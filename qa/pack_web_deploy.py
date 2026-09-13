@@ -47,6 +47,12 @@ INDEX_HTML = """<!DOCTYPE html>
 
 DEPLOY_MD = """# 《自动控制理论》交互课件 — Web 部署说明
 
+## 源码仓库与版本
+源码托管于 GitHub（公开仓库）：
+https://github.com/baoweiyu/sduee-control-courseware
+各版本打包下载（本地播放版四章包 + 本网页部署版）见 Releases：
+https://github.com/baoweiyu/sduee-control-courseware/releases
+
 ## 这是什么
 纯静态 HTML 课件站点（无后端、无数据库、无构建步骤），内含第一~四章共 258 页：
 - 第一章 绪论（35 页）
