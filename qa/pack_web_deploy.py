@@ -7,7 +7,7 @@ components/ + 实际引用的 assets + DEPLOY-部署说明.md + 可选 server.js
 import os, re, json, zipfile
 
 ROOT = r"H:\D_tools\courseware-system-kimi"
-OUT = os.path.join(ROOT, "act-courseware-web-deploy-v2.16.zip")
+OUT = os.path.join(ROOT, "act-courseware-web-deploy-v2.17.zip")
 
 COMMON_DIRS = ["player", "components", "theme"]
 LESSON_IDS = ["lesson01-intro", "lesson02-math-model", "lesson03-timedomain", "lesson04-freq"]
@@ -60,7 +60,11 @@ https://github.com/baoweiyu/sduee-control-courseware/releases
 - 第三章 时域分析法（85 页）
 - 第四章 频率响应法（87 页，含外部精修终审全部修复）
 
-整体版本 V2.16（2026-09-13）。本地播放版与网页部署版使用同一版本号。
+整体版本 V2.17（2026-09-14）。本地播放版与网页部署版使用同一版本号。
+V2.17 更新（第三章 6 页修复）：P6 抛物线按解析式精确绘制、特征点落在线上、
+图内公式改 MathJax；P14 稳态误差定义换行修复、指标徽章补峰值时间 tp；
+P25 求根公式补 ζ≥1 适用条件；P27-30 四种阻尼响应页左上卡统一为
+C(s)→极点→h(t)→备注顺序并补全 C(s) 表达式。
 V2.16 更新：①全部页面 theme.css/act-base.js 引用加版本号缓存破坏（杜绝旧版
 浏览器缓存 CSS 导致的"结论条太靠上遮盖"假象）；②翻页笔/方向键/PgUp/PgDn/Space
 统一为上一步/下一步（步尽自动翻页），底栏「上一页/下一页」保持直接翻页。
@@ -147,8 +151,12 @@ with zipfile.ZipFile(OUT, "w", zipfile.ZIP_DEFLATED, compresslevel=6) as z:
                 full = os.path.join(dirpath, fn)
                 z.write(full, arc(os.path.relpath(full, ROOT)))
                 count += 1
-    # lessons/index.json：四章完整版（与源文件一致，直接写入）
-    z.write(os.path.join(ROOT, "lessons", "index.json"), "lessons/index.json")
+    # lessons/index.json：按 LESSON_IDS 过滤重写（工作区 index.json 可能含
+    # 未验收章节草稿，直接打包会把缺失章节列进部署包目录，见规范第 131 条）
+    with open(os.path.join(ROOT, "lessons", "index.json"), encoding="utf-8") as f:
+        idx = json.load(f)
+    idx = [e for e in idx if e.get("lesson_id") in LESSON_IDS]
+    z.writestr("lessons/index.json", json.dumps(idx, ensure_ascii=False, indent=2))
     count += 1
     for a in assets:
         z.write(os.path.join(ROOT, a), arc(a))

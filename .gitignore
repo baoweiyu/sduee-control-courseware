@@ -44,3 +44,23 @@ _webtest_tmp/
 node_modules/
 Thumbs.db
 .DS_Store
+
+# ===== 未验收章节草稿（第五、六章复审通过前不入库，规范第 131 条）=====
+# 章节验收交付时：删除本块、提交源码、并同步扩充 pack/release 脚本的章节列表
+lessons/lesson05-root-locus/
+lessons/lesson06-compensation/
+qa/build_ch5*.py
+qa/build_ch6*.py
+qa/build_lib.py
+qa/rlocus_gen.py
+qa/bode_gen.py
+qa/gen_ch5_data.py
+qa/gen_ch6_data.py
+qa/gen_images_ch56.py
+qa/render_ch56_pages.py
+qa/ch56-orig-pages/
+
+# ===== Python 缓存与日志 =====
+__pycache__/
+qa/*.log
+qa/measure_*.json

@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <title>稳态误差与指标意义</title>
-<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<link rel="stylesheet" href="../../../theme/theme.css?v=217">
 <link rel="stylesheet" href="../lesson03-svg.css">
 <script src="../../../theme/mathjax/mathjax-render.js"></script>
 <script src="../../../theme/mathjax/tex-chtml.js"></script>
 <script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
-<script src="../../../theme/act-base.js?v=216" defer></script>
+<script src="../../../theme/act-base.js?v=217" defer></script>
 <style>
   .row { display:flex; gap:24px; flex:1; min-height:0; }
   .lcol { flex:1.15; display:flex; flex-direction:column; gap:16px; min-height:0; }
@@ -20,7 +20,7 @@
   .essfig .cap { font-size:18px; color:var(--muted); text-align:center; padding-top:2px; }
   .essfig svg { width:100%; flex:1; min-height:0; display:block; }
   .mn { flex:1; display:flex; align-items:center; gap:16px; background:#fff; border:2px solid var(--line); border-radius:14px; padding:12px 22px; font-size:21.5px; color:var(--ink); min-height:0; }
-  .mn .k { flex:none; width:118px; text-align:center; background:var(--blue); color:#fff; border-radius:10px; padding:7px 6px; font-size:22px; font-weight:700; font-style:italic; font-family:var(--font-math); }
+  .mn .k { flex:none; min-width:118px; width:auto; text-align:center; background:var(--blue); color:#fff; border-radius:10px; padding:7px 14px; font-size:22px; font-weight:700; font-style:italic; font-family:var(--font-math); }
   .mn .v { line-height:1.45; }
 </style>
 </head>
@@ -33,7 +33,7 @@
         <div class="act-card ess">
           <div class="hd">稳态误差 <span class="tex" style="font-style:italic">e_{ss}</span></div>
           <div class="bd">
-            对单位负反馈系统，当 <span class="tex">t \to \infty</span> 时，系统响应的实际值与期望值（输入量）之差的极限值：
+            对单位负反馈系统，<span style="white-space:nowrap">当 <span class="tex">t \to \infty</span> 时，</span>系统响应的实际值与期望值（输入量）之差的极限值：
             <div class="mathbox math eqline tex tex-d" style="margin:12px 0;font-size:27px">e_{ss} = \lim_{t \to \infty} \left[ r(t) - c(t) \right]</div>
             稳态误差是描述系统稳态性能的<span class="kw-r">唯一指标</span>，反映系统复现输入信号的（稳态）<span class="kw-r">精度</span>。
           </div>
@@ -65,7 +65,7 @@
       </div>
       <div class="rcol">
         <div class="sec-h">3. 各性能指标的意义</div>
-        <div class="mn"><span class="k">t<sub>d</sub>、t<sub>r</sub></span><span class="v">表征响应<span class="kw-r">初始阶段</span>的快慢</span></div>
+        <div class="mn"><span class="k">t<sub>d</sub>、t<sub>r</sub>、t<sub>p</sub></span><span class="v">表征响应<span class="kw-r">初始阶段</span>的快慢</span></div>
         <div class="mn"><span class="k">σ%</span><span class="v">表征系统振荡的<span class="kw-r">激烈程度</span>（平稳性）</span></div>
         <div class="mn"><span class="k">t<sub>s</sub></span><span class="v">表征系统动态过程的<span class="kw-r">快速性</span></span></div>
         <div class="mn"><span class="k">e<sub>ss</sub></span><span class="v">表征系统复现输入的<span class="kw-r">准确性</span>（精度）</span></div>

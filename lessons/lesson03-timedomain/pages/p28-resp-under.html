@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <title>欠阻尼（0&lt;ζ&lt;1）的阶跃响应</title>
-<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<link rel="stylesheet" href="../../../theme/theme.css?v=217">
 <link rel="stylesheet" href="../lesson03-svg.css">
 <script src="../../../theme/mathjax/mathjax-render.js"></script>
 <script src="../../../theme/mathjax/tex-chtml.js"></script>
 <script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
-<script src="../../../theme/act-base.js?v=216" defer></script>
+<script src="../../../theme/act-base.js?v=217" defer></script>
 <style>
   .row { display:flex; gap:24px; height:100%; }
   .lcol { flex:1; display:flex; flex-direction:column; gap:16px; }
@@ -28,7 +28,8 @@
         <div class="act-card drv">
           <div class="hd">4、0 &lt; ζ &lt; 1（欠阻尼）</div>
           <div class="bd">
-            共轭复极点：<span class="tex" style="font-size:24px">s_{1,2} = -\sigma \pm j\omega_{d}</span>，其中 <span class="tex" style="font-size:24px">\sigma = \zeta\omega_{n}</span>，<span class="tex" style="font-size:24px">\omega_{d} = \omega_{n}\sqrt{1-\zeta^{2}}</span>
+            <div class="mathbox math eqline tex tex-d" style="font-size:22.5px;margin-bottom:10px">C(s) = \dfrac{\omega_{n}^{2}}{s\,(s^{2}+2\zeta\omega_{n}\,s+\omega_{n}^{2})} = \dfrac{1}{s} - \dfrac{s+2\zeta\omega_{n}}{s^{2}+2\zeta\omega_{n}\,s+\omega_{n}^{2}}</div>
+            共轭复极点（位于左半 s 平面）：<span class="tex" style="font-size:24px">s_{1,2} = -\sigma \pm j\omega_{d}</span>，其中 <span class="tex" style="font-size:24px">\sigma = \zeta\omega_{n}</span>，<span class="tex" style="font-size:24px">\omega_{d} = \omega_{n}\sqrt{1-\zeta^{2}}</span>
             <div class="mathbox math eqline tex tex-d" style="font-size:25px;margin-top:10px">h(t) = 1 - \dfrac{e^{-\sigma t}}{\sqrt{1-\zeta^{2}}}\,\sin(\omega_{d} t + \beta)\quad(t\geq 0)</div>
             <div style="font-size:22px;margin-top:2px">式中阻尼角 <span class="tex" style="font-size:24px">\beta = \arccos\zeta</span>（即复平面上极点与负实轴的夹角）。</div>
           </div>

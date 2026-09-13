@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <title>零阻尼（ζ=0）的阶跃响应</title>
-<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<link rel="stylesheet" href="../../../theme/theme.css?v=217">
 <link rel="stylesheet" href="../lesson03-svg.css">
 <script src="../../../theme/mathjax/mathjax-render.js"></script>
 <script src="../../../theme/mathjax/tex-chtml.js"></script>
 <script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
-<script src="../../../theme/act-base.js?v=216" defer></script>
+<script src="../../../theme/act-base.js?v=217" defer></script>
 <style>
   .row { display:flex; gap:24px; height:100%; }
   .lcol { flex:1; display:flex; flex-direction:column; gap:16px; }
@@ -29,8 +29,9 @@
           <div class="hd">1、ζ = 0（零阻尼）</div>
           <div class="bd">
             <div class="mathbox math eqline tex tex-d" style="font-size:25px;margin-bottom:10px">C(s) = \dfrac{\omega_{n}^{2}}{s\,(s^{2}+\omega_{n}^{2})} = \dfrac{1}{s} - \dfrac{s}{s^{2}+\omega_{n}^{2}}</div>
-            <div class="mathbox math eqline tex tex-d" style="font-size:27px">h(t) = 1 - \cos\,\omega_{n} t \quad (t \geq 0)</div>
-            极点 <span class="tex">s_{1,2} = \pm\mathrm{j}\,\omega_{n}</span>（纯虚根，位于虚轴）。
+            <div style="margin-bottom:10px">极点 <span class="tex">s_{1,2} = \pm\mathrm{j}\,\omega_{n}</span>（纯虚根，位于虚轴上）。</div>
+            <div class="mathbox math eqline tex tex-d" style="font-size:27px;margin-bottom:10px">h(t) = 1 - \cos\,\omega_{n} t \quad (t \geq 0)</div>
+            <div style="font-size:20.5px;color:var(--muted)">暂态分量无衰减 —— 振幅恒为 1 的等幅余弦振荡。</div>
           </div>
         </div>
         <div class="feat">

@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <title>过阻尼（ζ&gt;1）的阶跃响应</title>
-<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<link rel="stylesheet" href="../../../theme/theme.css?v=217">
 <link rel="stylesheet" href="../lesson03-svg.css">
 <script src="../../../theme/mathjax/mathjax-render.js"></script>
 <script src="../../../theme/mathjax/tex-chtml.js"></script>
 <script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
-<script src="../../../theme/act-base.js?v=216" defer></script>
+<script src="../../../theme/act-base.js?v=217" defer></script>
 <style>
   .row { display:flex; gap:24px; height:100%; }
   .lcol { flex:1; display:flex; flex-direction:column; gap:16px; }
@@ -28,8 +28,9 @@
         <div class="act-card drv">
           <div class="hd">2、ζ &gt; 1（过阻尼）</div>
           <div class="bd">
-            两个相异负实极点：<span class="tex" style="font-size:23px">s_{1,2} = -\left(\zeta \pm \sqrt{\zeta^{2}-1}\right)\omega_{n}</span>
-            <div class="mathbox math eqline tex tex-d" style="font-size:23.5px;margin-top:10px">h(t) = 1 + A_{1}e^{s_{1}t} + A_{2}e^{s_{2}t} \quad (t \geq 0)</div>
+            <div class="mathbox math eqline tex tex-d" style="font-size:23px;margin-bottom:10px">C(s) = \dfrac{\omega_{n}^{2}}{s\,(s^{2}+2\zeta\omega_{n}\,s+\omega_{n}^{2})} = \dfrac{1}{s} + \dfrac{A_{1}}{s-s_{1}} + \dfrac{A_{2}}{s-s_{2}}</div>
+            <div style="margin-bottom:10px">两个相异负实极点（位于负实轴）：<span class="tex" style="font-size:23px">s_{1,2} = -\left(\zeta \pm \sqrt{\zeta^{2}-1}\right)\omega_{n}</span></div>
+            <div class="mathbox math eqline tex tex-d" style="font-size:23.5px;margin-bottom:10px">h(t) = 1 + A_{1}e^{s_{1}t} + A_{2}e^{s_{2}t} \quad (t \geq 0)</div>
             <div style="font-size:20.5px;color:var(--muted)">式中 A₁、A₂ 为留数常数；|s₂| ≫ |s₁|，<span class="tex" style="font-size:22px">e^{s_{2}t}</span> 很快消失。</div>
           </div>
         </div>
