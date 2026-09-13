@@ -16,6 +16,7 @@ bwy-chapt4-sources/
 # ===== 交接/备份与工作文档 =====
 交接备份-2026-09-07/
 第四章交接 - 2026-09-13/
+交接out-2026-09-13eve/
 第四章修改方案-v2-施工稿.md
 第四章课件修改意见.md
 
@@ -30,6 +31,9 @@ qa/chapt1-pages/
 qa/chapt2-pages/
 qa/chapt1-text.txt
 qa/chapt2-text.txt
+qa/chapt5-text.txt
+qa/chapt6-text.txt
+qa/chapt56-peek/
 qa/keytest-dump.html
 qa/note_probe_result.json
 
