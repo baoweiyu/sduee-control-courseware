@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>考核评价方式与标准</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .cols { display:flex; gap:32px; height:648px; margin-top:6px; }
+  .col-l { flex:1.15; display:flex; flex-direction:column; }
+  .col-r { flex:1; display:flex; flex-direction:column; }
+  .way { display:flex; gap:14px; align-items:center; flex:1; padding:13px 24px; border-bottom:2px dashed var(--line); font-size:22px; line-height:1.45; }
+  .way:last-child { border-bottom:none; }
+  .way .no { width:34px; height:34px; border-radius:50%; background:var(--blue); color:#fff; font-size:19px; font-weight:700; display:grid; place-items:center; flex:none; margin-top:2px; }
+  .way b { color:var(--navy); }
+  .total { display:flex; align-items:center; justify-content:center; gap:22px; padding:16px; font-size:26px; font-weight:700; color:var(--navy); }
+  .total .eq { color:var(--orange); font-size:30px; }
+  .bars { padding:6px 26px 20px; display:flex; flex-direction:column; gap:13px; font-size:21px; flex:1; justify-content:space-evenly; }
+  .bar { display:flex; align-items:center; gap:12px; }
+  .bar .lb { width:96px; color:var(--navy); }
+  .bar .tr { flex:1; height:20px; background:var(--sky); border-radius:10px; overflow:hidden; }
+  .bar .fl { height:100%; background:var(--blue2); border-radius:10px; }
+  .bar .pc { width:140px; color:#D63A2F; font-weight:700; white-space:nowrap; }
+  .final { margin:0 26px 22px; background:var(--sky); border-radius:12px; padding:14px 20px; font-size:22px; color:var(--navy); display:flex; justify-content:space-between; }
+  .final b { color:#D63A2F; }
+</style>
+</head>
+<body data-title="考核评价方式与标准" data-page="4 / 35">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="cols">
+      <div class="act-card col-l">
+        <div class="hd">考核评价方式</div>
+        <div class="way"><span class="no">1</span><span><b>课堂表现：</b>出勤，课堂互动</span></div>
+        <div class="way"><span class="no">2</span><span><b>作业：</b>课后作业 + 线上作业 + 仿真作业</span></div>
+        <div class="way"><span class="no">3</span><span><b>项目设计：</b>采用分组形式完成，提交设计报告，评定成绩</span></div>
+        <div class="way"><span class="no">4</span><span><b>实验：</b>实验老师根据 6 次实验给出成绩</span></div>
+        <div class="way"><span class="no">5</span><span><b>期末考试：</b>闭卷笔试</span></div>
+      </div>
+      <div class="act-card col-r">
+        <div class="hd">考核评价标准</div>
+        <div class="total">总成绩 <span class="eq">=</span> 平时成绩 50% <span class="eq">+</span> 期末考试 50%</div>
+        <div class="bars">
+          <div class="bar"><span class="lb">作业</span><div class="tr"><div class="fl" style="width:20%"></div></div><span class="pc">20% × 50%</span></div>
+          <div class="bar"><span class="lb">实验操作</span><div class="tr"><div class="fl" style="width:20%"></div></div><span class="pc">20% × 50%</span></div>
+          <div class="bar"><span class="lb">项目设计</span><div class="tr"><div class="fl" style="width:40%"></div></div><span class="pc">40% × 50%</span></div>
+          <div class="bar"><span class="lb">课堂表现</span><div class="tr"><div class="fl" style="width:20%"></div></div><span class="pc">20% × 50%</span></div>
+        </div>
+        <div class="final"><span>期末考试（闭卷笔试）</span><b>占总成绩 50%</b></div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note">
+    <svg class="ico" viewBox="0 0 48 48"><circle cx="24" cy="24" r="18" fill="none" stroke="#1D3FA0" stroke-width="3"/><circle cx="24" cy="24" r="10" fill="none" stroke="#1D3FA0" stroke-width="3"/><circle cx="24" cy="24" r="3" fill="#1D3FA0"/><path d="M24 24 L36 8" stroke="#F5821F" stroke-width="3"/><path d="M36 8 l-5 1.5 M36 8 l-1.5 5" stroke="#F5821F" stroke-width="3"/></svg>
+    <span><span class="lead">核心：</span>既看期末结果，也看平时学习过程与实践表现。</span>
+  </div>
+</div></div>
+</body>
+</html>

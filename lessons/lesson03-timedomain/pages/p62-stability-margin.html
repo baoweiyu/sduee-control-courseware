@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>稳定裕度检验 · 例 3-12</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<link rel="stylesheet" href="../lesson03-svg.css">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:24px; height:100%; }
+  .mtc { flex:0.9; display:flex; flex-direction:column; }
+  .mtc .bd { flex:1; font-size:22px; line-height:1.8; display:flex; flex-direction:column; justify-content:center; gap:14px; }
+  .exc { flex:1.1; display:flex; flex-direction:column; }
+  .exc .bd { flex:1; display:flex; flex-direction:column; justify-content:center; gap:12px; }
+  .figw { background:#fff; border:1.5px solid var(--line); border-radius:12px; padding:8px; }
+  .figw svg { display:block; width:86%; height:auto; margin:0 auto; }
+  .rt { border-collapse:collapse; width:100%; }
+  .rt th, .rt td { border:2px solid var(--line); padding:8px 8px; font-size:21.5px; text-align:center; }
+  .rt th { background:var(--navy); color:#fff; font-weight:700; font-size:19px; }
+  .rt td.rl { background:var(--sky); font-weight:700; color:var(--navy); }
+  .rt td.fc { background:#FDF3EC; font-weight:700; }
+  .rt td.calc { font-size:18.5px; color:#5B6B8C; text-align:left; padding-left:14px; line-height:1.5; }
+  .neg { color:#D63A2F; font-weight:800; }
+  .step { font-size:21.5px; line-height:1.7; color:var(--navy); }
+  .concl { background:#FCEBE9; border:2px solid #D63A2F; border-radius:12px; padding:11px 18px; font-size:21px; color:var(--navy); line-height:1.6; }
+  [data-step]:not(.shown) { visibility:hidden; }
+  tr[data-step]:not(.shown) { visibility:collapse; }
+  tr[data-step]:not(.shown) td { border-color:transparent !important; }
+</style>
+</head>
+<body data-title="稳定裕度的检验" data-page="65 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="row">
+      <div class="act-card mtc">
+        <div class="hd">应用③　检验稳定裕度</div>
+        <div class="bd">
+          <span>工程上不仅要求系统稳定，还希望<br>全部特征根离虚轴<span class="kw-r">至少保持距离 σ</span>（相对稳定性）。</span>
+          <span><b>方法</b>：令 <span class="tex">s=z-\sigma\ (\sigma&gt;0)</span>，代入特征方程得到关于 z 的多项式，<br>再对其应用劳斯判据 —— 相当于把虚轴<span class="kw-r">左移到 s=−σ</span> 处重新判稳。</span>
+          <div class="figw">
+            <svg viewBox="0 0 400 280">
+              <defs><marker id="ar62" markerWidth="11" markerHeight="11" refX="7.5" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#5B6B8C"/></marker></defs>
+              <rect x="30" y="30" width="132" height="220" fill="#EAF6EE" opacity="0.85"/>
+              <text x="42" y="54" font-size="17" fill="#1E9E57">希望根位于</text>
+              <text x="42" y="76" font-size="17" fill="#1E9E57">此区（裕度 ≥ σ）</text>
+              <line x1="30" y1="140" x2="382" y2="140" stroke="#5B6B8C" stroke-width="2" marker-end="url(#ar62)"/>
+              <line x1="220" y1="258" x2="220" y2="24" stroke="#5B6B8C" stroke-width="2" marker-end="url(#ar62)"/>
+              <line x1="162" y1="250" x2="162" y2="30" stroke="#D63A2F" stroke-width="2.4" stroke-dasharray="8 6"/>
+              <text x="384" y="162" font-size="17" fill="#5B6B8C" text-anchor="end">Re(s)</text>
+              <text x="232" y="22" font-size="17" fill="#5B6B8C">jω（虚轴）</text>
+              <text x="228" y="160" font-size="17" fill="#5B6B8C">0</text>
+              <text x="162" y="272" font-size="18" fill="#D63A2F" text-anchor="middle">s = −σ（新虚轴）</text>
+            </svg>
+          </div>
+          <span style="font-size:20px;color:#5B6B8C">若新虚轴右侧无根，则系统的稳定裕度不低于 σ。</span>
+        </div>
+      </div>
+      <div class="act-card exc">
+        <div class="hd">例 3-12</div>
+        <div class="bd">
+          <div class="step">系统特征方程 <span class="tex">2s^{3}+10s^{2}+13s+4=0</span>，设 <span class="tex">\sigma=1</span>，检验系统的稳定裕量。</div>
+          <div class="step" data-step="1"><b>解</b>　① 先判稳：系数全正，且<br><span class="tex">a_{1}a_{2}-a_{0}a_{3}=10\times13-2\times4=122&gt;0</span>，系统稳定。</div>
+          <div class="step" data-step="2">② 将 <span class="tex">s=z-1</span> 代入特征方程，整理得<br><span class="tex tex-d" style="font-size:21px">2z^{3}+4z^{2}-z-1=0</span></div>
+          <table class="rt" data-step="3">
+            <tr><th>行标</th><th>第 1 列</th><th>第 2 列</th><th>说明</th></tr>
+            <tr><td class="rl"><span class="tex" style="font-size:20px">z^{3}</span></td><td class="fc">2</td><td>−1</td><td class="calc">系数隔项排列</td></tr>
+            <tr><td class="rl"><span class="tex" style="font-size:20px">z^{2}</span></td><td class="fc">4</td><td>−1</td><td class="calc"></td></tr>
+            <tr><td class="rl"><span class="tex" style="font-size:20px">z^{1}</span></td><td class="fc"><span class="neg">−1/2</span></td><td></td><td class="calc">(4×(−1)−2×(−1))/4</td></tr>
+            <tr><td class="rl"><span class="tex" style="font-size:20px">z^{0}</span></td><td class="fc"><span class="neg">−1</span></td><td></td><td class="calc"></td></tr>
+          </table>
+          <div class="concl" data-step="4">第一列 2、4、<span class="neg">−1/2</span>、<span class="neg">−1</span> 变号<span class="kw-r">一次</span> → 有一个特征根在 <span class="tex">s=-1</span>（新虚轴）右边，<br>稳定裕量<span class="kw-r">达不到 1</span>。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+</body>
+</html>

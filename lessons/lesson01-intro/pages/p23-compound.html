@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>复合控制</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .def { background:#fff; border:2px solid var(--line); border-left:12px solid var(--blue); border-radius:16px; padding:30px 40px; font-size:29px; line-height:1.85; color:var(--ink); margin:8px 0 26px; }
+  .def b { color:var(--navy); }
+  .row { display:flex; gap:28px; }
+  .pc { flex:1; padding:26px 34px; }
+  .pc h4 { font-size:26px; margin-bottom:14px; }
+  .adv h4 { color:var(--blue); } .dis h4 { color:#D63A2F; }
+  .pc ul { list-style:none; font-size:24px; line-height:2.0; color:var(--ink); }
+  .pc li::before { content:"●"; margin-right:10px; font-size:16px; vertical-align:2px; }
+  .adv li::before { color:var(--blue); } .dis li::before { color:#D63A2F; }
+  .ex { margin-top:28px; font-size:24px; color:var(--navy); background:var(--sky); border-radius:12px; padding:20px 30px; }
+</style>
+</head>
+<body data-title="3、复合控制" data-page="23 / 35">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body fill">
+    <div class="def"><b>定义：</b>在反馈控制的基础上，增加对扰动（或输入）的<b>前馈补偿通道</b>，把<span class="kw-r">开环控制与闭环控制结合起来</span>的控制方式，称为<b>复合控制</b>。</div>
+    <div class="row">
+      <div class="act-card pc adv"><h4>优点</h4><ul><li>在扰动产生不利影响<b>以前</b>就产生补偿作用</li><li>抗扰能力强、响应快，兼顾控制精度</li></ul></div>
+      <div class="act-card pc dis"><h4>缺点</h4><ul><li>需要额外测量扰动、增设前馈通道</li><li>结构较复杂，设计与实现成本高</li></ul></div>
+    </div>
+    <div class="ex"><b style="color:var(--orange)">例子：</b>按扰动补偿的前馈—反馈复合控制系统（下一页展开）。</div>
+  </div>
+</div></div>
+</body>
+</html>

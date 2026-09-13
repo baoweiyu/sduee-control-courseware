@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>1.5 例 4-4：绘制系统极坐标图</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:24px; height:100%; min-height:0; }
+  .lcol { flex:1; display:flex; flex-direction:column; min-height:0; }
+  .lcol .bd { flex:1; display:flex; flex-direction:column; justify-content:center; gap:11px; padding:14px 24px; }
+  .st { background:var(--sky); border:2px solid var(--line); border-radius:14px; padding:11px 18px; font-size:19.5px; line-height:1.55; }
+  .st .no { display:inline-block; background:var(--blue); color:#fff; font-weight:700; border-radius:9px; padding:1px 12px; margin-right:10px; font-size:18px; }
+  .st.done2 { border-color:var(--orange); background:#FDF3EC; }
+  .figc { flex:1.3; display:flex; flex-direction:column; overflow:hidden; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:6px 12px; min-height:0; }
+  .figc svg { width:100%; height:100%; }
+  .prog { font-size:17px; color:var(--muted); font-weight:400; }
+</style>
+</head>
+<body data-title="1.5 例 4-4：绘制系统极坐标图" data-page="26 / 87">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="act-card lcol">
+        <div class="hd"><span style="flex:1">G(jω)H(jω) = <span class="tex" style="font-size:19px">\dfrac{10}{j\omega(1+j0.2\omega)(1+j0.05\omega)}</span>　<span class="prog" id="prog">0 / 8</span></span></div>
+        <div class="bd">
+          <div class="st" id="s1"><span class="no">①</span>数参数：m=0，n−m=3，<span class="kw-r">ν=1</span>（含一个积分环节）</div>
+          <div class="st" id="s2"><span class="no">②</span>起点 ω→0⁺：<span class="tex">\infty\angle-90^{\circ}</span>，沿渐近线 <span class="tex">\mathrm{Re}=-2.5</span> 从下方来</div>
+          <div class="st" id="s3"><span class="no">③</span>终点 ω→∞：<span class="tex">0\angle-270^{\circ}</span>，自正虚轴方向进入原点</div>
+          <div class="st" id="s4"><span class="no">④</span>实轴交点：令 <span class="tex">\mathrm{Im}=0</span> 得 <span class="tex">\omega=10</span>，代入 <span class="tex">\mathrm{Re}=-0.4</span> → <span class="kw-r">(−0.4, j0)</span></div>
+          <div class="st" id="s5"><span class="no">⑤</span>虚轴交点：<span class="tex">\mathrm{Re}=0</span> 仅当 ω=0、∞——曲线不与虚轴相交</div>
+          <div class="st" id="s6"><span class="no">⑥</span>按 ω 增大方向光滑连接，<span class="kw-r">大致曲线</span>即成（不追求精确）</div>
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd">分步绘制（点"下一步"或 ▶）</div>
+        <div class="bd2"><svg id="fig" viewBox="0 0 900 640"></svg></div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">回顾</span><span>例 4-4 是"三步法"的完整实战：<span class="kw-r">起点、终点、交点</span>三个信息足以定出曲线骨架。</span></div>
+  <div data-step="1" style="display:none"></div><div data-step="2" style="display:none"></div><div data-step="3" style="display:none"></div><div data-step="4" style="display:none"></div>
+  <div data-step="5" style="display:none"></div><div data-step="6" style="display:none"></div><div data-step="7" style="display:none"></div><div data-step="8" style="display:none"></div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("fig");
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const MF = "Cambria Math,STIX Two Math,Georgia,Microsoft YaHei,sans-serif";
+  const tx = (x, y, s, o, parent) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 21, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal", "font-family": MF }, parent); const esc = t => t.replace(/&/g, "&amp;").replace(/</g, "&lt;"); let html = "", sub = false; for (const p of String(s).split(/(_\{[^}]*\})/)) { if (!p) continue; if (p.startsWith("_{")) { html += `<tspan${sub ? "" : " dy=\"6\""} font-size="72%">${esc(p.slice(2, -1))}</tspan>`; sub = true; } else { html += sub ? `<tspan dy="-6">${esc(p)}</tspan>` : esc(p); sub = false; } } n.innerHTML = html; if (o && o.halo) n.setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:6;stroke-linejoin:round"); return n; };
+  const defs = mk("defs", {});
+  const m1 = mk("marker", { id: "a25", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, m1);
+  // G(jw)=10/(jw(1+0.2jw)(1+0.05jw))
+  const RE = w => { const D = 0.0625 * w ** 4 + w * w * (1 - 0.01 * w * w) ** 2; return -2.5 * w * w / D; };
+  const IM = w => { const D = 0.0625 * w ** 4 + w * w * (1 - 0.01 * w * w) ** 2; return -10 * w * (1 - 0.01 * w * w) / D; };
+  // 视图 x∈[-3,0.5], y∈[-1.35,0.35]
+  const O = { x: 768, y: 118 }, SCX = 235, SCY = 380;
+  const X = v => O.x + v * SCX, Y = v => O.y - v * SCY;
+  mk("line", { x1: 30, y1: O.y, x2: 875, y2: O.y, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a25)" });
+  mk("line", { x1: O.x, y1: 620, x2: O.x, y2: 20, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a25)" });
+  tx(866, O.y - 12, "Re", { fs: 22, it: true, b: true, fill: "#5B6B8C", an: "end" });
+  tx(O.x + 22, 34, "jIm", { fs: 22, it: true, b: true, fill: "#5B6B8C", an: "start" });
+  tx(O.x + 12, O.y + 28, "O", { fs: 20, fill: "#5B6B8C", an: "start" });
+  tx(X(-1), O.y + 28, "−1", { fs: 21, fill: "#5B6B8C" });
+  tx(X(-2), O.y + 28, "−2", { fs: 21, fill: "#5B6B8C" });
+  mk("line", { x1: X(-1), y1: O.y - 5, x2: X(-1), y2: O.y + 5, stroke: "#5B6B8C", "stroke-width": 1.4 });
+  mk("line", { x1: X(-2), y1: O.y - 5, x2: X(-2), y2: O.y + 5, stroke: "#5B6B8C", "stroke-width": 1.4 });
+  const dyn = mk("g", {});
+  const W0 = 0.28, W1 = 60; // ω 范围（对数）
+  const pts = [];
+  for (let i = 0; i <= 700; i++) { const w = W0 * Math.pow(W1 / W0, i / 700); pts.push([X(RE(w)), Y(IM(w))]); }
+  function curve(f) {
+    const n = Math.max(2, Math.ceil(pts.length * f));
+    let d = "";
+    for (let i = 0; i < n; i++) d += (i ? "L" : "M") + pts[i][0].toFixed(1) + "," + pts[i][1].toFixed(1);
+    return { d, tip: pts[n - 1] };
+  }
+  const TOTAL = 8;
+  let K = 0, playing = false;
+  function paint() {
+    dyn.innerHTML = "";
+    ["s1", "s2", "s3", "s4", "s5", "s6"].forEach((id, i) => document.getElementById(id).classList.toggle("done2", K >= i + 1));
+    // ② 起点渐近线
+    if (K >= 2) {
+      mk("line", { x1: X(-2.5), y1: 615, x2: X(-2.5), y2: Y(-0.25), stroke: "#8AA6D8", "stroke-width": 2.2, "stroke-dasharray": "9 7" }, dyn);
+      tx(X(-2.5) - 14, 598, "起点 ∞∠−90°", { fs: 24, b: true, fill: "#2B5CE6", an: "end" }, dyn);
+      tx(X(-2.5) + 14, 560, "渐近线 Re=−2.5", { fs: 21, fill: "#5B6B8C", an: "start" }, dyn);
+      mk("path", { d: `M ${X(-2.5) - 7} ${Y(-1.12)} l 7 -17 l 7 17 Z`, fill: "#2B5CE6" }, dyn);
+    }
+    // ③ 终点
+    if (K >= 3) {
+      mk("circle", { cx: O.x, cy: O.y, r: 8, fill: "#F5821F" }, dyn);
+      tx(O.x - 14, O.y - 62, "终点 0∠−270°", { fs: 24, b: true, fill: "#F5821F", an: "end" }, dyn);
+      mk("line", { x1: O.x, y1: O.y - 100, x2: O.x, y2: O.y - 16, stroke: "#F5821F", "stroke-width": 2.4, "stroke-dasharray": "7 5", "marker-end": "url(#a25)" }, dyn);
+    }
+    // ④ 实轴交点
+    if (K >= 4) {
+      mk("circle", { cx: X(-0.4), cy: O.y, r: 8, fill: "#D63A2F" }, dyn);
+      tx(X(-0.4) - 8, O.y - 22, "(−0.4, j0)，ω=10", { fs: 24, b: true, fill: "#D63A2F", an: "end", halo: 1 }, dyn);
+    }
+    // ⑥ 曲线生长（第 6~8 步分段生长）
+    if (K >= 6) {
+      const f = Math.min(1, (K - 5) / 3);
+      const { d, tip } = curve(f);
+      mk("path", { d, stroke: "#2B5CE6", "stroke-width": 4.5, fill: "none" }, dyn);
+      mk("circle", { cx: tip[0], cy: tip[1], r: 8, fill: "#D63A2F" }, dyn);
+      if (f >= 1) {
+        // 方向箭头：取曲线中段采样点，沿切线方向绘制，保证贴在曲线上
+        const k = Math.floor(pts.length * 0.52);
+        const a = pts[k - 3], b = pts[k], c = pts[k + 3];
+        const dx = c[0] - a[0], dy = c[1] - a[1], L = Math.hypot(dx, dy) || 1;
+        const ux = dx / L, uy = dy / L, px = -uy, py = ux, s = 12;
+        mk("path", { d: `M ${b[0] + ux * s} ${b[1] + uy * s} L ${b[0] - ux * s * .6 + px * s * .6} ${b[1] - uy * s * .6 + py * s * .6} L ${b[0] - ux * s * .6 - px * s * .6} ${b[1] - uy * s * .6 - py * s * .6} Z`, fill: "#2B5CE6" }, dyn);
+        tx(b[0] - 26, b[1] + 46, "ω 增大方向", { fs: 22, b: true, fill: "#2B5CE6", halo: 1 }, dyn);
+      }
+    }
+    document.getElementById("prog").textContent = K + " / " + TOTAL;
+  }
+  const S = ACT.step;
+  const _next = S.next.bind(S), _reset = S.reset.bind(S);
+  S.next = function () { if (K < TOTAL) K++; const d = _next(); paint(); return d; };
+  S.reset = function () { K = 0; playing = false; _reset(); paint(); };
+  window.prev = function () { if (K <= 0) return; const t = K - 1; S.reset(); for (let i = 0; i < t; i++) S.next(); };
+  paint();
+});
+</script>
+</body>
+</html>

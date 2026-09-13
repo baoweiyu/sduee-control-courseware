@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>峰值时间 tp 与超调量 σ%</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<link rel="stylesheet" href="../lesson03-svg.css">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:24px; height:100%; }
+  .lcol { flex:1; display:flex; flex-direction:column; gap:16px; }
+  .drv { flex:1; }
+  .drv .bd { font-size:22px; line-height:1.5; }
+  .res { background:#fff; border:2px solid var(--line); border-radius:14px; padding:14px 24px; font-size:22.5px; line-height:1.7; color:var(--ink); }
+  .figc { flex:1.35; display:flex; flex-direction:column; overflow:hidden; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:8px 14px; }
+  .figc svg { width:100%; height:100%; }
+  .stp { display:flex; gap:14px; align-items:flex-start; margin-bottom:8px; }
+  .stp .no { flex:none; width:34px; height:34px; border-radius:50%; background:var(--blue); color:#fff; display:grid; place-items:center; font-size:19px; font-weight:700; margin-top:4px; }
+</style>
+</head>
+<body data-title="动态指标 · tp 与 σ%" data-page="34 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lcol">
+        <div class="act-card drv">
+          <div class="hd">tp 与 σ% 的推导</div>
+          <div class="bd">
+            <div class="stp" data-step="1"><div class="no">1</div><div><b>求极值</b>：令 <span class="tex" style="font-size:23px">\left.\dfrac{dh}{dt}\right|_{t_{p}} = 0</span>，整理得
+              <div class="mathbox math eqline tex tex-d" style="font-size:22px">\tan(\omega_{d} t_{p} + \beta) = \dfrac{\sqrt{1-\zeta^{2}}}{\zeta} = \tan\beta</div>
+              故 <span class="tex" style="font-size:23px">\omega_{d} t_{p} = \pi</span>（第一个峰），即
+              <div class="mathbox math eqline tex tex-d" style="font-size:24px">t_{p} = \dfrac{\pi}{\omega_{d}}</div>
+            </div></div>
+            <div class="stp" data-step="2"><div class="no">2</div><div><b>代入定义</b>：σ% = h(t<sub>p</sub>) − 1（稳态值为 1），得
+              <div class="mathbox math eqline tex tex-d" style="font-size:24px">\sigma\% = e^{-\pi\zeta/\sqrt{1-\zeta^{2}}}\times 100\%</div>
+            </div></div>
+          </div>
+        </div>
+        <div class="res" data-step="3">
+          <b>关键结论</b>：<span class="kw-r">σ% 只由 ζ 决定，与 ωn 无关</span>。ζ 越大，σ% 越小；ωn 只影响响应的"快慢"（t<sub>r</sub>、t<sub>p</sub>、t<sub>s</sub> 都与 ω<sub>n</sub> 成反比）。
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd">tp 与 σ% 的几何意义（ζ=0.5，ωn=1）</div>
+        <div class="bd2"><svg id="fig" viewBox="0 0 1000 620"></svg></div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">记忆</span><span class="tex" style="font-size:23px">t_{p}=\dfrac{\pi}{\omega_{d}}</span> 是"半个阻尼振荡周期"；<span class="tex" style="font-size:23px">\sigma\%=e^{-\pi\zeta/\sqrt{1-\zeta^{2}}}\times 100\%</span>，<span class="kw-r">平稳性全看 ζ</span>。</div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("fig");
+  const z = 0.5, wn = 1, sg = z * wn, wd = wn * Math.sqrt(1 - z * z), beta = Math.acos(z);
+  const A = 1 / Math.sqrt(1 - z * z);
+  const h = t => t <= 0 ? 0 : 1 - A * Math.exp(-sg * t) * Math.sin(wd * t + beta);
+  const tp = Math.PI / wd, hp = h(tp), po = hp - 1;
+  const T = 10, YM = 1.45;
+  const X = t => 96 + t / T * 850;
+  const Y = v => 540 - v / YM * 480;
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const tx = (x, y, s, o) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 24, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal" }); n.textContent = s; return n; };
+  const defs = mk("defs", {});
+  const m1 = mk("marker", { id: "a32", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, m1);
+  const m2 = mk("marker", { id: "a32r", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#D63A2F" }, m2);
+  mk("line", { x1: 96, y1: 540, x2: 960, y2: 540, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a32)" });
+  mk("line", { x1: 96, y1: 540, x2: 96, y2: 32, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a32)" });
+  tx(966, 546, "t", { fs: 26, an: "start", it: true, b: true });
+  tx(58, 42, "h(t)", { fs: 26, it: true, b: true });
+  tx(74, 546, "O", { fs: 23, fill: "#5B6B8C" });
+  mk("line", { x1: 96, y1: Y(1), x2: 946, y2: Y(1), stroke: "#F5821F", "stroke-width": 2, "stroke-dasharray": "10 7" });
+  tx(80, Y(1) + 7, "1", { an: "end", fs: 24, b: true });
+  let d = "";
+  for (let i = 0; i <= 500; i++) { const t = T * i / 500; d += (i ? "L" : "M") + X(t).toFixed(1) + "," + Y(h(t)).toFixed(1); }
+  mk("path", { d, stroke: "#2B5CE6", "stroke-width": 3.5, fill: "none" });
+  // 峰值点 + σ% 双向箭头
+  mk("circle", { cx: X(tp), cy: Y(hp), r: 6.5, fill: "#D63A2F" });
+  mk("line", { x1: X(tp), y1: Y(hp), x2: X(tp), y2: Y(1), stroke: "#D63A2F", "stroke-width": 2.6, "marker-end": "url(#a32r)" });
+  mk("line", { x1: X(tp), y1: Y(1), x2: X(tp), y2: Y(hp), stroke: "#D63A2F", "stroke-width": 2.6, "marker-end": "url(#a32r)" });
+  mk("line", { x1: X(tp), y1: Y(hp), x2: X(tp), y2: 540, stroke: "#F5821F", "stroke-width": 2, "stroke-dasharray": "8 6" });
+  const labTp = mk("text", { x: X(tp), y: 576, "font-size": 21, "text-anchor": "middle", fill: "#D63A2F", "font-weight": 700, "font-style": "italic" });
+  const tp1 = mk("tspan", {}, labTp); tp1.textContent = "t";
+  const tp2 = mk("tspan", { dy: "0.3em", "font-size": "0.7em" }, labTp); tp2.textContent = "p";
+  const tp3 = mk("tspan", { dy: "-0.3em" }, labTp); tp3.textContent = " = π/ω";
+  const tp4 = mk("tspan", { dy: "0.32em", "font-size": "0.72em" }, labTp); tp4.textContent = "d";
+  tx(X(tp) + 74, (Y(hp) + Y(1)) / 2 + 7, "σ%", { fs: 29, b: true, it: true, fill: "#D63A2F", an: "start" });
+  tx(X(6.6), Y(1.22), "最大偏离量 / 稳态值", { fs: 25, b: true, fill: "#2B5CE6" });
+});
+</script>
+</body>
+</html>

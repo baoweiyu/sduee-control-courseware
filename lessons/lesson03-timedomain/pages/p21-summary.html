@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>第一、二节小结</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<link rel="stylesheet" href="../lesson03-svg.css">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:24px; height:100%; }
+  .lcol { flex:1.2; display:flex; flex-direction:column; gap:16px; }
+  .rcol { flex:1; display:flex; flex-direction:column; gap:16px; }
+  .cc .bd { font-size:21.5px; line-height:1.6; display:flex; align-items:center; height:calc(100% - 62px); }
+  .kt { width:100%; border-collapse:collapse; font-size:21px; }
+  .kt th { background:var(--blue); color:#fff; padding:12px 12px; border:2px solid var(--line); font-weight:700; }
+  .kt td { border:2px solid var(--line); padding:13px 12px; background:#fff; text-align:center; }
+  .kt tr:nth-child(even) td { background:var(--sky); }
+  .relc { flex:1; }
+  .relc .bd { font-size:22px; line-height:1.7; }
+</style>
+</head>
+<body data-title="第一、二节小结" data-page="22 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note fill">
+    <div class="row">
+      <div class="lcol">
+        <div class="act-card cc" style="flex:1">
+          <div class="hd">一阶系统要点回顾</div>
+          <div class="bd">
+            <table class="kt">
+              <tr><th>项目</th><th>内容</th></tr>
+              <tr><td>传递函数</td><td class="tex">\varPhi(s)=\dfrac{1}{Ts+1}</td></tr>
+              <tr><td>阶跃响应</td><td class="tex">h(t)=1-e^{-t/T}</td></tr>
+              <tr><td>调节时间</td><td class="tex">t_{s}=3T\;(\Delta=5\%)；\;4T\;(\Delta=2\%)</td></tr>
+              <tr><td>斜坡响应</td><td class="tex">c(t)=t-T+Te^{-t/T}，\; e_{ss}=T</td></tr>
+              <tr><td>脉冲响应</td><td class="tex">g(t)=\dfrac{1}{T}e^{-t/T}</td></tr>
+              <tr><td>T 的图解求法</td><td style="font-size:19.5px">初始斜率线交 h=1 于 t = T；或读 h(T)=0.632 点</td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="rcol">
+        <div class="act-card relc">
+          <div class="hd">三种响应的内在联系</div>
+          <div class="bd">
+            <div class="mathbox math eqline tex tex-d" style="font-size:25px;margin-bottom:10px">g(t) = \dfrac{\mathrm{d}h(t)}{\mathrm{d}t} = \dfrac{\mathrm{d}^{2}c(t)}{\mathrm{d}t^{2}}</div>
+            输入信号互为积分关系 ⇒ 响应互为求导关系。<br>
+            <span class="kw-r">此特征适用于任何阶线性定常系统</span>，因此只需选一种典型输入信号进行研究即可。
+            <svg viewBox="0 0 560 160" style="width:100%;display:block;margin-top:16px">
+              <defs>
+                <marker id="a21o" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#F5821F"/></marker>
+                <marker id="a21b" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#1D3FA0"/></marker>
+              </defs>
+              <rect x="24" y="48" width="140" height="64" rx="10" class="svgblk"/>
+              <text x="94" y="76" font-size="20" font-style="italic" fill="#1B3B8B" text-anchor="middle" font-weight="700">g(t)</text>
+              <text x="94" y="100" font-size="16" fill="#5B6B8C" text-anchor="middle">脉冲响应</text>
+              <rect x="210" y="48" width="140" height="64" rx="10" class="svgblk"/>
+              <text x="280" y="76" font-size="20" font-style="italic" fill="#1B3B8B" text-anchor="middle" font-weight="700">h(t)</text>
+              <text x="280" y="100" font-size="16" fill="#5B6B8C" text-anchor="middle">阶跃响应</text>
+              <rect x="396" y="48" width="140" height="64" rx="10" class="svgblk"/>
+              <text x="466" y="76" font-size="20" font-style="italic" fill="#1B3B8B" text-anchor="middle" font-weight="700">c(t)</text>
+              <text x="466" y="100" font-size="16" fill="#5B6B8C" text-anchor="middle">斜坡响应</text>
+              <line x1="168" y1="66" x2="206" y2="66" stroke="#F5821F" stroke-width="2.4" marker-end="url(#a21o)"/>
+              <text x="187" y="56" font-size="16" fill="#F5821F" text-anchor="middle" font-weight="700">积分</text>
+              <line x1="206" y1="94" x2="168" y2="94" stroke="#1D3FA0" stroke-width="2.4" marker-end="url(#a21b)"/>
+              <text x="187" y="122" font-size="16" fill="#1D3FA0" text-anchor="middle" font-weight="700">求导</text>
+              <line x1="354" y1="66" x2="392" y2="66" stroke="#F5821F" stroke-width="2.4" marker-end="url(#a21o)"/>
+              <text x="373" y="56" font-size="16" fill="#F5821F" text-anchor="middle" font-weight="700">积分</text>
+              <line x1="392" y1="94" x2="354" y2="94" stroke="#1D3FA0" stroke-width="2.4" marker-end="url(#a21b)"/>
+              <text x="373" y="122" font-size="16" fill="#1D3FA0" text-anchor="middle" font-weight="700">求导</text>
+            </svg>
+          </div>
+        </div>
+        <div class="act-card">
+          <div class="hd">最常用的三项指标</div>
+          <div class="bd" style="font-size:23px;display:grid;grid-template-columns:1fr 1fr 1fr;text-align:center;white-space:nowrap">
+            <span><span class="kw-r">σ%</span> —— 平稳性</span>
+            <span><span class="kw-r">t<sub>s</sub></span> —— 快速性</span>
+            <span><span class="kw-r">e<sub>ss</sub></span> —— 准确性</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">预告</span>下一节分析<span class="kw-r">二阶系统</span>：阻尼比 ζ 与无阻尼振荡频率 ωn 如何决定阶跃响应的形状与各项性能指标。</div>
+</div></div>
+</body>
+</html>

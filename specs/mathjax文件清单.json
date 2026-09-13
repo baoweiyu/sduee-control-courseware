@@ -1,0 +1,542 @@
+{
+	"type": "npm",
+	"name": "mathjax",
+	"version": "4.1.3",
+	"default": "/node-main.min.mjs",
+	"files": [
+		{
+			"name": "/a11y/assistive-mml.js",
+			"hash": "nBFmx8LKLlfV0lzDv3HcU2nTK5pCYBUfmYwL7XfVXcM=",
+			"size": 3639
+		},
+		{
+			"name": "/a11y/complexity.js",
+			"hash": "aB9+2J18TRckd/2FErgI6IXjDeSUkGDYnceQQK9HZmY=",
+			"size": 12664
+		},
+		{
+			"name": "/a11y/explorer.js",
+			"hash": "4Gt75I+QaFWIEzmlaW0uWfHla318gatClVgfNHInEKo=",
+			"size": 57864
+		},
+		{
+			"name": "/a11y/semantic-enrich.js",
+			"hash": "sWnnf77JMjogJHjtP0dsnaOvAjNqiER0nZAdvXYqjI4=",
+			"size": 4782
+		},
+		{
+			"name": "/a11y/speech.js",
+			"hash": "jD4wSFRuZgZ9R+PZKeIVLmqArvx3uN4Yh56B2segyuc=",
+			"size": 20451
+		},
+		{
+			"name": "/a11y/sre.js",
+			"hash": "Z4HGlc4ue/mLXlT0aLnDeuG028kGWvwYB4tDv7y9gXg=",
+			"size": 261018
+		},
+		{
+			"name": "/adaptors/jsdom.js",
+			"hash": "VIJo/UEm300gEBNe2MRxXvqDfNL7gN9EPlGeNpx3qXI=",
+			"size": 3284
+		},
+		{
+			"name": "/adaptors/linkedom.js",
+			"hash": "Wf539hGwMsmrcQoYG4YdoU2rrINVbYjCIUJCBPAxdPA=",
+			"size": 3737
+		},
+		{
+			"name": "/adaptors/liteDOM.js",
+			"hash": "m3dKGFn+o9iCnNAI1hMhxeskyVU8P04KqkfYbYMFhJA=",
+			"size": 13732
+		},
+		{
+			"name": "/CONTRIBUTING.md",
+			"hash": "ieH4f32qknHanmxDf+ewXM1+KcHuDil+eC2KPX3vY+w=",
+			"size": 13948
+		},
+		{
+			"name": "/core.js",
+			"hash": "GjyzKhgZk1XGe4949XWY3sjCU/dFWuQqw/l0tUjUOhs=",
+			"size": 141170
+		},
+		{
+			"name": "/input/asciimath.js",
+			"hash": "uk8g8vGy5+v7Ra/DueGV2Ep0nlSSVVgSvoBfahGtcGY=",
+			"size": 103833
+		},
+		{
+			"name": "/input/mml.js",
+			"hash": "zLd3o2mPPSYZh21/38jTB6VIlsPhgS83qsJCUmhyUeo=",
+			"size": 8673
+		},
+		{
+			"name": "/input/mml/entities.js",
+			"hash": "ACepx77xp0KGiwBEDRDQvjZIw9Vw1yK7MCBoR7CB2Gg=",
+			"size": 29055
+		},
+		{
+			"name": "/input/mml/extensions/mml3.js",
+			"hash": "7XkkebM0NSmiqaGoE+vzzqn+XTgenRNaB+FVyB0DYDE=",
+			"size": 27784
+		},
+		{
+			"name": "/input/mml/extensions/mml3.sef.json",
+			"hash": "Dw7veT87l987EMOG4jUok464L30YCv/mlDl+c0bwOoc=",
+			"size": 192556
+		},
+		{
+			"name": "/input/tex.js",
+			"hash": "A3WETAyWmLPCa94MeLW8Ytv74V43lEM9z34LSz6itpo=",
+			"size": 149555
+		},
+		{
+			"name": "/input/tex/extensions/action.js",
+			"hash": "fEb8HvgRhyO/LzhtcEqyieXdaDRx4K1OHnFyRJWbVls=",
+			"size": 1843
+		},
+		{
+			"name": "/input/tex/extensions/ams.js",
+			"hash": "b/hatInaBOxTOiK5uT1dXVH59R7wLHI0OXNOZdklfRQ=",
+			"size": 21194
+		},
+		{
+			"name": "/input/tex/extensions/amscd.js",
+			"hash": "gdYRWqQ1ipjaXm1HesQZjLwRwsJ1J0WzUpqLbidhIC8=",
+			"size": 4310
+		},
+		{
+			"name": "/input/tex/extensions/autoload.js",
+			"hash": "jalB/epmCUT8akQ0gj3OnPNpuIy2wKtQsAcAt6ktvww=",
+			"size": 3331
+		},
+		{
+			"name": "/input/tex/extensions/bbm.js",
+			"hash": "+3gPboylZUObPG3Hjz5CtSWQX9Q8XhVHGZSiodqRTKg=",
+			"size": 2143
+		},
+		{
+			"name": "/input/tex/extensions/bboldx.js",
+			"hash": "dyUDs0rFt8VuVsdphAO61v8+o/0YgsIrTh71GObvhsU=",
+			"size": 7397
+		},
+		{
+			"name": "/input/tex/extensions/bbox.js",
+			"hash": "nZ/20cWS0qT+coQS0tXsKTefRyG/o7g1atIEXrk5uEg=",
+			"size": 2323
+		},
+		{
+			"name": "/input/tex/extensions/begingroup.js",
+			"hash": "D2BtWnEwGZLpLYaXzL+DGHNhEGkdipQwPz8lTNWJQho=",
+			"size": 4266
+		},
+		{
+			"name": "/input/tex/extensions/boldsymbol.js",
+			"hash": "uqq9n7Qw/k/b+p23SqYLEY3WUKaCOSgDaKv9G8MKDhA=",
+			"size": 2460
+		},
+		{
+			"name": "/input/tex/extensions/braket.js",
+			"hash": "1AGDLZHKifyPds8epnziWyHEorHZ2g22BSBPJiyNae4=",
+			"size": 4653
+		},
+		{
+			"name": "/input/tex/extensions/bussproofs.js",
+			"hash": "h0UQdMwX4sgGTWMLkcxWFxGCzFpGwTEwBgFPVsSY2NQ=",
+			"size": 12204
+		},
+		{
+			"name": "/input/tex/extensions/cancel.js",
+			"hash": "n/kf+E2XdmBs22baYv/puznP36vPBw8hTTXlU2if/s4=",
+			"size": 2255
+		},
+		{
+			"name": "/input/tex/extensions/cases.js",
+			"hash": "aAXUgaruP3jYK7nwtrmsR7CATDDxAlM5RyRFnZXUGow=",
+			"size": 4277
+		},
+		{
+			"name": "/input/tex/extensions/centernot.js",
+			"hash": "48COltEfAgAnqbMl57hmHwiUC6u6IYt4asKdUNgi37o=",
+			"size": 2148
+		},
+		{
+			"name": "/input/tex/extensions/color.js",
+			"hash": "9Wnrv1Nyav6z96eANQCsIIiq2kAKIAA5SHnQtQMxGxc=",
+			"size": 6818
+		},
+		{
+			"name": "/input/tex/extensions/colortbl.js",
+			"hash": "3/KJq8/zDQ4QnrUab2vi0J5Gt+HbW8iBcZ+fG/SDq48=",
+			"size": 3185
+		},
+		{
+			"name": "/input/tex/extensions/colorv2.js",
+			"hash": "Q0OXqLMH7l6CSwZezzFFzo/65Y9GXgVLPZuFP1+QS68=",
+			"size": 1524
+		},
+		{
+			"name": "/input/tex/extensions/configmacros.js",
+			"hash": "Wntue3mA+NNCXdvLviEpnaWxJU1XAukb27nQT0h/RmQ=",
+			"size": 2588
+		},
+		{
+			"name": "/input/tex/extensions/dsfont.js",
+			"hash": "dKmWG0PENkTCjFgvwUAxt/QrrAt3EUCl2Arzg0FeqXg=",
+			"size": 1898
+		},
+		{
+			"name": "/input/tex/extensions/empheq.js",
+			"hash": "Ao53XsqZGTddM5epR9YIY4PsmaUBpQgLKDP/2l1XihQ=",
+			"size": 5946
+		},
+		{
+			"name": "/input/tex/extensions/enclose.js",
+			"hash": "UwHZHi59b4ainBPBuXJrdHa53psXRQEYhskUNy+rTPM=",
+			"size": 1731
+		},
+		{
+			"name": "/input/tex/extensions/extpfeil.js",
+			"hash": "LR+CvyKs7+bDWOOj3KKTzC/aM48ttP0Ue+/HUSLEGEE=",
+			"size": 2445
+		},
+		{
+			"name": "/input/tex/extensions/fontsizev3.js",
+			"hash": "Do/lVEJKJ01YCe/BHzpIYCcTu30rIoCuT8rAQYHxKPI=",
+			"size": 1637
+		},
+		{
+			"name": "/input/tex/extensions/gensymb.js",
+			"hash": "zVy4pocZrMDCFfQ3fk036zXU9JurJsfkbv/15NvH9tM=",
+			"size": 1588
+		},
+		{
+			"name": "/input/tex/extensions/html.js",
+			"hash": "pkfRPQCdXs7kI5z+aB74MfK9DyqRAzuSKua/NIHRVuA=",
+			"size": 2813
+		},
+		{
+			"name": "/input/tex/extensions/mathtools.js",
+			"hash": "CkA9JP8Pu2mMsO/Rz+hWm/tH5JIWUgQXBIHn5mGaHcw=",
+			"size": 22389
+		},
+		{
+			"name": "/input/tex/extensions/mhchem.js",
+			"hash": "dEdxDZgErqaLRJHo/edS1pqQXg0nqKOXBcU19kz6f9w=",
+			"size": 38920
+		},
+		{
+			"name": "/input/tex/extensions/newcommand.js",
+			"hash": "J7xt8PyFZ+r/UVPmeeXeU+nPCRiq5xTY3XL9OkDKIpM=",
+			"size": 8833
+		},
+		{
+			"name": "/input/tex/extensions/noerrors.js",
+			"hash": "R5wA0nT3844l1EoT5Ae/it64OwLdBWOaMCynwNs9TMI=",
+			"size": 1243
+		},
+		{
+			"name": "/input/tex/extensions/noundefined.js",
+			"hash": "0p2HHY04gCzBWB9uT11nPDV6i/mAIRTqV/UaU9Cg/vM=",
+			"size": 1384
+		},
+		{
+			"name": "/input/tex/extensions/physics.js",
+			"hash": "Oh0bCrIDtEaiwE2fWgv1nmIlyDonrqCyQD8oKTqtt5o=",
+			"size": 19564
+		},
+		{
+			"name": "/input/tex/extensions/require.js",
+			"hash": "bMv7f5puYn+r3DnOA0+ZNVFyuXeIkczjMkOERQEJgTA=",
+			"size": 4007
+		},
+		{
+			"name": "/input/tex/extensions/setoptions.js",
+			"hash": "dWEABUomS8/UfBtcA7fk3N18ymebeLaTppJuiHq1nDk=",
+			"size": 3729
+		},
+		{
+			"name": "/input/tex/extensions/tagformat.js",
+			"hash": "naDxKUnrIJ+M+gb9iN3OEr9riIDSnAZ6etCPQhZKOlc=",
+			"size": 1975
+		},
+		{
+			"name": "/input/tex/extensions/texhtml.js",
+			"hash": "YmndoJwotCkc1NleiAydwFPMlbQcZEzgV7q1ZAy4MRM=",
+			"size": 2504
+		},
+		{
+			"name": "/input/tex/extensions/textcomp.js",
+			"hash": "0IUhXC133wyNv0YLmRxZ76nmnL1+H26Uv1y7Njqhxpw=",
+			"size": 5135
+		},
+		{
+			"name": "/input/tex/extensions/textmacros.js",
+			"hash": "EqUmWZiEctjxYKlqd06XD4kVOg8uMp0qHQ4xjUq5vas=",
+			"size": 10279
+		},
+		{
+			"name": "/input/tex/extensions/unicode.js",
+			"hash": "vx3cn+UG94LA6SccDFLEslj55OrD0pBSdNDF0jniorM=",
+			"size": 3586
+		},
+		{
+			"name": "/input/tex/extensions/units.js",
+			"hash": "JSeIFMvAUPzU6IScAUwjjPaAHgBAXgrK9dmJJP0eJqc=",
+			"size": 2118
+		},
+		{
+			"name": "/input/tex/extensions/upgreek.js",
+			"hash": "D0yWEEaZrq2jdEbfs9UEOO/sThHFiYKrqi/3gdQtNmc=",
+			"size": 2157
+		},
+		{
+			"name": "/input/tex/extensions/verb.js",
+			"hash": "sikP8b5NM8V91HbYfRdT1M3gpZkWErSiTbiBoVyFolA=",
+			"size": 1779
+		},
+		{
+			"name": "/input/tex-base.js",
+			"hash": "MzNXaIdzKvP01D/yWfXlu0Eu+0cXxFT0kYKkYsgKXag=",
+			"size": 108684
+		},
+		{
+			"name": "/LICENSE",
+			"hash": "z8d0m5b2O9McPEK1xHG/dWgUBT6EfBDz6wA0F7xSPTA=",
+			"size": 11358
+		},
+		{
+			"name": "/loader.js",
+			"hash": "zwuUZN76Ua4MU/E5qEpbcDaUjHCYdeSOVqyrtq6AvSY=",
+			"size": 11379
+		},
+		{
+			"name": "/mml-chtml.js",
+			"hash": "VXV0yvq+O0NamtsIewP63GITji/KK+7MVLCGHwnHxiQ=",
+			"size": 850354
+		},
+		{
+			"name": "/mml-chtml-nofont.js",
+			"hash": "L08qQCo/h6WBICiG0F+jf2TZPARd16E6JktmizRJU2c=",
+			"size": 741397
+		},
+		{
+			"name": "/mml-svg.js",
+			"hash": "l3BEloC1fma145gIazTlev3qHcSie2rZJn4hrTxq5Ro=",
+			"size": 1702534
+		},
+		{
+			"name": "/mml-svg-nofont.js",
+			"hash": "bKoPG0uRPrfdGtV2iqY8q3TbX4HVEsTbB46JyOGmcYs=",
+			"size": 726828
+		},
+		{
+			"name": "/node-main.cjs",
+			"hash": "dYq2iVUC4TdFawLkmvpXdbEh0izB9UAteBXM7ky1wiA=",
+			"size": 134
+		},
+		{
+			"name": "/node-main.js",
+			"hash": "PBmEQ6R5v7HfJ7kBLb2FmjQxyVSEJ5M0wOq7Sb1Tf0g=",
+			"size": 177434
+		},
+		{
+			"name": "/node-main.mjs",
+			"hash": "wVILrAA1aaePF0SEvve/s2Ah5daqOXv2hEYTJwyvrjY=",
+			"size": 130
+		},
+		{
+			"name": "/node-main-setup.cjs",
+			"hash": "IdEK+iuRBQ8ith1kzWEH/4TTlGSTXNVAoggdFYZn/y0=",
+			"size": 137
+		},
+		{
+			"name": "/output/chtml.js",
+			"hash": "kDcwjGSvQCiEWzbN4IAZ4xFhjLpAYFSDpPBgaiL0rGk=",
+			"size": 173814
+		},
+		{
+			"name": "/output/svg.js",
+			"hash": "YVHSG4IFhYwQNkJITxyicuPJy73jfVMjWsBXKWbOYT0=",
+			"size": 159356
+		},
+		{
+			"name": "/package.json",
+			"hash": "RAz8v7MXRWp3S8cYboV6HxNZVBBeMqQxLWzdVV86Qlc=",
+			"size": 2435
+		},
+		{
+			"name": "/README.md",
+			"hash": "y0Ig6dWIStecNrM9YX+J5xtiZnSf3NYiFWWHECOpkDU=",
+			"size": 10085
+		},
+		{
+			"name": "/require.mjs",
+			"hash": "OZz/g23318+kK8VFnWnjNAdLUKlHO0K9i+rCEQisBTY=",
+			"size": 87
+		},
+		{
+			"name": "/sre/mathmaps/af.json",
+			"hash": "uQbKbpFResjW+HwwQiODnJmY2vLSmsjXnOX6lnwj3Hc=",
+			"size": 267392
+		},
+		{
+			"name": "/sre/mathmaps/base.json",
+			"hash": "clWHAFVtmXqV6SgQROMw66mkct2kNkKptcwEgylNh18=",
+			"size": 217157
+		},
+		{
+			"name": "/sre/mathmaps/ca.json",
+			"hash": "dQoDSYTztZZqKjketa0Me1C/oC61dqgmVqC/Q+vjTuc=",
+			"size": 247328
+		},
+		{
+			"name": "/sre/mathmaps/da.json",
+			"hash": "krguFZFmc+vcvdaSeqSRoYz0eAQycz5TThBxuYsXba4=",
+			"size": 247368
+		},
+		{
+			"name": "/sre/mathmaps/de.json",
+			"hash": "LlasT1pM5vgxppw0qBtm1OJgu6SgGUmVGPNWiIwUb6U=",
+			"size": 284080
+		},
+		{
+			"name": "/sre/mathmaps/en.json",
+			"hash": "XmDRhDNRlmoVnMQJ63Ppq8fH43WjMRxA01hD1w/uefs=",
+			"size": 364204
+		},
+		{
+			"name": "/sre/mathmaps/es.json",
+			"hash": "Pyc3mCV+rBuzkIJySsgZoJQFiK79ISdcLEOhF4utths=",
+			"size": 250921
+		},
+		{
+			"name": "/sre/mathmaps/euro.json",
+			"hash": "VkwQseyuPRYaUPvxOWW50ybSTYxeFyFSoWJT9jNDdaw=",
+			"size": 12781
+		},
+		{
+			"name": "/sre/mathmaps/fr.json",
+			"hash": "yvYKiCtlSsGPWhaJYK7qwBTCdwjFYZXdbXZa/3KIOd8=",
+			"size": 276403
+		},
+		{
+			"name": "/sre/mathmaps/hi.json",
+			"hash": "3r24/IscVqfxrE+WvFZq+UVmMrWN9VazMx3r3wwscj0=",
+			"size": 394568
+		},
+		{
+			"name": "/sre/mathmaps/it.json",
+			"hash": "tHbL+0oej2ES9pxR5uus+G7UEUqcCx+/tBmsKUSqbPo=",
+			"size": 282065
+		},
+		{
+			"name": "/sre/mathmaps/ko.json",
+			"hash": "r3/ZC88Gc29TY7dS1QXUzHeCvXJcbbQYTtzN9WskqH4=",
+			"size": 392014
+		},
+		{
+			"name": "/sre/mathmaps/nb.json",
+			"hash": "jRrXj4G+SbVpzgARBW9wUBWEhDtaXaiyG0wtjTjLOuM=",
+			"size": 260745
+		},
+		{
+			"name": "/sre/mathmaps/nemeth.json",
+			"hash": "FvMK1bx9sCu8zkYjsQhibxpz1lZgeZiR8j79dtyqMz4=",
+			"size": 227472
+		},
+		{
+			"name": "/sre/mathmaps/nn.json",
+			"hash": "hIHAOL+/YJ9TBTyyb4bB3kxur+vhqA+QkASzogGwcWY=",
+			"size": 262158
+		},
+		{
+			"name": "/sre/mathmaps/sv.json",
+			"hash": "dDZTHDJr6USb27QcdPyuQjX8WP98aBaZnlce5jb9FfE=",
+			"size": 271954
+		},
+		{
+			"name": "/sre/require.d.mts",
+			"hash": "lGcBBmsSJbu1Ocs7e5363+owm337co3CjllZmvl8EC0=",
+			"size": 44
+		},
+		{
+			"name": "/sre/require.mjs",
+			"hash": "OZz/g23318+kK8VFnWnjNAdLUKlHO0K9i+rCEQisBTY=",
+			"size": 87
+		},
+		{
+			"name": "/sre/speech-worker.js",
+			"hash": "gL1mPy1IUFKR3MJWcopP474b5Lc9NnW5Bb1RscQxdFs=",
+			"size": 425256
+		},
+		{
+			"name": "/startup.js",
+			"hash": "E6MD6uh5DFx57dsq/dPSIzi+b+WeC1JuvJLQC4jZih0=",
+			"size": 17116
+		},
+		{
+			"name": "/tex-chtml.js",
+			"hash": "bs0Ulwpz/Ki7EV+NaWeu+BgTXe4AkTOQYcQa2iMAcrY=",
+			"size": 997445
+		},
+		{
+			"name": "/tex-chtml-nofont.js",
+			"hash": "e9rJCjD5JsAXtd1Fvp5SkbSXSeMk6FT1Oexjh/3jmlg=",
+			"size": 888469
+		},
+		{
+			"name": "/tex-mml-chtml.js",
+			"hash": "ihPtDDm7pTmSF9ViEsItlvsrBTsNkz0MOXMchzOwCQw=",
+			"size": 997558
+		},
+		{
+			"name": "/tex-mml-chtml-nofont.js",
+			"hash": "HGPjgijG7REPNt5gYVUvvddMQKQxwkzyyIEZqJYjdUE=",
+			"size": 888601
+		},
+		{
+			"name": "/tex-mml-svg.js",
+			"hash": "8tG0BBP5xjHOWgdNEHJ3FviegJm2Gg/QgzFurfOr4XM=",
+			"size": 1849738
+		},
+		{
+			"name": "/tex-mml-svg-nofont.js",
+			"hash": "bj3lIeWRkrIZJ38SR83ANTjFx1euG1Bi1fnNuH0v4z4=",
+			"size": 874032
+		},
+		{
+			"name": "/tex-svg.js",
+			"hash": "I8A23szA8jdINKR+QDLkUkGfOsAnvxfhfBBOJ0axn0w=",
+			"size": 1849625
+		},
+		{
+			"name": "/tex-svg-nofont.js",
+			"hash": "ATXEHg8OXG9DxAusccw4Dt5o5C1mdkFKv/9A//m0x58=",
+			"size": 873900
+		},
+		{
+			"name": "/ui/lazy.js",
+			"hash": "FWNuF3Ne71syk2GNZZZZGajsKC/nlSTD5pH+IKPMzSI=",
+			"size": 6599
+		},
+		{
+			"name": "/ui/menu.js",
+			"hash": "xF5Ark1/o7npIgbS8eabm1b7zmcfI6SBcGFoEMDiFCs=",
+			"size": 75112
+		},
+		{
+			"name": "/ui/no-dark-mode.js",
+			"hash": "VW8MgFNCy3nV8TNPlSY16yEA/VfYq5bVVfAmgpSlYiY=",
+			"size": 2254
+		},
+		{
+			"name": "/ui/safe.js",
+			"hash": "3dW16zB2vfccmwUIxY+uCVtEGiK3vy/y4a1azjifSbI=",
+			"size": 6375
+		}
+	],
+	"links": {
+		"stats": "https://data.jsdelivr.com/v1/stats/packages/npm/mathjax@4.1.3",
+		"entrypoints": "https://data.jsdelivr.com/v1/packages/npm/mathjax@4.1.3/entrypoints"
+	}
+}

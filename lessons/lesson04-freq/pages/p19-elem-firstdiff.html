@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>1.5 一阶微分环节的极坐标图</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:26px; height:100%; min-height:0; }
+  .tx { flex:1; display:flex; flex-direction:column; gap:20px; min-height:0; }
+  .tx .act-card { flex:1; display:flex; flex-direction:column; min-height:0; }
+  .tx .bd { flex:1; display:flex; flex-direction:column; justify-content:center; gap:14px; font-size:21.5px; line-height:1.65; }
+  .tx .mathbox { font-size:23px; padding:12px 18px; }
+  .figc { flex:1.15; display:flex; flex-direction:column; overflow:hidden; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:8px 14px; min-height:0; }
+  .figc svg { width:100%; height:100%; }
+</style>
+</head>
+<body data-title="1.5 一阶微分环节的极坐标图" data-page="19 / 87">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="tx">
+        <div class="act-card">
+          <div class="hd">表达式</div>
+          <div class="bd">
+            <div class="mathbox math eqline tex tex-d">G(s)=1+Ts \;\Rightarrow\; G(j\omega)=1+j\omega T</div>
+            <div>实部恒为 1、虚部 <span class="tex">\omega T</span> 随 ω 线性增长：</div>
+            <div><span class="tex">A(\omega)=\sqrt{1+\omega^{2}T^{2}}</span>，<span class="tex">\varphi(\omega)=\operatorname{arctg}\omega T</span></div>
+            <div>轨迹：从点 <span class="kw-r">(1, j0)</span> 出发<span class="kw-r">竖直向上</span>的射线。</div>
+          </div>
+        </div>
+        <div class="act-card">
+          <div class="hd">与惯性环节对照</div>
+          <div class="bd">
+            <div>惯性环节 <span class="tex">\frac{1}{1+j\omega T}</span> 与一阶微分 <span class="tex">1+j\omega T</span> <span class="kw-r">互为倒数</span>：</div>
+            <div>幅值互为倒数、相角<span class="kw-r">反号</span>。</div>
+            <div>右图轨迹：动点从 <span class="tex">(1,\;j0)</span> 沿竖直线<span class="kw-r">向上</span>——实部恒为 1、虚部随 ω 线性增大（与惯性环节互为<span class="kw-r">复数倒数</span>：幅值互为倒数、相位反号；几何轨迹并不互为镜像）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd">轨迹：过 (1, j0) 的竖直射线</div>
+        <div class="bd2"><svg id="fig" viewBox="0 0 700 600"></svg></div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">操作</span><span>点"下一步"让 ω 逐段增大，观察动点从 (1, j0) 沿竖直线上升（共 5 段）。</span></div>
+  <div data-step="1" style="display:none"></div><div data-step="2" style="display:none"></div><div data-step="3" style="display:none"></div><div data-step="4" style="display:none"></div><div data-step="5" style="display:none"></div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("fig");
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const MF = "Cambria Math,STIX Two Math,Georgia,Microsoft YaHei,sans-serif";
+  const tx = (x, y, s, o, parent) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 20, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal", "font-family": MF }, parent); const esc = t => t.replace(/&/g, "&amp;").replace(/</g, "&lt;"); let html = "", sub = false; for (const p of String(s).split(/(_\{[^}]*\})/)) { if (!p) continue; if (p.startsWith("_{")) { html += `<tspan${sub ? "" : " dy=\"6\""} font-size="72%">${esc(p.slice(2, -1))}</tspan>`; sub = true; } else { html += sub ? `<tspan dy="-6">${esc(p)}</tspan>` : esc(p); sub = false; } } n.innerHTML = html; if (o && o.halo) n.setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:6;stroke-linejoin:round"); return n; };
+  const defs = mk("defs", {});
+  const m1 = mk("marker", { id: "a16", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, m1);
+  const O = { x: 300, y: 510 }, SC = 150; // ωT ∈ [0, 3]
+  const X = v => O.x + v * SC, Y = v => O.y - v * SC;
+  mk("line", { x1: 40, y1: O.y, x2: 660, y2: O.y, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a16)" });
+  mk("line", { x1: O.x, y1: 570, x2: O.x, y2: 30, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a16)" });
+  tx(654, O.y + 26, "Re", { fs: 20, it: true, b: true, fill: "#5B6B8C", an: "end" });
+  tx(O.x + 22, 42, "jIm", { fs: 20, it: true, b: true, fill: "#5B6B8C", an: "start" });
+  tx(O.x - 14, O.y + 24, "O", { fs: 18, fill: "#5B6B8C", an: "end" });
+  const X1 = X(1);
+  mk("line", { x1: X1, y1: O.y - 5, x2: X1, y2: O.y + 5, stroke: "#5B6B8C", "stroke-width": 1.5 });
+  tx(X1, O.y + 26, "1", { fs: 18, fill: "#5B6B8C" });
+  // 淡参考射线
+  mk("line", { x1: X1, y1: O.y, x2: X1, y2: Y(3.05), stroke: "#E4EAF7", "stroke-width": 2.2, "stroke-dasharray": "8 7" });
+  const dyn = mk("g", {});
+  const TOTAL = 5;
+  let K = 0;
+  function paint() {
+    dyn.innerHTML = "";
+    const f = K / TOTAL, top = 3 * f;
+    if (K > 0) {
+      mk("line", { x1: X1, y1: O.y, x2: X1, y2: Y(top), stroke: "#2B5CE6", "stroke-width": 4 }, dyn);
+      mk("circle", { cx: X1, cy: Y(top), r: 8, fill: "#D63A2F" }, dyn);
+      tx(X1 + 18, Y(top) + 7, "ωT=" + top.toFixed(1), { fs: 20, b: true, it: true, fill: "#D63A2F", an: "start", halo: 1 }, dyn);
+    }
+    mk("circle", { cx: X1, cy: O.y, r: 7, fill: "#1D3FA0" }, dyn);
+    tx(X1 - 6, O.y - 20, "ω=0（起点 1∠0°）", { fs: 20, b: true, it: true, fill: "#1D3FA0", an: "end", halo: 1 }, dyn);
+    if (K >= TOTAL) tx(X1 + 14, Y(3) - 18, "ω→∞", { fs: 20, b: true, it: true, fill: "#D63A2F", an: "start", halo: 1 }, dyn);
+  }
+  const S = ACT.step;
+  const _next = S.next.bind(S), _reset = S.reset.bind(S);
+  S.next = function () { if (K < TOTAL) K++; const d = _next(); paint(); return d; };
+  S.reset = function () { K = 0; _reset(); paint(); };
+  window.prev = function () { if (K <= 0) return; const t = K - 1; S.reset(); for (let i = 0; i < t; i++) S.next(); };
+  paint();
+});
+</script>
+</body>
+</html>

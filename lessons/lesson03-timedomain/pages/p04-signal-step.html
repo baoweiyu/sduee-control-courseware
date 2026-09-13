@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>阶跃函数</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<link rel="stylesheet" href="../lesson03-svg.css">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:26px; height:100%; align-items:stretch; }
+  .lcol { flex:1.05; display:flex; flex-direction:column; gap:18px; }
+  .name { font-size:27px; font-weight:700; color:var(--navy); }
+  .name small { font-size:20px; color:var(--muted); font-weight:400; margin-left:10px; }
+  .mathbox { font-size:30px; padding:24px 28px; }
+  .unit { background:#fff; border:2px solid var(--line); border-radius:14px; padding:16px 22px; font-size:22px; color:var(--ink); line-height:1.6; }
+  .figc { flex:1; display:flex; flex-direction:column; overflow:hidden; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:14px; }
+  .figc svg { width:100%; height:100%; }
+</style>
+</head>
+<body data-title="典型输入信号 · 阶跃函数" data-page="4 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body fill">
+    <div class="row">
+      <div class="lcol">
+        <div class="name">1、阶跃函数<small>位置函数</small></div>
+        <div class="mathbox math eqline tex tex-d">r(t) = \begin{cases} A, & t \geq 0 \\ 0, & t < 0 \end{cases}</div>
+        <div class="unit">
+          <b>单位阶跃函数</b>：令 <span class="tex">A=1</span>，记为 <span class="tex">1(t)</span>，其拉氏变换
+          <span class="mathbox math eqline tex tex-d" style="display:inline-block;padding:8px 22px;font-size:26px;margin-left:12px">\mathcal{L}\left[1(t)\right] = \dfrac{1}{s}</span>
+        </div>
+        <div class="unit">表示 <span class="tex">t=0</span> 时刻出现的<span class="kw-r">突变</span>信号，如给定值突然改变、开关突然合闸等。</div>
+      </div>
+      <div class="figc">
+        <div class="act-card figc">
+          <div class="hd">阶跃函数波形</div>
+          <div class="bd2">
+            <svg viewBox="0 0 640 560">
+              <defs>
+                <marker id="arr4" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#5B6B8C"/></marker>
+              </defs>
+              <!-- 坐标轴 -->
+              <line x1="90" y1="470" x2="600" y2="470" class="svgline" stroke="#5B6B8C" stroke-width="1.5" marker-end="url(#arr4)"/>
+              <line x1="90" y1="470" x2="90" y2="40" class="svgline" stroke="#5B6B8C" stroke-width="1.5" marker-end="url(#arr4)"/>
+              <text x="598" y="505" class="svgname" font-size="20" text-anchor="end">t</text>
+              <text x="60" y="44" class="svgname" font-size="20" text-anchor="middle">r(t)</text>
+              <text x="66" y="478" class="svgsub" font-size="18">O</text>
+              <!-- 波形：t<0 为 0，t≥0 为 A -->
+              <line x1="90" y1="470" x2="240" y2="470" stroke="#2B5CE6" stroke-width="3.5"/>
+              <line x1="240" y1="470" x2="240" y2="160" stroke="#2B5CE6" stroke-width="3.5" stroke-dasharray="9 7"/>
+              <line x1="240" y1="160" x2="580" y2="160" stroke="#2B5CE6" stroke-width="3.5"/>
+              <!-- A 高度参考线 -->
+              <line x1="90" y1="160" x2="240" y2="160" stroke="#F5821F" stroke-width="2" stroke-dasharray="8 6"/>
+              <text x="66" y="168" class="svgname" font-size="22" text-anchor="middle">A</text>
+              <!-- 原点与跳变点 -->
+              <circle cx="240" cy="160" r="5.5" fill="#2B5CE6"/>
+              <circle cx="240" cy="470" r="5.5" fill="#fff" stroke="#2B5CE6" stroke-width="3"/>
+              <text x="240" y="505" class="svgsub" font-size="19" text-anchor="middle">0</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+</body>
+</html>

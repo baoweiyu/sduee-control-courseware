@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>3.4 Bode 定理与第三部分小结</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .wrap { display:flex; flex-direction:column; justify-content:space-evenly; height:100%; min-height:0; gap:14px; }
+  .ln { background:#fff; border:2px solid var(--line); border-radius:14px; padding:20px 26px; display:flex; align-items:center; gap:18px; font-size:22px; line-height:1.6; color:var(--ink); }
+  .ln .k { flex:none; background:var(--blue); color:#fff; font-size:19px; font-weight:700; border-radius:9px; padding:6px 16px; white-space:nowrap; }
+  .ln b { color:var(--navy); }
+</style>
+</head>
+<body data-title="3.4 Bode 定理与第三部分小结" data-page="73 / 87">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="wrap">
+      <div class="ln"><span class="k">判据三坑</span><span><b>N 逆时针为正</b>、P 只数<span class="kw-r">右半平面</span>开环极点；先补镜像与 ∞ 圆弧<span class="kw-r">必须闭合</span>；条件稳定要指明 K 的稳定区间。</span></div>
+      <div class="ln"><span class="k">Bode 定理</span><span>最小相位系统幅频与相频<span class="kw-r">一一对应</span>：<span class="tex">\pm n\cdot 20\,\mathrm{dB/dec}\leftrightarrow\pm n\cdot 90^{\circ}</span>——最小相位系统的幅相联系涉及<span class="kw-r">整体</span>频率特性，不能由单一频率处的局部斜率精确确定该点相位。</span></div>
+      <div class="ln"><span class="k">设计准则</span><span>经验建议：ωc 处斜率约 <span class="kw-r">−20dB/dec</span> 并保持到约 2ωc（教材经验口径，通常有利于留出相角裕度；是设计参考，非充分必要条件）。</span></div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">第四部分</span><span>前面都在看<span class="kw-r">开环</span>频率特性；控制系统真正工作的是<span class="kw-r">闭环</span>——第四部分：由开环 Nyquist/Bode 图求闭环频率特性（等 M 圆、等 N 圆、Nichols 图）。</span></div>
+</div></div>
+</body>
+</html>

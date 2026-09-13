@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>4.2 二阶系统：γ、ωc 与调节时间 ts</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:22px; height:100%; min-height:0; }
+  .lst { flex:1.05; display:flex; flex-direction:column; justify-content:space-evenly; gap:12px; min-height:0; }
+  .seg { background:#fff; border:2px solid var(--line); border-radius:13px; padding:9px 15px; font-size:17.5px; line-height:1.5; }
+  .seg b { color:var(--navy); }
+  .seg .mathbox { font-size:18.5px; padding:5px 11px; }
+  .seg .no { display:inline-grid; place-items:center; width:26px; height:26px; border-radius:50%; background:var(--blue); color:#fff; font-weight:800; font-size:15px; margin-right:6px; }
+  .res { background:#FFF3E8; border-left:5px solid var(--orange); }
+  .figc { flex:1; display:flex; flex-direction:column; overflow:hidden; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:6px 12px; min-height:0; }
+  .figc svg { width:100%; height:100%; }
+</style>
+</head>
+<body data-title="4.2 二阶系统：γ、ωc 与调节时间 ts" data-page="81 / 87">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lst">
+        <div class="seg" data-step="1"><span class="no">1</span><b>时域结论（第三章，欠阻尼 2% 误差带近似）</b>：
+          <div class="mathbox math eqline tex tex-d">t_s\approx\dfrac{4}{\zeta\omega_n}</div>
+        </div>
+        <div class="seg" data-step="2"><span class="no">2</span><b>代入 ωc 与 ζ、ωn 的关系</b> <span class="tex">\omega_c=\omega_n\sqrt{\sqrt{1+4\zeta^{4}}-2\zeta^{2}}</span>：
+          <div class="mathbox math eqline tex tex-d">t_s\approx\dfrac{4}{\zeta\omega_c}\cdot\sqrt{\sqrt{1+4\zeta^{4}}-2\zeta^{2}}</div>
+        </div>
+        <div class="seg" data-step="3"><span class="no">3</span><b>再用</b> <span class="tex">\operatorname{tg}\gamma=\dfrac{2\zeta}{\sqrt{\sqrt{1+4\zeta^{4}}-2\zeta^{2}}}</span> <b>化简</b>：
+          <div class="mathbox math eqline tex tex-d">\boxed{\,t_s\approx\dfrac{8}{\omega_c\,\operatorname{tg}\gamma}\,}</div>
+        </div>
+        <div class="seg res" data-step="4"><span class="no">4</span><b>结论</b>：① <b>ζ 一定（γ 一定）时</b>，<span class="kw-r">ωc 越大 → ts 越小</span>，系统越快；② <b>ωc 一定时</b>，γ 越大（ζ 越大）→ ts 越小；③ 于是「<b>足够大的 ωc + 合适的 γ（30°~70°）</b>」成为频域设计二阶/类二阶系统的直接目标。
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd"><span style="flex:1"><span class="tex">t_{s}</span> 与 <span class="tex">\omega_{c}</span> 的关系：双曲线族 <span class="tex">t_{s}\cdot\omega_{c}=8/\operatorname{tg}\gamma</span></span></div>
+        <div class="bd2"><svg id="fig" viewBox="0 0 760 640"></svg></div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">意义</span><span>对二阶系统，同一模型族内 <span class="kw-r">ωc 反映时间尺度、γ 对应阻尼程度</span>——开环指标（ωc, γ）与（ts, σ%）的联系是有条件的近似关系，跨系统不能直接比较。</span></div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("fig");
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const MF = "Cambria Math,STIX Two Math,Georgia,Microsoft YaHei,sans-serif";
+  const SUB = (n, s) => { const esc = t => t.replace(/&/g, "&amp;").replace(/</g, "&lt;"); let html = "", sub = false; for (const p of String(s).split(/(_\{[^}]*\})/)) { if (!p) continue; if (p.startsWith("_{")) { html += '<tspan' + (sub ? '' : ' dy="6"') + ' font-size="72%">' + esc(p.slice(2, -1)) + '</tspan>'; sub = true; } else { html += sub ? '<tspan dy="-6">' + esc(p) + '</tspan>' : esc(p); sub = false; } } n.innerHTML = html; };
+  const tx = (x, y, s, o) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 17.5, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal" , "font-family": MF }); SUB(n, s); if (o && o.halo) n.setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:6;stroke-linejoin:round"); return n; };
+  const defs = mk("defs", {});
+  const m1 = mk("marker", { id: "a76", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, m1);
+  const x0 = 100, x1 = 706, y0 = 548, y1 = 68;   // ωc ∈ [0, 5], ts ∈ [0, 15]
+  const X = w => x0 + w / 5 * (x1 - x0);
+  const Y = t => y0 - t / 15 * (y0 - y1);
+  const gam = z => Math.atan2(2 * z, Math.sqrt(Math.sqrt(1 + 4 * z ** 4) - 2 * z * z));
+  mk("line", { x1: x0, y1: y0, x2: x1 + 16, y2: y0, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a76)" });
+  mk("line", { x1: x0, y1: y0, x2: x0, y2: y1 - 14, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a76)" });
+  for (let w = 0; w <= 5; w++) { mk("line", { x1: X(w), y1: y0, x2: X(w), y2: y1, stroke: "#F0F4FC", "stroke-width": 1 }); tx(X(w), y0 + 26, String(w), { fs: 17.5, fill: "#5B6B8C" }); }
+  for (let t = 0; t <= 15; t += 3) { mk("line", { x1: x0, y1: Y(t), x2: x1, y2: Y(t), stroke: "#F0F4FC", "stroke-width": 1 }); tx(x0 - 12, Y(t) + 5, String(t), { fs: 17.5, fill: "#5B6B8C", an: "end" }); }
+  tx(x1 + 20, y0 + 34, "ωc", { fs: 18, it: true, b: true, fill: "#5B6B8C" });
+  tx(x0 - 12, y1 - 20, "ts", { fs: 18, it: true, b: true, fill: "#1B3B8B", an: "end" });
+  // 双曲线族（曲线端部太挤，ζ 标签改为顶部图例行）
+  const fam = [[0.3, "#D63A2F"], [0.4, "#F5821F"], [0.707, "#2B5CE6"], [1.0, "#1E9E57"]];
+  fam.forEach(([z, c]) => {
+    const k = 8 / Math.tan(gam(z));
+    let d = "";
+    for (let i = 1; i <= 200; i++) {
+      const w = 0.6 + 4.4 * i / 200, t = k / w;
+      if (t <= 15.2) d += (d ? "L" : "M") + X(w).toFixed(1) + "," + Y(t).toFixed(1);
+    }
+    mk("path", { d, stroke: c, "stroke-width": 3.2, fill: "none" });
+  });
+  fam.forEach(([z, c], i) => {
+    const lx = 310 + i * 105;
+    mk("line", { x1: lx, y1: 88, x2: lx + 26, y2: 88, stroke: c, "stroke-width": 3.6 });
+    tx(lx + 34, 94, "ζ=" + z, { fs: 17.5, b: true, fill: c, an: "start" });
+  });
+  // 示例点：ζ=0.4, ωc=2
+  const k4 = 8 / Math.tan(gam(0.4));
+  const wP = 2, tP = k4 / wP;
+  mk("line", { x1: X(wP), y1: y0, x2: X(wP), y2: Y(tP), stroke: "#1D3FA0", "stroke-width": 1.4, "stroke-dasharray": "6 5" });
+  mk("line", { x1: x0, y1: Y(tP), x2: X(wP), y2: Y(tP), stroke: "#1D3FA0", "stroke-width": 1.4, "stroke-dasharray": "6 5" });
+  mk("circle", { cx: X(wP), cy: Y(tP), r: 7, fill: "#1D3FA0" });
+  tx(X(wP) - 16, Y(tP) + 32, "ζ=0.4、ωc=2 → ts≈" + tP.toFixed(1) + "s", { fs: 17.5, b: true, fill: "#1D3FA0", an: "end" }).setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:5");
+  tx(X(3.4), Y(13.6), "ζ 一定：ωc 加倍 → ts 减半", { fs: 17.5, b: true, fill: "#5B6B8C" });
+});
+</script>
+</body>
+</html>

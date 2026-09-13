@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!-- 单页结论条探针：?page=/lessons/<章>/pages/<文件>，iframe 在页面初始加载期内
+     同步设置 src（虚拟时钟暂停、真实等待加载），测量结论条与内容底边几何关系。
+     结果 JSON 写入 #out。 -->
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><title>noteprobe-one</title></head>
+<body>
+<iframe id="fr" style="width:1448px;height:1086px;border:0"></iframe>
+<pre id="out">RUNNING</pre>
+<script>
+const out = document.getElementById("out");
+const fr = document.getElementById("fr");
+const page = new URLSearchParams(location.search).get("page");
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+// 关键：解析期同步设置 src，让子框架加载发生在虚拟时钟暂停阶段
+fr.src = ".." + page;
+fr.onload = async () => {
+  const res = { page };
+  try {
+    const d = fr.contentDocument;
+    if (!d || !d.querySelector(".act-slide")) { res.err = "no-slide"; out.textContent = JSON.stringify(res); return; }
+    try {
+      const mj = fr.contentWindow.MathJax;
+      if (mj && mj.startup && mj.startup.promise) {
+        await Promise.race([mj.startup.promise, sleep(15000)]);
+      }
+    } catch (e) {}
+    await sleep(150);
+    const note = d.querySelector(".act-note");
+    if (!note) { res.note = false; out.textContent = JSON.stringify(res); return; }
+    res.note = true;
+    res.pair = !!d.querySelector(".act-body.has-note");
+    const nr = note.getBoundingClientRect();
+    let cmax = 0, who = "";
+    const body = d.querySelector(".act-body");
+    if (body) {
+      body.querySelectorAll("*").forEach(el => {
+        const cs = fr.contentWindow.getComputedStyle(el);
+        if (cs.display === "none" || cs.visibility === "hidden") return;
+        const r = el.getBoundingClientRect();
+        if (r.height === 0 && r.width === 0) return;
+        if (r.bottom > cmax) { cmax = r.bottom; who = el.className && el.className.baseVal !== undefined ? String(el.className.baseVal) : String(el.className).slice(0, 40); }
+      });
+    }
+    const slide = d.querySelector(".act-slide").getBoundingClientRect();
+    const k = slide.width / 1448;
+    res.overlap = Math.round((cmax - nr.top) / (k || 1));
+    if (res.overlap > 0) res.who = who;
+  } catch (e) { res.err = String(e).slice(0, 120); }
+  out.textContent = JSON.stringify(res);
+};
+fr.onerror = () => { out.textContent = JSON.stringify({ page, err: "iframe-error" }); };
+</script>
+</body>
+</html>

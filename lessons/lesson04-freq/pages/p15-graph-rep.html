@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>1.4 频率特性的图形表示方法</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:24px; height:100%; min-height:0; }
+  .gc { flex:1; display:flex; flex-direction:column; overflow:hidden; }
+  .gc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:6px 12px; min-height:0; }
+  .gc svg { width:100%; height:100%; }
+  .gc .dd { font-size:19.5px; color:var(--ink); line-height:1.55; padding:10px 22px 14px; text-align:center; }
+</style>
+</head>
+<body data-title="1.4 频率特性的图形表示方法" data-page="15 / 87">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="act-card gc">
+        <div class="hd">极坐标图（Nyquist 图）——第一部分学习</div>
+        <div class="bd2"><svg id="figN" viewBox="0 0 560 600"></svg></div>
+        <div class="dd">ω 从 0→∞，相量 <b>G(jω)</b> 曲线上每一点：模 = 幅频 A(ω)，相角 = 相频 φ(ω)</div>
+      </div>
+      <div class="act-card gc">
+        <div class="hd">对数坐标图（Bode 图）——第二部分学习</div>
+        <div class="bd2"><svg id="figB" viewBox="0 0 560 600"></svg></div>
+        <div class="dd">横轴对数分度；幅频在上、相频在下，共用同一 ω 轴</div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">同一系统的两种画法</span><span>两图画的是<span class="kw-r">同一个惯性环节</span> G(jω)=1/(jωT+1)：左边一根曲线包容全部信息，右边两幅图分工清楚、宽频段都看得清——各有用处，本章都要掌握。</span></div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  function panel(id, mid) {
+    const svg = document.getElementById(id);
+    const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+    const MF = "Cambria Math,STIX Two Math,Georgia,Microsoft YaHei,sans-serif";
+    const tx = (x, y, s, o, parent) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 19, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal", "font-family": MF }, parent); const esc = t => t.replace(/&/g, "&amp;").replace(/</g, "&lt;"); let html = "", sub = false; for (const p of String(s).split(/(_\{[^}]*\})/)) { if (!p) continue; if (p.startsWith("_{")) { html += `<tspan${sub ? "" : " dy=\"6\""} font-size="72%">${esc(p.slice(2, -1))}</tspan>`; sub = true; } else { html += sub ? `<tspan dy="-6">${esc(p)}</tspan>` : esc(p); sub = false; } } n.innerHTML = html; if (o && o.halo) n.setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:6;stroke-linejoin:round"); return n; };
+    const defs = mk("defs", {});
+    const m1 = mk("marker", { id: mid, markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+    mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, m1);
+    const m2 = mk("marker", { id: mid + "b", markerWidth: 11, markerHeight: 11, refX: 7.5, refY: 3.2, orient: "auto" }, defs);
+    mk("path", { d: "M0,0 L7.5,3.2 L0,6.4 Z", fill: "#2B5CE6" }, m2);
+    const m3 = mk("marker", { id: mid + "o", markerWidth: 11, markerHeight: 11, refX: 7.5, refY: 3.2, orient: "auto" }, defs);
+    mk("path", { d: "M0,0 L7.5,3.2 L0,6.4 Z", fill: "#F5821F" }, m3);
+    return { svg, mk, tx, mid };
+  }
+
+  // ============ 左：Nyquist 图（惯性环节，K=1） ============
+  const N = panel("figN", "n15");
+  const O = { x: 130, y: 290 }, SC = 300;          // 原点与比例（K=1 → 300px）
+  const PX = v => O.x + v * SC, PY = v => O.y - v * SC;
+  N.mk("line", { x1: 34, y1: O.y, x2: 540, y2: O.y, stroke: "#5B6B8C", "stroke-width": 1.8, "marker-end": "url(#n15)" });
+  N.mk("line", { x1: O.x, y1: 566, x2: O.x, y2: 34, stroke: "#5B6B8C", "stroke-width": 1.8, "marker-end": "url(#n15)" });
+  N.tx(534, O.y - 14, "Re", { fs: 22, it: true, b: true, fill: "#5B6B8C", an: "end" });
+  N.tx(O.x + 18, 52, "jIm", { fs: 22, it: true, b: true, fill: "#5B6B8C", an: "start" });
+  N.tx(O.x - 14, O.y + 30, "O", { fs: 19, fill: "#5B6B8C", an: "end" });
+  // 半圆轨迹（下半平面，ω:0→∞ 由 (1,j0) 走向原点）
+  N.mk("path", { d: "M " + PX(1) + " " + O.y + " A " + SC / 2 + " " + SC / 2 + " 0 0 1 " + O.x + " " + O.y, fill: "none", stroke: "#2B5CE6", "stroke-width": 4 });
+  // 方向箭头（弧上约 ω=1/T 之后处，指向原点）
+  const thA = Math.PI * 0.68, ax = O.x + SC / 2 + (SC / 2) * Math.cos(thA), ay = O.y + (SC / 2) * Math.sin(thA);
+  const tdx = -Math.sin(thA), tdy = Math.cos(thA);
+  N.mk("path", { d: "M " + (ax - tdx * 4) + " " + (ay - tdy * 4) + " L " + (ax + tdx * 22) + " " + (ay + tdy * 22), stroke: "#2B5CE6", "stroke-width": 4, "marker-end": "url(#n15b)" });
+  // 起点终点标注
+  N.tx(PX(1) + 4, O.y - 20, "ω = 0：G = 1∠0°", { fs: 20, b: true, fill: "#1B3B8B", an: "end", halo: 1 });
+  N.tx(O.x + 30, O.y - 20, "ω → ∞", { fs: 20, b: true, fill: "#1B3B8B", an: "start", halo: 1 });
+  // 相量示例：ω = 1/T 处（半圆最低点，−45°）
+  const qx = O.x + SC / 2, qy = O.y + SC / 2;
+  N.mk("line", { x1: O.x, y1: O.y, x2: qx, y2: qy, stroke: "#F5821F", "stroke-width": 3.4, "marker-end": "url(#n15o)" });
+  N.mk("circle", { cx: qx, cy: qy, r: 6.5, fill: "#F5821F" });
+  N.tx(qx + 16, qy + 40, "G(jω₁)，ω₁ = 1/T", { fs: 20, b: true, fill: "#E06D00", halo: 1 });
+  N.tx(O.x + 118, O.y + 92, "A(ω₁)", { fs: 20, b: true, it: true, fill: "#E06D00", halo: 1 });
+  // 相角弧（负角，顺时针）
+  N.mk("path", { d: "M " + (O.x + 74) + " " + O.y + " A 74 74 0 0 1 " + (O.x + 74 * Math.SQRT1_2) + " " + (O.y + 74 * Math.SQRT1_2), fill: "none", stroke: "#D63A2F", "stroke-width": 2.6 });
+  N.tx(O.x + 96, O.y + 42, "φ(ω₁) = −45°", { fs: 20, b: true, fill: "#D63A2F", an: "start", halo: 1 });
+  // ω 增大方向
+  N.tx(O.x + SC / 2, O.y + SC / 2 + 78, "ω 增大方向", { fs: 20, b: true, fill: "#D63A2F", halo: 1 });
+
+  // ============ 右：Bode 图（同一惯性环节，T=1） ============
+  const B = panel("figB", "b15");
+  const x0 = 74, x1 = 540, DEC = 142;               // ω: 0.1..100
+  const X = w => x0 + (Math.log10(w) + 1) * DEC;
+  const LG = Math.log10;
+  // —— 幅频面板：y ∈ [36, 262]，L ∈ [+10, −50] dB ——
+  const LT = 36, LB = 262, LHI = 10, LLO = -50;
+  const YL = v => LT + (LHI - v) / (LHI - LLO) * (LB - LT);
+  B.mk("line", { x1: x0, y1: LB, x2: x1, y2: LB, stroke: "#5B6B8C", "stroke-width": 1.7, "marker-end": "url(#b15)" });
+  B.mk("line", { x1: x0, y1: LB, x2: x0, y2: LT, stroke: "#5B6B8C", "stroke-width": 1.7, "marker-end": "url(#b15)" });
+  B.tx(x0 - 10, LT - 8, "L(ω) / dB", { fs: 19, b: true, fill: "#1B3B8B", an: "end" });
+  [0, -20, -40].forEach(v => {
+    B.mk("line", { x1: x0, y1: YL(v), x2: x1, y2: YL(v), stroke: v === 0 ? "#8AA6D8" : "#EDF2FB", "stroke-width": v === 0 ? 1.6 : 1, "stroke-dasharray": v === 0 ? "8 6" : "0" });
+    B.tx(x0 - 10, YL(v) + 6, String(v), { fs: 17.5, fill: "#5B6B8C", an: "end" });
+  });
+  // —— 相频面板：y ∈ [330, 566]，φ ∈ [0, −100]° ——
+  const PT = 330, PB = 566;
+  const YP = v => PT + (0 - v) / 100 * (PB - PT);
+  B.mk("line", { x1: x0, y1: PB, x2: x1, y2: PB, stroke: "#5B6B8C", "stroke-width": 1.7, "marker-end": "url(#b15)" });
+  B.mk("line", { x1: x0, y1: PB, x2: x0, y2: PT, stroke: "#5B6B8C", "stroke-width": 1.7, "marker-end": "url(#b15)" });
+  B.tx(x0 - 10, PT - 8, "φ(ω)", { fs: 19, b: true, fill: "#1B3B8B", an: "end" });
+  [0, -45, -90].forEach(v => {
+    B.mk("line", { x1: x0, y1: YP(v), x2: x1, y2: YP(v), stroke: v === 0 ? "#8AA6D8" : "#EDF2FB", "stroke-width": v === 0 ? 1.6 : 1, "stroke-dasharray": v === 0 ? "8 6" : "0" });
+    B.tx(x0 - 10, YP(v) + 6, v + "°", { fs: 17.5, fill: "#5B6B8C", an: "end" });
+  });
+  // 十倍频程刻度与竖网格
+  [0.1, 1, 10, 100].forEach(w => {
+    B.mk("line", { x1: X(w), y1: LT, x2: X(w), y2: LB, stroke: "#F0F4FC", "stroke-width": 1 });
+    B.mk("line", { x1: X(w), y1: PT, x2: X(w), y2: PB, stroke: "#F0F4FC", "stroke-width": 1 });
+    B.tx(X(w), PB + 27, String(w), { fs: 17.5, fill: "#5B6B8C" });
+  });
+  B.tx(x1, PB + 30, "ω", { fs: 19, it: true, b: true, fill: "#5B6B8C", an: "end" });
+  // 转角频率 ω=1/T=1 竖虚线（贯穿两面板的留白处断开）
+  B.mk("line", { x1: X(1), y1: LT, x2: X(1), y2: LB, stroke: "#C6D2EA", "stroke-width": 1.4, "stroke-dasharray": "6 5" });
+  B.mk("line", { x1: X(1), y1: PT, x2: X(1), y2: PB, stroke: "#C6D2EA", "stroke-width": 1.4, "stroke-dasharray": "6 5" });
+  B.tx(X(1), LT - 8, "ω = 1/T", { fs: 18, b: true, fill: "#5B6B8C", halo: 1 });
+  // 幅频：渐近线 + 精确曲线
+  B.mk("path", { d: "M " + X(0.1) + " " + YL(0) + " L " + X(1) + " " + YL(0) + " L " + X(100) + " " + YL(-40), fill: "none", stroke: "#9AA8C4", "stroke-width": 2.4, "stroke-dasharray": "9 6" });
+  let dL = "";
+  for (let i = 0; i <= 240; i++) { const w = 0.1 * Math.pow(1000, i / 240); const v = -10 * LG(1 + w * w); dL += (i ? "L" : "M") + X(w).toFixed(1) + "," + YL(v).toFixed(1); }
+  B.mk("path", { d: dL, fill: "none", stroke: "#2B5CE6", "stroke-width": 3.6 });
+  B.tx(X(0.35), YL(7), "渐近线", { fs: 18, b: true, fill: "#7C89A6", halo: 1 });
+  B.tx(X(45), YL(-46), "精确曲线", { fs: 18, b: true, fill: "#2B5CE6", halo: 1 });
+  B.mk("circle", { cx: X(1), cy: YL(-3.01), r: 5.5, fill: "#2B5CE6" });
+  B.tx(X(1) + 14, YL(-15), "−3 dB", { fs: 18, b: true, fill: "#2B5CE6", an: "start", halo: 1 });
+  // 相频：精确曲线 φ = −arctg(ωT)
+  let dP = "";
+  for (let i = 0; i <= 240; i++) { const w = 0.1 * Math.pow(1000, i / 240); const v = -Math.atan(w) * 180 / Math.PI; dP += (i ? "L" : "M") + X(w).toFixed(1) + "," + YP(v).toFixed(1); }
+  B.mk("path", { d: dP, fill: "none", stroke: "#D63A2F", "stroke-width": 3.6 });
+  B.mk("circle", { cx: X(1), cy: YP(-45), r: 5.5, fill: "#D63A2F" });
+  B.tx(X(1) - 16, YP(-54), "−45°", { fs: 18, b: true, fill: "#D63A2F", an: "end", halo: 1 });
+  B.tx(X(0.28), YP(-36), "φ(ω) = −arctg ωT", { fs: 18, b: true, fill: "#D63A2F", halo: 1 });
+  // 面板名
+  B.tx(x0 + 8, LB - 8, "幅频特性", { fs: 18, b: true, fill: "#1B3B8B", an: "start", halo: 1 });
+  B.tx(x0 + 8, PB - 8, "相频特性", { fs: 18, b: true, fill: "#1B3B8B", an: "start", halo: 1 });
+});
+</script>
+</body>
+</html>

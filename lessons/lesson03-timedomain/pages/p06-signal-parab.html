@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>抛物线函数</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<link rel="stylesheet" href="../lesson03-svg.css">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:26px; height:100%; align-items:stretch; }
+  .lcol { flex:1.05; display:flex; flex-direction:column; gap:18px; }
+  .name { font-size:27px; font-weight:700; color:var(--navy); }
+  .name small { font-size:20px; color:var(--muted); font-weight:400; margin-left:10px; }
+  .mathbox { font-size:30px; padding:24px 28px; }
+  .unit { background:#fff; border:2px solid var(--line); border-radius:14px; padding:16px 22px; font-size:22px; color:var(--ink); line-height:1.6; }
+  .figc { flex:1; display:flex; flex-direction:column; overflow:hidden; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:14px; }
+  .figc svg { width:100%; height:100%; }
+</style>
+</head>
+<body data-title="典型输入信号 · 抛物线函数" data-page="6 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body fill">
+    <div class="row">
+      <div class="lcol">
+        <div class="name">3、抛物线函数<small>等加速度函数</small></div>
+        <div class="mathbox math eqline tex tex-d">r(t) = \begin{cases} \dfrac{1}{2}A\,t^{2}, & t \geq 0 \\[6pt] 0, & t < 0 \end{cases}</div>
+        <div class="unit">
+          <b>单位抛物线函数</b>：令 <span class="tex">A=1</span>，记为 <span class="tex">\dfrac{1}{2}t^{2}\cdot 1(t)</span>，其拉氏变换
+          <span class="mathbox math eqline tex tex-d" style="display:inline-block;padding:8px 22px;font-size:26px;margin-left:12px">\mathcal{L}\left[\dfrac{1}{2}t^{2}\cdot 1(t)\right] = \dfrac{1}{s^{3}}</span>
+        </div>
+        <div class="unit">表示随时间<span class="kw-r">匀加速增长</span>的信号，如匀加速移动的跟踪目标。</div>
+      </div>
+      <div class="figc">
+        <div class="act-card figc">
+          <div class="hd">抛物线函数波形</div>
+          <div class="bd2">
+            <svg viewBox="0 0 640 560">
+              <defs>
+                <marker id="arr6" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#5B6B8C"/></marker>
+              </defs>
+              <line x1="90" y1="470" x2="606" y2="470" stroke="#5B6B8C" stroke-width="2" marker-end="url(#arr6)"/>
+              <line x1="90" y1="470" x2="90" y2="40" stroke="#5B6B8C" stroke-width="2" marker-end="url(#arr6)"/>
+              <text x="600" y="508" class="svgname" font-size="23" text-anchor="end">t</text>
+              <text x="58" y="44" class="svgname" font-size="23" text-anchor="middle">r(t)</text>
+              <text x="64" y="480" class="svgsub" font-size="21">O</text>
+              <!-- 波形：t<0 为 0，t≥0 为 ½At²（抛物线） -->
+              <line x1="90" y1="470" x2="240" y2="470" stroke="#2B5CE6" stroke-width="4"/>
+              <path d="M240,470 C300,462 360,435 410,372 C460,310 520,160 580,80" stroke="#2B5CE6" stroke-width="4" fill="none"/>
+              <!-- 特征标注 -->
+              <line x1="495" y1="252" x2="495" y2="470" stroke="#F5821F" stroke-width="2.5" stroke-dasharray="9 7"/>
+              <line x1="90" y1="252" x2="495" y2="252" stroke="#F5821F" stroke-width="2.5" stroke-dasharray="9 7"/>
+              <circle cx="495" cy="252" r="5" fill="#F5821F"/>
+              <text x="495" y="505" class="svgsub" font-size="21" text-anchor="middle">t₁</text>
+              <text x="150" y="238" class="svgsub" font-size="22">½At₁²</text>
+              <text x="140" y="100" class="svgname" font-size="22">曲线上翘：斜率随 t 线性增大</text>
+              <text x="140" y="132" class="svgsub" font-size="20">（加速度恒定为 A）</text>
+              <line x1="330" y1="144" x2="478" y2="272" stroke="#5B6B8C" stroke-width="1.6"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+</body>
+</html>

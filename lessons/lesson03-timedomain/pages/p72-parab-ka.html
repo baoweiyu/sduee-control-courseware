@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>抛物线输入 · 静态加速度误差系数 Ka</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:24px; height:100%; }
+  .derc { flex:1.05; display:flex; flex-direction:column; }
+  .derc .bd { flex:1; font-size:22.5px; line-height:1.85; display:flex; flex-direction:column; justify-content:center; gap:16px; }
+  .disc { flex:0.95; display:flex; flex-direction:column; }
+  .disc .bd { flex:1; display:flex; flex-direction:column; justify-content:center; gap:15px; }
+  .hl { background:var(--sky); border-radius:12px; padding:12px 16px; }
+  .tt { border-collapse:collapse; width:100%; }
+  .tt th, .tt td { border:2px solid var(--line); padding:9px 6px; font-size:20.5px; text-align:center; }
+  .tt th { background:var(--navy); color:#fff; font-weight:700; font-size:19px; }
+  .tt td.hc { background:#FDF3EC; font-weight:700; }
+  .tt td.zero { background:#EAF6EE; color:#1E9E57; font-weight:800; }
+  .tt td.bad { background:#FCEBE9; color:#D63A2F; font-weight:800; }
+  .concl { background:#FCEBE9; border:2px solid #D63A2F; border-radius:12px; padding:12px 18px; font-size:21.5px; color:var(--navy); line-height:1.65; }
+</style>
+</head>
+<body data-title="抛物线输入 · 静态加速度误差系数" data-page="76 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="row">
+      <div class="act-card derc">
+        <div class="hd">3. 抛物线（加速度）输入</div>
+        <div class="bd">
+          <span>抛物线输入：<span class="tex">r(t)=\dfrac{A}{2}t^{2}</span>，<span class="tex">R(s)=\dfrac{A}{s^{3}}</span></span>
+          <span data-step="1"><span class="tex tex-d" style="font-size:22.5px">e_{ss}=\lim_{s\to 0}\frac{sR(s)}{1+G(s)H(s)}=\lim_{s\to 0}\frac{A}{s^{2}+s^{2}G(s)H(s)}</span></span>
+          <span data-step="2">令 <span class="tex tex-d" style="font-size:23px">K_{a}=\lim_{s\to 0}s^{2}G(s)H(s)</span><br>—— <span class="kw-r">静态加速度误差系数</span>，则</span>
+          <div class="hl" data-step="3"><span class="tex tex-d" style="font-size:25px">e_{ss}=\frac{A}{K_{a}}</span></div>
+        </div>
+      </div>
+      <div class="act-card disc">
+        <div class="hd">按型别讨论（ν = 0, 1, 2, 3）</div>
+        <div class="bd">
+          <table class="tt" data-step="4">
+            <tr><th>型别 ν</th><th><span class="tex" style="font-size:19px">K_{a}</span></th><th><span class="tex" style="font-size:19px">e_{ss}</span></th><th>跟踪能力</th></tr>
+            <tr><td class="hc">0 型</td><td>0</td><td class="bad">∞</td><td rowspan="2">不能跟踪</td></tr>
+            <tr><td class="hc">1 型</td><td>0</td><td class="bad">∞</td></tr>
+            <tr><td class="hc">2 型</td><td>K</td><td><span class="tex" style="font-size:19px">\dfrac{A}{K}</span></td><td>有恒定误差</td></tr>
+            <tr><td class="hc">3 型</td><td>∞</td><td class="zero">0</td><td>准确跟踪</td></tr>
+          </table>
+          <div class="concl" data-step="5"><b>结论</b>：0 型和 1 型<span class="kw-r">不能跟踪</span>抛物线输入；<br>2 型可跟踪但有误差 <span class="tex">A/K</span>；<br>3 型及以上才能<span class="kw-r">准确跟踪</span>。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+</body>
+</html>

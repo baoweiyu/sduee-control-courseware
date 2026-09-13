@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>附加极点：三阶系统的响应</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<link rel="stylesheet" href="../lesson03-svg.css">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:24px; height:100%; }
+  .lcol { flex:1; display:flex; flex-direction:column; gap:16px; }
+  .drv { flex:1; }
+  .drv .bd { font-size:23.5px; line-height:1.8; display:flex; flex-direction:column; justify-content:center; }
+  .feat { background:#fff; border:2px solid var(--line); border-radius:14px; padding:16px 24px; font-size:22.5px; line-height:1.9; color:var(--ink); }
+  .figc { flex:1.35; display:flex; flex-direction:column; overflow:hidden; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:8px 14px; }
+  .figc svg { width:100%; height:100%; }
+</style>
+</head>
+<body data-title="高阶系统 · 三阶系统（附加极点）" data-page="45 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lcol">
+        <div class="act-card drv">
+          <div class="hd">二阶 + 附加实极点的三阶系统</div>
+          <div class="bd">
+            <div class="mathbox math eqline tex tex-d" style="font-size:25.5px">\varPhi(s)=\dfrac{\omega_{n}^{2}\,s_{0}}{(s^{2}+2\zeta\omega_{n} s+\omega_{n}^{2})(s+s_{0})}</div>
+            <span>附加实极点 <span class="tex" style="font-size:25px">s_{3}=-s_{0}</span>，定义<span class="kw-r">相对位置</span></span>
+            <div class="mathbox math eqline tex tex-d" style="font-size:26px">\beta=\dfrac{s_{0}}{\zeta\omega_{n}}=\dfrac{|s_{3}|}{\text{复极点到虚轴的距离}}</div>
+          </div>
+        </div>
+        <div class="feat">
+          ① β 越小（s₃ 越靠近虚轴）：附加惯性越强——<br><span class="kw-r">σ% 减小、上升变慢、t<sub>s</sub> 增大</span>；<br>
+          ② β → ∞（s₃ 远离虚轴）：影响消失——<br><span class="kw-r">退化为标准二阶</span>；<br>
+          ③ 物理本质：附加极点相当于串入一阶惯性环节，"拖慢"了响应。
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd">不同 β 下的阶跃响应（ζ=0.5，ωn=1）</div>
+        <div class="bd2"><svg id="fig" viewBox="0 0 1000 800"></svg></div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">承上启下</span><span>附加极点<span class="kw-r">离虚轴越近，对响应的"发言权"越大</span>——这正是"主导极点"思想的前奏。</span></div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("fig");
+  const z = 0.5, wn = 1, sg = 0.5, wd = Math.sqrt(0.75);
+  const std = t => t <= 0 ? 0 : 1 - Math.exp(-sg * t) / Math.sqrt(0.75) * Math.sin(wd * t + Math.PI / 3);
+  function third(beta) {
+    const s0 = beta * sg;
+    const K0 = -1 / (s0 * s0 - 2 * sg * s0 + 1);
+    const B = -1 - K0, C = (s0 * K0 + sg * B) / wd;
+    return t => t <= 0 ? 0 : 1 + K0 * Math.exp(-s0 * t) + Math.exp(-sg * t) * (B * Math.cos(wd * t) + C * Math.sin(wd * t));
+  }
+  const T = 14, YM = 1.35;
+  const X = t => 96 + t / T * 850;
+  const Y = v => 700 - v / YM * 580;
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const tx = (x, y, s, o) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 20, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal" }); n.textContent = s; return n; };
+  const defs = mk("defs", {});
+  const m1 = mk("marker", { id: "a43", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, m1);
+  mk("line", { x1: 96, y1: 700, x2: 960, y2: 700, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a43)" });
+  mk("line", { x1: 96, y1: 700, x2: 96, y2: 56, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a43)" });
+  tx(966, 706, "t", { fs: 22, an: "start", it: true, b: true });
+  tx(58, 66, "c(t)", { fs: 22, it: true, b: true });
+  tx(74, 706, "O", { fs: 19, fill: "#5B6B8C" });
+  mk("line", { x1: 96, y1: Y(1), x2: 946, y2: Y(1), stroke: "#F5821F", "stroke-width": 2, "stroke-dasharray": "10 7" });
+  tx(80, Y(1) + 7, "1", { an: "end", fs: 19, b: true });
+  const curve = (fn, color, wdt, dash) => {
+    let d = "";
+    for (let i = 0; i <= 600; i++) { const t = T * i / 600; d += (i ? "L" : "M") + X(t).toFixed(1) + "," + Y(fn(t)).toFixed(1); }
+    const at = { d, stroke: color, "stroke-width": wdt, fill: "none" };
+    if (dash) at["stroke-dasharray"] = dash;
+    mk("path", at);
+  };
+  curve(third(1), "#D63A2F", 3.2);
+  curve(third(2), "#F5821F", 3.2);
+  curve(third(5), "#1E9E57", 3.2);
+  curve(std, "#2B5CE6", 3.2, "10 7");
+  // 图例
+  const lg = (y, color, lb, dash, b) => {
+    const at = { x1: 500, y1: y, x2: 565, y2: y, stroke: color, "stroke-width": 3.2 };
+    if (dash) at["stroke-dasharray"] = dash;
+    mk("line", at);
+    tx(578, y + 7, lb, { fs: 20, an: "start", fill: b ? color : "#5B6B8C", b: !!b });
+  };
+  lg(54, "#D63A2F", "β=1（s₃ 很近，惯性大）", null, true);
+  lg(90, "#F5821F", "β=2");
+  lg(126, "#1E9E57", "β=5");
+  lg(162, "#2B5CE6", "β→∞（标准二阶）", "10 7");
+});
+</script>
+</body>
+</html>

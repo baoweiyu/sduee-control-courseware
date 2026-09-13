@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>正弦函数</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<link rel="stylesheet" href="../lesson03-svg.css">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:26px; height:100%; align-items:stretch; }
+  .lcol { flex:1.05; display:flex; flex-direction:column; gap:18px; }
+  .name { font-size:27px; font-weight:700; color:var(--navy); }
+  .name small { font-size:20px; color:var(--muted); font-weight:400; margin-left:10px; }
+  .mathbox { font-size:30px; padding:24px 28px; }
+  .unit { background:#fff; border:2px solid var(--line); border-radius:14px; padding:16px 22px; font-size:22px; color:var(--ink); line-height:1.6; }
+  .figc { flex:1; display:flex; flex-direction:column; overflow:hidden; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:14px; }
+  .figc svg { width:100%; height:100%; }
+</style>
+</head>
+<body data-title="典型输入信号 · 正弦函数" data-page="8 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body fill">
+    <div class="row">
+      <div class="lcol">
+        <div class="name">5、正弦函数<small>周期函数</small></div>
+        <div class="mathbox math eqline tex tex-d">r(t) = \begin{cases} A\,\sin\,\omega t, & t \geq 0 \\ 0, & t < 0 \end{cases}</div>
+        <div class="unit">
+          <b>拉氏变换</b>
+          <span class="mathbox math eqline tex tex-d" style="display:inline-block;padding:8px 22px;font-size:26px;margin-left:12px">\mathcal{L}\left[A\sin\omega t\right] = \dfrac{A\,\omega}{s^{2}+\omega^{2}}</span>
+        </div>
+        <div class="unit">等幅振荡信号：幅值 <span class="tex">A</span>、角频率 <span class="tex">\omega</span>、周期 <span class="tex">T=2\pi/\omega</span>。</div>
+        <div class="unit">系统对不同频率正弦函数的稳态响应，称为<span class="kw-r">频率响应</span>——是第五章<b>频域分析法</b>的基础。</div>
+      </div>
+      <div class="figc">
+        <div class="act-card figc">
+          <div class="hd">正弦函数波形</div>
+          <div class="bd2">
+            <svg viewBox="0 0 640 560">
+              <defs>
+                <marker id="arr8" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#5B6B8C"/></marker>
+                <marker id="arr8b" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#F5821F"/></marker>
+                <marker id="period8" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto-start-reverse"><path d="M0,0 L7,3 L0,6 Z" fill="#F5821F"/></marker>
+              </defs>
+              <line x1="44" y1="300" x2="606" y2="300" stroke="#5B6B8C" stroke-width="2" marker-end="url(#arr8)"/>
+              <line x1="70" y1="500" x2="70" y2="52" stroke="#5B6B8C" stroke-width="2" marker-end="url(#arr8)"/>
+              <text x="600" y="338" class="svgname" font-size="23" text-anchor="end">t</text>
+              <text x="52" y="48" class="svgname" font-size="23" text-anchor="middle">r(t)</text>
+              <text x="48" y="308" class="svgsub" font-size="21">O</text>
+              <!-- 正弦波形：幅值 130，周期 240px -->
+              <path id="sine-wave" stroke="#2B5CE6" stroke-width="4" fill="none"/>
+              <!-- 波形与幅值线共用峰值/谷值坐标，避免留出误导性间距。 -->
+              <line x1="70" y1="170" x2="132" y2="170" stroke="#F5821F" stroke-width="2.2" stroke-dasharray="8 6"/>
+              <line x1="70" y1="430" x2="252" y2="430" stroke="#F5821F" stroke-width="2.2" stroke-dasharray="8 6"/>
+              <text x="56" y="178" class="svgsub" font-size="22" text-anchor="end">A</text>
+              <text x="56" y="438" class="svgsub" font-size="22" text-anchor="end">−A</text>
+              <!-- 相邻波峰之间的周期；尺寸线置于波形上方。 -->
+              <line x1="130" y1="162" x2="130" y2="100" stroke="#C9D8F2" stroke-width="1.6" stroke-dasharray="6 6"/>
+              <line x1="370" y1="162" x2="370" y2="100" stroke="#C9D8F2" stroke-width="1.6" stroke-dasharray="6 6"/>
+              <line x1="130" y1="110" x2="370" y2="110" stroke="#F5821F" stroke-width="2.2" marker-start="url(#period8)" marker-end="url(#period8)"/>
+              <foreignObject x="145" y="36" width="210" height="68"><div xmlns="http://www.w3.org/1999/xhtml" style="font-size:26px;text-align:center;color:#B85E10"><span class="tex">T=\dfrac{2\pi}{\omega}</span></div></foreignObject>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+<script>
+const sinePoints = Array.from({length:531}, (_, i) => `${i ? 'L' : 'M'}${70+i},${300-130*Math.sin(2*Math.PI*i/240)}`);
+document.getElementById('sine-wave').setAttribute('d', sinePoints.join(' '));
+</script>
+</body>
+</html>

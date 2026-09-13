@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>求解示例与 MATLAB</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .cols { display:flex; gap:26px; height:640px; margin-top:4px; }
+  .hand { flex:1.25; display:flex; flex-direction:column; }
+  .hand .bd2 { flex:1; padding:22px 28px; display:flex; flex-direction:column; justify-content:center; gap:14px; }
+  .math { font-size:23px; line-height:1.7; color:var(--ink); }
+  .step-tag { display:inline-block; background:var(--blue); color:#fff; font-size:18px; font-weight:700; border-radius:8px; padding:3px 12px; margin-right:10px; }
+  .mlab { flex:1; display:flex; flex-direction:column; }
+  .mlab .bd2 { flex:1; padding:20px 24px; display:flex; flex-direction:column; justify-content:center; }
+  .code { background:#12266B; color:#D7E3FF; border-radius:12px; padding:20px 22px; font-family:Consolas, "Courier New", monospace; font-size:19.5px; line-height:1.8; }
+  .code .cm { color:#7EA0E8; }
+  .rs { margin-top:16px; background:var(--sky); border-radius:12px; padding:14px 18px; font-family:Consolas, monospace; font-size:19px; color:var(--navy); line-height:1.7; }
+</style>
+</head>
+<body data-title="例：微分方程求解" data-page="13 / 51">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="cols">
+      <div class="act-card hand">
+        <div class="hd" style="display:block">例：求解 ÿ + 5ẏ + 4y = u(t)，u(t) = 2e<sup>−2t</sup>，y(0)=0，ẏ(0)=0</div>
+        <div class="bd2">
+          <div class="math" data-step><span class="step-tag">① 拉氏变换</span><span style="white-space:nowrap"><span class="tex">(s^{2} + 5s + 4)Y(s) = \dfrac{2}{s + 2}</span></span></div>
+          <div class="math" data-step><span class="step-tag">② 求 Y(s)</span><span style="white-space:nowrap"><span class="tex">Y(s) = \dfrac{2}{(s+1)(s+2)(s+4)}</span></span>　<span style="white-space:nowrap"><span class="tex">= \dfrac{2/3}{s+1} - \dfrac{1}{s+2} + \dfrac{1/3}{s+4}</span></span><span style="color:var(--muted);font-size:19px">　（部分分式展开）</span></div>
+          <div class="math" data-step style="background:var(--sky);border-radius:12px;padding:12px 16px"><span class="step-tag">③ 反变换</span><b style="color:var(--danger);white-space:nowrap"><span class="tex">y(t) = \dfrac{2}{3}e^{-t} - e^{-2t} + \dfrac{1}{3}e^{-4t}</span></b><span style="color:var(--muted);font-size:19px">　（稳态解 0 + 暂态解）</span></div>
+        </div>
+      </div>
+      <div class="act-card mlab">
+        <div class="hd">用 MATLAB 验证（residue 部分分式）</div>
+        <div class="bd2">
+          <div class="code">
+            num = 2;<br>
+            den = poly([-2; -1; -4]); <span class="cm">% 分母的根</span><br>
+            [r, p, k] = residue(num, den)
+          </div>
+          <div class="rs">r = 留数向量（1/3, −1, 2/3）<br>p = 极点（−4, −2, −1）<br>k = 直项（本例为空）<br>↳ 与手工展开逐项对应</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note">
+    <svg class="ico" viewBox="0 0 48 48"><rect x="6" y="8" width="36" height="26" rx="3" fill="none" stroke="#1D3FA0" stroke-width="3"/><path d="M12 20 l6 5-6 5 M22 30 h8" fill="none" stroke="#F5821F" stroke-width="3" stroke-linecap="round"/></svg>
+    <span><span class="lead">对照：</span>手工部分分式与 MATLAB residue 结果一致——计算机辅助验证是工程常态。</span>
+  </div>
+</div></div>
+</body>
+</html>

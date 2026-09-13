@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>三、自动控制的发展史 ③ 现代与智能控制</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .era { display:flex; align-items:center; gap:14px; margin:4px 0 12px; }
+  .enode { flex:1; text-align:center; background:var(--sky); border-radius:12px; padding:9px 8px; color:var(--navy); }
+  .enode b { font-size:22.5px; display:block; }
+  .enode span { font-size:16.5px; color:var(--muted); }
+  .enode.on { background:var(--orange); color:#fff; }
+  .enode.on span { color:rgba(255,255,255,.88); }
+  .earr { color:var(--orange); font-size:26px; font-weight:700; }
+  .tlc { padding:6px 10px 2px; margin-bottom:14px; }
+  svg text { font-family:var(--font); }
+  .yr { fill:var(--blue); font-size:21px; font-weight:800; }
+  .evt { fill:var(--ink); font-size:17.5px; }
+  .evt .em { fill:#D63A2F; font-weight:700; }
+  .nd { fill:var(--orange); stroke:#fff; stroke-width:2.5; }
+  .ld { stroke:var(--muted); stroke-width:1.6; }
+  .axis { stroke:var(--blue); stroke-width:3; marker-end:url(#arrT); }
+  .bot { display:flex; gap:22px; height:258px; }
+  .imgc { flex:1; display:flex; flex-direction:column; overflow:hidden; }
+  .imgc .bd2 { flex:1; display:grid; place-items:center; background:var(--sky); padding:6px; }
+  .imgc img { max-width:100%; max-height:100%; object-fit:contain; border-radius:8px; }
+  .imgc .cap { text-align:center; font-size:17.5px; color:var(--muted); padding:6px 4px; }
+  .sum { flex:1.25; background:#fff; border:2px solid var(--line); border-radius:14px; padding:14px 24px; display:flex; flex-direction:column; justify-content:center; gap:10px; }
+  .sum .sh { font-size:23px; font-weight:800; color:var(--navy); }
+  .srow { display:flex; gap:12px; font-size:20.5px; line-height:1.5; color:var(--ink); }
+  .srow b { flex:0 0 108px; color:var(--blue); }
+  .srow .em { color:#D63A2F; font-weight:700; }
+</style>
+</head>
+<body data-title="三、自动控制的发展史 ③ 现代与智能控制" data-page="29 / 35">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="era">
+      <div class="enode"><b>① 思想萌芽</b><span>古代 — 1788</span></div><div class="earr">➜</div>
+      <div class="enode"><b>② 经典控制理论</b><span>1868 — 1948</span></div><div class="earr">➜</div>
+      <div class="enode on"><b>③ 现代与智能控制</b><span>1950s 末 — 今</span></div>
+    </div>
+    <div class="act-card tlc">
+      <svg viewBox="0 0 1180 320" width="100%">
+        <defs><marker id="arrT" markerWidth="11" markerHeight="11" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#1D3FA0"/></marker></defs>
+        <line class="axis" x1="24" y1="160" x2="1166" y2="160"/>
+        <!-- 节点 1（上） -->
+        <circle class="nd" cx="130" cy="160" r="8"/>
+        <line class="ld" x1="130" y1="152" x2="130" y2="118"/>
+        <text class="yr" x="130" y="30" text-anchor="middle">1956</text>
+        <text class="evt" x="130" y="54" text-anchor="middle">庞德里亚金（苏）</text>
+        <text class="evt" x="130" y="78" text-anchor="middle"><tspan class="em">极大（小）值原理</tspan></text>
+        <!-- 节点 2（下） -->
+        <circle class="nd" cx="350" cy="160" r="8"/>
+        <line class="ld" x1="350" y1="168" x2="350" y2="202"/>
+        <text class="yr" x="350" y="228" text-anchor="middle">1957</text>
+        <text class="evt" x="350" y="252" text-anchor="middle">贝尔曼（美）</text>
+        <text class="evt" x="350" y="276" text-anchor="middle"><tspan class="em">动态规划法</tspan></text>
+        <!-- 节点 3（上） -->
+        <circle class="nd" cx="580" cy="160" r="8"/>
+        <line class="ld" x1="580" y1="152" x2="580" y2="118"/>
+        <text class="yr" x="580" y="30" text-anchor="middle">1958</text>
+        <text class="evt" x="580" y="54" text-anchor="middle">卡尔曼（美）：滤波理论</text>
+        <text class="evt" x="580" y="78" text-anchor="middle">与最优控制结合</text>
+        <text class="evt" x="580" y="102" text-anchor="middle"><tspan class="em">状态空间法 → 现代控制形成</tspan></text>
+        <!-- 节点 4（下） -->
+        <circle class="nd" cx="810" cy="160" r="8"/>
+        <line class="ld" x1="810" y1="168" x2="810" y2="202"/>
+        <text class="yr" x="810" y="228" text-anchor="middle">1970s</text>
+        <text class="evt" x="810" y="252" text-anchor="middle">大系统理论</text>
+        <text class="evt" x="810" y="276" text-anchor="middle"><tspan class="em">应对特大复杂系统</tspan></text>
+        <!-- 节点 5（上） -->
+        <circle class="nd" cx="1050" cy="160" r="8"/>
+        <line class="ld" x1="1050" y1="152" x2="1050" y2="118"/>
+        <text class="yr" x="1050" y="30" text-anchor="middle">1980s — 今</text>
+        <text class="evt" x="1050" y="54" text-anchor="middle">智能控制：控制 × AI</text>
+        <text class="evt" x="1050" y="78" text-anchor="middle">（模糊 · 神经 · 学习）</text>
+        <text class="evt" x="1050" y="102" text-anchor="middle"><tspan class="em">机器人 · 无人驾驶 · 智能制造</tspan></text>
+      </svg>
+    </div>
+    <div class="bot">
+      <div class="act-card imgc">
+        <div class="bd2"><img src="../../../assets/image2/robot-arm.png" alt="工业机器人"></div>
+        <div class="cap">工业机器人——现代控制理论的产业化应用</div>
+      </div>
+      <div class="act-card imgc">
+        <div class="bd2"><img src="../../../assets/image2/intelligent-driving.png" alt="智能驾驶汽车"></div>
+        <div class="cap">智能驾驶——控制理论与人工智能的深度融合</div>
+      </div>
+      <div class="sum">
+        <div class="sh">现代与智能控制要点</div>
+        <div class="srow"><b>研究对象</b><span><span class="em">多输入多输出、时变、非线性</span>系统</span></div>
+        <div class="srow"><b>数学工具</b><span><span class="em">状态空间法</span>（时域分析方法）</span></div>
+        <div class="srow"><b>主要方法</b><span><span class="em">最优控制、最优估计、系统辨识</span>等</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note" style="bottom:96px">
+    <svg class="ico" viewBox="0 0 48 48"><path d="M8 36 L20 24 L28 30 L42 12" fill="none" stroke="#1D3FA0" stroke-width="3"/><path d="M42 12 h-8 M42 12 v8" stroke="#F5821F" stroke-width="3" fill="none"/></svg>
+    <span><span class="lead">回望：</span>从铜壶滴漏到智能驾驶——历经<b>经典控制、现代控制、大系统与智能控制</b>三个阶段。</span>
+  </div>
+</div></div>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>梅逊公式练习（R-C 例）</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .ctl { display:flex; align-items:center; gap:12px; margin-bottom:6px; }
+  .btn { border:none; background:var(--blue); color:#fff; font-size:18.5px; font-weight:700;
+         border-radius:9px; padding:7px 18px; cursor:pointer; font-family:inherit; }
+  .btn.ghost { background:#fff; color:var(--blue); border:2px solid var(--blue); }
+  .cap2 { font-size:20px; font-weight:800; color:var(--red); flex:1; }
+  .prog { font-size:17px; color:var(--muted); }
+  .panel { background:var(--sky); border-radius:14px; padding:2px 10px; }
+  .hl { opacity:0; transition:opacity .35s; fill:none; stroke-linecap:round; stroke-linejoin:round; }
+  .hl.red { stroke:#D63A2F; } .hl.blue { stroke:#1D3FA0; } .hl.grn { stroke:#2E9E6B; }
+  .flow { stroke-dasharray:20 14; animation:fl .9s linear infinite; }
+  @keyframes fl { to { stroke-dashoffset:-34; } }
+  .work { margin-top:8px; display:flex; gap:12px; }
+  .wc { flex:1; background:#fff; border:2px solid var(--blue); border-radius:12px; padding:8px 14px;
+        opacity:0; transform:translateY(12px); transition:.4s; font-size:18px; line-height:1.5; }
+  .wc.on { opacity:1; transform:none; }
+  .wc .h { font-weight:800; color:var(--blue); font-size:18px; margin-bottom:3px; }
+  .wc.fin { border-color:var(--red); background:#FDF0EF; flex:1.3; }
+  .wc.fin .h { color:var(--red); }
+</style>
+</head>
+<body data-title="梅逊公式练习（R-C 例）" data-page="48 / 51">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="ctl">
+      <button class="btn ghost" onclick="prev()">◀ 上一步</button>
+      <button class="btn" onclick="ACT.step.next()">揭示下一步 ▶</button>
+      <button class="btn ghost" onclick="ACT.step.reset()">↺</button>
+      <div class="cap2" id="cap">课堂练习：先自己在图上数——几条前向通道？几个回环？</div>
+      <div class="prog" id="prog">0 / 12</div>
+    </div>
+    <div class="panel">
+      <svg viewBox="0 0 1150 430" width="100%" height="392">
+        <defs><marker id="a47" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#1D3FA0"/></marker></defs>
+        <!-- 基图（方框图） -->
+        <g font-size="16.5" fill="#1B3B8B">
+          <circle cx="90" cy="150" r="13" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><path d="M 84.1,144.1 L 95.9,155.9 M 84.1,155.9 L 95.9,144.1" stroke="#1D3FA0" stroke-width="2.2" fill="none"/>
+          <circle cx="180" cy="150" r="13" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><path d="M 174.1,144.1 L 185.9,155.9 M 174.1,155.9 L 185.9,144.1" stroke="#1D3FA0" stroke-width="2.2" fill="none"/>
+          <rect x="220" y="128" width="80" height="44" rx="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><text x="260" y="156" text-anchor="middle" font-style="italic">G₁(s)</text>
+          <rect x="380" y="128" width="80" height="44" rx="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><text x="420" y="156" text-anchor="middle" font-style="italic">G₂(s)</text>
+          <circle cx="520" cy="150" r="13" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><path d="M 514.1,144.1 L 525.9,155.9 M 514.1,155.9 L 525.9,144.1" stroke="#1D3FA0" stroke-width="2.2" fill="none"/>
+          <rect x="600" y="128" width="80" height="44" rx="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><text x="640" y="156" text-anchor="middle" font-style="italic">G₃(s)</text>
+          <rect x="250" y="28" width="80" height="44" rx="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><text x="290" y="56" text-anchor="middle" font-style="italic">G₄(s)</text>
+          <circle cx="340" cy="270" r="12" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><path d="M 334.6,264.6 L 345.4,275.4 M 334.6,275.4 L 345.4,264.6" stroke="#1D3FA0" stroke-width="2.2" fill="none"/>
+          <rect x="180" y="248" width="80" height="40" rx="6" fill="#fff" stroke="#F5821F" stroke-width="2.4"/><text x="220" y="274" text-anchor="middle" font-style="italic" fill="#F5821F">H₁(s)</text>
+          <rect x="560" y="248" width="80" height="40" rx="6" fill="#fff" stroke="#F5821F" stroke-width="2.4"/><text x="600" y="274" text-anchor="middle" font-style="italic" fill="#F5821F">H₃(s)</text>
+        </g>
+        <g stroke="#1D3FA0" stroke-width="2.4" fill="none" marker-end="url(#a47)">
+          <line x1="28" y1="150" x2="73" y2="150"/><line x1="103" y1="150" x2="163" y2="150"/>
+          <line x1="193" y1="150" x2="216" y2="150"/><line x1="300" y1="150" x2="376" y2="150"/>
+          <line x1="460" y1="150" x2="503" y2="150"/><line x1="533" y1="150" x2="596" y2="150"/>
+          <line x1="680" y1="150" x2="800" y2="150"/>
+          <polyline points="130,150 130,50 246,50"/><polyline points="330,50 520,50 520,133"/>
+          <line x1="340" y1="150" x2="340" y2="254"/>
+          <polyline points="328,270 264,270" /><line x1="180" y1="270" x2="180" y2="167"/>
+          <polyline points="720,150 720,270 644,270"/><line x1="560" y1="270" x2="356" y2="270"/>
+          <line x1="520" y1="270" x2="520" y2="167"/>
+          <polyline points="760,150 760,352 90,352 90,167"/>
+        </g>
+        <circle cx="130" cy="150" r="4.5" fill="#1D3FA0"/><circle cx="340" cy="150" r="4.5" fill="#1D3FA0"/>
+        <circle cx="720" cy="150" r="4.5" fill="#1D3FA0"/><circle cx="760" cy="150" r="4.5" fill="#1D3FA0"/>
+        <circle cx="520" cy="270" r="4" fill="#1D3FA0"/>
+        <text x="4" y="142" font-size="16" fill="#1B3B8B" font-style="italic">R(s)</text>
+        <text x="806" y="142" font-size="16" fill="#1B3B8B" font-style="italic">C(s)</text>
+        <g font-size="15" fill="#D63A2F" font-weight="700">
+          <text x="148" y="140">1</text><text x="200" y="140">2</text><text x="352" y="140">3</text>
+          <text x="486" y="140">4</text><text x="572" y="140">5</text><text x="738" y="140">6</text>
+        </g>
+        <text x="72" y="140" font-size="14" fill="#D63A2F">+</text><text x="72" y="186" font-size="14" fill="#D63A2F">−</text>
+        <text x="162" y="140" font-size="14" fill="#D63A2F">+</text><text x="162" y="186" font-size="14" fill="#D63A2F">−</text>
+        <text x="502" y="140" font-size="14" fill="#D63A2F">+</text><text x="528" y="120" font-size="14" fill="#D63A2F">+</text>
+        <text x="528" y="196" font-size="14" fill="#D63A2F">−</text>
+        <!-- 淡化层（互不接触 / 余子式演示用） -->
+        <rect id="dim" x="0" y="0" width="1150" height="430" fill="#EDF3FC" opacity="0" style="transition:opacity .4s"/>
+        <!-- 高亮层：严格贴合基图走线 -->
+        <path id="hl-p1" class="hl red flow" stroke-width="6" d="M 28 150 L 800 150"/>
+        <path id="hl-p2" class="hl red flow" stroke-width="6" d="M 28 150 L 130 150 L 130 50 L 520 50 L 520 150 L 800 150"/>
+        <path id="hl-l1" class="hl red flow" stroke-width="6" d="M 180 150 L 340 150 L 340 270 L 180 270 Z"/>
+        <path id="hl-l2" class="hl red flow" stroke-width="6" d="M 520 150 L 720 150 L 720 270 L 520 270 Z"/>
+        <path id="hl-l3" class="hl red flow" stroke-width="6" d="M 180 150 L 720 150 L 720 270 L 180 270 Z"/>
+        <path id="hl-l4" class="hl red flow" stroke-width="6" d="M 90 150 L 130 150 L 130 50 L 520 50 L 520 150 L 760 150 L 760 352 L 90 352 Z"/>
+        <path id="hl-l5" class="hl red flow" stroke-width="6" d="M 90 150 L 760 150 L 760 352 L 90 352 Z"/>
+        <g id="lb" font-size="20" font-weight="800" opacity="0" style="transition:opacity .3s">
+          <text id="lb-t" x="420" y="412" fill="#D63A2F"></text>
+        </g>
+      </svg>
+    </div>
+    <div class="work math">
+      <div class="wc" id="wA">
+        <div class="h">① 前向通道（2 条）</div>
+        <span id="wA1" style="opacity:0"><span class="tex">P_{1} = G_{1}G_{2}G_{3}</span><br></span>
+        <span id="wA2" style="opacity:0"><span class="tex">P_{2} = G_{4}G_{3}</span></span>
+      </div>
+      <div class="wc" id="wB" style="flex:1.35">
+        <div class="h">② 回环（5 个）</div>
+        <span id="wB1" style="opacity:0"><span class="tex">L_{1} = -G_{1}H_{1}\qquad L_{2} = -G_{3}H_{3}</span><br></span>
+        <span id="wB2" style="opacity:0"><span class="tex">L_{3} = -G_{1}G_{2}G_{3}H_{3}H_{1}</span><br></span>
+        <span id="wB3" style="opacity:0"><span class="tex">L_{4} = -G_{4}G_{3}\qquad L_{5} = -G_{1}G_{2}G_{3}</span><span style="font-size:15.5px;color:var(--muted)">（经最外环 −1）</span></span>
+      </div>
+      <div class="wc" id="wC" style="flex:1.25">
+        <div class="h">③ 互不接触与 <span class="tex">\Delta _{k}</span></div>
+        <span id="wC1" style="opacity:0"><span class="tex">L_{1}L_{2} = G_{1}G_{3}H_{1}H_{3}</span><br></span>
+        <span id="wC2" style="opacity:0"><span class="tex">L_{1}L_{4} = G_{1}G_{3}G_{4}H_{1}</span><br></span>
+        <span id="wC3" style="opacity:0"><span class="tex">\Delta _{1} = 1</span>；<span class="tex">\Delta _{2} = 1 + G_{1}H_{1}</span></span>
+      </div>
+      <div class="wc fin" id="wD">
+        <div class="h">✔ 合成 <span class="tex">\Phi (s)</span></div>
+        <div style="font-size:16.5px"><span class="tex">\Phi (s) = \dfrac{G_{1}G_{2}G_{3} + G_{4}G_{3}(1+G_{1}H_{1})}{1+G_{1}H_{1}+G_{3}H_{3}+G_{1}G_{2}G_{3}H_{3}H_{1}+G_{4}G_{3}+G_{1}G_{2}G_{3}+G_{1}G_{3}H_{1}H_{3}+G_{1}G_{3}G_{4}H_{1}}</span></div>
+      </div>
+    </div>
+  </div>
+  <div data-step="1" style="display:none"></div><div data-step="2" style="display:none"></div>
+  <div data-step="3" style="display:none"></div><div data-step="4" style="display:none"></div>
+  <div data-step="5" style="display:none"></div><div data-step="6" style="display:none"></div>
+  <div data-step="7" style="display:none"></div><div data-step="8" style="display:none"></div>
+  <div data-step="9" style="display:none"></div><div data-step="10" style="display:none"></div>
+  <div data-step="11" style="display:none"></div><div data-step="12" style="display:none"></div>
+</div></div>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const TOTAL = 12;
+    let K = 0;
+    const $ = id => document.getElementById(id);
+    const HLS = ["hl-p1","hl-p2","hl-l1","hl-l2","hl-l3","hl-l4","hl-l5"];
+    const CAP = [
+      null,
+      "\\text{① 前向通道 }P_{1} = G_{1}G_{2}G_{3}\\text{（沿主链 }R\\to C\\text{）}",
+      "\\text{② 前向通道 }P_{2} = G_{4}G_{3}\\text{（经上支路 }G_{4}\\text{，汇入 }G_{3}\\text{ 前的相加点）}",
+      "\\text{✔ 前向通道共 2 条，记入推导区}",
+      "\\text{③ 回环 }L_{1} = -G_{1}H_{1}\\text{（}G_{1}\\text{ 输出 → 下方相加点 → }H_{1}\\text{ 回到 }G_{1}\\text{ 前）}",
+      "\\text{④ 回环 }L_{2} = -G_{3}H_{3}\\text{（}G_{3}\\text{ 输出 → }H_{3}\\text{ 回到 }G_{3}\\text{ 前相加点）}",
+      "\\text{⑤ 回环 }L_{3} = -G_{1}G_{2}G_{3}H_{3}H_{1}\\text{（主链经 }H_{3}\\text{、}H_{1}\\text{ 两级的中环）}",
+      "\\text{⑥ 回环 }L_{4} = -G_{4}G_{3}\\text{（上支路 }G_{4}\\text{ 经最外环 }-1\\text{ 闭合）}",
+      "\\text{⑦ 回环 }L_{5} = -G_{1}G_{2}G_{3}\\text{（主链经最外环 }-1\\text{ 闭合）——回环共 5 个}",
+      "\\text{⑧ 互不接触回环：}L_{1}\\text{ 与 }L_{2}\\text{ 无公共节点（红 }=L_{1}\\text{，绿 }=L_{2}\\text{，其余淡化）}",
+      "\\text{⑨ 另一对：}L_{1}\\text{ 与 }L_{4}\\text{ 互不接触 ⇒ }\\sum L_{2} = L_{1}L_{2}+L_{1}L_{4}",
+      "\\text{⑩ 余子式：}P_{2}\\text{ 只与 }L_{1}\\text{ 不接触 ⇒ }\\Delta _{2} = 1+G_{1}H_{1}\\text{，}\\Delta _{1}=1",
+      "\\text{✔ 合成 }\\Phi (s) = (P_{1}\\Delta _{1}+P_{2}\\Delta _{2})/\\Delta "
+    ];
+    function setHL(id, on, grn) {
+      const el = $(id);
+      el.style.opacity = on ? 1 : 0;
+      el.classList.toggle("grn", !!grn);
+      el.classList.toggle("red", !grn);
+    }
+    function label(txt) { $("lb").style.opacity = txt ? 1 : 0; $("lb-t").textContent = txt || ""; }
+    function paint() {
+      HLS.forEach(h => setHL(h, false));
+      $("dim").style.opacity = 0; label("");
+      $("wA").classList.toggle("on", K >= 3);
+      $("wA1").style.opacity = K >= 1 ? 1 : 0;
+      $("wA2").style.opacity = K >= 2 ? 1 : 0;
+      $("wB").classList.toggle("on", K >= 4);
+      $("wB1").style.opacity = K >= 5 ? 1 : 0;
+      $("wB2").style.opacity = K >= 6 ? 1 : 0;
+      $("wB3").style.opacity = K >= 8 ? 1 : 0;
+      $("wC").classList.toggle("on", K >= 9);
+      $("wC1").style.opacity = K >= 9 ? 1 : 0;
+      $("wC2").style.opacity = K >= 10 ? 1 : 0;
+      $("wC3").style.opacity = K >= 11 ? 1 : 0;
+      $("wD").classList.toggle("on", K >= 12);
+      if (K === 1) { setHL("hl-p1", 1); label("P₁"); }
+      if (K === 2) { setHL("hl-p2", 1); label("P₂"); }
+      if (K === 4) { setHL("hl-l1", 1); label("L₁ = −G₁H₁"); }
+      if (K === 5) { setHL("hl-l2", 1); label("L₂ = −G₃H₃"); }
+      if (K === 6) { setHL("hl-l3", 1); label("L₃ = −G₁G₂G₃H₃H₁"); }
+      if (K === 7) { setHL("hl-l4", 1); label("L₄ = −G₄G₃"); }
+      if (K === 8) { setHL("hl-l5", 1); label("L₅ = −G₁G₂G₃"); }
+      if (K === 9) { $("dim").style.opacity = .72; setHL("hl-l1", 1); setHL("hl-l2", 1, true); label("L₁ 与 L₂ 互不接触 ✔"); }
+      if (K === 10) { $("dim").style.opacity = .72; setHL("hl-l1", 1); setHL("hl-l4", 1, true); label("L₁ 与 L₄ 互不接触 ✔"); }
+      if (K === 11) { $("dim").style.opacity = .72; setHL("hl-p2", 1); setHL("hl-l1", 1, true); label("P₂ 通道上：只有 L₁ 不接触"); }
+      if (!(CAP[K] && window.mjxTypeset && mjxTypeset($("cap"), CAP[K]))) $("cap").textContent = "课堂练习：先自己在图上数——几条前向通道？几个回环？";
+      $("prog").textContent = K + " / " + TOTAL;
+    }
+    const S = ACT.step;
+    const _next = S.next.bind(S), _reset = S.reset.bind(S);
+    S.next = function () { if (K < TOTAL) K++; const d = _next(); paint(); return d; };
+    S.reset = function () { K = 0; _reset(); paint(); };
+    window.prev = function () {
+      if (K <= 0) return;
+      const t = K - 1; S.reset();
+      for (let i = 0; i < t; i++) S.next();
+    };
+    paint();
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>例 3-5 · 劳斯判据的应用</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:24px; height:100%; }
+  .prbc { flex:0.85; display:flex; flex-direction:column; }
+  .prbc .bd { flex:1; font-size:22.5px; line-height:1.85; display:flex; flex-direction:column; justify-content:center; gap:16px; }
+  .tabc { flex:1.15; display:flex; flex-direction:column; }
+  .tabc .bd { flex:1; display:flex; flex-direction:column; justify-content:center; gap:14px; }
+  .rt { border-collapse:collapse; width:100%; }
+  .rt th, .rt td { border:2px solid var(--line); padding:9px 8px; font-size:22.5px; text-align:center; }
+  .rt th { background:var(--navy); color:#fff; font-weight:700; font-size:20px; }
+  .rt td.rl { background:var(--sky); font-weight:700; color:var(--navy); }
+  .rt td.fc { background:#FDF3EC; font-weight:700; }
+  .rt td.calc { font-size:19px; color:#5B6B8C; text-align:left; padding-left:14px; line-height:1.5; }
+  .neg { color:#D63A2F; font-weight:800; }
+  .concl { background:#FCEBE9; border:2px solid #D63A2F; border-radius:12px; padding:13px 20px; font-size:22px; color:var(--navy); line-height:1.65; }
+  .tip { font-size:20px; color:#5B6B8C; line-height:1.6; }
+  tr[data-step] { transform:none !important; }
+  tr[data-step]:not(.shown) td { border-color:transparent !important; }
+</style>
+</head>
+<body data-title="例 3-5 · 劳斯判据的应用" data-page="59 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="row">
+      <div class="act-card prbc">
+        <div class="hd">例 3-5</div>
+        <div class="bd">
+          <span>系统特征方程为</span>
+          <div class="mathbox math eqline tex tex-d" style="font-size:26px">D(s)=s^{4}+2s^{3}+3s^{2}+4s+5=0</div>
+          <span>用劳斯判据判别系统是否稳定；若不稳定，确定正实部根的数目。</span>
+          <span><b>分析</b>：系数 1、2、3、4、5 全为正 → 必要条件满足，需列劳斯表。若只判稳定性，算到 s¹ 行出现 <span class="kw-r">−6</span> 即可；<br>要确定正实部根的个数，则<span class="kw-r">必须计算到底</span>。</span>
+        </div>
+      </div>
+      <div class="act-card tabc">
+        <div class="hd">劳斯表</div>
+        <div class="bd">
+          <table class="rt">
+            <tr><th>行标</th><th>第 1 列</th><th>第 2 列</th><th>第 3 列</th><th>计算说明</th></tr>
+            <tr><td class="rl"><span class="tex" style="font-size:22px">s^{4}</span></td><td class="fc">1</td><td>3</td><td>5</td><td class="calc">首两行：系数隔项排列</td></tr>
+            <tr><td class="rl"><span class="tex" style="font-size:22px">s^{3}</span></td><td class="fc">2</td><td>4</td><td>0</td><td class="calc">缺项位置补 0</td></tr>
+            <tr data-step="1"><td class="rl"><span class="tex" style="font-size:22px">s^{2}</span></td><td class="fc">1</td><td>5</td><td>0</td><td class="calc">b₁=(2×3−1×4)/2=1<br>b₂=(2×5−1×0)/2=5</td></tr>
+            <tr data-step="2"><td class="rl"><span class="tex" style="font-size:22px">s^{1}</span></td><td class="fc"><span class="neg">−6</span></td><td>0</td><td></td><td class="calc">c₁=(1×4−2×5)/1=<span class="neg">−6</span></td></tr>
+            <tr data-step="3"><td class="rl"><span class="tex" style="font-size:22px">s^{0}</span></td><td class="fc">5</td><td></td><td></td><td class="calc">d₁=((−6)×5−1×0)/(−6)=5</td></tr>
+          </table>
+          <div class="concl" data-step="4">
+            第一列：1、2、1、<span class="neg">−6</span>、5 —— 符号改变<span class="kw-r">两次</span>（1→−6、−6→5），故特征方程有<span class="kw-r">两个正实部根</span>，系统<span class="kw-r">不稳定</span>。
+          </div>
+          <div class="tip">注意：用某个正数去乘或除劳斯表中任意一行的系数，并不改变稳定性的结论（可用来化简计算）。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+</body>
+</html>

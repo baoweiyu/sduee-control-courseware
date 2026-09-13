@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>一阶系统的单位脉冲响应</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<link rel="stylesheet" href="../lesson03-svg.css">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:24px; height:100%; }
+  .figc { flex:1.65; display:flex; flex-direction:column; overflow:hidden; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:8px 14px; }
+  .figc svg { width:100%; height:100%; }
+  .ctl { flex:1; display:flex; flex-direction:column; gap:14px; }
+  .panel { background:#fff; border:2px solid var(--line); border-radius:14px; padding:15px 22px; }
+  .panel .h { font-size:20.5px; font-weight:700; color:var(--blue); margin-bottom:10px; }
+  .panel .mathbox { font-size:21px; margin:4px 0; }
+  .panel .sub { font-size:18px; color:var(--muted); line-height:1.5; }
+  .sliderow { display:flex; align-items:center; gap:14px; font-size:22px; }
+  .sliderow input[type=range] { flex:1; accent-color:var(--orange); height:34px; }
+  .sliderow .val { min-width:104px; text-align:center; font-weight:700; color:var(--navy); background:var(--sky); border-radius:10px; padding:6px 12px; font-size:22px; }
+  .reads { display:flex; flex-direction:column; gap:11px; }
+  .rd { display:flex; justify-content:space-between; align-items:center; background:var(--sky); border-radius:12px; padding:11px 18px; font-size:20.5px; color:var(--ink); }
+  .rd b { color:var(--navy); font-size:21.5px; font-style:italic; font-family:var(--font-math); }
+  .rd.hot { background:#FDECEA; border:1.5px solid #F2C1BC; }
+  .rd.hot b { color:var(--red); }
+  .hint { font-size:18px; color:var(--muted); line-height:1.5; }
+</style>
+</head>
+<body data-title="一阶系统的单位脉冲响应" data-page="19 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="act-card figc">
+        <div class="hd">单位脉冲响应 <span class="tex" style="font-style:italic">g(t) = \dfrac{1}{T}\,e^{-t/T}</span></div>
+        <div class="bd2"><svg id="fig" viewBox="0 0 1000 620"></svg></div>
+      </div>
+      <div class="ctl">
+        <div class="panel">
+          <div class="h">推导（R(s) = 1）</div>
+          <div class="mathbox math tex tex-d" style="font-size:22px">C(s) = \dfrac{1}{Ts+1} \;\Rightarrow\; g(t) = \dfrac{1}{T}\,e^{-t/T}</div>
+          <div class="sub">t → ∞ 时 g(t) → 0，系统恢复平衡；脉冲响应是阶跃响应的导数。</div>
+        </div>
+        <div class="panel">
+          <div class="h">拖动滑块改变时间常数 T</div>
+          <div class="sliderow">
+            <span style="font-style:italic;font-family:var(--font-math);font-size:24px;color:var(--navy)">T</span>
+            <input id="sld" type="range" min="0.2" max="1.5" step="0.1" value="1.0">
+            <span class="val" id="val">1.0 s</span>
+          </div>
+        </div>
+        <div class="panel" style="flex:1">
+          <div class="h">性能读数</div>
+          <div class="reads">
+            <div class="rd hot"><span>初值 g(0) = 1/T</span><b id="r1">1.00</b></div>
+            <div class="rd"><span>初始斜率 = −1/T²</span><b id="r2">−1.00</b></div>
+            <div class="rd"><span>g(T) = 0.368 / T</span><b id="r3">0.37</b></div>
+          </div>
+          <div class="hint" style="margin-top:14px">观察：T 减小时，峰值 1/T 变高、衰减更快，响应越"尖锐"；T 增大则曲线平缓。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">联系</span>脉冲响应是阶跃响应的导数：<span class="tex" style="font-size:25px">g(t) = \dfrac{\mathrm{d}h(t)}{\mathrm{d}t}</span>（输入 δ(t) 是 1(t) 的导数）。</div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("fig");
+  const TM = 6;
+  const X = t => 96 + t / TM * 850;
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const tx = (x, y, s, o, parent) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 24, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal", opacity: (o && o.op !== undefined) ? o.op : 1 }, parent); n.textContent = s; return n; };
+  const defs = mk("defs", {});
+  const m1 = mk("marker", { id: "a18", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, m1);
+
+  function render(T) {
+    svg.innerHTML = "";
+    svg.appendChild(defs);
+    const YM = Math.max(1.25, 1.08 / T);
+    const Y = v => 540 - v / YM * 480;
+    const g = t => t <= 0 ? 0 : (1 / T) * Math.exp(-t / T);
+    // 坐标轴
+    mk("line", { x1: 96, y1: 540, x2: 960, y2: 540, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a18)" });
+    mk("line", { x1: 96, y1: 540, x2: 96, y2: 32, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a18)" });
+    tx(950, 600, "t / s", { fs: 24, an: "end", it: true, b: true });
+    tx(56, 42, "g(t)", { fs: 25, it: true, b: true });
+    tx(74, 546, "O", { fs: 22, fill: "#5B6B8C" });
+    for (let i = 1; i <= 6; i++) {
+      mk("line", { x1: X(i), y1: 540, x2: X(i), y2: 60, stroke: "#C9D8F2", "stroke-width": 1, "stroke-dasharray": "5 6" });
+      tx(X(i), 572, i + "", { fs: 21, fill: "#5B6B8C", op: (Math.abs(X(i) - X(T)) < 26 ? 0 : 1) });
+    }
+    for (let v = 1; v < YM; v++) {
+      mk("line", { x1: 96, y1: Y(v), x2: 946, y2: Y(v), stroke: "#C9D8F2", "stroke-width": 1, "stroke-dasharray": "5 6" });
+      tx(80, Y(v) + 7, v + "", { an: "end", fs: 20, fill: "#5B6B8C" });
+    }
+    // 曲线
+    let d = "";
+    for (let i = 0; i <= 300; i++) { const t = TM * i / 300; d += (i ? "L" : "M") + X(t).toFixed(1) + "," + Y(g(t)).toFixed(1); }
+    mk("path", { d, stroke: "#2B5CE6", "stroke-width": 3.5, fill: "none" });
+    // 初始切线：(0, 1/T) → (T, 0)
+    mk("line", { x1: X(0), y1: Y(1 / T), x2: X(T), y2: Y(0), stroke: "#D63A2F", "stroke-width": 2.4, "stroke-dasharray": "9 6" });
+    // 切线图例（固定在顶部空白区）
+    mk("line", { x1: 560, y1: 66, x2: 624, y2: 66, stroke: "#D63A2F", "stroke-width": 2.4, "stroke-dasharray": "9 6" });
+    tx(636, 74, "初始切线：斜率 = −1/T²", { fs: 23, b: true, fill: "#D63A2F", an: "start" });
+    // g(0) = 1/T 标注
+    mk("circle", { cx: X(0), cy: Y(1 / T), r: 6.5, fill: "#D63A2F" });
+    mk("line", { x1: 96, y1: Y(1 / T), x2: X(Math.min(0.45 * T, 0.6)), y2: Y(1 / T), stroke: "#F5821F", "stroke-width": 2, "stroke-dasharray": "8 6" });
+    tx(80, Y(1 / T) + 7, "1/T", { an: "end", fs: 23, b: true, it: true, fill: "#D63A2F" });
+    // T 点标记
+    mk("line", { x1: X(T), y1: 540, x2: X(T), y2: Y(g(T)), stroke: "#F5821F", "stroke-width": 2, "stroke-dasharray": "8 6" });
+    mk("circle", { cx: X(T), cy: Y(g(T)), r: 6, fill: "#D63A2F" });
+    tx(X(T), 568, "T", { fs: 24, b: true, it: true, fill: "#D63A2F" });
+    tx(X(T) + 18, Y(g(T)) - 16, "0.368/T", { fs: 22, b: true, it: true, fill: "#D63A2F", an: "start" });
+    // 读数
+    document.getElementById("r1").textContent = (1 / T).toFixed(2);
+    document.getElementById("r2").textContent = "−" + (1 / (T * T)).toFixed(2);
+    document.getElementById("r3").textContent = (0.368 / T).toFixed(2);
+  }
+  const sld = document.getElementById("sld"), val = document.getElementById("val");
+  sld.addEventListener("input", () => { const T = +sld.value; val.textContent = T.toFixed(1) + " s"; render(T); });
+  render(1.0);
+});
+</script>
+</body>
+</html>

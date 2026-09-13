@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>扰动误差传递函数</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<link rel="stylesheet" href="../lesson03-svg.css">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:24px; height:100%; }
+  .dtc { flex:1.12; display:flex; flex-direction:column; }
+  .dtc .bd { flex:1; font-size:21.5px; line-height:1.8; display:flex; flex-direction:column; justify-content:center; gap:14px; }
+  .sumc { flex:0.88; display:flex; flex-direction:column; }
+  .sumc .bd { flex:1; font-size:22px; line-height:1.85; display:flex; flex-direction:column; justify-content:center; gap:18px; }
+  .figw { background:#fff; border:1.5px solid var(--line); border-radius:12px; padding:6px 8px; }
+  .figw svg { display:block; width:100%; height:auto; }
+  .hl { background:var(--sky); border-radius:12px; padding:12px 18px; }
+  .note2 { background:#F4F7FF; border-left:5px solid var(--navy); border-radius:0 10px 10px 0; padding:12px 18px; font-size:20.5px; line-height:1.7; }
+</style>
+</head>
+<body data-title="扰动误差传递函数" data-page="71 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="row">
+      <div class="act-card dtc">
+        <div class="hd">4. 扰动误差传递函数</div>
+        <div class="bd">
+          <div class="figw">
+            <svg viewBox="0 0 700 300">
+              <defs><marker id="ar67" markerWidth="11" markerHeight="11" refX="7.5" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#1B3B8B"/></marker>
+              <marker id="ar67r" markerWidth="11" markerHeight="11" refX="7.5" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#D63A2F"/></marker></defs>
+              <text x="6" y="116" font-size="20" fill="#1B3B8B" font-style="italic">R(s)</text>
+              <line x1="52" y1="110" x2="80" y2="110" stroke="#1B3B8B" stroke-width="2.2" marker-end="url(#ar67)"/>
+              <circle cx="100" cy="110" r="15" fill="#fff" stroke="#1B3B8B" stroke-width="2.2"/>
+              <line x1="92" y1="102" x2="108" y2="118" stroke="#1B3B8B" stroke-width="2"/>
+              <line x1="108" y1="102" x2="92" y2="118" stroke="#1B3B8B" stroke-width="2"/>
+              <text x="68" y="142" font-size="18" fill="#1B3B8B">+</text>
+              <text x="120" y="160" font-size="18" fill="#1B3B8B">−</text>
+              <line x1="115" y1="110" x2="146" y2="110" stroke="#1B3B8B" stroke-width="2.2" marker-end="url(#ar67)"/>
+              <text x="120" y="96" font-size="19" fill="#1B3B8B" font-style="italic">E(s)</text>
+              <rect x="150" y="78" width="120" height="64" rx="8" fill="#EAF0FE" stroke="#1B3B8B" stroke-width="2.2"/>
+              <foreignObject x="160" y="90" width="100" height="42"><div xmlns="http://www.w3.org/1999/xhtml" class="tex" style="font-size:21px;text-align:center">G_{1}(s)</div></foreignObject>
+              <line x1="270" y1="110" x2="300" y2="110" stroke="#1B3B8B" stroke-width="2.2" marker-end="url(#ar67)"/>
+              <circle cx="320" cy="110" r="15" fill="#fff" stroke="#1B3B8B" stroke-width="2.2"/>
+              <line x1="312" y1="102" x2="328" y2="118" stroke="#1B3B8B" stroke-width="2"/>
+              <line x1="328" y1="102" x2="312" y2="118" stroke="#1B3B8B" stroke-width="2"/>
+              <text x="292" y="142" font-size="18" fill="#1B3B8B">+</text>
+              <text x="336" y="80" font-size="18" fill="#D63A2F">+</text>
+              <line x1="320" y1="52" x2="320" y2="92" stroke="#D63A2F" stroke-width="2.2" marker-end="url(#ar67r)"/>
+              <text x="330" y="42" font-size="19" fill="#D63A2F" font-style="italic">N(s)（扰动）</text>
+              <line x1="335" y1="110" x2="366" y2="110" stroke="#1B3B8B" stroke-width="2.2" marker-end="url(#ar67)"/>
+              <rect x="370" y="78" width="120" height="64" rx="8" fill="#EAF0FE" stroke="#1B3B8B" stroke-width="2.2"/>
+              <foreignObject x="380" y="90" width="100" height="42"><div xmlns="http://www.w3.org/1999/xhtml" class="tex" style="font-size:21px;text-align:center">G_{2}(s)</div></foreignObject>
+              <line x1="490" y1="110" x2="630" y2="110" stroke="#1B3B8B" stroke-width="2.2" marker-end="url(#ar67)"/>
+              <circle cx="570" cy="110" r="4" fill="#1B3B8B"/>
+              <text x="640" y="116" font-size="20" fill="#1B3B8B" font-style="italic">C(s)</text>
+              <line x1="570" y1="110" x2="570" y2="248" stroke="#1B3B8B" stroke-width="2.2"/>
+              <line x1="400" y1="248" x2="570" y2="248" stroke="#1B3B8B" stroke-width="2.2"/>
+              <rect x="250" y="216" width="150" height="64" rx="8" fill="#EAF0FE" stroke="#1B3B8B" stroke-width="2.2"/>
+              <foreignObject x="260" y="228" width="130" height="42"><div xmlns="http://www.w3.org/1999/xhtml" class="tex" style="font-size:21px;text-align:center">H(s)</div></foreignObject>
+              <line x1="100" y1="248" x2="250" y2="248" stroke="#1B3B8B" stroke-width="2.2"/>
+              <line x1="100" y1="248" x2="100" y2="125" stroke="#1B3B8B" stroke-width="2.2" marker-end="url(#ar67)"/>
+            </svg>
+          </div>
+          <span>对调节系统（<span class="tex">R(s)=0</span>）：<span class="tex">E(s)=-B(s)=-H(s)C(s)</span>，<br>扰动单独作用时 <span class="tex">C(s)=\dfrac{G_{2}(s)}{1+G_{1}(s)G_{2}(s)H(s)}N(s)</span>，故</span>
+          <div class="hl"><span class="tex tex-d" style="font-size:21.5px">\varPhi_{en}(s)=\frac{E(s)}{N(s)}=-\frac{G_{2}(s)H(s)}{1+G_{1}(s)G_{2}(s)H(s)}</span><br><span style="font-size:20px">—— <span class="kw-r">扰动误差传递函数</span></span></div>
+        </div>
+      </div>
+      <div class="act-card sumc">
+        <div class="hd">5. 给定与扰动共同作用</div>
+        <div class="bd">
+          <span>由线性系统的<b>叠加原理</b>：</span>
+          <div class="hl"><span class="tex tex-d" style="font-size:22.5px">E(s)=\varPhi_{e}(s)\,R(s)+\varPhi_{en}(s)\,N(s)</span></div>
+          <span>总稳态误差为两部分之和：</span>
+          <div class="mathbox math eqline tex tex-d" style="font-size:22.5px">e_{ss}=e_{ssr}+e_{ssn}</div>
+          <div class="note2"><b>随动系统</b>：主要考核<b>跟随性能</b>，重点是各种输入信号下的跟踪误差 <span class="tex">e_{ssr}</span>。<br><b>恒值（调节）系统</b>：主要考核<b>抗干扰能力</b>，重点是扰动引起的误差 <span class="tex">e_{ssn}</span>。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+</body>
+</html>

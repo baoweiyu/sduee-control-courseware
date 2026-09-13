@@ -1,0 +1,4577 @@
+{
+	"type": "npm",
+	"name": "@mathjax/mathjax-stix2-font",
+	"version": "4.1.3",
+	"default": null,
+	"files": [
+		{
+			"name": "/chtml.js",
+			"hash": "WrsVk+NtwbZHHl43fQ4ujxfpaDPTe7NhA0Nl6HAZx8c=",
+			"size": 91610
+		},
+		{
+			"name": "/chtml/dynamic/accents.js",
+			"hash": "J49OziwlUc/oGfBd1WABBQQJyuuBZnJaoO37xevyk1M=",
+			"size": 3666
+		},
+		{
+			"name": "/chtml/dynamic/accents-other.js",
+			"hash": "WGU+wIEV5PVOfYm+dP9YrnwvMME7tAEnGYGFBC0K24c=",
+			"size": 10243
+		},
+		{
+			"name": "/chtml/dynamic/arrows.js",
+			"hash": "Qg7MOSj0ONODM5iP/DBAOc1+8z1665mf+5QgIGZczW8=",
+			"size": 4401
+		},
+		{
+			"name": "/chtml/dynamic/calligraphic.js",
+			"hash": "F/yQgfy1ynPMY9KEst1Zvyh+snuM5vbHHJ9n5q98I40=",
+			"size": 3894
+		},
+		{
+			"name": "/chtml/dynamic/cyrillic.js",
+			"hash": "zNYyNbf8AaH6FDifa0Zca05P5J+baas4l9ncDHbofrk=",
+			"size": 10663
+		},
+		{
+			"name": "/chtml/dynamic/dingbats.js",
+			"hash": "OzYmFl8i7u8jq+bOPUkoGpdBB7oj5odKjKDRZcoqv0A=",
+			"size": 5896
+		},
+		{
+			"name": "/chtml/dynamic/double-struck.js",
+			"hash": "1bvyEQBaIOayTJfhukxkZ1TFB7O4Rp/5O7Nmht36LmQ=",
+			"size": 2400
+		},
+		{
+			"name": "/chtml/dynamic/enclosed.js",
+			"hash": "pPzE1ojL53cC0DE+LWjBz800SUU3DDzRnFRmGncW2cg=",
+			"size": 4574
+		},
+		{
+			"name": "/chtml/dynamic/fraktur.js",
+			"hash": "aLKj39UxZeyky4DKxcP9jxmLp96cLhrKc5/RA/OMM3w=",
+			"size": 3680
+		},
+		{
+			"name": "/chtml/dynamic/greek.js",
+			"hash": "U6okEb0O5PoDVBnvVjDW+sdt0oN2rxEm94t63VAKsNk=",
+			"size": 3724
+		},
+		{
+			"name": "/chtml/dynamic/latin.js",
+			"hash": "Or3DMqQ3LnmJs4ziaLOTkgBHUimRYN5rH1PbOWGZs4c=",
+			"size": 10896
+		},
+		{
+			"name": "/chtml/dynamic/latin-b.js",
+			"hash": "QEec3R4ow8Up8Ya7sP3252g0EEiz4lWIw+wfJXcjm40=",
+			"size": 11152
+		},
+		{
+			"name": "/chtml/dynamic/latin-bi.js",
+			"hash": "h6ut0KeCCo4EMNHYPqWFq5PQqGiw6xmqIoI+ri3hY9I=",
+			"size": 12963
+		},
+		{
+			"name": "/chtml/dynamic/latin-i.js",
+			"hash": "W+Ru6a1PruZHb+3QfwsA1sU8xxD437FRKBjZiJJ0mJE=",
+			"size": 12857
+		},
+		{
+			"name": "/chtml/dynamic/math.js",
+			"hash": "GIR2a5aZxovLud73nCpYWCl2sayDR2jrTBYFqOfoS3k=",
+			"size": 9184
+		},
+		{
+			"name": "/chtml/dynamic/monospace.js",
+			"hash": "vZkGNEubbzVaoJl3hGox0BYLcFWe0hjVADswo8qELxo=",
+			"size": 1861
+		},
+		{
+			"name": "/chtml/dynamic/phonetics.js",
+			"hash": "r4Ii5NLAAzYM+1m0Y3pJ514uRMkYWGcwP1+mDuPWM4s=",
+			"size": 10657
+		},
+		{
+			"name": "/chtml/dynamic/sans-serif.js",
+			"hash": "d/IlL1pbZxrmqA9aUgTz8+PQZ2mbwyf7Cfg8RnR4g+A=",
+			"size": 9320
+		},
+		{
+			"name": "/chtml/dynamic/script.js",
+			"hash": "iBBrqYFAxTrq7bhHCf23tXGTo4ngJ8sql/3xSLSqPzs=",
+			"size": 4252
+		},
+		{
+			"name": "/chtml/dynamic/shapes.js",
+			"hash": "g4KX9fmW1N0DZ82ENAVEXhhBMtNIdExWbAO+ZQXpgpE=",
+			"size": 10498
+		},
+		{
+			"name": "/chtml/dynamic/stretchy.js",
+			"hash": "YXRn/pqMOSsYAIrwtHiT8M3lpYmI0B7CC6p6+IkoLXM=",
+			"size": 6121
+		},
+		{
+			"name": "/chtml/dynamic/symbols.js",
+			"hash": "B5FXI+j03/5+AAZrHzAngeyjX/MNpK2zrBOakkjEMdo=",
+			"size": 8285
+		},
+		{
+			"name": "/chtml/dynamic/symbols-other.js",
+			"hash": "Vgv1UeT70CnCSnepn9Jm8AnYXMFC9Q9icKAwqHxvTtQ=",
+			"size": 8298
+		},
+		{
+			"name": "/chtml/dynamic/upright.js",
+			"hash": "IcS3iHyOCxhYlDdC1rwhZIU407NPcAEnRiCuPl7vM8o=",
+			"size": 1614
+		},
+		{
+			"name": "/chtml/dynamic/variants.js",
+			"hash": "7lelw0Y15DTKsaKIjk4tr/oE2Lo9QdumduuqGXrn4a0=",
+			"size": 2780
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-ac.woff2",
+			"hash": "xPav3W/ymAcPNgTL3GRw9YeLEHRLrkllxuFSymwoleQ=",
+			"size": 6632
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-acb.woff2",
+			"hash": "pJzEvd4MeE7nidUOOohxS4rasoe8GZvZuCIJ1fCqo7o=",
+			"size": 6148
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-acbi.woff2",
+			"hash": "Q4ZI5vultxJkSP8mfF5i201ky1ncR6gObJDeCY3GPAg=",
+			"size": 6404
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-aci.woff2",
+			"hash": "ewBChdYvq9cv4jwwtC/idPF5JO7hl+yV/T30slOtLq0=",
+			"size": 6392
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-ar.woff2",
+			"hash": "Uc6brGgOObOx7ChWk5Ry/BzMe/AnESKofYKdeC7zQ6U=",
+			"size": 12396
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-b.woff2",
+			"hash": "BBsJk8N9bFDYKBy98dKWb14sVllzFOjwBT33szmFTpI=",
+			"size": 5596
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-bi.woff2",
+			"hash": "x13FU3STRhNyMj0gU/GpjtC4b2Zs2zQho/1/zJuiN7A=",
+			"size": 6456
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-brk.woff2",
+			"hash": "7tek6QRCytPqeenUBc7aFRwACuIetZ3Aj1CG9dYWtL8=",
+			"size": 1016
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-c.woff2",
+			"hash": "bdicV1cxmisBUdj9al0MPRYpaChmZVEx7LQn2+izGCE=",
+			"size": 7424
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-cb.woff2",
+			"hash": "HoELVRF8MOjLPE5NfBbgYmf2MpuBoI88lw0M0E+BoQE=",
+			"size": 7224
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-cy.woff2",
+			"hash": "mwKYuvTfoHYKt/scsRsk/nlwHqr32FprikMn5vUCWdM=",
+			"size": 9148
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-cyb.woff2",
+			"hash": "IKMI3T/tnG5ZCCGfbizCVc+oD8pp5kX1At+RvzXdy6M=",
+			"size": 8704
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-cybi.woff2",
+			"hash": "VtCirJKBs48dTGqJxoWkUC+Sf3swvYRIaVlUHtQfW2Y=",
+			"size": 10248
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-cyi.woff2",
+			"hash": "VgMP4oUz2BwolMziw8BqVrdPlnaekGcGYSACuYAqzks=",
+			"size": 9912
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-db.woff2",
+			"hash": "7a2l8rf1/SSm7BsTxSA3TBR6h7yGlH1WVOb7KtIuytc=",
+			"size": 31268
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-ds.woff2",
+			"hash": "ziJbZL6OV/frgQ0QC1SlTgqvsYoCNn6TV0VaWK5YWtQ=",
+			"size": 6940
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-dsi.woff2",
+			"hash": "KLAmrasek8eZ7eNIaAhQ/aeGtgMfMmTP/2ZK6MzsktA=",
+			"size": 5256
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-e.woff2",
+			"hash": "NliAjIAcrS7Jl+CHiGABlwNPRU3u186b7bBBo5bpKjE=",
+			"size": 2564
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-en.woff2",
+			"hash": "Y3o0cu/KvpKXt+8JKeyQOnJXDQFsXzCHB7akzlF/st4=",
+			"size": 12700
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-f.woff2",
+			"hash": "HYyHm93jaZxUeB0mMdgmayDJkfGs6Wp+LIPWHTO+Q8s=",
+			"size": 8016
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-fb.woff2",
+			"hash": "fQqwixdoaHXvED5zMrkjfWm+S2qrLvVUFmcsXpvq/FY=",
+			"size": 8040
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-gk.woff2",
+			"hash": "Ks4SJKKOYB/Z323nFtb3DLp87WSF8VKo58LHiMu0ow0=",
+			"size": 3832
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-gkb.woff2",
+			"hash": "q6nJqOXau4rZpgxCGLJuNuK9ymV+yidJHhzwbE1Ok0o=",
+			"size": 3628
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-gkbi.woff2",
+			"hash": "0rEOBJWOCyfy/l8kAuo/ohVl+03NL858j848hwmEyeY=",
+			"size": 3948
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-gki.woff2",
+			"hash": "DCe+xfs9+w2GZgms2TgJRqjLzGQKVRP9QOJOzOilEkM=",
+			"size": 3948
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-i.woff2",
+			"hash": "3OVhLgdsQ/F+mm8faOiQwL9wOUgapinATtSlimvEMTU=",
+			"size": 6360
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-lb.woff2",
+			"hash": "qvHk5Smbqor/GUaNwb3sFkHfUiU4YBt17XN1nlDnv8A=",
+			"size": 16492
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-lbi.woff2",
+			"hash": "/bIhWG4jZOvWi0me2fjmBWAWaZyClwGIO9J0Wm1xW/o=",
+			"size": 17772
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-li.woff2",
+			"hash": "CnIGwMraBxGvyXmA+bJtFJmfJGZByikF3bU8iYGNgaI=",
+			"size": 17412
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-lo.woff2",
+			"hash": "S+HHwnxAcODdIOrnDrSGYU0nk5mjqrI0f95XnXvCXwQ=",
+			"size": 7964
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-lr.woff2",
+			"hash": "F8IhBurJbcu5LPB5AJtMuzg5L3i0LVoOt8rGZax5x9g=",
+			"size": 16556
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-m.woff2",
+			"hash": "kUZRIYGXWCoeZXuDksvKneuXFFVAWjt7a/CMy3fC3s0=",
+			"size": 7148
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-mi.woff2",
+			"hash": "yGcjO4z6e2Now6d2IIxIVYlMPWy0lYc1ZYdi7Td4jD4=",
+			"size": 6724
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-mm.woff2",
+			"hash": "Mk5cl4W39c7ryNprFw+ypi7vPAjCNK7S3JN9B19wIQ0=",
+			"size": 19852
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-n.woff2",
+			"hash": "xL5ghdUn7vKn2yalwIIN61oSgO7m6Yjk/lbZR0gZIzE=",
+			"size": 74976
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-ob.woff2",
+			"hash": "gHTg4bi40KPkO8FKUL9ZunR63LaScHEj+X4eOCs1w3g=",
+			"size": 1868
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-os.woff2",
+			"hash": "QZ3QRykugde/yikenQkqZeNdHxVFyrScU5xVh344OJQ=",
+			"size": 1868
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-ph.woff2",
+			"hash": "66ujfOEmfwZ9oLH/ZhhwHEulNs/NCXzCA3prPuRsnE4=",
+			"size": 9200
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-phb.woff2",
+			"hash": "hvK6hodDcT/JPJ6XldJhFhZSnfyCNEYbgghmxwhYG+4=",
+			"size": 9196
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-phbi.woff2",
+			"hash": "Z65xlixey+lJfjE7kSVqI9B5rNWOlH0iglatUwZwmBc=",
+			"size": 11296
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-phi.woff2",
+			"hash": "lPHDOewfhqe9L4DrDbtnXoOcOr/J7plwMxBgV/sB1e4=",
+			"size": 10600
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-s.woff2",
+			"hash": "PbAol1FVMFxFRfG0IiVfNNF4HErkE+rdd9czxCCCGIM=",
+			"size": 9396
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-s3.woff2",
+			"hash": "0r2DrMRxv7eabO1gbyDCCB5KdHNP87fewRYv59eWYBU=",
+			"size": 3692
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-s4.woff2",
+			"hash": "keMhBrnydBPnG9WGAB1DI4Ht2jELKCbgHlNJd27ymlo=",
+			"size": 3624
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-s5.woff2",
+			"hash": "PeeN22bLgpU+kc8CYnuhJ7DAoQHwFzQOMZFHC+5Smbc=",
+			"size": 3436
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-s6.woff2",
+			"hash": "3Z9SAgsXes0GtT9vYdbcUIhh6fy67lEQhxxNKoWZhiE=",
+			"size": 2388
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-s7.woff2",
+			"hash": "O1p7n4fudd3FI2zJPX7qdg/0uCSTWqY3OPlXpD7IgPk=",
+			"size": 2412
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-s8.woff2",
+			"hash": "gu5LA0ACZDGthNgr/9g6/4ITrZUbZry/Sqp6colmuEQ=",
+			"size": 2348
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-s9.woff2",
+			"hash": "0JxfLOgpzDSp8kPdCz0ehofpfgSQ6ffbqZztAxB3BHw=",
+			"size": 2384
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-s10.woff2",
+			"hash": "uhYsYO601KG0SXzK6KNIxLbCWoC4HVzzUt3dbDUt0Bg=",
+			"size": 2352
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-s11.woff2",
+			"hash": "lBm0FuGS6DXzWzVPA6Tb59WXRIRI8PuASG55acQgwLk=",
+			"size": 2332
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-s12.woff2",
+			"hash": "q2gHSur2YHHUxEpf/tXglVazrASYexrIZ/yu9xFMC/o=",
+			"size": 2320
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-sb.woff2",
+			"hash": "Tg5FtCkGtVhxReycRzUxDWOJj15xyrXfgnkTqPU5vv8=",
+			"size": 8536
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-sh.woff2",
+			"hash": "N4cxJm0vXs5muaaKZqKPWSZ5G6EyrA5qeMpTzlixGOk=",
+			"size": 39756
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-so.woff2",
+			"hash": "K1vA+Oz0h+F5KluZFUZvNVe6i+zKQ8xW5pnMDhzHsSg=",
+			"size": 3768
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-ss.woff2",
+			"hash": "wc4bcKyiwYJEufgkcYv2bS3q+QjbiNJ5cJtQk2YDsZk=",
+			"size": 8380
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-ssb.woff2",
+			"hash": "v1el8+BryqHZrsbiQ1kMOyEn39he+bBpzMRbqqr6izg=",
+			"size": 1104
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-ssbi.woff2",
+			"hash": "vtUu8ocoKvepzAHkZUTw52+hQs553q/n3yppQRdWw8Y=",
+			"size": 4320
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-ssi.woff2",
+			"hash": "5Oq0pXyNqxL6oSzcF7qQvPyMo/OXWNHfGE6I/2GdQ6s=",
+			"size": 7764
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-sy.woff2",
+			"hash": "U5hh1pL9yJC993IUyUEoNLHTMAgw+RLZh2AZYfcXNP0=",
+			"size": 26192
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-syb.woff2",
+			"hash": "5U8rMo62aYYpuPXTS/LLOf9VwEGvEoS3TSofhlowK/c=",
+			"size": 8252
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-sybi.woff2",
+			"hash": "/EeuHRb44F/AatjoNRPX9wKxZ6wm1Uee/5JJDFGpxVQ=",
+			"size": 8676
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-syi.woff2",
+			"hash": "Y5pDnoSJZECYDNX2ENsjpA1DaM3oJUcC6Eyf/bP6m4o=",
+			"size": 8660
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-u.woff2",
+			"hash": "lV21xiDS+7SqMeBiiE/poej964BgraNz/TvNKUAJ0a8=",
+			"size": 3972
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-ud.woff2",
+			"hash": "sfaNdXmUdoDyftuTRgWSTD5eN30ud9UJ4ObEYl2d5zg=",
+			"size": 4092
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-v.woff2",
+			"hash": "gB25BEy+VDcHATGmaJHavlB8SCtq9rblo+FBkK8ZlU8=",
+			"size": 6296
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-vx.woff2",
+			"hash": "kXthV190wfBLRNWM9aVA8eH73Mmv3DwMBpMsRqd5Oqk=",
+			"size": 7252
+		},
+		{
+			"name": "/chtml/woff2/mjx-stx-zero.woff2",
+			"hash": "gQjLD+tSof87q4WKSvYSPIwM/KqsPx4QGpyhy4w0GSg=",
+			"size": 1000
+		},
+		{
+			"name": "/cjs/chtml.d.ts",
+			"hash": "ePXzFI2210pNn7T3UDyH2ziYdZcog8JRKnaulqibM6o=",
+			"size": 7820
+		},
+		{
+			"name": "/cjs/chtml.js",
+			"hash": "0vulRgBzhTMSgjvMazXo60c8CspH6NKO1CYH2rRaPOY=",
+			"size": 32587
+		},
+		{
+			"name": "/cjs/chtml.js.map",
+			"hash": "aLkXUqcxbybId1OGCiItBm6O3kky4hL5dsqrUSr0+DA=",
+			"size": 24903
+		},
+		{
+			"name": "/cjs/chtml/bold.d.ts",
+			"hash": "6GEuhAJQ+PGN4qR7619HCoK7Sa6ZCex48bNOZYOdBfY=",
+			"size": 141
+		},
+		{
+			"name": "/cjs/chtml/bold.js",
+			"hash": "hG/r/iH/T/RmLcCR8KDXii51bRf2qy39aNyuVbt36IQ=",
+			"size": 3811
+		},
+		{
+			"name": "/cjs/chtml/bold.js.map",
+			"hash": "ZXZWB78jdTx5LcEceMGFZ9iLc/wPy2fsmGMBbTX/+3o=",
+			"size": 6910
+		},
+		{
+			"name": "/cjs/chtml/bold-italic.d.ts",
+			"hash": "1jFVNvRbyYfE5OqMG2R6Z9w5gH6q+pv4eKuJ3lAVGiw=",
+			"size": 147
+		},
+		{
+			"name": "/cjs/chtml/bold-italic.js",
+			"hash": "ftBV9z26/iQABpfzfjtN4c/iEYuaAtQ7i+qPkiPsEzU=",
+			"size": 4702
+		},
+		{
+			"name": "/cjs/chtml/bold-italic.js.map",
+			"hash": "YxJCaQyfhFYqH6BDWCgvVxJ513YftYVmINy1cZra2bc=",
+			"size": 8664
+		},
+		{
+			"name": "/cjs/chtml/default.d.ts",
+			"hash": "40z/lYqSsbHrgMQIw/SGKA7eoWMtV04PuRnq36MgQQ0=",
+			"size": 76
+		},
+		{
+			"name": "/cjs/chtml/default.js",
+			"hash": "9nSrNPDaxapKZGCH51i1hSTiJFc7QcMNmDP5Uscef/c=",
+			"size": 272
+		},
+		{
+			"name": "/cjs/chtml/default.js.map",
+			"hash": "LhZxMCOVmOaCz37yLIhTxU+yPQlOWu9pmGTP2aRDT7Y=",
+			"size": 204
+		},
+		{
+			"name": "/cjs/chtml/delimiters.d.ts",
+			"hash": "xS6FluoJFzqCulBdrMx+KRZn5f+NQXoTeJnIp/QhSlM=",
+			"size": 151
+		},
+		{
+			"name": "/cjs/chtml/delimiters.js",
+			"hash": "vK/+mM2x1LdAoM7YXr0ZIgUket2K/UFSoPa3tgXQawc=",
+			"size": 31616
+		},
+		{
+			"name": "/cjs/chtml/delimiters.js.map",
+			"hash": "hyMILTClwbfY4HJ3J88qxMynAEIrkMwNQkKQMYb72A0=",
+			"size": 39477
+		},
+		{
+			"name": "/cjs/chtml/double-struck.d.ts",
+			"hash": "oTRFB5N6t4Ke0Un7hMlycy7SxdpuuByPYQcIvjsa59E=",
+			"size": 149
+		},
+		{
+			"name": "/cjs/chtml/double-struck.js",
+			"hash": "o1DJdkVrhb0qcDySXGa6NDZ1s5L6iGIabAc6D6JD8x8=",
+			"size": 176
+		},
+		{
+			"name": "/cjs/chtml/double-struck.js.map",
+			"hash": "XXLQ/EnDJdwm2C1rqbw0ZnbBGEMHOPYJkH023jjRLbI=",
+			"size": 160
+		},
+		{
+			"name": "/cjs/chtml/double-struck-italic.d.ts",
+			"hash": "Z6yyCiNlD+LGxxkgFwTB3/nEpkmNSWUVmDBqgansf4U=",
+			"size": 155
+		},
+		{
+			"name": "/cjs/chtml/double-struck-italic.js",
+			"hash": "p5+RxKHPHiTuiGN4aWCW7upx5sAwU0hddo4NCy2tQk8=",
+			"size": 2658
+		},
+		{
+			"name": "/cjs/chtml/double-struck-italic.js.map",
+			"hash": "7cK8J/dd/2OscYoyh/5NmXUr6sSlu1R5vvmph+M9CK8=",
+			"size": 4953
+		},
+		{
+			"name": "/cjs/chtml/dynamic/accents.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/cjs/chtml/dynamic/accents.js",
+			"hash": "crgeAUZ0EfJxiMjAyFH1n0CIpxsGpxhXklXLOlzU4HQ=",
+			"size": 6424
+		},
+		{
+			"name": "/cjs/chtml/dynamic/accents.js.map",
+			"hash": "mvW6auS29mnTDDe8ZN3Ve6h9QrzyrjhPo5DO5gin3iA=",
+			"size": 9889
+		},
+		{
+			"name": "/cjs/chtml/dynamic/accents-other.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/cjs/chtml/dynamic/accents-other.js",
+			"hash": "cHT+fasq1UCh+Opu1+Il/bps2Z49cDJz5SifUD2WPvQ=",
+			"size": 18121
+		},
+		{
+			"name": "/cjs/chtml/dynamic/accents-other.js.map",
+			"hash": "j1bbqxLTdhamwffedYIpzc49EFKVLiejHkAmUyHjoPw=",
+			"size": 28464
+		},
+		{
+			"name": "/cjs/chtml/dynamic/arrows.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/cjs/chtml/dynamic/arrows.js",
+			"hash": "TzmIGAV7Qi9f6BeQWXar6wH9K54eEpuN/vF76uzGHAQ=",
+			"size": 7606
+		},
+		{
+			"name": "/cjs/chtml/dynamic/arrows.js.map",
+			"hash": "zyYUd5FhwyJhqO89BfF9F/Ev9ARDZ/BaeC+MpLvfvRA=",
+			"size": 9881
+		},
+		{
+			"name": "/cjs/chtml/dynamic/calligraphic.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/cjs/chtml/dynamic/calligraphic.js",
+			"hash": "GhGkdwCLAIvskG+nnkYuNhjld+dzNrI7Dg7NxKXCs8o=",
+			"size": 6417
+		},
+		{
+			"name": "/cjs/chtml/dynamic/calligraphic.js.map",
+			"hash": "n/Z/uEwjN0seJPj6+F1aHrkkp+q1FvBeqTQu4KdDh2M=",
+			"size": 9871
+		},
+		{
+			"name": "/cjs/chtml/dynamic/cyrillic.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/cjs/chtml/dynamic/cyrillic.js",
+			"hash": "0pDjnvlIfM32Wo0rgtYXrxB5zDIPrJhWL4i6RyroKIc=",
+			"size": 18687
+		},
+		{
+			"name": "/cjs/chtml/dynamic/cyrillic.js.map",
+			"hash": "s3jm5Hseb009BI1ObEKFIflYbDiFvhGu4zv0vg3Fb1I=",
+			"size": 26893
+		},
+		{
+			"name": "/cjs/chtml/dynamic/dingbats.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/cjs/chtml/dynamic/dingbats.js",
+			"hash": "Vyxpyi/AzMgR3iuPXxO4UasFrAlRBD5A5XPkGQ/NwN0=",
+			"size": 10695
+		},
+		{
+			"name": "/cjs/chtml/dynamic/dingbats.js.map",
+			"hash": "mqir7clAtCESxr1sDs7Amv0sX8c17LvWChVrMAOuGT0=",
+			"size": 13871
+		},
+		{
+			"name": "/cjs/chtml/dynamic/double-struck.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/cjs/chtml/dynamic/double-struck.js",
+			"hash": "lpbo2y1GGkrh4P6Ah3D470eHNt4WSjdGsE1ljRoYMKE=",
+			"size": 3959
+		},
+		{
+			"name": "/cjs/chtml/dynamic/double-struck.js.map",
+			"hash": "px8wPtyb1JWik+0viPNIUx9oj0EgjtiMtERS6bBs4RY=",
+			"size": 5498
+		},
+		{
+			"name": "/cjs/chtml/dynamic/enclosed.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/cjs/chtml/dynamic/enclosed.js",
+			"hash": "8Vrabgpd/CC08KaYNiG4Oq1S4awbH6Rr1bBEfoknQRg=",
+			"size": 8051
+		},
+		{
+			"name": "/cjs/chtml/dynamic/enclosed.js.map",
+			"hash": "PJi3Yl5UdB0H5z3In0sEQkZ1QsRm2rNpnY3e9xByIZQ=",
+			"size": 10009
+		},
+		{
+			"name": "/cjs/chtml/dynamic/fraktur.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/cjs/chtml/dynamic/fraktur.js",
+			"hash": "cYRJ34c+WtCrqD2PaOUpopn9gL63XxnCV2pVZYDI42c=",
+			"size": 6012
+		},
+		{
+			"name": "/cjs/chtml/dynamic/fraktur.js.map",
+			"hash": "wAiIVxsgPBlU0gCM8EvWMiPBauYnPGcmkvDBXeiILBY=",
+			"size": 8350
+		},
+		{
+			"name": "/cjs/chtml/dynamic/greek.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/cjs/chtml/dynamic/greek.js",
+			"hash": "kmnrh/Blx7G3I0IPdzxP8GLKeIN8ID8hOBUWVbgzlTE=",
+			"size": 6632
+		},
+		{
+			"name": "/cjs/chtml/dynamic/greek.js.map",
+			"hash": "ntYnBlDAgtKLMHX7lYVtfkt1O2ByTqQe0885205SOZE=",
+			"size": 9326
+		},
+		{
+			"name": "/cjs/chtml/dynamic/latin.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/cjs/chtml/dynamic/latin.js",
+			"hash": "J0gX5dD3WuMyhYdgmkUgY4O5cvSrdWrF/EYHHRsWIl0=",
+			"size": 19936
+		},
+		{
+			"name": "/cjs/chtml/dynamic/latin.js.map",
+			"hash": "2vml3AKK4U4l/jU089VyFtrwt06bPaZHWSdHNQLjLoM=",
+			"size": 27277
+		},
+		{
+			"name": "/cjs/chtml/dynamic/latin-b.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/cjs/chtml/dynamic/latin-b.js",
+			"hash": "XiU/7wi68BCh9OO1Ej5QdNDHaHll4MOjDZtv8MnBows=",
+			"size": 20291
+		},
+		{
+			"name": "/cjs/chtml/dynamic/latin-b.js.map",
+			"hash": "PQsvhzgUpDS5T19Yp/agNZZG5GA5dWs4usOTS3Rzroc=",
+			"size": 28100
+		},
+		{
+			"name": "/cjs/chtml/dynamic/latin-bi.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/cjs/chtml/dynamic/latin-bi.js",
+			"hash": "JakNmSFcvXEA6xZnctz0chLVgTqjDmVFSTEu+ClrS1E=",
+			"size": 22760
+		},
+		{
+			"name": "/cjs/chtml/dynamic/latin-bi.js.map",
+			"hash": "KK1cftqmXvtKVpYEiw0tIN3IR4FlG/2wN0EnrjM2oe4=",
+			"size": 33052
+		},
+		{
+			"name": "/cjs/chtml/dynamic/latin-i.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/cjs/chtml/dynamic/latin-i.js",
+			"hash": "NA1VPWQGWWJe82aZevYPv7/9MW9Jf+qKXpQZiC10LDM=",
+			"size": 22604
+		},
+		{
+			"name": "/cjs/chtml/dynamic/latin-i.js.map",
+			"hash": "wlwQz0ytevwtg1FwvkctaCSpx4cL62HdTkdFF1Teg4M=",
+			"size": 32660
+		},
+		{
+			"name": "/cjs/chtml/dynamic/math.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/cjs/chtml/dynamic/math.js",
+			"hash": "FpNQZ5POmIn7qBOSPJnncm4KW0+24R3KzIe0/cjN+9c=",
+			"size": 16148
+		},
+		{
+			"name": "/cjs/chtml/dynamic/math.js.map",
+			"hash": "2O4rCyw1YbDdB0sjsQASL4vdBm3Y24hdhjyVzzsrPdQ=",
+			"size": 20961
+		},
+		{
+			"name": "/cjs/chtml/dynamic/monospace.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/cjs/chtml/dynamic/monospace.js",
+			"hash": "sAP5A2EhgX2zh8xiWSb/jIal7SSD9rlwNsjgVFwLwBc=",
+			"size": 3149
+		},
+		{
+			"name": "/cjs/chtml/dynamic/monospace.js.map",
+			"hash": "jG49JBQhJBOuR75X4JtUn6yEffuuFSMAgFwSyxp5ytA=",
+			"size": 4320
+		},
+		{
+			"name": "/cjs/chtml/dynamic/phonetics.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/cjs/chtml/dynamic/phonetics.js",
+			"hash": "avbY9UyjpumYFDDQiim/rcIAFnn//1UypT8V5Yb9VA0=",
+			"size": 19201
+		},
+		{
+			"name": "/cjs/chtml/dynamic/phonetics.js.map",
+			"hash": "cwDhdamXhMKLUZDhx5hgY7+SgKsqs550rW1A2X15UC4=",
+			"size": 27115
+		},
+		{
+			"name": "/cjs/chtml/dynamic/sans-serif.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/cjs/chtml/dynamic/sans-serif.js",
+			"hash": "J2tgy68UREDTMh4ktb1jukROoXaA1uDp2PV6spyk91c=",
+			"size": 15652
+		},
+		{
+			"name": "/cjs/chtml/dynamic/sans-serif.js.map",
+			"hash": "7LMAjS6aQeJ6GoRUN6641vlwTdMsf53SD4uRvl0Fdq8=",
+			"size": 23349
+		},
+		{
+			"name": "/cjs/chtml/dynamic/script.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/cjs/chtml/dynamic/script.js",
+			"hash": "QW37AkBYibEr40sSjXnkFnMdVndOiJy+/S5dHXrY2Gk=",
+			"size": 6806
+		},
+		{
+			"name": "/cjs/chtml/dynamic/script.js.map",
+			"hash": "m8//wtvyOhhUabbtzV0fonOijHeQElXz6DyuJyDMEeA=",
+			"size": 9935
+		},
+		{
+			"name": "/cjs/chtml/dynamic/shapes.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/cjs/chtml/dynamic/shapes.js",
+			"hash": "RiFxc0FcoX+Q7KaWyGNML2/6mr5GcyMuPTT4cixGKgE=",
+			"size": 18805
+		},
+		{
+			"name": "/cjs/chtml/dynamic/shapes.js.map",
+			"hash": "eTk0y7Ti8siegTjlTZMSGGd28SrEMzP9xqhx489nzq4=",
+			"size": 24615
+		},
+		{
+			"name": "/cjs/chtml/dynamic/stretchy.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/cjs/chtml/dynamic/stretchy.js",
+			"hash": "GQ7rbyCdfgoI+QFWcfjf7ncsGy2JpnXJ30tY1DU+sfA=",
+			"size": 10504
+		},
+		{
+			"name": "/cjs/chtml/dynamic/stretchy.js.map",
+			"hash": "/lRylg7vtZqA1TJyMXcz8hAuGSQqhScpCmVYbgBRcbU=",
+			"size": 12737
+		},
+		{
+			"name": "/cjs/chtml/dynamic/symbols.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/cjs/chtml/dynamic/symbols.js",
+			"hash": "/+bZ5Hespga8KJj1kfL/dRv2hdJIC/dD76Z1bI/nwok=",
+			"size": 14803
+		},
+		{
+			"name": "/cjs/chtml/dynamic/symbols.js.map",
+			"hash": "EHwYyueWh1gT+t2o2nZALC4bR/rHtq+FwfUnmV9lldE=",
+			"size": 19612
+		},
+		{
+			"name": "/cjs/chtml/dynamic/symbols-other.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/cjs/chtml/dynamic/symbols-other.js",
+			"hash": "a7lLZgSk0FyfnfRZyzgjn3UIH2InODOaEBpC3LJ2tmo=",
+			"size": 14625
+		},
+		{
+			"name": "/cjs/chtml/dynamic/symbols-other.js.map",
+			"hash": "/e7nsKgvfKXBd68hlL5B8hToHxgMg01ccGkGQOg+2+A=",
+			"size": 20052
+		},
+		{
+			"name": "/cjs/chtml/dynamic/upright.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/cjs/chtml/dynamic/upright.js",
+			"hash": "N11PhqSNDd+qmNMe0XxpcMnIn3rF1x623VX1zpe1h+0=",
+			"size": 2666
+		},
+		{
+			"name": "/cjs/chtml/dynamic/upright.js.map",
+			"hash": "rnOmp/eokKbtEufQttyl92qT6rLFwlyCtBCBADgqLfo=",
+			"size": 3181
+		},
+		{
+			"name": "/cjs/chtml/dynamic/variants.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/cjs/chtml/dynamic/variants.js",
+			"hash": "nw6l33zJUfQMzq1KLt1Ps4YTSYimmGQF9mDb+UC7vt0=",
+			"size": 4712
+		},
+		{
+			"name": "/cjs/chtml/dynamic/variants.js.map",
+			"hash": "ejqqs80PvLJS4ltSKB7Ti/YDUSKOdSI9pTSekny/HmE=",
+			"size": 6416
+		},
+		{
+			"name": "/cjs/chtml/extend.d.ts",
+			"hash": "cCjTjSIdLBL/plJgLWqX3GDqY/Fu61JQegWAf72GiDE=",
+			"size": 143
+		},
+		{
+			"name": "/cjs/chtml/extend.js",
+			"hash": "hqVE0ifH57q3KqdFmO1qmOSu/k6sUU4CLld4wYAqaNI=",
+			"size": 1775
+		},
+		{
+			"name": "/cjs/chtml/extend.js.map",
+			"hash": "CLDHAC65uwpSrjZh7aJ/U9m44SEFQIx9Mig4qZopmN4=",
+			"size": 2936
+		},
+		{
+			"name": "/cjs/chtml/fraktur.d.ts",
+			"hash": "h21tpsf3cG14Q64ebmruXh+Ru0Gk5GABMJtsRpw+7jw=",
+			"size": 144
+		},
+		{
+			"name": "/cjs/chtml/fraktur.js",
+			"hash": "fbzOmpfNkFEJbewr5VH63buOClnybsXRIx/baVMF784=",
+			"size": 160
+		},
+		{
+			"name": "/cjs/chtml/fraktur.js.map",
+			"hash": "BhSK43EmiyAMc7mBTziV246AzJrdLBJ381IIS2VgtsI=",
+			"size": 148
+		},
+		{
+			"name": "/cjs/chtml/fraktur-bold.d.ts",
+			"hash": "xH3FLLP8MwhkNmLZKVorOVjxVkHYBqBajTzDfiHR1TI=",
+			"size": 148
+		},
+		{
+			"name": "/cjs/chtml/fraktur-bold.js",
+			"hash": "M9O8FoAJmlQfvdXp4oWVpb+uxYAiDF7TQ+Vtc6Rsyzs=",
+			"size": 173
+		},
+		{
+			"name": "/cjs/chtml/fraktur-bold.js.map",
+			"hash": "iUSoydVjBQvq4gmP/6p5+XGcp1Hkerw9w8f0K1I3lHQ=",
+			"size": 158
+		},
+		{
+			"name": "/cjs/chtml/italic.d.ts",
+			"hash": "LPKrTFb48H8slgKBiIf3HC2NTIs7okVnl8gCDVp1icA=",
+			"size": 143
+		},
+		{
+			"name": "/cjs/chtml/italic.js",
+			"hash": "cpxi/bkYZBnRlj/ESZfG04OoQGMJEHSkZBVzNHKQ6sk=",
+			"size": 4659
+		},
+		{
+			"name": "/cjs/chtml/italic.js.map",
+			"hash": "WrLJz4+csHKh4OXleOGDv/wVp8RNMptwm/F9SRUnX3E=",
+			"size": 8603
+		},
+		{
+			"name": "/cjs/chtml/largeop.d.ts",
+			"hash": "n2H8/AMDggoQQc0i/dsB9ArNVfwx0Am/dl2LVqrOaW8=",
+			"size": 144
+		},
+		{
+			"name": "/cjs/chtml/largeop.js",
+			"hash": "MwH7pwHGp1Sw4cdFgSElICqPRswUOlbppNHCo4INX40=",
+			"size": 3590
+		},
+		{
+			"name": "/cjs/chtml/largeop.js.map",
+			"hash": "A5GaaE5LLxOTlPGC3edywbja882vzR22hMkXsHI/fVA=",
+			"size": 5942
+		},
+		{
+			"name": "/cjs/chtml/monospace.d.ts",
+			"hash": "a65BfPOZlFDVyHnEPNn4VWj//03tLKd+mZ+F+KRzibA=",
+			"size": 146
+		},
+		{
+			"name": "/cjs/chtml/monospace.js",
+			"hash": "N1c1ljs4B2HJwg0W0BJvImjpIh3eXwZI1qAio8qiGtg=",
+			"size": 166
+		},
+		{
+			"name": "/cjs/chtml/monospace.js.map",
+			"hash": "hIaWRsSvqv2lO2EjEyLcjjeI7Ja4eW6CVa+TI+2Ys2U=",
+			"size": 152
+		},
+		{
+			"name": "/cjs/chtml/normal.d.ts",
+			"hash": "4nVq4uG4CizPeoD2/2C0glCN651eSuacvdknfmbeC/E=",
+			"size": 143
+		},
+		{
+			"name": "/cjs/chtml/normal.js",
+			"hash": "6Q5hmUdEJSn+tPj3VILIF/y7mSEBbdxJmMuzcI1rARE=",
+			"size": 47749
+		},
+		{
+			"name": "/cjs/chtml/normal.js.map",
+			"hash": "loWgJ4edNuSjmC7affKmNxLMgA505jcKiTYNnA56zmo=",
+			"size": 83601
+		},
+		{
+			"name": "/cjs/chtml/sans-serif.d.ts",
+			"hash": "N02MEKbyT+2/dVR6NDh4jt75MAQ5QcKqEOxdYhGtniU=",
+			"size": 146
+		},
+		{
+			"name": "/cjs/chtml/sans-serif.js",
+			"hash": "s2UZBKpgurJzp7MLXyO/GIzR7Te/CRcsWtb/WMKWYYc=",
+			"size": 167
+		},
+		{
+			"name": "/cjs/chtml/sans-serif.js.map",
+			"hash": "4O9NW2ScIAt1ZZK9ISvilKtpjvauPeLa/I4pFIN/2Fg=",
+			"size": 154
+		},
+		{
+			"name": "/cjs/chtml/sans-serif-bold.d.ts",
+			"hash": "pMfiJcCE2AB4t0kWR6sU/ATfXvwXkRHPXFMjMX5LYGE=",
+			"size": 150
+		},
+		{
+			"name": "/cjs/chtml/sans-serif-bold.js",
+			"hash": "MJnuIDS4z9zKNBlTKIzMaODIKOFfatBVlxZ3eu8epEI=",
+			"size": 180
+		},
+		{
+			"name": "/cjs/chtml/sans-serif-bold.js.map",
+			"hash": "IARQdxsx6e3wrQyD0O3xGiQCrRvcgU+0WtASiZaU+F8=",
+			"size": 164
+		},
+		{
+			"name": "/cjs/chtml/sans-serif-bold-italic.d.ts",
+			"hash": "F+4grFGiBs/WPLGxmPLjfw3H8VrDt2pNewcqOdN+UeE=",
+			"size": 156
+		},
+		{
+			"name": "/cjs/chtml/sans-serif-bold-italic.js",
+			"hash": "AUbn0/th3q1dGZKTl/Jif7T2i+NrCAN3CoW+oJhpfo4=",
+			"size": 199
+		},
+		{
+			"name": "/cjs/chtml/sans-serif-bold-italic.js.map",
+			"hash": "9H1kuBK9EPZl51+ZOSFVxRUagW8wBhlVWB13JCMt/q4=",
+			"size": 180
+		},
+		{
+			"name": "/cjs/chtml/sans-serif-italic.d.ts",
+			"hash": "vL9dJqdVA9kZun43Ltqb7hcIlNorTf3BTKsTJR9EVms=",
+			"size": 152
+		},
+		{
+			"name": "/cjs/chtml/sans-serif-italic.js",
+			"hash": "sEija5on0BgPq2icVP6QP7DWBtpvql1HjhEUKQzlCIk=",
+			"size": 186
+		},
+		{
+			"name": "/cjs/chtml/sans-serif-italic.js.map",
+			"hash": "umkrDp53qOwHgQfNMfsZ3sXNWHSS26JQozbuzkjKQ/g=",
+			"size": 168
+		},
+		{
+			"name": "/cjs/chtml/script.d.ts",
+			"hash": "Vl8Q25KGhj7pHI51yWIYIJUBzhuZpjDvp09Hq5vqZe4=",
+			"size": 143
+		},
+		{
+			"name": "/cjs/chtml/script.js",
+			"hash": "KqkyXvq8FZaoauJ9u6O8AZ4QuGzuZhaYKjvjteAqQFc=",
+			"size": 157
+		},
+		{
+			"name": "/cjs/chtml/script.js.map",
+			"hash": "Jv9LRYtARjopuS8HzunIZUYl8PgXXhOT91qqtwHQTVU=",
+			"size": 146
+		},
+		{
+			"name": "/cjs/chtml/script-bold.d.ts",
+			"hash": "GhoVNK56PMI1S60hEdvFx/ZJQFWsP8B3SrnlNdplk4M=",
+			"size": 147
+		},
+		{
+			"name": "/cjs/chtml/script-bold.js",
+			"hash": "SV1sD9Rqqrx0CrTLzpYqb+ICcGybkIbzrjsrr58Y8TA=",
+			"size": 170
+		},
+		{
+			"name": "/cjs/chtml/script-bold.js.map",
+			"hash": "Mvd/wjUU6OqnV2jl5i614VthSM8rGxF0MaWDivkzZwM=",
+			"size": 156
+		},
+		{
+			"name": "/cjs/chtml/size3.d.ts",
+			"hash": "FluKGai8xHG98GleNo9ZMXGIlp775KNXEbpvk7T7enQ=",
+			"size": 142
+		},
+		{
+			"name": "/cjs/chtml/size3.js",
+			"hash": "0Xxi+bKcmOf5LpNfbjMQCho8QHOny9X7PBsgrJWfXQA=",
+			"size": 1628
+		},
+		{
+			"name": "/cjs/chtml/size3.js.map",
+			"hash": "LXMRFhqS9JV+QTY3ITTFoN5gWT6xT8WYHI6hKysKsYs=",
+			"size": 2614
+		},
+		{
+			"name": "/cjs/chtml/size4.d.ts",
+			"hash": "yEXh1BSaudz96Pl4ZSbVESPinZvrl2/qKJbrLRzDUC4=",
+			"size": 142
+		},
+		{
+			"name": "/cjs/chtml/size4.js",
+			"hash": "6smZUl6jOZYvM7kOoDfud2WUJA0IbaUllYtxcGDbe38=",
+			"size": 1610
+		},
+		{
+			"name": "/cjs/chtml/size4.js.map",
+			"hash": "ujygYU662JX6SI9Tqnb/z6SKFUqTpTsccFIjapfTXuc=",
+			"size": 2584
+		},
+		{
+			"name": "/cjs/chtml/size5.d.ts",
+			"hash": "mMdN0Oq3J2+kJv6nsDaM0RSj2aldd5DpIFD8hf3a67k=",
+			"size": 142
+		},
+		{
+			"name": "/cjs/chtml/size5.js",
+			"hash": "0fNt/DFcGQZ9TR8q20CCTkoHjCcB5YVMcAQu27XPMZc=",
+			"size": 1509
+		},
+		{
+			"name": "/cjs/chtml/size5.js.map",
+			"hash": "Uy9SkzwGQUwgjzn1mvAgZKq+5PTqwBPdltsWctLehCo=",
+			"size": 2431
+		},
+		{
+			"name": "/cjs/chtml/size6.d.ts",
+			"hash": "c1OwT0jzP+DmxtE/NZWVRvsRD8JEqXkqJYeyle0a2b8=",
+			"size": 142
+		},
+		{
+			"name": "/cjs/chtml/size6.js",
+			"hash": "zcBSCImwucgcLFN2AoKehePBIjJrh8rUsNkNxZgevwU=",
+			"size": 534
+		},
+		{
+			"name": "/cjs/chtml/size6.js.map",
+			"hash": "ytLtDUH5YjSvHAvNm4yf2GJt9OB89cpWM9NJ/D8CMNs=",
+			"size": 756
+		},
+		{
+			"name": "/cjs/chtml/size7.d.ts",
+			"hash": "YtWATVY2dC1AFT1mVHxckOAo+LOEFG6Z6uN64QJe40s=",
+			"size": 142
+		},
+		{
+			"name": "/cjs/chtml/size7.js",
+			"hash": "XX1iP67BBEHpRUA9HwXQJGLS210nyJKWiJijQBpPDzA=",
+			"size": 544
+		},
+		{
+			"name": "/cjs/chtml/size7.js.map",
+			"hash": "0v0ugOsR4kAsHRoVhKW/fqg7m1G+CU/iDt6sR7tEMMQ=",
+			"size": 756
+		},
+		{
+			"name": "/cjs/chtml/size8.d.ts",
+			"hash": "SB6q8ArRF8d/vxGCL/ATeNJovWA5RVB6W4/dELa5DwE=",
+			"size": 142
+		},
+		{
+			"name": "/cjs/chtml/size8.js",
+			"hash": "wWRy5kZqXcssqQ+Nverl6bHtyVadi7V0xz1I5S35bpU=",
+			"size": 550
+		},
+		{
+			"name": "/cjs/chtml/size8.js.map",
+			"hash": "B+qWsU75D/QbfjdSTWGYWFvRa7bpfMCFl+pNKjidX04=",
+			"size": 756
+		},
+		{
+			"name": "/cjs/chtml/size9.d.ts",
+			"hash": "JKEG2OLqLvDZy5HZCYCLXWJqSPrgDkD26jlulc0PAl0=",
+			"size": 142
+		},
+		{
+			"name": "/cjs/chtml/size9.js",
+			"hash": "40JNwPfTwrMnLRgX/w/8H+WME/vbSkzU5fiq2WLb2Bo=",
+			"size": 534
+		},
+		{
+			"name": "/cjs/chtml/size9.js.map",
+			"hash": "C/egy8/kOqtS/typj9CfiNDcrEmzFtXJPc+/RaSG+uc=",
+			"size": 756
+		},
+		{
+			"name": "/cjs/chtml/size10.d.ts",
+			"hash": "+wEF3JgX5+BamfVRl7KxvST6Frfk3+b2zwxVdNlXJy4=",
+			"size": 143
+		},
+		{
+			"name": "/cjs/chtml/size10.js",
+			"hash": "vpkgK3hbuG/hXdaJyMO3tbWp5nUu7+sEJOiZXOXwNvc=",
+			"size": 531
+		},
+		{
+			"name": "/cjs/chtml/size10.js.map",
+			"hash": "2eYb93kcmN/6Yd/Hu9jQQheX85EV/KJKIITGAGXsoeI=",
+			"size": 758
+		},
+		{
+			"name": "/cjs/chtml/size11.d.ts",
+			"hash": "0M2v27kRudh4EI0eSusiPZnTSvX57iTyS9Jo8owqb3E=",
+			"size": 143
+		},
+		{
+			"name": "/cjs/chtml/size11.js",
+			"hash": "jFOI71TudGYINLBkI/xVm7jNIDZV4tScbZ34Xq8nWeI=",
+			"size": 539
+		},
+		{
+			"name": "/cjs/chtml/size11.js.map",
+			"hash": "QNsYbQuSctjutp9l7kJ7TZYahiz/Z2g4AP2jSYoF+bE=",
+			"size": 758
+		},
+		{
+			"name": "/cjs/chtml/size12.d.ts",
+			"hash": "QE1A6/y+fVo83XuHuGvw0r8dUl1HWkBh8AAfWXE/wEM=",
+			"size": 143
+		},
+		{
+			"name": "/cjs/chtml/size12.js",
+			"hash": "erLhkc7yUkPTbY9GcvBqtLAo6YUO0IZuVHwoZHt3/tE=",
+			"size": 541
+		},
+		{
+			"name": "/cjs/chtml/size12.js.map",
+			"hash": "vetpcudfmGsFJ6it2otFqc3yBrjL1w2QK8qeGqZ+8OA=",
+			"size": 758
+		},
+		{
+			"name": "/cjs/chtml/smallop.d.ts",
+			"hash": "a1YigNxDMQ2Yxv62DMmgd/EdW6wprabB2TUqTbUUweE=",
+			"size": 144
+		},
+		{
+			"name": "/cjs/chtml/smallop.js",
+			"hash": "0urP6SEhlHMQGqmzmPvd7fxZVIyfdneoamwoFPN0Gf0=",
+			"size": 1694
+		},
+		{
+			"name": "/cjs/chtml/smallop.js.map",
+			"hash": "B2yMOsHU4mYqChEmA0k8nrKfrJ2TYd0U4xiegwQUdM8=",
+			"size": 2822
+		},
+		{
+			"name": "/cjs/chtml/tex-calligraphic.d.ts",
+			"hash": "EgxJRruT/VbFH9DeYzfOUJGnmVscOhWOT3eiaJUZnIc=",
+			"size": 152
+		},
+		{
+			"name": "/cjs/chtml/tex-calligraphic.js",
+			"hash": "F1Og/OYsRN0/oX2f17IWWofEBPY+QztieeMZSh1LNAo=",
+			"size": 185
+		},
+		{
+			"name": "/cjs/chtml/tex-calligraphic.js.map",
+			"hash": "1emiaqxETmRua1veTZ5k7/rKWvZNaRkIJHfZKmdjiKY=",
+			"size": 166
+		},
+		{
+			"name": "/cjs/chtml/tex-calligraphic-bold.d.ts",
+			"hash": "sV3V6XiMLxri2YpwfCri1vIrroPNoGHsoZv9+6WYyf4=",
+			"size": 156
+		},
+		{
+			"name": "/cjs/chtml/tex-calligraphic-bold.js",
+			"hash": "hvdxOktKFO7wZ/ss/sIOKZeXENrP8bFcIA0FIJ/uadE=",
+			"size": 198
+		},
+		{
+			"name": "/cjs/chtml/tex-calligraphic-bold.js.map",
+			"hash": "AFXUqCnm2M70Lrt3O1yh9eGHL/Ikmv9zxwtdYpd2vhw=",
+			"size": 178
+		},
+		{
+			"name": "/cjs/chtml/tex-mathit.d.ts",
+			"hash": "dmNlOPODZEI9t+IxehCV29l6AVxl55rLg7Xp0XG7R/E=",
+			"size": 146
+		},
+		{
+			"name": "/cjs/chtml/tex-mathit.js",
+			"hash": "CCdyLyJTci5IbII/8YVTmNdU4S7iYvpfGYZLxL6W/uo=",
+			"size": 2326
+		},
+		{
+			"name": "/cjs/chtml/tex-mathit.js.map",
+			"hash": "xLJ163Io8YXLH7uiAk9whoz2F7LH9YrsKNqBGql16/k=",
+			"size": 4126
+		},
+		{
+			"name": "/cjs/chtml/tex-oldstyle.d.ts",
+			"hash": "nAXABMixAuccdR3MiJyfuvkmbnq0kqqmuX+mq6FOHgU=",
+			"size": 148
+		},
+		{
+			"name": "/cjs/chtml/tex-oldstyle.js",
+			"hash": "E7MljBtyAPRjUc007X4xyjuJou9uGxxGpwcUv8YNivM=",
+			"size": 467
+		},
+		{
+			"name": "/cjs/chtml/tex-oldstyle.js.map",
+			"hash": "+pWdMRllty8c4CjHnY+5ItlSJrI2OzaKGdAPs2Q82aE=",
+			"size": 668
+		},
+		{
+			"name": "/cjs/chtml/tex-oldstyle-bold.d.ts",
+			"hash": "hgIy8UfyK8xnSmPLHb33J4J0Sbof9TDRRLBY/bbEvZA=",
+			"size": 152
+		},
+		{
+			"name": "/cjs/chtml/tex-oldstyle-bold.js",
+			"hash": "/kCpwoLRvb5cQaA5svIC1RK5jiJg6e9NVQ3J1YxoLHw=",
+			"size": 480
+		},
+		{
+			"name": "/cjs/chtml/tex-oldstyle-bold.js.map",
+			"hash": "DUeXOuXAAr8CDc2BdQDxrsaiPfSHNrtlxdbRHQF9VxI=",
+			"size": 678
+		},
+		{
+			"name": "/cjs/chtml/tex-variant.d.ts",
+			"hash": "q0vxUCQJe9o6+o/5IQkDynKxuTgfQtNfPEWgoOXAqGk=",
+			"size": 147
+		},
+		{
+			"name": "/cjs/chtml/tex-variant.js",
+			"hash": "fRWUogCce9TyG17iWWvUSr/3k3tYm7W1mN3DMOjtpAA=",
+			"size": 3063
+		},
+		{
+			"name": "/cjs/chtml/tex-variant.js.map",
+			"hash": "ax2Ej/bmgPmemPIIAIxciBRMaTtXQSXoe4A2qjiTuI4=",
+			"size": 5027
+		},
+		{
+			"name": "/cjs/chtml/up.d.ts",
+			"hash": "Ye31EI65k2Dt5PA6ksc4qpbHKUUiU+45gG/lFlRUiQo=",
+			"size": 139
+		},
+		{
+			"name": "/cjs/chtml/up.js",
+			"hash": "vMo+GmAWlt6HQMm9dtgDFNJGOMebEE9ZFB8V90HfMxU=",
+			"size": 145
+		},
+		{
+			"name": "/cjs/chtml/up.js.map",
+			"hash": "NhfNgX3rPmODSa+bfxn18HZv2upgpyg9dih8KuknXJY=",
+			"size": 138
+		},
+		{
+			"name": "/cjs/chtml/up-dsp.d.ts",
+			"hash": "8tbrd/WASA7RMsFXSxVhjWhwIwve7uMwTrWJvojAz8k=",
+			"size": 142
+		},
+		{
+			"name": "/cjs/chtml/up-dsp.js",
+			"hash": "/LYyitlNlkgHysHQ3U4wyB5b9s1NB7Ydgq/kKyeoNn4=",
+			"size": 155
+		},
+		{
+			"name": "/cjs/chtml/up-dsp.js.map",
+			"hash": "iu4wEQwhTaODpYQe1sqaC20Ok2fxl7oOGwacZk9A9Ck=",
+			"size": 146
+		},
+		{
+			"name": "/cjs/common.d.ts",
+			"hash": "uTwK7oHxmMgQk7HA7Mh3GGZAr1fRufzovn6RxE6PyKA=",
+			"size": 315
+		},
+		{
+			"name": "/cjs/common.js",
+			"hash": "fFsJyQKbsxRqvo4G3Sf1dVHYbJF3qCyCBc5tQbwaGpQ=",
+			"size": 4747
+		},
+		{
+			"name": "/cjs/common.js.map",
+			"hash": "GGf6lquUUI0GtqlRPvc+2Jzu3TDei2MG443ZYPDsDEw=",
+			"size": 2179
+		},
+		{
+			"name": "/cjs/nofont.d.ts",
+			"hash": "40z/lYqSsbHrgMQIw/SGKA7eoWMtV04PuRnq36MgQQ0=",
+			"size": 76
+		},
+		{
+			"name": "/cjs/nofont.js",
+			"hash": "QU370L77O7wlrVljSWryctwS8FMcvxyMtZdv2Z7KLYQ=",
+			"size": 207
+		},
+		{
+			"name": "/cjs/nofont.js.map",
+			"hash": "QMjbdCbn8m2mjtiO9Nn0zqyuOBpZIF6bnp2gXFTk6LI=",
+			"size": 178
+		},
+		{
+			"name": "/cjs/package.json",
+			"hash": "gAWjSR232S82rGY2mGFYn5xHEj06fHHmQ/wsBhaM1Fo=",
+			"size": 25
+		},
+		{
+			"name": "/cjs/svg.d.ts",
+			"hash": "bdgQ3vtRZDC1TXjyigbJuZoAM2yxENi8Iu+ukB5q7mo=",
+			"size": 878
+		},
+		{
+			"name": "/cjs/svg.js",
+			"hash": "YJ1WLDm8pJLcsZ1u6Kurc+4gotQMGthgCHDkq3JkhXg=",
+			"size": 23639
+		},
+		{
+			"name": "/cjs/svg.js.map",
+			"hash": "Q5C0Qeufv6iWk5/0VeJLEivHOe4RhuJtaLc+mJWTUDw=",
+			"size": 20930
+		},
+		{
+			"name": "/cjs/svg/bold.d.ts",
+			"hash": "PCd1TGUlnBSym2uAaVvw6p3DNksWppFlH4wVvYWwqHQ=",
+			"size": 135
+		},
+		{
+			"name": "/cjs/svg/bold.js",
+			"hash": "0867Jhc3pUqLcJ1V7V+L5DOh4Pi8SY3lkzZhryuk7D0=",
+			"size": 20331
+		},
+		{
+			"name": "/cjs/svg/bold.js.map",
+			"hash": "UaAQNLupCHYQVfm1KZAifq5uyaw14yuKQVHjJicycTU=",
+			"size": 10277
+		},
+		{
+			"name": "/cjs/svg/bold-italic.d.ts",
+			"hash": "7ji5QIXiZuIrAL2HW+L+FXdJYJp7wvmTNyPutnRoVbs=",
+			"size": 141
+		},
+		{
+			"name": "/cjs/svg/bold-italic.js",
+			"hash": "21ERBM02Hrnk4qL/kM2HJhxLDpH03JbaTp642htS6c0=",
+			"size": 23905
+		},
+		{
+			"name": "/cjs/svg/bold-italic.js.map",
+			"hash": "lzhxAsb6RleSD5YGoL0vYTPtDBV5T9gJDl7pxI5BIBw=",
+			"size": 11941
+		},
+		{
+			"name": "/cjs/svg/default.d.ts",
+			"hash": "40z/lYqSsbHrgMQIw/SGKA7eoWMtV04PuRnq36MgQQ0=",
+			"size": 76
+		},
+		{
+			"name": "/cjs/svg/default.js",
+			"hash": "Gfwew7HGAHjrO1vO1Ca1i0wjjIae70rfwvn7fIyDbrc=",
+			"size": 266
+		},
+		{
+			"name": "/cjs/svg/default.js.map",
+			"hash": "qZ8M1UVfawqufYem+czoHVFFqCvmc+7iAougnBK5QmY=",
+			"size": 202
+		},
+		{
+			"name": "/cjs/svg/delimiters.d.ts",
+			"hash": "Q692qf3Q0Jw3IFDLwRQA1yMgA6GEHyxFjNUkxTOeaUk=",
+			"size": 149
+		},
+		{
+			"name": "/cjs/svg/delimiters.js",
+			"hash": "Kc/vSuQL1+kw+t5XiZVzXZAR4vqEEFDGREGxLnkrPDQ=",
+			"size": 31260
+		},
+		{
+			"name": "/cjs/svg/delimiters.js.map",
+			"hash": "yNG42LO7GV5tEOVXjZIf3wfYcHliqWbhKftDR6iNufA=",
+			"size": 39115
+		},
+		{
+			"name": "/cjs/svg/double-struck.d.ts",
+			"hash": "G81lknWOpKDutr9sv2pMzmp6/dalFDmQ4VFLmWd2ZQA=",
+			"size": 143
+		},
+		{
+			"name": "/cjs/svg/double-struck.js",
+			"hash": "o1DJdkVrhb0qcDySXGa6NDZ1s5L6iGIabAc6D6JD8x8=",
+			"size": 176
+		},
+		{
+			"name": "/cjs/svg/double-struck.js.map",
+			"hash": "lbhJf7S0qWddO6mxHUi5cnqMxwmwcaO3MnC9kDxloMk=",
+			"size": 158
+		},
+		{
+			"name": "/cjs/svg/double-struck-italic.d.ts",
+			"hash": "JbbJbyda46lv7LXZXlpXIMnzKMuM4oYCpwA9W24RFYs=",
+			"size": 149
+		},
+		{
+			"name": "/cjs/svg/double-struck-italic.js",
+			"hash": "GBYjLv+qdZr5qmI8cmrRH2swi33ve/k1BBIMcUopWVo=",
+			"size": 14670
+		},
+		{
+			"name": "/cjs/svg/double-struck-italic.js.map",
+			"hash": "LukHQqbUAx6f0g4+GvA4T/GEXCamMrGm6jPHBLHPsG0=",
+			"size": 6098
+		},
+		{
+			"name": "/cjs/svg/dynamic/accents.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/cjs/svg/dynamic/accents.js",
+			"hash": "tQ2QJEWEj1pRTcVThOfhH7Aasc17ISFE8IPCp/gLVWQ=",
+			"size": 26505
+		},
+		{
+			"name": "/cjs/svg/dynamic/accents.js.map",
+			"hash": "P7YgxeSuVpAs2zDiQc8DVbbNPKWnIOUTXmFBPBSqiQo=",
+			"size": 13303
+		},
+		{
+			"name": "/cjs/svg/dynamic/accents-other.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/cjs/svg/dynamic/accents-other.js",
+			"hash": "xmS16giaLhsAlQre4V+iHD6zMqE0zXO9likruP194m0=",
+			"size": 74437
+		},
+		{
+			"name": "/cjs/svg/dynamic/accents-other.js.map",
+			"hash": "ekZ3xGft4AGmA9pBpjbY8nsj6ZMuQY3azwBXsKvU5gU=",
+			"size": 37896
+		},
+		{
+			"name": "/cjs/svg/dynamic/arrows.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/cjs/svg/dynamic/arrows.js",
+			"hash": "wATv2wvdkcdNZk6B5XisFqwn9WkRNUVLd+svJ7gmC9s=",
+			"size": 77147
+		},
+		{
+			"name": "/cjs/svg/dynamic/arrows.js.map",
+			"hash": "sQqYUbNqp4eA5qCjyYlI1OK+sbIodrEPXQFRzIq0uAI=",
+			"size": 15687
+		},
+		{
+			"name": "/cjs/svg/dynamic/calligraphic.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/cjs/svg/dynamic/calligraphic.js",
+			"hash": "T78BqopTv3hLPofHsTtLLGjbbsnietgjS/oUAfWAX/0=",
+			"size": 53754
+		},
+		{
+			"name": "/cjs/svg/dynamic/calligraphic.js.map",
+			"hash": "LyVlRVufKcokRTEpGS2TRXnWnigJBIdaTyHlhFMNRqE=",
+			"size": 12257
+		},
+		{
+			"name": "/cjs/svg/dynamic/cyrillic.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/cjs/svg/dynamic/cyrillic.js",
+			"hash": "0o01p9OjswlGDNepmA9FMVeYRI/q5YdgSAUMum4jXf8=",
+			"size": 177893
+		},
+		{
+			"name": "/cjs/svg/dynamic/cyrillic.js.map",
+			"hash": "WfNrqLIMDevAbHNtSNimLJfT04R4Nnhq8d7UpuIgjM0=",
+			"size": 38896
+		},
+		{
+			"name": "/cjs/svg/dynamic/dingbats.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/cjs/svg/dynamic/dingbats.js",
+			"hash": "EbB143NK3wVOHPmtNGxE5E0A7UJQTP7BcDbP8v11G/I=",
+			"size": 141420
+		},
+		{
+			"name": "/cjs/svg/dynamic/dingbats.js.map",
+			"hash": "hzX+/rsitzp1SrL+3Khxy1quUv0wHjyFhfv1S9U2Niw=",
+			"size": 22440
+		},
+		{
+			"name": "/cjs/svg/dynamic/double-struck.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/cjs/svg/dynamic/double-struck.js",
+			"hash": "mLzaNraPiHlm5JXS9NZkxvZafQzIVNe7Cx9lDv1gQuQ=",
+			"size": 21422
+		},
+		{
+			"name": "/cjs/svg/dynamic/double-struck.js.map",
+			"hash": "OUbO7+wjlnEFygXbOjXVqUidMjjoeoHH8iff8Y0P34U=",
+			"size": 7386
+		},
+		{
+			"name": "/cjs/svg/dynamic/enclosed.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/cjs/svg/dynamic/enclosed.js",
+			"hash": "81sQxzKiaXftMYQxMIKqLcHhy9pmwqCycz0ROEK63V4=",
+			"size": 103246
+		},
+		{
+			"name": "/cjs/svg/dynamic/enclosed.js.map",
+			"hash": "MinFBBG8N7+AKTMqFkZ0yKt5GM+UPsl6Rq1xOgUBXRE=",
+			"size": 16269
+		},
+		{
+			"name": "/cjs/svg/dynamic/fraktur.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/cjs/svg/dynamic/fraktur.js",
+			"hash": "gl7rFoH6ac3iMhFsW8uGZIlvsNARm2YF65ScfQtFZQ8=",
+			"size": 57691
+		},
+		{
+			"name": "/cjs/svg/dynamic/fraktur.js.map",
+			"hash": "yox3RyFSJbtblCQBDrf34jEBJ2c1xygQnda8SZX1xrU=",
+			"size": 11027
+		},
+		{
+			"name": "/cjs/svg/dynamic/greek.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/cjs/svg/dynamic/greek.js",
+			"hash": "cPGMT0L8K9GYcyo2hETJXGgw/vtqttFpgvLbl6u9HQE=",
+			"size": 51031
+		},
+		{
+			"name": "/cjs/svg/dynamic/greek.js.map",
+			"hash": "Lenp7M06RCNBNfVVc2v6rOrgvtZ/VV2uklA06B4fTk8=",
+			"size": 13008
+		},
+		{
+			"name": "/cjs/svg/dynamic/latin.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/cjs/svg/dynamic/latin.js",
+			"hash": "FZXGBPKZ/XjvReeiiugDGN0kn2U02VYs/moqboGmcxU=",
+			"size": 210039
+		},
+		{
+			"name": "/cjs/svg/dynamic/latin.js.map",
+			"hash": "GxaL1/JpSZBsSvpCbxNZJEkLA8z8a5TupiuldGJQ06I=",
+			"size": 42151
+		},
+		{
+			"name": "/cjs/svg/dynamic/latin-b.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/cjs/svg/dynamic/latin-b.js",
+			"hash": "2ohZeKIK1VBdoyKblVNbjcIalHQDX9RdQtBoOMB06zQ=",
+			"size": 211293
+		},
+		{
+			"name": "/cjs/svg/dynamic/latin-b.js.map",
+			"hash": "DWbyvsCHEQb7a9eaKj6Wp7K/3L27wUFdZHoJqgM7SCQ=",
+			"size": 42664
+		},
+		{
+			"name": "/cjs/svg/dynamic/latin-bi.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/cjs/svg/dynamic/latin-bi.js",
+			"hash": "IcpBDIpt7awvpk7U/OnuLTdWzrnNVGsubv4iGsZarvg=",
+			"size": 227907
+		},
+		{
+			"name": "/cjs/svg/dynamic/latin-bi.js.map",
+			"hash": "xWMRa8fL2XkhlHIL1ODoDq/O4u9UA1acKtVYLh0uIRc=",
+			"size": 46097
+		},
+		{
+			"name": "/cjs/svg/dynamic/latin-i.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/cjs/svg/dynamic/latin-i.js",
+			"hash": "hPxTbN1JHn00eFDTnn+MsCAl1NwMi1TohP8gf4QUORQ=",
+			"size": 227963
+		},
+		{
+			"name": "/cjs/svg/dynamic/latin-i.js.map",
+			"hash": "M2+IhSptibN2ktZ8t5AXt//ECFQd2G54QC3nFDjrWws=",
+			"size": 45848
+		},
+		{
+			"name": "/cjs/svg/dynamic/math.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/cjs/svg/dynamic/math.js",
+			"hash": "uUSiSXbXP0FeAkzcQGg7QcPBfS5hX9QynxzbdDajW7U=",
+			"size": 103774
+		},
+		{
+			"name": "/cjs/svg/dynamic/math.js.map",
+			"hash": "jjB2uy6U8DvRRA0mGU7jy+boBaazffR3UqHVU85Vs5g=",
+			"size": 33683
+		},
+		{
+			"name": "/cjs/svg/dynamic/monospace.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/cjs/svg/dynamic/monospace.js",
+			"hash": "6b32y1bGTkm2Jqkya969KUPaP/etkj3UeFuJMupOYeg=",
+			"size": 35875
+		},
+		{
+			"name": "/cjs/svg/dynamic/monospace.js.map",
+			"hash": "lST1SXZTVEHzJju3UEPIbSf+cSZL3Dqfox0u+NsEls0=",
+			"size": 6164
+		},
+		{
+			"name": "/cjs/svg/dynamic/phonetics.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/cjs/svg/dynamic/phonetics.js",
+			"hash": "6B/7HsY2e6lqoIfxeGi9ELeWTOb2tGLtE6lYCbkDVrY=",
+			"size": 181265
+		},
+		{
+			"name": "/cjs/svg/dynamic/phonetics.js.map",
+			"hash": "C8vDeWgd6jidt2dcDnOVXCqhn04yCdqxk14aPJS2SNQ=",
+			"size": 39259
+		},
+		{
+			"name": "/cjs/svg/dynamic/sans-serif.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/cjs/svg/dynamic/sans-serif.js",
+			"hash": "xtHQ85N4j1wELoXzpWd6TpQJa2hz2cWjH/SeRTIWU2o=",
+			"size": 71992
+		},
+		{
+			"name": "/cjs/svg/dynamic/sans-serif.js.map",
+			"hash": "oIC+6EnTHb6ydqqvt76yqyVOd76Uq1AbjCDhsNw8b8k=",
+			"size": 30406
+		},
+		{
+			"name": "/cjs/svg/dynamic/script.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/cjs/svg/dynamic/script.js",
+			"hash": "9/OQV6wRNlP+JSbn7vE1NpeesdiqJ1N2pEQNf4yCcLc=",
+			"size": 67369
+		},
+		{
+			"name": "/cjs/svg/dynamic/script.js.map",
+			"hash": "SmXmdH3MToeq1xcKdAVX0QQ0I2fpaMIemu/cB02TVCQ=",
+			"size": 12442
+		},
+		{
+			"name": "/cjs/svg/dynamic/shapes.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/cjs/svg/dynamic/shapes.js",
+			"hash": "IFsQkoxeRwSE4ALFpzjtQfqtarskmm6qB7vaq3vVYdg=",
+			"size": 241605
+		},
+		{
+			"name": "/cjs/svg/dynamic/shapes.js.map",
+			"hash": "ehuRgbxSRPbHlk1rdDzMsd9AzF4l2ar6StylWg2dlCM=",
+			"size": 38867
+		},
+		{
+			"name": "/cjs/svg/dynamic/stretchy.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/cjs/svg/dynamic/stretchy.js",
+			"hash": "IU+WUytCar98G4tJgcaPXol0vLShVpzOMsHW4g3WV50=",
+			"size": 44418
+		},
+		{
+			"name": "/cjs/svg/dynamic/stretchy.js.map",
+			"hash": "BRLecnyy8Pn1NjNXtO96vCSents7FA96agSdDfmrv+Q=",
+			"size": 18231
+		},
+		{
+			"name": "/cjs/svg/dynamic/symbols.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/cjs/svg/dynamic/symbols.js",
+			"hash": "taAkuoHVAmeaBGUoZY7mzNhu6A5d0M5XRcBg351XDQc=",
+			"size": 126155
+		},
+		{
+			"name": "/cjs/svg/dynamic/symbols.js.map",
+			"hash": "zc2Bql+WbwSBIPP++qvjUsx2VgX0Y7kblrkQS1c4I5o=",
+			"size": 30801
+		},
+		{
+			"name": "/cjs/svg/dynamic/symbols-other.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/cjs/svg/dynamic/symbols-other.js",
+			"hash": "RoayjKrBeUdccLKvTUB5fUiEpvpm6FMHcNSyS1IGVN0=",
+			"size": 124477
+		},
+		{
+			"name": "/cjs/svg/dynamic/symbols-other.js.map",
+			"hash": "WYXwfzhKLKXtrhgSP5WmSmoMbUCDHoNZ+FCjzJ/1NHQ=",
+			"size": 30071
+		},
+		{
+			"name": "/cjs/svg/dynamic/upright.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/cjs/svg/dynamic/upright.js",
+			"hash": "v6k85h7GWIy4P/tT6qexc3HLPqAZiEat7vMYDnMA/BQ=",
+			"size": 43031
+		},
+		{
+			"name": "/cjs/svg/dynamic/upright.js.map",
+			"hash": "hyTwerkZulQx7oaQE1csgsoChiqq3r+sKlcEZR9ITDY=",
+			"size": 4928
+		},
+		{
+			"name": "/cjs/svg/dynamic/variants.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/cjs/svg/dynamic/variants.js",
+			"hash": "bgQjB3sclKPaZk+x114lY2hRydK3uGkMgHrqYnSTU2k=",
+			"size": 27102
+		},
+		{
+			"name": "/cjs/svg/dynamic/variants.js.map",
+			"hash": "7d35Q+8iXzrDiEEjkvcTSDrzjfRZiWntOiTrYIWNYew=",
+			"size": 9029
+		},
+		{
+			"name": "/cjs/svg/extend.d.ts",
+			"hash": "+szxrJUEC+uWcUxK5vnRku3WSs75KZU32TYWCB8bwwo=",
+			"size": 137
+		},
+		{
+			"name": "/cjs/svg/extend.js",
+			"hash": "abicEhk2L9zKIMg+S+GCj6jeeKBpXq/LXMUzMjmV0ag=",
+			"size": 5858
+		},
+		{
+			"name": "/cjs/svg/extend.js.map",
+			"hash": "6pcd7obvByWdU+6HWCoYtIR6M5ARiyfo4ljwIwCoW0Y=",
+			"size": 4524
+		},
+		{
+			"name": "/cjs/svg/fraktur.d.ts",
+			"hash": "SgApwiKpItFRhsKZmuirX+gESdCZjr4FaWYyeyaDo7k=",
+			"size": 138
+		},
+		{
+			"name": "/cjs/svg/fraktur.js",
+			"hash": "fbzOmpfNkFEJbewr5VH63buOClnybsXRIx/baVMF784=",
+			"size": 160
+		},
+		{
+			"name": "/cjs/svg/fraktur.js.map",
+			"hash": "c2R+GHjLAJtXSLx8Qbs0bkwy/IGiLV1K9z5eDU9CasU=",
+			"size": 146
+		},
+		{
+			"name": "/cjs/svg/fraktur-bold.d.ts",
+			"hash": "w0EFslihD5IEMIHdV8Aq8r8o00AWBnBvQKjl0TBEh8c=",
+			"size": 142
+		},
+		{
+			"name": "/cjs/svg/fraktur-bold.js",
+			"hash": "M9O8FoAJmlQfvdXp4oWVpb+uxYAiDF7TQ+Vtc6Rsyzs=",
+			"size": 173
+		},
+		{
+			"name": "/cjs/svg/fraktur-bold.js.map",
+			"hash": "v/SaotbEr3KaipgbMcEGvAtivB4e2z3Kw5vEHn4nZc8=",
+			"size": 156
+		},
+		{
+			"name": "/cjs/svg/italic.d.ts",
+			"hash": "5RVAIx+/mcth04Wimjaou6pcMoM4h4NODi2tpZKXSbc=",
+			"size": 137
+		},
+		{
+			"name": "/cjs/svg/italic.js",
+			"hash": "IKRI1yGqzpnEwWsfZyKNeBtcX8OGELciimxcGbT6YpQ=",
+			"size": 23837
+		},
+		{
+			"name": "/cjs/svg/italic.js.map",
+			"hash": "y1QSGlMfJHgL0pu7Yyk0TOTmoE56i0CFbu4YS7QV7cI=",
+			"size": 11848
+		},
+		{
+			"name": "/cjs/svg/largeop.d.ts",
+			"hash": "2jmksSplO9qQgP2rts3GB9wx2VqqUA/7p9FfYkGKrJM=",
+			"size": 138
+		},
+		{
+			"name": "/cjs/svg/largeop.js",
+			"hash": "3WfADcwZbHBEK/sC5IrlOWJet8OgFQmIMtipUjQ/xkQ=",
+			"size": 33283
+		},
+		{
+			"name": "/cjs/svg/largeop.js.map",
+			"hash": "WeK0ZwNj2QVO9Gnbg8W9tPpX1X1jzE/+KjTTUG30Amw=",
+			"size": 8751
+		},
+		{
+			"name": "/cjs/svg/monospace.d.ts",
+			"hash": "/NQShX8lNKubmqhe/CpBlP8IK/d7xF03Ky9DCoTKHm4=",
+			"size": 140
+		},
+		{
+			"name": "/cjs/svg/monospace.js",
+			"hash": "N1c1ljs4B2HJwg0W0BJvImjpIh3eXwZI1qAio8qiGtg=",
+			"size": 166
+		},
+		{
+			"name": "/cjs/svg/monospace.js.map",
+			"hash": "ZopguL5x6+CmCo/qQlBwhy56gO3hOw2v6fQl78atkG0=",
+			"size": 150
+		},
+		{
+			"name": "/cjs/svg/normal.d.ts",
+			"hash": "2irwJp2jQu5jqon0h2ZQnPx715UWealGxPj2TKHyb0k=",
+			"size": 137
+		},
+		{
+			"name": "/cjs/svg/normal.js",
+			"hash": "t90rNDg+0iTC/xGzlSuQKgucyEdTp15TYnfQ7xDWzbU=",
+			"size": 360985
+		},
+		{
+			"name": "/cjs/svg/normal.js.map",
+			"hash": "ntyI+EaNkz4X5izGtm/NlY+j8Kb7JwlFkzG1QoUCMcw=",
+			"size": 118711
+		},
+		{
+			"name": "/cjs/svg/sans-serif.d.ts",
+			"hash": "rXqtMTziSfaxppNlLjC5y/W+EZQxZhgMQcO381VNwVY=",
+			"size": 140
+		},
+		{
+			"name": "/cjs/svg/sans-serif.js",
+			"hash": "s2UZBKpgurJzp7MLXyO/GIzR7Te/CRcsWtb/WMKWYYc=",
+			"size": 167
+		},
+		{
+			"name": "/cjs/svg/sans-serif.js.map",
+			"hash": "xSovl43iqccTj6Trwc10MPVAl9plDgbRGd/O+Q4aZgs=",
+			"size": 152
+		},
+		{
+			"name": "/cjs/svg/sans-serif-bold.d.ts",
+			"hash": "GD/th8vxzJf/Dw/80sN4wykMfyRzAdegOAE2iwZ9Cfc=",
+			"size": 144
+		},
+		{
+			"name": "/cjs/svg/sans-serif-bold.js",
+			"hash": "MJnuIDS4z9zKNBlTKIzMaODIKOFfatBVlxZ3eu8epEI=",
+			"size": 180
+		},
+		{
+			"name": "/cjs/svg/sans-serif-bold.js.map",
+			"hash": "kVEd2gaFfOGhTuxbMsuC6TpW+6Ficf4i1xsEOWfSXco=",
+			"size": 162
+		},
+		{
+			"name": "/cjs/svg/sans-serif-bold-italic.d.ts",
+			"hash": "qKEiUDOooIsPv9tB5ZQnZd/+9E0XuCV+jRZCgF8+faw=",
+			"size": 150
+		},
+		{
+			"name": "/cjs/svg/sans-serif-bold-italic.js",
+			"hash": "AUbn0/th3q1dGZKTl/Jif7T2i+NrCAN3CoW+oJhpfo4=",
+			"size": 199
+		},
+		{
+			"name": "/cjs/svg/sans-serif-bold-italic.js.map",
+			"hash": "/paAvT2L8VWfshRdScP7I4BTkYDaffoLcntC6Y4RI0s=",
+			"size": 178
+		},
+		{
+			"name": "/cjs/svg/sans-serif-italic.d.ts",
+			"hash": "153bGVtdyzIhMhysxNx4XWWdIbNs3JOraBjNIZHpmlw=",
+			"size": 146
+		},
+		{
+			"name": "/cjs/svg/sans-serif-italic.js",
+			"hash": "sEija5on0BgPq2icVP6QP7DWBtpvql1HjhEUKQzlCIk=",
+			"size": 186
+		},
+		{
+			"name": "/cjs/svg/sans-serif-italic.js.map",
+			"hash": "fkbjP7tJTWz2hx11Su+v02D+hUs/55zeyJqJHOzMEKc=",
+			"size": 166
+		},
+		{
+			"name": "/cjs/svg/script.d.ts",
+			"hash": "ZhfFdWYTt2MNnEAEpiRqDQxsSPVbsKUnd5/Ip/KjbY4=",
+			"size": 137
+		},
+		{
+			"name": "/cjs/svg/script.js",
+			"hash": "KqkyXvq8FZaoauJ9u6O8AZ4QuGzuZhaYKjvjteAqQFc=",
+			"size": 157
+		},
+		{
+			"name": "/cjs/svg/script.js.map",
+			"hash": "OgCjtPJ7ZHSc8IetMNx9pqPmZLZlgPs4/N6j847R4hg=",
+			"size": 144
+		},
+		{
+			"name": "/cjs/svg/script-bold.d.ts",
+			"hash": "hgi8/ZbGF1TM0sa3OdZw+X7SreqGl6qSW5gWinfIB+o=",
+			"size": 141
+		},
+		{
+			"name": "/cjs/svg/script-bold.js",
+			"hash": "SV1sD9Rqqrx0CrTLzpYqb+ICcGybkIbzrjsrr58Y8TA=",
+			"size": 170
+		},
+		{
+			"name": "/cjs/svg/script-bold.js.map",
+			"hash": "koRH2aZ1RuO/bgbHZyFgXnzkZvthtIKdwfQRCLz7tCE=",
+			"size": 154
+		},
+		{
+			"name": "/cjs/svg/size3.d.ts",
+			"hash": "xSV3RA89MkwhjRIgc8CTY6smO+CROshLO7UnJNCHkaQ=",
+			"size": 136
+		},
+		{
+			"name": "/cjs/svg/size3.js",
+			"hash": "KAL/o31UOXZtq/XmSKZAoZ53xMCoL2/iSQqEQlyVRCY=",
+			"size": 7165
+		},
+		{
+			"name": "/cjs/svg/size3.js.map",
+			"hash": "6IIUKriucssmnYXJ68PRpFlC8FZxpGJG24F/oEfRZZg=",
+			"size": 4042
+		},
+		{
+			"name": "/cjs/svg/size4.d.ts",
+			"hash": "fRFrYGtVoTuP+KsIMndRK6BDwknHVAizaGHo0gavKgc=",
+			"size": 136
+		},
+		{
+			"name": "/cjs/svg/size4.js",
+			"hash": "bUCVde+tdIT8keWfyinNczOZlBtJFrRbnm8l601tKjE=",
+			"size": 7183
+		},
+		{
+			"name": "/cjs/svg/size4.js.map",
+			"hash": "acmxhn1Cn1SSB0t699mPSbspzg07ht1BQPAvVLVxo+U=",
+			"size": 4022
+		},
+		{
+			"name": "/cjs/svg/size5.d.ts",
+			"hash": "0sLexUqp2n8paEufxilh4S7Ehm0+EEtCjwCZptcsrZk=",
+			"size": 136
+		},
+		{
+			"name": "/cjs/svg/size5.js",
+			"hash": "RCujQisk67lXynuyS5wmYHXP4Y72g5Tf5bpgGBJZhGg=",
+			"size": 6920
+		},
+		{
+			"name": "/cjs/svg/size5.js.map",
+			"hash": "RFef/L9Zuz2yS28M0hftYC5obrhVnSDKHg9uGPvNRlA=",
+			"size": 3773
+		},
+		{
+			"name": "/cjs/svg/size6.d.ts",
+			"hash": "1c4nPov4iICo+7ojlAiEeZcfb6/UDf6Twzw2uZKFvi4=",
+			"size": 136
+		},
+		{
+			"name": "/cjs/svg/size6.js",
+			"hash": "N2AqOPmcIf9VSYn3KmegK2DobZ2WzCasZ2NOsKtFzkY=",
+			"size": 1982
+		},
+		{
+			"name": "/cjs/svg/size6.js.map",
+			"hash": "vXJuKh8Tk4IIpQ0gKFa4todEFjwp82h5m0ThcjfaB94=",
+			"size": 1138
+		},
+		{
+			"name": "/cjs/svg/size7.d.ts",
+			"hash": "z3J21foIh88NOOkshOEqQ43qmPM2+gknbUrduUm280c=",
+			"size": 136
+		},
+		{
+			"name": "/cjs/svg/size7.js",
+			"hash": "zpMWcnpzJh9s9MhJdJXZf13LoEe/qsSPWmCpwpvDlEY=",
+			"size": 2020
+		},
+		{
+			"name": "/cjs/svg/size7.js.map",
+			"hash": "smLEwuyPX5qzNV643vTF40y4MWF5L9NlMoI2QzQxasY=",
+			"size": 1138
+		},
+		{
+			"name": "/cjs/svg/size8.d.ts",
+			"hash": "qHsGoeqc8zGzdDDjbHDm4HftS81GT7fY2v+NjmraZnM=",
+			"size": 136
+		},
+		{
+			"name": "/cjs/svg/size8.js",
+			"hash": "NnHRars0sAFMIT/CJ8u6yFDJklLfWLuodh9It94rq+o=",
+			"size": 2050
+		},
+		{
+			"name": "/cjs/svg/size8.js.map",
+			"hash": "2FarRLL+pSGtxZ5l4Q9od+c+52k2dLnxW7pF8tpar78=",
+			"size": 1138
+		},
+		{
+			"name": "/cjs/svg/size9.d.ts",
+			"hash": "vvMRjhIUpKWT3+Z/ez8m6xGohIqIgWBXR9bfwWU8xDE=",
+			"size": 136
+		},
+		{
+			"name": "/cjs/svg/size9.js",
+			"hash": "5WjkD1SFsPnaGn3beUNvn7RNViVk5HPntToiXl2LMD4=",
+			"size": 2036
+		},
+		{
+			"name": "/cjs/svg/size9.js.map",
+			"hash": "bddkh8HghT4LpwSL1R/CFDfm6KuYfEr9PWdBAawdUds=",
+			"size": 1138
+		},
+		{
+			"name": "/cjs/svg/size10.d.ts",
+			"hash": "y4fkQtMxqWcF4Hz4sGmVhnhItzzXNUiPp3y9LV7n2LI=",
+			"size": 137
+		},
+		{
+			"name": "/cjs/svg/size10.js",
+			"hash": "wik2n2LlzL7zw5GOkSwqs9J/wcWOw4tqloNQqphVeks=",
+			"size": 2039
+		},
+		{
+			"name": "/cjs/svg/size10.js.map",
+			"hash": "kH7mfZ4bLsDlsXjRQyKSFxVtyTvE3ZWBQTQHhapAlc8=",
+			"size": 1140
+		},
+		{
+			"name": "/cjs/svg/size11.d.ts",
+			"hash": "dmgIC62wQDqA1nD/d1zFdGLDtjvi1WpqpQX8FfPMTWY=",
+			"size": 137
+		},
+		{
+			"name": "/cjs/svg/size11.js",
+			"hash": "PnW5svO3ucBF+3K5kvZiMzpWR9MbGZ0op33RxTey4uM=",
+			"size": 2055
+		},
+		{
+			"name": "/cjs/svg/size11.js.map",
+			"hash": "zqbgUd4umpeiQV0eLv8OGZvT54jf6onzE4PsaCaxnAY=",
+			"size": 1140
+		},
+		{
+			"name": "/cjs/svg/size12.d.ts",
+			"hash": "+2NpAJsRH6/KHWr87afA/pJxs6kutFxaXlVlo800Ad0=",
+			"size": 137
+		},
+		{
+			"name": "/cjs/svg/size12.js",
+			"hash": "AQEn609iK5lYpeU+sTT95SbquOFyfLDqE6xKg6NfqeM=",
+			"size": 2070
+		},
+		{
+			"name": "/cjs/svg/size12.js.map",
+			"hash": "y+rccuvThYfwfPFr43C7rildDuxG0hr5pKBGNyub374=",
+			"size": 1140
+		},
+		{
+			"name": "/cjs/svg/smallop.d.ts",
+			"hash": "moUtIDPfwohTNW4fdsz1AzhYPolLVErM8QOHHqi4A2o=",
+			"size": 138
+		},
+		{
+			"name": "/cjs/svg/smallop.js",
+			"hash": "L/6Zur2CKz3DwDB2jgBT0LB9V4fl4Uca88KfonIQoX8=",
+			"size": 7207
+		},
+		{
+			"name": "/cjs/svg/smallop.js.map",
+			"hash": "E9MXMz9FcEwAa2ZWJmnmbgoIL/ttwyu3CmtfQzWYXB8=",
+			"size": 4378
+		},
+		{
+			"name": "/cjs/svg/tex-calligraphic.d.ts",
+			"hash": "sde9dDn3hGGCT4SyMXznVOHMr4/IZhlLHfKsDfb0tA8=",
+			"size": 146
+		},
+		{
+			"name": "/cjs/svg/tex-calligraphic.js",
+			"hash": "F1Og/OYsRN0/oX2f17IWWofEBPY+QztieeMZSh1LNAo=",
+			"size": 185
+		},
+		{
+			"name": "/cjs/svg/tex-calligraphic.js.map",
+			"hash": "LENTp5lOUkvdJ8p+qWyj12wuJSyHFshGfUSC8CODBXA=",
+			"size": 164
+		},
+		{
+			"name": "/cjs/svg/tex-calligraphic-bold.d.ts",
+			"hash": "uNkqzcaMA9Rn+fla9VNFSwZo3/4cXmy1C4XxwykNq3w=",
+			"size": 150
+		},
+		{
+			"name": "/cjs/svg/tex-calligraphic-bold.js",
+			"hash": "hvdxOktKFO7wZ/ss/sIOKZeXENrP8bFcIA0FIJ/uadE=",
+			"size": 198
+		},
+		{
+			"name": "/cjs/svg/tex-calligraphic-bold.js.map",
+			"hash": "7otT1hQzFOrXT2PdVTcLqnBQjIveAaOSTiUOOb4l+yU=",
+			"size": 176
+		},
+		{
+			"name": "/cjs/svg/tex-mathit.d.ts",
+			"hash": "GRa/T8dTsYgANNgUXhuFYc9fFqkMM2MJUWklsJNT5ik=",
+			"size": 140
+		},
+		{
+			"name": "/cjs/svg/tex-mathit.js",
+			"hash": "Yg3fS8ClpYSPOccoveB40c40kx/Zr0Q59vPMCQ65xww=",
+			"size": 21758
+		},
+		{
+			"name": "/cjs/svg/tex-mathit.js.map",
+			"hash": "xRar03lN1KOO31TXRiyYEYhKx4ZxUKPRIROdzXJU3Cs=",
+			"size": 5845
+		},
+		{
+			"name": "/cjs/svg/tex-oldstyle.d.ts",
+			"hash": "3dAzqp8JhKF2/BkNjiOLSwF26QHbsu4dq2TkPOyyiEY=",
+			"size": 142
+		},
+		{
+			"name": "/cjs/svg/tex-oldstyle.js",
+			"hash": "Cqt63HO2NGMtmVaNBXRV2Tqax0mFAfwaVedC8yLTJYI=",
+			"size": 2833
+		},
+		{
+			"name": "/cjs/svg/tex-oldstyle.js.map",
+			"hash": "Y8grTjQPMWYRRx9BhLRYnIMt7UBahLmnv1L/TZyi2jI=",
+			"size": 986
+		},
+		{
+			"name": "/cjs/svg/tex-oldstyle-bold.d.ts",
+			"hash": "q1j06lQu7o+h/SxMB5aykEZqx9ha1vTLY4S7xHpyXvQ=",
+			"size": 146
+		},
+		{
+			"name": "/cjs/svg/tex-oldstyle-bold.js",
+			"hash": "DCNkBTQ1iyEdFBgkKl+10bsL4UbkapHFAxnWXqURVPY=",
+			"size": 2844
+		},
+		{
+			"name": "/cjs/svg/tex-oldstyle-bold.js.map",
+			"hash": "xZmBqHp6kVaoYUVVMvyfsWxZ6Pqx+QWecTBsrPKfJSo=",
+			"size": 996
+		},
+		{
+			"name": "/cjs/svg/tex-variant.d.ts",
+			"hash": "GpRPpK0HUValvO4Z6z6FE1mGtO/36Q2ntLUnW3Mme1w=",
+			"size": 141
+		},
+		{
+			"name": "/cjs/svg/tex-variant.js",
+			"hash": "i6oBav60LPI55Tcwlgy5ddno89rSkRTKdQWMAHVeI78=",
+			"size": 24142
+		},
+		{
+			"name": "/cjs/svg/tex-variant.js.map",
+			"hash": "K5LgL0km2igzap23y8qOgWmIOhzP5AYPf0gyNZZ1BL0=",
+			"size": 7899
+		},
+		{
+			"name": "/cjs/svg/up.d.ts",
+			"hash": "56sTMBuEpvwNu3t0MOD288Qn3NiVpclhYTrwnn4+frc=",
+			"size": 133
+		},
+		{
+			"name": "/cjs/svg/up.js",
+			"hash": "vMo+GmAWlt6HQMm9dtgDFNJGOMebEE9ZFB8V90HfMxU=",
+			"size": 145
+		},
+		{
+			"name": "/cjs/svg/up.js.map",
+			"hash": "/l9ejs4nyKFrcfysrJKv5P65avXcqT0fmefyrVIERbc=",
+			"size": 136
+		},
+		{
+			"name": "/cjs/svg/up-dsp.d.ts",
+			"hash": "wFdLLvctEmkxZ26lFp88pkAfD74NqMtk+AWOmbECC3c=",
+			"size": 136
+		},
+		{
+			"name": "/cjs/svg/up-dsp.js",
+			"hash": "/LYyitlNlkgHysHQ3U4wyB5b9s1NB7Ydgq/kKyeoNn4=",
+			"size": 155
+		},
+		{
+			"name": "/cjs/svg/up-dsp.js.map",
+			"hash": "GMVSiA5uWVQpzBHBorn+UQUF1TUEdb8w4gL4iu2SRPg=",
+			"size": 144
+		},
+		{
+			"name": "/def/mathjax-stix2.ts",
+			"hash": "UxjdoOFDuOcx4qZcFAorBALvmfLSvTU4BMrhY+vh4VY=",
+			"size": 26597
+		},
+		{
+			"name": "/examples/chtml.html",
+			"hash": "nYbZB7Qvw9ZawGQCRbU1FiYKiZ8Algo2wY61bUbTWbA=",
+			"size": 2862
+		},
+		{
+			"name": "/examples/svg.html",
+			"hash": "1ssLCFwQPaUxyDggwbAd19vbYNYBYUoD8kch+2MAxZ0=",
+			"size": 2888
+		},
+		{
+			"name": "/mjs/chtml.d.ts",
+			"hash": "II3PrO9dvGRGFAfMvpD0RHC9+xJzazF5HG+vcbWXm0Y=",
+			"size": 7820
+		},
+		{
+			"name": "/mjs/chtml.js",
+			"hash": "N1hkF+9qf+3E+woZ+gk+vprlyss/TjoMAU87WOZM0Jc=",
+			"size": 27416
+		},
+		{
+			"name": "/mjs/chtml.js.map",
+			"hash": "SVLeOXtEHvJdySsW1qfmFjnTO/SLlqdfITmbXf6wF/8=",
+			"size": 25813
+		},
+		{
+			"name": "/mjs/chtml/bold.d.ts",
+			"hash": "7A4JAljMzt98SuQ00hL4FIRcFiQrXpV1LFtNm5YuVFk=",
+			"size": 141
+		},
+		{
+			"name": "/mjs/chtml/bold.js",
+			"hash": "ktH+hs/YI4MhsiRNVbFnrc6t7iPo0d0RHcUAU0UEJA8=",
+			"size": 3716
+		},
+		{
+			"name": "/mjs/chtml/bold.js.map",
+			"hash": "so4Zzkpcz2esLvXsX4wuZ08pecJAagYf7dg+IHV6Ln8=",
+			"size": 6917
+		},
+		{
+			"name": "/mjs/chtml/bold-italic.d.ts",
+			"hash": "KUM0ted6pKsA33lc7KwaFm85CsUu8V070wpCsUGgkCQ=",
+			"size": 147
+		},
+		{
+			"name": "/mjs/chtml/bold-italic.js",
+			"hash": "wNVEZk+JuJoGJ9dRWNAnuqI3mtA8amRcNueYVYGLe0w=",
+			"size": 4601
+		},
+		{
+			"name": "/mjs/chtml/bold-italic.js.map",
+			"hash": "qirz7pi6P6OzPUUTxPhgtAoKRifm7KlGl8JQrEfG5c8=",
+			"size": 8671
+		},
+		{
+			"name": "/mjs/chtml/default.d.ts",
+			"hash": "40z/lYqSsbHrgMQIw/SGKA7eoWMtV04PuRnq36MgQQ0=",
+			"size": 76
+		},
+		{
+			"name": "/mjs/chtml/default.js",
+			"hash": "E7/EtUjRjjynhVeNdKocPtR29C17gnZyCewhCFkaccU=",
+			"size": 173
+		},
+		{
+			"name": "/mjs/chtml/default.js.map",
+			"hash": "ctiZyfrHej34ukUnpDzSzEf+4m2bCcGtaHYqA73JJEc=",
+			"size": 241
+		},
+		{
+			"name": "/mjs/chtml/delimiters.d.ts",
+			"hash": "zoiP+VtJ9++U2GQ4Vh+aSspJONi5VSPZ443Pc2a+d34=",
+			"size": 151
+		},
+		{
+			"name": "/mjs/chtml/delimiters.js",
+			"hash": "KfEg6ilA57VTegn260XSt70tH7nlfGjm98jLu8RhInI=",
+			"size": 28656
+		},
+		{
+			"name": "/mjs/chtml/delimiters.js.map",
+			"hash": "QDB/2+QUPkNUzhjG7/KdEKiqI6+4kCpyeMrStLpsPhg=",
+			"size": 39334
+		},
+		{
+			"name": "/mjs/chtml/double-struck.d.ts",
+			"hash": "zoU5GiWMd5p9Pwv3vOCA1ex637rBbuQFSPAUtlTmuAo=",
+			"size": 149
+		},
+		{
+			"name": "/mjs/chtml/double-struck.js",
+			"hash": "fQY11/APzrJ8mI4uu+RBsh+Bc3KaXRY+dzDu0tOSpHk=",
+			"size": 73
+		},
+		{
+			"name": "/mjs/chtml/double-struck.js.map",
+			"hash": "5Ugbl8/N3cbfsNELbo2Ssrf7Y3Iq9h/SdUHKYLmtnOc=",
+			"size": 167
+		},
+		{
+			"name": "/mjs/chtml/double-struck-italic.d.ts",
+			"hash": "iE2WZg55Fs3yJcZt61V58uBFhgbpjHnVrrir2sND/VI=",
+			"size": 155
+		},
+		{
+			"name": "/mjs/chtml/double-struck-italic.js",
+			"hash": "5yXAvQgD6yn9JG4stI2FhKo3lRsh+dseHPUpwoxAqgQ=",
+			"size": 2549
+		},
+		{
+			"name": "/mjs/chtml/double-struck-italic.js.map",
+			"hash": "9QDi5+Af4V014FqG7w5DetrfV9yTZf8/E6cdC/ZG2CA=",
+			"size": 4960
+		},
+		{
+			"name": "/mjs/chtml/dynamic/accents.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/mjs/chtml/dynamic/accents.js",
+			"hash": "zU9Z9AY2HGWedoMg/NXyikXuZWrQWnBFqnmyhkGzQqI=",
+			"size": 6314
+		},
+		{
+			"name": "/mjs/chtml/dynamic/accents.js.map",
+			"hash": "9qgFoV6DT2SvO5YR8BZTjO4h5jkHP6lBtiBaoi58Dbw=",
+			"size": 9943
+		},
+		{
+			"name": "/mjs/chtml/dynamic/accents-other.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/mjs/chtml/dynamic/accents-other.js",
+			"hash": "+Wfou0Dt6ELWpsFZjEJkafYjvgfZ/K+nSW6XuG5phmM=",
+			"size": 18011
+		},
+		{
+			"name": "/mjs/chtml/dynamic/accents-other.js.map",
+			"hash": "UY8EnmYK5sfsAtIt8YblIes/a8DRjgJiQ2lnvBkZiBM=",
+			"size": 28518
+		},
+		{
+			"name": "/mjs/chtml/dynamic/arrows.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/mjs/chtml/dynamic/arrows.js",
+			"hash": "VjlsMHZSLuFYJp1MXO2tcNLzMmqc8OYye7hgYA/exNw=",
+			"size": 7496
+		},
+		{
+			"name": "/mjs/chtml/dynamic/arrows.js.map",
+			"hash": "qxv6EVpWeHd4aSdOxq0qqG29JIachPv63ve8tnwebfI=",
+			"size": 9935
+		},
+		{
+			"name": "/mjs/chtml/dynamic/calligraphic.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/mjs/chtml/dynamic/calligraphic.js",
+			"hash": "wC/89PAUem8uUZ6xCdTpOnTkguhfgyIr2NTDQ1TDHME=",
+			"size": 6307
+		},
+		{
+			"name": "/mjs/chtml/dynamic/calligraphic.js.map",
+			"hash": "g7UK3Y5Nq3Mdu+P4symdvjBOTlyGmgjElJrrVuHAr5k=",
+			"size": 9925
+		},
+		{
+			"name": "/mjs/chtml/dynamic/cyrillic.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/mjs/chtml/dynamic/cyrillic.js",
+			"hash": "jEOdCEgydXmbC8nDsuQoIFci0i5QDiML1p3ddkLeqvM=",
+			"size": 18577
+		},
+		{
+			"name": "/mjs/chtml/dynamic/cyrillic.js.map",
+			"hash": "oxzK2Nb7iL3DtjnQnwdS0YywGgy5G1ZpNv/WHhWUxnM=",
+			"size": 26947
+		},
+		{
+			"name": "/mjs/chtml/dynamic/dingbats.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/mjs/chtml/dynamic/dingbats.js",
+			"hash": "ur67KoIh37JjgEJaPStU5PkO7doLmKuRazDEm9OdoCI=",
+			"size": 10585
+		},
+		{
+			"name": "/mjs/chtml/dynamic/dingbats.js.map",
+			"hash": "MQDaYI/qjsi28morHbC/HkQfPAh3KI6cSGBplYTfcrA=",
+			"size": 13925
+		},
+		{
+			"name": "/mjs/chtml/dynamic/double-struck.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/mjs/chtml/dynamic/double-struck.js",
+			"hash": "FRlRVsphcAK/Yzy7dBCesV05vceSM0AG8Fhta4uvA/g=",
+			"size": 3849
+		},
+		{
+			"name": "/mjs/chtml/dynamic/double-struck.js.map",
+			"hash": "EGZ+h27EtRQMnGC+XvZ9L9i8FQdr3Uh/7g8s60tNSww=",
+			"size": 5552
+		},
+		{
+			"name": "/mjs/chtml/dynamic/enclosed.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/mjs/chtml/dynamic/enclosed.js",
+			"hash": "UZPFn37xk8O7+mJNu/edU5TtCbezpZzuhj1y4UT7dw4=",
+			"size": 7941
+		},
+		{
+			"name": "/mjs/chtml/dynamic/enclosed.js.map",
+			"hash": "7wDDj8Xi3esPFgYL1i7o+BVyRc1gYzJOnPptcbLXP58=",
+			"size": 10063
+		},
+		{
+			"name": "/mjs/chtml/dynamic/fraktur.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/mjs/chtml/dynamic/fraktur.js",
+			"hash": "HVoDEwlwiu3s/Jnc9RWBLMmaR+FDYjm3tDyqyBOOhgg=",
+			"size": 5902
+		},
+		{
+			"name": "/mjs/chtml/dynamic/fraktur.js.map",
+			"hash": "o5kBIp1e0OYbgPVh0+HI3E6+kivgfxCNe83qXKVcoSc=",
+			"size": 8404
+		},
+		{
+			"name": "/mjs/chtml/dynamic/greek.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/mjs/chtml/dynamic/greek.js",
+			"hash": "gIr/MI35K3HVHw0SG3itteuTK3+JM7BPdHSYIGG8yGQ=",
+			"size": 6522
+		},
+		{
+			"name": "/mjs/chtml/dynamic/greek.js.map",
+			"hash": "oV2nRl+FPbIGx6aNjQEQ023rs+ggbJCGBGY/GbyCieA=",
+			"size": 9380
+		},
+		{
+			"name": "/mjs/chtml/dynamic/latin.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/mjs/chtml/dynamic/latin.js",
+			"hash": "w8SBJMVfIb8SA6biO6/dl0HkQVBzukvVIVgii+h7REw=",
+			"size": 19826
+		},
+		{
+			"name": "/mjs/chtml/dynamic/latin.js.map",
+			"hash": "mDYRz8Krs4Squt4i/XMH1U6tDxRquo7F20XWABkBCUc=",
+			"size": 27331
+		},
+		{
+			"name": "/mjs/chtml/dynamic/latin-b.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/mjs/chtml/dynamic/latin-b.js",
+			"hash": "fo6iXnDL/qykTml9yhNHBoNHQIMqEPd0TvEywb/Hf5g=",
+			"size": 20181
+		},
+		{
+			"name": "/mjs/chtml/dynamic/latin-b.js.map",
+			"hash": "2ZbLIVz29SdKmmp1yw8a6faIp5SPNo160M8b3W752W8=",
+			"size": 28154
+		},
+		{
+			"name": "/mjs/chtml/dynamic/latin-bi.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/mjs/chtml/dynamic/latin-bi.js",
+			"hash": "5I/3VwIAcKodOyYouvEbo+i2Ij5pDQXcf99IWr737pQ=",
+			"size": 22650
+		},
+		{
+			"name": "/mjs/chtml/dynamic/latin-bi.js.map",
+			"hash": "sz+v8IVMUSvywtouvtIMZpbgSN3htiADD2miyqjhbtw=",
+			"size": 33106
+		},
+		{
+			"name": "/mjs/chtml/dynamic/latin-i.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/mjs/chtml/dynamic/latin-i.js",
+			"hash": "Huo+9+gmosV2UxPwMsEkpP/LqQeNeqadyk8zS0D/L5k=",
+			"size": 22494
+		},
+		{
+			"name": "/mjs/chtml/dynamic/latin-i.js.map",
+			"hash": "jrJxBYLaYaWPb04rqto1JuTDgR75zh/Qb+2PlI2sXx4=",
+			"size": 32714
+		},
+		{
+			"name": "/mjs/chtml/dynamic/math.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/mjs/chtml/dynamic/math.js",
+			"hash": "5RyDrmIGAvDqmAriGCumpAGWIPTG6lkdhSV+1qB4ZOI=",
+			"size": 16038
+		},
+		{
+			"name": "/mjs/chtml/dynamic/math.js.map",
+			"hash": "9RWdvcF2bBYiOOjdikQ+1SqrBqMTzMzjBupF14TbdUs=",
+			"size": 21015
+		},
+		{
+			"name": "/mjs/chtml/dynamic/monospace.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/mjs/chtml/dynamic/monospace.js",
+			"hash": "odAj6J8IdzqzuitTgQQs1kvwMaQwNmvyh64AI8KnBrs=",
+			"size": 3039
+		},
+		{
+			"name": "/mjs/chtml/dynamic/monospace.js.map",
+			"hash": "NDRadv4KL7ORUXV8zl9K8jG214/W0nV8kd+Su6nS4rQ=",
+			"size": 4374
+		},
+		{
+			"name": "/mjs/chtml/dynamic/phonetics.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/mjs/chtml/dynamic/phonetics.js",
+			"hash": "iGiRmrQI2nmJr4Nv6POlT63FAtoyMN0Kq80hdPX0EKE=",
+			"size": 19091
+		},
+		{
+			"name": "/mjs/chtml/dynamic/phonetics.js.map",
+			"hash": "iOh0gEV/hQeQn/vgVXO77E7tad9+2eb7ae41crYpass=",
+			"size": 27169
+		},
+		{
+			"name": "/mjs/chtml/dynamic/sans-serif.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/mjs/chtml/dynamic/sans-serif.js",
+			"hash": "woVgn+wC5Hj4Qbumpuh+GKCqOx6JuwmT0EGVrGNlT7c=",
+			"size": 15542
+		},
+		{
+			"name": "/mjs/chtml/dynamic/sans-serif.js.map",
+			"hash": "j0TTiYU3VqxS1aXs9iuAo0Pg2fSh0lFHGN6pjfl8pUk=",
+			"size": 23403
+		},
+		{
+			"name": "/mjs/chtml/dynamic/script.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/mjs/chtml/dynamic/script.js",
+			"hash": "4nVnLq++T9SIgGa96V2nUDodDhgji7FB8yYUkhPVnWs=",
+			"size": 6696
+		},
+		{
+			"name": "/mjs/chtml/dynamic/script.js.map",
+			"hash": "aBz8g8bgpt6loopkQ0CvmLoqWpJamP9fWS8i4e0caOo=",
+			"size": 9989
+		},
+		{
+			"name": "/mjs/chtml/dynamic/shapes.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/mjs/chtml/dynamic/shapes.js",
+			"hash": "bX3znV1mq0QT4KkFLp+LfA5ngpnTT7vBTncvgsghnJM=",
+			"size": 18695
+		},
+		{
+			"name": "/mjs/chtml/dynamic/shapes.js.map",
+			"hash": "hDf+5BNxWMrgwNvq6MqbrFWVDseYWSptx3rVJ8roCSU=",
+			"size": 24669
+		},
+		{
+			"name": "/mjs/chtml/dynamic/stretchy.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/mjs/chtml/dynamic/stretchy.js",
+			"hash": "+LMQeC2KUE/1EkgGsTohk0JBEm+A2uaMteSdyquUsqY=",
+			"size": 10157
+		},
+		{
+			"name": "/mjs/chtml/dynamic/stretchy.js.map",
+			"hash": "+4vMboFMTsbBIpoetRJRV8H4HVwRj0j5Pg3JCQtWCe0=",
+			"size": 12806
+		},
+		{
+			"name": "/mjs/chtml/dynamic/symbols.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/mjs/chtml/dynamic/symbols.js",
+			"hash": "Tbz6sNkVq+PyasfjiA/5v4G5+2IibGGiNxAYDhgKZM4=",
+			"size": 14693
+		},
+		{
+			"name": "/mjs/chtml/dynamic/symbols.js.map",
+			"hash": "bDGAKA/5Cg5F84TH5/wEOy2jQv7fSQQ7IciEa9wM4jo=",
+			"size": 19666
+		},
+		{
+			"name": "/mjs/chtml/dynamic/symbols-other.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/mjs/chtml/dynamic/symbols-other.js",
+			"hash": "j5ug1hnSWC/iFvP54M9qOi/TjGIVcdy/d7HhCobztPw=",
+			"size": 14515
+		},
+		{
+			"name": "/mjs/chtml/dynamic/symbols-other.js.map",
+			"hash": "rngjRFQ92zg3emODXudxkPGyMci+AwvbAcDEyuCG46s=",
+			"size": 20106
+		},
+		{
+			"name": "/mjs/chtml/dynamic/upright.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/mjs/chtml/dynamic/upright.js",
+			"hash": "2youJy6qxF+soifevrb8Yh4HZXMB49Vkc6lNva6df60=",
+			"size": 2556
+		},
+		{
+			"name": "/mjs/chtml/dynamic/upright.js.map",
+			"hash": "ivm4u1NLTJc1eey3uzuv2mIG1wfHF1NkddGF3bagttg=",
+			"size": 3235
+		},
+		{
+			"name": "/mjs/chtml/dynamic/variants.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/mjs/chtml/dynamic/variants.js",
+			"hash": "ufqaed/JdkGZLb0DIgh4bFqt2o5SYjmoPYiQd16s8F8=",
+			"size": 4602
+		},
+		{
+			"name": "/mjs/chtml/dynamic/variants.js.map",
+			"hash": "bO9TtOgcZkNNZ4GHRkpWge2i05MaZh7Qg/97rq0L4yg=",
+			"size": 6470
+		},
+		{
+			"name": "/mjs/chtml/extend.d.ts",
+			"hash": "qcIxfiqKJy1YREZ0naJGiJp1s8Or+8c9phdKDGqRQC0=",
+			"size": 143
+		},
+		{
+			"name": "/mjs/chtml/extend.js",
+			"hash": "f7izrmvwMpZ3B9HrXgHVPjAAIsVdWwTs4F7mS5tiYUM=",
+			"size": 1678
+		},
+		{
+			"name": "/mjs/chtml/extend.js.map",
+			"hash": "O7FbnMsjhSIhLP3eSA6H1+vsya0VD2sW3ldu2kkbgZc=",
+			"size": 2943
+		},
+		{
+			"name": "/mjs/chtml/fraktur.d.ts",
+			"hash": "TRif4+D5bXb4D7hnrgyFp721Bm/fxi/A9wybmz6uk54=",
+			"size": 144
+		},
+		{
+			"name": "/mjs/chtml/fraktur.js",
+			"hash": "XzEKnw4SejHJlag6T8N7iSqK62iTB/TEgkdpP9J7KvU=",
+			"size": 62
+		},
+		{
+			"name": "/mjs/chtml/fraktur.js.map",
+			"hash": "uK6ewFJ0xGy50zm0T5ktKZ1OWk47O3En0TdPIm5EiUw=",
+			"size": 155
+		},
+		{
+			"name": "/mjs/chtml/fraktur-bold.d.ts",
+			"hash": "BeX9aWSx901RGrpp2LHyShtOyqce/2OrJjyzAAdtsB4=",
+			"size": 148
+		},
+		{
+			"name": "/mjs/chtml/fraktur-bold.js",
+			"hash": "COogmJR7knmb56BMEGTxVnvN67bslXa7ZnTZqe9rd/I=",
+			"size": 71
+		},
+		{
+			"name": "/mjs/chtml/fraktur-bold.js.map",
+			"hash": "AsFldJRsxJFqPGd/66ZMqwaYUZd/1rgv6iML7zK30MU=",
+			"size": 165
+		},
+		{
+			"name": "/mjs/chtml/italic.d.ts",
+			"hash": "5uH7SyTBUMfBsmZWsh5yEJZou6jFknGCNLrLLxvXhtE=",
+			"size": 143
+		},
+		{
+			"name": "/mjs/chtml/italic.js",
+			"hash": "j1fli8E+gs1Cna7NpdX208Bxs6BwGQj3Fj9+joZgw8g=",
+			"size": 4562
+		},
+		{
+			"name": "/mjs/chtml/italic.js.map",
+			"hash": "hYuc1XwsiN0QQRYP74FeNJ7ugyS5E5ZEVsJ25iOO/iw=",
+			"size": 8610
+		},
+		{
+			"name": "/mjs/chtml/largeop.d.ts",
+			"hash": "2+tf+UeKLw36RKu5GUDH/rqi8SVnm3UP+g1JR7l86Bo=",
+			"size": 144
+		},
+		{
+			"name": "/mjs/chtml/largeop.js",
+			"hash": "iAp8OvAnQE005a6qSvttM08PwVEuYUkpioS9aqZCQY0=",
+			"size": 3492
+		},
+		{
+			"name": "/mjs/chtml/largeop.js.map",
+			"hash": "aoHBk1cTZE1aRiBGcBV0VBpUVtvT8vZyw5DY9cyYoGE=",
+			"size": 5949
+		},
+		{
+			"name": "/mjs/chtml/monospace.d.ts",
+			"hash": "tHxn0ldc68/cgvZZRIoovXqyV/ccDIV+LSw7+YvjXtY=",
+			"size": 146
+		},
+		{
+			"name": "/mjs/chtml/monospace.js",
+			"hash": "bWBxVBfuSXrFj3LG9L+Zpx2PLud6knSBlnAJfqBu9vU=",
+			"size": 66
+		},
+		{
+			"name": "/mjs/chtml/monospace.js.map",
+			"hash": "xKnhv6IZa3/gMCOsXehIj9ROegCrmAeZl8+B5aTLcyQ=",
+			"size": 159
+		},
+		{
+			"name": "/mjs/chtml/normal.d.ts",
+			"hash": "3yDyX/9CxEga8hMq3/3RLFBVJNbpB65JvVkXoAXO3Go=",
+			"size": 143
+		},
+		{
+			"name": "/mjs/chtml/normal.js",
+			"hash": "bxeroRR/CPTIrhYeclR2bCDMdUvbLQGF2sPo3oRYwnc=",
+			"size": 47652
+		},
+		{
+			"name": "/mjs/chtml/normal.js.map",
+			"hash": "x6Wl9Bfdsh3RVLjiVx5oZ20GDWFP/tLw3p/8+P1r6Us=",
+			"size": 83608
+		},
+		{
+			"name": "/mjs/chtml/sans-serif.d.ts",
+			"hash": "+/9fbcxvuq0wREpJsS3Bz9jWu8aNEht32W+JNCl81Qw=",
+			"size": 146
+		},
+		{
+			"name": "/mjs/chtml/sans-serif.js",
+			"hash": "rNQBxXax7e2RcCAuPTUstS6CZQZcexcJiU1ctKwGNN4=",
+			"size": 67
+		},
+		{
+			"name": "/mjs/chtml/sans-serif.js.map",
+			"hash": "31sC3eCyFRPC/k9vDP2VHvObsInxrM0Lhgc0Oyox1yE=",
+			"size": 161
+		},
+		{
+			"name": "/mjs/chtml/sans-serif-bold.d.ts",
+			"hash": "WvV1bL/Idwpg0/IzSnz+/cgX0/dhkCsiAM+zI9XO3BQ=",
+			"size": 150
+		},
+		{
+			"name": "/mjs/chtml/sans-serif-bold.js",
+			"hash": "xOnaUjUrgMUGhp/qAiryOsL9z/pfClNtN0/9ty7i5Zk=",
+			"size": 76
+		},
+		{
+			"name": "/mjs/chtml/sans-serif-bold.js.map",
+			"hash": "/WqPGGJkZtu0r29NQmQks2lBVuzo8CLjGxe2+cvPGX4=",
+			"size": 171
+		},
+		{
+			"name": "/mjs/chtml/sans-serif-bold-italic.d.ts",
+			"hash": "+X6+EiFxyj9tTecGFJ1/QE51Rx64gM+OTU8M5L1EapA=",
+			"size": 156
+		},
+		{
+			"name": "/mjs/chtml/sans-serif-bold-italic.js",
+			"hash": "OVB4UlV5crw9fOOFj5QGzhDutAJmVXWZipQBe4Pienw=",
+			"size": 89
+		},
+		{
+			"name": "/mjs/chtml/sans-serif-bold-italic.js.map",
+			"hash": "bnRvXUdQYO9HIrZnTpKKLqHJgeFujInQYvj9rMUUVEk=",
+			"size": 187
+		},
+		{
+			"name": "/mjs/chtml/sans-serif-italic.d.ts",
+			"hash": "ElcfJAbhToQxog6ar/quvCPd5WAeVftGTQpoc6cebag=",
+			"size": 152
+		},
+		{
+			"name": "/mjs/chtml/sans-serif-italic.js",
+			"hash": "vDVqWYHGM3W3UdVCpCsJS0pbUPMzWqryOylihk7jim8=",
+			"size": 80
+		},
+		{
+			"name": "/mjs/chtml/sans-serif-italic.js.map",
+			"hash": "ZKUy5ikfmZPCd2HS74w25YgL5y2r5y6uG+WkupCCioE=",
+			"size": 175
+		},
+		{
+			"name": "/mjs/chtml/script.d.ts",
+			"hash": "iiLI9oNQOwj1sorV5vIzJb/y7dak81WXw7QqTxsOdQw=",
+			"size": 143
+		},
+		{
+			"name": "/mjs/chtml/script.js",
+			"hash": "4yj75tfZZJUizj0jhSXtiD14p09HzYICLgXYl8e3MB8=",
+			"size": 60
+		},
+		{
+			"name": "/mjs/chtml/script.js.map",
+			"hash": "fDY5rFh8o3cGezC2dvMAh2biGAMAb+znzYvApZvJ4rY=",
+			"size": 153
+		},
+		{
+			"name": "/mjs/chtml/script-bold.d.ts",
+			"hash": "G7kDk6iuWxVvXYEMlWZVWhOoARS6S51sdRjsyd96QVo=",
+			"size": 147
+		},
+		{
+			"name": "/mjs/chtml/script-bold.js",
+			"hash": "SInxeOaJAk9RQrV7n7kHUiBNv+B/W+kTFUTPVfCN5Zc=",
+			"size": 69
+		},
+		{
+			"name": "/mjs/chtml/script-bold.js.map",
+			"hash": "KMsZj/4HzQ+df89cI+fUsJiDeIWgVB2yQS7QZJZHL5c=",
+			"size": 163
+		},
+		{
+			"name": "/mjs/chtml/size3.d.ts",
+			"hash": "tDw9o/zyQgmgdg6Qe6MO9sV3vtTFTV6JRbariMSZd/Y=",
+			"size": 142
+		},
+		{
+			"name": "/mjs/chtml/size3.js",
+			"hash": "AEDDcQoUHhYo2odBcbtcrfQlDh5p9K46dpO3pPf+gPk=",
+			"size": 1532
+		},
+		{
+			"name": "/mjs/chtml/size3.js.map",
+			"hash": "IWcvrvnmv37mOnVcvJhS2i/1wdmn0aOHTOQO1+7zlis=",
+			"size": 2621
+		},
+		{
+			"name": "/mjs/chtml/size4.d.ts",
+			"hash": "Kh9LpPVkOpIHls+4vfa63rVUjDYqpIdr2UAf/YulVvo=",
+			"size": 142
+		},
+		{
+			"name": "/mjs/chtml/size4.js",
+			"hash": "pVZSFn1FfF85gT39nTjExuEhsxisBmVwxzCZobVNpqo=",
+			"size": 1514
+		},
+		{
+			"name": "/mjs/chtml/size4.js.map",
+			"hash": "MOop7bUrt7zbkwVWni1NFnkgIjlxVRs1WzUe3W6v5fU=",
+			"size": 2591
+		},
+		{
+			"name": "/mjs/chtml/size5.d.ts",
+			"hash": "ewUXvN6LoqYEIhzO1UTRpb0vbZ2ENSCK/z+T/pgIBMw=",
+			"size": 142
+		},
+		{
+			"name": "/mjs/chtml/size5.js",
+			"hash": "b15g1QYxh2TmQz9DazdysnxzSWWieDCZyOyUca50kD8=",
+			"size": 1413
+		},
+		{
+			"name": "/mjs/chtml/size5.js.map",
+			"hash": "CkO03OOiSK2o1rjl4B2bNtylXukxT2tpDGlsRz+wF2U=",
+			"size": 2438
+		},
+		{
+			"name": "/mjs/chtml/size6.d.ts",
+			"hash": "d0T9tDGloR3yGWaQO+MAuDYGbh//IrJTPtkvpRAIo3E=",
+			"size": 142
+		},
+		{
+			"name": "/mjs/chtml/size6.js",
+			"hash": "Njflt33C6bzpaDE1csA7XI5+lfmXqiIiGCcS2JKADTY=",
+			"size": 438
+		},
+		{
+			"name": "/mjs/chtml/size6.js.map",
+			"hash": "rcDHw5DmN/ICgqdtJstdohZvsm2qLXFGDRE5fi6XDSo=",
+			"size": 763
+		},
+		{
+			"name": "/mjs/chtml/size7.d.ts",
+			"hash": "W6x3aIaZvBHan9XOLjL7623J1L6+kgCYrPJQ2IpYkC4=",
+			"size": 142
+		},
+		{
+			"name": "/mjs/chtml/size7.js",
+			"hash": "eYsq7j3yHx08zhWPEdLPEWauBV0BgsCdEcqOj3qhkCY=",
+			"size": 448
+		},
+		{
+			"name": "/mjs/chtml/size7.js.map",
+			"hash": "gp1YCf8zW9Xj0zMFdHX4e0GoTQGWleNRwrYvJdObW1Q=",
+			"size": 763
+		},
+		{
+			"name": "/mjs/chtml/size8.d.ts",
+			"hash": "+33TZ+90ClRT+4MoR8pUnuiuyf5Awq1T5DzPzdOCzEI=",
+			"size": 142
+		},
+		{
+			"name": "/mjs/chtml/size8.js",
+			"hash": "C2fVfpccfDUY66hZFW6g5l3q5qwXLLyZvx/c/7NWHbg=",
+			"size": 454
+		},
+		{
+			"name": "/mjs/chtml/size8.js.map",
+			"hash": "GhMNV7xy2NlGpB0n5iv/fmThNx8by/ixnAi1S+BwDKw=",
+			"size": 763
+		},
+		{
+			"name": "/mjs/chtml/size9.d.ts",
+			"hash": "tm0sm+2NdIVi/uVOQrOO5lrbBOBkiEToQ7wCCDLCbO8=",
+			"size": 142
+		},
+		{
+			"name": "/mjs/chtml/size9.js",
+			"hash": "sZafBDXN1OjkUZZSggO64NltvQb4FUFBPQiETY0jqPQ=",
+			"size": 438
+		},
+		{
+			"name": "/mjs/chtml/size9.js.map",
+			"hash": "V8pCvtuu6orpSuV4sBx/1CTNDi87YWN8q4rilmd+WdM=",
+			"size": 763
+		},
+		{
+			"name": "/mjs/chtml/size10.d.ts",
+			"hash": "jsmY12+/8nYOCflVL6268bEjhW2SvOAT9rz5o4nQfJM=",
+			"size": 143
+		},
+		{
+			"name": "/mjs/chtml/size10.js",
+			"hash": "vxgmaDFwG1Pn+Bjj6Orcn84Txc892PxkUYSGZivsfm4=",
+			"size": 434
+		},
+		{
+			"name": "/mjs/chtml/size10.js.map",
+			"hash": "t4BTLX51y5YXH5Oj4/fQmVzk+d5NIk7VMDVspsKHu9A=",
+			"size": 765
+		},
+		{
+			"name": "/mjs/chtml/size11.d.ts",
+			"hash": "A1FtWn4qU7tZvQVumaPP8Az/SRrlUzQ91/VEwFRkmLc=",
+			"size": 143
+		},
+		{
+			"name": "/mjs/chtml/size11.js",
+			"hash": "PGewxUVHM0KrP3H/qf9jRwH4JxE7Z3zthuxohpnTTXY=",
+			"size": 442
+		},
+		{
+			"name": "/mjs/chtml/size11.js.map",
+			"hash": "Bck6ZVGx4m4+dDtofA+5B5bJ2+O6TxHQRZMCRn+wq48=",
+			"size": 765
+		},
+		{
+			"name": "/mjs/chtml/size12.d.ts",
+			"hash": "+wmshvJKfvNdFh6zr/9xq3gMzwW77pWSaxz3KwW9z2U=",
+			"size": 143
+		},
+		{
+			"name": "/mjs/chtml/size12.js",
+			"hash": "DfJprfMGpbbMFdwcgzMbqYozIFuFRnAE75oonhbgMCU=",
+			"size": 444
+		},
+		{
+			"name": "/mjs/chtml/size12.js.map",
+			"hash": "0pKVmQh5JCZ356DnZHNqlF7MaztfuWZWqUSQsZijgdk=",
+			"size": 765
+		},
+		{
+			"name": "/mjs/chtml/smallop.d.ts",
+			"hash": "qlNptJ1GXtSfRfgwOEvi5rTp53Hrz5BMoeX/KBrOKxI=",
+			"size": 144
+		},
+		{
+			"name": "/mjs/chtml/smallop.js",
+			"hash": "PfAa9l9IzG17bwMdveNjMxmzHWfBbprupP3+76CZh+E=",
+			"size": 1596
+		},
+		{
+			"name": "/mjs/chtml/smallop.js.map",
+			"hash": "U7LO3Ed76sNl13LZL8KjIBw0j2GSwaGs+eGbh4B3CbQ=",
+			"size": 2829
+		},
+		{
+			"name": "/mjs/chtml/tex-calligraphic.d.ts",
+			"hash": "2a89WlQpCD0Wa6yOKA+s5QYF7Obf9c5FAuTHyrXfEfg=",
+			"size": 152
+		},
+		{
+			"name": "/mjs/chtml/tex-calligraphic.js",
+			"hash": "yFbCi8K3iIA6Vjcby1oDSQY5AvRlYnkrcgS4KLc4r2M=",
+			"size": 79
+		},
+		{
+			"name": "/mjs/chtml/tex-calligraphic.js.map",
+			"hash": "LTKRNCQ2fRkaR5NsVPfodORrskAnRqnIlWGWMT9whA4=",
+			"size": 173
+		},
+		{
+			"name": "/mjs/chtml/tex-calligraphic-bold.d.ts",
+			"hash": "PptTeqdDMNOxouKm9Fkq34sNlhPHSQLfBAo8i7MHaKg=",
+			"size": 156
+		},
+		{
+			"name": "/mjs/chtml/tex-calligraphic-bold.js",
+			"hash": "EsW6ScTNe+k/aPtECJKJdApe9jwbDLz+MXDVJIjnNWU=",
+			"size": 88
+		},
+		{
+			"name": "/mjs/chtml/tex-calligraphic-bold.js.map",
+			"hash": "brzyp7BMNRueYpNHC1cWxFpw7fywC6gjtTpuPjEmijM=",
+			"size": 185
+		},
+		{
+			"name": "/mjs/chtml/tex-mathit.d.ts",
+			"hash": "8GiWEQAAFYdk+/JRWk1xrGe1meQjDYzLxl7pJcDXZB4=",
+			"size": 146
+		},
+		{
+			"name": "/mjs/chtml/tex-mathit.js",
+			"hash": "ewR6pmLhZXO2ysT397EyZ1eppDmZdhlpJmTsIVUuzO8=",
+			"size": 2226
+		},
+		{
+			"name": "/mjs/chtml/tex-mathit.js.map",
+			"hash": "8ClHvE/EhJ9wqPCraa5n0LSyyMy+PKQPmoc5eScqaLE=",
+			"size": 4133
+		},
+		{
+			"name": "/mjs/chtml/tex-oldstyle.d.ts",
+			"hash": "0ABeYLkxY2UQ/VeZF9g/qOCkarxEQWwQ+0Tngu8M5Uw=",
+			"size": 148
+		},
+		{
+			"name": "/mjs/chtml/tex-oldstyle.js",
+			"hash": "8KeQxz0AmBKEnGYkltFSZLsihwEEmGgFffPLQE7aAmM=",
+			"size": 365
+		},
+		{
+			"name": "/mjs/chtml/tex-oldstyle.js.map",
+			"hash": "FfsDyM4t+f5NO+k8MqpQtXpq4mP18lkgR3eNNeaSw8s=",
+			"size": 675
+		},
+		{
+			"name": "/mjs/chtml/tex-oldstyle-bold.d.ts",
+			"hash": "9InSkhTynKbWEn+dVEiRjWet0cw2pygt5jJLqfxJ1+o=",
+			"size": 152
+		},
+		{
+			"name": "/mjs/chtml/tex-oldstyle-bold.js",
+			"hash": "pOgL52kpvrufl1/hyzyYcSgXxvGUAVfMQUu/Pj6JTsE=",
+			"size": 374
+		},
+		{
+			"name": "/mjs/chtml/tex-oldstyle-bold.js.map",
+			"hash": "Aki3rxRubzivuBTf7YHvBGv6ZhJdSKBC4X2xz0GRmko=",
+			"size": 685
+		},
+		{
+			"name": "/mjs/chtml/tex-variant.d.ts",
+			"hash": "VJPz/Ei4vXKXS2MrNuR9o5gaA2z82iAO3+UARHI9uHs=",
+			"size": 147
+		},
+		{
+			"name": "/mjs/chtml/tex-variant.js",
+			"hash": "eHJENg0C+2e09OY8W+Ot6aEohGcuBwLgEBBQ5ahdpvg=",
+			"size": 2962
+		},
+		{
+			"name": "/mjs/chtml/tex-variant.js.map",
+			"hash": "OobqesCDEnFOGJ3Z67jejL05CKt8NZBpHvDTVbsMq4c=",
+			"size": 5034
+		},
+		{
+			"name": "/mjs/chtml/up.d.ts",
+			"hash": "Q4tgcurm+nH7Axs2fSBdlTzC5scNDLHb0oFsdWCjLME=",
+			"size": 139
+		},
+		{
+			"name": "/mjs/chtml/up.js",
+			"hash": "sEOXUFa/FqF11ROTA8AQxhbQrs58wgDlNIiQCC8ZePM=",
+			"size": 52
+		},
+		{
+			"name": "/mjs/chtml/up.js.map",
+			"hash": "E2XTRNAxi0JddrgUzek/nKYrGvyuRRUpnrBlDVpL95Q=",
+			"size": 145
+		},
+		{
+			"name": "/mjs/chtml/up-dsp.d.ts",
+			"hash": "QL93/hK5KhHZ394rniD0wjv/Up1Q1CLO1lrQgVfADks=",
+			"size": 142
+		},
+		{
+			"name": "/mjs/chtml/up-dsp.js",
+			"hash": "4xecsvwA84IOssA0cXzDVdEJIFg58pydJYO7jwtHp0I=",
+			"size": 59
+		},
+		{
+			"name": "/mjs/chtml/up-dsp.js.map",
+			"hash": "CnQ1aRj9S+gvfxPy9BsfqW97HKT1yr7E76LZ9jN+yEY=",
+			"size": 153
+		},
+		{
+			"name": "/mjs/common.d.ts",
+			"hash": "6q86Q6sAfPBY4Ov9OltWYeTImmL5Cyyfn+V2w9jcUJs=",
+			"size": 315
+		},
+		{
+			"name": "/mjs/common.js",
+			"hash": "unjkjYvtatQoVhTQGzX51M0UEM0p+WGOEbybjSLCD/8=",
+			"size": 2323
+		},
+		{
+			"name": "/mjs/common.js.map",
+			"hash": "ugPHINz8GMLe6xJ3SmwwXtDqwcg16G4oh7NrjzFz8vs=",
+			"size": 2115
+		},
+		{
+			"name": "/mjs/nofont.d.ts",
+			"hash": "40z/lYqSsbHrgMQIw/SGKA7eoWMtV04PuRnq36MgQQ0=",
+			"size": 76
+		},
+		{
+			"name": "/mjs/nofont.js",
+			"hash": "Hn6g5m2XTuMHThAuhcuO5VacxY4yv8/DUP62vWv0n+c=",
+			"size": 112
+		},
+		{
+			"name": "/mjs/nofont.js.map",
+			"hash": "2AclH25gHzZCZEUfsrNQR13cxvjxzhdcHwCXcFj/8zo=",
+			"size": 185
+		},
+		{
+			"name": "/mjs/package.json",
+			"hash": "PKnUr9IUJQh88xiTuPn2PIGwuECNteNDynbl+Komq5o=",
+			"size": 23
+		},
+		{
+			"name": "/mjs/svg.d.ts",
+			"hash": "xCXQ86Oq2w3PZqN70jpSnKZvgsRz7GpuyCFggQvcPzU=",
+			"size": 878
+		},
+		{
+			"name": "/mjs/svg.js",
+			"hash": "eljmjyC/0WAmbTyPiAx5Pv2LDSg6eLycCoZN0IfUyWo=",
+			"size": 19265
+		},
+		{
+			"name": "/mjs/svg.js.map",
+			"hash": "IICZSyJkntwDY4R3SakEBimm7YQ7bcffIkXcSTM2LBU=",
+			"size": 21786
+		},
+		{
+			"name": "/mjs/svg/bold.d.ts",
+			"hash": "Fyw5KS/ndp/mKt7DlRjZJfo3BLNcOlvqpkhaJPyjBK0=",
+			"size": 135
+		},
+		{
+			"name": "/mjs/svg/bold.js",
+			"hash": "GAO5fsU8S4NZ4l+bMM/puKzei8YMgGVrI5DKhW4/ywM=",
+			"size": 20236
+		},
+		{
+			"name": "/mjs/svg/bold.js.map",
+			"hash": "8m44+agAEE/Gs1qXWaJ2AsFJPEcLOYgATXmxVKtzUhM=",
+			"size": 10284
+		},
+		{
+			"name": "/mjs/svg/bold-italic.d.ts",
+			"hash": "1cRWkkFkNcyFdqGEgF/j1GcQplqi2hM/979BR982Chs=",
+			"size": 141
+		},
+		{
+			"name": "/mjs/svg/bold-italic.js",
+			"hash": "SRB5Op3wuDAHieEXpx5O528vhGBGAGXTbGTN1sDT2dM=",
+			"size": 23804
+		},
+		{
+			"name": "/mjs/svg/bold-italic.js.map",
+			"hash": "gedpd1TGSS0cIgVduL4eCnK0dtrWaJvK/1T5UaKLays=",
+			"size": 11948
+		},
+		{
+			"name": "/mjs/svg/default.d.ts",
+			"hash": "40z/lYqSsbHrgMQIw/SGKA7eoWMtV04PuRnq36MgQQ0=",
+			"size": 76
+		},
+		{
+			"name": "/mjs/svg/default.js",
+			"hash": "4bZ3Pc6XoClhBbX4gsXLZ1Zz+5ZmmpdIeCFPFKiJPIQ=",
+			"size": 171
+		},
+		{
+			"name": "/mjs/svg/default.js.map",
+			"hash": "PWRO7SlBkoIdAlUgdATc4thSFQBSsoCZ29KbG94wLVo=",
+			"size": 239
+		},
+		{
+			"name": "/mjs/svg/delimiters.d.ts",
+			"hash": "qay9MwBcpLaPULnyD77rtQisH+C4G0X4PEIYfiZnq68=",
+			"size": 149
+		},
+		{
+			"name": "/mjs/svg/delimiters.js",
+			"hash": "sBqEHLlF6we/oq/YJBg2rA/beVg4Y3gIJcs5o1/8VZM=",
+			"size": 28300
+		},
+		{
+			"name": "/mjs/svg/delimiters.js.map",
+			"hash": "wLudAzjQnWbUfqlpbtv+Ce2DlngWWhtJKS5uU6vtRNw=",
+			"size": 38972
+		},
+		{
+			"name": "/mjs/svg/double-struck.d.ts",
+			"hash": "YMnCir6ihs72ULf5mRLQSJGTH6687T3XYekbE6rgnEA=",
+			"size": 143
+		},
+		{
+			"name": "/mjs/svg/double-struck.js",
+			"hash": "fQY11/APzrJ8mI4uu+RBsh+Bc3KaXRY+dzDu0tOSpHk=",
+			"size": 73
+		},
+		{
+			"name": "/mjs/svg/double-struck.js.map",
+			"hash": "DvCTHs1MczTuqucZXj/wdp3LvCs46cg7HoV9/LKDgn0=",
+			"size": 165
+		},
+		{
+			"name": "/mjs/svg/double-struck-italic.d.ts",
+			"hash": "2bE7uO2T1xP0P2d8RUNWq5y28BDL9U8Ql4efQoMPPaM=",
+			"size": 149
+		},
+		{
+			"name": "/mjs/svg/double-struck-italic.js",
+			"hash": "nXdDkD+AjlrIWZ0a6xdqiTMQCtW2bNIPMvZQJbK6yIo=",
+			"size": 14561
+		},
+		{
+			"name": "/mjs/svg/double-struck-italic.js.map",
+			"hash": "KfWU133aVj6Ar9KM7m4DgnrJ2lFRcFlk9Zi9sfeHUm8=",
+			"size": 6105
+		},
+		{
+			"name": "/mjs/svg/dynamic/accents.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/mjs/svg/dynamic/accents.js",
+			"hash": "8hE9TA8rvQXcJQaEMH82HO55pAkQdtNo91CaA5yaq9E=",
+			"size": 26428
+		},
+		{
+			"name": "/mjs/svg/dynamic/accents.js.map",
+			"hash": "UhDyAMBN9/H5J5VfGegzEwEM8/mS2A4r0MW47OR25Z0=",
+			"size": 13331
+		},
+		{
+			"name": "/mjs/svg/dynamic/accents-other.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/mjs/svg/dynamic/accents-other.js",
+			"hash": "eDFQnIwvSUvp2NjUdrgugR4xXoK/GyAA49bOreaPWd8=",
+			"size": 74360
+		},
+		{
+			"name": "/mjs/svg/dynamic/accents-other.js.map",
+			"hash": "A47eA2ibZGIotTWAT2ppr9QBVlOOm0+grpeSTYSBu4g=",
+			"size": 37924
+		},
+		{
+			"name": "/mjs/svg/dynamic/arrows.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/mjs/svg/dynamic/arrows.js",
+			"hash": "hthat2QUw2Qa4RYcPAdG+TdiHVFmUJnig2eK6ZAn4/4=",
+			"size": 77070
+		},
+		{
+			"name": "/mjs/svg/dynamic/arrows.js.map",
+			"hash": "kai8ufojkgD/Y5xNmKwvIOmtBAPof8vPJ4V0CMFbkBY=",
+			"size": 15715
+		},
+		{
+			"name": "/mjs/svg/dynamic/calligraphic.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/mjs/svg/dynamic/calligraphic.js",
+			"hash": "JF0hwfOmbjNaY4X+4UNbmSuXG8MstOV6iUicbEZGcy4=",
+			"size": 53677
+		},
+		{
+			"name": "/mjs/svg/dynamic/calligraphic.js.map",
+			"hash": "W8/ay2bIOzdZyQR1ceypLXjXm3ObNw6a5nLMyD2oO34=",
+			"size": 12285
+		},
+		{
+			"name": "/mjs/svg/dynamic/cyrillic.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/mjs/svg/dynamic/cyrillic.js",
+			"hash": "vOthn7jxE19y4WstoOOUYufNnqcHuK/YXRLjJnbmjnw=",
+			"size": 177816
+		},
+		{
+			"name": "/mjs/svg/dynamic/cyrillic.js.map",
+			"hash": "7Yo+xtvlzfwWeyxlVIX1ghvG1X3N0tpDYDNOjoQzAEo=",
+			"size": 38924
+		},
+		{
+			"name": "/mjs/svg/dynamic/dingbats.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/mjs/svg/dynamic/dingbats.js",
+			"hash": "7LbmDVLntSigaLE4dewaQ/JK6UU99URaFi0E4tSnI6k=",
+			"size": 141343
+		},
+		{
+			"name": "/mjs/svg/dynamic/dingbats.js.map",
+			"hash": "EbuDpOX50quL2PytiJED8tXFyrijsq7PeGmv5YGy6Uc=",
+			"size": 22468
+		},
+		{
+			"name": "/mjs/svg/dynamic/double-struck.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/mjs/svg/dynamic/double-struck.js",
+			"hash": "Xqd6g1W1vbGFOAwztXWr0HXJ77H5zp9auDmatu2nYj8=",
+			"size": 21345
+		},
+		{
+			"name": "/mjs/svg/dynamic/double-struck.js.map",
+			"hash": "VNt+3YgRmaEI2lXNM/rDp6DfDxCAkLpG2/ZGT8KCjjA=",
+			"size": 7414
+		},
+		{
+			"name": "/mjs/svg/dynamic/enclosed.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/mjs/svg/dynamic/enclosed.js",
+			"hash": "ubBGLayV+c9aTDaUQU6rMOVdWTuR1+cwHnMjIGGsCFw=",
+			"size": 103169
+		},
+		{
+			"name": "/mjs/svg/dynamic/enclosed.js.map",
+			"hash": "ZIaRUZm/ld9/X1xEhUepm5m2kSacV9uAgZIJ6VnaQVc=",
+			"size": 16297
+		},
+		{
+			"name": "/mjs/svg/dynamic/fraktur.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/mjs/svg/dynamic/fraktur.js",
+			"hash": "qxPYbY+z2DjaDV/VBrTN3Fw6fJpTA2R7oHbnvqB3UWA=",
+			"size": 57614
+		},
+		{
+			"name": "/mjs/svg/dynamic/fraktur.js.map",
+			"hash": "lOnNpgWvuv2Qp6W/T2qR15jq44H9D8dDdYT9Fz7YsLk=",
+			"size": 11055
+		},
+		{
+			"name": "/mjs/svg/dynamic/greek.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/mjs/svg/dynamic/greek.js",
+			"hash": "eJOh9JlyJXvKCVctx2mdl9UxbXmlx3JugLSrFnmFw2I=",
+			"size": 50954
+		},
+		{
+			"name": "/mjs/svg/dynamic/greek.js.map",
+			"hash": "RYZbgoegxZyN/PxPpmiLvcMUgtJWZXDvncJADGTZTzA=",
+			"size": 13036
+		},
+		{
+			"name": "/mjs/svg/dynamic/latin.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/mjs/svg/dynamic/latin.js",
+			"hash": "zsvTsGHOu6YeNiDsyCZRTD8gLs2RSNgR6Bx6lIQT1Kw=",
+			"size": 209962
+		},
+		{
+			"name": "/mjs/svg/dynamic/latin.js.map",
+			"hash": "siKI3EdYzDtnrJSz+9n0AK+eXplt0h4KRCUu+UQrQrQ=",
+			"size": 42179
+		},
+		{
+			"name": "/mjs/svg/dynamic/latin-b.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/mjs/svg/dynamic/latin-b.js",
+			"hash": "hcDzR6DxMclxcybXluhfrX6ZKaRe9at8fM0X9qsgZds=",
+			"size": 211216
+		},
+		{
+			"name": "/mjs/svg/dynamic/latin-b.js.map",
+			"hash": "a3qg81P+ZsA0tLoiiyEF7cs7QpzXrFYXz+dWLWoZFpw=",
+			"size": 42692
+		},
+		{
+			"name": "/mjs/svg/dynamic/latin-bi.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/mjs/svg/dynamic/latin-bi.js",
+			"hash": "dqw1u5iA0YFwXT3P4IE/Rq/AmLgKZfRAHcY4l5FwCAg=",
+			"size": 227830
+		},
+		{
+			"name": "/mjs/svg/dynamic/latin-bi.js.map",
+			"hash": "4NOqtANon9+WwP6hgcBNxSWVsS9lFB3/pjBEF279V+s=",
+			"size": 46125
+		},
+		{
+			"name": "/mjs/svg/dynamic/latin-i.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/mjs/svg/dynamic/latin-i.js",
+			"hash": "qQvy2wnYC0zbPlhQWsZJ1sOaL1bNZmPSgyyhFOuG9ys=",
+			"size": 227886
+		},
+		{
+			"name": "/mjs/svg/dynamic/latin-i.js.map",
+			"hash": "Dtac7upfn4o5V9i9rTEUaARSUsj1krZ3sM/qbP3XbdM=",
+			"size": 45876
+		},
+		{
+			"name": "/mjs/svg/dynamic/math.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/mjs/svg/dynamic/math.js",
+			"hash": "Z3pxcEMVVba2nvXKpVMdFN9O4pFUyEH1+f0LKNbPfZo=",
+			"size": 103697
+		},
+		{
+			"name": "/mjs/svg/dynamic/math.js.map",
+			"hash": "3cqF5oRxs+kqFfFx7Sn0hDUVxSOijkQoq6B415qGgUE=",
+			"size": 33711
+		},
+		{
+			"name": "/mjs/svg/dynamic/monospace.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/mjs/svg/dynamic/monospace.js",
+			"hash": "FZlXuON5Cer+0RMo9p2La9VBy0DmgjKCQqXiJYx86fk=",
+			"size": 35798
+		},
+		{
+			"name": "/mjs/svg/dynamic/monospace.js.map",
+			"hash": "HQlnw+dd9uMKTXr7gyjHWwwcUio4VchAj2souPqIVx0=",
+			"size": 6192
+		},
+		{
+			"name": "/mjs/svg/dynamic/phonetics.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/mjs/svg/dynamic/phonetics.js",
+			"hash": "BUdxJ5en5LPdVijYoqDAijFN41etht4av3FniSRFzQQ=",
+			"size": 181188
+		},
+		{
+			"name": "/mjs/svg/dynamic/phonetics.js.map",
+			"hash": "2UQdLGpp0MX+bJBPE6f+IxAwIaseoptCWrKl2mZj4W4=",
+			"size": 39287
+		},
+		{
+			"name": "/mjs/svg/dynamic/sans-serif.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/mjs/svg/dynamic/sans-serif.js",
+			"hash": "OZIcmZUfOoM8z/SygnTKejGGWQOwr1FkbhtPxlv00eI=",
+			"size": 71915
+		},
+		{
+			"name": "/mjs/svg/dynamic/sans-serif.js.map",
+			"hash": "4z7H1v/1VzziqfR4uPg6p+Srr6+XREds/95gFaN+8mU=",
+			"size": 30434
+		},
+		{
+			"name": "/mjs/svg/dynamic/script.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/mjs/svg/dynamic/script.js",
+			"hash": "5AIvKzrK6eCPVRRSZRu0Onu4v7nymj1yKDawq3IVhzo=",
+			"size": 67292
+		},
+		{
+			"name": "/mjs/svg/dynamic/script.js.map",
+			"hash": "mfAB4sRNTZp9C4rXPwNP1lSez4etGwoZLv2f7KhjxM8=",
+			"size": 12470
+		},
+		{
+			"name": "/mjs/svg/dynamic/shapes.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/mjs/svg/dynamic/shapes.js",
+			"hash": "W29vAqoNsDLVMJ93lDVO0QuvkswnwpmZo6wPld782Vg=",
+			"size": 241528
+		},
+		{
+			"name": "/mjs/svg/dynamic/shapes.js.map",
+			"hash": "qgxawiSBgxBgu7H5pHJsG2f6XWZLhdVlzBl1NFSoloI=",
+			"size": 38895
+		},
+		{
+			"name": "/mjs/svg/dynamic/stretchy.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/mjs/svg/dynamic/stretchy.js",
+			"hash": "1q/JW208Sxy5aYdkdDYtDmdKr1AMUXMtYr9g3WjeqW0=",
+			"size": 44104
+		},
+		{
+			"name": "/mjs/svg/dynamic/stretchy.js.map",
+			"hash": "KzoXKfwMAzrq5wSqApLgCsiZ07/Euw7c9Cn6bBx0Jzg=",
+			"size": 18274
+		},
+		{
+			"name": "/mjs/svg/dynamic/symbols.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/mjs/svg/dynamic/symbols.js",
+			"hash": "EeSl/1rcI1Nyk4ol9i2w0bP8LOC20lxj08FvWka5UUI=",
+			"size": 126078
+		},
+		{
+			"name": "/mjs/svg/dynamic/symbols.js.map",
+			"hash": "6KiUg4NxFovqaMg7GGjFodGOkDqF5ShfDK66f4dP2BU=",
+			"size": 30829
+		},
+		{
+			"name": "/mjs/svg/dynamic/symbols-other.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/mjs/svg/dynamic/symbols-other.js",
+			"hash": "LisM6ZixKygwRnYsq222G5o5ketF52agYbKoRXqC8Os=",
+			"size": 124400
+		},
+		{
+			"name": "/mjs/svg/dynamic/symbols-other.js.map",
+			"hash": "/TyWBGWAtyDvajbIgsOILHCVvxY8UieqFSfYW4E1kck=",
+			"size": 30099
+		},
+		{
+			"name": "/mjs/svg/dynamic/upright.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/mjs/svg/dynamic/upright.js",
+			"hash": "c9awGLRfib60nZfs6ulnrmqNuYzZua8WT7VeJp7PKQ0=",
+			"size": 42954
+		},
+		{
+			"name": "/mjs/svg/dynamic/upright.js.map",
+			"hash": "AKxTTqsesu/PSzj8Qh/adHr+rz3zMa0H9hN05okx4kc=",
+			"size": 4956
+		},
+		{
+			"name": "/mjs/svg/dynamic/variants.d.ts",
+			"hash": "jmCbtxwguFjHfw6fkLsTGduEd7E/n5ZfGh4YUkv1CIE=",
+			"size": 11
+		},
+		{
+			"name": "/mjs/svg/dynamic/variants.js",
+			"hash": "zhsUuWVGpeyHonHe+KuWbB0M9/9WDbX0F91KLhZfQqo=",
+			"size": 27025
+		},
+		{
+			"name": "/mjs/svg/dynamic/variants.js.map",
+			"hash": "JyFIk3DxrgJnxLVr1w/Zb2zCl7+XESO0tKWnD2UVuBQ=",
+			"size": 9057
+		},
+		{
+			"name": "/mjs/svg/extend.d.ts",
+			"hash": "/lotGwUk4pYBFGNXtEEhAlLV7u983D1Cb+shdcoMmp4=",
+			"size": 137
+		},
+		{
+			"name": "/mjs/svg/extend.js",
+			"hash": "TqzcF67d8S8EYV8csTasM6DZB9w0tTl5+U0YwCoi6TQ=",
+			"size": 5761
+		},
+		{
+			"name": "/mjs/svg/extend.js.map",
+			"hash": "BFiWZ/rdIjtSsNyp0pbZ2pnSe6jbmKaBsKG5nAQdwp4=",
+			"size": 4531
+		},
+		{
+			"name": "/mjs/svg/fraktur.d.ts",
+			"hash": "8z5KOMk1vcgiDJTjOOUe8uqy1a5ByXeRf34fjNmCGhQ=",
+			"size": 138
+		},
+		{
+			"name": "/mjs/svg/fraktur.js",
+			"hash": "XzEKnw4SejHJlag6T8N7iSqK62iTB/TEgkdpP9J7KvU=",
+			"size": 62
+		},
+		{
+			"name": "/mjs/svg/fraktur.js.map",
+			"hash": "lHuT1EqPbrM6uSO92dxQmstDa0azvBHdAF4SpcomyEg=",
+			"size": 153
+		},
+		{
+			"name": "/mjs/svg/fraktur-bold.d.ts",
+			"hash": "mu7eBasvZURulbGwm0ZalUIxEEKE5FJ/afxYxduhoCY=",
+			"size": 142
+		},
+		{
+			"name": "/mjs/svg/fraktur-bold.js",
+			"hash": "COogmJR7knmb56BMEGTxVnvN67bslXa7ZnTZqe9rd/I=",
+			"size": 71
+		},
+		{
+			"name": "/mjs/svg/fraktur-bold.js.map",
+			"hash": "iL6G2TziJ6BrJDPQajEPWu/fV4Vk9IPs/a9AojDYO5w=",
+			"size": 163
+		},
+		{
+			"name": "/mjs/svg/italic.d.ts",
+			"hash": "u32lo0KJAPNJ2IbAeA+ZxZKM9PvZHGoe4GPAv1xgkTk=",
+			"size": 137
+		},
+		{
+			"name": "/mjs/svg/italic.js",
+			"hash": "rT2xcx0OgYWy6mQi/rfgyC2NJ+e2RTb0ytp30WU4TxA=",
+			"size": 23740
+		},
+		{
+			"name": "/mjs/svg/italic.js.map",
+			"hash": "WBdRgGbUzVDKyI+vPHeoWvC6I70ROx8cwRDqBuxrWVc=",
+			"size": 11855
+		},
+		{
+			"name": "/mjs/svg/largeop.d.ts",
+			"hash": "0KC0eoWRczcQ2Fe5c9XtzkzP3jbHwNB+lfk2cOm88Rw=",
+			"size": 138
+		},
+		{
+			"name": "/mjs/svg/largeop.js",
+			"hash": "2bWSfIaheci7FjdSacnk5rSgjam8T/jY/y0sTOxKkVM=",
+			"size": 33185
+		},
+		{
+			"name": "/mjs/svg/largeop.js.map",
+			"hash": "RAgUXkCpjR94maPROdsFc/+0V3WKRtUstHp+NLjeQkQ=",
+			"size": 8758
+		},
+		{
+			"name": "/mjs/svg/monospace.d.ts",
+			"hash": "vazHm4DcVxZion/JoNmAfkK1ji4+fJwBb8cJEN+/dBw=",
+			"size": 140
+		},
+		{
+			"name": "/mjs/svg/monospace.js",
+			"hash": "bWBxVBfuSXrFj3LG9L+Zpx2PLud6knSBlnAJfqBu9vU=",
+			"size": 66
+		},
+		{
+			"name": "/mjs/svg/monospace.js.map",
+			"hash": "RUOIbnsl41Y062U1EE0dEo16h85U67l1Sa7YOGz0NN8=",
+			"size": 157
+		},
+		{
+			"name": "/mjs/svg/normal.d.ts",
+			"hash": "vhl0dSkKV9dlnGP+TslEvibdk6gNzggnXCrZ/JZ9W5U=",
+			"size": 137
+		},
+		{
+			"name": "/mjs/svg/normal.js",
+			"hash": "YSfTgmLRzn1zVq0ooWcXV7sgb/dhTSSkzqpePwvHIks=",
+			"size": 360888
+		},
+		{
+			"name": "/mjs/svg/normal.js.map",
+			"hash": "BvXczMGSSLMD3yzkLuYlZ6urs7OUmWI5BJ41M0Sh4Lk=",
+			"size": 118718
+		},
+		{
+			"name": "/mjs/svg/sans-serif.d.ts",
+			"hash": "s6QqvRq0Pi9tGKvkkMQ0cCTi1Zh2kv461/M7NKEulYs=",
+			"size": 140
+		},
+		{
+			"name": "/mjs/svg/sans-serif.js",
+			"hash": "rNQBxXax7e2RcCAuPTUstS6CZQZcexcJiU1ctKwGNN4=",
+			"size": 67
+		},
+		{
+			"name": "/mjs/svg/sans-serif.js.map",
+			"hash": "gOdG/p/LT90LvaioHtv21aqbYzfcU0R4hbdBFmFqiMM=",
+			"size": 159
+		},
+		{
+			"name": "/mjs/svg/sans-serif-bold.d.ts",
+			"hash": "EMktXJ0/xRQmXZuBs49xitbuD0tMTxv1126zUkRTVC4=",
+			"size": 144
+		},
+		{
+			"name": "/mjs/svg/sans-serif-bold.js",
+			"hash": "xOnaUjUrgMUGhp/qAiryOsL9z/pfClNtN0/9ty7i5Zk=",
+			"size": 76
+		},
+		{
+			"name": "/mjs/svg/sans-serif-bold.js.map",
+			"hash": "2T7Z7wqSYysKb4Jf+7aYJea1Q1ga4HKIimG4lSrJQIg=",
+			"size": 169
+		},
+		{
+			"name": "/mjs/svg/sans-serif-bold-italic.d.ts",
+			"hash": "cwse1KWp09ZXCGnblIjOKkog94e4xlAdqywrvM0x+xA=",
+			"size": 150
+		},
+		{
+			"name": "/mjs/svg/sans-serif-bold-italic.js",
+			"hash": "OVB4UlV5crw9fOOFj5QGzhDutAJmVXWZipQBe4Pienw=",
+			"size": 89
+		},
+		{
+			"name": "/mjs/svg/sans-serif-bold-italic.js.map",
+			"hash": "zHkgvsR7IEXueT2y9rMblJwpmgrNpUS9V1zm/gRAS9w=",
+			"size": 185
+		},
+		{
+			"name": "/mjs/svg/sans-serif-italic.d.ts",
+			"hash": "+IM7v6TTy//VQm0cJdFEBuOSwp3H/BJZ5mrlRvVV7R8=",
+			"size": 146
+		},
+		{
+			"name": "/mjs/svg/sans-serif-italic.js",
+			"hash": "vDVqWYHGM3W3UdVCpCsJS0pbUPMzWqryOylihk7jim8=",
+			"size": 80
+		},
+		{
+			"name": "/mjs/svg/sans-serif-italic.js.map",
+			"hash": "q4murnQjTNTrs17guXFKwGao76YOLIUJ+bs/YY9tTGg=",
+			"size": 173
+		},
+		{
+			"name": "/mjs/svg/script.d.ts",
+			"hash": "WWuTDgIPE5t7gDLGjLCsd544mlJ8ONjaWEPsE/TSw6g=",
+			"size": 137
+		},
+		{
+			"name": "/mjs/svg/script.js",
+			"hash": "4yj75tfZZJUizj0jhSXtiD14p09HzYICLgXYl8e3MB8=",
+			"size": 60
+		},
+		{
+			"name": "/mjs/svg/script.js.map",
+			"hash": "AWaNQ3abxmQf1iiLb04hvZoWuj4B/RNgcMZuT1bOxvo=",
+			"size": 151
+		},
+		{
+			"name": "/mjs/svg/script-bold.d.ts",
+			"hash": "e87veBzEbP++TLeqZEvK1y7R6v4a9wsghluROvIEJp8=",
+			"size": 141
+		},
+		{
+			"name": "/mjs/svg/script-bold.js",
+			"hash": "SInxeOaJAk9RQrV7n7kHUiBNv+B/W+kTFUTPVfCN5Zc=",
+			"size": 69
+		},
+		{
+			"name": "/mjs/svg/script-bold.js.map",
+			"hash": "yPFs3e7SJny8lQGG+xxpoFh53lVGSQGXudt++O8DvHM=",
+			"size": 161
+		},
+		{
+			"name": "/mjs/svg/size3.d.ts",
+			"hash": "N0L/SPHN54kevnY4loqd2mld+5StgzJrvmEbL05aWWQ=",
+			"size": 136
+		},
+		{
+			"name": "/mjs/svg/size3.js",
+			"hash": "LDcIl6kDa4vyKEyo+v4kTC31/UBoQnbiQlutefHYg9M=",
+			"size": 7069
+		},
+		{
+			"name": "/mjs/svg/size3.js.map",
+			"hash": "/3uZ9mxtNBk4twkfI034Ubrv9pzLhFk/GvQQ7YlGUHk=",
+			"size": 4049
+		},
+		{
+			"name": "/mjs/svg/size4.d.ts",
+			"hash": "jtPIW0OmjrQ1ST+G/ZVFTBKtTpIBF36hL4TLN8IA2q8=",
+			"size": 136
+		},
+		{
+			"name": "/mjs/svg/size4.js",
+			"hash": "+UQxZLgdNRoepmWBcwHV5kwyjy41y57Y4p8oO64ovrA=",
+			"size": 7087
+		},
+		{
+			"name": "/mjs/svg/size4.js.map",
+			"hash": "/yDgOk6gq5p+g9XKb70619bMjSp/ma3sF75E/v5MeDc=",
+			"size": 4029
+		},
+		{
+			"name": "/mjs/svg/size5.d.ts",
+			"hash": "FzYTjVroT+S9iY9lm0HpbQEFVBmfxpKP25dVVU+X/PQ=",
+			"size": 136
+		},
+		{
+			"name": "/mjs/svg/size5.js",
+			"hash": "HSsYWBmxYAg1nAX8ifyxD+qy1tApXSp/O8s4oUclBBY=",
+			"size": 6824
+		},
+		{
+			"name": "/mjs/svg/size5.js.map",
+			"hash": "ElOFZvmvJwglqExFBu3vblrHhk0x366DoE6rOeicWJc=",
+			"size": 3780
+		},
+		{
+			"name": "/mjs/svg/size6.d.ts",
+			"hash": "bZvQa58pLGIZFqnRfaPLsu87ya8Kg1Exefm3wpwMl68=",
+			"size": 136
+		},
+		{
+			"name": "/mjs/svg/size6.js",
+			"hash": "aT4nnwg0bdD9C4d52lVqidpElLof6VZWaaO2Fub22tM=",
+			"size": 1886
+		},
+		{
+			"name": "/mjs/svg/size6.js.map",
+			"hash": "kOy3XhlXF7mPPGYiqMAYUKC6HOx7PHvAEVB+TGEBfqo=",
+			"size": 1145
+		},
+		{
+			"name": "/mjs/svg/size7.d.ts",
+			"hash": "Uu0VdTinjsFJ77trMDZZJh1wUxVnKWxNQwVO706wX1U=",
+			"size": 136
+		},
+		{
+			"name": "/mjs/svg/size7.js",
+			"hash": "SO2nKtAFstHeDdzDMHzpmW8zuETnk6Cl3N/15e0G5io=",
+			"size": 1924
+		},
+		{
+			"name": "/mjs/svg/size7.js.map",
+			"hash": "0TfWxJioE31mkuT+XO5jhqhaegiJRDUGGjcIwZrNmrA=",
+			"size": 1145
+		},
+		{
+			"name": "/mjs/svg/size8.d.ts",
+			"hash": "1XAhoz/3qhprsmoc0mHnhUd1DR7BAzZkTtOujDMI78c=",
+			"size": 136
+		},
+		{
+			"name": "/mjs/svg/size8.js",
+			"hash": "87kv31l7HOMhPRJgy0AhbLdmc6wlmM1XsGNG0Jpqc3Q=",
+			"size": 1954
+		},
+		{
+			"name": "/mjs/svg/size8.js.map",
+			"hash": "V1PfmTPDFcVid8a5oKfAD1oa1QzJHQMkWU0ojM6x8WE=",
+			"size": 1145
+		},
+		{
+			"name": "/mjs/svg/size9.d.ts",
+			"hash": "mrcxaHey9pD4MFogVRC066ZWnrD0Mwu3/i5t447hekI=",
+			"size": 136
+		},
+		{
+			"name": "/mjs/svg/size9.js",
+			"hash": "ToIUiZiA9fRCpQKRxQPgQbP392rz9DFM142C+xnQwhg=",
+			"size": 1940
+		},
+		{
+			"name": "/mjs/svg/size9.js.map",
+			"hash": "hGxygPw/JZis6gcY6+x0eta9gmg2oaWOBkkyaE+uppA=",
+			"size": 1145
+		},
+		{
+			"name": "/mjs/svg/size10.d.ts",
+			"hash": "scu7ptCGxDI0zEY6KswMazUmKycvUa6/kwtN/DoJ6UA=",
+			"size": 137
+		},
+		{
+			"name": "/mjs/svg/size10.js",
+			"hash": "a5+OZA11oKIZ+D9fTNrx34yo5Y3ZmyC4qCm+x6rEDjM=",
+			"size": 1942
+		},
+		{
+			"name": "/mjs/svg/size10.js.map",
+			"hash": "EJjp8kQkUIbaj8ErzJGfW19mLBuDhtSWU/4w9OPdf9A=",
+			"size": 1147
+		},
+		{
+			"name": "/mjs/svg/size11.d.ts",
+			"hash": "TYc74CTjjI76dEgy1VuoEmxhIyClD6Ik0Dxly60jzP8=",
+			"size": 137
+		},
+		{
+			"name": "/mjs/svg/size11.js",
+			"hash": "L4Zbyf08HpACYR4gKzqVOHi4ShOzxs7SHcWAjlZHddo=",
+			"size": 1958
+		},
+		{
+			"name": "/mjs/svg/size11.js.map",
+			"hash": "Wj13qQBvE74+8uoixFl2Oi+WcErB0WeTba8TWM6Z/dk=",
+			"size": 1147
+		},
+		{
+			"name": "/mjs/svg/size12.d.ts",
+			"hash": "tbpJZ5EiZjGvRwSBBsR++FhH/1bq7Qfny3mKkz7OkE0=",
+			"size": 137
+		},
+		{
+			"name": "/mjs/svg/size12.js",
+			"hash": "84J3Gk5hTNjsiMsBib9Ej7iuAVkMu9ZLSzXWl+c8MUY=",
+			"size": 1973
+		},
+		{
+			"name": "/mjs/svg/size12.js.map",
+			"hash": "rbCcYkFB60sC9lTZ4ih7Un1IhcGxg/tl4EOU/UzVZQc=",
+			"size": 1147
+		},
+		{
+			"name": "/mjs/svg/smallop.d.ts",
+			"hash": "3Ndf+wtIIQN61NtJiHYNCjglHjMAyyPqRpF32xeEkUE=",
+			"size": 138
+		},
+		{
+			"name": "/mjs/svg/smallop.js",
+			"hash": "nF6B3slHmSMJHfOd1MTTsKHJ/ilv0m4nbPS8nS/APvI=",
+			"size": 7109
+		},
+		{
+			"name": "/mjs/svg/smallop.js.map",
+			"hash": "7Wal2ZsjkxsoXqZUMWARVoY0d7pRlUJfZcQd++aWvO8=",
+			"size": 4385
+		},
+		{
+			"name": "/mjs/svg/tex-calligraphic.d.ts",
+			"hash": "S4wrzlOssIGvkirChZmGE9h8t2JkVPa9HTqrthucZSY=",
+			"size": 146
+		},
+		{
+			"name": "/mjs/svg/tex-calligraphic.js",
+			"hash": "yFbCi8K3iIA6Vjcby1oDSQY5AvRlYnkrcgS4KLc4r2M=",
+			"size": 79
+		},
+		{
+			"name": "/mjs/svg/tex-calligraphic.js.map",
+			"hash": "m9SzpYeIakK4MHoU80Tvov9SITTYON+ZXZ/CcHT737w=",
+			"size": 171
+		},
+		{
+			"name": "/mjs/svg/tex-calligraphic-bold.d.ts",
+			"hash": "dPT/tPDF8qJShxnGJmFxjyCZPs8fXjb/yuS5Kn6EWX8=",
+			"size": 150
+		},
+		{
+			"name": "/mjs/svg/tex-calligraphic-bold.js",
+			"hash": "EsW6ScTNe+k/aPtECJKJdApe9jwbDLz+MXDVJIjnNWU=",
+			"size": 88
+		},
+		{
+			"name": "/mjs/svg/tex-calligraphic-bold.js.map",
+			"hash": "azAgoaZFBEbvf02A3ttbomEaFHfKYeeWTG3GR3b8VuY=",
+			"size": 183
+		},
+		{
+			"name": "/mjs/svg/tex-mathit.d.ts",
+			"hash": "y0TfACRtr23mxvBHqV30bDty7icFqLOFGh81mLa+ERE=",
+			"size": 140
+		},
+		{
+			"name": "/mjs/svg/tex-mathit.js",
+			"hash": "2TqC8bZQ+jgVx0TCKmj6h9PAULbG9dioRodtrzcTAno=",
+			"size": 21658
+		},
+		{
+			"name": "/mjs/svg/tex-mathit.js.map",
+			"hash": "nrhYngONSl+xuzWivAWxEkGaohS6cd538eSXQk3/cHc=",
+			"size": 5852
+		},
+		{
+			"name": "/mjs/svg/tex-oldstyle.d.ts",
+			"hash": "V2C82zudCpnhR+eOK9+wa7HSlifOmOanoy7AY2z2SP8=",
+			"size": 142
+		},
+		{
+			"name": "/mjs/svg/tex-oldstyle.js",
+			"hash": "aDYjg4YvHKyd3HTFDVttC5yH4FZ7pPDrT2bj5kl+pRU=",
+			"size": 2731
+		},
+		{
+			"name": "/mjs/svg/tex-oldstyle.js.map",
+			"hash": "iSBrH+lY+k0936CQdJN77X6b3Egiy35ElCmWII4slLk=",
+			"size": 993
+		},
+		{
+			"name": "/mjs/svg/tex-oldstyle-bold.d.ts",
+			"hash": "ZIUrDHQpt7MOua7g9ruGIwwgP3qQyDR96I5lFhE2Zbw=",
+			"size": 146
+		},
+		{
+			"name": "/mjs/svg/tex-oldstyle-bold.js",
+			"hash": "vUaoqHrVPxgTFoV8QRch0n+rbfHWYCaDJNdwoC++O8U=",
+			"size": 2738
+		},
+		{
+			"name": "/mjs/svg/tex-oldstyle-bold.js.map",
+			"hash": "YJoIrqg6fNx8QMRfpfrTsSeQGsjH6Kz7M+o/iO/1Loo=",
+			"size": 1003
+		},
+		{
+			"name": "/mjs/svg/tex-variant.d.ts",
+			"hash": "H4Wirpv7/G3uOyKzGrEyhjKpd32/QLUOInUjGU3AyKM=",
+			"size": 141
+		},
+		{
+			"name": "/mjs/svg/tex-variant.js",
+			"hash": "1qeAMkLOHhi2+f+zdKaRM8eDZcUgwwje7bEfRa2EJhA=",
+			"size": 24041
+		},
+		{
+			"name": "/mjs/svg/tex-variant.js.map",
+			"hash": "TRHeBPyIhTwGioNhcQRXyxJnSD8QwTYBGVoDQ6di68Q=",
+			"size": 7906
+		},
+		{
+			"name": "/mjs/svg/up.d.ts",
+			"hash": "RFldSyKFsNnJc23sNOtNr12IsHPJtD3q8vio1Il/Ygs=",
+			"size": 133
+		},
+		{
+			"name": "/mjs/svg/up.js",
+			"hash": "sEOXUFa/FqF11ROTA8AQxhbQrs58wgDlNIiQCC8ZePM=",
+			"size": 52
+		},
+		{
+			"name": "/mjs/svg/up.js.map",
+			"hash": "Xi3vHIrvIOEE7ut+P7AecBpEKQvl1Kr0zbo/sv66x+o=",
+			"size": 143
+		},
+		{
+			"name": "/mjs/svg/up-dsp.d.ts",
+			"hash": "GJBxRApe92QXnuZYLI8hteCMDqZ5D54GhXrPFPTKYCY=",
+			"size": 136
+		},
+		{
+			"name": "/mjs/svg/up-dsp.js",
+			"hash": "4xecsvwA84IOssA0cXzDVdEJIFg58pydJYO7jwtHp0I=",
+			"size": 59
+		},
+		{
+			"name": "/mjs/svg/up-dsp.js.map",
+			"hash": "0vMZ/glnn+Hzsn6ssJ5qqkIC1CBd+XHUL6IJPzl8u6s=",
+			"size": 151
+		},
+		{
+			"name": "/package.json",
+			"hash": "H6YqSwcl402cboyR2GygR+Nra4G88HWojxlhOYr6mVM=",
+			"size": 5005
+		},
+		{
+			"name": "/svg.js",
+			"hash": "gKyDuzsr1A0aJZOtVoBawu/TTCJiJgyciFlZSnb1pGY=",
+			"size": 569128
+		},
+		{
+			"name": "/svg/dynamic/accents.js",
+			"hash": "fDTJCyLDPvAAQfNsZ2FKGs7d/vR/TP5pXvSbU9d3pfY=",
+			"size": 23976
+		},
+		{
+			"name": "/svg/dynamic/accents-other.js",
+			"hash": "0GZ6HkyIqL92yJTgJ2PKuuODG79Huzlk6R27lLtt2SY=",
+			"size": 67176
+		},
+		{
+			"name": "/svg/dynamic/arrows.js",
+			"hash": "4vJjvUQ4Q0X+C9ZEgw9w1v/2S0f5LLQLD3Y7V1hq6bA=",
+			"size": 74027
+		},
+		{
+			"name": "/svg/dynamic/calligraphic.js",
+			"hash": "khnl4b72Vh0N1ipUhHxVsdTD/SMPZleYq6LRZ2b5dPk=",
+			"size": 51551
+		},
+		{
+			"name": "/svg/dynamic/cyrillic.js",
+			"hash": "AiJc5ZN0wxZEW2k3r8cO1LNuEA9TL6I3ODzLvd6DgI0=",
+			"size": 170328
+		},
+		{
+			"name": "/svg/dynamic/dingbats.js",
+			"hash": "e2I6yBZHzsraSVtKEyQnoYpw8wScLIEmYWh0TfOYBTw=",
+			"size": 136706
+		},
+		{
+			"name": "/svg/dynamic/double-struck.js",
+			"hash": "Bl0Lv4Vd9XGirDMljRgwGRmg7QZAmu8sQ3Pa6xG6BUk=",
+			"size": 20038
+		},
+		{
+			"name": "/svg/dynamic/enclosed.js",
+			"hash": "u3L/rhIIlT6dZCw9/2JnWM09mY7BtDX1vmeABvqtp6A=",
+			"size": 99854
+		},
+		{
+			"name": "/svg/dynamic/fraktur.js",
+			"hash": "fQq4aWMjZSEp2ggS8CEPQhpuCdtf0lUGM4OTA3SxrG8=",
+			"size": 55656
+		},
+		{
+			"name": "/svg/dynamic/greek.js",
+			"hash": "c7cZOqBbnttyTMf7BhI2RoqkuMKarOl3WCWHPT3y/Vo=",
+			"size": 48390
+		},
+		{
+			"name": "/svg/dynamic/latin.js",
+			"hash": "MF2KszBb1j1yEehnkIXnq9MArogf/k4WKpkOvk6tQfk=",
+			"size": 201236
+		},
+		{
+			"name": "/svg/dynamic/latin-b.js",
+			"hash": "KYfn/LxbePMKgS2GDPtnC7pH5DxbtzKgEF4Tdronsu4=",
+			"size": 202449
+		},
+		{
+			"name": "/svg/dynamic/latin-bi.js",
+			"hash": "u4NUnQRnuje1QDlCXHq0aKD6uKB7Yj9L6QU3ymnFToY=",
+			"size": 218735
+		},
+		{
+			"name": "/svg/dynamic/latin-i.js",
+			"hash": "Tb8xuGeGJMXCppJ997b2U/iaDi1O+7YuzVPzOrPKsTw=",
+			"size": 218815
+		},
+		{
+			"name": "/svg/dynamic/math.js",
+			"hash": "F5fDqlrQCwws/p03tG8QDAjHAvrRDGxLajBpsIHt5Jc=",
+			"size": 96899
+		},
+		{
+			"name": "/svg/dynamic/monospace.js",
+			"hash": "B8JAASKs8atwGMSAcu+zEk9o9KNhaOsMbrGbVaYp5qg=",
+			"size": 34724
+		},
+		{
+			"name": "/svg/dynamic/phonetics.js",
+			"hash": "MBho1UPWBElLiJBLHGmg45Qu0948YS2eEk4BLaj+OZc=",
+			"size": 173188
+		},
+		{
+			"name": "/svg/dynamic/sans-serif.js",
+			"hash": "/GtJVsgAqvSWL/j8GnBHxfLjaE6oUP5XKWlTxvCxSys=",
+			"size": 66282
+		},
+		{
+			"name": "/svg/dynamic/script.js",
+			"hash": "ro0lvnbXcFQ/XImnq5nkVKGT+xyKfprB7rDQ18M8YZc=",
+			"size": 65168
+		},
+		{
+			"name": "/svg/dynamic/shapes.js",
+			"hash": "BW2T0jfCWU/i0gIIdcLnqDeJSqazQLOGh24DQ1BN3W0=",
+			"size": 233495
+		},
+		{
+			"name": "/svg/dynamic/stretchy.js",
+			"hash": "5OWwET/dupmJQkUE+re1V8HsYtDlaEqSFCiSkuPSSQ4=",
+			"size": 40242
+		},
+		{
+			"name": "/svg/dynamic/symbols.js",
+			"hash": "xRGgLGl/f1Nb/EwNqksIwSDs7p68BvNWYyPJdRCGrMQ=",
+			"size": 119770
+		},
+		{
+			"name": "/svg/dynamic/symbols-other.js",
+			"hash": "jPuGb20wMwzjum3BzyXIyT1B1dvX/BjoP5qbAcfZdAE=",
+			"size": 118419
+		},
+		{
+			"name": "/svg/dynamic/upright.js",
+			"hash": "Wbtq9nkvTIdPsdaL2LgiQuxuWjwBLXx+WLJsoc1zR60=",
+			"size": 42076
+		},
+		{
+			"name": "/svg/dynamic/variants.js",
+			"hash": "KatkbDpjcUhDBFCAWLZBxRhxOPH79HFNIJMoRuWadDs=",
+			"size": 25331
+		},
+		{
+			"name": "/tex-mml-chtml-mathjax-stix2.js",
+			"hash": "i1LiDEDN3hyFNaiKdQfk4R64AsdJjqokT9N4iWFN+GA=",
+			"size": 979209
+		},
+		{
+			"name": "/tex-mml-svg-mathjax-stix2.js",
+			"hash": "A1a3tWW4eF1cElVYnQVQS0Gj1xQpjxluWBXyo1E+YTA=",
+			"size": 1442313
+		},
+		{
+			"name": "/tsconfig.json",
+			"hash": "qwpoqEm68Gf/P8bfGIUDvC3sW8dc4Gvw6SCVJNLv9rU=",
+			"size": 39
+		},
+		{
+			"name": "/tsconfig/cjs.json",
+			"hash": "Hc9hncJcZNKCarirhrcMvgYRaQc3pfFJ+BCNg3cyo+Y=",
+			"size": 131
+		},
+		{
+			"name": "/tsconfig/common.json",
+			"hash": "NuhwxpBB8tbb5R6VFn26Q/Ynbg3jISVuEPvAJUiLtpo=",
+			"size": 266
+		},
+		{
+			"name": "/tsconfig/def.json",
+			"hash": "fkn2AMTN/x94Kt5w2+xPZ9ZVqx4uj4PIwyJXypOfIAY=",
+			"size": 178
+		},
+		{
+			"name": "/tsconfig/mjs.json",
+			"hash": "rGe334UUWsXvGoy0TcpoRAqxQSB3Geq/9hWxNtBb+aI=",
+			"size": 158
+		}
+	],
+	"links": {
+		"stats": "https://data.jsdelivr.com/v1/stats/packages/npm/@mathjax/mathjax-stix2-font@4.1.3",
+		"entrypoints": "https://data.jsdelivr.com/v1/packages/npm/@mathjax/mathjax-stix2-font@4.1.3/entrypoints"
+	}
+}

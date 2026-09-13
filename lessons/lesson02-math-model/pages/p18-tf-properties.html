@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>传递函数的性质</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:22px; margin-top:8px; }
+  .pp { display:flex; gap:18px; align-items:center; background:#fff; border:2px solid var(--line); border-radius:14px; padding:22px 26px; }
+  .pp .n { width:46px; height:46px; border-radius:50%; background:var(--sky); color:var(--blue); font-weight:700; display:grid; place-items:center; flex:none; font-size:22px; }
+  .pp .tx { font-size:22.5px; color:var(--ink); line-height:1.55; }
+  .imp { grid-column:1 / -1; background:var(--sky); border:2px solid var(--blue); border-radius:14px; padding:20px 28px; font-size:23px; color:var(--navy); line-height:1.8; }
+  .imp .math { font-size:24px; }
+</style>
+</head>
+<body data-title="传递函数的性质" data-page="18 / 51">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body fill">
+    <div class="grid">
+      <div class="pp"><div class="n">1</div><div class="tx">只适用于<b>线性定常</b>系统</div></div>
+      <div class="pp"><div class="n">2</div><div class="tx">只反映系统在<b>零状态</b>下的动态特性</div></div>
+      <div class="pp"><div class="n">3</div><div class="tx">只描述系统的<b>输入、输出</b>特性，不反映内部信息</div></div>
+      <div class="pp"><div class="n">4</div><div class="tx">只与系统<b>自身的结构、参数</b>有关，与输入、初始条件无关</div></div>
+      <div class="pp"><div class="n">5</div><div class="tx">是复变量 s 的<b>有理真分式</b>（n ≥ m）</div></div>
+      <div class="pp"><div class="n">6</div><div class="tx">是系统<b>单位脉冲响应</b>的拉氏变换</div></div>
+      <div class="imp" data-step><b>性质 6 说明：</b>已知 r(t) = δ(t) 时 R(s) = 1，故 G(s) = C(s)/R(s) = C(s)，于是单位脉冲响应 <span class="math tex">y(t) = c(t) = L^{-1}[G(s)]</span> —— 传递函数本身就是系统的「指纹」。</div>
+    </div>
+  </div>
+</div></div>
+</body>
+</html>

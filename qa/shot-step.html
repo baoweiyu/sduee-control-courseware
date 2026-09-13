@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>shot-step</title>
+<style>
+  html,body{margin:0;padding:0;background:#fff;width:1448px;height:1086px;overflow:hidden}
+  iframe{width:1448px;height:1086px;border:0;display:block}
+  @page{size:1448px 1086px;margin:0}
+</style>
+</head>
+<body>
+<iframe id="f"></iframe>
+<script>
+var q = new URLSearchParams(location.search);
+var p = q.get('page');
+var stopAt = parseInt(q.get('steps') || '0', 10);
+var f = document.getElementById('f');
+f.src = p;
+f.onload = function(){
+  var w = f.contentWindow, d = f.contentDocument;
+  var n = 0, advanced = false;
+  var timer = setInterval(function(){
+    if (!advanced) {
+      try { if (w.ACT && w.ACT.step) { for (var i=0;i<stopAt;i++) w.ACT.step.next(); } } catch(e){}
+      advanced = true;
+    }
+    try {
+      if (!d.getElementById('qastyle')) {
+        var s = d.createElement('style');
+        s.id = 'qastyle';
+        s.textContent = '.act-slide{transform:none!important}.act-stage{place-items:start!important}';
+        d.head.appendChild(s);
+      }
+    } catch(e){}
+    if (++n > 25) { clearInterval(timer); document.title = 'READY'; }
+  }, 100);
+};
+</script>
+</body>
+</html>

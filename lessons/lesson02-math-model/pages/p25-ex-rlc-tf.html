@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>例2-6 RLC 串联电路的传递函数</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .cols { display:flex; gap:26px; margin-top:4px; }
+  .lft { flex:1; }
+  .lft .bd2 { padding:20px 26px; }
+  table { width:100%; border-collapse:collapse; font-size:21.5px; }
+  th { background:var(--blue); color:#fff; padding:10px 14px; border:2px solid var(--line); }
+  td { border:2px solid var(--line); padding:9px 14px; background:#fff; text-align:center; }
+  tr:nth-child(even) td { background:var(--sky); }
+  .rgt { flex:1.35; display:flex; flex-direction:column; }
+  .rgt .bd2 { flex:1; padding:20px 28px; display:flex; flex-direction:column; justify-content:center; gap:16px; }
+  .math { font-size:24px; color:var(--ink); line-height:1.7; }
+  .step-tag { display:inline-block; background:var(--blue); color:#fff; font-size:18px; font-weight:700; border-radius:8px; padding:3px 12px; margin-right:10px; }
+  .tip { background:var(--sky); border-radius:12px; padding:14px 20px; font-size:21px; color:var(--navy); }
+</style>
+</head>
+<body data-title="例2-6　RLC 传递函数（复阻抗法）" data-page="25 / 51">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="cols">
+      <div class="act-card lft">
+        <div class="hd">元件的复阻抗</div>
+        <div class="bd2">
+          <table>
+            <tr><th>元件</th><th>交流阻抗</th><th>复阻抗</th></tr>
+            <tr><td class="math tex">R</td><td class="math tex">R</td><td class="math tex">R</td></tr>
+            <tr><td class="math tex">L</td><td class="math tex">j\omega L</td><td class="math tex">sL</td></tr>
+            <tr><td class="math tex">C</td><td class="math tex">\dfrac{1}{j\omega C}</td><td class="math tex">\dfrac{1}{sC}</td></tr>
+          </table>
+          <div class="tip" style="margin-top:16px">对电网络，可直接利用<b>复阻抗</b>求传递函数，跳过列写微分方程。</div>
+        </div>
+      </div>
+      <div class="act-card rgt">
+        <div class="hd">例2-6　求例2-1 RLC 串联电路的传递函数</div>
+        <div class="bd2">
+          <div class="math" data-step><span class="step-tag">①</span>由微分方程 <span class="math tex">LC\cdot u_{o}'' + RC\cdot u_{o}' + u_{o} = u_{i}</span> 零初始条件取拉氏变换：<br>　<span class="tex">G(s) = \dfrac{U_{o}(s)}{U_{i}(s)} = \dfrac{1}{LCs^{2} + RCs + 1}</span></div>
+          <div class="math" data-step><span class="step-tag">②</span>复阻抗法验证：令 <span class="tex">Z_{1} = R + Ls</span>，<span class="tex">Z_{2} = \dfrac{1}{Cs}</span>（分压关系）<br>　<span class="tex">G(s) = \dfrac{Z_{2}}{Z_{1} + Z_{2}} = \dfrac{1/(Cs)}{R + Ls + 1/(Cs)}</span></div>
+          <div class="math" data-step style="background:var(--sky);border-radius:12px;padding:14px 18px"><span class="step-tag">③</span><b style="color:var(--danger)"><span class="tex">G(s) = \dfrac{U_{o}(s)}{U_{i}(s)} = \dfrac{1}{LCs^{2} + RCs + 1}</span></b>　两种方法结果一致</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+</body>
+</html>

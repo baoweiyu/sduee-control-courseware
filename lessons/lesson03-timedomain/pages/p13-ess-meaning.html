@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>稳态误差与指标意义</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<link rel="stylesheet" href="../lesson03-svg.css">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:24px; flex:1; min-height:0; }
+  .lcol { flex:1.15; display:flex; flex-direction:column; gap:16px; min-height:0; }
+  .rcol { flex:1; display:flex; flex-direction:column; gap:14px; min-height:0; }
+  .sec-h { font-size:23px; font-weight:700; color:var(--blue); flex:none; }
+  .ess { flex:1.05; display:flex; flex-direction:column; }
+  .ess .bd { flex:1; font-size:22px; line-height:1.7; display:flex; flex-direction:column; justify-content:center; }
+  .essfig { flex:1; background:#fff; border:2px solid var(--line); border-radius:14px; padding:8px 14px; display:flex; flex-direction:column; min-height:0; }
+  .essfig .cap { font-size:18px; color:var(--muted); text-align:center; padding-top:2px; }
+  .essfig svg { width:100%; flex:1; min-height:0; display:block; }
+  .mn { flex:1; display:flex; align-items:center; gap:16px; background:#fff; border:2px solid var(--line); border-radius:14px; padding:12px 22px; font-size:21.5px; color:var(--ink); min-height:0; }
+  .mn .k { flex:none; width:118px; text-align:center; background:var(--blue); color:#fff; border-radius:10px; padding:7px 6px; font-size:22px; font-weight:700; font-style:italic; font-family:var(--font-math); }
+  .mn .v { line-height:1.45; }
+</style>
+</head>
+<body data-title="稳态性能指标与各指标的意义" data-page="14 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note fill">
+    <div class="row">
+      <div class="lcol">
+        <div class="sec-h">2. 稳态性能指标</div>
+        <div class="act-card ess">
+          <div class="hd">稳态误差 <span class="tex" style="font-style:italic">e_{ss}</span></div>
+          <div class="bd">
+            对单位负反馈系统，当 <span class="tex">t \to \infty</span> 时，系统响应的实际值与期望值（输入量）之差的极限值：
+            <div class="mathbox math eqline tex tex-d" style="margin:12px 0;font-size:27px">e_{ss} = \lim_{t \to \infty} \left[ r(t) - c(t) \right]</div>
+            稳态误差是描述系统稳态性能的<span class="kw-r">唯一指标</span>，反映系统复现输入信号的（稳态）<span class="kw-r">精度</span>。
+          </div>
+        </div>
+        <div class="essfig">
+          <svg viewBox="0 0 640 300">
+            <defs>
+              <marker id="a13" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#5A6B87"/></marker>
+              <marker id="a13r" markerWidth="9" markerHeight="9" refX="6" refY="2.5" orient="auto"><path d="M0,0 L6,2.5 L0,5 Z" fill="#D63A2F"/></marker>
+              <marker id="a13rb" markerWidth="9" markerHeight="9" refX="0" refY="2.5" orient="auto"><path d="M6,0 L0,2.5 L6,5 Z" fill="#D63A2F"/></marker>
+            </defs>
+            <line x1="80" y1="262" x2="80" y2="26" stroke="#5A6B87" stroke-width="2.5" marker-end="url(#a13)"/>
+            <line x1="80" y1="262" x2="606" y2="262" stroke="#5A6B87" stroke-width="2.5" marker-end="url(#a13)"/>
+            <text x="52" y="34" font-size="20" font-style="italic" fill="#1B3B8B" font-weight="600">c(t)</text>
+            <text x="596" y="292" font-size="20" font-style="italic" fill="#1B3B8B" font-weight="600">t</text>
+            <text x="56" y="270" font-size="19" fill="#5A6B87">O</text>
+            <line x1="80" y1="92" x2="600" y2="92" stroke="#1B3B8B" stroke-width="2" stroke-dasharray="9 7"/>
+            <text x="60" y="98" font-size="20" font-style="italic" fill="#1B3B8B" text-anchor="end">1</text>
+            <text x="300" y="80" font-size="20" font-style="italic" fill="#1B3B8B">期望值 r(t) = 1(t)</text>
+            <line x1="80" y1="150" x2="520" y2="150" stroke="#8A97AC" stroke-width="1.6" stroke-dasharray="4 6"/>
+            <text x="60" y="156" font-size="19" font-style="italic" fill="#5A6B87" text-anchor="end">c(∞)</text>
+            <path d="M80,262 C170,260 250,228 320,190 C390,152 460,150 600,149" fill="none" stroke="#1D3FA0" stroke-width="3.5"/>
+            <text x="330" y="222" font-size="20" font-style="italic" fill="#1D3FA0">实际响应 c(t)</text>
+            <line x1="540" y1="92" x2="540" y2="150" stroke="#D63A2F" stroke-width="2.5" marker-start="url(#a13rb)" marker-end="url(#a13r)"/>
+            <text x="552" y="128" font-size="21" font-style="italic" fill="#D63A2F" font-weight="700">e_ss</text>
+          </svg>
+          <div class="cap">稳态误差的几何意义：t → ∞ 时实际值与期望值之差</div>
+        </div>
+      </div>
+      <div class="rcol">
+        <div class="sec-h">3. 各性能指标的意义</div>
+        <div class="mn"><span class="k">t<sub>d</sub>、t<sub>r</sub></span><span class="v">表征响应<span class="kw-r">初始阶段</span>的快慢</span></div>
+        <div class="mn"><span class="k">σ%</span><span class="v">表征系统振荡的<span class="kw-r">激烈程度</span>（平稳性）</span></div>
+        <div class="mn"><span class="k">t<sub>s</sub></span><span class="v">表征系统动态过程的<span class="kw-r">快速性</span></span></div>
+        <div class="mn"><span class="k">e<sub>ss</sub></span><span class="v">表征系统复现输入的<span class="kw-r">准确性</span>（精度）</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">结论</span>工程上最常用的三项指标：<span class="kw-r">σ%</span>（平稳性）、<span class="kw-r">t<sub>s</sub></span>（快速性）、<span class="kw-r">e<sub>ss</sub></span>（准确性）。</div>
+</div></div>
+</body>
+</html>

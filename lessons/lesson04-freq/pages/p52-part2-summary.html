@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>第二部分小结</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .wrap { display:flex; flex-direction:column; justify-content:space-evenly; height:100%; min-height:0; gap:12px; }
+  .ln { background:#fff; border:2px solid var(--line); border-radius:14px; padding:14px 22px; display:flex; align-items:center; gap:16px; font-size:20.5px; line-height:1.5; color:var(--ink); }
+  .ln .k { flex:none; background:var(--blue); color:#fff; font-size:18px; font-weight:700; border-radius:9px; padding:5px 14px; white-space:nowrap; }
+  .ln b { color:var(--navy); }
+</style>
+</head>
+<body data-title="第二部分小结" data-page="52 / 87">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="wrap">
+      <div class="ln"><span class="k">是什么</span><span><b>Bode 图</b>：半对数坐标下的频率特性图——L(ω) 取 dB、φ(ω) 取度，横轴按 lgω 分度。</span></div>
+      <div class="ln"><span class="k">为什么</span><span>四大优点：<b>低频展开</b>精细、乘除变<b>加减</b>、<b>渐近线</b>近似够用、K 只上下<b>平移</b>。</span></div>
+      <div class="ln"><span class="k">怎么画</span><span><b>顺序斜率法</b>最快：过 (1, 20lgK) 作 −20ν 起步，遇转角频率叠加 ∓20 / ∓40；要求准则用<b>计算法</b>。</span></div>
+      <div class="ln"><span class="k">环节规律</span><span>惯性 −20、一阶微分 +20、振荡 −40、二阶微分 +40（dB/dec）；相角：一阶 ±90°、二阶 ±180°。</span></div>
+      <div class="ln"><span class="k">最小相位</span><span>右半 s 平面无零极点、无延迟：幅频与相频<span class="kw-r">一一对应</span>，可由渐近线直接反写 G(s)。</span></div>
+      <div class="ln"><span class="k">实验建模</span><span>扫频得 Bode 图：斜率读环节、低频读型别与增益；相角差随 ω 线性增长 ⇒ 含<span class="kw-r">延迟环节</span>。下一步：判稳（第三节）。</span></div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">串起来</span><span>Nyquist 图看<span class="kw-r">整体轨迹</span>，Bode 图看<span class="kw-r">分段结构</span>——同一频率特性的两种画法，第三部分将分别给出对应的稳定判据。</span></div>
+</div></div>
+</body>
+</html>

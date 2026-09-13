@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>互动实验：ζ 与振荡环节 Nyquist 曲线</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:22px; height:100%; }
+  .figc { flex:1.5; display:flex; flex-direction:column; overflow:hidden; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:6px 12px; }
+  .figc svg { width:100%; height:100%; }
+  .ctl { flex:1; display:flex; flex-direction:column; gap:13px; }
+  .panel { background:#fff; border:2px solid var(--line); border-radius:14px; padding:13px 20px; }
+  .panel .h { font-size:20px; font-weight:700; color:var(--blue); margin-bottom:10px; display:flex; justify-content:space-between; align-items:center; }
+  .reg { font-size:17.5px; font-weight:700; color:#fff; background:var(--orange); border-radius:14px; padding:3px 14px; }
+  .sliderow { display:flex; align-items:center; gap:12px; font-size:21px; margin:8px 0; }
+  .sliderow input[type=range] { flex:1; accent-color:var(--orange); height:30px; }
+  .sliderow .val { min-width:86px; text-align:center; font-weight:700; color:var(--navy); background:var(--sky); border-radius:10px; padding:4px 10px; font-size:21px; }
+  .sliderow .sy { font-style:italic; font-family:var(--font-math); font-size:23px; color:var(--navy); min-width:34px; }
+  .reads { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .rd { background:var(--sky); border-radius:11px; padding:11px 14px; font-size:19.5px; color:var(--ink); display:flex; justify-content:space-between; align-items:center; }
+  .rd b { color:var(--navy); font-size:21px; font-style:italic; font-family:var(--font-math); }
+  .kpc { flex:1; font-size:20px; line-height:1.55; color:var(--ink); display:flex; flex-direction:column; justify-content:space-evenly; }
+  .kpc .kt { font-weight:700; color:var(--navy); font-size:20.5px; }
+  .kpc .kp { display:flex; gap:10px; align-items:baseline; }
+  .kpc .no { flex:none; width:30px; height:30px; border-radius:50%; background:var(--sky); color:var(--blue); font-weight:800; font-size:18px; display:grid; place-items:center; align-self:center; }
+  .kpc b { color:var(--navy); }
+</style>
+</head>
+<body data-title="互动实验：ζ 与振荡环节 Nyquist 曲线" data-page="23 / 87">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="act-card figc">
+        <div class="hd">Nyquist 曲线（ω<sub>n</sub> = 1）随 ζ 的变化</div>
+        <div class="bd2"><svg id="figR" viewBox="0 0 1000 620"></svg></div>
+      </div>
+      <div class="ctl">
+        <div class="panel">
+          <div class="h">拖动滑块<span class="reg" id="reg">谐振</span></div>
+          <div class="sliderow">
+            <span class="sy">ζ</span>
+            <input id="sz" type="range" min="0.05" max="1.2" step="0.05" value="0.4">
+            <span class="val" id="vz">0.40</span>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="h">谐振读数</div>
+          <div class="reads">
+            <div class="rd"><span>谐振频率 ω<sub>r</sub></span><b id="m-wr">—</b></div>
+            <div class="rd"><span>谐振峰值 M<sub>r</sub></span><b id="m-mr">—</b></div>
+            <div class="rd"><span>ω=ωn 处深度 1/(2ζ)</span><b id="m-dp">—</b></div>
+            <div class="rd"><span>谐振条件</span><b id="m-ck">—</b></div>
+          </div>
+        </div>
+        <div class="panel kpc">
+          <div class="kt">盯住三个关键点</div>
+          <div class="kp"><span class="no">1</span><span>起点 (1, j0) 不动；</span></div>
+          <div class="kp"><span class="no">2</span><span>与负虚轴交点随 ζ 减小而<span class="kw-r">加深</span>；</span></div>
+          <div class="kp"><span class="no">3</span><span>终点沿负实轴回原点；</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">观察</span><span>拖 ζ 从 1.2 减到 0.05：曲线由"扁平"到"鼓包"，<span class="tex">M_r</span> 读数飙升——谐振是 ζ 太小惹的祸。</span></div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const R = document.getElementById("figR");
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || R).appendChild(n); return n; };
+  const MF = "Cambria Math,STIX Two Math,Georgia,Microsoft YaHei,sans-serif";
+  const tx = (x, y, s, o, parent) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 24, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal", "font-family": MF }, parent); const esc = t => t.replace(/&/g, "&amp;").replace(/</g, "&lt;"); let html = "", sub = false; for (const p of String(s).split(/(_\{[^}]*\})/)) { if (!p) continue; if (p.startsWith("_{")) { html += `<tspan${sub ? "" : " dy=\"7\""} font-size="72%">${esc(p.slice(2, -1))}</tspan>`; sub = true; } else { html += sub ? `<tspan dy="-7">${esc(p)}</tspan>` : esc(p); sub = false; } } n.innerHTML = html; if (o && o.halo) n.setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:7;stroke-linejoin:round"); return n; };
+  const defs = mk("defs", {});
+  const m1 = mk("marker", { id: "a20", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, m1);
+
+  function render(z) {
+    R.innerHTML = "";
+    const d2 = mk("defs", {});
+    const mm = mk("marker", { id: "a20b", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, d2);
+    mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, mm);
+    const mr = 1 / (2 * z * Math.sqrt(1 - z * z));
+    const Amax = Math.max(2.0, z < 0.707 ? mr * 1.15 : 2.0);
+    const O = { x: 250, y: 205 }, SC = 400 / Amax;
+    const X = v => O.x + v * SC, Y = v => O.y - v * SC;
+    mk("line", { x1: 30, y1: O.y, x2: 968, y2: O.y, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a20b)" });
+    mk("line", { x1: O.x, y1: 592, x2: O.x, y2: 40, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a20b)" });
+    tx(962, O.y - 14, "Re", { fs: 22, it: true, b: true, fill: "#5B6B8C", an: "end" });
+    tx(O.x + 24, 52, "jIm", { fs: 22, it: true, b: true, fill: "#5B6B8C", an: "start" });
+    tx(O.x - 14, O.y + 28, "O", { fs: 20, fill: "#5B6B8C", an: "end" });
+    // 曲线
+    const PT = w => { const dd = (1 - w * w) * (1 - w * w) + (2 * z * w) * (2 * z * w); const A = 1 / Math.sqrt(dd); const ph = Math.atan2(-2 * z * w, 1 - w * w); return [A * Math.cos(ph), A * Math.sin(ph)]; };
+    let d = "";
+    const wmax = 6;
+    for (let i = 0; i <= 600; i++) { const w = wmax * i / 600; const [re, im] = PT(w); d += (i ? "L" : "M") + X(re).toFixed(1) + "," + Y(im).toFixed(1); }
+    mk("path", { d, stroke: "#2B5CE6", "stroke-width": 4, fill: "none" });
+    // 起点终点
+    mk("circle", { cx: X(1), cy: Y(0), r: 8, fill: "#1D3FA0" });
+    tx(X(1) + 14, Y(0) - 18, "ω=0", { fs: 23, b: true, it: true, fill: "#1D3FA0", an: "start", halo: 1 });
+    mk("circle", { cx: O.x, cy: O.y, r: 8, fill: "#F5821F" });
+    tx(O.x - 20, O.y + 46, "ω→∞", { fs: 23, b: true, it: true, fill: "#F5821F", an: "end", halo: 1 });
+    // ω=ωn 交点
+    const dp = 1 / (2 * z);
+    mk("circle", { cx: O.x, cy: Y(-dp), r: 7.5, fill: "#1D3FA0" });
+    tx(O.x + 18, Y(-dp) + 38, "ω=ω_{n}：−j/(2ζ)", { fs: 23, b: true, it: true, fill: "#1D3FA0", an: "start", halo: 1 });
+    // 谐振点
+    if (z <= 0.707) {
+      const wr = Math.sqrt(Math.max(0, 1 - 2 * z * z));
+      const [re, im] = PT(wr);
+      mk("line", { x1: O.x, y1: O.y, x2: X(re), y2: Y(im), stroke: "#D63A2F", "stroke-width": 2.2, "stroke-dasharray": "7 5" });
+      mk("circle", { cx: X(re), cy: Y(im), r: 9, fill: "#D63A2F" });
+      tx(X(re) + 16, Y(im) - 16, "谐振点 M_{r}=" + mr.toFixed(2), { fs: 23, b: true, fill: "#D63A2F", an: "start", halo: 1 });
+    }
+    // 读数
+    const has = z <= 0.707;
+    document.getElementById("m-wr").textContent = has ? Math.sqrt(Math.max(0, 1 - 2 * z * z)).toFixed(3) : "不存在";
+    document.getElementById("m-mr").textContent = has ? mr.toFixed(2) : "1（单调）";
+    document.getElementById("m-dp").textContent = dp.toFixed(2);
+    document.getElementById("m-ck").textContent = has ? "ζ≤0.707 ✓" : "ζ>0.707 ✗";
+    document.getElementById("reg").textContent = z > 0.707 ? "无谐振" : z === 0.707 ? "临界" : z >= 0.3 ? "谐振" : "剧烈谐振";
+  }
+  const sz = document.getElementById("sz"), vz = document.getElementById("vz");
+  function upd() { const z = +sz.value; vz.textContent = z.toFixed(2); render(z); }
+  sz.addEventListener("input", upd);
+  upd();
+});
+</script>
+</body>
+</html>

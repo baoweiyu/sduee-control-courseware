@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>1.5 二阶微分环节与延迟环节</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:26px; height:100%; min-height:0; }
+  .ec { flex:1; display:flex; flex-direction:column; overflow:hidden; }
+  .ec .bd { flex:1; display:flex; flex-direction:column; gap:12px; padding:14px 18px 16px; min-height:0; }
+  .ec .fm { align-self:center; font-size:24px; padding:10px 20px; flex:none; }
+  .ec .fig { flex:1; display:grid; place-items:center; min-height:0; }
+  .ec svg { width:100%; height:100%; }
+  .ec .feats { flex:none; font-size:18.5px; line-height:1.6; color:var(--ink); background:var(--sky); border-radius:10px; padding:10px 16px; text-align:center; }
+  .ec .hd { display:flex; align-items:center; justify-content:space-between; gap:10px; }
+  .hdbtns { flex:none; display:flex; gap:8px; flex-wrap:nowrap; }
+  .pbtn { font-size:15px; padding:3px 12px; border-radius:8px; border:none; background:#fff; color:var(--blue); font-weight:700; cursor:pointer; white-space:nowrap; }
+  .pbtn.ghost { background:transparent; color:#fff; border:1.5px solid rgba(255,255,255,.75); }
+  .pbtn:active { transform:translateY(1px); }
+</style>
+</head>
+<body data-title="1.5 二阶微分环节与延迟环节" data-page="24 / 87">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="act-card ec">
+        <div class="hd"><span>二阶微分环节</span><span class="hdbtns"><button class="pbtn" id="playL">▶ 播放</button><button class="pbtn ghost" id="rstL">⟲ 重画</button></span></div>
+        <div class="bd">
+          <div class="mathbox fm math eqline tex tex-d">G(j\omega)=(1-T^{2}\omega^{2})+j\,2\zeta T\omega</div>
+          <div class="fig"><svg id="figL" viewBox="0 0 420 480"></svg></div>
+          <div class="feats">与振荡环节<span class="kw-r">互为倒数</span>：幅值互为倒数、相角反号；轨迹从 <span class="kw-r">(1, j0)</span> 出发进入<span class="kw-r">上半平面</span>，伸向无穷远。</div>
+        </div>
+      </div>
+      <div class="act-card ec">
+        <div class="hd"><span>延迟环节</span><span class="hdbtns"><button class="pbtn" id="playR">▶ 播放</button><button class="pbtn ghost" id="rstR">⟲ 重画</button></span></div>
+        <div class="bd">
+          <div class="mathbox fm math eqline tex tex-d">G(s)=e^{-T_D s}\;\Rightarrow\;G(j\omega)=1\angle-\omega T_D</div>
+          <div class="fig"><svg id="figR" viewBox="0 0 420 480"></svg></div>
+          <div class="feats"><span class="kw-r">模恒为 1</span>，相角随 ω <span class="kw-r">线性增大</span>；轨迹是<span class="kw-r">单位圆</span>，顺时针绕行——延迟只"推迟"信号，不改变大小。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">对比</span><span>振荡环节的轨迹"收缩回原点"，二阶微分"发散到无穷"，延迟环节"原地转圈"——三种截然不同的几何形态。</span></div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  function base(id, mid, ymax) {
+    const svg = document.getElementById(id);
+    const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+    const MF = "Cambria Math,STIX Two Math,Georgia,Microsoft YaHei,sans-serif";
+  const SUB = (n, s) => { const esc = t => t.replace(/&/g, "&amp;").replace(/</g, "&lt;"); let html = "", sub = false; for (const p of String(s).split(/(_\{[^}]*\})/)) { if (!p) continue; if (p.startsWith("_{")) { html += '<tspan' + (sub ? '' : ' dy="6"') + ' font-size="72%">' + esc(p.slice(2, -1)) + '</tspan>'; sub = true; } else { html += sub ? '<tspan dy="-6">' + esc(p) + '</tspan>' : esc(p); sub = false; } } n.innerHTML = html; };
+  const tx = (x, y, s, o, parent) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 16, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal" , "font-family": MF }, parent); SUB(n, s); if (o && o.halo) n.setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:6;stroke-linejoin:round"); return n; };
+    const defs = mk("defs", {});
+    const m1 = mk("marker", { id: mid, markerWidth: 9, markerHeight: 9, refX: 6.5, refY: 2.7, orient: "auto" }, defs);
+    mk("path", { d: "M0,0 L6.5,2.7 L0,5.4 Z", fill: "#5B6B8C" }, m1);
+    return { svg, mk, tx, mid };
+  }
+  // ---- 左：二阶微分（播放动画） ----
+  {
+    const { mk, tx, mid } = base("figL");
+    const z = 0.5;
+    const PT = w => [1 - w * w, 2 * z * w];
+    const O = { x: 150, y: 400 }, SC = 110;
+    const X = v => O.x + v * SC, Y = v => O.y - v * SC;
+    mk("line", { x1: 20, y1: O.y, x2: 405, y2: O.y, stroke: "#5B6B8C", "stroke-width": 1.4, "marker-end": `url(#${mid})` });
+    mk("line", { x1: O.x, y1: 462, x2: O.x, y2: 16, stroke: "#5B6B8C", "stroke-width": 1.4, "marker-end": `url(#${mid})` });
+    tx(400, O.y + 22, "Re", { fs: 17, it: true, b: true, fill: "#5B6B8C", an: "end" });
+    tx(O.x + 18, 26, "jIm", { fs: 17, it: true, b: true, fill: "#5B6B8C", an: "start" });
+    tx(O.x - 10, O.y + 22, "O", { fs: 15, fill: "#5B6B8C", an: "end" });
+    mk("circle", { cx: X(1), cy: Y(0), r: 6.5, fill: "#1D3FA0" });
+    tx(X(1) + 12, Y(0) - 12, "ω=0", { fs: 17, b: true, it: true, fill: "#1D3FA0", an: "start" });
+    tx(60, 40, "ζ=0.5", { fs: 17, b: true, fill: "#5B6B8C", an: "start" });
+    const dyn = mk("g", {});
+    function drawL(f) {
+      dyn.innerHTML = "";
+      if (f <= 0) return;
+      const wm = 1.55 * f;
+      let d = "";
+      for (let i = 0; i <= 200; i++) { const w = wm * i / 200; const [re, im] = PT(w); d += (i ? "L" : "M") + X(re).toFixed(1) + "," + Y(im).toFixed(1); }
+      mk("path", { d, stroke: "#2B5CE6", "stroke-width": 3.4, fill: "none" }, dyn);
+      const [re, im] = PT(wm);
+      mk("circle", { cx: X(re), cy: Y(im), r: 6.5, fill: "#2B5CE6" }, dyn);
+      if (wm >= 1) {
+        mk("circle", { cx: X(0), cy: Y(1), r: 6, fill: "#D63A2F" }, dyn);
+        tx(X(0) + 18, Y(1) - 10, "ω=1/T", { fs: 17, b: true, it: true, fill: "#D63A2F", an: "start" }, dyn);
+      }
+      if (f > 0.95) {
+        // ω→∞：箭头放在曲线末端，沿切线方向（切向量 dPT/dw = (−2w, 2ζ)，屏幕 y 取反）
+        const ang = Math.atan2(-2 * z, -2 * wm) * 180 / Math.PI;
+        const [ere, eim] = PT(wm);
+        mk("path", { d: "M -10,-6 L 11,0 L -10,6 Z", fill: "#2B5CE6", transform: `translate(${X(ere).toFixed(1)},${Y(eim).toFixed(1)}) rotate(${ang.toFixed(1)})` }, dyn);
+        tx(X(ere) - 12, Y(eim) - 22, "ω→∞", { fs: 17, b: true, it: true, fill: "#F5821F", an: "end" }, dyn);
+      }
+    }
+    window.__p24L = drawL;
+    drawL(0);
+  }
+  // ---- 右：延迟环节（转圈动画） ----
+  {
+    const { mk, tx, mid } = base("figR");
+    const O = { x: 210, y: 250 }, Rr = 150;
+    mk("line", { x1: 20, y1: O.y, x2: 405, y2: O.y, stroke: "#5B6B8C", "stroke-width": 1.4, "marker-end": `url(#${mid})` });
+    mk("line", { x1: O.x, y1: 462, x2: O.x, y2: 16, stroke: "#5B6B8C", "stroke-width": 1.4, "marker-end": `url(#${mid})` });
+    tx(400, O.y + 22, "Re", { fs: 17, it: true, b: true, fill: "#5B6B8C", an: "end" });
+    tx(O.x + 18, 26, "jIm", { fs: 17, it: true, b: true, fill: "#5B6B8C", an: "start" });
+    mk("circle", { cx: O.x, cy: O.y, r: Rr, fill: "none", stroke: "#C9D8F2", "stroke-width": 2, "stroke-dasharray": "7 6" });
+    mk("circle", { cx: O.x, cy: O.y, r: 4, fill: "#5B6B8C" });
+    const dyn = mk("g", {});
+    const MAXTH = 3 * Math.PI; // ωTD: 0 → 3π
+    function drawR(f) {
+      dyn.innerHTML = "";
+      const th = MAXTH * f;
+      if (f > 0) {
+        // 已走过的圆弧
+        let d = "";
+        for (let i = 0; i <= 240; i++) {
+          const a = MAXTH * i / 240 * f;
+          const x = O.x + Rr * Math.cos(a), y = O.y + Rr * Math.sin(a); // 顺时针=Im 负方向
+          d += (i ? "L" : "M") + x.toFixed(1) + "," + y.toFixed(1);
+        }
+        mk("path", { d, stroke: "#D63A2F", "stroke-width": 3.6, fill: "none" }, dyn);
+        const xe = O.x + Rr * Math.cos(th), ye = O.y + Rr * Math.sin(th);
+        mk("line", { x1: O.x, y1: O.y, x2: xe, y2: ye, stroke: "#F5821F", "stroke-width": 2.4 }, dyn);
+        mk("circle", { cx: xe, cy: ye, r: 8, fill: "#D63A2F" }, dyn);
+        tx(xe + 16, ye - 10, "φ=−" + (th / Math.PI).toFixed(1) + "π", { fs: 17, b: true, it: true, fill: "#D63A2F", an: "start" }, dyn);
+      }
+      mk("circle", { cx: O.x + Rr, cy: O.y, r: 6.5, fill: "#1D3FA0" }, dyn);
+      tx(O.x + Rr, O.y + 40, "ω=0", { fs: 16, b: true, it: true, fill: "#1D3FA0", an: "middle" }, dyn);
+    }
+    window.__p24R = drawR;
+    drawR(0);
+  }
+  // 播放 / 重画按钮
+  function playOne(draw, btn, DUR) {
+    if (btn.dataset.busy) return;
+    btn.dataset.busy = "1";
+    const t0 = performance.now();
+    (function fr(ts) {
+      const f = Math.min(1, (ts - t0) / DUR);
+      draw(f);
+      if (f < 1) requestAnimationFrame(fr);
+      else delete btn.dataset.busy;
+    })(t0);
+  }
+  document.getElementById("playL").onclick = e => playOne(window.__p24L, e.currentTarget, 2400);
+  document.getElementById("playR").onclick = e => playOne(window.__p24R, e.currentTarget, 4200);
+  document.getElementById("rstL").onclick = () => window.__p24L(0);
+  document.getElementById("rstR").onclick = () => window.__p24R(0);
+});
+</script>
+</body>
+</html>

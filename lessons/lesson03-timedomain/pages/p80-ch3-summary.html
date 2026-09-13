@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>第三章小结</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .grid { display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:20px; height:100%; }
+  .cc { background:#fff; border:2px solid var(--line); border-radius:14px; padding:16px 24px; display:flex; flex-direction:column; justify-content:center; }
+  .cc .t { font-size:22.5px; font-weight:700; color:var(--blue); margin-bottom:10px; }
+  .cc .in { font-size:21px; line-height:1.8; color:var(--ink); }
+</style>
+</head>
+<body data-title="第三章小结" data-page="84 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="grid">
+      <div class="cc"><div class="t">① 时域响应与性能分析</div>
+        <div class="in">应用拉氏变换求解典型一阶、二阶系统的响应输出，并能进行时域性能分析；欠阻尼二阶系统指标：
+        <span class="tex tex-d" style="font-size:19px">t_{r}=\dfrac{\pi-\beta}{\omega_{d}},\quad t_{s}\approx\dfrac{4}{\zeta\omega_{n}},\quad \sigma\%=e^{-\pi\zeta/\sqrt{1-\zeta^{2}}}\times100\%</span>
+        参数影响链：<b>ζ 管平稳、ω<sub>n</sub> 管快慢</b>。</div>
+      </div>
+      <div class="cc"><div class="t">② 高阶系统的近似分析</div>
+        <div class="in">领会<span class="kw-r">主导极点</span>的概念以及高阶系统时域性能的近似分析方法：实部 5 倍判据降阶、偶极子抵消；<br>衰减快慢看实部、运动类型看极点。</div>
+      </div>
+      <div class="cc"><div class="t">③ 稳定性分析</div>
+        <div class="in">应用<span class="kw-r">劳斯－赫尔维茨判据</span>对闭环特征方程判稳，并分析参数变化对稳定性的影响：参数允许范围与临界值（例 3-11）；<br>稳定裕度检验：<span class="tex" style="font-size:19.5px">s=z-\sigma</span> 代换（例 3-12）。</div>
+      </div>
+      <div class="cc"><div class="t">④ 稳态误差分析</div>
+        <div class="in">掌握<span class="kw-r">静态误差系数</span>的定义及稳态误差的求取方法：型别 ν 与 <span class="tex" style="font-size:19.5px">K_{p},K_{v},K_{a}</span> 总表；扰动误差与积分环节位置；<br>动态误差系数法；复合控制（不变性原理）。</div>
+      </div>
+    </div>
+  </div>
+</div></div>
+</body>
+</html>

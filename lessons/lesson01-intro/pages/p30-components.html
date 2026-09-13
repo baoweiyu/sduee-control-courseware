@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>自动控制系统的组成</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .defs { display:flex; gap:24px; margin-bottom:16px; }
+  .df { flex:1; background:#fff; border:2px solid var(--line); border-radius:14px; padding:16px 26px; font-size:22.5px; line-height:1.7; color:var(--ink); }
+  .df b { color:var(--navy); font-size:24px; }
+  .df .em { color:#D63A2F; font-weight:700; }
+  .fig { height:596px; display:grid; place-items:center; padding:4px; }
+  svg text { font-family:var(--font); }
+  .blk { fill:#fff; stroke:var(--blue); stroke-width:2.5; }
+  .blkt { fill:var(--navy); font-size:20px; font-weight:700; }
+  .sig { stroke:var(--blue); stroke-width:2.5; fill:none; marker-end:url(#arr); }
+  .lab { fill:var(--ink); font-size:19px; }
+  .sum { fill:#fff; stroke:var(--blue); stroke-width:2.5; }
+  .sumt { fill:var(--navy); font-size:18px; font-weight:700; }
+  .dist { stroke:#D63A2F; stroke-width:2.5; stroke-dasharray:7 5; marker-end:url(#arrO); fill:none; }
+  .distt { fill:#D63A2F; font-size:19px; }
+  .fb { stroke:var(--blue); stroke-width:2.5; fill:none; }
+  .zone { fill:none; stroke:var(--muted); stroke-width:2; stroke-dasharray:10 8; }
+  .zonet { fill:var(--muted); font-size:18px; }
+  .hlrect { fill:rgba(214,58,47,.05); stroke:#D63A2F; stroke-width:2.5; stroke-dasharray:10 7; }
+  .hlell { fill:rgba(214,58,47,.07); stroke:#D63A2F; stroke-width:2.5; stroke-dasharray:8 6; }
+  @keyframes hlpulse { 0%,100% { opacity:1; } 50% { opacity:.35; } }
+  g.flash .hlrect, g.flash .hlell { animation:hlpulse 1.6s ease-in-out infinite; }
+  .banner { fill:#EFF4FF; stroke:#C9D8F2; stroke-width:1.5; }
+  .deft { fill:var(--navy); font-size:24px; }
+  .deft .tn { fill:#D63A2F; font-weight:700; }
+  [data-step]:not(.shown) { visibility:hidden; }
+</style>
+</head>
+<body data-title="第二节　自动控制系统的组成及分类 — 组成" data-page="30 / 35">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="defs">
+      <div class="df"><b>被控对象：</b>自动控制系统中被控制的<span class="em">机器、设备或生产过程</span>等。</div>
+      <div class="df"><b>自动控制装置：</b>对被控对象起控制作用的各部分的总称 —— <span class="em">测量元件、比较元件、调节元件（含放大器和校正装置）、执行元件</span>。</div>
+    </div>
+    <div class="act-card fig">
+      <svg viewBox="0 0 1330 520" width="98%" height="97%">
+        <defs>
+          <marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#1D3FA0"/></marker>
+          <marker id="arrO" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#D63A2F"/></marker>
+        </defs>
+        <!-- 分区虚线框 -->
+        <rect class="zone" x="20" y="30" width="890" height="390" rx="16"/>
+        <text class="zonet" x="48" y="404">（控制器部分）</text>
+        <text class="zonet" x="1020" y="404">（被控对象部分）</text>
+        <!-- 主通道 -->
+        <text class="lab" x="28" y="130">给定量</text>
+        <line class="sig" x1="34" y1="148" x2="96" y2="148"/>
+        <circle class="sum" cx="122" cy="148" r="20"/>
+        <path d="M 112,138 L 132,158 M 112,158 L 132,138" stroke="#1D3FA0" stroke-width="2.5" fill="none"/>
+        <text class="sumt" x="99" y="130" text-anchor="middle">+</text>
+        <text class="sumt" x="108" y="192" text-anchor="middle">−</text>
+        <text class="zonet" x="86" y="100">比较元件</text>
+        <text class="lab" x="152" y="130">偏差量</text>
+        <line class="sig" x1="142" y1="148" x2="212" y2="148"/>
+        <rect class="blk" x="214" y="114" width="130" height="68" rx="8"/>
+        <text class="blkt" x="279" y="157" text-anchor="middle">放大元件</text>
+        <line class="sig" x1="344" y1="148" x2="414" y2="148"/>
+        <rect class="blk" x="416" y="114" width="130" height="68" rx="8"/>
+        <text class="blkt" x="481" y="157" text-anchor="middle">校正元件</text>
+        <line class="sig" x1="546" y1="148" x2="616" y2="148"/>
+        <rect class="blk" x="618" y="114" width="130" height="68" rx="8"/>
+        <text class="blkt" x="683" y="157" text-anchor="middle">执行元件</text>
+        <text class="lab" x="762" y="130">控制量</text>
+        <line class="sig" x1="748" y1="148" x2="936" y2="148"/>
+        <!-- 被控对象 -->
+        <rect class="blk" x="940" y="100" width="170" height="96" rx="8"/>
+        <text class="blkt" x="1025" y="140" text-anchor="middle">被控对象</text>
+        <text class="distt" x="982" y="56">扰动量</text>
+        <line class="dist" x1="1000" y1="64" x2="1000" y2="96"/>
+        <line class="sig" x1="1110" y1="148" x2="1252" y2="148"/>
+        <text class="lab" x="1156" y="130">被控量</text>
+        <!-- 反馈回路：输出 → 下 → 测量元件 → 左 → 上 → 比较点 -->
+        <polyline class="fb" points="1190,148 1190,351 746,351"/>
+        <rect class="blk" x="600" y="320" width="140" height="62" rx="8"/>
+        <text class="blkt" x="670" y="358" text-anchor="middle">测量元件</text>
+        <polyline class="fb" points="600,351 122,351 122,172" marker-end="url(#arr)"/>
+        <text class="lab" x="180" y="336">反馈量</text>
+        <!-- 逐步高亮 + 定义横幅 -->
+        <g data-step="1">
+          <ellipse class="hlell" cx="57" cy="122" rx="46" ry="20"/>
+          <rect class="banner" x="20" y="448" width="1290" height="58" rx="12"/>
+          <text class="deft" x="48" y="486"><tspan class="tn">给定量（输入量）：</tspan><tspan>系统输出量的要求值。</tspan></text>
+        </g>
+        <g data-step="2">
+          <ellipse class="hlell" cx="1185" cy="122" rx="46" ry="20"/>
+          <rect class="banner" x="20" y="448" width="1290" height="58" rx="12"/>
+          <text class="deft" x="48" y="486"><tspan class="tn">被控量（输出量）：</tspan><tspan>被控系统所控制的物理量。</tspan></text>
+        </g>
+        <g data-step="3">
+          <ellipse class="hlell" cx="209" cy="327" rx="46" ry="21"/>
+          <rect class="banner" x="20" y="448" width="1290" height="58" rx="12"/>
+          <text class="deft" x="48" y="486"><tspan class="tn">反馈量：</tspan><tspan>与输出成正比或成某种函数关系，与给定量有相同量纲和数量级的信号。</tspan></text>
+        </g>
+        <g data-step="4">
+          <ellipse class="hlell" cx="181" cy="122" rx="45" ry="20"/>
+          <rect class="banner" x="20" y="448" width="1290" height="58" rx="12"/>
+          <text class="deft" x="48" y="486"><tspan class="tn">偏差量：</tspan><tspan>给定量与主反馈量之差。</tspan></text>
+        </g>
+        <g data-step="5">
+          <ellipse class="hlell" cx="791" cy="122" rx="46" ry="20"/>
+          <rect class="banner" x="20" y="448" width="1290" height="58" rx="12"/>
+          <text class="deft" x="48" y="486"><tspan class="tn">控制量：</tspan><tspan>作用于被控对象的信号。</tspan></text>
+        </g>
+        <g data-step="6">
+          <ellipse class="hlell" cx="1011" cy="47" rx="46" ry="19"/>
+          <rect class="banner" x="20" y="448" width="1290" height="58" rx="12"/>
+          <text class="deft" x="48" y="486"><tspan class="tn">扰动量：</tspan><tspan>对系统输出量有不利影响的输入量。</tspan></text>
+        </g>
+        <g data-step="7">
+          <rect class="hlrect" x="926" y="86" width="198" height="124" rx="12"/>
+          <rect class="banner" x="20" y="448" width="1290" height="58" rx="12"/>
+          <text class="deft" x="48" y="486"><tspan class="tn">被控对象：</tspan><tspan>被控制的机器、设备或生产过程。</tspan></text>
+        </g>
+      </svg>
+    </div>
+  </div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const S = ACT.step, _n = S.next.bind(S), _r = S.reset.bind(S);
+  function flash() {
+    const gs = Array.from(document.querySelectorAll("g[data-step]"));
+    gs.forEach(g => g.classList.remove("flash"));
+    const cur = gs.filter(g => g.classList.contains("shown")).pop();
+    if (cur) cur.classList.add("flash");
+  }
+  S.next = function () { const r = _n(); flash(); return r; };
+  S.reset = function () { _r(); flash(); };
+  window.prev = function () { const n = Math.max(0, S.cur - 1); S.reset(); for (let i = 0; i < n; i++) S.next(); };
+});
+</script>
+</body>
+</html>

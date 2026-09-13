@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>例2-8 各环节传递函数与综合</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .svgwrap { background:var(--sky); border-radius:14px; padding:4px 4px; margin-bottom:12px;
+             position:relative; cursor:zoom-in; }
+  .svgwrap .ztip { position:absolute; top:8px; right:12px; font-size:15.5px; color:var(--blue);
+                   background:#fff; border:1.5px solid var(--blue); border-radius:8px;
+                   padding:2px 10px; opacity:.92; pointer-events:none; }
+  .zoomov { position:absolute; inset:0; z-index:60; background:rgba(247,250,255,.985);
+            display:grid; place-items:center; opacity:0; pointer-events:none;
+            transition:opacity .28s; cursor:zoom-out; }
+  .zoomov.on { opacity:1; pointer-events:auto; }
+  .zoomov .zbox { width:100%; display:grid; place-items:center;
+                  transform:scale(.72); transition:transform .28s; }
+  .zoomov.on .zbox { transform:scale(1); }
+  .zoomov .zbox svg { width:96%; height:auto; max-height:86%; }
+  .zoomov .zback { position:absolute; top:112px; right:64px; font-size:20px; color:var(--muted);
+                   background:#fff; border:1.5px solid var(--line); border-radius:10px;
+                   padding:6px 16px; }
+  .cols { display:flex; gap:22px; align-items:stretch; }
+  .cl { flex:1.12; display:flex; flex-direction:column; }
+  .cr { flex:1; display:flex; flex-direction:column; }
+  .cl .bd2, .cr .bd2 { display:flex; flex-direction:column; justify-content:center; gap:10px; padding:14px 20px; }
+  .row { display:flex; align-items:center; gap:14px; font-size:21px; color:var(--navy); }
+  .tag { flex:0 0 118px; background:var(--blue); color:#fff; border-radius:9px; text-align:center;
+         font-weight:700; font-size:19px; padding:6px 4px; }
+  .tag small { display:block; font-size:14px; font-weight:400; opacity:.85; }
+  .f { font-size:20px; }
+  .sub { margin-left:132px; font-size:19px; color:var(--navy); }
+  .phi { font-size:20px; background:#fff; border:2px solid var(--blue); border-radius:12px; padding:10px 14px; color:var(--navy); }
+  .phi .lbl { font-style:normal; font-weight:700; font-size:19px; color:var(--blue); display:block; margin-bottom:2px; }
+  .k0 { text-align:center; font-size:20px; margin-top:2px; color:var(--navy); }
+  .note2 { margin-top:10px; display:flex; gap:10px; align-items:flex-start;
+           background:#FDF3EC; border-left:6px solid var(--orange); border-radius:10px;
+           padding:8px 14px; font-size:20px; color:var(--ink); }
+  /* 方框图规范：名称正体、公式 KaTeX、线条 2px、小圆角 */
+  .svgname { font:600 15px "Microsoft YaHei","Segoe UI",sans-serif; fill:#1B3B8B; }
+  .svgsub { font:400 12px "Microsoft YaHei","Segoe UI",sans-serif; fill:#5B6B8C; }
+  .svgblk { fill:#fff; stroke:#1D3FA0; stroke-width:2; }
+  .svgline { stroke:#1D3FA0; stroke-width:2; fill:none; }
+</style>
+</head>
+<body data-title="例2-8　速度控制系统传递函数" data-page="28 / 51">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="svgwrap" id="tfwrap">
+      <div class="ztip">🔍 点击放大</div>
+      <svg viewBox="0 0 1080 176" width="100%" height="110">
+        <defs><marker id="a28" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+          <path d="M0,0 L10,5 L0,10 Z" fill="#1D3FA0"/></marker>
+          <marker id="a28r" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+          <path d="M0,0 L10,5 L0,10 Z" fill="#D63A2F"/></marker></defs>
+        <!-- 相加点 -->
+        <circle cx="90" cy="76" r="14" class="svgblk"/>
+        <path d="M 83.7,69.7 L 96.3,82.3 M 83.7,82.3 L 96.3,69.7" stroke="#1D3FA0" stroke-width="2.2" fill="none"/>
+        <text x="46" y="62" class="svgname" font-size="14">+</text>
+        <text x="98" y="116" class="svgname" font-size="14">−</text>
+        <!-- 主通道方框 -->
+        <rect x="122" y="46" width="112" height="60" rx="4" class="svgblk"/>
+        <text x="178" y="63" text-anchor="middle" class="svgname">运放Ⅰ</text>
+        <foreignObject x="124" y="64" width="108" height="36"><div xmlns="http://www.w3.org/1999/xhtml" class="tex" style="font-size:15px;text-align:center">G_1 = K_1</div></foreignObject>
+        <rect x="274" y="46" width="150" height="60" rx="4" class="svgblk"/>
+        <text x="349" y="63" text-anchor="middle" class="svgname">运放Ⅱ</text>
+        <foreignObject x="276" y="64" width="146" height="38"><div xmlns="http://www.w3.org/1999/xhtml" class="tex" style="font-size:15px;text-align:center">G_2 = \dfrac{\tau s + 1}{Ts}</div></foreignObject>
+        <rect x="464" y="46" width="106" height="60" rx="4" class="svgblk"/>
+        <text x="517" y="63" text-anchor="middle" class="svgname">功放</text>
+        <foreignObject x="466" y="64" width="102" height="36"><div xmlns="http://www.w3.org/1999/xhtml" class="tex" style="font-size:15px;text-align:center">G_3 = K_2</div></foreignObject>
+        <rect x="610" y="46" width="160" height="60" rx="4" class="svgblk"/>
+        <text x="690" y="63" text-anchor="middle" class="svgname">电动机（双输入）</text>
+        <foreignObject x="612" y="64" width="156" height="36"><div xmlns="http://www.w3.org/1999/xhtml" class="tex" style="font-size:15px;text-align:center">G_u,\ G_m</div></foreignObject>
+        <!-- 反馈通道方框 -->
+        <rect x="556" y="110" width="126" height="44" rx="4" fill="#fff" stroke="#F5821F" stroke-width="2"/>
+        <text x="619" y="125" text-anchor="middle" class="svgname" font-size="13" fill="#F5821F">测速机</text>
+        <foreignObject x="558" y="126" width="122" height="26"><div xmlns="http://www.w3.org/1999/xhtml" class="tex" style="font-size:13px;text-align:center;color:#F5821F">G_f = K_f</div></foreignObject>
+        <!-- 信号线 -->
+        <g class="svgline">
+          <line x1="34" y1="76" x2="74" y2="76" marker-end="url(#a28)"/>
+          <line x1="104" y1="76" x2="118" y2="76" marker-end="url(#a28)"/>
+          <line x1="234" y1="76" x2="270" y2="76" marker-end="url(#a28)"/>
+          <line x1="424" y1="76" x2="460" y2="76" marker-end="url(#a28)"/>
+          <line x1="570" y1="76" x2="606" y2="76" marker-end="url(#a28)"/>
+          <line x1="770" y1="76" x2="874" y2="76" marker-end="url(#a28)"/>
+          <polyline points="850,76 850,132 686,132" marker-end="url(#a28)"/>
+          <polyline points="556,132 90,132 90,92" marker-end="url(#a28)"/>
+        </g>
+        <line x1="690" y1="14" x2="690" y2="42" stroke="#D63A2F" stroke-width="2" fill="none" marker-end="url(#a28r)"/>
+        <circle cx="850" cy="76" r="4" fill="#1D3FA0"/>
+        <!-- 信号标注 -->
+        <foreignObject x="2" y="60" width="30" height="28"><div xmlns="http://www.w3.org/1999/xhtml" class="tex" style="font-size:15px">u_r</div></foreignObject>
+        <foreignObject x="882" y="60" width="26" height="28"><div xmlns="http://www.w3.org/1999/xhtml" class="tex" style="font-size:15px">n</div></foreignObject>
+        <foreignObject x="700" y="6" width="200" height="24"><div xmlns="http://www.w3.org/1999/xhtml" class="tex" style="font-size:13px;color:#D63A2F">m_c\ (\text{负载扰动})</div></foreignObject>
+      </svg>
+    </div>
+    <div class="cols">
+      <div class="act-card cl">
+        <div class="hd" style="font-size:22px">五个环节的传递函数</div>
+        <div class="bd2">
+          <div class="row"><div class="tag">运放Ⅰ<small>比例</small></div>
+            <div class="f tex">G_1(s) = \dfrac{U_1(s)}{U_e(s)} = -\dfrac{R_1}{R_0} = K_1,\quad U_e = U_r - U_f</div></div>
+          <div class="row"><div class="tag">运放Ⅱ<small>PI 校正</small></div>
+            <div class="f tex">G_2(s) = \dfrac{U_2(s)}{U_1(s)} = \dfrac{\tau s + 1}{Ts}</div></div>
+          <div class="row"><div class="tag">功放<small>比例</small></div>
+            <div class="f tex">G_3(s) = \dfrac{U_a(s)}{U_2(s)} = K_2</div></div>
+          <div class="row"><div class="tag">电动机<small>双输入</small></div>
+            <div class="f tex" style="font-size:19px">m_c{=}0:\ G_u(s) = \dfrac{N(s)}{U_a(s)} = \dfrac{K_u}{T_aT_ms^2+T_ms+1}</div></div>
+          <div class="sub tex">u_a{=}0:\ G_m(s) = \dfrac{N(s)}{M_c(s)} = \dfrac{-K_m(T_as+1)}{T_aT_ms^2+T_ms+1}</div>
+          <div class="row"><div class="tag" style="background:var(--orange)">测速机<small>反馈</small></div>
+            <div class="f tex">G_f(s) = \dfrac{U_f(s)}{N(s)} = K_f</div></div>
+        </div>
+      </div>
+      <div class="act-card cr" data-step>
+        <div class="hd" style="font-size:22px">综合：闭环传递函数（叠加原理）</div>
+        <div class="bd2">
+          <div class="phi">
+            <span class="lbl"><span class="tex">m_{c}(t)=0</span> 时（给定作用）</span>
+            <span class="eqline tex">\Phi_u(s) = \dfrac{N(s)}{U_r(s)} =</span>
+            <span class="eqline tex">\dfrac{K_0(\tau s+1)}{T_aT_mTs^3+T_mTs^2+(T+K_0K_f\tau)s+K_0K_f}</span>
+          </div>
+          <div class="phi">
+            <span class="lbl"><span class="tex">u_{r}(t)=0</span> 时（扰动作用）</span>
+            <span class="eqline tex">\Phi_m(s) = \dfrac{N(s)}{M_c(s)} =</span>
+            <span class="eqline tex">\dfrac{-K_m(T_as+1)}{T_aT_mTs^3+T_mTs^2+(T+K_0K_f\tau)s+K_0K_f}</span>
+          </div>
+          <div class="k0">其中　<span class="tex">K_0 = K_1K_2K_u</span>（前向通道总增益）</div>
+        </div>
+      </div>
+    </div>
+    <div class="note2" data-step>
+      <div style="font-size:24px">💡</div>
+      <div>线性系统有两个输入（给定 <span class="tex">u_{r}</span> 与扰动 <span class="tex">m_{c}</span>）时，分别求各自的闭环传递函数再叠加；两者的<span class="kw-r">分母完全相同</span>——它就是闭环系统的特征多项式。</div>
+    </div>
+  </div>
+  <div class="act-note">要点：电动机是"双输入"环节（给定 + 负载扰动）；给定通道与扰动通道的区别仅在分子，分母同为闭环特征多项式。</div>
+  <div class="zoomov" id="zoomov">
+    <div class="zback">✕ 点击任意处缩回</div>
+    <div class="zbox" id="zbox"></div>
+  </div>
+</div></div>
+<script>
+(function () {
+  var wrap = document.getElementById("tfwrap"),
+      ov = document.getElementById("zoomov"),
+      zb = document.getElementById("zbox");
+  wrap.addEventListener("click", function () {
+    if (!zb.firstChild) {
+      var c = wrap.querySelector("svg").cloneNode(true);
+      c.removeAttribute("height");
+      c.innerHTML = c.innerHTML.replace(/a28/g, "a28z"); // 克隆体 marker 改 id，避免与原图冲突
+      zb.appendChild(c);
+    }
+    ov.classList.add("on");
+  });
+  ov.addEventListener("click", function () { ov.classList.remove("on"); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>典型闭环系统的传递函数</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .panel { background:var(--sky); border-radius:12px; padding:2px 10px; margin-bottom:12px; }
+  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .gc .bd2 { padding:14px 20px; }
+  .gc .h { font-size:20px; font-weight:800; color:var(--blue); margin-bottom:6px; }
+  .gc .f { font-size:21.5px; line-height:1.55; }
+  .gc .s { font-size:18px; color:var(--muted); margin-top:5px; line-height:1.45; }
+  .conc .bd2 { display:flex; align-items:center; gap:14px; padding:12px 22px; font-size:22px; }
+</style>
+</head>
+<body data-title="典型闭环系统的传递函数" data-page="39 / 51">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="panel">
+      <svg viewBox="0 0 1120 150" width="100%" height="132">
+        <defs><marker id="a38" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#1D3FA0"/></marker></defs>
+        <g font-size="18" fill="#1B3B8B">
+          <circle cx="80" cy="76" r="14" fill="#fff" stroke="#1D3FA0" stroke-width="2.5"/><path d="M 73.7,69.7 L 86.3,82.3 M 73.7,82.3 L 86.3,69.7" stroke="#1D3FA0" stroke-width="2.2" fill="none"/>
+          <rect x="120" y="52" width="90" height="48" rx="7" fill="#fff" stroke="#1D3FA0" stroke-width="2.5"/><text x="165" y="82" text-anchor="middle" font-style="italic">G₁</text>
+          <circle cx="258" cy="76" r="14" fill="#fff" stroke="#1D3FA0" stroke-width="2.5"/><path d="M 251.7,69.7 L 264.3,82.3 M 251.7,82.3 L 264.3,69.7" stroke="#1D3FA0" stroke-width="2.2" fill="none"/>
+          <rect x="300" y="52" width="90" height="48" rx="7" fill="#fff" stroke="#1D3FA0" stroke-width="2.5"/><text x="345" y="82" text-anchor="middle" font-style="italic">G₂</text>
+          <rect x="200" y="120" width="90" height="28" rx="6" fill="#fff" stroke="#F5821F" stroke-width="2.5"/><text x="245" y="140" text-anchor="middle" font-style="italic" fill="#F5821F" font-size="16">H</text>
+        </g>
+        <g stroke="#1D3FA0" stroke-width="2.5" fill="none" marker-end="url(#a38)">
+          <line x1="16" y1="76" x2="62" y2="76"/><line x1="94" y1="76" x2="116" y2="76"/>
+          <line x1="210" y1="76" x2="240" y2="76"/><line x1="272" y1="76" x2="296" y2="76"/>
+          <line x1="390" y1="76" x2="480" y2="76"/>
+          <line x1="258" y1="16" x2="258" y2="58" stroke="#D63A2F"/>
+          <polyline points="440,76 440,134 294,134" stroke="#F5821F"/>
+          <polyline points="200,134 80,134 80,94" stroke="#F5821F"/>
+        </g>
+        <circle cx="440" cy="76" r="4.5" fill="#1D3FA0"/>
+        <text x="6" y="68" font-size="17" fill="#1B3B8B" font-style="italic">R(s)</text>
+        <text x="486" y="68" font-size="17" fill="#1B3B8B" font-style="italic">C(s)</text>
+        <text x="266" y="14" font-size="16" fill="#D63A2F" font-style="italic">N(s) ↓（扰动）</text>
+        <text x="100" y="68" font-size="15" fill="#1B3B8B" font-style="italic">E</text>
+        <text x="60" y="66" font-size="15" fill="#D63A2F">+</text><text x="60" y="116" font-size="15" fill="#D63A2F">−</text>
+        <text x="600" y="60" font-size="17" fill="#8B93B8">闭环系统的典型结构：给定 R 与扰动 N 两个输入</text>
+      </svg>
+    </div>
+    <div class="grid2">
+      <div class="act-card gc" data-step="1"><div class="bd2 math">
+        <div class="h">① R(s) 作用（令 N=0）</div>
+        <div class="f"><span class="tex">\Phi (s) = \dfrac{C(s)}{R(s)} = \dfrac{G_{1}G_{2}}{1+G_{1}G_{2}H}</span>；　<span class="tex">\Phi _{e}(s) = \dfrac{E(s)}{R(s)} = \dfrac{1}{1+G_{1}G_{2}H}</span></div>
+        <div class="s">E(s)=R(s)−B(s)；H=1（单位反馈）时　Φ<sub>e</sub>(s) = 1 − Φ(s)</div>
+      </div></div>
+      <div class="act-card gc" data-step="2"><div class="bd2 math">
+        <div class="h">② N(s) 作用（令 R=0，恒值系统）</div>
+        <div class="f"><span class="tex">\Phi _{n}(s) = \dfrac{C(s)}{N(s)} = \dfrac{G_{2}}{1+G_{1}G_{2}H}</span>；　<span class="tex">\Phi _{ne}(s) = \dfrac{E(s)}{N(s)} = \dfrac{-G_{2}H}{1+G_{1}G_{2}H}</span></div>
+        <div class="s">此时 E(s) = 0 − B(s) = −H(s)C(s)</div>
+      </div></div>
+      <div class="act-card gc" data-step="3"><div class="bd2 math">
+        <div class="h">③ 两输入同时作用（叠加原理）</div>
+        <div class="f"><span class="tex">C(s) = \Phi (s)R(s) + \Phi _{n}(s)N(s)</span></div>
+        <div class="f" style="font-size:20px"><span class="tex">= \dfrac{G_{1}G_{2}}{1+G_{1}G_{2}H}\cdot R(s) + \dfrac{G_{2}}{1+G_{1}G_{2}H}\cdot N(s)</span></div>
+      </div></div>
+      <div class="act-card gc conc" data-step="4"><div class="bd2">
+        <div style="font-size:30px">📌</div>
+        <div class="math" style="font-size:21.5px">各传递函数的<span class="kw-r">分母都相同</span>：<span class="tex">1 + G_{1}(s)G_{2}(s)H(s)</span><br>这就是闭环系统的<span class="kw-r">特征多项式</span>（与输入无关）。</div>
+      </div></div>
+    </div>
+  </div>
+</div></div>
+</body>
+</html>

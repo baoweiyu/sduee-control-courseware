@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><title>QA Scan</title></head>
+<body>
+<div id="log">scan harness</div>
+<iframe id="fr" style="width:1300px;height:800px"></iframe>
+<script>
+var PAGES = "p01-cover p02-model-intro p03-contents p04-ode-build p05-ex-rlc p06-ex-spring p07-ex-motor p08-quiz-common p09-laplace-table p10-laplace-theorems p11-laplace-inverse p12-ode-solve p13-ode-example p14-quiz-solution p15-linearization p16-tf-definition p17-tf-derive p18-tf-properties p19-tf-forms p20-quiz-tf p21-typical-1 p22-typical-2 p23-typical-3 p24-quiz-tf2 p25-ex-rlc-tf p26-ex-opamp p27-ex-speed-system p28-ex-speed-tf p29-bd-elements p30-bd-draw p31-bd-equiv-principle p32-bd-basic-anim p33-bd-move-rules p34-bd-branch-move p35-bd-sum-move p36-action-decompose p37-bd-reduce-ex210 p38-ex-rc-ladder p39-closedloop-tf p40-sfg-concept p41-sfg-terms p42-sfg-mapping p43-sfg-example p44-sfg-rules p45-sfg-convert p46-mason-formula p47-mason-lab p48-mason-rc p49-keypoints p50-exercise p51-quiz-furnace".split(" ").map(function(n){return n + ".html";});
+var BASE = "../lessons/lesson02-math-model/pages/";
+
+function scanOne(name) {
+  return new Promise(function (resolve) {
+    var fr = document.getElementById('fr');
+    fr.onload = function () {
+      var w = fr.contentWindow, d = fr.contentDocument;
+      var t0 = Date.now();
+      var timer = setInterval(function () {
+        var done = d.body && d.body.getAttribute('data-mjx-done');
+        if (done || Date.now() - t0 > 12000) {
+          clearInterval(timer);
+          setTimeout(function () {
+            try {
+              // 展开全部步骤，让交互页的最终状态也参与检查
+              try { if (w.ACT && w.ACT.step) { for (var i = 0; i < 40; i++) w.ACT.step.next(); } } catch (e) {}
+              var o = { p: name.replace('.html', '') };
+              o.mjx = d.querySelectorAll('mjx-container').length;
+              o.merr = d.querySelectorAll('mjx-merror').length;
+              var ru = 0, samples = [];
+              d.querySelectorAll('mjx-mtext[data-latex]').forEach(function (n) {
+                var t = n.getAttribute('data-latex') || '';
+                if (/^\\[a-zA-Z]+$/.test(t)) { ru++; if (samples.length < 3) samples.push(t); }
+              });
+              o.redUndef = ru;
+              if (samples.length) o.samples = samples;
+              o.errs = (w.__mjxErrs || []).slice(0, 3);
+              o.img404 = 0;
+              var imgs = d.querySelectorAll('img');
+              imgs.forEach(function (im) { if (im.src && !im.complete) o.img404++; });
+              resolve(o);
+            } catch (e) { resolve({ p: name, scanErr: String(e && e.message || e).slice(0, 80) }); }
+          }, 3000);
+        }
+      }, 200);
+    };
+    fr.src = BASE + name + '?scan=1';
+  });
+}
+
+window.runScan = function (from, to) {
+  var list = PAGES.slice(from, to);
+  var out = [];
+  return list.reduce(function (chain, name) {
+    return chain.then(function () {
+      document.getElementById('log').textContent = 'scanning ' + name;
+      return scanOne(name).then(function (r) { out.push(r); });
+    });
+  }, Promise.resolve()).then(function () { return JSON.stringify(out); });
+};
+</script>
+</body>
+</html>

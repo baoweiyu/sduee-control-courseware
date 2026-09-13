@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>阶跃响应性能指标图解</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<link rel="stylesheet" href="../lesson03-svg.css">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:26px; height:100%; }
+  .figc { flex:1.75; display:flex; flex-direction:column; overflow:hidden; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:8px 14px; }
+  .figc svg { width:100%; height:100%; }
+  .side { flex:1; display:flex; flex-direction:column; gap:12px; }
+  .gi { background:#fff; border:2px solid var(--line); border-radius:12px; padding:13px 18px; font-size:20.5px; color:var(--ink); display:flex; gap:14px; align-items:center; transition:all .25s; }
+  .gi .no { width:38px; height:38px; border-radius:50%; background:var(--sky); color:var(--blue); font-size:19px; font-weight:700; display:grid; place-items:center; flex:none; transition:all .25s; }
+  .gi.on { border-color:var(--orange); background:#FFF7EF; }
+  .gi.on .no { background:var(--orange); color:#fff; }
+  .tip { font-size:19px; color:var(--muted); text-align:center; margin-top:2px; }
+</style>
+</head>
+<body data-title="阶跃响应性能指标 · 图解" data-page="12 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="act-card figc">
+        <div class="hd">单位阶跃响应曲线上的指标（欠阻尼二阶系统示例）</div>
+        <div class="bd2"><svg id="fig" viewBox="0 0 1000 640"></svg></div>
+      </div>
+      <div class="side">
+        <div class="gi" id="g1"><div class="no">1</div>稳态值 <span class="tex">c(\infty)</span> 与<span class="kw-r">误差带</span> <span class="tex">\Delta=\pm 5\%</span></div>
+        <div class="gi" id="g2"><div class="no">2</div><b>延迟时间</b> <span class="tex">t_{d}</span>：首次达稳态值 50%</div>
+        <div class="gi" id="g3"><div class="no">3</div><b>上升时间</b> <span class="tex">t_{r}</span>：首次达稳态值 <span class="tex">c(\infty)</span></div>
+        <div class="gi" id="g4"><div class="no">4</div><b>峰值时间</b> <span class="tex">t_{p}</span>：达第一个峰值</div>
+        <div class="gi" id="g5"><div class="no">5</div><b>超调量</b> <span class="tex">\sigma\%</span>：A 段与 B 段之比</div>
+        <div class="gi" id="g6"><div class="no">6</div><b>调节时间</b> <span class="tex">t_{s}</span>：进入并保持在误差带内</div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note" data-step="7"><span class="lead">超调量</span><span class="tex" style="font-size:28px">\sigma\% = \dfrac{A}{B}\times 100\%</span><span style="font-size:22px">（A = 超调高度 = 峰值 − 稳态值；B = 稳态值高度）</span></div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("fig");
+  const zeta = 0.45, wn = 1.2;
+  const wd = wn * Math.sqrt(1 - zeta * zeta);
+  const phi = Math.atan2(Math.sqrt(1 - zeta * zeta), zeta);
+  const h = t => t <= 0 ? 0 : 1 - Math.exp(-zeta * wn * t) / Math.sqrt(1 - zeta * zeta) * Math.sin(wd * t + phi);
+  const T = 8, YM = 1.35;
+  const X = t => 90 + t / T * 870;
+  const Y = v => 560 - v / YM * 520;
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const tx = (x, y, s, o, parent) => { const n = mk("text", Object.assign({ x, y, "font-size": (o && o.fs) || 20, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal" }, {}), parent); n.textContent = s; return n; };
+
+  // 箭头 marker
+  const defs = mk("defs", {});
+  const m1 = mk("marker", { id: "ar", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto-start-reverse" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, m1);
+  const m2 = mk("marker", { id: "arO", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto-start-reverse" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#F5821F" }, m2);
+  const m3s = mk("marker", { id: "arR", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto-start-reverse" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#D63A2F" }, m3s);
+  const mB = mk("marker", { id: "arB", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto-start-reverse" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#1D3FA0" }, mB);
+
+  // 坐标轴
+  mk("line", { x1: 90, y1: 560, x2: 972, y2: 560, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#ar)" });
+  mk("line", { x1: 90, y1: 560, x2: 90, y2: 28, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#ar)" });
+  tx(968, 600, "t", { fs: 21, an: "end", it: true, b: true });
+  tx(58, 36, "c(t)", { fs: 21, it: true, b: true });
+  tx(70, 566, "O", { fs: 18, fill: "#5B6B8C" });
+
+  // 响应曲线
+  let d = "";
+  for (let i = 0; i <= 320; i++) { const t = T * i / 320; d += (i ? "L" : "M") + X(t).toFixed(1) + "," + Y(h(t)).toFixed(1); }
+  mk("path", { d, stroke: "#2B5CE6", "stroke-width": 3.5, fill: "none" });
+
+  // 关键点
+  const tr = (Math.PI - phi) / wd, tp = Math.PI / wd;
+  const pk = 1 + Math.exp(-Math.PI * zeta / Math.sqrt(1 - zeta * zeta));
+  let td = 0; for (let t = 0; t <= T; t += 0.001) { if (h(t) >= 0.5) { td = t; break; } }
+  let ts = 0; for (let t = T; t >= 0; t -= 0.002) { if (Math.abs(h(t) - 1) > 0.05) { ts = t; break; } }
+
+  const vline = (g, x, yTop, lab) => {
+    mk("line", { x1: x, y1: yTop, x2: x, y2: 560, stroke: "#F5821F", "stroke-width": 2, "stroke-dasharray": "8 6" }, g);
+    tx(x, 594, lab, { fs: 22, b: true, it: true }, g);
+  };
+
+  // 1. 稳态值 + 误差带
+  const g1 = mk("g", { "data-step": "1" });
+  mk("rect", { x: 90, y: Y(1.05), width: 870, height: Y(0.95) - Y(1.05), fill: "#EEF3FD", opacity: 0.85 }, g1);
+  mk("line", { x1: 90, y1: Y(1.05), x2: 960, y2: Y(1.05), stroke: "#5B6B8C", "stroke-width": 1.4, "stroke-dasharray": "7 6" }, g1);
+  mk("line", { x1: 90, y1: Y(0.95), x2: 960, y2: Y(0.95), stroke: "#5B6B8C", "stroke-width": 1.4, "stroke-dasharray": "7 6" }, g1);
+  mk("line", { x1: 90, y1: Y(1), x2: 960, y2: Y(1), stroke: "#F5821F", "stroke-width": 2.2, "stroke-dasharray": "10 7" }, g1);
+  tx(78, Y(1) + 7, "c(∞)", { an: "end", fs: 21, it: true, b: true }, g1);
+  tx(78, Y(1.05) + 7, "1.05", { an: "end", fs: 17, fill: "#5B6B8C" }, g1);
+  tx(78, Y(0.95) + 7, "0.95", { an: "end", fs: 17, fill: "#5B6B8C" }, g1);
+  tx(950, Y(1.05) - 12, "误差带 Δ=±5%", { fs: 20, b: true, fill: "#5B6B8C", an: "end" }, g1);
+
+  // 2. td
+  const g2 = mk("g", { "data-step": "2" });
+  mk("line", { x1: 90, y1: Y(0.5), x2: 960, y2: Y(0.5), stroke: "#C9D8F2", "stroke-width": 1.4, "stroke-dasharray": "7 6" }, g2);
+  tx(78, Y(0.5) + 7, "0.5", { an: "end", fs: 17, fill: "#5B6B8C" }, g2);
+  mk("circle", { cx: X(td), cy: Y(0.5), r: 6, fill: "#D63A2F" }, g2);
+  vline(g2, X(td), Y(0.5), "td");
+
+  // 3. tr
+  const g3 = mk("g", { "data-step": "3" });
+  mk("circle", { cx: X(tr), cy: Y(1), r: 6, fill: "#D63A2F" }, g3);
+  vline(g3, X(tr), Y(1), "tr");
+
+  // 4. tp
+  const g4 = mk("g", { "data-step": "4" });
+  mk("circle", { cx: X(tp), cy: Y(pk), r: 6.5, fill: "#D63A2F" }, g4);
+  vline(g4, X(tp), Y(pk), "tp");
+  tx(X(tp), Y(pk) - 16, "峰值 cmax", { fs: 20, b: true, fill: "#D63A2F" }, g4);
+
+  // 5. σ% = A/B
+  const g5 = mk("g", { "data-step": "5" });
+  const xA = X(tp) + 44;
+  mk("line", { x1: xA, y1: Y(pk), x2: xA, y2: Y(1), stroke: "#D63A2F", "stroke-width": 2.4, "marker-start": "url(#arR)", "marker-end": "url(#arR)" }, g5);
+  tx(xA + 24, (Y(pk) + Y(1)) / 2 + 7, "A", { fs: 24, b: true, it: true, fill: "#D63A2F" }, g5);
+  mk("line", { x1: 126, y1: Y(1), x2: 126, y2: Y(0), stroke: "#1D3FA0", "stroke-width": 2.4, "marker-start": "url(#arB)", "marker-end": "url(#arB)" }, g5);
+  tx(150, Y(0.75) + 7, "B", { fs: 24, b: true, it: true }, g5);
+
+  // 6. ts
+  const g6 = mk("g", { "data-step": "6" });
+  mk("circle", { cx: X(ts), cy: Y(h(ts)), r: 6, fill: "#D63A2F" }, g6);
+  vline(g6, X(ts), Y(h(ts)), "ts");
+
+  // 侧栏高亮联动
+  const S = ACT.step, _n = S.next.bind(S), _r = S.reset.bind(S);
+  function mark() {
+    for (let i = 1; i <= 6; i++) {
+      const el = document.getElementById("g" + i);
+      if (el) el.classList.toggle("on", S.cur >= i);
+    }
+  }
+  S.next = function () { const dn = _n(); mark(); return dn; };
+  S.reset = function () { _r(); mark(); };
+  window.prev = function () { const n = Math.max(0, S.cur - 1); S.reset(); for (let i = 0; i < n; i++) S.next(); };
+});
+</script>
+</body>
+</html>

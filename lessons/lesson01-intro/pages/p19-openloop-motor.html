@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>直流电动机转速开环控制系统</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .pane { height:696px; display:flex; flex-direction:column; gap:20px; }
+  .fig { flex:1.05; padding:16px 18px 8px; }
+  .fig .cap, .fig2 .cap { text-align:center; font-size:20px; color:var(--muted); padding:6px 0 2px; }
+  .fig2 { flex:1; padding:16px 18px 8px; }
+  svg text { font-family:var(--font); }
+  .blk { fill:#fff; stroke:var(--blue); stroke-width:2.5; }
+  .blkt { fill:var(--navy); font-size:22px; font-weight:700; }
+  .sig { stroke:var(--blue); stroke-width:2.5; fill:none; marker-end:url(#arr); }
+  .sigt { fill:var(--blue); font-size:21px; font-style:italic; font-family:var(--font-math); }
+  .lab { fill:var(--ink); font-size:20px; }
+  .dist { stroke:#D63A2F; stroke-width:2.5; stroke-dasharray:7 5; marker-end:url(#arrO); }
+  .distt { fill:#D63A2F; font-size:20px; }
+</style>
+</head>
+<body data-title="直流电动机转速开环控制系统" data-page="19 / 35">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="pane">
+      <div class="act-card fig">
+        <svg viewBox="0 0 1300 300" width="100%" height="88%">
+          <defs><marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#1D3FA0"/></marker></defs>
+          <!-- 电位器 -->
+          <rect class="blk" x="60" y="90" width="26" height="130" rx="6"/>
+          <line class="sig" x1="30" y1="155" x2="60" y2="155"/>
+          <text class="lab" x="42" y="250">电位器</text>
+          <text class="sigt" x="110" y="135">uᵣ</text>
+          <line class="sig" x1="86" y1="155" x2="220" y2="155"/>
+          <!-- 功率放大器 -->
+          <rect class="blk" x="222" y="105" width="150" height="100" rx="8"/>
+          <text class="blkt" x="297" y="148" text-anchor="middle">功率</text>
+          <text class="blkt" x="297" y="178" text-anchor="middle">放大器</text>
+          <text class="sigt" x="396" y="135">uₐ</text>
+          <line class="sig" x1="372" y1="155" x2="470" y2="155"/>
+          <!-- 电动机 -->
+          <circle cx="545" cy="155" r="52" fill="#fff" stroke="#1D3FA0" stroke-width="2.5"/>
+          <text class="blkt" x="545" y="150" text-anchor="middle" style="font-size:20px">直流</text>
+          <text class="blkt" x="545" y="176" text-anchor="middle" style="font-size:20px">电动机</text>
+          <text class="sigt" x="620" y="135">n</text>
+          <line class="sig" x1="597" y1="155" x2="700" y2="155"/>
+          <!-- 负载 -->
+          <rect class="blk" x="702" y="115" width="110" height="80" rx="8"/>
+          <text class="blkt" x="757" y="164" text-anchor="middle">负载</text>
+          <!-- 扰动 -->
+          <text class="distt" x="900" y="60">扰动量（如负载变化、电压波动）</text>
+          <line class="dist" x1="757" y1="66" x2="757" y2="111"/>
+          <defs><marker id="arrO" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#D63A2F"/></marker></defs>
+          <text class="lab" x="900" y="160" style="fill:var(--muted)">输出转速 n 不受反馈调节</text>
+        </svg>
+        <div class="cap">图 1-1　直流电动机转速开环控制系统（原理示意）</div>
+      </div>
+      <div class="act-card fig2">
+        <svg viewBox="0 0 1300 260" width="100%" height="84%">
+          <text class="sigt" x="40" y="120">r(t)</text>
+          <text class="lab" x="24" y="150">输入量</text>
+          <line class="sig" x1="60" y1="140" x2="200" y2="140"/>
+          <rect class="blk" x="202" y="100" width="180" height="80" rx="8"/>
+          <text class="blkt" x="292" y="148" text-anchor="middle">控制器</text>
+          <line class="sig" x1="382" y1="140" x2="522" y2="140"/>
+          <rect class="blk" x="524" y="100" width="260" height="80" rx="8"/>
+          <text class="blkt" x="654" y="136" text-anchor="middle">被控对象</text>
+          <text class="blkt" x="654" y="164" text-anchor="middle" style="font-size:19px">（直流电动机）</text>
+          <text class="distt" x="600" y="42">扰动量</text>
+          <line class="dist" x1="654" y1="50" x2="654" y2="96"/>
+          <line class="sig" x1="784" y1="140" x2="960" y2="140"/>
+          <text class="sigt" x="928" y="118">c(t)</text>
+          <text class="lab" x="985" y="147">输出量（被控制量）</text>
+        </svg>
+        <div class="cap">开环系统方框图：信号单向传递，无反馈回路</div>
+      </div>
+    </div>
+  </div>
+</div></div>
+</body>
+</html>

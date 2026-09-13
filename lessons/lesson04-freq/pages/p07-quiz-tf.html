@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>课堂互动 · 时域与频域</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; flex-direction:row-reverse; gap:24px; height:100%; }
+  .figc { flex:1.18; display:flex; flex-direction:column; overflow:hidden; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:8px 14px; min-height:0; }
+  .figc svg { width:100%; height:100%; }
+  .figc .cap { flex:none; font-size:19px; color:var(--navy); background:var(--sky); border-radius:12px; padding:11px 18px; margin:0 14px 14px; }
+  .qcol { flex:1; display:flex; flex-direction:column; gap:20px; }
+  .qtype { display:inline-block; background:var(--orange); color:#fff; font-size:21px; font-weight:700; border-radius:10px; padding:7px 20px; width:fit-content; }
+  .qz { background:#fff; border:2px solid var(--line); border-radius:16px; padding:22px 28px; flex:1; display:flex; flex-direction:column; justify-content:center; min-height:0; }
+  .qz .qt { font-size:24px; color:var(--navy); font-weight:700; margin-bottom:18px; line-height:1.5; }
+  .stage-tip { display:inline-block; margin-bottom:16px; font-size:19.5px; color:#fff; background:var(--blue); border-radius:20px; padding:6px 20px; width:fit-content; }
+  .opts { display:flex; flex-direction:column; gap:16px; }
+  .opt { background:var(--sky); border:2px solid var(--line); border-radius:12px; padding:16px 18px; font-size:20.5px; color:var(--ink); font-weight:700; position:relative; line-height:1.45; }
+  .opt.right { border-color:#1E9E57; background:#F0FAF4; }
+  .opt.right::after { content:"✓"; position:absolute; top:-13px; right:-10px; width:31px; height:31px; border-radius:50%; background:#1E9E57; color:#fff; font-weight:800; font-size:19px; display:grid; place-items:center; }
+  .opt.wrong { border-color:#D63A2F; background:#FDF1EF; }
+  .opt.wrong::after { content:"✗"; position:absolute; top:-13px; right:-10px; width:31px; height:31px; border-radius:50%; background:#D63A2F; color:#fff; font-weight:800; font-size:19px; display:grid; place-items:center; }
+  .ans { font-size:21.5px; color:var(--navy); background:var(--sky); border-radius:12px; padding:16px 24px; line-height:1.7; }
+  .ans b { color:var(--danger); }
+</style>
+</head>
+<body data-title="课堂互动 · 时域与频域" data-page="7 / 87">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="row">
+      <div class="act-card figc">
+        <div class="hd">同一信号的两种"视角"</div>
+        <div class="bd2"><svg id="fig" viewBox="0 0 900 660"></svg></div>
+        <div class="cap"><b>两种视角，同一信号：</b>时域看<span class="kw-r">波形叠加</span>，频域看<span class="kw-r">频率成分</span>。</div>
+      </div>
+      <div class="qcol">
+        <span class="qtype">多选题　1 分</span>
+        <div class="qz">
+          <div class="qt">关于时域和频域，你认为以下说法<span style="color:var(--danger)">正确的</span>是？</div>
+          <span class="stage-tip">请先作出判断</span>
+          <div class="opts">
+            <div class="opt" data-mark="1">A　时域和频域是用来分析信号的不同角度</div>
+            <div class="opt" data-mark="1">B　时域是实际存在的域，是信号随时间变化的总体概括</div>
+            <div class="opt" data-mark="1">C　频域是数学构造的，是描述信号频率特性时用到的一种坐标系</div>
+            <div class="opt" data-mark="0">D　正弦波是频域中唯一存在的波形</div>
+          </div>
+        </div>
+        <div class="ans" data-step="2">
+          <b>答案：A、B、C。</b>时域与频域只是<span class="kw-r">观察同一信号的两种角度</span>：时域真实存在，频域是数学构造的坐标系。任何波形都可投影到频域表示，正弦波只是<span class="kw-r">分解的基</span>，并非频域中"唯一存在"的波形（D 错）。
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("fig");
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const MF = "Cambria Math,STIX Two Math,Georgia,Microsoft YaHei,sans-serif";
+  const tx = (x, y, s, o) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 23, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal", "font-family": MF }); const esc = t => t.replace(/&/g, "&amp;").replace(/</g, "&lt;"); let html = "", sub = false; for (const p of String(s).split(/(_\{[^}]*\})/)) { if (!p) continue; if (p.startsWith("_{")) { html += `<tspan${sub ? "" : " dy=\"6\""} font-size="72%">${esc(p.slice(2, -1))}</tspan>`; sub = true; } else { html += sub ? `<tspan dy="-6">${esc(p)}</tspan>` : esc(p); sub = false; } } n.innerHTML = html; if (o && o.halo) n.setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:6;stroke-linejoin:round"); return n; };
+  const defs = mk("defs", {});
+  const m1 = mk("marker", { id: "a6", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, m1);
+  // 上：时域合成波
+  tx(450, 42, "时域视角：x(t) = sin t + 0.5 sin 3t + 0.33 sin 5t", { fs: 25, b: true });
+  mk("line", { x1: 60, y1: 190, x2: 840, y2: 190, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a6)" });
+  mk("line", { x1: 60, y1: 190, x2: 60, y2: 78, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a6)" });
+  tx(846, 196, "t", { fs: 21, an: "start", it: true, b: true, fill: "#5B6B8C" });
+  const f1 = t => Math.sin(t) + 0.5 * Math.sin(3 * t) + 0.33 * Math.sin(5 * t);
+  let d = "";
+  for (let i = 0; i <= 700; i++) { const t = 4 * Math.PI * i / 700; d += (i ? "L" : "M") + (60 + t / (4 * Math.PI) * 760).toFixed(1) + "," + (190 - f1(t) * 60).toFixed(1); }
+  mk("path", { d, stroke: "#2B5CE6", "stroke-width": 3.4, fill: "none" });
+  tx(120, 102, "合成波形", { fs: 21, b: true, fill: "#2B5CE6", an: "start", halo: 1 });
+  // 连接箭头（傅里叶分解：由时域得到频域，用页面已有的红色系，放大加粗）
+  mk("line", { x1: 450, y1: 268, x2: 450, y2: 330, stroke: "#D63A2F", "stroke-width": 5, "marker-end": "url(#a6)" });
+  tx(475, 306, "傅里叶分解", { fs: 27, b: true, fill: "#D63A2F", an: "start", halo: 1 });
+  // 下：频域谱线
+  tx(450, 378, "频域视角：三根谱线（幅值 vs 频率）", { fs: 25, b: true });
+  mk("line", { x1: 60, y1: 620, x2: 840, y2: 620, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a6)" });
+  mk("line", { x1: 60, y1: 620, x2: 60, y2: 416, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a6)" });
+  tx(846, 626, "ω", { fs: 21, an: "start", it: true, b: true, fill: "#5B6B8C" });
+  tx(40, 424, "幅值", { fs: 21, b: true, fill: "#5B6B8C" });
+  const bars = [ [1, 1.0], [3, 0.5], [5, 0.33] ];
+  bars.forEach(([w, a]) => {
+    const x = 60 + w / 6.5 * 720;
+    mk("line", { x1: x, y1: 620, x2: x, y2: 620 - a * 195, stroke: "#D63A2F", "stroke-width": 8 });
+    mk("circle", { cx: x, cy: 620 - a * 195, r: 7, fill: "#D63A2F" });
+    tx(x, 648, String(w), { fs: 21, b: true });
+    tx(x, 620 - a * 195 - 18, a.toFixed(2), { fs: 21, b: true, fill: "#D63A2F" });
+  });
+  // 三段式
+  const S = ACT.step, _n = S.next.bind(S), _r = S.reset.bind(S);
+  function mark() {
+    const on = S.cur >= 1;
+    document.querySelectorAll(".opt").forEach(o => {
+      o.classList.toggle("right", on && o.dataset.mark === "1");
+      o.classList.toggle("wrong", on && o.dataset.mark === "0");
+    });
+  }
+  S.next = function () { const dd = _n(); mark(); return dd; };
+  S.reset = function () { _r(); mark(); };
+  window.prev = function () { const n = Math.max(0, S.cur - 1); S.reset(); for (let i = 0; i < n; i++) S.next(); };
+});
+</script>
+</body>
+</html>

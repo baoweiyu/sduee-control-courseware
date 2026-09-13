@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>例 3-3 · 速度反馈参数设计</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:24px; height:100%; }
+  .lcol { flex:1.15; display:flex; flex-direction:column; gap:16px; }
+  .prob { background:var(--navy); color:#fff; border-radius:14px; padding:16px 26px; font-size:22.5px; line-height:1.6; }
+  .prob .tag { display:inline-block; background:var(--orange); border-radius:8px; padding:3px 14px; font-size:19px; font-weight:700; margin-right:12px; vertical-align:3px; }
+  .prob .tex { color:#fff; }
+  .solv { flex:1; }
+  .solv .bd { font-size:23px; line-height:1.8; padding:24px 30px; }
+  .stp { display:flex; gap:14px; align-items:flex-start; margin-bottom:13px; }
+  .stp .no { flex:none; width:34px; height:34px; border-radius:50%; background:var(--blue); color:#fff; display:grid; place-items:center; font-size:19px; font-weight:700; margin-top:2px; }
+  .tabc { flex:1; display:flex; flex-direction:column; overflow:hidden; }
+  .tabc .bd3 { flex:1; background:#fff; padding:22px 24px; display:flex; flex-direction:column; justify-content:center; gap:18px; }
+  .act-table { font-size:20.5px; }
+  .act-table td, .act-table th { text-align:center; }
+  .act-table td.l { text-align:left; }
+  .good { color:#1E9E57; font-weight:700; }
+  .cmt { font-size:20px; color:var(--navy); background:var(--sky); border-radius:12px; padding:12px 20px; line-height:1.6; }
+  .solv .bd { display:flex; flex-direction:column; }
+  .rslt { margin-top:auto; background:var(--sky); border-radius:12px; padding:16px 24px; font-size:21.5px; line-height:1.6; color:var(--navy); }
+</style>
+</head>
+<body data-title="例 3-3 · 速度反馈参数设计" data-page="41 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="row">
+      <div class="lcol">
+        <div class="prob"><span class="tag">例 3-3</span>例 3-2 的随动系统（K = 16，T = 0.25 s）要求 σ% = 16% 且<span style="color:#FFD9A0">不降低增益</span>。采用速度反馈，求反馈系数 τ 与系统指标。</div>
+        <div class="act-card solv">
+          <div class="hd">解题过程</div>
+          <div class="bd">
+            <div class="stp" data-step="1"><div class="no">1</div><div><b>由 σ% = 16% 定阻尼比</b>：ζ<sub>1</sub> = 0.5</div></div>
+            <div class="stp" data-step="2"><div class="no">2</div><div><b>由 ζ<sub>1</sub> 公式反求 τ</b>：
+              <span class="tex" style="font-size:23px">\tau=\dfrac{2\zeta_{1}\sqrt{KT}-1}{K}=\dfrac{2\times0.5\times2-1}{16}=0.0625\;\text{s}</span></div></div>
+            <div class="stp" data-step="3"><div class="no">3</div><div><b>校核指标</b>：ω<sub>n</sub> = 8 不变，ω<sub>d</sub> = 6.93，β = 60° = 1.047 rad
+              <div style="margin-top:4px"><span class="tex" style="font-size:23px">t_{r}=0.30\;\text{s},\;\; t_{p}=0.45\;\text{s},\;\; t_{s}=1.0\;\text{s}\;(\Delta=2\%),\;\; \sigma\%=16\%</span></div>
+            </div></div>
+            <div class="rslt" data-step="4"><b>设计结果</b>：串入 τ = 0.0625 s 的速度反馈后，闭环传递函数
+              <div class="mathbox math eqline tex tex-d" style="font-size:23px;margin:8px 0 4px">\varPhi_{1}(s)=\dfrac{16}{0.25s^{2}+2s+16}=\dfrac{64}{s^{2}+8s+64}</div>
+              检验：ω<sub>n</sub> = √64 = 8，ζ<sub>1</sub> = 8/(2×8) = 0.5 → <span class="kw-r">σ% = 16%，满足要求</span>。
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="act-card tabc">
+        <div class="hd">原系统 vs 速度反馈系统 指标对比</div>
+        <div class="bd3">
+          <table class="act-table">
+            <tr><th style="width:34%">指标</th><th>原系统<br>K=16</th><th>速度反馈<br>K=16, τ=0.0625</th></tr>
+            <tr><td class="l">阻尼比 ζ</td><td>0.25</td><td class="good">0.5</td></tr>
+            <tr><td class="l">自然频率 ω<sub>n</sub></td><td>8 rad/s</td><td>8 rad/s（不变）</td></tr>
+            <tr><td class="l">超调量 σ%</td><td>44.4%</td><td class="good">16%</td></tr>
+            <tr><td class="l">调节时间 t<sub>s</sub>（2%）</td><td>2.0 s</td><td class="good">1.0 s</td></tr>
+            <tr><td class="l">上升时间 t<sub>r</sub></td><td>0.24 s</td><td>0.30 s（略缓）</td></tr>
+            <tr><td class="l">峰值时间 t<sub>p</sub></td><td>0.41 s</td><td>0.45 s（略缓）</td></tr>
+          </table>
+          <div class="cmt">对比可见：速度反馈是"性价比高"的校正手段——<br><span class="kw-r">牺牲一点上升速度，换超调量减半、t<sub>s</sub> 缩短一半</span>。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+</body>
+</html>

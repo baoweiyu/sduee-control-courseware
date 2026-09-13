@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>特征方程与闭环极点</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<link rel="stylesheet" href="../lesson03-svg.css">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:24px; height:100%; }
+  .drv { flex:1.25; }
+  .drv .bd { font-size:22px; line-height:1.65; display:flex; flex-direction:column; justify-content:space-evenly; height:calc(100% - 62px); }
+  .figc { flex:1; display:flex; flex-direction:column; overflow:hidden; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:8px 14px; }
+  .figc svg { width:100%; height:100%; }
+  .def { background:#fff; border:2px solid var(--line); border-radius:14px; padding:14px 24px; font-size:22px; line-height:1.85; color:var(--ink); margin-top:14px; }
+</style>
+</head>
+<body data-title="特征方程与闭环极点" data-page="25 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="act-card drv">
+        <div class="hd">特征方程与闭环极点的求解</div>
+        <div class="bd">
+          <div class="mathbox math eqline tex tex-d" style="font-size:27px">s^{2} + 2\zeta\omega_{n}\,s + \omega_{n}^{2} = 0</div>
+          <div style="font-size:21px;color:var(--muted)">由一元二次方程求根公式：</div>
+          <div class="mathbox math eqline tex tex-d" style="font-size:24px">s_{1,2} = \dfrac{-2\zeta\omega_{n} \pm \sqrt{4\zeta^{2}\omega_{n}^{2} - 4\omega_{n}^{2}}}{2} = -\zeta\omega_{n} \pm \omega_{n}\sqrt{\zeta^{2}-1}</div>
+          <div class="mathbox math eqline tex tex-d" style="font-size:26px;margin-bottom:0">s_{1,2} = -\zeta\omega_{n} \pm \mathrm{j}\,\omega_{n}\sqrt{1-\zeta^{2}} = -\sigma \pm \mathrm{j}\,\omega_{d} \quad (0<\zeta<1)</div>
+          <div class="def" style="margin-top:0">
+            <span class="kw-r">σ = ζω<sub>n</sub></span> —— 衰减系数（极点到虚轴的距离）<br>
+            <span class="kw-r">ω<sub>d</sub> = ω<sub>n</sub>√(1−ζ²)</span> —— 阻尼振荡角频率<br>
+            <span class="kw-r">β = arccos ζ</span> —— 阻尼角（极点矢量与负实轴夹角）
+          </div>
+          <div class="def" style="margin-top:0;background:var(--sky);font-size:20px">
+            <b>极点读法</b>：实部 −σ 决定<span class="kw-r">衰减快慢</span>，虚部 ±ω<sub>d</sub> 决定<span class="kw-r">振荡频率</span>。
+          </div>
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd">闭环极点在 s 平面上的位置（0&lt;ζ&lt;1）</div>
+        <div class="bd2"><svg id="fig" viewBox="0 0 700 620"></svg></div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">要点</span>极点到原点的距离恒为 <span class="kw-r">ω<sub>n</sub></span>；ζ 越小，β 越大，极点越靠近虚轴，振荡越强。</div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("fig");
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const tx = (x, y, s, o) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 20, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal" }); n.textContent = s; return n; };
+  const defs = mk("defs", {});
+  const m1 = mk("marker", { id: "a23", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, m1);
+  const O = { x: 350, y: 340 }, R = 240;       // 原点与 ωn 半径
+  const beta = 55 * Math.PI / 180;              // 阻尼角示例
+  const px = O.x - R * Math.cos(beta), py = O.y - R * Math.sin(beta);  // 上极点
+  const qx = px, qy = O.y + R * Math.sin(beta);                          // 下极点
+
+  // 坐标轴
+  mk("line", { x1: 60, y1: O.y, x2: 664, y2: O.y, stroke: "#5B6B8C", "stroke-width": 1.6, "marker-end": "url(#a23)" });
+  mk("line", { x1: O.x, y1: 596, x2: O.x, y2: 30, stroke: "#5B6B8C", "stroke-width": 1.6, "marker-end": "url(#a23)" });
+  tx(660, O.y + 34, "Re", { fs: 20, it: true, b: true, fill: "#5B6B8C", an: "end" });
+  tx(O.x + 34, 44, "jω", { fs: 20, it: true, b: true, fill: "#5B6B8C", an: "start" });
+  tx(O.x - 18, O.y + 32, "O", { fs: 18, fill: "#5B6B8C", an: "end" });
+
+  // ωn 半圆（左半）
+  mk("path", { d: `M ${O.x - R} ${O.y} A ${R} ${R} 0 0 1 ${O.x} ${O.y - R}`, fill: "none", stroke: "#C9D8F2", "stroke-width": 2, "stroke-dasharray": "7 6" });
+  mk("path", { d: `M ${O.x} ${O.y + R} A ${R} ${R} 0 0 1 ${O.x - R} ${O.y}`, fill: "none", stroke: "#C9D8F2", "stroke-width": 2, "stroke-dasharray": "7 6" });
+
+  // 极点 × 标记
+  [[px, py], [qx, qy]].forEach(p => {
+    mk("line", { x1: p[0] - 11, y1: p[1] - 11, x2: p[0] + 11, y2: p[1] + 11, stroke: "#D63A2F", "stroke-width": 3.4 });
+    mk("line", { x1: p[0] - 11, y1: p[1] + 11, x2: p[0] + 11, y2: p[1] - 11, stroke: "#D63A2F", "stroke-width": 3.4 });
+  });
+  tx(px - 20, py - 18, "s1", { fs: 22, it: true, b: true, fill: "#D63A2F", an: "end" });
+  tx(qx - 20, qy + 34, "s2", { fs: 22, it: true, b: true, fill: "#D63A2F", an: "end" });
+
+  // 原点到上极点的矢量（ωn）
+  mk("line", { x1: O.x, y1: O.y, x2: px, y2: py, stroke: "#2B5CE6", "stroke-width": 2.6 });
+  const mx = (O.x + px) / 2, my = (O.y + py) / 2;
+  tx(mx + 34, my - 2, "ωn", { fs: 23, it: true, b: true, fill: "#2B5CE6", an: "start" });
+
+  // β 角弧（负实轴 → 极点矢量）
+  const rB = 74;
+  const a0 = Math.PI, a1 = Math.PI - beta;
+  mk("path", { d: `M ${O.x - rB} ${O.y} A ${rB} ${rB} 0 0 1 ${O.x + rB * Math.cos(a1)} ${O.y - rB * Math.sin(a1)}`, fill: "none", stroke: "#F5821F", "stroke-width": 2.6 });
+  tx(O.x - rB - 40, O.y - 30, "β", { fs: 24, it: true, b: true, fill: "#F5821F" });
+
+  // σ（实部）与 ωd（虚部）标注
+  mk("line", { x1: px, y1: py, x2: px, y2: O.y, stroke: "#5B6B8C", "stroke-width": 1.6, "stroke-dasharray": "6 5" });
+  mk("line", { x1: px, y1: O.y - 4, x2: O.x, y2: O.y - 4, stroke: "#D63A2F", "stroke-width": 2.4 });
+  tx((px + O.x) / 2, O.y + 36, "σ = ζωn", { fs: 20, b: true, it: true, fill: "#D63A2F" });
+  mk("line", { x1: O.x + 4, y1: py, x2: px, y2: py, stroke: "#C9D8F2", "stroke-width": 1.6, "stroke-dasharray": "6 5" });
+  tx(px + 12, py - 12, "ωd", { fs: 20, it: true, b: true, fill: "#1B3B8B", an: "start" });
+
+  // cosβ = ζ 提示（置于原点右下方空白区）
+  tx(O.x + 95, O.y + 38, "cos β = ζ", { fs: 21, b: true, it: true, fill: "#F5821F" });
+});
+</script>
+</body>
+</html>

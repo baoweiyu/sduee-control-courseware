@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>典型二阶系统</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<link rel="stylesheet" href="../lesson03-svg.css">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:24px; height:100%; }
+  .lcol { flex:1.4; display:flex; flex-direction:column; gap:16px; }
+  .bdcard { flex:1; display:flex; flex-direction:column; overflow:hidden; }
+  .bdcard .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:10px 16px; }
+  .bdcard svg { width:100%; height:100%; }
+  .tf { background:#fff; border:2px solid var(--line); border-radius:14px; padding:14px 26px; font-size:22px; line-height:1.75; color:var(--ink); }
+  .rcol { flex:1; display:flex; flex-direction:column; gap:16px; }
+  .imgc { flex:1; border-radius:14px; overflow:hidden; border:2px solid var(--line); position:relative; }
+  .imgc img { width:100%; height:100%; object-fit:cover; display:block; }
+  .imgc .cap { position:absolute; left:0; right:0; bottom:0; background:linear-gradient(transparent, rgba(13,27,62,.85)); color:#fff; font-size:19px; padding:26px 18px 12px; }
+</style>
+</head>
+<body data-title="典型二阶系统" data-page="24 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lcol">
+        <div class="act-card bdcard">
+          <div class="hd">第三节 二阶系统分析 · 典型二阶系统的方框图</div>
+          <div class="bd2"><svg id="bd" viewBox="0 0 1000 330"></svg></div>
+        </div>
+        <div class="tf">
+          开环传递函数　<span class="tex" style="font-size:25px">G(s) = \dfrac{\omega_{n}^{2}}{s\,(s + 2\zeta\omega_{n})}</span><br>
+          闭环传递函数　<span class="tex" style="font-size:25px">\varPhi(s) = \dfrac{\omega_{n}^{2}}{s^{2} + 2\zeta\omega_{n}\,s + \omega_{n}^{2}}</span>
+        </div>
+      </div>
+      <div class="rcol">
+        <div class="imgc">
+          <img src="../../../assets/image2/car-suspension.png" alt="汽车悬架">
+          <div class="cap">弹簧–质量–阻尼：最典型的二阶物理原型（汽车悬架）</div>
+        </div>
+        <div class="act-card">
+          <div class="hd">两个特征参数</div>
+          <div class="bd" style="font-size:22.5px;line-height:1.9">
+            <span class="kw-r">ζ —— 阻尼比</span>：决定响应的振荡程度<br>
+            <span class="kw-r">ω<sub>n</sub> —— 无阻尼振荡角频率</span>：决定响应的快慢尺度
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">意义</span>随动系统、RLC 电路、弹簧–质量–阻尼装置等工程系统都可用二阶模型描述，二阶分析是时域法的核心。</div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("bd");
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const tx = (x, y, s, o) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 24, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal" }); n.textContent = s; return n; };
+  const defs = mk("defs", {});
+  const m1 = mk("marker", { id: "a22", markerWidth: 11, markerHeight: 11, refX: 8, refY: 3.5, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L8,3.5 L0,7 Z", fill: "#1D3FA0" }, m1);
+
+  const y = 128;
+  // 输入
+  tx(46, y + 9, "R(s)", { fs: 28, it: true, b: true });
+  mk("line", { x1: 88, y1: y, x2: 176, y2: y, stroke: "#1D3FA0", "stroke-width": 2.6, "marker-end": "url(#a22)" });
+  // 相加点（圆圈+内×，±号标在圈外引线旁）
+  mk("circle", { cx: 210, cy: y, r: 27, fill: "#fff", stroke: "#1D3FA0", "stroke-width": 2.6 });
+  mk("line", { x1: 197, y1: y - 13, x2: 223, y2: y + 13, stroke: "#1D3FA0", "stroke-width": 2.6 });
+  mk("line", { x1: 197, y1: y + 13, x2: 223, y2: y - 13, stroke: "#1D3FA0", "stroke-width": 2.6 });
+  tx(182, y - 34, "+", { fs: 28, b: true });
+  tx(238, y + 72, "−", { fs: 30, b: true });
+  mk("line", { x1: 238, y1: y, x2: 322, y2: y, stroke: "#1D3FA0", "stroke-width": 2.6, "marker-end": "url(#a22)" });
+  // 前向通道方块
+  mk("rect", { x: 322, y: y - 62, width: 400, height: 124, rx: 10, class: "svgblk" });
+  tx(522, y - 10, "ωn²", { fs: 34, it: true, b: true });
+  mk("line", { x1: 384, y1: y + 12, x2: 660, y2: y + 12, stroke: "#1D3FA0", "stroke-width": 2 });
+  tx(522, y + 50, "s (s + 2ζωn)", { fs: 29, it: true });
+  // 输出
+  mk("line", { x1: 722, y1: y, x2: 864, y2: y, stroke: "#1D3FA0", "stroke-width": 2.6, "marker-end": "url(#a22)" });
+  tx(886, y + 9, "C(s)", { fs: 28, it: true, b: true, an: "start" });
+  // 反馈通道（止于相加点圆周）
+  mk("circle", { cx: 800, cy: y, r: 7, fill: "#1D3FA0" });
+  mk("polyline", { points: "800," + y + " 800,272 210,272 210," + (y + 30), fill: "none", stroke: "#1D3FA0", "stroke-width": 2.6, "marker-end": "url(#a22)" });
+  tx(505, 260, "单位负反馈", { fs: 23, fill: "#5B6B8C" });
+});
+</script>
+</body>
+</html>

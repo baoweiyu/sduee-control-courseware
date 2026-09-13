@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<!-- 结论条遮挡探针：逐页测量 .act-body 内容底边与 .act-note 顶边的几何关系。
+     结果写入 #out（JSON 行），由 run_note_probe.py 收集。 -->
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><title>noteprobe</title></head>
+<body>
+<iframe id="fr" style="width:1448px;height:1086px;border:0"></iframe>
+<pre id="out">RUNNING</pre>
+<script>
+const out = document.getElementById("out");
+const fr = document.getElementById("fr");
+const results = [];
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+async function until(fn, timeout = 12000) {
+  const t0 = Date.now();
+  while (Date.now() - t0 < timeout) { try { const v = fn(); if (v) return v; } catch (e) {} await sleep(150); }
+  return null;
+}
+(async () => {
+  const q = new URLSearchParams(location.search);
+  const lessons = [q.get("lesson") || "lesson01-intro"];
+  const push = r => { results.push(r); out.textContent = results.map(x => JSON.stringify(x)).join("\n"); };
+  function loadPage(url) {
+    return new Promise(res => {
+      const to = setTimeout(() => res(false), 15000); // 兜底：页面坏掉时放弃
+      fr.onload = () => { clearTimeout(to); res(true); };
+      fr.src = url;
+    });
+  }
+  for (const ls of lessons) {
+    const idx = await (await fetch("../lessons/" + ls + "/lesson.json")).json();
+    for (const pg of idx.pages) {
+      const url = "../lessons/" + ls + "/pages/" + pg.file;
+      const loaded = await loadPage(url);
+      if (!loaded) { push({ page: ls + "/" + pg.file, err: "load-timeout" }); continue; }
+      const d = fr.contentDocument;
+      if (!d || !d.querySelector(".act-slide")) { push({ page: ls + "/" + pg.file, err: "no-slide" }); continue; }
+      // 等 MathJax 真实排版完成（CPU 实时，不吃虚拟时钟），15s 虚拟兜底
+      try {
+        const mj = fr.contentWindow.MathJax;
+        if (mj && mj.startup && mj.startup.promise) {
+          await Promise.race([mj.startup.promise, sleep(15000)]);
+        }
+      } catch (e) {}
+      await sleep(150);
+      const note = d.querySelector(".act-note");
+      if (!note) { push({ page: ls + "/" + pg.file, note: false }); continue; }
+      const hasPair = !!d.querySelector(".act-body.has-note");
+      const nr = note.getBoundingClientRect();
+      let cmax = 0, who = "";
+      const body = d.querySelector(".act-body");
+      if (body) {
+        body.querySelectorAll("*").forEach(el => {
+          const cs = fr.contentWindow.getComputedStyle(el);
+          if (cs.display === "none" || cs.visibility === "hidden") return;
+          const r = el.getBoundingClientRect();
+          if (r.height === 0 && r.width === 0) return;
+          if (r.bottom > cmax) { cmax = r.bottom; who = el.className && el.className.baseVal !== undefined ? String(el.className.baseVal) : String(el.className).slice(0, 40); }
+        });
+      }
+      const slide = d.querySelector(".act-slide").getBoundingClientRect();
+      const k = slide.width / 1448;
+      const overlap = (cmax - nr.top) / (k || 1);
+      push({ page: ls + "/" + pg.file, note: true, pair: hasPair,
+             overlap: Math.round(overlap), who: overlap > 0 ? who : "" });
+    }
+  }
+  out.textContent = "DONE\n" + results.map(x => JSON.stringify(x)).join("\n");
+})();
+</script>
+</body>
+</html>

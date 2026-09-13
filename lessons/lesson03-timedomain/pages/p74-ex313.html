@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>例 3-13 · 两种型别系统的稳态误差对比</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<link rel="stylesheet" href="../lesson03-svg.css">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:24px; height:100%; }
+  .probc { flex:0.94; display:flex; flex-direction:column; }
+  .probc .bd { flex:1; display:flex; flex-direction:column; justify-content:center; gap:14px; }
+  .solc { flex:1.06; display:flex; flex-direction:column; }
+  .solc .bd { flex:1; display:flex; flex-direction:column; justify-content:center; gap:13px; }
+  .figc { display:flex; flex-direction:column; gap:6px; }
+  .fcap { font-size:20px; font-weight:700; color:var(--navy); }
+  .figw { background:#fff; border:1.5px solid var(--line); border-radius:12px; padding:4px 8px; }
+  .figw svg { display:block; width:100%; height:auto; }
+  .step { font-size:21px; line-height:1.7; color:var(--navy); }
+  .concl { background:#FCEBE9; border:2px solid #D63A2F; border-radius:12px; padding:11px 18px; font-size:21px; color:var(--navy); line-height:1.6; }
+  [data-step]:not(.shown) { visibility:hidden; }
+</style>
+</head>
+<body data-title="例 3-13 · 两种型别系统的稳态误差对比" data-page="78 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="row">
+      <div class="act-card probc">
+        <div class="hd">例 3-13　两系统均为单位反馈，<span class="tex" style="font-size:19px">r(t)=2+4t+3t^{2}</span></div>
+        <div class="bd">
+          <div class="figc">
+            <div class="fcap">系统 1</div>
+            <div class="figw">
+              <svg viewBox="0 0 620 150">
+                <defs><marker id="ar74a" markerWidth="11" markerHeight="11" refX="7.5" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#1B3B8B"/></marker></defs>
+                <text x="8" y="76" font-size="20" fill="#1B3B8B" font-style="italic">R(s)</text>
+                <line x1="54" y1="70" x2="78" y2="70" stroke="#1B3B8B" stroke-width="2.2" marker-end="url(#ar74a)"/>
+                <circle cx="98" cy="70" r="14" fill="#fff" stroke="#1B3B8B" stroke-width="2.2"/>
+                <line x1="90" y1="62" x2="106" y2="78" stroke="#1B3B8B" stroke-width="2"/>
+                <line x1="106" y1="62" x2="90" y2="78" stroke="#1B3B8B" stroke-width="2"/>
+                <text x="64" y="100" font-size="18" fill="#1B3B8B">+</text>
+                <text x="117" y="114" font-size="18" fill="#1B3B8B">−</text>
+                <line x1="112" y1="70" x2="140" y2="70" stroke="#1B3B8B" stroke-width="2.2"/>
+                <rect x="144" y="40" width="180" height="60" rx="8" fill="#EAF0FE" stroke="#1B3B8B" stroke-width="2.2"/>
+                <foreignObject x="150" y="46" width="168" height="48"><div xmlns="http://www.w3.org/1999/xhtml" class="tex" style="font-size:19px;text-align:center">\dfrac{10}{s(s+4)}</div></foreignObject>
+                <line x1="324" y1="70" x2="472" y2="70" stroke="#1B3B8B" stroke-width="2.2" marker-end="url(#ar74a)"/>
+                <circle cx="428" cy="70" r="4" fill="#1B3B8B"/>
+                <text x="482" y="76" font-size="20" fill="#1B3B8B" font-style="italic">C(s)</text>
+                <polyline points="428,70 428,124 98,124 98,86" fill="none" stroke="#1B3B8B" stroke-width="2.2" marker-end="url(#ar74a)"/>
+              </svg>
+            </div>
+          </div>
+          <div class="figc">
+            <div class="fcap">系统 2</div>
+            <div class="figw">
+              <svg viewBox="0 0 620 150">
+                <defs><marker id="ar74b" markerWidth="11" markerHeight="11" refX="7.5" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#1B3B8B"/></marker></defs>
+                <text x="8" y="76" font-size="20" fill="#1B3B8B" font-style="italic">R(s)</text>
+                <line x1="54" y1="70" x2="78" y2="70" stroke="#1B3B8B" stroke-width="2.2" marker-end="url(#ar74b)"/>
+                <circle cx="98" cy="70" r="14" fill="#fff" stroke="#1B3B8B" stroke-width="2.2"/>
+                <line x1="90" y1="62" x2="106" y2="78" stroke="#1B3B8B" stroke-width="2"/>
+                <line x1="106" y1="62" x2="90" y2="78" stroke="#1B3B8B" stroke-width="2"/>
+                <text x="64" y="100" font-size="18" fill="#1B3B8B">+</text>
+                <text x="117" y="114" font-size="18" fill="#1B3B8B">−</text>
+                <line x1="112" y1="70" x2="140" y2="70" stroke="#1B3B8B" stroke-width="2.2"/>
+                <rect x="144" y="40" width="204" height="60" rx="8" fill="#EAF0FE" stroke="#1B3B8B" stroke-width="2.2"/>
+                <foreignObject x="150" y="46" width="192" height="48"><div xmlns="http://www.w3.org/1999/xhtml" class="tex" style="font-size:19px;text-align:center">\dfrac{10(s+1)}{s^{2}(s+4)}</div></foreignObject>
+                <line x1="348" y1="70" x2="472" y2="70" stroke="#1B3B8B" stroke-width="2.2" marker-end="url(#ar74b)"/>
+                <circle cx="428" cy="70" r="4" fill="#1B3B8B"/>
+                <text x="482" y="76" font-size="20" fill="#1B3B8B" font-style="italic">C(s)</text>
+                <polyline points="428,70 428,124 98,124 98,86" fill="none" stroke="#1B3B8B" stroke-width="2.2" marker-end="url(#ar74b)"/>
+              </svg>
+            </div>
+          </div>
+          <span style="font-size:20.5px;color:var(--navy)">求两个系统在该输入下的<b>稳态误差</b>。</span>
+        </div>
+      </div>
+      <div class="act-card solc">
+        <div class="hd">解</div>
+        <div class="bd">
+          <div class="step">输入分解：<span class="tex" style="font-size:20px">r(t)=2\cdot 1(t)+4t+6\cdot\dfrac{t^{2}}{2}</span><br>由叠加原理：<span class="tex tex-d" style="font-size:21px">e_{ss}=\frac{2}{1+K_{p}}+\frac{4}{K_{v}}+\frac{6}{K_{a}}</span></div>
+          <div class="step" data-step="1"><b>系统 1</b>　<span class="tex" style="font-size:20px">G_{1}(s)=\dfrac{10}{s(s+4)}=\dfrac{2.5}{s(0.25s+1)}</span><br>→ 1 型系统，<span class="tex">K=2.5</span>：<span class="tex" style="font-size:20px">K_{p}=\infty,\quad K_{v}=2.5,\quad K_{a}=0</span></div>
+          <div class="step" data-step="2"><span class="tex tex-d" style="font-size:21px">e_{ss1}=\frac{2}{1+\infty}+\frac{4}{2.5}+\frac{6}{0}=0+1.6+\infty=\infty</span><br>抛物线分量<span class="kw-r">不能跟踪</span>，误差发散。</div>
+          <div class="step" data-step="3"><b>系统 2</b>　<span class="tex" style="font-size:20px">G_{2}(s)=\dfrac{10(s+1)}{s^{2}(s+4)}=\dfrac{2.5(s+1)}{s^{2}(0.25s+1)}</span><br>→ 2 型系统，<span class="tex">K=2.5</span>：<span class="tex" style="font-size:20px">K_{p}=\infty,\quad K_{v}=\infty,\quad K_{a}=2.5</span></div>
+          <div class="step" data-step="4"><span class="tex tex-d" style="font-size:21px">e_{ss2}=\frac{2}{1+\infty}+\frac{4}{\infty}+\frac{6}{2.5}=0+0+2.4=2.4</span></div>
+          <div class="concl" data-step="5">同一输入下：1 型系统 <span class="tex">e_{ss1}=\infty</span>，2 型系统 <span class="tex">e_{ss2}=2.4</span>；<br><span class="kw-r">提高型别可从根本上改善稳态精度</span>。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+</body>
+</html>

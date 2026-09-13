@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>过阻尼（ζ&gt;1）的阶跃响应</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<link rel="stylesheet" href="../lesson03-svg.css">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:24px; height:100%; }
+  .lcol { flex:1; display:flex; flex-direction:column; gap:16px; }
+  .drv { flex:1; }
+  .drv .bd { font-size:21.5px; line-height:1.6; }
+  .feat { background:#fff; border:2px solid var(--line); border-radius:14px; padding:16px 24px; font-size:22px; line-height:1.85; color:var(--ink); }
+  .figc { flex:1.35; display:flex; flex-direction:column; overflow:hidden; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:8px 14px; }
+  .figc svg { width:100%; height:100%; }
+</style>
+</head>
+<body data-title="过阻尼（ζ>1）的阶跃响应" data-page="28 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lcol">
+        <div class="act-card drv">
+          <div class="hd">2、ζ &gt; 1（过阻尼）</div>
+          <div class="bd">
+            两个相异负实极点：<span class="tex" style="font-size:23px">s_{1,2} = -\left(\zeta \pm \sqrt{\zeta^{2}-1}\right)\omega_{n}</span>
+            <div class="mathbox math eqline tex tex-d" style="font-size:23.5px;margin-top:10px">h(t) = 1 + A_{1}e^{s_{1}t} + A_{2}e^{s_{2}t} \quad (t \geq 0)</div>
+            <div style="font-size:20.5px;color:var(--muted)">式中 A₁、A₂ 为留数常数；|s₂| ≫ |s₁|，<span class="tex" style="font-size:22px">e^{s_{2}t}</span> 很快消失。</div>
+          </div>
+        </div>
+        <div class="feat">
+          ① 响应<span class="kw-r">单调上升、无超调</span>，但上升缓慢；<br>
+          ② 靠近原点的极点 <span class="kw-r">s₁ 起主导作用</span>；<br>
+          ③ <span class="kw-r">ζ ≫ 1</span> 时可忽略远离原点的极点 s₂，二阶系统<span class="kw-r">降阶近似为一阶系统</span>。
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd">过阻尼响应曲线（ζ=1.5 与 ζ=1 对比，ωn=1）</div>
+        <div class="bd2"><svg id="fig" viewBox="0 0 1000 620"></svg></div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">权衡</span>增大阻尼可以消除振荡，代价是响应变慢 —— 工程上需要在"平稳"与"快速"之间折中。</div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("fig");
+  const T = 9, YM = 1.25;
+  const X = t => 96 + t / T * 850;
+  const Y = v => 540 - v / YM * 480;
+  const over = t => { if (t <= 0) return 0; const z = 1.5, wn = 1; const s1 = -wn * (z - Math.sqrt(z * z - 1)), s2 = -wn * (z + Math.sqrt(z * z - 1)); return 1 + (s2 * Math.exp(s1 * t) - s1 * Math.exp(s2 * t)) / (s1 - s2); };
+  const crit = t => t <= 0 ? 0 : 1 - (1 + t) * Math.exp(-t);
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const tx = (x, y, s, o) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 24, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal" }); n.textContent = s; return n; };
+  const defs = mk("defs", {});
+  const m1 = mk("marker", { id: "a26", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, m1);
+
+  mk("line", { x1: 96, y1: 540, x2: 960, y2: 540, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a26)" });
+  mk("line", { x1: 96, y1: 540, x2: 96, y2: 32, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a26)" });
+  tx(966, 546, "t", { fs: 26, an: "start", it: true, b: true });
+  tx(58, 42, "h(t)", { fs: 26, it: true, b: true });
+  tx(74, 546, "O", { fs: 23, fill: "#5B6B8C" });
+  mk("line", { x1: 96, y1: Y(1), x2: 946, y2: Y(1), stroke: "#F5821F", "stroke-width": 2, "stroke-dasharray": "10 7" });
+  tx(80, Y(1) + 7, "1", { an: "end", fs: 24, b: true });
+  [1.5, 3, 4.5, 6, 7.5].forEach(v => {
+    mk("line", { x1: X(v), y1: 540, x2: X(v), y2: 60, stroke: "#C9D8F2", "stroke-width": 1, "stroke-dasharray": "5 6" });
+    tx(X(v), 572, v + "", { fs: 21, fill: "#5B6B8C" });
+  });
+
+  let d1 = "", d2 = "";
+  for (let i = 0; i <= 400; i++) { const t = T * i / 400; d1 += (i ? "L" : "M") + X(t).toFixed(1) + "," + Y(over(t)).toFixed(1); d2 += (i ? "L" : "M") + X(t).toFixed(1) + "," + Y(crit(t)).toFixed(1); }
+  mk("path", { d: d2, stroke: "#8FA3C8", "stroke-width": 3, fill: "none", "stroke-dasharray": "12 7" });
+  mk("path", { d: d1, stroke: "#2B5CE6", "stroke-width": 3.5, fill: "none" });
+  tx(X(6.2), Y(crit(6.2)) - 24, "ζ = 1（临界）", { fs: 25, b: true, it: true, fill: "#5B6B8C" });
+  tx(X(7.0), Y(over(7.0)) + 48, "ζ = 1.5（过阻尼，更慢）", { fs: 25, b: true, it: true, fill: "#2B5CE6" });
+});
+</script>
+</body>
+</html>

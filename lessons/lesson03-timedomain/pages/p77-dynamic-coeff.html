@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>动态误差系数法</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:24px; height:100%; }
+  .limc { flex:0.82; display:flex; flex-direction:column; }
+  .limc .bd { flex:1; font-size:22.5px; line-height:1.9; display:flex; flex-direction:column; justify-content:center; gap:22px; }
+  .derc { flex:1.18; display:flex; flex-direction:column; }
+  .derc .bd { flex:1; display:flex; flex-direction:column; justify-content:center; gap:18px; }
+  .step { font-size:22px; line-height:1.8; color:var(--navy); }
+  .hl { background:var(--sky); border-radius:12px; padding:14px 20px; font-size:22px; color:var(--navy); line-height:1.75; }
+  .lim { display:flex; gap:14px; align-items:flex-start; }
+  .lim .no { flex:none; width:40px; height:40px; border-radius:50%; background:var(--navy); color:#fff; display:grid; place-items:center; font-size:21px; font-weight:800; margin-top:4px; }
+  [data-step]:not(.shown) { visibility:hidden; }
+</style>
+</head>
+<body data-title="动态误差系数法" data-page="81 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="row">
+      <div class="act-card limc">
+        <div class="hd">静态误差系数法的局限</div>
+        <div class="bd">
+          <div class="lim"><div class="no">1</div><div>只能给出稳态误差的<b>终值</b>（0、定值或 ∞），<span class="kw-r">不能反映误差随时间的变化规律</span>。</div></div>
+          <div class="lim"><div class="no">2</div><div>只适用于阶跃、斜坡、抛物线三种典型输入及其组合，<b>其他形式输入无法应用</b>。</div></div>
+          <div style="font-size:21px;color:#5B6B8C">→ 需要一种能描述 <b style="color:var(--navy)">ess(t) 随时间变化</b> 的方法：动态误差系数法。</div>
+        </div>
+      </div>
+      <div class="act-card derc">
+        <div class="hd">五、动态误差系数法</div>
+        <div class="bd">
+          <div class="step" data-step="1">① 将 <span class="tex">\varPhi_{e}(s)</span> 在 <span class="tex">s=0</span> 邻域作泰勒展开：<br><span class="tex tex-d" style="font-size:21.5px">\varPhi_{e}(s)=\varPhi_{e}(0)+\dot{\varPhi}_{e}(0)\,s+\frac{\ddot{\varPhi}_{e}(0)}{2!}s^{2}+\cdots</span></div>
+          <div class="step" data-step="2">② 代入 <span class="tex">E(s)=\varPhi_{e}(s)R(s)</span>：<br><span class="tex tex-d" style="font-size:21.5px">E(s)=\varPhi_{e}(0)R(s)+\dot{\varPhi}_{e}(0)\,sR(s)+\frac{\ddot{\varPhi}_{e}(0)}{2!}s^{2}R(s)+\cdots</span></div>
+          <div class="step" data-step="3">③ 取拉氏反变换（<span class="tex">s\to 0</span> 邻域 ⇔ <span class="tex">t\to\infty</span> 时段）：<br><span class="tex tex-d" style="font-size:22px">e_{ss}(t)=c_{0}\,r(t)+c_{1}\,\dot{r}(t)+c_{2}\,\ddot{r}(t)+\cdots,\qquad c_{i}=\frac{\varPhi_{e}^{(i)}(0)}{i!}</span><br><span class="tex">c_{i}</span> 称为<span class="kw-r">动态误差系数</span>。</div>
+          <div class="hl" data-step="4"><b>意义</b>：可研究<b>任意时间函数输入</b>下稳态误差随时间的变化规律；<span class="tex">c_{0},c_{1},c_{2}</span> 分别称动态位置、速度、加速度误差系数。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+</body>
+</html>

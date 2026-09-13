@@ -1,0 +1,22 @@
+[
+  {
+    "lesson_id": "lesson01-intro",
+    "path": "lesson01-intro/lesson.json",
+    "title": "第一章 绪论"
+  },
+  {
+    "lesson_id": "lesson02-math-model",
+    "path": "lesson02-math-model/lesson.json",
+    "title": "第二章 控制系统的数学模型"
+  },
+  {
+    "lesson_id": "lesson03-timedomain",
+    "path": "lesson03-timedomain/lesson.json",
+    "title": "第三章 时域分析法"
+  },
+  {
+    "lesson_id": "lesson04-freq",
+    "path": "lesson04-freq/lesson.json",
+    "title": "第四章 频率响应法"
+  }
+]

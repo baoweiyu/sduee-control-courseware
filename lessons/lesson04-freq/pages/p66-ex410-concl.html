@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>3.3 例 4-10（下）：补全曲线并判断稳定性</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:22px; height:100%; min-height:0; }
+  .lst { flex:0.98; display:flex; flex-direction:column; gap:10px; min-height:0; }
+  .seg { background:#fff; border:2px solid var(--line); border-radius:13px; padding:10px 16px; font-size:18px; line-height:1.55; }
+  .seg b { color:var(--navy); }
+  .seg .mathbox { font-size:19px; padding:6px 12px; }
+  .ok { background:#EEF3FD; border-left:5px solid #2B5CE6; border-radius:11px; padding:10px 16px; font-size:19.5px; line-height:1.55; }
+  .figc { flex:1.3; display:flex; flex-direction:column; overflow:hidden; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:6px 12px; min-height:0; }
+  .figc svg { width:100%; height:100%; }
+</style>
+</head>
+<body data-title="3.3 例 4-10（下）：补全曲线并判断稳定性" data-page="66 / 87">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lst">
+        <div class="seg" data-step="1"><b>① 补全闭合曲线</b>：负频段与正频段<span class="kw-r">关于实轴镜像</span>；ν=1 的 <b>∞ 大半圆</b>把 ω=0⁻ 与 ω=0⁺ 两端闭合。</div>
+        <div class="seg" data-step="2"><b>② 数 P 与 N</b>：右半 s 平面无极点 ⇒ <b>P=0</b>；对有限 ω&gt;0，虚部<span class="kw-r">严格为负</span>——正频段恒在实轴下方，不管 K 多大都<b>不包围</b> (−1, j0)，<b>N=0</b>。
+          <div class="mathbox math eqline tex tex-d">G(j\omega)H(j\omega)=\frac{-KT}{1+\omega^{2}T^{2}}-j\,\frac{K}{\omega(1+\omega^{2}T^{2})}</div>
+        </div>
+        <div class="seg" data-step="3"><b>③ 由判据式下结论</b>：
+          <div class="mathbox math eqline tex tex-d">Z=P-N=0-0=0</div>
+        </div>
+        <div class="ok" data-step="4"><b>闭环系统稳定</b>，且对<b>任意 K&gt;0、T&gt;0 都稳定</b>——论据是补全围线后 N=0、P=0；可用特征多项式 Ts²+s+K 系数全正作独立代数校验（如 K=2、T=1 时曲线低频段在 −1 左侧，仍稳定）。</div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd">完整 Nyquist 曲线：正频段（实线）+ 镜像负频段 + ∞ 圆弧（虚线）</div>
+        <div class="bd2"><svg id="fig" viewBox="0 0 1000 640"></svg></div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">记住形状</span><span>正频段从 −j∞ 沿渐近线 Re=−KT 出发、始终在实轴<span class="kw-r">下方</span>趋于原点——N=0、P=0，故 Z=0。</span></div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("fig");
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const MF = "Cambria Math,STIX Two Math,Georgia,Microsoft YaHei,sans-serif";
+  const SUB = (n, s) => { const esc = t => t.replace(/&/g, "&amp;").replace(/</g, "&lt;"); let html = "", sub = false; for (const p of String(s).split(/(_\{[^}]*\})/)) { if (!p) continue; if (p.startsWith("_{")) { html += '<tspan' + (sub ? '' : ' dy="6"') + ' font-size="72%">' + esc(p.slice(2, -1)) + '</tspan>'; sub = true; } else { html += sub ? '<tspan dy="-6">' + esc(p) + '</tspan>' : esc(p); sub = false; } } n.innerHTML = html; };
+  const tx = (x, y, s, o, parent) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 19.5, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal" , "font-family": MF }, parent); SUB(n, s); if (o && o.halo) n.setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:6;stroke-linejoin:round"); return n; };
+  const defs = mk("defs", {});
+  const m1 = mk("marker", { id: "a61", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, m1);
+  const SC = 150, O = { x: 560, y: 320 };
+  const X = v => O.x + v * SC, Y = v => O.y - v * SC;
+  mk("line", { x1: 60, y1: O.y, x2: 950, y2: O.y, stroke: "#5B6B8C", "stroke-width": 1.6, "marker-end": "url(#a61)" });
+  mk("line", { x1: O.x, y1: 600, x2: O.x, y2: 40, stroke: "#5B6B8C", "stroke-width": 1.6, "marker-end": "url(#a61)" });
+  tx(944, O.y - 14, "Re", { fs: 20, it: true, b: true, fill: "#5B6B8C", an: "end" });
+  tx(O.x + 20, 56, "jIm", { fs: 20, it: true, b: true, fill: "#5B6B8C", an: "start" });
+  tx(O.x - 14, O.y + 28, "O", { fs: 19.5, fill: "#5B6B8C", an: "end" });
+  mk("circle", { cx: X(-1), cy: Y(0), r: 9, fill: "#fff", stroke: "#D63A2F", "stroke-width": 3.4 });
+  tx(X(-1), Y(0) + 36, "(−1, j0)", { fs: 19.5, b: true, fill: "#D63A2F" });
+  // G(jω) K=T=1: Re=-1/(1+w²), Im=-1/[w(1+w²)]
+  const Gp = w => [-1 / (1 + w * w), -1 / (w * (1 + w * w))];
+  const dyn = mk("g", {});
+  function posBranch(dash, col) {
+    let d = "";
+    for (let i = 0; i <= 400; i++) { const w = 0.06 * Math.pow(400, i / 400); const [a, b] = Gp(w); d += (i ? "L" : "M") + X(a).toFixed(1) + "," + Y(b).toFixed(1); }
+    return mk("path", { d, fill: "none", stroke: col, "stroke-width": 4.2, "stroke-dasharray": dash || "0" }, dyn);
+  }
+  let K = 0; const TOTAL = 4;
+  function paint() {
+    dyn.innerHTML = "";
+    if (K >= 1) {
+      // 正频段（红实线）+ 方向
+      posBranch("0", "#D63A2F");
+      const [a1, b1] = Gp(0.5);
+      mk("path", { d: "M" + (X(a1) - 10) + "," + (Y(b1) - 12) + " l14,-2 l-6,13 Z", fill: "#D63A2F" }, dyn);
+      tx(X(-0.6), Y(-1.1), "正频段 ω:0⁺→+∞", { fs: 19.5, b: true, fill: "#D63A2F", an: "start" }, dyn);
+      // 镜像负频段（紫）
+      let d = "";
+      for (let i = 0; i <= 400; i++) { const w = 0.06 * Math.pow(400, i / 400); const [a, b] = Gp(w); d += (i ? "L" : "M") + X(a).toFixed(1) + "," + Y(-b).toFixed(1); }
+      mk("path", { d, fill: "none", stroke: "#2B5CE6", "stroke-width": 3.6, "stroke-dasharray": "9 6" }, dyn);
+      // 渐近线 Re=-1
+      mk("line", { x1: X(-1), y1: Y(-2.2), x2: X(-1), y2: Y(2.2), stroke: "#C6D2EA", "stroke-width": 1.4, "stroke-dasharray": "6 5" }, dyn);
+      tx(X(-1) - 10, Y(-1.55), "渐近线 Re=−KT", { fs: 19.5, fill: "#5B6B8C", an: "end" }, dyn);
+    }
+    if (K >= 2) {
+      // ∞ 右半大圆（顺时针，从 +j∞ 端 → −j∞ 端）—— GH 平面上是右半 ∞ 半圆，示意画大虚线圆
+      mk("path", { d: "M" + X(0.35) + "," + Y(2.05) + " A" + 2.24 * SC + "," + 2.24 * SC + " 0 0 1 " + X(0.35) + "," + Y(-2.05), fill: "none", stroke: "#2B5CE6", "stroke-width": 3, "stroke-dasharray": "12 9" }, dyn);
+      tx(X(2.15), Y(0.35), "∞ 补圆弧", { fs: 19.5, b: true, fill: "#2B5CE6", an: "start" }, dyn);
+    }
+    if (K >= 3) {
+      // 不包围示意：(-1,j0) 在曲线左侧之外
+      mk("circle", { cx: X(-1), cy: Y(0), r: 18, fill: "none", stroke: "#D63A2F", "stroke-width": 2, "stroke-dasharray": "5 4" }, dyn);
+      tx(X(-1) - 16, Y(0) - 26, "曲线不经过、不包围此点 ⇒ N=0", { fs: 19.5, b: true, fill: "#D63A2F", an: "end" }, dyn);
+    }
+    // 紫段标注最后画，确保在所有曲线之上（halo 才真正有效）
+    if (K >= 1) {
+      tx(X(0.02), Y(1.62), "镜像负频段 ω:−∞→0⁻", { fs: 19.5, b: true, fill: "#2B5CE6", an: "start" }, dyn)
+        .setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:6");
+    }
+  }
+  const S = ACT.step, _next = S.next.bind(S), _reset = S.reset.bind(S);
+  S.next = function () { if (K < TOTAL) K++; const d = _next(); paint(); return d; };
+  S.reset = function () { K = 0; _reset(); paint(); };
+  window.prev = function () { const n = Math.max(0, S.cur - 1); S.reset(); for (let i = 0; i < n; i++) S.next(); };
+  paint();
+});
+</script>
+</body>
+</html>

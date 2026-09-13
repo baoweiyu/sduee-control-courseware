@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>特殊情况① · 例 3-7</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:24px; height:100%; }
+  .spc { flex:0.85; display:flex; flex-direction:column; gap:18px; }
+  .spc .act-card { flex:1; display:flex; flex-direction:column; }
+  .spc .bd { flex:1; font-size:22px; line-height:1.85; display:flex; flex-direction:column; justify-content:center; gap:12px; }
+  .tabc { flex:1.15; display:flex; flex-direction:column; }
+  .tabc .bd { flex:1; display:flex; flex-direction:column; justify-content:center; gap:14px; }
+  .rt { border-collapse:collapse; width:100%; }
+  .rt th, .rt td { border:2px solid var(--line); padding:9px 8px; font-size:22.5px; text-align:center; }
+  .rt th { background:var(--navy); color:#fff; font-weight:700; font-size:20px; }
+  .rt td.rl { background:var(--sky); font-weight:700; color:var(--navy); }
+  .rt td.fc { background:#FDF3EC; font-weight:700; }
+  .rt td.calc { font-size:19px; color:#5B6B8C; text-align:left; padding-left:14px; line-height:1.5; }
+  .neg { color:#D63A2F; font-weight:800; }
+  .concl { background:#FCEBE9; border:2px solid #D63A2F; border-radius:12px; padding:13px 20px; font-size:21.5px; color:var(--navy); line-height:1.65; }
+  tr[data-step] { transform:none !important; }
+  tr[data-step]:not(.shown) td { border-color:transparent !important; }
+</style>
+</head>
+<body data-title="特殊情况① · 例 3-7" data-page="61 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="row">
+      <div class="spc">
+        <div class="act-card">
+          <div class="hd">特殊情况①：第一列出现零</div>
+          <div class="bd">
+            <span><b>现象</b>：某一行<span class="kw-r">第一列元素为 0</span>，而其余各项不全为零 —— 下一行将以 0 作分母，无法继续计算。</span>
+            <span><b>对策</b>：用一个充分小的正数 <span class="tex" style="font-size:22px">\varepsilon</span> <span class="kw-r">代替这个 0</span><br>（ε&gt;0 且 ε→0）继续计算，再令 ε→0⁺ 看符号。</span>
+          </div>
+        </div>
+        <div class="act-card">
+          <div class="hd">例 3-7 题目</div>
+          <div class="bd">
+            <span>系统特征方程为</span>
+            <div class="mathbox math eqline tex tex-d" style="font-size:25px">D(s)=s^{4}+2s^{3}+s^{2}+2s+1=0</div>
+            <span>试判别系统的稳定性。（系数全正，需列劳斯表）</span>
+          </div>
+        </div>
+      </div>
+      <div class="act-card tabc">
+        <div class="hd">劳斯表</div>
+        <div class="bd">
+          <table class="rt">
+            <tr><th>行标</th><th>第 1 列</th><th>第 2 列</th><th>第 3 列</th><th>计算说明</th></tr>
+            <tr><td class="rl"><span class="tex" style="font-size:22px">s^{4}</span></td><td class="fc">1</td><td>1</td><td>1</td><td class="calc">首两行：系数隔项排列</td></tr>
+            <tr><td class="rl"><span class="tex" style="font-size:22px">s^{3}</span></td><td class="fc">2</td><td>2</td><td>0</td><td class="calc"></td></tr>
+            <tr data-step="1"><td class="rl"><span class="tex" style="font-size:22px">s^{2}</span></td><td class="fc">0 → <span class="neg">ε</span></td><td>1</td><td></td><td class="calc">第一列出现 0，<br>用 ε 代替继续</td></tr>
+            <tr data-step="2"><td class="rl"><span class="tex" style="font-size:22px">s^{1}</span></td><td class="fc"><span class="neg">2−2/ε</span></td><td>0</td><td></td><td class="calc">c₁=(ε×2−2×1)/ε<br>= 2 − 2/ε</td></tr>
+            <tr data-step="3"><td class="rl"><span class="tex" style="font-size:22px">s^{0}</span></td><td class="fc">1</td><td></td><td></td><td class="calc">d₁=((2−2/ε)×1−ε×0)/(2−2/ε)=1</td></tr>
+          </table>
+          <div class="concl" data-step="4">
+            令 ε→0⁺：2−2/ε <span class="neg">→ −∞</span>。第一列 1、2、ε、<span class="neg">−∞</span>、1 符号改变<span class="kw-r">两次</span> → 特征方程有<span class="kw-r">两个正实部根</span>，系统<span class="kw-r">不稳定</span>。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+</body>
+</html>

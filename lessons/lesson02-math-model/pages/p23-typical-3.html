@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>典型环节：微分与延迟</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .cols { display:flex; gap:26px; height:620px; margin-top:4px; }
+  .cc { flex:1; display:flex; flex-direction:column; }
+  .cc .bd2 { flex:1; padding:14px 26px; display:flex; flex-direction:column; gap:8px; justify-content:center; }
+  .cc .bd2 > * { flex:none; }
+  .math { font-size:19.5px; color:var(--ink); }
+  .math.cont { padding-left:64px; }
+  /* display 公式左对齐（默认居中导致三行左缘不齐） */
+  .cc .bd2 .math mjx-container[display="true"] { text-align:left !important; margin:0.15em 0 !important; }
+  .sub3 { font-size:18.5px; color:var(--muted); }
+  .cap { font-size:19px; color:var(--muted); text-align:center; min-height:26px; }
+  .seg { display:flex; gap:10px; }
+  .seg-b { flex:1; padding:5px 4px; border:2px solid var(--blue); border-radius:10px;
+           background:#fff; color:var(--blue); font-size:16.5px; font-weight:700;
+           cursor:pointer; font-family:var(--font); transition:background .15s,color .15s; }
+  .seg-b.on { background:var(--blue); color:#fff; }
+  .seg-b .tex { font-size:14.5px; }
+</style>
+</head>
+<body data-title="典型环节（三）" data-page="23 / 51">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="cols">
+      <div class="act-card cc">
+        <div class="hd">5、微分环节</div>
+        <div class="bd2">
+          <div class="math tex tex-d">\text{\textbf{理想：}}c(t) = K\dfrac{dr(t)}{dt} \Rightarrow G(s) = \color{#D63A2F}{Ks}</div>
+          <div class="math tex tex-d">\text{\textbf{一阶：}}c(t) = K[\tau \dfrac{dr(t)}{dt} + r(t)] \Rightarrow G(s) = \color{#D63A2F}{K(\tau s + 1)}</div>
+          <div class="math tex tex-d">\text{\textbf{二阶：}}c(t) = K\left[\tau ^{2}\dfrac{d^{2}r(t)}{dt^{2}} + 2\zeta \tau \dfrac{dr(t)}{dt} + r(t)\right]</div>
+          <div class="math tex tex-d cont">\Rightarrow G(s) = \color{#D63A2F}{K(\tau ^{2}s^{2} + 2\zeta \tau s + 1)}</div>
+          <div class="sub3">特点：只有零点；输出反映输入的<b>变化趋势</b>（「超前」作用）。</div>
+          <div class="seg">
+            <button class="seg-b on" data-m="0">理想　<span class="tex">Ks</span></button>
+            <button class="seg-b" data-m="1">一阶　<span class="tex">K(\tau s+1)</span></button>
+            <button class="seg-b" data-m="2">二阶　<span class="tex">K(\tau^{2}s^{2}+\cdots)</span></button>
+          </div>
+          <svg viewBox="0 0 400 196" style="height:164px;width:auto;max-width:100%;align-self:center;flex:none">
+            <defs><marker id="a23" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#8B93B8"/></marker></defs>
+            <line x1="24" y1="150" x2="386" y2="150" stroke="#8B93B8" stroke-width="2" marker-end="url(#a23)"/>
+            <line x1="40" y1="150" x2="40" y2="14" stroke="#8B93B8" stroke-width="2" marker-end="url(#a23)"/>
+            <path d="M40 150 L84 150 L84 82 L384 82" fill="none" stroke="#1D3FA0" stroke-width="3"/>
+            <text x="292" y="74" font-size="16" fill="#1D3FA0">r(t) = 1(t) 阶跃</text>
+            <text x="382" y="172" font-size="15" fill="#8B93B8">t</text>
+            <!-- 理想微分：脉冲 Kδ(t) -->
+            <g id="dm0">
+              <path d="M84 150 L84 30" stroke="#F5821F" stroke-width="4"/>
+              <path d="M84 30 l-7 14 M84 30 l7 14" stroke="#F5821F" stroke-width="4" fill="none"/>
+              <text x="98" y="46" font-size="17" fill="#F5821F">c(t) = Kδ(t)</text>
+              <text x="98" y="68" font-size="14.5" fill="#F5821F" opacity=".8">（脉冲，面积 = K）</text>
+            </g>
+            <!-- 一阶微分：脉冲 Kτδ(t) + 阶跃 K -->
+            <g id="dm1" style="display:none">
+              <path d="M84 150 L84 30" stroke="#F5821F" stroke-width="4"/>
+              <path d="M84 30 l-7 14 M84 30 l7 14" stroke="#F5821F" stroke-width="4" fill="none"/>
+              <text x="98" y="46" font-size="17" fill="#F5821F">Kτδ(t)</text>
+              <path d="M84 108 L384 108" stroke="#F5821F" stroke-width="3"/>
+              <text x="362" y="100" font-size="16" fill="#F5821F">K</text>
+            </g>
+            <!-- 二阶微分：冲激偶 Kτ²δ′(t) + 脉冲 2Kζτδ(t) + 阶跃 K -->
+            <g id="dm2" style="display:none">
+              <path d="M84 150 L84 24" stroke="#F5821F" stroke-width="3.5"/>
+              <path d="M84 24 l-7 14 M84 24 l7 14" stroke="#F5821F" stroke-width="3.5" fill="none"/>
+              <path d="M84 150 L84 178" stroke="#F5821F" stroke-width="3.5"/>
+              <path d="M84 178 l-7 -13 M84 178 l7 -13" stroke="#F5821F" stroke-width="3.5" fill="none"/>
+              <text x="96" y="40" font-size="15.5" fill="#F5821F">冲激偶 Kτ²δ′(t)</text>
+              <path d="M102 150 L102 62" stroke="#D63A2F" stroke-width="3.5"/>
+              <path d="M102 62 l-6 12 M102 62 l6 12" stroke="#D63A2F" stroke-width="3.5" fill="none"/>
+              <text x="114" y="94" font-size="15.5" fill="#D63A2F">脉冲 2Kζτδ(t)</text>
+              <path d="M84 116 L384 116" stroke="#F5821F" stroke-width="3"/>
+              <text x="362" y="108" font-size="16" fill="#F5821F">K</text>
+            </g>
+          </svg>
+          <div class="cap" id="dmcap">理想微分：阶跃输入 → 输出为脉冲 Kδ(t)</div>
+        </div>
+      </div>
+      <div class="act-card cc">
+        <div class="hd">6、延迟环节</div>
+        <div class="bd2">
+          <div class="math tex tex-d">c(t) = r(t - \tau )</div>
+          <div class="math tex tex-d" style="background:var(--sky);border-radius:12px;padding:14px 18px">G(s) = \dfrac{C(s)}{R(s)} = \color{#D63A2F}{e^{-\tau s}}</div>
+          <div class="sub3">输出波形与输入完全相同，仅滞后一个时间 τ（如物料输送、信号传输延迟）。</div>
+          <svg viewBox="0 0 400 170" width="92%">
+            <line x1="30" y1="140" x2="380" y2="140" stroke="#8B93B8" stroke-width="2"/>
+            <line x1="30" y1="140" x2="30" y2="15" stroke="#8B93B8" stroke-width="2"/>
+            <path d="M60 140 L60 60 L200 60 L200 140" fill="none" stroke="#1D3FA0" stroke-width="3"/>
+            <path d="M170 140 L170 60 L310 60 L310 140" fill="none" stroke="#F5821F" stroke-width="3"/>
+            <path d="M60 110 L170 110" stroke="#D63A2F" stroke-width="2.5" stroke-dasharray="7 5"/>
+            <path d="M170 110 l-10 -5 M170 110 l-10 5" stroke="#D63A2F" stroke-width="2.5" fill="none"/>
+            <text x="100" y="100" font-size="17" fill="#D63A2F">τ</text>
+            <text x="382" y="162" font-size="15" fill="#8B93B8">t</text>
+          </svg>
+          <div class="cap">输出 = 输入向右平移 τ</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note">
+    <svg class="ico" viewBox="0 0 48 48"><circle cx="24" cy="24" r="18" fill="none" stroke="#1D3FA0" stroke-width="3"/><path d="M24 14 v10 l7 5" fill="none" stroke="#F5821F" stroke-width="3" stroke-linecap="round"/></svg>
+    <span><span class="lead">小结：</span>比例 K、惯性 K/(Ts+1)、积分 K/s、振荡、微分、延迟 e^(−τs) —— 六个「积木」搭出任一线性定常系统。</span>
+  </div>
+</div></div>
+<script>
+(function () {
+  var caps = [
+    "理想微分：阶跃输入 → 输出为脉冲 Kδ(t)",
+    "一阶微分：脉冲 Kτδ(t) ＋ 阶跃 K —— 比理想微分多一个「保持」分量",
+    "二阶微分：冲激偶 Kτ²δ′(t) ＋ 脉冲 2Kζτδ(t) ＋ 阶跃 K"
+  ];
+  var btns = document.querySelectorAll(".seg-b");
+  btns.forEach(function (b) {
+    b.addEventListener("click", function () {
+      btns.forEach(function (x) { x.classList.remove("on"); });
+      b.classList.add("on");
+      var m = +b.dataset.m;
+      [0, 1, 2].forEach(function (i) {
+        document.getElementById("dm" + i).style.display = i === m ? "" : "none";
+      });
+      document.getElementById("dmcap").textContent = caps[m];
+    });
+  });
+})();
+</script>
+</body>
+</html>

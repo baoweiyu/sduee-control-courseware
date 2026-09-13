@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>1.1 历史背景：为什么需要频率响应法</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:26px; height:100%; }
+  .lcol { flex:1.25; display:flex; flex-direction:column; gap:22px; min-height:0; }
+  .lcol .bd { flex:1; display:flex; flex-direction:column; justify-content:center; gap:14px; font-size:22.5px; line-height:1.65; }
+  .hard li, .hist li { margin:6px 0; }
+  .hard ul, .hist ul { padding-left:30px; }
+  .imgc { flex:1; display:flex; flex-direction:column; overflow:hidden; }
+  .imgc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:10px; min-height:0; }
+  .imgc img { width:100%; height:100%; object-fit:cover; border-radius:10px; }
+  .cap { font-size:19px; color:var(--muted); text-align:center; padding:10px 16px 14px; }
+  .yr { display:inline-block; background:var(--navy); color:#fff; border-radius:9px; padding:2px 12px; font-size:20px; font-weight:700; margin-right:8px; }
+</style>
+</head>
+<body data-title="1.1 历史背景：为什么需要频率响应法" data-page="4 / 87">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lcol">
+        <div class="act-card">
+          <div class="hd">时域分析法遇到的困难</div>
+          <div class="bd hard">
+            <ul>
+              <li>三阶以上系统的微分方程<span class="kw-r">难以解析求解</span>，时间响应不易获得；</li>
+              <li>许多实际系统（机械、液压、热力）的微分方程模型<span class="kw-r">难以准确建立</span>；</li>
+              <li>工程上迫切需要一种<span class="kw-r">不必求解微分方程</span>、甚至可以借助试验的分析方法。</li>
+            </ul>
+          </div>
+        </div>
+        <div class="act-card">
+          <div class="hd">历史背景：从通信工程中走来</div>
+          <div class="bd hist">
+            <ul>
+              <li><span class="yr">20世纪30年代</span>长途电话与反馈放大器工程实践推动下发展起来，是一种<span class="kw-r">经典的工程实用方法</span>；</li>
+              <li><span class="yr">1932</span>奈奎斯特（Nyquist）提出频域稳定判据；</li>
+              <li><span class="yr">1940s</span>伯德（Bode）建立对数频率特性方法，奠定了频域分析与综合的基础。</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="act-card imgc">
+        <div class="hd">频率响应法诞生于通信工程实践</div>
+        <div class="bd2"><img src="../../../assets/image2/freq-history.png" alt="20世纪30年代无线电机房"></div>
+        <div class="cap">20 世纪 30 年代的无线电机房：正弦信号是当时最容易产生、最容易测量的信号</div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">核心问题</span><span>不求解微分方程，能否利用<span class="kw-r">试验可测的"频率特性"</span>来分析系统的稳定性与性能？</span></div>
+</div></div>
+</body>
+</html>

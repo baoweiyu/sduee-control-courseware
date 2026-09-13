@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>高阶系统响应的一般结构</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .col { display:flex; flex-direction:column; gap:18px; height:100%; }
+  .fmc { flex:1.15; display:flex; flex-direction:column; }
+  .fmc .bd { flex:1; display:flex; flex-direction:column; justify-content:center; gap:14px; font-size:23px; line-height:1.65; }
+  .brow { flex:1; display:flex; gap:22px; min-height:0; }
+  .cc { flex:1; background:#fff; border:2px solid var(--line); border-radius:14px; padding:20px 26px; font-size:23.5px; line-height:1.95; color:var(--ink); }
+  .cc .t { font-size:24px; font-weight:700; color:var(--blue); margin-bottom:10px; }
+</style>
+</head>
+<body data-title="高阶系统响应的一般结构" data-page="46 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="col">
+      <div class="act-card fmc">
+        <div class="hd">高阶系统的阶跃响应 = 一阶分量 + 二阶分量 的叠加</div>
+        <div class="bd">
+          <div>设闭环特征式 <span class="tex" style="font-size:24px">D(s)=\prod_{i=1}^{q}(s+s_{i})\prod_{k=1}^{r}(s^{2}+2\zeta_{k}\omega_{k}s+\omega_{k}^{2})</span>（无重极点），则</div>
+          <div class="mathbox math eqline tex tex-d" style="font-size:24.5px">c(t)=a_{0}+\sum_{i=1}^{q}a_{i}\,e^{-s_{i}t}+\sum_{k=1}^{r}e^{-\zeta_{k}\omega_{k}t}\left(b_{k}\cos\omega_{dk}t+c_{k}\sin\omega_{dk}t\right)</div>
+          <div style="font-size:21px;color:#5B6B8C">a₀ 为稳态分量；aᵢ、bₖ、cₖ 为留数，<b style="color:var(--navy)">由全部零、极点共同决定</b>。</div>
+        </div>
+      </div>
+      <div class="brow">
+        <div class="cc"><div class="t">结论 ① 衰减快慢看实部</div>
+          每个分量衰减的快慢，取决于对应极点的——<br><span class="kw-r">实部（到虚轴的距离）</span>：离虚轴越远，分量消失得越快；离虚轴最近的分量"活到最后"。
+        </div>
+        <div class="cc"><div class="t">结论 ② 极点定类型，零点定形状</div>
+          响应<span class="kw-r">包含哪些运动类型</span>（指数衰减 or 振荡）—— 由<span class="kw-r">极点</span>决定；<br>
+          响应<span class="kw-r">曲线的具体形状</span>（权重、符号）—— 还与<span class="kw-r">零点</span>有关。
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">意义</span><span>高阶系统不必逐点求解——抓住<span class="kw-r">"活得最久"的分量</span>，就能把握响应的主要特征（下一页：主导极点）。</span></div>
+</div></div>
+</body>
+</html>

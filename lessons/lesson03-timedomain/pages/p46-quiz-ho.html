@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>课堂互动 · 高阶系统的主导极点</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<link rel="stylesheet" href="../lesson03-svg.css">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:24px; height:100%; }
+  .figc { flex:1.15; display:flex; flex-direction:column; overflow:hidden; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:8px 14px; }
+  .figc svg { width:100%; height:100%; }
+  .qcol { flex:1; display:flex; flex-direction:column; gap:18px; }
+  .qtype { display:inline-block; background:var(--orange); color:#fff; font-size:21px; font-weight:700; border-radius:10px; padding:7px 20px; width:fit-content; }
+  .qz { background:#fff; border:2px solid var(--line); border-radius:16px; padding:24px 30px; }
+  .qz .qt { font-size:24.5px; color:var(--navy); font-weight:700; margin-bottom:18px; line-height:1.55; }
+  .stage-tip { display:inline-block; margin-bottom:16px; font-size:19.5px; color:#fff; background:var(--blue); border-radius:20px; padding:6px 20px; width:fit-content; }
+  .opts { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .opt { text-align:center; background:var(--sky); border:2px solid var(--line); border-radius:12px; padding:16px 8px; font-size:22.5px; color:var(--ink); font-weight:700; position:relative; }
+  .opt.right { border-color:#1E9E57; background:#F0FAF4; }
+  .opt.right::after { content:"✓"; position:absolute; top:-14px; right:-10px; width:32px; height:32px; border-radius:50%; background:#1E9E57; color:#fff; font-weight:800; font-size:20px; display:grid; place-items:center; }
+  .ans { font-size:22px; color:var(--navy); background:var(--sky); border-radius:12px; padding:16px 24px; line-height:1.75; }
+  .ans b { color:var(--danger); }
+</style>
+</head>
+<body data-title="课堂互动 · 主导极点判型" data-page="48 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="row">
+      <div class="act-card figc">
+        <div class="hd">某高阶系统的单位阶跃响应</div>
+        <div class="bd2"><svg id="fig" viewBox="0 0 1000 800"></svg></div>
+      </div>
+      <div class="qcol">
+        <span class="qtype">单选题　2 分</span>
+        <div class="qz">
+          <div class="qt">由左图响应形态推断：该系统离虚轴<span style="color:var(--danger)">最近</span>的闭环极点（主导极点）是哪种类型？</div>
+          <span class="stage-tip">请先作出判断</span>
+          <div class="opts">
+            <div class="opt" data-mark="0">A　一个负实数极点</div>
+            <div class="opt" data-mark="1">B　一对共轭复数极点</div>
+            <div class="opt" data-mark="0">C　一对纯虚极点</div>
+            <div class="opt" data-mark="0">D　两个正实数极点</div>
+          </div>
+        </div>
+        <div class="ans" data-step="2">
+          <b>答案：B。</b>响应呈<span class="kw">衰减振荡</span> → 主导分量是二阶振荡分量，<br>其极点必为<span class="kw">共轭复数</span>；振荡"衰减"说明实部为负（位于左半平面）。纯虚极点对应等幅振荡（C 错），实数极点不会产生振荡（A、D 错）。
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("fig");
+  const z = 0.22, wn = 1.2, sg = z * wn, wd = wn * Math.sqrt(1 - z * z), be = Math.acos(z), A = 1 / Math.sqrt(1 - z * z);
+  const h = t => t <= 0 ? 0 : 1 - A * Math.exp(-sg * t) * Math.sin(wd * t + be) + 0.08 * Math.exp(-3.5 * t); // 高阶=主导二阶+一个快衰减分量
+  const T = 12, YM = 1.9;
+  const X = t => 96 + t / T * 850;
+  const Y = v => 700 - v / YM * 580;
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const tx = (x, y, s, o) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 20, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal" }); n.textContent = s; return n; };
+  const defs = mk("defs", {});
+  const m1 = mk("marker", { id: "a46", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, m1);
+  mk("line", { x1: 96, y1: 700, x2: 960, y2: 700, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a46)" });
+  mk("line", { x1: 96, y1: 700, x2: 96, y2: 56, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a46)" });
+  tx(966, 706, "t", { fs: 22, an: "start", it: true, b: true });
+  tx(58, 66, "c(t)", { fs: 22, it: true, b: true });
+  tx(74, 706, "O", { fs: 19, fill: "#5B6B8C" });
+  mk("line", { x1: 96, y1: Y(1), x2: 946, y2: Y(1), stroke: "#F5821F", "stroke-width": 2, "stroke-dasharray": "10 7" });
+  tx(80, Y(1) + 7, "1", { an: "end", fs: 19, b: true });
+  let d = "";
+  for (let i = 0; i <= 600; i++) { const t = T * i / 600; d += (i ? "L" : "M") + X(t).toFixed(1) + "," + Y(h(t)).toFixed(1); }
+  mk("path", { d, stroke: "#2B5CE6", "stroke-width": 3.5, fill: "none" });
+  tx(X(6.0), Y(1.62), "衰减振荡", { fs: 21, b: true, fill: "#2B5CE6" });
+  // 三段式
+  const S = ACT.step, _n = S.next.bind(S), _r = S.reset.bind(S);
+  function mark() {
+    const on = S.cur >= 1;
+    document.querySelectorAll(".opt").forEach(o => o.classList.toggle("right", on && o.dataset.mark === "1"));
+  }
+  S.next = function () { const dd = _n(); mark(); return dd; };
+  S.reset = function () { _r(); mark(); };
+  window.prev = function () { const n = Math.max(0, S.cur - 1); S.reset(); for (let i = 0; i < n; i++) S.next(); };
+});
+</script>
+</body>
+</html>

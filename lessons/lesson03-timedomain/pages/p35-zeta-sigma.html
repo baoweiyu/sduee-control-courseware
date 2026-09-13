@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>ζ 与 σ% 的关系曲线</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<link rel="stylesheet" href="../lesson03-svg.css">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:24px; height:100%; }
+  .lcol { flex:1; display:flex; flex-direction:column; gap:16px; }
+  .drv { flex:1; }
+  .drv .bd { font-size:24.5px; line-height:1.9; padding:26px 30px; }
+  .feat { background:#fff; border:2px solid var(--line); border-radius:14px; padding:16px 24px; font-size:22px; line-height:1.85; color:var(--ink); }
+  .figc { flex:1.4; display:flex; flex-direction:column; overflow:hidden; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:8px 14px; }
+  .figc svg { width:100%; height:100%; }
+  .act-note{font-size:23px;padding:16px 26px}
+</style>
+</head>
+<body data-title="阻尼比 ζ 与超调量 σ% 的关系" data-page="37 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lcol">
+        <div class="act-card drv">
+          <div class="hd">σ%–ζ 关系曲线</div>
+          <div class="bd">
+            由 <span class="tex" style="font-size:24px">\sigma\% = e^{-\pi\zeta/\sqrt{1-\zeta^{2}}}\times 100\%</span> 可作右图曲线：
+            <div style="margin-top:10px">① σ% <span class="kw-r">只与 ζ 有关</span>，且随 ζ 增大<span class="kw-r">单调下降</span>；</div>
+            <div>② ζ = 0 时 σ% = 100%（等幅振荡）；ζ ≥ 1 时 σ% = 0（无超调）。</div>
+          </div>
+        </div>
+        <div class="feat" data-step="2">
+          <b>工程推荐 <span class="tex" style="font-size:23.5px">\zeta = 0.4 \sim 0.8</span></b>（σ% = 25% ~ 1.5%）：
+          既不太振荡、也不过分迟缓，<br><span class="kw-r">平稳性与快速性的折中</span>。常取 ζ = 0.707（σ%≈4.3%）为"最佳阻尼比"。
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd">σ% 随 ζ 的变化（标注例题取值点）</div>
+        <div class="bd2"><svg id="fig" viewBox="0 0 1000 620"></svg></div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">用途</span><span>设计时常 <span class="kw-r">先由 σ% 要求查 ζ</span>（如 σ%≤16% → ζ≥0.5），再由 <span class="tex">t_{s}</span> 要求定 <span class="tex">\omega_{n}</span>——例 3-2 即此思路。</span></div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("fig");
+  const po = z => z >= 1 ? 0 : Math.exp(-Math.PI * z / Math.sqrt(1 - z * z)) * 100;
+  const X = z => 110 + z * 820;          // ζ: 0 → 1
+  const Y = v => 540 - v / 100 * 470;    // σ%: 0 → 100
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const tx = (x, y, s, o, parent) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 20, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal" }, parent); n.textContent = s; return n; };
+  const defs = mk("defs", {});
+  const m1 = mk("marker", { id: "a35", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, m1);
+  mk("line", { x1: 110, y1: 540, x2: 966, y2: 540, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a35)" });
+  mk("line", { x1: 110, y1: 540, x2: 110, y2: 32, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a35)" });
+  tx(966, 574, "ζ", { fs: 28, it: true, b: true });
+  tx(78, 42, "σ%", { fs: 28, it: true, b: true });
+  tx(88, 546, "O", { fs: 24, fill: "#5B6B8C" });
+  [0.2, 0.4, 0.6, 0.8, 1.0].forEach(z => {
+    mk("line", { x1: X(z), y1: 540, x2: X(z), y2: 548, stroke: "#5B6B8C", "stroke-width": 1.5 });
+    tx(X(z), 574, z.toFixed(1), { fs: 22, fill: "#5B6B8C" });
+  });
+  [20, 40, 60, 80, 100].forEach(v => {
+    mk("line", { x1: 102, y1: Y(v), x2: 110, y2: Y(v), stroke: "#5B6B8C", "stroke-width": 1.5 });
+    tx(94, Y(v) + 7, v + "", { fs: 22, fill: "#5B6B8C", an: "end" });
+  });
+  // 推荐区间底纹（step2）
+  const g2 = mk("g", { "data-step": "2" });
+  mk("rect", { x: X(0.4), y: 46, width: X(0.8) - X(0.4), height: 494, fill: "#E7F6EC", opacity: 0.75 }, g2);
+  tx((X(0.4) + X(0.8)) / 2, 96, "工程推荐区间", { fs: 26, b: true, fill: "#1E9E57" }, g2);
+  tx((X(0.4) + X(0.8)) / 2, 130, "ζ = 0.4 ~ 0.8", { fs: 24, b: true, it: true, fill: "#1E9E57" }, g2);
+  // 曲线
+  let d = "";
+  for (let i = 0; i <= 500; i++) { const z = 0.995 * i / 500; d += (i ? "L" : "M") + X(z).toFixed(1) + "," + Y(po(z)).toFixed(1); }
+  d += "L" + X(1).toFixed(1) + "," + Y(0).toFixed(1);
+  mk("path", { d, stroke: "#2B5CE6", "stroke-width": 3.5, fill: "none" });
+  // 标注分别放在特征点右上、左上和右下，避免互相遮挡或压住辅助线。
+  const labelOffsets = [[18, -34, "start"], [-18, -34, "end"], [18, 46, "start"], [18, 78, "start"]];
+  pts.forEach((p, i) => {
+    const g1 = mk("g", { "data-step": "1" });
+    const zx = X(p[0]), vy = Y(po(p[0]));
+    const [dx, dy, an] = labelOffsets[i];
+    mk("line", { x1: zx, y1: vy, x2: zx, y2: 540, stroke: "#F5821F", "stroke-width": 1.6, "stroke-dasharray": "6 5" }, g1);
+    mk("line", { x1: 110, y1: vy, x2: zx, y2: vy, stroke: "#F5821F", "stroke-width": 1.6, "stroke-dasharray": "6 5" }, g1);
+    mk("circle", { cx: zx, cy: vy, r: 6.5, fill: "#D63A2F" }, g1);
+    mk("line", { x1: zx + (dx < 0 ? -6 : 6), y1: vy + (dy < 0 ? -6 : 6), x2: zx + dx, y2: vy + dy + (dy < 0 ? 8 : -8), stroke: "#D63A2F", "stroke-width": 1.4 }, g1);
+    tx(zx + dx, vy + dy, "ζ=" + p[0] + " → " + p[1], { fs: 24, b: true, fill: "#D63A2F", an }, g1);
+  });
+});
+</script>
+</body>
+</html>

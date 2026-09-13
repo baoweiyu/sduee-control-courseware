@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>二阶系统的单位斜坡响应与稳态误差</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<link rel="stylesheet" href="../lesson03-svg.css">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:24px; height:100%; }
+  .lcol { flex:1; display:flex; flex-direction:column; gap:16px; }
+  .drv { flex:1; }
+  .drv .bd { font-size:22px; line-height:1.65; }
+  .feat { background:#fff; border:2px solid var(--line); border-radius:14px; padding:16px 24px; font-size:21.5px; line-height:1.85; color:var(--ink); }
+  .figc { flex:1.35; display:flex; flex-direction:column; overflow:hidden; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:8px 14px; }
+  .figc svg { width:100%; height:100%; }
+  .stp { display:flex; gap:14px; align-items:flex-start; margin-bottom:13px; }
+  .stp .no { flex:none; width:34px; height:34px; border-radius:50%; background:var(--blue); color:#fff; display:grid; place-items:center; font-size:19px; font-weight:700; margin-top:2px; }
+  .act-note{font-size:23px;padding:16px 26px}
+</style>
+</head>
+<body data-title="二阶系统的斜坡响应" data-page="43 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lcol">
+        <div class="act-card drv">
+          <div class="hd">r(t) = t 作用下的响应</div>
+          <div class="bd">
+            <div class="stp" data-step="1"><div class="no">1</div><div><b>响应式（0&lt;ζ&lt;1）</b>：
+              <div class="mathbox math eqline tex tex-d" style="font-size:22.5px">c(t)=t-\dfrac{2\zeta}{\omega_{n}}+\dfrac{e^{-\zeta\omega_{n} t}}{\omega_{d}}\sin(\omega_{d} t+2\beta)</div>
+            </div></div>
+            <div class="stp" data-step="2"><div class="no">2</div><div><b>稳态误差</b>（终值定理）：
+              <div class="mathbox math eqline tex tex-d" style="font-size:25px">e_{ss}=\lim_{s\to0}s\cdot\dfrac{1}{s^{2}}\cdot\dfrac{1}{1+G(s)}=\dfrac{2\zeta}{\omega_{n}}</div>
+            </div></div>
+            <div class="stp" data-step="3"><div class="no">3</div><div><b>含义</b>：输出以固定"滞后量"跟随斜坡输入，滞后量 = 2ζ/ω<sub>n</sub>。</div></div>
+          </div>
+        </div>
+        <div class="feat" data-step="3">
+          <b>矛盾与权衡</b>：ω<sub>n</sub> 一定时，<span class="kw-r">ζ 越大 e<sub>ss</sub> 越大</span>——增大阻尼改善平稳性，却牺牲了斜坡跟踪精度；提高 ω<sub>n</sub> 则对两者都有利。
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd">斜坡响应与稳态误差（ζ=0.5，ωn=1，ess=1）</div>
+        <div class="bd2"><svg id="fig" viewBox="0 0 1000 620"></svg></div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">结论</span><span>（Ⅰ型）二阶系统跟踪斜坡有<span class="kw-r">常值稳态误差 e<sub>ss</sub> = 2ζ/ω<sub>n</sub></span>；减小它：提高 ω<sub>n</sub>、减小 ζ，或提高型别（第六节详述）。</span></div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("fig");
+  const z = 0.5, wn = 1, sg = z * wn, wd = wn * Math.sqrt(1 - z * z), b2 = 2 * Math.acos(z);
+  const c = t => t <= 0 ? 0 : t - 2 * z / wn + Math.exp(-sg * t) / wd * Math.sin(wd * t + b2);
+  const T = 10, YM = 10;
+  const X = t => 96 + t / T * 850;
+  const Y = v => 540 - v / YM * 480;
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const tx = (x, y, s, o) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 20, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal" }); n.textContent = s; return n; };
+  const defs = mk("defs", {});
+  const m1 = mk("marker", { id: "a41", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, m1);
+  const m2 = mk("marker", { id: "a41r", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#D63A2F" }, m2);
+  mk("line", { x1: 96, y1: 540, x2: 960, y2: 540, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a41)" });
+  mk("line", { x1: 96, y1: 540, x2: 96, y2: 32, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a41)" });
+  tx(966, 546, "t", { fs: 21, an: "start", it: true, b: true });
+  tx(58, 42, "c(t)", { fs: 21, it: true, b: true });
+  tx(74, 546, "O", { fs: 18, fill: "#5B6B8C" });
+  // 输入 r(t)=t
+  mk("line", { x1: 96, y1: Y(0), x2: X(9.6), y2: Y(9.6), stroke: "#9FB3D9", "stroke-width": 2.4, "stroke-dasharray": "10 7" });
+  tx(905, 68, "r(t) = t", { fs: 20, b: true, it: true, fill: "#5B6B8C", an: "end" });
+  // 稳态渐近线 t − 2ζ/ωn
+  mk("line", { x1: X(1), y1: Y(0), x2: X(9.6), y2: Y(8.6), stroke: "#F5821F", "stroke-width": 2, "stroke-dasharray": "4 5" });
+  const ta = mk("text", { x: 283, y: 530, "font-size": 19, "text-anchor": "start", fill: "#F5821F", "font-weight": 700, "font-style": "italic" });
+  ta.appendChild(document.createTextNode("渐近线 c = t − 2ζ/ω"));
+  const tas = mk("tspan", { dy: "0.3em", "font-size": "0.7em" }, ta); tas.textContent = "n";
+  // 响应曲线
+  let d = "";
+  for (let i = 0; i <= 500; i++) { const t = 9.6 * i / 500; d += (i ? "L" : "M") + X(t).toFixed(1) + "," + Y(c(t)).toFixed(1); }
+  mk("path", { d, stroke: "#2B5CE6", "stroke-width": 3.5, fill: "none" });
+  tx(X(4.0), Y(4.4), "c(t)", { fs: 21, b: true, it: true, fill: "#2B5CE6" });
+  // ess 双向箭头（t=8 处，输入与渐近线之间）
+  const tE = 8.4;
+  mk("line", { x1: X(tE), y1: Y(tE), x2: X(tE), y2: Y(tE - 1), stroke: "#D63A2F", "stroke-width": 2.4, "marker-end": "url(#a41r)" });
+  mk("line", { x1: X(tE), y1: Y(tE - 1), x2: X(tE), y2: Y(tE), stroke: "#D63A2F", "stroke-width": 2.4, "marker-end": "url(#a41r)" });
+  const te = mk("text", { x: 830, y: 210, "font-size": 20, "text-anchor": "start", fill: "#D63A2F", "font-weight": 700, "font-style": "italic" });
+  te.appendChild(document.createTextNode("e"));
+  const te1 = mk("tspan", { dy: "0.3em", "font-size": "0.7em" }, te); te1.textContent = "ss";
+  const te2 = mk("tspan", { dy: "-0.3em" }, te); te2.textContent = " = 2ζ/ω";
+  const te3 = mk("tspan", { dy: "0.3em", "font-size": "0.7em" }, te); te3.textContent = "n";
+});
+</script>
+</body>
+</html>

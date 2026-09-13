@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>典型环节：比例与惯性</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .sec { font-size:28px; font-weight:700; color:var(--blue); margin:4px 0 18px; }
+  .cols { display:flex; gap:26px; height:600px; }
+  .cc { flex:1; display:flex; flex-direction:column; }
+  .cc .bd2 { flex:1; padding:20px 26px; display:flex; flex-direction:column; gap:14px; justify-content:flex-start; }
+  .math { font-size:24px; color:var(--ink); }
+  .plot { margin-top:auto; text-align:center; }
+  .cap { font-size:19px; color:var(--muted); text-align:center; margin-top:6px; }
+</style>
+</head>
+<body data-title="典型环节（一）" data-page="21 / 51">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="sec">二、典型环节及其传递函数</div>
+    <div class="cols">
+      <div class="act-card cc">
+        <div class="hd">1、比例环节</div>
+        <div class="bd2">
+          <div class="math tex tex-d">c(t) = K\cdot r(t)\text{，}t \ge 0</div>
+          <div class="math tex tex-d" style="background:var(--sky);border-radius:12px;padding:14px 18px">G(s) = \dfrac{C(s)}{R(s)} = \color{#D63A2F}{K}</div>
+          <div class="plot">
+            <svg viewBox="0 0 400 200" width="92%">
+              <defs><marker id="ax21a" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="#8B93B8"/></marker></defs>
+              <line x1="30" y1="170" x2="388" y2="170" stroke="#8B93B8" stroke-width="2" marker-end="url(#ax21a)"/>
+              <line x1="30" y1="170" x2="30" y2="14" stroke="#8B93B8" stroke-width="2" marker-end="url(#ax21a)"/>
+              <!-- r(t)=1(t)：t=0 处跃升到 1 -->
+              <polyline points="30,170 60,170 60,132 382,132" stroke="#1D3FA0" stroke-width="3" fill="none"/>
+              <!-- c(t)=K·1(t)：同一时刻按比例跃升到 K（K>1） -->
+              <polyline points="30,170 60,170 60,52 382,52" stroke="#F5821F" stroke-width="3" fill="none"/>
+              <text x="24" y="137" text-anchor="end" font-size="15" fill="#1D3FA0">1</text>
+              <text x="24" y="57" text-anchor="end" font-size="15" fill="#F5821F">K</text>
+              <text x="210" y="124" font-size="17" fill="#1D3FA0">r(t) = 1(t)</text>
+              <text x="210" y="44" font-size="17" fill="#F5821F">c(t) = K·1(t)</text>
+              <text x="22" y="190" font-size="15" fill="#8B93B8">0</text>
+              <text x="384" y="192" font-size="16" fill="#8B93B8">t</text>
+            </svg>
+            <div class="cap">阶跃输入下输出立即按比例复现（无惯性、无延迟）</div>
+          </div>
+        </div>
+      </div>
+      <div class="act-card cc">
+        <div class="hd">2、惯性环节</div>
+        <div class="bd2">
+          <div class="math tex tex-d">T\dfrac{dc(t)}{dt} + c(t) = K\cdot r(t)</div>
+          <div class="math tex tex-d" style="background:var(--sky);border-radius:12px;padding:14px 18px">G(s) = \dfrac{C(s)}{R(s)} = \color{#D63A2F}{\dfrac{K}{Ts + 1}}</div>
+          <div class="math tex tex-d" style="font-size:21px">\text{单位阶跃：}c(t) = K(1 - e^{-t/T})\text{，}t \ge 0</div>
+          <div class="plot">
+            <svg viewBox="0 0 400 200" width="92%">
+              <defs><marker id="ax21b" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="#8B93B8"/></marker></defs>
+              <line x1="30" y1="170" x2="388" y2="170" stroke="#8B93B8" stroke-width="2" marker-end="url(#ax21b)"/>
+              <line x1="30" y1="170" x2="30" y2="14" stroke="#8B93B8" stroke-width="2" marker-end="url(#ax21b)"/>
+              <!-- 输入 r(t)=1(t) -->
+              <polyline points="30,170 60,170 60,110 382,110" stroke="#1D3FA0" stroke-width="2.5" fill="none"/>
+              <text x="210" y="102" font-size="16" fill="#1D3FA0">r(t) = 1(t)</text>
+              <!-- 稳态值 K 虚线 -->
+              <line x1="30" y1="50" x2="382" y2="50" stroke="#8B93B8" stroke-width="1.5" stroke-dasharray="6 5"/>
+              <!-- 指数趋近曲线 c(t)=K(1−e^(−t/T))：起陡后缓 -->
+              <path d="M60 168 C95 92 140 58 210 53 C270 49 340 50 380 50" fill="none" stroke="#F5821F" stroke-width="3"/>
+              <text x="24" y="115" text-anchor="end" font-size="15" fill="#1D3FA0">1</text>
+              <text x="24" y="55" text-anchor="end" font-size="15" fill="#F5821F">K</text>
+              <text x="240" y="40" font-size="16" fill="#8B93B8">c(∞) = K</text>
+              <text x="330" y="68" text-anchor="middle" font-size="16" fill="#F5821F">c(t)</text>
+              <text x="22" y="190" font-size="15" fill="#8B93B8">0</text>
+              <text x="384" y="192" font-size="16" fill="#8B93B8">t</text>
+            </svg>
+            <div class="cap">按指数规律逐渐趋近稳态值 K</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+</body>
+</html>

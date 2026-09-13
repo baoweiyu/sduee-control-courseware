@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>2.2 典型环节 Bode 图一览</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .wrap { height:100%; display:flex; flex-direction:column; }
+  .grpbar { flex:none; display:flex; gap:12px; padding:12px 18px 0; }
+  .gbtn { border:2px solid var(--line); background:#F6F9FF; color:var(--navy); font-size:20px; font-weight:700; border-radius:10px; padding:9px 22px; cursor:pointer; }
+  .gbtn.active { background:var(--blue); border-color:var(--blue); color:#fff; }
+  .gbtn:not(.active):hover { background:#E8F0FE; }
+  .wrap .bd { flex:1; display:flex; flex-direction:column; padding:12px 18px 4px; min-height:0; }
+  .grid4 { flex:1; display:grid; grid-template-columns:repeat(4,1fr); gap:14px; min-height:0; }
+  .card { background:var(--sky); border:2px solid var(--line); border-radius:14px; padding:12px 14px; display:flex; flex-direction:column; align-items:center; gap:8px; min-height:0; }
+  .card .nm { font-size:22px; font-weight:800; color:var(--navy); }
+  .card .mf { font-size:21px; padding:5px 12px; background:#fff; border-radius:10px; }
+  .card .miniplot { width:100%; flex:1; min-height:0; }
+  .spec { width:100%; font-size:17.5px; line-height:1.5; color:var(--ink); }
+  .spec b { color:var(--navy); }
+  .spec .r { color:var(--danger); font-weight:700; }
+</style>
+</head>
+<body data-title="2.2 典型环节 Bode 图一览" data-page="41 / 87">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="act-card wrap">
+      <div class="hd">典型环节的渐近对数幅频特性（橙虚线=渐近线，蓝实线=精确趋势）</div>
+      <div class="grpbar">
+        <button class="gbtn active" id="gb1">纯幂次与延迟：比例 · 积分 · 微分 · 延迟</button>
+        <button class="gbtn" id="gb2">一次与二次因子：惯性 · 一阶微分 · 振荡 · 二阶微分</button>
+      </div>
+      <div class="bd">
+        <div class="grid4" id="grp1">
+          <div class="card"><div class="nm">比例</div><div class="mathbox math mf eqline tex tex-d">G(s)=K</div><svg class="miniplot" id="g1" viewBox="0 0 150 92"></svg><div class="spec">斜率 <b>0</b>（水平线 20lgK）<br>相角恒 <b>0°</b> ｜ 关键转角：无</div></div>
+          <div class="card"><div class="nm">积分</div><div class="mathbox math mf eqline tex tex-d">G(s)=\dfrac{1}{s}</div><svg class="miniplot" id="g2" viewBox="0 0 150 92"></svg><div class="spec">斜率恒 <span class="r">−20dB/dec</span><br>相角恒 <b>−90°</b> ｜ 关键转角：无</div></div>
+          <div class="card"><div class="nm">微分</div><div class="mathbox math mf eqline tex tex-d">G(s)=s</div><svg class="miniplot" id="g3" viewBox="0 0 150 92"></svg><div class="spec">斜率恒 <span class="r">+20dB/dec</span><br>相角恒 <b>+90°</b> ｜ 关键转角：无</div></div>
+          <div class="card"><div class="nm">延迟</div><div class="mathbox math mf eqline tex tex-d">G(s)=e^{-T_{D}s}</div><svg class="miniplot" id="g8" viewBox="0 0 150 92"></svg><div class="spec">幅频恒 <b>0dB</b><br>相角 <b>−ωT<sub>D</sub></b> 无界下降 ｜ 无转角</div></div>
+        </div>
+        <div class="grid4" id="grp2" style="display:none">
+          <div class="card"><div class="nm">惯性</div><div class="mathbox math mf eqline tex tex-d">G(s)=\dfrac{1}{Ts+1}</div><svg class="miniplot" id="g4" viewBox="0 0 150 92"></svg><div class="spec">斜率 <b>0 → −20</b><br>相角 <b>0° → −90°</b> ｜ 转角 <b>1/T</b></div></div>
+          <div class="card"><div class="nm">一阶微分</div><div class="mathbox math mf eqline tex tex-d">G(s)=Ts+1</div><svg class="miniplot" id="g5" viewBox="0 0 150 92"></svg><div class="spec">斜率 <b>0 → +20</b><br>相角 <b>0° → +90°</b> ｜ 转角 <b>1/T</b></div></div>
+          <div class="card"><div class="nm">振荡</div><div class="mathbox math mf eqline tex tex-d">G(s)=\dfrac{1}{T^{2}s^{2}+2\zeta Ts+1}</div><svg class="miniplot" id="g6" viewBox="0 0 150 92"></svg><div class="spec">斜率 <b>0 → −40</b><br>相角 <b>0° → −180°</b> ｜ 转角 <b>ω<sub>n</sub></b></div></div>
+          <div class="card"><div class="nm">二阶微分</div><div class="mathbox math mf eqline tex tex-d">G(s)=T^{2}s^{2}+2\zeta Ts+1</div><svg class="miniplot" id="g7" viewBox="0 0 150 92"></svg><div class="spec">斜率 <b>0 → +40</b><br>相角 <b>0° → +180°</b> ｜ 转角 <b>ω<sub>n</sub></b></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">记忆</span><span>每过一个转角频率，斜率改变该环节的"贡献值"：惯性 <span class="kw-r">−20</span>、一阶微分 <span class="kw-r">+20</span>、振荡 <span class="kw-r">−40</span>、二阶微分 <span class="kw-r">+40</span>（dB/dec）——这是顺序斜率法的全部基础。</span></div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const X = v => 18 + (v + 1.2) / 2.4 * 126;
+  const Y = v => 46 - v * 1.05;
+  function draw(id, fn) {
+    const svg = document.getElementById(id);
+    const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+    mk("line", { x1: 8, y1: 46, x2: 146, y2: 46, stroke: "#9FB0D4", "stroke-width": 0.9 });
+    mk("line", { x1: 18, y1: 86, x2: 18, y2: 6, stroke: "#9FB0D4", "stroke-width": 0.9 });
+    const t = mk("text", { x: 12, y: 14, "font-size": 11.5, "text-anchor": "start", fill: "#5B6B8C", "font-weight": 700 }); t.textContent = "L";
+    fn(mk);
+  }
+  const corner = (mk, v) => { mk("path", { d: "M" + X(v) + ",46 l-4,8 l8,0 Z", fill: "#F5821F" }); };
+  const lab = (mk, x, y, s, c) => { const t = mk("text", { x, y, "font-size": 12.5, "text-anchor": "middle", fill: c || "#F5821F", "font-weight": 700 }); t.textContent = s; };
+  const seg = (mk, a, b, c, d2, col, dash) => mk("line", { x1: X(a), y1: Y(b), x2: X(c), y2: Y(d2), stroke: col, "stroke-width": 1.6, "stroke-dasharray": dash || "0" });
+  draw("g1", mk => { seg(mk, -1.2, 12, 1.2, 12, "#2B5CE6"); lab(mk, 84, 34, "20lgK", "#2B5CE6"); });
+  draw("g2", mk => { seg(mk, -1.2, 20, 1.2, -20, "#2B5CE6"); lab(mk, 66, 20, "−20", "#F5821F"); const t = mk("text", { x: X(0), y: 60, "font-size": 11.5, "text-anchor": "middle", fill: "#5B6B8C" }); t.textContent = "1"; });
+  draw("g3", mk => { seg(mk, -1.2, -20, 1.2, 20, "#2B5CE6"); lab(mk, 84, 20, "+20", "#F5821F"); const t = mk("text", { x: X(0), y: 60, "font-size": 11.5, "text-anchor": "middle", fill: "#5B6B8C" }); t.textContent = "1"; });
+  draw("g8", mk => { seg(mk, -1.2, 0, 1.2, 0, "#2B5CE6"); });
+  draw("g4", mk => { seg(mk, -1.2, 0, 0, 0, "#F5821F", "6 4"); seg(mk, 0, 0, 1.2, -20, "#F5821F", "6 4"); corner(mk, 0); let d = "M" + X(-1.2) + "," + Y(0); for (let i = 0; i <= 60; i++) { const v = -1.2 + 2.4 * i / 60; const w = Math.pow(10, v); d += "L" + X(v) + "," + Y(-10 * Math.log10(1 + w * w)); } mk("path", { d, stroke: "#2B5CE6", "stroke-width": 1.7, fill: "none" }); lab(mk, 112, 80, "−20"); });
+  draw("g5", mk => { seg(mk, -1.2, 0, 0, 0, "#F5821F", "6 4"); seg(mk, 0, 0, 1.2, 20, "#F5821F", "6 4"); corner(mk, 0); let d = "M" + X(-1.2) + "," + Y(0); for (let i = 0; i <= 60; i++) { const v = -1.2 + 2.4 * i / 60; const w = Math.pow(10, v); d += "L" + X(v) + "," + Y(10 * Math.log10(1 + w * w)); } mk("path", { d, stroke: "#2B5CE6", "stroke-width": 1.7, fill: "none" }); lab(mk, 112, 16, "+20"); });
+  draw("g6", mk => { seg(mk, -1.2, 0, 0, 0, "#F5821F", "6 4"); seg(mk, 0, 0, 1.2, -40, "#F5821F", "6 4"); corner(mk, 0); let d = "M" + X(-1.2) + "," + Y(0); for (let i = 0; i <= 60; i++) { const v = -1.2 + 2.4 * i / 60; const w = Math.pow(10, v); d += "L" + X(v) + "," + Y(Math.max(-21, -10 * Math.log10((1 - w * w) ** 2 + (0.4 * w) ** 2))); } mk("path", { d, stroke: "#2B5CE6", "stroke-width": 1.7, fill: "none" }); lab(mk, 104, 85, "−40"); });
+  draw("g7", mk => { seg(mk, -1.2, 0, 0, 0, "#F5821F", "6 4"); seg(mk, 0, 0, 1.2, 40, "#F5821F", "6 4"); corner(mk, 0); let d = "M" + X(-1.2) + "," + Y(0); for (let i = 0; i <= 60; i++) { const v = -1.2 + 2.4 * i / 60; const w = Math.pow(10, v); d += "L" + X(v) + "," + Y(Math.min(21, 10 * Math.log10((1 - w * w) ** 2 + (0.4 * w) ** 2))); } mk("path", { d, stroke: "#2B5CE6", "stroke-width": 1.7, fill: "none" }); lab(mk, 104, 12, "+40"); });
+  // 分组切换
+  const g1d = document.getElementById("grp1"), g2d = document.getElementById("grp2");
+  const b1 = document.getElementById("gb1"), b2 = document.getElementById("gb2");
+  function showGroup(n) {
+    g1d.style.display = n === 1 ? "" : "none";
+    g2d.style.display = n === 2 ? "" : "none";
+    b1.classList.toggle("active", n === 1);
+    b2.classList.toggle("active", n === 2);
+  }
+  b1.addEventListener("click", () => showGroup(1));
+  b2.addEventListener("click", () => showGroup(2));
+  if (+new URLSearchParams(location.search).get("g") === 2) showGroup(2);
+});
+</script>
+</body>
+</html>

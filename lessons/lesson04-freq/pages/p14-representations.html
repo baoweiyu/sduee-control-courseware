@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>1.4 频率特性的表示方法（解析式）</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .col { display:flex; flex-direction:column; gap:20px; height:100%; min-height:0; }
+  .ana { flex:1; display:flex; flex-direction:column; min-height:0; }
+  .ana .bd { flex:1; display:flex; flex-direction:column; gap:14px; padding:16px 24px; justify-content:center; }
+  .fc { flex:1; background:var(--sky); border:2px solid var(--line); border-radius:14px; padding:10px 20px; display:flex; align-items:center; gap:20px; min-height:0; }
+  .fc .hd2 { flex:none; width:236px; font-size:20.5px; font-weight:700; color:var(--navy); line-height:1.4; }
+  .fc .hd2 .no { display:inline-grid; place-items:center; width:32px; height:32px; border-radius:50%; background:var(--blue); color:#fff; font-size:19px; margin-right:6px; }
+  .fc .mathbox { flex:none; background:#fff; font-size:21px; padding:9px 14px; margin:0; }
+  .fc span.d { flex:1; font-size:19px; color:var(--ink); line-height:1.5; }
+</style>
+</head>
+<body data-title="1.4 频率特性的表示方法（解析式）" data-page="14 / 87">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="col">
+      <div class="act-card ana">
+        <div class="hd">解析式表示：一个复数，四种等价写法</div>
+        <div class="bd">
+          <div class="fc">
+            <div class="hd2"><span class="no">1</span>幅频—相频形式</div>
+            <div class="mathbox math eqline tex tex-d">G(j\omega)=|G(j\omega)|\angle G(j\omega)=A(\omega)\angle\varphi(\omega)</div>
+            <span class="d">最常用——<span class="kw-r">幅频特性</span>与<span class="kw-r">相频特性</span>分开研究，是两种图形表示的基础。</span>
+          </div>
+          <div class="fc">
+            <div class="hd2"><span class="no">2</span>指数形式</div>
+            <div class="mathbox math eqline tex tex-d">G(j\omega)=A(\omega)\,e^{j\varphi(\omega)}</div>
+            <span class="d">理论推导最方便——乘除运算直接转化为<span class="kw-r">模的乘除、相角的加减</span>。</span>
+          </div>
+          <div class="fc">
+            <div class="hd2"><span class="no">3</span>三角函数形式</div>
+            <div class="mathbox math eqline tex tex-d">G(j\omega)=A(\omega)\cos\varphi(\omega)+j\,A(\omega)\sin\varphi(\omega)</div>
+            <span class="d">指数形式按欧拉公式展开，便于与实频—虚频形式互化。</span>
+          </div>
+          <div class="fc">
+            <div class="hd2"><span class="no">4</span>实频—虚频形式</div>
+            <div class="mathbox math eqline tex tex-d">G(j\omega)=X(\omega)+j\,Y(\omega)</div>
+            <span class="d"><span class="kw-r">实频特性 X(ω)</span> 与 <span class="kw-r">虚频特性 Y(ω)</span>——逐点计算与绘图时最顺手。</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">小结</span><span>四种形式<span class="kw-r">完全等价、可随时互化</span>：<span class="tex">A=\sqrt{X^{2}+Y^{2}},\quad \varphi=\operatorname{arctg}(Y/X)</span>，使用时按需选择。</span></div>
+</div></div>
+</body>
+</html>

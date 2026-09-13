@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>课堂互动 · 多选题</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .qtype { display:inline-block; background:var(--orange); color:#fff; font-size:21px; font-weight:700; border-radius:10px; padding:7px 20px; margin-bottom:26px; }
+  .q { font-size:32px; font-weight:700; color:var(--navy); margin-bottom:32px; }
+  .opts { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+  .opt { display:flex; align-items:center; gap:18px; background:#fff; border:2px solid var(--line); border-radius:14px; padding:26px 28px; font-size:26px; color:var(--ink); }
+  .opt .k { width:48px; height:48px; border-radius:50%; background:var(--sky); color:var(--blue); font-weight:700; display:grid; place-items:center; flex:none; font-size:24px; }
+  .opt.right { border-color:#1E9E57; background:#F0FAF4; }
+  .opt.right .k { background:#1E9E57; color:#fff; }
+  .ans { margin-top:30px; font-size:26px; color:var(--navy); background:var(--sky); border-radius:14px; padding:18px 30px; }
+  .ans b { color:var(--orange); }
+</style>
+</head>
+<body data-title="课堂互动 · 随堂多选" data-page="25 / 35">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body" style="display:flex;flex-direction:column;justify-content:center">
+    <span class="qtype">多选题　2 分</span>
+    <div class="q">与开环控制系统相比，闭环控制系统（　）</div>
+    <div class="opts">
+      <div class="opt" data-mark="1"><span class="k">A</span>控制精度高</div>
+      <div class="opt" data-mark="0"><span class="k">B</span>结构简单</div>
+      <div class="opt" data-mark="1"><span class="k">C</span>会有不稳定问题</div>
+      <div class="opt" data-mark="0"><span class="k">D</span>以上都对</div>
+    </div>
+    <div class="ans" data-step="1"><b>答案：A、C。</b>闭环以反馈换取高精度与抗扰能力，代价是可能失稳；「结构简单」恰恰是开环的优点。</div>
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const origNext = ACT.step.next.bind(ACT.step);
+      ACT.step.next = function () {
+        const done = origNext();
+        // 展示答案时同步高亮正确选项
+        if (ACT.step.cur >= 1) {
+          document.querySelectorAll(".opt").forEach(o => {
+            if (o.dataset.mark === "1") o.classList.add("right");
+          });
+        }
+        return done;
+      };
+      const origReset = ACT.step.reset.bind(ACT.step);
+      ACT.step.reset = function () {
+        origReset();
+        document.querySelectorAll(".opt").forEach(o => o.classList.remove("right", "wrong"));
+      };
+      window.prev = function () { const n = Math.max(0, ACT.step.cur - 1); ACT.step.reset(); for (let i = 0; i < n; i++) ACT.step.next(); };
+    });
+  </script>
+</div></div>
+</body>
+</html>

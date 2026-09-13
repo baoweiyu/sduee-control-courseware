@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>梅逊公式</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .big { text-align:center; margin-bottom:14px; }
+  .big .mathbox { display:inline-block; font-size:34px; padding:20px 46px; border:3px solid var(--blue); background:#fff; }
+  .big .mathbox b { color:var(--red); }
+  .grid2 { display:grid; grid-template-columns:1fr 1.35fr; gap:18px; height:430px; }
+  .gc .bd2 { padding:16px 22px; }
+  .it { display:flex; gap:12px; align-items:flex-start; margin-bottom:12px; font-size:20.5px; line-height:1.45; }
+  .it .k { flex:0 0 92px; font-weight:800; color:var(--blue); font-family:var(--font-math); font-style:italic; font-size:22px; }
+  .dlt { display:flex; gap:12px; align-items:flex-start; margin-bottom:10px; font-size:20px; line-height:1.4; }
+  .dlt .k { flex:0 0 150px; font-weight:800; color:var(--red); font-family:var(--font-math); font-style:italic; }
+  .delform { text-align:center; font-size:25px; background:var(--sky); border-radius:12px; padding:12px 10px; margin-bottom:14px; }
+  .sgn { display:inline-block; background:#FDF0EF; border-radius:8px; padding:0 10px; margin:0 2px; font-weight:800; }
+  .tip { margin-top:12px; display:flex; gap:10px; align-items:center; background:#FDF3EC;
+         border-left:6px solid var(--orange); border-radius:10px; padding:9px 18px; font-size:20px; }
+</style>
+</head>
+<body data-title="梅逊公式及各项含义" data-page="46 / 51">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="big math" data-step="1">
+      <div class="mathbox tex tex-d">G(s) = \dfrac{1}{\Delta }\color{#D63A2F}{\cdot }\sum _{k=1}^{n} P_{k}\Delta _{k} = \dfrac{P_{1}\Delta _{1} + P_{2}\Delta _{2} + \cdots + P_{n}\Delta _{n}}{\Delta }</div>
+    </div>
+    <div class="grid2">
+      <div class="act-card gc" data-step="2"><div class="bd2">
+        <div class="it"><div class="k"><span class="tex">G(s)</span></div><div>源节点到汇节点的<b>总传输</b>（总增益），即 <span class="tex">\Phi (s)=C(s)/R(s)</span></div></div>
+        <div class="it"><div class="k">n</div><div>从源节点到汇节点之间<b>前向通道的总数</b></div></div>
+        <div class="it"><div class="k"><span class="tex">P_{k}</span></div><div>第 k 条前向通道的<b>传输</b>（各支路增益乘积）</div></div>
+        <div class="it"><div class="k"><span class="tex">\Delta _{k}</span></div><div>第 k 条前向通道的<b>余子式</b>：把与该通道<span class="kw-r">相接触</span>的回环全部置零后，剩余图的特征式</div></div>
+      </div></div>
+      <div class="act-card gc" data-step="3"><div class="bd2">
+        <div class="delform math tex tex-d">\Delta = 1 - \sum L_{1}\color{#D63A2F}{+}\sum L_{2}\color{#D63A2F}{-}\sum L_{3}\color{#D63A2F}{+}\cdots \color{#D63A2F}{(-1)^{m}}\sum L_{m}</div>
+        <div class="dlt"><div class="k"><span class="tex">\sum L_{1}</span></div><div>所有<span class="kw-r">不同回环</span>的传输之和</div></div>
+        <div class="dlt"><div class="k"><span class="tex">\sum L_{2}</span></div><div>所有<span class="kw-r">两个互不接触</span>回环传输的<b>乘积之和</b></div></div>
+        <div class="dlt"><div class="k"><span class="tex">\sum L_{3}</span></div><div>所有<span class="kw-r">三个互不接触</span>回环传输的乘积之和</div></div>
+        <div class="dlt"><div class="k"><span class="tex">\sum L_{m}</span></div><div>所有 m 个互不接触回环传输的乘积之和（<b>符号交替</b>：− + − +⋯）</div></div>
+      </div></div>
+    </div>
+    <div class="tip" data-step="4">
+      <div style="font-size:24px">🧭</div>
+      <div>使用口诀：<b>数通道、数回环、找互不接触、拼 Δ、配余子式</b>——下一步用例 2-14 完整走一遍。</div>
+    </div>
+  </div>
+  <div class="act-note">梅逊公式本质是"不算中间变量、直接写总传输"。强调 Δ 的符号交替规律和 Δk 的含义（与该前向通道接触的回环项全部去掉）。提醒：回环传输含符号，负反馈回环传输本身带负号。</div>
+</div></div>
+</body>
+</html>

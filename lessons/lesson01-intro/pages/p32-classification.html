@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>自动控制系统的分类</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .rows { display:flex; flex-direction:column; gap:36px; margin-top:8px; }
+  .row2 { display:flex; align-items:center; gap:20px; }
+  .cat { flex:0 0 300px; background:var(--blue); color:#fff; border-radius:14px; padding:30px 22px; font-size:24px; font-weight:700; text-align:center; }
+  .subs { flex:1; display:flex; gap:14px; }
+  .sub2 { flex:1; background:#fff; border:2px solid var(--line); border-radius:12px; padding:28px 18px; font-size:24px; color:var(--ink); text-align:center; position:relative; }
+  .sub2.focus { border-color:#D63A2F; background:var(--sky); font-weight:700; color:var(--navy); }
+  .sub2 .ck { position:absolute; top:-12px; right:10px; width:26px; height:26px; border-radius:50%; background:#D63A2F; color:#fff; font-size:16px; display:grid; place-items:center; }
+</style>
+</head>
+<body data-title="二、自动控制系统的分类" data-page="32 / 35">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body fill">
+    <div class="rows">
+      <div class="row2"><div class="cat">按给定信号分类</div><div class="subs">
+        <div class="sub2 focus">恒值控制系统<span class="ck">✓</span></div><div class="sub2">随动控制系统</div><div class="sub2">程序控制系统</div></div></div>
+      <div class="row2"><div class="cat">按数学描述分类</div><div class="subs">
+        <div class="sub2 focus">线性控制系统<span class="ck">✓</span></div><div class="sub2">非线性控制系统</div></div></div>
+      <div class="row2"><div class="cat">按时间信号的性质分类</div><div class="subs">
+        <div class="sub2 focus">连续时间系统<span class="ck">✓</span></div><div class="sub2">离散时间系统</div></div></div>
+      <div class="row2"><div class="cat">按输入输出信号的数量分类</div><div class="subs">
+        <div class="sub2 focus">单输入单输出系统<span class="ck">✓</span></div><div class="sub2">多输入多输出系统</div></div></div>
+    </div>
+  </div>
+  <div class="act-note">
+    <svg class="ico" viewBox="0 0 48 48"><circle cx="24" cy="24" r="18" fill="none" stroke="#1D3FA0" stroke-width="3"/><path d="M17 24 l5 5 10-11" fill="none" stroke="#F5821F" stroke-width="3.5" stroke-linecap="round"/></svg>
+    <span><span class="lead">说明：</span>打「✓」的类型是本课程的主要研究对象——线性、连续、恒值、单输入单输出系统。</span>
+  </div>
+</div></div>
+</body>
+</html>

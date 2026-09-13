@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>课堂互动 · 频域指标的选择</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; flex-direction:row-reverse; gap:24px; height:100%; }
+  .figc { flex:1.05; display:flex; flex-direction:column; overflow:hidden; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:8px 14px; min-height:0; }
+  .figc svg { width:100%; height:100%; }
+  .figc .cap { flex:none; font-size:19px; color:var(--navy); background:var(--sky); border-radius:12px; padding:11px 18px; margin:0 14px 14px; }
+  .qcol { flex:1; display:flex; flex-direction:column; gap:16px; }
+  .qtype { display:inline-block; background:var(--orange); color:#fff; font-size:21px; font-weight:700; border-radius:10px; padding:7px 20px; width:fit-content; }
+  .qz { background:#fff; border:2px solid var(--line); border-radius:16px; padding:20px 26px; }
+  .qz .qt { font-size:23px; color:var(--navy); font-weight:700; margin-bottom:14px; line-height:1.5; }
+  .stage-tip { display:inline-block; margin-bottom:14px; font-size:19.5px; color:#fff; background:var(--blue); border-radius:20px; padding:6px 20px; width:fit-content; }
+  .opts { display:flex; flex-direction:column; gap:12px; }
+  .opt { background:var(--sky); border:2px solid var(--line); border-radius:12px; padding:12px 18px; font-size:20px; color:var(--ink); font-weight:700; position:relative; line-height:1.4; }
+  .opt.right { border-color:#1E9E57; background:#F0FAF4; }
+  .opt.right::after { content:"✓"; position:absolute; top:-13px; right:-10px; width:31px; height:31px; border-radius:50%; background:#1E9E57; color:#fff; font-weight:800; font-size:19px; display:grid; place-items:center; }
+  .opt.wrong { border-color:#D63A2F; background:#FDF1EF; }
+  .opt.wrong::after { content:"✗"; position:absolute; top:-13px; right:-10px; width:31px; height:31px; border-radius:50%; background:#D63A2F; color:#fff; font-weight:800; font-size:19px; display:grid; place-items:center; }
+  .ans { font-size:20.5px; color:var(--navy); background:var(--sky); border-radius:12px; padding:14px 22px; line-height:1.65; }
+  .ans b { color:var(--danger); }
+</style>
+</head>
+<body data-title="课堂互动 · 频域指标的选择" data-page="86 / 87">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="row">
+      <div class="act-card figc">
+        <div class="hd">开环 Bode 图上的 γ 与 ωc</div>
+        <div class="bd2"><svg id="fig" viewBox="0 0 860 640"></svg></div>
+        <div class="cap"><b>读图口诀：</b>0dB 穿越点定 <b>ωc</b>，该点相角距 −180° 的余量即 <b>γ</b>。</div>
+      </div>
+      <div class="qcol">
+        <span class="qtype">单选题　3 分</span>
+        <div class="qz">
+          <div class="qt">在 Bode 图上，最能体现闭环阶跃响应「超调量 σ%」和「调节时间 ts」的开环指标分别是？</div>
+          <span class="stage-tip">请先作出判断</span>
+          <div class="opts">
+            <div class="opt" data-mark="1">A　相角裕度 γ 和截止频率 ωc</div>
+            <div class="opt" data-mark="0">B　增益裕度 Kg 和相位穿越频率 ωg</div>
+            <div class="opt" data-mark="0">C　开环增益 K 和系统型别 ν</div>
+            <div class="opt" data-mark="0">D　各转折频率和对应斜率</div>
+          </div>
+        </div>
+        <div class="ans" data-step="2">
+          <b>答案：A。</b>由二阶系统的解析关系：<span class="kw-r">γ 只与 ζ 有关</span> → γ 决定 σ%（平稳性）；<span class="kw-r">ts=8/(ωc·tgγ)</span> → ωc 决定快慢（快速性）。B 中 Kg、ωg 主要刻画「离临界稳定多远」；C 中 K、ν 决定稳态精度而非暂态；D 转折频率/斜率是图的构造参数，不直接对应时域指标。
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("fig");
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const MF = "Cambria Math,STIX Two Math,Georgia,Microsoft YaHei,sans-serif";
+  const SUB = (n, s) => { const esc = t => t.replace(/&/g, "&amp;").replace(/</g, "&lt;"); let html = "", sub = false; for (const p of String(s).split(/(_\{[^}]*\})/)) { if (!p) continue; if (p.startsWith("_{")) { html += '<tspan' + (sub ? '' : ' dy="6"') + ' font-size="72%">' + esc(p.slice(2, -1)) + '</tspan>'; sub = true; } else { html += sub ? '<tspan dy="-6">' + esc(p) + '</tspan>' : esc(p); sub = false; } } n.innerHTML = html; };
+  const tx = (x, y, s, o, parent) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 19, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal" , "font-family": MF }, parent); SUB(n, s); if (o && o.halo) n.setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:6;stroke-linejoin:round"); return n; };
+  const defs = mk("defs", {});
+  const m1 = mk("marker", { id: "a81", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, m1);
+  const x0 = 96, x1 = 806, DEC = (x1 - x0) / 2;    // ω: 0.1..10
+  const X = w => x0 + (Math.log10(w) + 1) * DEC;
+  const y0L = 340, yTopL = 56, y0P = 596, yTopP = 400;
+  const YL = v => y0L - (v + 50) / 70 * (y0L - yTopL);   // L ∈ [−50, 20]
+  const YP = v => yTopP + (-v) / 270 * (y0P - yTopP);    // φ ∈ [−270, 0]，0° 在上、向下为负
+  function Gp(w) {
+    const d = { re: -1.25 * w * w, im: w - 0.25 * w * w * w };
+    const m2 = d.re * d.re + d.im * d.im;
+    const re = 1.2 * d.re / m2, im = -1.2 * d.im / m2;
+    let p = Math.atan2(im, re) * 180 / Math.PI;
+    if (p > 0) p -= 360;   // 相位卷绕：本系统 φ∈(−270°,−90°)
+    return { L: 20 * Math.log10(Math.hypot(re, im)), p };
+  }
+  // 幅频
+  mk("line", { x1: x0, y1: y0L, x2: x1 + 12, y2: y0L, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a81)" });
+  mk("line", { x1: x0, y1: y0L, x2: x0, y2: yTopL - 10, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a81)" });
+  [0.1, 1, 10].forEach(w => { const x = X(w); mk("line", { x1: x, y1: y0L, x2: x, y2: yTopL, stroke: "#F0F4FC", "stroke-width": 1 }); tx(x, y0L + 24, String(w), { fs: 19, fill: "#5B6B8C" }); });
+  [20, 0, -20, -40].forEach(v => { mk("line", { x1: x0, y1: YL(v), x2: x1, y2: YL(v), stroke: v === 0 ? "#8AA6D8" : "#F0F4FC", "stroke-width": v === 0 ? 1.7 : 1, "stroke-dasharray": v === 0 ? "8 5" : "0" }); tx(x0 - 10, YL(v) + 5, v + "", { fs: 19, fill: "#5B6B8C", an: "end" }); });
+  tx(x1 + 4, y0L + 6, "ω", { fs: 19, it: true, b: true, fill: "#5B6B8C", an: "start" });
+  tx(x0 - 10, yTopL - 16, "L/dB", { fs: 19, b: true, fill: "#1B3B8B", an: "end" });
+  let d = "";
+  for (let i = 0; i <= 300; i++) { const w = 0.1 * Math.pow(100, i / 300); d += (i ? "L" : "M") + X(w).toFixed(1) + "," + YL(Math.min(21.5, Math.max(-51, Gp(w).L))).toFixed(1); }
+  mk("path", { d, stroke: "#2B5CE6", "stroke-width": 3.8, fill: "none" });
+  // 相频（0° 在上，向下为负）
+  mk("line", { x1: x0, y1: y0P, x2: x1 + 12, y2: y0P, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a81)" });
+  mk("line", { x1: x0, y1: y0P, x2: x0, y2: yTopP - 10, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a81)" });
+  [0.1, 1, 10].forEach(w => { const x = X(w); mk("line", { x1: x, y1: y0P, x2: x, y2: yTopP, stroke: "#F0F4FC", "stroke-width": 1 }); tx(x, y0P + 24, String(w), { fs: 19, fill: "#5B6B8C" }); });
+  [0, -90, -180].forEach(v => { mk("line", { x1: x0, y1: YP(v), x2: x1, y2: YP(v), stroke: v === -180 ? "#D63A2F" : "#F0F4FC", "stroke-width": v === -180 ? 1.5 : 1, "stroke-dasharray": v === -180 ? "8 5" : "0", opacity: v === -180 ? 0.6 : 1 }); tx(x0 - 10, YP(v) + 5, v + "°", { fs: 19, fill: v === -180 ? "#D63A2F" : "#5B6B8C", an: "end" }); });
+  tx(x1 + 4, y0P + 6, "ω", { fs: 19, it: true, b: true, fill: "#5B6B8C", an: "start" });
+  tx(x0 - 10, yTopP - 16, "φ", { fs: 19, b: true, fill: "#1B3B8B", an: "end" });
+  let d2 = "";
+  for (let i = 0; i <= 300; i++) { const w = 0.1 * Math.pow(100, i / 300); d2 += (i ? "L" : "M") + X(w).toFixed(1) + "," + YP(Gp(w).p).toFixed(1); }
+  mk("path", { d: d2, stroke: "#D63A2F", "stroke-width": 3.4, fill: "none" });
+  // ωc、γ 标注（初始隐藏，随答案揭晓出现）
+  const gA = mk("g", { opacity: 0 });
+  const wc = 0.87, phc = Gp(wc).p, gam = 180 + phc;
+  mk("line", { x1: X(wc), y1: YL(Gp(wc).L) - 4, x2: X(wc), y2: YP(phc) + 4, stroke: "#1E9E57", "stroke-width": 1.8, "stroke-dasharray": "7 5" }, gA);
+  mk("circle", { cx: X(wc), cy: YL(0), r: 7.5, fill: "#1E9E57" }, gA);
+  tx(X(wc) + 12, YL(0) - 14, "ωc≈0.87", { fs: 19, b: true, fill: "#1E9E57", an: "start" }, gA);
+  mk("circle", { cx: X(wc), cy: YP(phc), r: 7.5, fill: "#1E9E57" }, gA);
+  mk("line", { x1: X(wc) + 12, y1: YP(phc), x2: X(wc) + 12, y2: YP(-180), stroke: "#1E9E57", "stroke-width": 2.6 }, gA);
+  tx(X(wc) - 16, (YP(phc) + YP(-180)) / 2 + 6, "γ≈37°", { fs: 19, b: true, fill: "#1E9E57", an: "end" }, gA).setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:5");
+  const S = ACT.step, _n = S.next.bind(S), _r = S.reset.bind(S);
+  function mark() {
+    const on = S.cur >= 1;
+    document.querySelectorAll(".opt").forEach(o => {
+      o.classList.toggle("right", on && o.dataset.mark === "1");
+      o.classList.toggle("wrong", on && o.dataset.mark === "0");
+    });
+    gA.setAttribute("opacity", on ? 1 : 0);
+  }
+  S.next = function () { const dd = _n(); mark(); return dd; };
+  S.reset = function () { _r(); mark(); };
+  window.prev = function () { const n = Math.max(0, S.cur - 1); S.reset(); for (let i = 0; i < n; i++) S.next(); };
+  mark();
+});
+</script>
+</body>
+</html>

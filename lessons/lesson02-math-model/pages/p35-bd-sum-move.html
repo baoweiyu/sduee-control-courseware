@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>相加点移动辨析：向同类移动</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .qbar { display:flex; align-items:center; gap:16px; margin-bottom:6px; }
+  .qbar .q { font-size:22px; font-weight:800; color:var(--navy); }
+  .opt { border:2.5px solid var(--blue); background:#fff; color:var(--blue); font-size:20px;
+         font-weight:800; border-radius:10px; padding:5px 20px; cursor:pointer; font-family:inherit; transition:.25s; }
+  .opt.right { background:#2E9E6B; border-color:#2E9E6B; color:#fff; }
+  .opt.wrong { background:#fff; border-color:var(--red); color:var(--red); text-decoration:line-through; }
+  .stamp { font-size:23px; font-weight:900; color:var(--red); opacity:0; transform:scale(2) rotate(-8deg); transition:.35s; }
+  .stamp.on { opacity:1; transform:scale(1) rotate(-8deg); }
+  .row1 { display:flex; gap:16px; align-items:stretch; }
+  .row1 .act-card { flex:1; }
+  .row1 .bd2 { padding:4px 10px; }
+  .cap { text-align:center; font-size:19px; color:var(--muted); font-weight:700; margin-bottom:2px; }
+  .arrowc { display:grid; place-items:center; font-size:34px; color:var(--orange); font-weight:800; }
+  .ans { margin-top:10px; background:#FDF0EF; border-left:6px solid var(--red); border-radius:10px;
+         padding:12px 20px; font-size:21px; color:var(--ink); line-height:1.55; }
+  .row2 { margin-top:6px; }
+  .row2 .bd2, .row3 .bd2 { padding:4px 10px; }
+  .row3 { margin-top:6px; }
+  .split { display:flex; gap:10px; align-items:center; }
+</style>
+</head>
+<body data-title="相加点移动辨析：向同类移动" data-page="35 / 51">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="qbar">
+      <div class="q">🗳️ 课堂投票：右边这种"相加点移动"能否帮助继续化简？</div>
+      <button class="opt" data-mark="0" onclick="vote(this)">A　能</button>
+      <button class="opt" data-mark="1" onclick="vote(this)">B　不能</button>
+      <div class="stamp" id="stamp">答案：B　不能！</div>
+    </div>
+    <div class="row1">
+      <div class="act-card"><div class="bd2">
+        <div class="cap">原图：第二个相加点在 <span class="tex">G_{2}</span> 之前</div>
+        <svg viewBox="0 0 520 240" width="98%" height="240">
+          <defs><marker id="a35" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#1D3FA0"/></marker></defs>
+          <g font-size="16" fill="#1B3B8B">
+            <circle cx="75" cy="130" r="12" fill="#fff" stroke="#1D3FA0" stroke-width="2.2"/><path d="M 69.6,124.6 L 80.4,135.4 M 69.6,135.4 L 80.4,124.6" stroke="#1D3FA0" stroke-width="2.2" fill="none"/>
+            <rect x="115" y="108" width="70" height="44" rx="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.2"/><text x="150" y="136" text-anchor="middle" font-style="italic">G₁</text>
+            <circle cx="225" cy="130" r="12" fill="#fff" stroke="#1D3FA0" stroke-width="2.2"/><path d="M 219.6,124.6 L 230.4,135.4 M 219.6,135.4 L 230.4,124.6" stroke="#1D3FA0" stroke-width="2.2" fill="none"/>
+            <rect x="265" y="108" width="70" height="44" rx="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.2"/><text x="300" y="136" text-anchor="middle" font-style="italic">G₂</text>
+            <rect x="115" y="16" width="70" height="40" rx="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.2"/><text x="150" y="42" text-anchor="middle" font-style="italic">G₃</text>
+            <rect x="150" y="192" width="70" height="36" rx="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.2"/><text x="185" y="216" text-anchor="middle" font-style="italic">H₁</text>
+          </g>
+          <g stroke="#1D3FA0" stroke-width="2.2" fill="none" marker-end="url(#a35)">
+            <line x1="10" y1="130" x2="34" y2="130"/><line x1="40" y1="130" x2="60" y2="130"/>
+            <line x1="87" y1="130" x2="111" y2="130"/><line x1="185" y1="130" x2="209" y2="130"/>
+            <line x1="237" y1="130" x2="261" y2="130"/><line x1="335" y1="130" x2="420" y2="130"/>
+            <polyline points="40,130 40,36 111,36"/><line x1="185" y1="36" x2="225" y2="36"/>
+            <line x1="225" y1="36" x2="225" y2="114"/>
+            <line x1="375" y1="130" x2="375" y2="210"/><line x1="375" y1="210" x2="224" y2="210"/>
+            <polyline points="150,210 75,210 75,146"/>
+          </g>
+          <circle cx="40" cy="130" r="4" fill="#1D3FA0"/><circle cx="375" cy="130" r="4" fill="#1D3FA0"/>
+          <text x="60" y="122" font-size="13" fill="#D63A2F">+</text><text x="64" y="166" font-size="13" fill="#D63A2F">−</text>
+          <text x="231" y="104" font-size="13" fill="#D63A2F">+</text>
+          <circle cx="225" cy="130" r="17" fill="none" stroke="#F5821F" stroke-width="3" stroke-dasharray="5 4"/>
+        </svg>
+      </div></div>
+      <div class="arrowc">➜</div>
+      <div class="act-card"><div class="bd2">
+        <div class="cap">移动方案：相加点跨过 <span class="tex">G_{2}</span> 移到输出端，<span class="tex">G_{3}</span> 支路补一个"?"</div>
+        <svg viewBox="0 0 520 240" width="98%" height="240">
+          <defs><marker id="b35" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#1D3FA0"/></marker></defs>
+          <g font-size="16" fill="#1B3B8B">
+            <circle cx="75" cy="130" r="12" fill="#fff" stroke="#1D3FA0" stroke-width="2.2"/><path d="M 69.6,124.6 L 80.4,135.4 M 69.6,135.4 L 80.4,124.6" stroke="#1D3FA0" stroke-width="2.2" fill="none"/>
+            <rect x="115" y="108" width="70" height="44" rx="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.2"/><text x="150" y="136" text-anchor="middle" font-style="italic">G₁</text>
+            <rect x="225" y="108" width="70" height="44" rx="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.2"/><text x="260" y="136" text-anchor="middle" font-style="italic">G₂</text>
+            <circle cx="335" cy="130" r="12" fill="#fff" stroke="#1D3FA0" stroke-width="2.2"/><path d="M 329.6,124.6 L 340.4,135.4 M 329.6,135.4 L 340.4,124.6" stroke="#1D3FA0" stroke-width="2.2" fill="none"/>
+            <rect x="115" y="16" width="70" height="40" rx="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.2"/><text x="150" y="42" text-anchor="middle" font-style="italic">G₃</text>
+            <rect x="225" y="16" width="70" height="40" rx="6" fill="#FDF3EC" stroke="#F5821F" stroke-width="2.6" stroke-dasharray="6 4"/><text id="qmark35" x="260" y="43" text-anchor="middle" fill="#F5821F" font-weight="800" font-size="20">?</text>
+            <rect x="150" y="192" width="70" height="36" rx="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.2"/><text x="185" y="216" text-anchor="middle" font-style="italic">H₁</text>
+          </g>
+          <g stroke="#1D3FA0" stroke-width="2.2" fill="none" marker-end="url(#b35)">
+            <line x1="10" y1="130" x2="34" y2="130"/><line x1="40" y1="130" x2="60" y2="130"/>
+            <line x1="87" y1="130" x2="111" y2="130"/><line x1="185" y1="130" x2="221" y2="130"/>
+            <line x1="295" y1="130" x2="319" y2="130"/><line x1="347" y1="130" x2="420" y2="130"/>
+            <polyline points="40,130 40,36 111,36"/><line x1="185" y1="36" x2="221" y2="36"/>
+            <line x1="295" y1="36" x2="335" y2="36"/><line x1="335" y1="36" x2="335" y2="114"/>
+            <line x1="395" y1="130" x2="395" y2="210"/><line x1="395" y1="210" x2="224" y2="210"/>
+            <polyline points="150,210 75,210 75,146"/>
+          </g>
+          <circle cx="40" cy="130" r="4" fill="#1D3FA0"/><circle cx="395" cy="130" r="4" fill="#1D3FA0"/>
+          <text x="60" y="122" font-size="13" fill="#D63A2F">+</text><text x="64" y="166" font-size="13" fill="#D63A2F">−</text>
+        </svg>
+      </div></div>
+    </div>
+
+    <div data-step="1">
+      <div class="ans">移动<b>本身正确</b>：跨过 <span class="tex">G_{2}</span> 后，<span class="tex">G_{3}</span> 支路串入 <span class="kw-r"><span class="tex">G_{2}</span></span> 确实等效——但对化简<b>无意义</b>：<span class="tex">G_{2}</span> 重复出现，框图仍无法逐环化简，等于<span class="kw-r">原地踏步</span>。<b>经验法则：移动方向要服务于"能继续化简"——向同类移动</b>（相加点往相加点靠，分支点往分支点靠）。正确做法👇</div>
+      <div class="act-card row2"><div class="bd2">
+        <div class="split">
+          <svg viewBox="0 0 560 240" width="62%" height="225">
+            <defs><marker id="c35" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#1D3FA0"/></marker></defs>
+            <g font-size="16" fill="#1B3B8B">
+              <rect x="80" y="108" width="70" height="44" rx="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.2"/><text x="115" y="136" text-anchor="middle" font-style="italic">G₁</text>
+              <circle cx="190" cy="130" r="12" fill="#fff" stroke="#1D3FA0" stroke-width="2.2"/><path d="M 184.6,124.6 L 195.4,135.4 M 184.6,135.4 L 195.4,124.6" stroke="#1D3FA0" stroke-width="2.2" fill="none"/>
+              <circle cx="230" cy="130" r="12" fill="#fff" stroke="#1D3FA0" stroke-width="2.2"/><path d="M 224.6,124.6 L 235.4,135.4 M 224.6,135.4 L 235.4,124.6" stroke="#1D3FA0" stroke-width="2.2" fill="none"/>
+              <rect x="270" y="108" width="70" height="44" rx="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.2"/><text x="305" y="136" text-anchor="middle" font-style="italic">G₂</text>
+              <rect x="80" y="16" width="70" height="40" rx="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.2"/><text x="115" y="42" text-anchor="middle" font-style="italic">G₃</text>
+              <rect x="330" y="192" width="70" height="36" rx="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.2"/><text x="365" y="216" text-anchor="middle" font-style="italic">H₁</text>
+              <rect x="230" y="192" width="70" height="36" rx="6" fill="#FDF0EF" stroke="#D63A2F" stroke-width="2.6"/><text x="265" y="216" text-anchor="middle" font-style="italic" fill="#D63A2F" font-weight="700">G₁</text>
+            </g>
+            <g stroke="#1D3FA0" stroke-width="2.2" fill="none" marker-end="url(#c35)">
+              <line x1="10" y1="130" x2="34" y2="130"/><line x1="40" y1="130" x2="76" y2="130"/>
+              <line x1="150" y1="130" x2="174" y2="130"/><line x1="202" y1="130" x2="214" y2="130"/>
+              <line x1="242" y1="130" x2="266" y2="130"/><line x1="340" y1="130" x2="445" y2="130"/>
+              <polyline points="40,130 40,36 76,36"/><line x1="150" y1="36" x2="190" y2="36"/>
+              <line x1="190" y1="36" x2="190" y2="114"/>
+              <line x1="400" y1="130" x2="400" y2="210"/>
+              <line x1="330" y1="210" x2="304" y2="210"/>
+              <line x1="230" y1="210" x2="230" y2="146"/>
+            </g>
+            <circle cx="40" cy="130" r="4" fill="#1D3FA0"/><circle cx="400" cy="130" r="4" fill="#1D3FA0"/>
+            <text x="184" y="104" font-size="13" fill="#D63A2F">+</text><text x="238" y="162" font-size="13" fill="#D63A2F">−</text>
+            <ellipse cx="210" cy="130" rx="46" ry="26" fill="none" stroke="#F5821F" stroke-width="3" stroke-dasharray="6 4"/>
+            <text x="160" y="88" font-size="15" fill="#F5821F" font-weight="800">相邻相加点⇒合并</text>
+          </svg>
+          <div style="flex:1; font-size:21.5px; color:var(--ink); line-height:1.7">
+            <b>正确做法：</b>把第一个相加点<span class="kw-r">前移跨过 <span class="tex">G_{1}</span></span>，与第二个相加点相邻合并；<span class="tex">H_{1}</span> 支路串入 <span class="kw-r"><span class="tex">G_{1}</span></span> 保持等效。之后即可逐环化简。
+          </div>
+        </div>
+      </div></div>
+    </div>
+
+  </div>
+</div></div>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const S = ACT.step;
+    const _next = S.next.bind(S);
+    S.next = function () {
+      const d = _next();
+      if (S.cur >= 1) {
+        document.getElementById("stamp").classList.add("on");
+        document.querySelectorAll(".opt").forEach(o => {
+          if (o.dataset.mark === "1") o.classList.add("right");
+        });
+        const qm = document.getElementById("qmark35");
+        if (qm) { qm.textContent = "G₂"; qm.setAttribute("font-size", "17"); qm.setAttribute("font-style", "italic"); }
+      }
+      return d;
+    };
+    const _reset = S.reset.bind(S);
+    S.reset = function () {
+      _reset();
+      document.getElementById("stamp").classList.remove("on");
+      document.querySelectorAll(".opt").forEach(o => o.classList.remove("right", "wrong"));
+      const qm = document.getElementById("qmark35");
+      if (qm) { qm.textContent = "?"; qm.setAttribute("font-size", "20"); qm.removeAttribute("font-style"); }
+    };
+    window.prev = function () { const n = Math.max(0, S.cur - 1); S.reset(); for (let i = 0; i < n; i++) S.next(); };
+  });
+  function vote(el) {
+    document.querySelectorAll(".opt").forEach(o => {
+      if (o !== el && o.dataset.mark !== "1") o.classList.add("wrong");
+    });
+    ACT.step.next();
+  }
+</script>
+</body>
+</html>

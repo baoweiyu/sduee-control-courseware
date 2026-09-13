@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>1.1 基本思想：傅里叶分解</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:26px; height:100%; min-height:0; }
+  .idea { flex:1.05; display:flex; flex-direction:column; min-height:0; }
+  .idea .bd { flex:1; display:flex; flex-direction:column; justify-content:space-evenly; gap:0; padding:26px 28px; }
+  .pt { display:flex; gap:16px; align-items:flex-start; }
+  .pt .no { flex:none; width:42px; height:42px; border-radius:50%; background:var(--blue); color:#fff; font-size:23px; font-weight:800; display:grid; place-items:center; }
+  .pt .tt { font-size:22px; line-height:1.78; color:var(--ink); }
+  .pt .tt b { color:var(--navy); }
+  .figc { flex:1.2; display:flex; flex-direction:column; overflow:hidden; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:8px 12px; min-height:0; }
+  .figc svg { width:100%; height:100%; }
+</style>
+</head>
+<body data-title="1.1 基本思想：傅里叶分解" data-page="5 / 87">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="act-card idea">
+        <div class="hd">为什么可以只研究"正弦输入"？</div>
+        <div class="bd">
+          <div class="pt"><span class="no">1</span><div class="tt"><b>信号可分解</b>——由傅里叶分析，工程中的信号都可分解为<span class="kw-r">不同频率、不同幅值正弦信号的叠加</span>（右图：一个近方波 = 基波 + 3 次谐波 + 5 次谐波）。</div></div>
+          <div class="pt"><span class="no">2</span><div class="tt"><b>响应可叠加</b>——线性系统满足叠加原理：只要求出系统对<span class="kw-r">每个频率正弦输入</span>的稳态响应，叠加起来就是任意输入下的总响应。</div></div>
+          <div class="pt"><span class="no">3</span><div class="tt"><b>正弦响应最简单</b>——线性系统对正弦输入的稳态输出仍是<span class="kw-r">同频率</span>的正弦，只有幅值与相角发生变化（1.3 节严格证明）。</div></div>
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd">复杂信号 = 不同频率、不同幅值的正弦波叠加</div>
+        <div class="bd2"><svg id="fig" viewBox="0 0 560 660"></svg></div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">顺理成章</span><span>研究系统，只需研究它对<span class="kw-r">单频率正弦输入</span>的稳态响应——这就是"频率响应"。正弦信号又极易产生与测量，扫频试验即可实测。</span></div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("fig");
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const MF = "Cambria Math,STIX Two Math,Georgia,Microsoft YaHei,sans-serif";
+  const tx = (x, y, s, o, parent) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 19, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal", "font-family": MF }, parent); const esc = t => t.replace(/&/g, "&amp;").replace(/</g, "&lt;"); let html = "", sub = false; for (const p of String(s).split(/(_\{[^}]*\})/)) { if (!p) continue; if (p.startsWith("_{")) { html += `<tspan${sub ? "" : " dy=\"6\""} font-size="72%">${esc(p.slice(2, -1))}</tspan>`; sub = true; } else { html += sub ? `<tspan dy="-6">${esc(p)}</tspan>` : esc(p); sub = false; } } n.innerHTML = html; if (o && o.halo) n.setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:6;stroke-linejoin:round"); return n; };
+  const defs = mk("defs", {});
+  const m1 = mk("marker", { id: "a5", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, m1);
+  const mO = mk("marker", { id: "a5o", markerWidth: 11, markerHeight: 11, refX: 7.5, refY: 3.2, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7.5,3.2 L0,6.4 Z", fill: "#F5821F" }, mO);
+  const x0 = 44, x1 = 528, W = x1 - x0;
+  const X = t => x0 + t / (2 * Math.PI) * W;      // t: 0..2π
+  // 三个分量：基波、3次(1/3)、5次(1/5)
+  const comps = [
+    { k: 1, a: 1, lab: "基波　sin ωt", amp: 62 },
+    { k: 3, a: 1 / 3, lab: "3 次谐波　⅓·sin 3ωt", amp: 34 },
+    { k: 5, a: 1 / 5, lab: "5 次谐波　⅕·sin 5ωt", amp: 24 }
+  ];
+  // ---- 上：合成波 ----
+  const cY = 128;
+  mk("line", { x1: x0 - 8, y1: cY, x2: x1 + 10, y2: cY, stroke: "#C9D8F2", "stroke-width": 1.2, "marker-end": "url(#a5)" });
+  let d = "";
+  for (let i = 0; i <= 480; i++) {
+    const t = 2 * Math.PI * i / 480;
+    const v = comps.reduce((s, c) => s + c.a * Math.sin(c.k * t), 0);
+    d += (i ? "L" : "M") + X(t).toFixed(1) + "," + (cY - v * 72).toFixed(1);
+  }
+  mk("path", { d, fill: "none", stroke: "#D63A2F", "stroke-width": 4 });
+  tx(x0 - 4, cY - 84, "合成信号（近方波）", { fs: 20, b: true, fill: "#D63A2F", an: "start", halo: 1 });
+  tx(x1 + 6, cY + 22, "t", { fs: 19, it: true, b: true, fill: "#5B6B8C", an: "start" });
+  // ---- 中：等号 ----
+  tx(286, 272, "=", { fs: 50, b: true, fill: "#5B6B8C" });
+  // ---- 下：三个分量 ----
+  const rows = [330, 450, 570];
+  comps.forEach((c, i) => {
+    const y = rows[i];
+    mk("line", { x1: x0 - 8, y1: y, x2: x1 + 10, y2: y, stroke: "#C9D8F2", "stroke-width": 1.2, "marker-end": "url(#a5)" });
+    let dd = "";
+    for (let j = 0; j <= 480; j++) {
+      const t = 2 * Math.PI * j / 480;
+      dd += (j ? "L" : "M") + X(t).toFixed(1) + "," + (y - Math.sin(c.k * t) * c.amp).toFixed(1);
+    }
+    mk("path", { d: dd, fill: "none", stroke: "#2B5CE6", "stroke-width": 2.8 });
+    tx(x0 - 4, y - c.amp - 10, c.lab, { fs: 19, b: true, fill: "#1D3FA0", an: "start", halo: 1 });
+    if (i < 2) tx(x0 - 22, rows[i + 1] - 34, "+", { fs: 32, b: true, fill: "#F5821F", an: "start" });
+  });
+  // 合成方向提示箭头（自下而上）
+  mk("line", { x1: 542, y1: 540, x2: 542, y2: 170, stroke: "#F5821F", "stroke-width": 3, "stroke-dasharray": "8 6", "marker-end": "url(#a5o)" });
+  tx(548, 360, "叠", { fs: 20, b: true, fill: "#E06D00", an: "start" });
+  tx(548, 386, "加", { fs: 20, b: true, fill: "#E06D00", an: "start" });
+});
+</script>
+</body>
+</html>

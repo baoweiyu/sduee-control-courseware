@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>1.5 谐振的危害与利用</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .col { display:flex; flex-direction:column; gap:22px; height:100%; min-height:0; }
+  .top { display:flex; gap:24px; flex:1; min-height:0; }
+  .imgc { flex:1; display:flex; flex-direction:column; overflow:hidden; }
+  .imgc .bd2 { flex:1; background:#fff; padding:10px; min-height:0; position:relative; overflow:hidden; }
+  .imgc img { position:absolute; inset:10px; width:calc(100% - 20px); height:calc(100% - 20px); object-fit:cover; border-radius:10px; }
+  .cap { font-size:19.5px; color:var(--ink); padding:10px 18px 14px; line-height:1.5; text-align:center; min-height:64px; display:flex; align-items:center; justify-content:center; }
+  .why .bd { display:flex; align-items:center; gap:30px; padding:16px 30px; font-size:21px; line-height:1.6; }
+  .why .mathbox { font-size:23px; padding:10px 20px; flex:none; }
+</style>
+</head>
+<body data-title="1.5 谐振的危害与利用" data-page="22 / 87">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="col">
+      <div class="top">
+        <div class="act-card imgc">
+          <div class="hd">危害：共振可以摧毁结构</div>
+          <div class="bd2"><img src="../../../assets/image2/resonance-bridge.png" alt="大跨度桥梁在风中扭转共振"></div>
+          <div class="cap">激励频率接近 <span class="tex">\omega_r</span> 时振幅被放大 <span class="tex">M_r</span> 倍——足以使结构解体</div>
+        </div>
+        <div class="act-card imgc">
+          <div class="hd">利用：收音机调台</div>
+          <div class="bd2"><img src="../../../assets/image2/radio-tuning.png" alt="复古收音机调谐旋钮"></div>
+          <div class="cap">调节 <span class="tex">\omega_r</span> 只对某一电台频率谐振——天然的"选频器"</div>
+        </div>
+        <div class="act-card imgc">
+          <div class="hd">实验室里的振荡环节</div>
+          <div class="bd2"><img src="../../../assets/image2/osc-lab.png" alt="振动台上的弹簧振子与示波器"></div>
+          <div class="cap">扫频试验：<span class="tex">\omega_r</span> 附近振幅明显隆起</div>
+        </div>
+      </div>
+      <div class="act-card why">
+        <div class="hd">谐振峰值的物理含义</div>
+        <div class="bd">
+          <div class="mathbox math eqline tex tex-d">M_r=\dfrac{c_{\max}}{R}\Big|_{\omega=\omega_r}=\dfrac{1}{2\zeta\sqrt{1-\zeta^{2}}}</div>
+          <div><span class="tex">M_r</span> 是系统对正弦输入的<span class="kw-r">最大放大倍数</span>：ζ 越小放大越狠。设计中要么<span class="kw-r">避开</span>它（结构安全），要么<span class="kw-r">利用</span>它（选频、传感）——关键都是把 ζ 控制在手里。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+</body>
+</html>

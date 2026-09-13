@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>课堂互动 · 补全 Nyquist 曲线</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; flex-direction:row-reverse; gap:24px; height:100%; }
+  .figc { flex:1.1; display:flex; flex-direction:column; overflow:hidden; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:8px 14px; }
+  .figc svg { width:100%; height:100%; }
+  .qcol { flex:1; display:flex; flex-direction:column; gap:18px; }
+  .qtype { display:inline-block; background:var(--orange); color:#fff; font-size:21px; font-weight:700; border-radius:10px; padding:7px 20px; width:fit-content; }
+  .qz { background:#fff; border:2px solid var(--line); border-radius:16px; padding:20px 26px; flex:1; display:flex; flex-direction:column; justify-content:center; min-height:0; }
+  .qz .qt { font-size:23px; color:var(--navy); font-weight:700; margin-bottom:14px; line-height:1.5; }
+  .stage-tip { display:inline-block; margin-bottom:14px; font-size:19.5px; color:#fff; background:var(--blue); border-radius:20px; padding:6px 20px; width:fit-content; }
+  .opts { display:flex; flex-direction:column; gap:12px; }
+  .opt { background:var(--sky); border:2px solid var(--line); border-radius:12px; padding:12px 18px; font-size:20px; color:var(--ink); font-weight:700; position:relative; line-height:1.4; }
+  .opt.right { border-color:#1E9E57; background:#F0FAF4; }
+  .opt.right::after { content:"✓"; position:absolute; top:-13px; right:-10px; width:31px; height:31px; border-radius:50%; background:#1E9E57; color:#fff; font-weight:800; font-size:19px; display:grid; place-items:center; }
+  .opt.wrong { border-color:#D63A2F; background:#FDF1EF; }
+  .opt.wrong::after { content:"✗"; position:absolute; top:-13px; right:-10px; width:31px; height:31px; border-radius:50%; background:#D63A2F; color:#fff; font-weight:800; font-size:19px; display:grid; place-items:center; }
+  .ans { font-size:20.5px; color:var(--navy); background:var(--sky); border-radius:12px; padding:14px 22px; line-height:1.65; }
+  .ans b { color:var(--danger); }
+</style>
+</head>
+<body data-title="课堂互动 · 补全 Nyquist 曲线" data-page="68 / 87">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="row">
+      <div class="act-card figc">
+        <div class="hd">已知 ω：0⁺→+∞ 的正频段（红实线），如何得到 ω：−∞→+∞ 全曲线？</div>
+        <div class="bd2"><svg id="fig" viewBox="0 0 860 640"></svg></div>
+      </div>
+      <div class="qcol">
+        <span class="qtype">单选题　3 分</span>
+        <div class="qz">
+          <div class="qt">由 ω&gt;0 的部分补全完整 Nyquist 曲线，正确的做法是？</div>
+          <span class="stage-tip">请先作出判断</span>
+          <div class="opts">
+            <div class="opt" data-mark="1">A　负频段与正频段关于实轴镜像；若 ν≥1，还要用 ν×180° 顺时针 ∞ 圆弧补闭合</div>
+            <div class="opt" data-mark="0">B　负频段与正频段关于虚轴镜像即可</div>
+            <div class="opt" data-mark="0">C　负频段与正频段关于原点对称即可</div>
+            <div class="opt" data-mark="0">D　正频段本身已闭合，无需补画</div>
+          </div>
+        </div>
+        <div class="ans" data-step="2">
+          <b>答案：A。</b>G(−jω) 与 G(jω) 互为共轭 ⇒ 负频段是正频段关于<span class="kw-r">实轴</span>的镜像（B、C 错）；有积分环节时 ω=0⁻ 与 ω=0⁺ 两端都在无穷远处，必须用 <span class="kw-r">ν×180° 顺时针 ∞ 圆弧</span>补闭合才能数圈数（D 错）。左图即为补全动画。
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("fig");
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const MF = "Cambria Math,STIX Two Math,Georgia,Microsoft YaHei,sans-serif";
+  const SUB = (n, s) => { const esc = t => t.replace(/&/g, "&amp;").replace(/</g, "&lt;"); let html = "", sub = false; for (const p of String(s).split(/(_\{[^}]*\})/)) { if (!p) continue; if (p.startsWith("_{")) { html += '<tspan' + (sub ? '' : ' dy="6"') + ' font-size="72%">' + esc(p.slice(2, -1)) + '</tspan>'; sub = true; } else { html += sub ? '<tspan dy="-6">' + esc(p) + '</tspan>' : esc(p); sub = false; } } n.innerHTML = html; };
+  const tx = (x, y, s, o, parent) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 18.5, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal" , "font-family": MF }, parent); SUB(n, s); if (o && o.halo) n.setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:6;stroke-linejoin:round"); return n; };
+  const defs = mk("defs", {});
+  const m1 = mk("marker", { id: "a63", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, m1);
+  const SC = 130, O = { x: 480, y: 320 };
+  const X = v => O.x + v * SC, Y = v => O.y - v * SC;
+  mk("line", { x1: 50, y1: O.y, x2: 830, y2: O.y, stroke: "#5B6B8C", "stroke-width": 1.6, "marker-end": "url(#a63)" });
+  mk("line", { x1: O.x, y1: 600, x2: O.x, y2: 40, stroke: "#5B6B8C", "stroke-width": 1.6, "marker-end": "url(#a63)" });
+  tx(824, O.y - 14, "Re", { fs: 19, it: true, b: true, fill: "#5B6B8C", an: "end" });
+  tx(O.x + 20, 56, "jIm", { fs: 19, it: true, b: true, fill: "#5B6B8C", an: "start" });
+  tx(O.x - 14, O.y + 28, "O", { fs: 18.5, fill: "#5B6B8C", an: "end" });
+  mk("circle", { cx: X(-1), cy: Y(0), r: 8, fill: "#fff", stroke: "#D63A2F", "stroke-width": 3 });
+  tx(X(-1), Y(0) + 32, "(−1, j0)", { fs: 18.5, b: true, fill: "#D63A2F" });
+  // 正频段：K/[s(Ts+1)] K=T=1
+  const Gp = w => [-1 / (1 + w * w), -1 / (w * (1 + w * w))];
+  function branch(mirror, col, wdt, dash) {
+    let d = "";
+    for (let i = 0; i <= 320; i++) { const w = 0.09 * Math.pow(300, i / 320); const [a, b] = Gp(w); d += (i ? "L" : "M") + X(a).toFixed(1) + "," + Y(mirror ? -b : b).toFixed(1); }
+    return mk("path", { d, fill: "none", stroke: col, "stroke-width": wdt, "stroke-dasharray": dash || "0" });
+  }
+  branch(false, "#D63A2F", 4.4);
+  tx(X(-0.97) - 14, Y(-1.35), "正频段（已知）", { fs: 18.5, b: true, fill: "#D63A2F", an: "end" });
+  // 答案动画元素（初始隐藏）
+  const gMir = mk("g", { opacity: 0 });
+  const mPath = (function () {
+    let d = "";
+    for (let i = 0; i <= 320; i++) { const w = 0.09 * Math.pow(300, i / 320); const [a, b] = Gp(w); d += (i ? "L" : "M") + X(a).toFixed(1) + "," + Y(-b).toFixed(1); }
+    return mk("path", { d, fill: "none", stroke: "#2B5CE6", "stroke-width": 3.8, "stroke-dasharray": "10 6" }, gMir);
+  })();
+  tx(X(-0.97) - 14, Y(1.42), "镜像负频段", { fs: 18.5, b: true, fill: "#2B5CE6", an: "end" }, gMir);
+  const gArc = mk("g", { opacity: 0 });
+  mk("path", { d: "M" + X(0.3) + "," + Y(2.1) + " A" + 2.16 * SC + "," + 2.16 * SC + " 0 0 1 " + X(0.3) + "," + Y(-2.1), fill: "none", stroke: "#2B5CE6", "stroke-width": 3.2, "stroke-dasharray": "12 9" }, gArc);
+  tx(X(0) + 12, Y(-0.77), "∞ 圆弧（ν=1：180° 顺时针）", { fs: 18.5, b: true, fill: "#2B5CE6", an: "start" }, gArc);
+  // 三段式 + 补全动画
+  const S = ACT.step, _n = S.next.bind(S), _r = S.reset.bind(S);
+  function mark() {
+    const on = S.cur >= 1;
+    document.querySelectorAll(".opt").forEach(o => {
+      o.classList.toggle("right", on && o.dataset.mark === "1");
+      o.classList.toggle("wrong", on && o.dataset.mark === "0");
+    });
+    // 补全动画：镜像段描画 → ∞ 圆弧
+    if (on) {
+      const len = mPath.getTotalLength();
+      mPath.style.strokeDasharray = "10 6";
+      mPath.style.strokeDashoffset = 0;
+      gMir.setAttribute("opacity", 0);
+      gArc.setAttribute("opacity", 0);
+      setTimeout(() => { gMir.setAttribute("opacity", 1); }, 150);
+      setTimeout(() => { gArc.setAttribute("opacity", 1); }, 1200);
+    } else {
+      gMir.setAttribute("opacity", 0);
+      gArc.setAttribute("opacity", 0);
+    }
+  }
+  S.next = function () { const dd = _n(); mark(); return dd; };
+  S.reset = function () { _r(); mark(); };
+  window.prev = function () { const n = Math.max(0, S.cur - 1); S.reset(); for (let i = 0; i < n; i++) S.next(); };
+  mark();
+});
+</script>
+</body>
+</html>

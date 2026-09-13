@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>传递函数的两种表示与一般形式</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .cols { display:flex; gap:24px; margin-top:4px; }
+  .cc { flex:1; padding:20px 26px; }
+  .cc h4 { font-size:23px; color:var(--navy); margin-bottom:12px; }
+  .cc .math { font-size:23px; line-height:1.8; color:var(--ink); }
+  .cc .sub2 { font-size:19.5px; color:var(--muted); margin-top:10px; line-height:1.6; }
+  .conv { margin-top:20px; background:var(--sky); border-radius:14px; padding:16px 28px; font-size:22.5px; color:var(--navy); text-align:center; }
+  .gen { margin-top:18px; background:#fff; border:2px solid var(--line); border-radius:14px; padding:16px 28px; font-size:21px; color:var(--ink); line-height:1.8; }
+</style>
+</head>
+<body data-title="传递函数的表示形式" data-page="19 / 51">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body fill">
+    <div class="cols">
+      <div class="act-card cc">
+        <h4>⑴ 零、极点表示</h4>
+        <span class="math tex">G(s) = \dfrac{b_{0}(s-z_{1})(s-z_{2})\cdots (s-z_{m})}{a_{0}(s-p_{1})(s-p_{2})\cdots (s-p_{n})} = K_{1}\dfrac{\prod (s-z_{j})}{\prod (s-p_{i})}</span>
+        <div class="sub2"><span class="tex">z_{j}</span> —— 零点（<span class="tex">j=1..m</span>）；<span class="tex">p_{i}</span> —— 极点（<span class="tex">i=1..n</span>）；<span class="tex">K_{1} = b_{0}/a_{0}</span> —— 传递系数</div>
+      </div>
+      <div class="act-card cc">
+        <h4>⑵ 时间常数表示</h4>
+        <span class="math tex">G(s) = \dfrac{K(\tau _{1}s+1)(\tau _{2}s+1)\cdots }{(T_{1}s+1)(T_{2}s+1)\cdots } = K\dfrac{\prod (\tau _{j}s+1)}{\prod (T_{i}s+1)}</span>
+        <div class="sub2">T<sub>i</sub>、τ<sub>j</sub> —— 时间常数；K —— 放大系数</div>
+      </div>
+    </div>
+    <div class="conv" data-step><b>两种形式间的变换：</b><span class="math tex">T_{i} = -1/p_{i}\text{，} \tau _{j} = -1/z_{j}\text{，} K = K_{1}\cdot \dfrac{\prod (-z_{j})}{\prod (-p_{i})}</span></div>
+    <div class="gen" data-step><b>一般形式：</b>含复数零极点、零值极点时，传递函数可分解为<b>典型环节因子</b>的乘积：
+      <span class="math tex">G(s) = \dfrac{K}{s^{\nu }}\cdot \dfrac{\prod (\tau _{j}s+1)\cdot \prod (\tau _{k}^{2}s^{2}+2\zeta _{k}\tau _{k}s+1)}{\prod (T_{i}s+1)\cdot \prod (T_{l}^{2}s^{2}+2\zeta _{l}T_{l}s+1)}</span>
+      —— 任何线性定常系统都可看作若干<b>典型环节</b>的组合（下页起逐一认识）。</div>
+  </div>
+</div></div>
+</body>
+</html>

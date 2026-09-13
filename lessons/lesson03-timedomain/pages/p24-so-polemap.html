@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>四种阻尼的闭环极点分布</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<link rel="stylesheet" href="../lesson03-svg.css">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .grid { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); grid-template-rows:minmax(0,1fr) minmax(0,1fr); gap:18px; height:100%; }
+  .cell { display:flex; flex-direction:column; overflow:hidden; min-height:0; min-width:0; }
+  .cell .hd { font-size:23px; padding:10px 22px; display:flex; justify-content:space-between; align-items:center; flex:none; }
+  .cell .hd .rt { font-size:19px; font-weight:400; font-style:italic; }
+  .cell .bd2 { flex:1; min-height:0; display:grid; place-items:center; background:#fff; padding:4px 10px; }
+  .cell svg { width:100%; height:100%; }
+</style>
+</head>
+<body data-title="四种阻尼的闭环极点分布" data-page="26 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="grid">
+      <div class="act-card cell" data-step="1">
+        <div class="hd"><span>① 零阻尼　ζ = 0</span><span class="rt">s1,2 = ±jωn</span></div>
+        <div class="bd2"><svg id="f1" viewBox="0 0 460 280"></svg></div>
+      </div>
+      <div class="act-card cell" data-step="2">
+        <div class="hd"><span>② 欠阻尼　0&lt;ζ&lt;1</span><span class="rt">s1,2 = −ζωn ± jωd</span></div>
+        <div class="bd2"><svg id="f2" viewBox="0 0 460 280"></svg></div>
+      </div>
+      <div class="act-card cell" data-step="3">
+        <div class="hd"><span>③ 临界阻尼　ζ = 1</span><span class="rt">s1,2 = −ωn（重根）</span></div>
+        <div class="bd2"><svg id="f3" viewBox="0 0 460 280"></svg></div>
+      </div>
+      <div class="act-card cell" data-step="4">
+        <div class="hd"><span>④ 过阻尼　ζ&gt;1</span><span class="rt">s1,2 = −ζωn ± ωn√(ζ²−1)</span></div>
+        <div class="bd2"><svg id="f4" viewBox="0 0 460 280"></svg></div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">规律</span>ζ&gt;0 → 极点全部位于<span class="kw-r">左半 s 平面</span>（稳定）；ζ=0 → 极点在虚轴上（临界稳定）。</div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  function plane(id, draw) {
+    const svg = document.getElementById(id);
+    const O = { x: 210, y: 140 };
+    const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+    const tx = (x, y, s, o) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 17, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal" }); n.textContent = s; return n; };
+    const defs = mk("defs", {});
+    const mid = "am" + id;
+    const m1 = mk("marker", { id: mid, markerWidth: 9, markerHeight: 9, refX: 6.5, refY: 2.7, orient: "auto" }, defs);
+    mk("path", { d: "M0,0 L6.5,2.7 L0,5.4 Z", fill: "#5B6B8C" }, m1);
+    mk("line", { x1: 24, y1: O.y, x2: 440, y2: O.y, stroke: "#5B6B8C", "stroke-width": 1.4, "marker-end": `url(#${mid})` });
+    mk("line", { x1: O.x, y1: 262, x2: O.x, y2: 16, stroke: "#5B6B8C", "stroke-width": 1.4, "marker-end": `url(#${mid})` });
+    tx(436, O.y + 26, "Re", { fs: 16, it: true, b: true, fill: "#5B6B8C", an: "end" });
+    tx(O.x + 26, 30, "jω", { fs: 16, it: true, b: true, fill: "#5B6B8C", an: "start" });
+    tx(O.x - 12, O.y + 24, "O", { fs: 14, fill: "#5B6B8C", an: "end" });
+    const cross = (x, y, lb, dy) => {
+      mk("line", { x1: x - 9, y1: y - 9, x2: x + 9, y2: y + 9, stroke: "#D63A2F", "stroke-width": 3 });
+      mk("line", { x1: x - 9, y1: y + 9, x2: x + 9, y2: y - 9, stroke: "#D63A2F", "stroke-width": 3 });
+      if (lb) tx(x, y + (dy || -18), lb, { fs: 16, it: true, b: true, fill: "#D63A2F" });
+    };
+    draw(mk, tx, O, cross);
+  }
+  // ① ζ=0：虚轴上 ±jωn
+  plane("f1", (mk, tx, O, cross) => {
+    cross(O.x, O.y - 95, "jωn", -20);
+    cross(O.x, O.y + 95, "−jωn", 30);
+  });
+  // ② 0<ζ<1：ωn 圆上共轭复极点
+  plane("f2", (mk, tx, O, cross) => {
+    const R = 110, beta = 55 * Math.PI / 180;
+    const px = O.x - R * Math.cos(beta), py = O.y - R * Math.sin(beta);
+    mk("path", { d: `M ${O.x - R} ${O.y} A ${R} ${R} 0 0 1 ${O.x} ${O.y - R}`, fill: "none", stroke: "#C9D8F2", "stroke-width": 1.8, "stroke-dasharray": "6 5" });
+    mk("path", { d: `M ${O.x} ${O.y + R} A ${R} ${R} 0 0 1 ${O.x - R} ${O.y}`, fill: "none", stroke: "#C9D8F2", "stroke-width": 1.8, "stroke-dasharray": "6 5" });
+    // 原点指向 s1 的射线（|s1| = ωn）
+    mk("line", { x1: O.x, y1: O.y, x2: px, y2: py, stroke: "#2B5CE6", "stroke-width": 2.4 });
+    tx(px + 26, py + 42, "ωn", { fs: 16, it: true, b: true, fill: "#2B5CE6", an: "end" });
+    cross(px, py, "s1", -20); cross(px, O.y + (O.y - py), "s2", 32);
+    const rB = 40, a1 = Math.PI - beta;
+    mk("path", { d: `M ${O.x - rB} ${O.y} A ${rB} ${rB} 0 0 1 ${O.x + rB * Math.cos(a1)} ${O.y - rB * Math.sin(a1)}`, fill: "none", stroke: "#F5821F", "stroke-width": 2.2 });
+    tx(186, 126, "β", { fs: 18, it: true, b: true, fill: "#F5821F" });
+  });
+  // ③ ζ=1：−ωn 处重根
+  plane("f3", (mk, tx, O, cross) => {
+    cross(O.x - 110, O.y, "−ωn（二重）", 34);
+  });
+  // ④ ζ>1：负实轴两相异实极点
+  plane("f4", (mk, tx, O, cross) => {
+    cross(O.x - 56, O.y, "s1", 32);
+    cross(O.x - 170, O.y, "s2", 32);
+  });
+});
+</script>
+</body>
+</html>

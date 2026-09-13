@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>无超调响应的 tr 与 ts</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<link rel="stylesheet" href="../lesson03-svg.css">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:26px; height:100%; }
+  .figc { flex:1.7; display:flex; flex-direction:column; overflow:hidden; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:8px 14px; }
+  .figc svg { width:100%; height:100%; }
+  .side { flex:1; display:flex; flex-direction:column; gap:16px; justify-content:center; }
+  .dc { background:var(--sky); border:2px solid var(--line); border-radius:14px; padding:18px 24px; font-size:22.5px; color:var(--ink); line-height:1.65; }
+</style>
+</head>
+<body data-title="无超调响应的上升时间与调节时间" data-page="13 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body fill">
+    <div class="row">
+      <div class="act-card figc">
+        <div class="hd">无超调（单调上升）响应的指标定义</div>
+        <div class="bd2"><svg id="fig" viewBox="0 0 1000 620"></svg></div>
+      </div>
+      <div class="side">
+        <div class="dc"><b>上升时间 <span class="tex">t_{r}</span></b>（无超调系统）：响应从稳态值的 <span class="kw-r">10%</span> 上升到 <span class="kw-r">90%</span> 所需的时间。</div>
+        <div class="dc"><b>调节时间 <span class="tex">t_{s}</span></b>：响应进入并保持在误差带 <span class="tex">\Delta=\pm5\%</span>（或 ±2%）内的时刻。</div>
+        <div class="dc">无超调响应<span class="kw-r">没有</span>峰值时间 <span class="tex">t_{p}</span> 与超调量 <span class="tex">\sigma\%</span>。</div>
+      </div>
+    </div>
+  </div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("fig");
+  const Tc = 1.2, h = t => t <= 0 ? 0 : 1 - Math.exp(-t / Tc);
+  const T = 8, YM = 1.25;
+  const X = t => 90 + t / T * 870;
+  const Y = v => 540 - v / YM * 490;
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const tx = (x, y, s, o, parent) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 20, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal" }, parent); n.textContent = s; return n; };
+  const defs = mk("defs", {});
+  const m1 = mk("marker", { id: "ar12", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto-start-reverse" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, m1);
+  const m1r = mk("marker", { id: "ar12r", markerWidth: 9, markerHeight: 9, refX: 6.5, refY: 2.7, orient: "auto-start-reverse" }, defs);
+  mk("path", { d: "M0,0 L6.5,2.7 L0,5.4 Z", fill: "#D63A2F" }, m1r);
+
+  mk("line", { x1: 90, y1: 540, x2: 972, y2: 540, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#ar12)" });
+  mk("line", { x1: 90, y1: 540, x2: 90, y2: 30, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#ar12)" });
+  tx(968, 578, "t", { fs: 21, an: "end", it: true, b: true });
+  tx(58, 38, "h(t)", { fs: 21, it: true, b: true });
+  tx(70, 546, "O", { fs: 18, fill: "#5B6B8C" });
+
+  // 稳态值与误差带
+  mk("rect", { x: 90, y: Y(1.05), width: 870, height: Y(0.95) - Y(1.05), fill: "#EEF3FD", opacity: 0.85 });
+  mk("line", { x1: 90, y1: Y(1), x2: 960, y2: Y(1), stroke: "#F5821F", "stroke-width": 2.2, "stroke-dasharray": "10 7" });
+  tx(78, Y(1) + 7, "c(∞)", { an: "end", fs: 21, it: true, b: true });
+  tx(950, Y(1.05) - 12, "误差带 Δ=±5%", { fs: 19, b: true, fill: "#5B6B8C", an: "end" });
+  mk("line", { x1: 90, y1: Y(1.05), x2: 960, y2: Y(1.05), stroke: "#5B6B8C", "stroke-width": 1.3, "stroke-dasharray": "7 6" });
+  mk("line", { x1: 90, y1: Y(0.95), x2: 960, y2: Y(0.95), stroke: "#5B6B8C", "stroke-width": 1.3, "stroke-dasharray": "7 6" });
+
+  // 曲线
+  let d = "";
+  for (let i = 0; i <= 320; i++) { const t = T * i / 320; d += (i ? "L" : "M") + X(t).toFixed(1) + "," + Y(h(t)).toFixed(1); }
+  mk("path", { d, stroke: "#2B5CE6", "stroke-width": 3.5, fill: "none" });
+
+  // 10% / 90% 参考线与 tr 段
+  const t10 = -Tc * Math.log(0.9), t90 = -Tc * Math.log(0.1);
+  [[0.1, t10, "0.1"], [0.9, t90, "0.9"]].forEach(p => {
+    mk("line", { x1: 90, y1: Y(p[0]), x2: 960, y2: Y(p[0]), stroke: "#C9D8F2", "stroke-width": 1.3, "stroke-dasharray": "7 6" });
+    tx(78, Y(p[0]) + 6, p[2], { an: "end", fs: 17, fill: "#5B6B8C" });
+  });
+  mk("line", { x1: X(t10), y1: Y(0.1), x2: X(t10), y2: 540, stroke: "#F5821F", "stroke-width": 2, "stroke-dasharray": "8 6" });
+  mk("line", { x1: X(t90), y1: Y(0.9), x2: X(t90), y2: 540, stroke: "#F5821F", "stroke-width": 2, "stroke-dasharray": "8 6" });
+  mk("circle", { cx: X(t10), cy: Y(0.1), r: 6, fill: "#D63A2F" });
+  mk("circle", { cx: X(t90), cy: Y(0.9), r: 6, fill: "#D63A2F" });
+  // tr 双向箭头（横轴下方）
+  mk("line", { x1: X(t10), y1: 586, x2: X(t90), y2: 586, stroke: "#D63A2F", "stroke-width": 2.2, "marker-start": "url(#ar12r)", "marker-end": "url(#ar12r)" });
+  tx((X(t10) + X(t90)) / 2, 612, "tr", { fs: 22, b: true, it: true, fill: "#D63A2F" });
+
+  // ts
+  const ts = 3 * Tc;
+  mk("circle", { cx: X(ts), cy: Y(h(ts)), r: 6, fill: "#D63A2F" });
+  mk("line", { x1: X(ts), y1: Y(h(ts)), x2: X(ts), y2: 540, stroke: "#F5821F", "stroke-width": 2, "stroke-dasharray": "8 6" });
+  tx(X(ts), 574, "ts", { fs: 22, b: true, it: true });
+});
+</script>
+</body>
+</html>

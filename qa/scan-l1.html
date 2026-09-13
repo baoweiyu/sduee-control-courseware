@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><title>QA Scan L1</title></head>
+<body>
+<div id="log">scan harness L1</div>
+<iframe id="fr" style="width:1300px;height:800px"></iframe>
+<script>
+var PAGES = "p01-cover p02-teachers p03-teaching p04-grading p05-mooc p06-textbook p07-contents p08-curriculum p09-disciplines p10-calendar p11-concept p12-examples-space p13-example-driving p14-quiz-blank p15-incubator p16-level p17-modes p18-openloop p19-openloop-motor p20-closedloop p21-closedloop-motor p22-cruise p23-compound p24-compound-diag p25-quiz-multi p26-modes-compare p27-history-origins p28-history-classical p29-history-modern p30-components p31-terms p32-classification p33-requirements p34-design p35-course-map p36-summary".split(" ").map(function(n){return n + ".html";});
+var BASE = "../lessons/lesson01-intro/pages/";
+
+function scanOne(name) {
+  return new Promise(function (resolve) {
+    var fr = document.getElementById('fr');
+    fr.onload = function () {
+      var w = fr.contentWindow, d = fr.contentDocument;
+      setTimeout(function () {
+        try {
+          try { if (w.ACT && w.ACT.step) { for (var i = 0; i < 40; i++) w.ACT.step.next(); } } catch (e) {}
+          setTimeout(function () {
+            try {
+              var o = { p: name.replace('.html', '') };
+              o.img404 = 0; var bad = [];
+              d.querySelectorAll('img').forEach(function (im) {
+                if (im.src && (!im.complete || im.naturalWidth === 0)) { o.img404++; bad.push(im.src.split('/').pop()); }
+              });
+              if (bad.length) o.bad = bad;
+              o.title = d.title || '';
+              resolve(o);
+            } catch (e) { resolve({ p: name, scanErr: String(e && e.message || e).slice(0, 80) }); }
+          }, 400);
+        } catch (e) { resolve({ p: name, scanErr: String(e && e.message || e).slice(0, 80) }); }
+      }, 1500);
+    };
+    fr.onerror = function () { resolve({ p: name, loadErr: true }); };
+    fr.src = BASE + name + '?scan=1';
+  });
+}
+
+window.runScan = function (from, to) {
+  var list = PAGES.slice(from, to);
+  var out = [];
+  return list.reduce(function (p, n) {
+    return p.then(function () { return scanOne(n); }).then(function (o) { out.push(o); });
+  }, Promise.resolve()).then(function () { return out; });
+};
+</script>
+</body>
+</html>

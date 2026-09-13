@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>上升时间 tr 的推导</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<link rel="stylesheet" href="../lesson03-svg.css">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:24px; height:100%; }
+  .lcol { flex:1; display:flex; flex-direction:column; gap:16px; }
+  .drv { flex:1; }
+  .drv .bd { font-size:22.5px; line-height:1.65; }
+  .res { background:#fff; border:2px solid var(--line); border-radius:14px; padding:16px 24px; font-size:22.5px; line-height:1.8; color:var(--ink); }
+  .figc { flex:1.35; display:flex; flex-direction:column; overflow:hidden; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:8px 14px; }
+  .figc svg { width:100%; height:100%; }
+  .stp { display:flex; gap:14px; align-items:flex-start; margin-bottom:14px; }
+  .stp .no { flex:none; width:34px; height:34px; border-radius:50%; background:var(--blue); color:#fff; display:grid; place-items:center; font-size:19px; font-weight:700; margin-top:4px; }
+</style>
+</head>
+<body data-title="动态指标 · 上升时间 tr" data-page="33 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lcol">
+        <div class="act-card drv">
+          <div class="hd">上升时间 tr 的推导</div>
+          <div class="bd">
+            <div class="stp" data-step="1"><div class="no">1</div><div><b>定义</b>：响应<span class="kw-r">第一次</span>到达稳态值的时刻，即令 <span class="tex" style="font-size:24px">h(t_{r}) = 1</span>。</div></div>
+            <div class="stp" data-step="2"><div class="no">2</div><div><b>代入响应式</b>：
+              <div class="mathbox math eqline tex tex-d" style="font-size:24px">\sin(\omega_{d} t_{r} + \beta) = 0 \;\Rightarrow\; \omega_{d} t_{r} + \beta = \pi</div>
+              <div style="font-size:20.5px;color:#5B6B8C">（取第一次到达，故括号取 π 而非 2π、3π…）</div>
+            </div></div>
+            <div class="stp" data-step="3"><div class="no">3</div><div><b>解得</b>：
+              <div class="mathbox math eqline tex tex-d" style="font-size:27px">t_{r} = \dfrac{\pi - \beta}{\omega_{d}}</div>
+            </div></div>
+          </div>
+        </div>
+        <div class="res" data-step="3">
+          <b>物理意义</b>：ω<sub>d</sub> 一定时，ζ 越大（β 越小）t<sub>r</sub> 越大——<span class="kw-r">阻尼大，上升慢</span>；ζ 一定时，ω<sub>n</sub> 越大 t<sub>r</sub> 越小——自然频率高，响应快。
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd">tr 的几何意义（ζ=0.5，ωn=1）</div>
+        <div class="bd2"><svg id="fig" viewBox="0 0 1000 620"></svg></div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">记忆</span><span class="tex">t_{r}</span> 反映响应的<span class="kw-r">初始快慢</span>：<span class="tex" style="font-size:23px">t_{r}=\dfrac{\pi-\beta}{\omega_{d}}</span>，分子是"要走的角度"，分母是"走角速度"。</div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("fig");
+  const z = 0.5, wn = 1, sg = z * wn, wd = wn * Math.sqrt(1 - z * z), beta = Math.acos(z);
+  const A = 1 / Math.sqrt(1 - z * z);
+  const h = t => t <= 0 ? 0 : 1 - A * Math.exp(-sg * t) * Math.sin(wd * t + beta);
+  const tr = (Math.PI - beta) / wd;
+  const T = 10, YM = 1.6;
+  const X = t => 96 + t / T * 850;
+  const Y = v => 540 - v / YM * 480;
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const tx = (x, y, s, o) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 24, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal" }); n.textContent = s; return n; };
+  const defs = mk("defs", {});
+  const m1 = mk("marker", { id: "a31", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, m1);
+  mk("line", { x1: 96, y1: 540, x2: 960, y2: 540, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a31)" });
+  mk("line", { x1: 96, y1: 540, x2: 96, y2: 32, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a31)" });
+  tx(966, 546, "t", { fs: 26, an: "start", it: true, b: true });
+  tx(58, 42, "h(t)", { fs: 26, it: true, b: true });
+  tx(74, 546, "O", { fs: 23, fill: "#5B6B8C" });
+  mk("line", { x1: 96, y1: Y(1), x2: 946, y2: Y(1), stroke: "#F5821F", "stroke-width": 2, "stroke-dasharray": "10 7" });
+  tx(80, Y(1) + 7, "1", { an: "end", fs: 24, b: true });
+  let d = "";
+  for (let i = 0; i <= 500; i++) { const t = T * i / 500; d += (i ? "L" : "M") + X(t).toFixed(1) + "," + Y(h(t)).toFixed(1); }
+  mk("path", { d, stroke: "#2B5CE6", "stroke-width": 3.5, fill: "none" });
+  // tr 标注：首交点
+  mk("circle", { cx: X(tr), cy: Y(1), r: 6.5, fill: "#D63A2F" });
+  mk("line", { x1: X(tr), y1: Y(1), x2: X(tr), y2: 540, stroke: "#F5821F", "stroke-width": 2, "stroke-dasharray": "8 6" });
+  const labTr = mk("text", { x: X(tr), y: 574, "font-size": 22, "text-anchor": "middle", fill: "#D63A2F", "font-weight": 700, "font-style": "italic" });
+  const tr1 = mk("tspan", {}, labTr); tr1.textContent = "t";
+  const tr2 = mk("tspan", { dy: "0.3em", "font-size": "0.7em" }, labTr); tr2.textContent = "r";
+  const labF = mk("text", { x: X(tr), y: 606, "font-size": 19, "text-anchor": "middle", fill: "#D63A2F", "font-weight": 700, "font-style": "italic" });
+  const lf1 = mk("tspan", {}, labF); lf1.textContent = "= (π−β)/ω";
+  const lf2 = mk("tspan", { dy: "0.32em", "font-size": "0.72em" }, labF); lf2.textContent = "d";
+  tx(X(6.2), Y(1.35), "首次到达稳态值", { fs: 25, b: true, fill: "#2B5CE6" });
+  mk("line", { x1: X(4.4), y1: Y(1.32), x2: X(tr) + 16, y2: Y(1) - 14, stroke: "#2B5CE6", "stroke-width": 1.6, "marker-end": "url(#a31)" });
+});
+</script>
+</body>
+</html>

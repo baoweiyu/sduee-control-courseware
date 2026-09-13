@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><title>QA Scan L3</title></head>
+<body>
+<div id="log">scan harness lesson03</div>
+<iframe id="fr" style="width:1300px;height:800px"></iframe>
+<script>
+var PAGES = "p01-cover p02-intro p03-signals-why p04-signal-step p05-signal-ramp p06-signal-parab p07-signal-impulse p08-signal-sine p09-signal-relation p09-signal-choice p10-metrics-def p11-metrics-figure p12-metrics-noover p13-ess-meaning p14-first-order p15-fo-step p16-fo-lab p17-fo-ramp p18-fo-impulse p19-fo-summary p20-quiz-fo p21-summary p22a-part2-cover p22-so-typical p23-so-poles p24-so-polemap p25-resp-zero p26-resp-over p27-resp-crit p28-resp-under p29-so-compare p30-quiz-beta p31-metrics-tr p32-metrics-tp p33-metrics-ts p34-so-lab p35-zeta-sigma p36-ex31 p37-ex32 p38-velocity-fb p39-ex33 p40-so-impulse p41-so-ramp p42-so-zero p43-ho-third p44-ho-general p45-ho-dominant p46-quiz-ho p47-so-summary p48a-part3-cover p48-stability-concept p49-stability-math p50-root-response p51-stability-condition p52-routh-motivation p53-routh-table p54-routh-coeffs p55-routh-criterion p56-ex35 p57-quiz-routh p58-routh-special1 p59-routh-special2 p60-hurwitz p61-routh-app p62-stability-margin p63-routh-summary p64a-part4-cover p64-ess-intro p65-ess-definition p66-error-tf p67-disturbance-tf p68-quiz-disturbance p69-system-type p70-step-kp p71-ramp-kv p72-parab-ka p73-ess-table p74-ex313 p75-quiz-kv p76-disturbance-ess p77-dynamic-coeff p78-ex314 p79-reduce-ess p80-ch3-summary p81-ch3-exercise".split(" ").map(function(n){return n + ".html";});
+var BASE = "../lessons/lesson03-timedomain/pages/";
+
+function scanOne(name) {
+  return new Promise(function (resolve) {
+    var fr = document.getElementById('fr');
+    fr.onload = function () {
+      var w = fr.contentWindow, d = fr.contentDocument;
+      var t0 = Date.now();
+      var timer = setInterval(function () {
+        var done = d.body && d.body.getAttribute('data-mjx-done');
+        if (done || Date.now() - t0 > 12000) {
+          clearInterval(timer);
+          setTimeout(function () {
+            try {
+              try { if (w.ACT && w.ACT.step) { for (var i = 0; i < 40; i++) w.ACT.step.next(); } } catch (e) {}
+              var o = { p: name.replace('.html', '') };
+              o.mjx = d.querySelectorAll('mjx-container').length;
+              o.merr = d.querySelectorAll('mjx-merror').length;
+              var ru = 0, samples = [];
+              d.querySelectorAll('mjx-mtext[data-latex]').forEach(function (n) {
+                var t = n.getAttribute('data-latex') || '';
+                if (/^\\[a-zA-Z]+$/.test(t)) { ru++; if (samples.length < 3) samples.push(t); }
+              });
+              o.redUndef = ru;
+              if (samples.length) o.samples = samples;
+              o.errs = (w.__mjxErrs || []).slice(0, 3);
+              o.img404 = 0;
+              var imgs = d.querySelectorAll('img');
+              imgs.forEach(function (im) { if (im.src && !im.complete) o.img404++; });
+              resolve(o);
+            } catch (e) { resolve({ p: name, scanErr: String(e && e.message || e).slice(0, 80) }); }
+          }, 3000);
+        }
+      }, 200);
+    };
+    fr.src = BASE + name + '?scan=1';
+  });
+}
+
+window.runScan = function (from, to) {
+  var list = PAGES.slice(from, to);
+  var out = [];
+  return list.reduce(function (chain, name) {
+    return chain.then(function () {
+      document.getElementById('log').textContent = 'scanning ' + name;
+      return scanOne(name).then(function (r) { out.push(r); });
+    });
+  }, Promise.resolve()).then(function () { return JSON.stringify(out); });
+};
+</script>
+</body>
+</html>

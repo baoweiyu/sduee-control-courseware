@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>例2-2 弹簧-质量-阻尼器系统</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .cols { display:flex; gap:26px; height:470px; margin-top:2px; }
+  .imgc { flex:1; overflow:hidden; display:flex; flex-direction:column; }
+  .imgc .bd2 { flex:1; display:grid; place-items:center; background:var(--sky); padding:8px; }
+  .imgc img { max-width:100%; max-height:100%; object-fit:contain; }
+  .mec { flex:1.1; display:flex; flex-direction:column; }
+  .mec .bd2 { flex:1; display:grid; place-items:center; padding:6px; }
+  .drv { margin-top:22px; display:flex; flex-direction:column; gap:12px; }
+  .ln { background:#fff; border:2px solid var(--line); border-radius:12px; padding:12px 24px; font-size:22px; color:var(--ink); display:flex; align-items:center; gap:18px; flex-wrap:wrap; }
+  .ln .s { flex:0 0 150px; font-weight:700; color:var(--blue); font-size:21px; }
+  .math { font-size:23px; }
+</style>
+</head>
+<body data-title="例2-2　弹簧-质量-阻尼器系统" data-page="6 / 51">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="cols">
+      <div class="act-card imgc">
+        <div class="hd" style="font-size:23px">机械位移实验装置</div>
+        <div class="bd2"><img src="../../../assets/image2/spring-mass-damper.png" alt="弹簧-质量-阻尼器实验装置"></div>
+      </div>
+      <div class="act-card mec">
+        <div class="hd" style="font-size:23px">力学模型</div>
+        <div class="bd2">
+          <svg viewBox="0 0 460 250" width="96%" height="94%">
+            <g stroke="#1D3FA0" stroke-width="3" fill="none">
+              <!-- 固定墙 -->
+              <line x1="30" y1="55" x2="30" y2="205"/>
+              <path d="M30 60 l-9 9 M30 80 l-9 9 M30 100 l-9 9 M30 120 l-9 9 M30 140 l-9 9 M30 160 l-9 9 M30 180 l-9 9 M30 200 l-9 9" stroke-width="2"/>
+              <!-- 弹簧 k：墙 → 质量块 -->
+              <path d="M30 100 L50 100 L56 88 L69 112 L81 88 L94 112 L106 88 L119 112 L131 88 L144 112 L156 88 L169 112 L181 88 L194 112 L200 100 L210 100"/>
+              <!-- 阻尼器 f：缸筒 + 活塞杆 -->
+              <line x1="30" y1="152" x2="66" y2="152"/>
+              <rect x="66" y="138" width="62" height="28" fill="#fff"/>
+              <line x1="116" y1="142" x2="116" y2="162"/>
+              <line x1="116" y1="152" x2="210" y2="152"/>
+              <!-- 质量块 -->
+              <rect x="210" y="86" width="80" height="80" fill="#fff"/>
+              <!-- 地面 -->
+              <line x1="120" y1="224" x2="430" y2="224" stroke="#8B93B8" stroke-width="2"/>
+              <path d="M129 224 l-9 10 M149 224 l-9 10 M169 224 l-9 10 M189 224 l-9 10 M209 224 l-9 10 M229 224 l-9 10 M249 224 l-9 10 M269 224 l-9 10 M289 224 l-9 10 M309 224 l-9 10 M329 224 l-9 10 M349 224 l-9 10 M369 224 l-9 10 M389 224 l-9 10 M409 224 l-9 10" stroke="#8B93B8" stroke-width="1.5"/>
+            </g>
+            <text x="120" y="78" text-anchor="middle" font-size="20" fill="#1B3B8B" font-style="italic">k（弹簧）</text>
+            <text x="97" y="130" text-anchor="middle" font-size="20" fill="#1B3B8B" font-style="italic">f（阻尼器）</text>
+            <text x="250" y="132" text-anchor="middle" font-size="22" fill="#1B3B8B" font-style="italic">m</text>
+            <!-- 外力 F：作用于质量块，向右 -->
+            <path d="M290 126 L356 126 M348 120 L356 126 L348 132" stroke="#F5821F" stroke-width="3" fill="none"/>
+            <text x="350" y="112" text-anchor="middle" font-size="19" fill="#F5821F" font-style="italic">F（外力）</text>
+            <!-- 位移 x -->
+            <path d="M240 196 L302 196 M294 190 L302 196 L294 202" stroke="#1D3FA0" stroke-width="2.5" fill="none"/>
+            <text x="312" y="202" font-size="18" fill="#1B3B8B" font-style="italic">x（位移）</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="drv">
+      <div class="ln" data-step><span class="s">① 定输入输出</span><span class="math tex">\text{外作用力 F —— 输入量，位移 x —— 输出量}</span></div>
+      <div class="ln" data-step><span class="s">② 列写方程</span><span>根据牛顿定律：<span class="math tex">F + F_{\text{弹}} + F_{\text{阻}} = m\cdot a</span>，且 <span class="math tex">F_{\text{弹}} = -kx</span>，<span class="math tex">F_{\text{阻}} = -f\dfrac{dx}{dt}</span></span></div>
+      <div class="ln" data-step><span class="s">③ 消元标准化</span><span>考虑 <span class="math tex">a = \dfrac{d^{2}x}{dt^{2}}</span>，得 <b class="math tex" style="color:var(--danger)">m\dfrac{d^{2}x}{dt^{2}} + f\dfrac{dx}{dt} + kx = F</b></span></div>
+    </div>
+  </div>
+</div></div>
+</body>
+</html>

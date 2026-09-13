@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>拉氏变换的基本定理</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:8px; }
+  .th { background:#fff; border:2px solid var(--line); border-radius:14px; padding:18px 24px; }
+  .th b { display:block; font-size:22px; color:var(--blue); margin-bottom:8px; }
+  .th .math { font-size:22.5px; color:var(--ink); line-height:1.6; }
+  .th .cond { font-size:18px; color:var(--muted); margin-top:6px; }
+</style>
+</head>
+<body data-title="拉氏变换的基本定理" data-page="10 / 51">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body fill">
+    <div class="grid">
+      <div class="th"><b>① 线性定理</b><span class="math tex">\text{若} \mathcal{L} [f_{1}(t)]=F_{1}(s)\text{，}\mathcal{L} [f_{2}(t)]=F_{2}(s)\text{，则} \mathcal{L} [a\cdot f_{1}(t)+b\cdot f_{2}(t)] = aF_{1}(s) + bF_{2}(s)</span></div>
+      <div class="th"><b>② 微分定理</b><span class="math tex">\mathcal{L} [f'(t)] = sF(s) - f(0)</span><br><span class="math tex">\mathcal{L} [f''(t)] = s^{2}F(s) - s f(0) - f'(0)</span><br><span class="math tex">\mathcal{L} [f^{(n)}(t)] = s^{n}F(s) - \sum _{k=1}^{n} s^{n-k}f^{(k-1)}(0)</span></div>
+      <div class="th"><b>③ 积分定理</b><span class="math tex">\mathcal{L} [\int f(t)dt] = \dfrac{F(s)}{s} + \dfrac{f^{(-1)}(0)}{s}</span><br><span class="math tex">\mathcal{L} [\int_{0}^{t}\!\!\int_{0}^{\tau} f(\tau )d\tau dt] = \dfrac{F(s)}{s^{2}} + \dfrac{f^{(-1)}(0)}{s^{2}} + \dfrac{f^{(-2)}(0)}{s}</span></div>
+      <div class="th"><b>④ 位移定理</b><span class="math tex">\text{实位移：}\mathcal{L} [f(t-\tau )] = F(s)\cdot e^{-\tau s}</span><br><span class="math tex">\text{复位移：}\mathcal{L} [e^{-at}f(t)] = F(s+a)</span></div>
+      <div class="th"><b>⑤ 终值定理</b><span class="math tex">\lim _{t\to \infty } f(t) = \lim _{s\to 0} sF(s)</span><div class="cond">条件：sF(s) 的极点都具有负实部</div></div>
+      <div class="th"><b>⑥ 初值定理</b><span class="math tex">\lim _{t\to 0^{+}} f(t) = \lim _{s\to \infty } sF(s)</span></div>
+    </div>
+  </div>
+  <div class="act-note">
+    <svg class="ico" viewBox="0 0 48 48"><circle cx="24" cy="24" r="18" fill="none" stroke="#1D3FA0" stroke-width="3"/><path d="M17 24 l5 5 10-11" fill="none" stroke="#F5821F" stroke-width="3.5" stroke-linecap="round"/></svg>
+    <span><span class="lead">关键：</span>零初始条件下微分定理简化为 <span class="tex">\mathcal{L} [f^{(n)}(t)] = s^{n}F(s)</span>——微分方程瞬间变代数方程。</span>
+  </div>
+</div></div>
+</body>
+</html>

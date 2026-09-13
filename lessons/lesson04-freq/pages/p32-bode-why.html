@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>2.1 为什么用对数坐标——Bode 图的优点</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .rows { display:flex; flex-direction:column; gap:14px; height:100%; min-height:0; }
+  .r { flex:1; display:flex; align-items:center; gap:20px; background:#fff; border:2px solid var(--line); border-radius:16px; padding:8px 22px; min-height:0; }
+  .r .no { flex:none; width:46px; height:46px; border-radius:50%; background:var(--orange); color:#fff; font-size:24px; font-weight:800; display:grid; place-items:center; }
+  .r .tt { flex:1.32; min-width:0; display:flex; flex-direction:column; gap:6px; }
+  .r .hd { font-size:23.5px; font-weight:800; color:var(--navy); border-left:5px solid var(--orange); padding-left:12px; line-height:1.25; }
+  .r .bd { font-size:19.5px; line-height:1.5; color:var(--ink); }
+  .r .bd .tex { font-size:17.5px; }
+  .r .mf { flex:1; height:100%; min-height:0; display:grid; place-items:center; }
+  .r svg { width:100%; height:100%; max-height:162px; }
+</style>
+</head>
+<body data-title="2.1 为什么用对数坐标——Bode 图的优点" data-page="32 / 87">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="rows">
+      <div class="r">
+        <span class="no">1</span>
+        <div class="tt">
+          <div class="hd">对数横轴：低频精细、高频压缩</div>
+          <div class="bd">频率按对数分度：工程关心的<span class="kw-r">低频段被展开、读数精细</span>，高频段压缩收纳——一张图容纳多个十倍频程。</div>
+        </div>
+        <div class="mf"><svg id="m1" viewBox="0 0 480 160"></svg></div>
+      </div>
+      <div class="r">
+        <span class="no">2</span>
+        <div class="tt">
+          <div class="hd">乘除变加减：曲线可以"叠加"</div>
+          <div class="bd">取 20lg|G| 后，各环节的<span class="kw-r">乘除变成加减</span>：<span class="tex">20\lg\Big|\prod_i G_i\Big|=\sum_i 20\lg|G_i|</span>，整条曲线由各环节直线<span class="kw-r">逐段叠加</span>得到。</div>
+        </div>
+        <div class="mf"><svg id="m2" viewBox="0 0 480 160"></svg></div>
+      </div>
+      <div class="r">
+        <span class="no">3</span>
+        <div class="tt">
+          <div class="hd">渐近线：折线代替曲线</div>
+          <div class="bd">用<span class="kw-r">折线渐近线</span>代替精确曲线，仅转折处稍加修正——绘图快、精度够，这是 Bode 图被广泛应用的根本原因。</div>
+        </div>
+        <div class="mf"><svg id="m3" viewBox="0 0 480 160"></svg></div>
+      </div>
+      <div class="r">
+        <span class="no">4</span>
+        <div class="tt">
+          <div class="hd">K 只平移、不变形</div>
+          <div class="bd">增益 K 变化时，幅频曲线<span class="kw-r">只整体平移 20lgK</span>，形状与相频均不变——调参与分析都极其方便。</div>
+        </div>
+        <div class="mf"><svg id="m4" viewBox="0 0 480 160"></svg></div>
+      </div>
+    </div>
+  </div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  function setup(id) {
+    const svg = document.getElementById(id);
+    const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+    const tx = (x, y, s, o) => {
+      const n = mk("text", { x, y, "font-size": (o && o.fs) || 16, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#5B6B8C", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal" });
+      if (o && o.halo) { n.setAttribute("paint-order", "stroke"); n.setAttribute("stroke", "#FFFFFF"); n.setAttribute("stroke-width", 5); n.setAttribute("stroke-linejoin", "round"); }
+      n.textContent = s; return n;
+    };
+    const defs = mk("defs", {});
+    const mid = id + "m";
+    const mr = mk("marker", { id: mid, markerWidth: 9, markerHeight: 9, refX: 6.5, refY: 2.7, orient: "auto" }, defs);
+    mk("path", { d: "M0,0 L6.5,2.7 L0,5.4 Z", fill: "#5B6B8C" }, mr);
+    return { mk, tx, mid };
+  }
+  // ① 对数横轴：低频展开、高频压缩
+  {
+    const { mk, tx } = setup("m1");
+    const X = w => 34 + (Math.log10(w) + 1) * 112;   // 0.1→34  1→146  10→258  100→370
+    const yA = 100;
+    mk("line", { x1: 24, y1: yA, x2: 452, y2: yA, stroke: "#5B6B8C", "stroke-width": 1.6, "marker-end": "url(#m1m)" });
+    for (let d = 0.1; d <= 100.0001; d *= 10) {
+      mk("line", { x1: X(d), y1: yA - 6, x2: X(d), y2: yA + 6, stroke: "#5B6B8C", "stroke-width": 2 });
+      tx(X(d), yA + 28, String(d), { fs: 16, b: 1, fill: "#1B3B8B" });
+      for (let m = 2; m < 10; m++) { const x = X(d * m); if (x < 442) mk("line", { x1: x, y1: yA - 3.5, x2: x, y2: yA + 3.5, stroke: "#AAB6D0", "stroke-width": 1 }); }
+    }
+    tx(452, yA + 28, "ω", { fs: 17, it: 1, fill: "#5B6B8C", an: "start" });
+    mk("line", { x1: 40, y1: 64, x2: 140, y2: 64, stroke: "#1D3FA0", "stroke-width": 2, "marker-end": "url(#m1m)" });
+    mk("line", { x1: 364, y1: 64, x2: 264, y2: 64, stroke: "#1D3FA0", "stroke-width": 2, "marker-end": "url(#m1m)" });
+    tx(90, 46, "低频段 · 展开精细", { fs: 17, b: 1, fill: "#1D3FA0" });
+    tx(314, 46, "高频段 · 压缩收纳", { fs: 17, b: 1, fill: "#1D3FA0" });
+  }
+  // ② 乘除变加减：两条线相加成合成线
+  {
+    const { mk, tx } = setup("m2");
+    mk("path", { d: "M30,88 L225,42", stroke: "#2B5CE6", "stroke-width": 3.4 });
+    mk("path", { d: "M30,110 L225,76", stroke: "#9AA7C0", "stroke-width": 3.4 });
+    mk("line", { x1: 250, y1: 30, x2: 250, y2: 126, stroke: "#C9D8F2", "stroke-width": 1.2, "stroke-dasharray": "5 5" });
+    tx(250, 92, "＋", { fs: 28, b: 1, fill: "#F5821F" });
+    mk("path", { d: "M274,116 L450,36", stroke: "#1D3FA0", "stroke-width": 4.6 });
+    tx(118, 52, "环节①", { fs: 16.5, b: 1, fill: "#2B5CE6", halo: 1 });
+    tx(150, 118, "环节②", { fs: 16.5, b: 1, fill: "#7C89A6", halo: 1 });
+    tx(446, 26, "合成 L(ω)", { fs: 17, b: 1, fill: "#1D3FA0", halo: 1, an: "end" });
+  }
+  // ③ 渐近线：折线代替曲线（惯性环节 1/(1+jω/2)）
+  {
+    const { mk, tx } = setup("m3");
+    const X = w => 40 + (Math.log10(w) + 1) * 104;   // 0.1→40  2→177.5  10→260  100→364
+    const Y = v => 84 - v * 1.5;                     // 0dB→84  −34dB→135
+    mk("line", { x1: 24, y1: 140, x2: 452, y2: 140, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#m3m)" });
+    mk("line", { x1: 30, y1: 150, x2: 30, y2: 12, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#m3m)" });
+    tx(24, 22, "L/dB", { fs: 15, b: 1, fill: "#5B6B8C", an: "end" });
+    tx(448, 158, "ω", { fs: 17, it: 1, fill: "#5B6B8C", an: "end" });
+    mk("line", { x1: 30, y1: Y(0), x2: 440, y2: Y(0), stroke: "#D9E3F6", "stroke-width": 1.2, "stroke-dasharray": "6 5" });
+    let d = "";
+    for (let i = 0; i <= 220; i++) { const w = 0.1 * Math.pow(1000, i / 220); const v = -10 * Math.log10(1 + w * w / 4); d += (i ? "L" : "M") + X(w).toFixed(1) + "," + Y(v).toFixed(1); }
+    mk("path", { d, stroke: "#2B5CE6", "stroke-width": 3.6, fill: "none" });
+    mk("path", { d: `M${X(0.1)},${Y(0)} L${X(2)},${Y(0)} L${X(100)},${Y(-34)}`, stroke: "#F5821F", "stroke-width": 3, fill: "none", "stroke-dasharray": "9 6" });
+    mk("circle", { cx: X(2), cy: Y(-3), r: 4.5, fill: "#2B5CE6" });
+    tx(88, 64, "渐近线（折线）", { fs: 16.5, b: 1, fill: "#F5821F", halo: 1, an: "start" });
+    tx(330, 98, "精确曲线", { fs: 16.5, b: 1, fill: "#2B5CE6", halo: 1 });
+    tx(190, 108, "−3dB", { fs: 14.5, fill: "#5B6B8C", halo: 1, an: "start" });
+  }
+  // ④ K 只平移：两条同形曲线相差 20lgK
+  {
+    const { mk, tx } = setup("m4");
+    const base = t => { const x = 34 + t * 406; const s = Math.max(0, (t - 0.38) / 0.62); const sm = s * s * (3 - 2 * s); return [x, 44 + 58 * sm]; };
+    const path = off => { let d = ""; for (let i = 0; i <= 60; i++) { const [x, y] = base(i / 60); d += (i ? "L" : "M") + x.toFixed(1) + "," + (y + off).toFixed(1); } return d; };
+    mk("line", { x1: 24, y1: 140, x2: 452, y2: 140, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#m4m)" });
+    mk("line", { x1: 30, y1: 150, x2: 30, y2: 12, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#m4m)" });
+    tx(24, 22, "L/dB", { fs: 15, b: 1, fill: "#5B6B8C", an: "end" });
+    tx(448, 158, "ω", { fs: 17, it: 1, fill: "#5B6B8C", an: "end" });
+    mk("path", { d: path(0), stroke: "#2B5CE6", "stroke-width": 3.4, fill: "none" });
+    mk("path", { d: path(30), stroke: "#9AA7C0", "stroke-width": 3.4, fill: "none" });
+    mk("line", { x1: 74, y1: 70, x2: 74, y2: 50, stroke: "#F5821F", "stroke-width": 2.6, "marker-end": "url(#m4m)" });
+    tx(88, 40, "上移 20lgK", { fs: 16.5, b: 1, fill: "#F5821F", halo: 1, an: "start" });
+    tx(310, 88, "形状不变", { fs: 16.5, b: 1, fill: "#2B5CE6", halo: 1 });
+  }
+});
+</script>
+</body>
+</html>

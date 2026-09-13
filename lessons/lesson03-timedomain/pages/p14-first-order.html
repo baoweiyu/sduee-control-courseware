@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>一阶系统的数学模型</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<link rel="stylesheet" href="../lesson03-svg.css">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .col { display:flex; flex-direction:column; gap:18px; height:100%; min-height:0; }
+  .inst-row { display:flex; gap:24px; flex:1.05; min-height:0; }
+  .inst { flex:1; display:flex; flex-direction:column; min-height:0; }
+  .inst .bd { flex:1; display:flex; gap:16px; padding:14px 18px; min-height:0; }
+  .inst .fig { flex:1; display:grid; place-items:center; background:var(--sky); border-radius:12px; overflow:hidden; min-height:0; }
+  .inst .fig img { max-width:100%; max-height:100%; object-fit:contain; }
+  .inst .fig svg { width:100%; height:100%; }
+  .inst .eqs { flex:1.1; display:flex; flex-direction:column; justify-content:center; gap:9px; font-size:19.5px; line-height:1.5; color:var(--ink); }
+  .inst .eqs .mathbox { font-size:22px; margin:2px 0; }
+  .io { font-size:18.5px; color:var(--muted); }
+  .io b { color:var(--navy); }
+  .gen { flex:1.1; display:flex; flex-direction:column; min-height:0; }
+  .gen .bd { flex:1; display:flex; gap:26px; align-items:center; padding:6px 24px; min-height:0; }
+  .gen .eqs { flex:1; display:flex; flex-direction:column; justify-content:center; gap:6px; font-size:20.5px; line-height:1.45; }
+  .gen .eqs .mathbox { font-size:23px; margin:0; }
+  .gen .fig { flex:1.05; display:grid; place-items:center; min-height:0; }
+  .gen .fig svg { width:100%; display:block; }
+  .arrow-dn { text-align:center; color:var(--orange); font-size:26px; line-height:1; flex:none; }
+</style>
+</head>
+<body data-title="第二节　一阶系统的暂态响应 · 数学模型" data-page="15 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="col">
+      <div class="inst-row">
+        <div class="act-card inst">
+          <div class="hd">实例 1：水箱液位系统</div>
+          <div class="bd">
+            <div class="fig"><img src="../../../assets/image2/water-tank-level-control.png" alt="水箱液位控制系统"></div>
+            <div class="eqs">
+              <div class="io">输入 <b>q<sub>i</sub>(t)</b>（进水流量增量）· 输出 <b>h(t)</b>（液位）</div>
+              <div>物料平衡：<span class="tex">A\dfrac{\mathrm{d}h}{\mathrm{d}t} = q_i - \dfrac{h}{R}</span>（R：液阻）</div>
+              <div class="mathbox math eqline tex tex-d">AR\dfrac{\mathrm{d}h}{\mathrm{d}t} + h = R\,q_i</div>
+              <div class="io">一阶惯性环节，时间常数 <span class="kw-r">T = AR</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="act-card inst">
+          <div class="hd">实例 2：RC 电路</div>
+          <div class="bd">
+            <div class="fig">
+              <svg viewBox="0 0 560 230">
+                <line x1="70" y1="66" x2="200" y2="66" class="svgline"/>
+                <rect x="200" y="48" width="120" height="36" class="svgblk"/>
+                <text x="260" y="36" class="svgname" font-size="21" text-anchor="middle">R</text>
+                <line x1="320" y1="66" x2="470" y2="66" class="svgline"/>
+                <circle cx="70" cy="66" r="4" fill="#1D3FA0"/>
+                <circle cx="470" cy="66" r="4" fill="#1D3FA0"/>
+                <line x1="470" y1="66" x2="470" y2="106" class="svgline"/>
+                <line x1="438" y1="106" x2="502" y2="106" class="svgline" stroke-width="3"/>
+                <line x1="438" y1="120" x2="502" y2="120" class="svgline" stroke-width="3"/>
+                <text x="516" y="118" class="svgname" font-size="21">C</text>
+                <line x1="470" y1="120" x2="470" y2="166" class="svgline"/>
+                <line x1="70" y1="66" x2="70" y2="166" class="svgline"/>
+                <line x1="70" y1="166" x2="470" y2="166" class="svgline"/>
+                <circle cx="70" cy="166" r="4" fill="#1D3FA0"/>
+                <circle cx="470" cy="166" r="4" fill="#1D3FA0"/>
+                <text x="42" y="122" font-size="21" font-style="italic" fill="#1B3B8B" font-weight="600">u<tspan dy="6" font-size="15">i</tspan></text>
+                <text x="392" y="96" font-size="21" font-style="italic" fill="#1B3B8B" font-weight="600">u<tspan dy="6" font-size="15">C</tspan></text>
+              </svg>
+            </div>
+            <div class="eqs">
+              <div class="io">输入 <b>u<sub>i</sub>(t)</b> · 输出 <b>u<sub>C</sub>(t)</b>（电容电压）</div>
+              <div>回路方程：<span class="tex">Ri + u_C = u_i,\; i = C\dfrac{\mathrm{d}u_C}{\mathrm{d}t}</span></div>
+              <div class="mathbox math eqline tex tex-d">RC\dfrac{\mathrm{d}u_C}{\mathrm{d}t} + u_C = u_i</div>
+              <div class="io">一阶惯性环节，时间常数 <span class="kw-r">T = RC</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="act-card gen">
+        <div class="hd">归纳：一阶系统的通用数学模型</div>
+        <div class="bd">
+          <div class="eqs">
+            <div>物理背景不同，<span class="kw-r">动态结构相同</span>——都可归纳为一阶微分方程：</div>
+            <div class="mathbox math eqline tex tex-d">T\,\dfrac{\mathrm{d}c(t)}{\mathrm{d}t} + c(t) = r(t)</div>
+            <div>闭环传递函数　<span class="tex" style="font-size:24px">\varPhi(s) = \dfrac{C(s)}{R(s)} = \dfrac{1}{Ts+1}</span></div>
+            <div><span class="kw-r">T —— 时间常数</span>，是一阶系统唯一的特征参数。</div>
+          </div>
+          <div class="fig">
+            <svg viewBox="0 0 620 130">
+              <defs><marker id="a14" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#1D3FA0"/></marker></defs>
+              <text x="14" y="72" font-size="23" font-style="italic" fill="#1B3B8B" font-weight="600">R(s)</text>
+              <line x1="76" y1="65" x2="150" y2="65" class="svgline" marker-end="url(#a14)"/>
+              <rect x="164" y="28" width="290" height="74" rx="10" class="svgblk"/>
+              <text x="309" y="74" font-size="26" font-style="italic" fill="#1B3B8B" text-anchor="middle">1 / (Ts + 1)</text>
+              <line x1="454" y1="65" x2="530" y2="65" class="svgline" marker-end="url(#a14)"/>
+              <text x="544" y="72" font-size="23" font-style="italic" fill="#1B3B8B" font-weight="600">C(s)</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+</body>
+</html>

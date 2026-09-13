@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>环节的合并：串联 / 并联 / 反馈</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .hint { display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
+  .hint .t { font-size:20px; color:var(--muted); }
+  .hint .t b { color:var(--blue); }
+  .btn { border:none; background:var(--blue); color:#fff; font-size:18px; font-weight:700;
+         border-radius:9px; padding:7px 18px; cursor:pointer; font-family:inherit; white-space:nowrap; }
+  .btn.ghost { background:#fff; color:var(--blue); border:2px solid var(--blue); }
+  .mrow { display:flex; align-items:center; gap:14px; background:var(--sky); border-radius:14px;
+          padding:6px 14px 6px 6px; margin-bottom:10px; }
+  .mrow .lbl { flex:0 0 92px; text-align:center; }
+  .mrow .lbl .big { font-size:25px; font-weight:800; color:var(--blue); }
+  .mrow .lbl .sub { font-size:15.5px; color:var(--muted); margin-top:2px; }
+  .mrow svg { flex:1; }
+  .mrow .fx { opacity:0; transform-box:fill-box; transform-origin:center; transform:scale(.35);
+              transition:opacity .45s ease, transform .45s cubic-bezier(.34,1.56,.64,1); }
+  .mrow .ph { transition:opacity .3s; }
+  .mrow .orig { transition:opacity .4s; }
+  .mrow.done .orig { opacity:.18; }
+  .mrow.done .fx { opacity:1; transform:scale(1); }
+  .mrow.done .ph { opacity:0; }
+  .fbar { flex:0 0 300px; opacity:0; transform:translateY(10px); transition:.4s; }
+  .mrow.done .fbar { opacity:1; transform:none; }
+  .fbar .mathbox { font-size:21px; padding:10px 14px; line-height:1.45; }
+  .fbar .ext { font-size:16.5px; color:var(--muted); margin-top:6px; text-align:center; line-height:1.4; }
+  .mbtn { flex:0 0 116px; text-align:right; }
+  .mrow.done .mbtn .btn { background:var(--green,#2E9E6B); }
+  .defs .bd2 { display:flex; gap:20px; padding:16px 22px; align-items:stretch; }
+  .dcol { flex:1; font-size:19.5px; color:var(--ink); line-height:1.6; }
+  .dcol .h { font-weight:800; color:var(--blue); font-size:20.5px; margin-bottom:4px; }
+</style>
+</head>
+<body data-title="环节的合并：三种基本联接" data-page="32 / 51">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="hint">
+      <div class="t">💡 串联、并联、反馈——三种基本联接的多个环节，都可以<b>合并为一个等效环节</b></div>
+      <button class="btn ghost" onclick="ACT.step.reset()">↺ 重置</button>
+    </div>
+
+    <!-- 串联 -->
+    <div class="mrow" id="row0">
+      <div class="lbl"><div class="big">串 联</div><div class="sub">首尾相接</div></div>
+      <svg viewBox="0 0 720 108" height="100">
+        <defs><marker id="s32" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#1D3FA0"/></marker></defs>
+        <g class="orig" font-size="18" fill="#1B3B8B">
+          <rect x="60" y="30" width="90" height="48" rx="7" fill="#fff" stroke="#1D3FA0" stroke-width="2.5"/><text x="105" y="60" text-anchor="middle" font-style="italic">G₁</text>
+          <rect x="190" y="30" width="90" height="48" rx="7" fill="#fff" stroke="#1D3FA0" stroke-width="2.5"/><text x="235" y="60" text-anchor="middle" font-style="italic">G₂</text>
+          <g stroke="#1D3FA0" stroke-width="2.5" fill="none" marker-end="url(#s32)">
+            <line x1="8" y1="54" x2="54" y2="54"/><line x1="150" y1="54" x2="184" y2="54"/><line x1="280" y1="54" x2="330" y2="54"/>
+          </g>
+          <text x="16" y="44" font-style="italic">R</text><text x="298" y="44" font-style="italic">C</text>
+        </g>
+        <text x="368" y="66" font-size="34" fill="#F5821F" font-weight="700">⇒</text>
+        <g class="ph">
+          <rect x="470" y="30" width="150" height="48" rx="7" fill="none" stroke="#8B93B8" stroke-width="2" stroke-dasharray="7 6"/>
+          <text x="545" y="61" text-anchor="middle" font-size="22" fill="#8B93B8">?</text>
+        </g>
+        <g class="fx" font-size="18" fill="#1B3B8B">
+          <rect x="440" y="30" width="210" height="48" rx="7" fill="#fff" stroke="#D63A2F" stroke-width="3"/>
+          <text x="545" y="60" text-anchor="middle" font-style="italic" fill="#D63A2F" font-size="20">G = G₁·G₂</text>
+          <g stroke="#1D3FA0" stroke-width="2.5" fill="none" marker-end="url(#s32)">
+            <line x1="402" y1="54" x2="434" y2="54"/><line x1="650" y1="54" x2="700" y2="54"/>
+          </g>
+          <text x="408" y="44" font-style="italic">R</text><text x="668" y="44" font-style="italic">C</text>
+        </g>
+      </svg>
+      <div class="fbar">
+        <div class="mathbox math tex tex-d">G(s) = G_{1}(s)\cdot G_{2}(s)</div>
+        <div class="ext"><span class="tex">n</span> 个串联：<span class="tex">G(s) = \prod G_{i}(s)</span><br><span class="kw-r">注意：环节间须无负载效应</span></div>
+      </div>
+      <div class="mbtn"><button class="btn" onclick="ACT.step.next()">合并 ▸</button></div>
+    </div>
+
+    <!-- 并联 -->
+    <div class="mrow" id="row1">
+      <div class="lbl"><div class="big">并 联</div><div class="sub">同入相加</div></div>
+      <svg viewBox="0 0 720 108" height="100">
+        <defs><marker id="p32" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#1D3FA0"/></marker></defs>
+        <g class="orig" font-size="18" fill="#1B3B8B">
+          <rect x="90" y="6" width="86" height="40" rx="7" fill="#fff" stroke="#1D3FA0" stroke-width="2.5"/><text x="133" y="32" text-anchor="middle" font-style="italic">G₁</text>
+          <rect x="90" y="62" width="86" height="40" rx="7" fill="#fff" stroke="#1D3FA0" stroke-width="2.5"/><text x="133" y="88" text-anchor="middle" font-style="italic">G₂</text>
+          <circle cx="250" cy="54" r="13" fill="#fff" stroke="#1D3FA0" stroke-width="2.5"/><path d="M 244.1,48.1 L 255.9,59.9 M 244.1,59.9 L 255.9,48.1" stroke="#1D3FA0" stroke-width="2.2" fill="none"/>
+          <circle cx="52" cy="54" r="4" fill="#1D3FA0"/>
+          <g stroke="#1D3FA0" stroke-width="2.5" fill="none" marker-end="url(#p32)">
+            <line x1="8" y1="54" x2="46" y2="54"/>
+            <polyline points="52,54 52,26 84,26"/><polyline points="52,54 52,82 84,82"/>
+            <polyline points="176,26 250,26 250,41"/><polyline points="176,82 250,82 250,67"/>
+            <line x1="263" y1="54" x2="330" y2="54"/>
+          </g>
+          <text x="16" y="44" font-style="italic">R</text><text x="296" y="44" font-style="italic">C</text>
+          <text x="260" y="32" font-size="15" fill="#D63A2F">+</text><text x="260" y="82" font-size="15" fill="#D63A2F">+</text>
+        </g>
+        <text x="368" y="66" font-size="34" fill="#F5821F" font-weight="700">⇒</text>
+        <g class="ph">
+          <rect x="470" y="30" width="150" height="48" rx="7" fill="none" stroke="#8B93B8" stroke-width="2" stroke-dasharray="7 6"/>
+          <text x="545" y="61" text-anchor="middle" font-size="22" fill="#8B93B8">?</text>
+        </g>
+        <g class="fx" font-size="18" fill="#1B3B8B">
+          <rect x="440" y="30" width="210" height="48" rx="7" fill="#fff" stroke="#D63A2F" stroke-width="3"/>
+          <text x="545" y="60" text-anchor="middle" font-style="italic" fill="#D63A2F" font-size="20">G = G₁+G₂</text>
+          <g stroke="#1D3FA0" stroke-width="2.5" fill="none" marker-end="url(#p32)">
+            <line x1="402" y1="54" x2="434" y2="54"/><line x1="650" y1="54" x2="700" y2="54"/>
+          </g>
+          <text x="408" y="44" font-style="italic">R</text><text x="668" y="44" font-style="italic">C</text>
+        </g>
+      </svg>
+      <div class="fbar">
+        <div class="mathbox math tex tex-d">G(s) = G_{1}(s) + G_{2}(s)</div>
+        <div class="ext"><span class="tex">n</span> 个并联：<span class="tex">G(s) = \sum G_{i}(s)</span><br>（各支路信号相加/减）</div>
+      </div>
+      <div class="mbtn"><button class="btn" onclick="ACT.step.next()">合并 ▸</button></div>
+    </div>
+
+    <!-- 反馈 -->
+    <div class="mrow" id="row2">
+      <div class="lbl"><div class="big">反 馈</div><div class="sub">闭环回路</div></div>
+      <svg viewBox="0 0 720 118" height="106">
+        <defs><marker id="f32" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#1D3FA0"/></marker></defs>
+        <g class="orig" font-size="18" fill="#1B3B8B">
+          <circle cx="60" cy="46" r="13" fill="#fff" stroke="#1D3FA0" stroke-width="2.5"/><path d="M 54.1,40.1 L 65.9,51.9 M 54.1,51.9 L 65.9,40.1" stroke="#1D3FA0" stroke-width="2.2" fill="none"/>
+          <rect x="100" y="22" width="90" height="48" rx="7" fill="#fff" stroke="#1D3FA0" stroke-width="2.5"/><text x="145" y="52" text-anchor="middle" font-style="italic">G</text>
+          <rect x="112" y="88" width="66" height="26" rx="6" fill="#fff" stroke="#F5821F" stroke-width="2.5"/><text x="145" y="106" text-anchor="middle" font-style="italic" fill="#F5821F" font-size="16">H</text>
+          <circle cx="268" cy="46" r="4" fill="#1D3FA0"/>
+          <g stroke="#1D3FA0" stroke-width="2.5" fill="none" marker-end="url(#f32)">
+            <line x1="8" y1="46" x2="44" y2="46"/><line x1="73" y1="46" x2="96" y2="46"/>
+            <line x1="190" y1="46" x2="330" y2="46"/>
+            <polyline points="268,46 268,101 182,101" stroke="#F5821F"/>
+            <polyline points="112,101 60,101 60,62" stroke="#F5821F"/>
+          </g>
+          <text x="16" y="36" font-style="italic">R</text><text x="300" y="36" font-style="italic">C</text>
+          <text x="42" y="38" font-size="15" fill="#D63A2F">+</text><text x="42" y="82" font-size="15" fill="#D63A2F">−</text>
+          <text x="76" y="40" font-size="14" font-style="italic">E</text>
+        </g>
+        <text x="368" y="66" font-size="34" fill="#F5821F" font-weight="700">⇒</text>
+        <g class="ph">
+          <rect x="455" y="34" width="180" height="48" rx="7" fill="none" stroke="#8B93B8" stroke-width="2" stroke-dasharray="7 6"/>
+          <text x="545" y="65" text-anchor="middle" font-size="22" fill="#8B93B8">?</text>
+        </g>
+        <g class="fx" font-size="18" fill="#1B3B8B">
+          <rect x="420" y="34" width="250" height="48" rx="7" fill="#fff" stroke="#D63A2F" stroke-width="3"/>
+          <text x="545" y="64" text-anchor="middle" font-style="italic" fill="#D63A2F" font-size="21">Φ = G/(1+GH)</text>
+          <g stroke="#1D3FA0" stroke-width="2.5" fill="none" marker-end="url(#f32)">
+            <line x1="382" y1="58" x2="414" y2="58"/><line x1="670" y1="58" x2="706" y2="58"/>
+          </g>
+          <text x="388" y="48" font-style="italic">R</text><text x="676" y="48" font-style="italic">C</text>
+        </g>
+      </svg>
+      <div class="fbar">
+        <div class="mathbox math tex tex-d" style="font-size:20px">\text{负反馈：}\Phi (s) = \dfrac{G(s)}{1+G(s)H(s)}</div>
+        <div class="ext">正反馈：分母为 1−G(s)H(s)<br>（先合并内环，再处理外环）</div>
+      </div>
+      <div class="mbtn"><button class="btn" onclick="ACT.step.next()">合并 ▸</button></div>
+    </div>
+
+    <div class="act-card defs" data-step="4">
+      <div class="hd" style="font-size:21px">反馈联接的几个名词（负反馈）</div>
+      <div class="bd2 math">
+        <div class="dcol">
+          <div class="h">偏差信号</div>
+          <span class="tex">E(s) = R(s) - B(s)</span>（正反馈为 <span class="tex">R+B</span>）；<span class="tex">H(s)=1</span> 时称<span class="kw-r">单位反馈</span>
+        </div>
+        <div class="dcol">
+          <div class="h">开环传递函数</div>
+          <span class="tex">G(s)H(s) = \dfrac{B(s)}{E(s)}</span>；前向通道：<span class="tex">G(s) = \dfrac{C(s)}{E(s)}</span>
+        </div>
+        <div class="dcol">
+          <div class="h">闭环传递函数推导</div>
+          <span class="tex">C = EG = (R-CH)G \Rightarrow \Phi (s) = \dfrac{C(s)}{R(s)} = \dfrac{G(s)}{1+G(s)H(s)}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div data-step="1" style="display:none"></div>
+  <div data-step="2" style="display:none"></div>
+  <div data-step="3" style="display:none"></div>
+</div></div>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const S = ACT.step;
+    const _next = S.next.bind(S), _reset = S.reset.bind(S);
+    function paint() {
+      document.querySelectorAll(".mrow").forEach((r, i) => r.classList.toggle("done", S.cur > i));
+      document.querySelectorAll(".mrow .mbtn .btn").forEach((b, i) => {
+        b.textContent = S.cur > i ? "✓ 完成" : "合并 ▸";
+      });
+    }
+    S.next = function () { const d = _next(); paint(); return d; };
+    S.reset = function () { _reset(); paint(); };
+    window.prev = function () { const n = Math.max(0, S.cur - 1); S.reset(); for (let i = 0; i < n; i++) S.next(); };
+    paint();
+  });
+</script>
+</body>
+</html>

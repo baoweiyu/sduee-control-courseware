@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>1.3 推导结论与推广</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .col { display:flex; flex-direction:column; gap:12px; height:100%; min-height:0; }
+  .concl .bd { display:flex; align-items:center; gap:24px; padding:8px 24px; }
+  .concl .mathbox { font-size:22px; padding:9px 18px; margin:0; flex:none; }
+  .concl .wh { font-size:20.5px; line-height:1.55; color:var(--ink); }
+  .gen { flex:1; display:flex; flex-direction:column; min-height:0; }
+  .gen .bd { flex:1; display:flex; flex-direction:column; gap:8px; padding:10px 24px; justify-content:space-evenly; }
+  .gc { flex:1; background:var(--sky); border:2px solid var(--line); border-radius:14px; padding:7px 20px; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:4px; min-height:0; text-align:center; overflow:hidden; }
+  .gc .hd2 { font-size:22px; font-weight:700; color:var(--navy); line-height:1.4; display:flex; align-items:center; }
+  .gc .hd2 .no { display:inline-grid; place-items:center; width:32px; height:32px; border-radius:50%; background:var(--blue); color:#fff; font-size:19px; margin-right:10px; flex:none; }
+  .gc .mathbox { align-self:center; background:#fff; font-size:21px; padding:4px 16px; margin:0; }
+  .gc span.d { font-size:20.5px; color:var(--ink); line-height:1.5; max-width:1080px; }
+</style>
+</head>
+<body data-title="1.3 推导结论与推广" data-page="10 / 87">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="col">
+      <div class="act-card concl">
+        <div class="hd">结论：稳态输出 = 同频、变幅、移相的正弦</div>
+        <div class="bd">
+          <div class="mathbox math eqline tex tex-d">c(t)\xrightarrow[t\to\infty]{}\;R\,A(\omega)\sin\big(\omega t+\varphi(\omega)\big)</div>
+          <div class="wh">其中　<span class="tex">A(\omega)=|\varPhi(j\omega)|</span>（幅值之比），<span class="tex">\varphi(\omega)=\angle\varPhi(j\omega)</span>（相角之差）。稳态输出与输入是<span class="kw-r">同频率</span>的正弦，改变的只是<span class="kw-r">幅值与相角</span>——规律完全由 <span class="tex">\varPhi(j\omega)</span> 决定。</div>
+        </div>
+      </div>
+      <div class="act-card gen">
+        <div class="hd">推广：从传递函数到频率特性</div>
+        <div class="bd">
+          <div class="gc">
+            <div class="hd2"><span class="no">1</span>求取途径一：令 s = jω</div>
+            <div class="mathbox math eqline tex tex-d">\varPhi(j\omega)=\left.\varPhi(s)\right|_{s=j\omega}</div>
+            <span class="d">频率特性就是传递函数在虚轴上的取值——传递函数的<span class="kw-r">频域化身</span>。</span>
+          </div>
+          <div class="gc">
+            <div class="hd2"><span class="no">2</span>求取途径二：输出与输入的傅立叶变换之比</div>
+            <div class="mathbox math eqline tex tex-d">\varPhi(j\omega)=\dfrac{C(j\omega)}{R(j\omega)}</div>
+            <span class="d">零初始条件下对<span class="kw-r">任意输入信号</span>都成立。</span>
+          </div>
+          <div class="gc">
+            <div class="hd2"><span class="no">3</span>求取途径三：试验直接测量</div>
+            <div class="mathbox math eqline tex tex-d">A(\omega)=\dfrac{c_{\max}}{R},\quad \varphi(\omega)=\angle\dfrac{c}{r}</div>
+            <span class="d">逐点改变 <span class="tex">\omega</span>，测输出幅值与相位差即可绘出曲线。</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">一句话</span><span>三种途径殊途同归——频率特性只取决于系统自身的结构与参数，它是系统在频域的「名片」，也是后续画图与判稳的基础。</span></div>
+</div></div>
+</body>
+</html>

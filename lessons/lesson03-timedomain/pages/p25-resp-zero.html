@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>零阻尼（ζ=0）的阶跃响应</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<link rel="stylesheet" href="../lesson03-svg.css">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:24px; height:100%; }
+  .lcol { flex:1; display:flex; flex-direction:column; gap:16px; }
+  .drv { flex:1; }
+  .drv .bd { font-size:22px; line-height:1.6; }
+  .feat { background:#fff; border:2px solid var(--line); border-radius:14px; padding:16px 24px; font-size:22.5px; line-height:1.9; color:var(--ink); }
+  .figc { flex:1.35; display:flex; flex-direction:column; overflow:hidden; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:8px 14px; }
+  .figc svg { width:100%; height:100%; }
+</style>
+</head>
+<body data-title="零阻尼（ζ=0）的阶跃响应" data-page="27 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lcol">
+        <div class="act-card drv">
+          <div class="hd">1、ζ = 0（零阻尼）</div>
+          <div class="bd">
+            <div class="mathbox math eqline tex tex-d" style="font-size:25px;margin-bottom:10px">C(s) = \dfrac{\omega_{n}^{2}}{s\,(s^{2}+\omega_{n}^{2})} = \dfrac{1}{s} - \dfrac{s}{s^{2}+\omega_{n}^{2}}</div>
+            <div class="mathbox math eqline tex tex-d" style="font-size:27px">h(t) = 1 - \cos\,\omega_{n} t \quad (t \geq 0)</div>
+            极点 <span class="tex">s_{1,2} = \pm\mathrm{j}\,\omega_{n}</span>（纯虚根，位于虚轴）。
+          </div>
+        </div>
+        <div class="feat">
+          ① 响应为<span class="kw-r">等幅余弦振荡</span>，振幅 1，在 0～2 之间振荡；<br>
+          ② 振荡频率恰为 <span class="kw-r">ω<sub>n</sub></span> —— 这就是"无阻尼振荡角频率"的物理意义；<br>
+          ③ 无衰减，系统处于<span class="kw-r">临界稳定</span>状态。
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd">等幅振荡曲线（图示 ωn = 1）</div>
+        <div class="bd2"><svg id="fig" viewBox="0 0 1000 680">
+          <foreignObject x="130" y="601" width="220" height="76"><div xmlns="http://www.w3.org/1999/xhtml" style="font-size:28px;text-align:center;color:#D63A2F"><span class="tex">T=\dfrac{2\pi}{\omega_n}</span></div></foreignObject>
+          <foreignObject x="370" y="25" width="410" height="60"><div xmlns="http://www.w3.org/1999/xhtml" style="font-size:28px;text-align:center;color:#2B5CE6"><span class="tex">h(t)=1-\cos\omega_n t</span></div></foreignObject>
+        </svg></div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">直观</span>没有阻尼消耗能量，阶跃注入的能量在"弹簧"与"质量"之间永远交换，振荡永不停止。</div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("fig");
+  const h = t => t <= 0 ? 0 : 1 - Math.cos(t);
+  const T = 20, YM = 2.3;
+  const X = t => 96 + t / T * 850;
+  const Y = v => 540 - v / YM * 480;
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const tx = (x, y, s, o) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 24, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal" }); n.textContent = s; return n; };
+  const defs = mk("defs", {});
+  const m1 = mk("marker", { id: "a25", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, m1);
+
+  mk("line", { x1: 96, y1: 540, x2: 960, y2: 540, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a25)" });
+  mk("line", { x1: 96, y1: 540, x2: 96, y2: 32, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a25)" });
+  tx(966, 546, "t", { fs: 26, an: "start", it: true, b: true });
+  tx(58, 42, "h(t)", { fs: 26, it: true, b: true });
+  tx(74, 546, "O", { fs: 23, fill: "#5B6B8C" });
+
+  // 参考线 h=1、h=2
+  mk("line", { x1: 96, y1: Y(1), x2: 946, y2: Y(1), stroke: "#F5821F", "stroke-width": 2, "stroke-dasharray": "10 7" });
+  tx(80, Y(1) + 7, "1", { an: "end", fs: 24, b: true });
+  mk("line", { x1: 96, y1: Y(2), x2: 946, y2: Y(2), stroke: "#C9D8F2", "stroke-width": 1.4, "stroke-dasharray": "7 6" });
+  tx(80, Y(2) + 7, "2", { an: "end", fs: 24, b: true });
+
+  // 曲线
+  let d = "";
+  for (let i = 0; i <= 400; i++) { const t = T * i / 400; d += (i ? "L" : "M") + X(t).toFixed(1) + "," + Y(h(t)).toFixed(1); }
+  mk("path", { d, stroke: "#2B5CE6", "stroke-width": 3.5, fill: "none" });
+
+  // 周期标注：一个周期 2π
+  const t1 = 0, t2 = 2 * Math.PI;
+  // 双向箭头横跨一个周期，端点通过引线与相邻波峰对齐。
+  mk("line", { x1: X(t1), y1: 578, x2: X(t2), y2: 578, stroke: "#D63A2F", "stroke-width": 2.2, "marker-start": "url(#a25r)", "marker-end": "url(#a25r)" });
+  const m2 = mk("marker", { id: "a25r", markerWidth: 9, markerHeight: 9, refX: 6.5, refY: 2.7, orient: "auto-start-reverse" }, defs);
+  mk("path", { d: "M0,0 L6.5,2.7 L0,5.4 Z", fill: "#D63A2F" }, m2);
+  [t1, t2].forEach(t => mk("line", {x1:X(t), y1:548, x2:X(t), y2:590, stroke:"#C9D8F2", "stroke-width":1.5}));
+});
+</script>
+</body>
+</html>

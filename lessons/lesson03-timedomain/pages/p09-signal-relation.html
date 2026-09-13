@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>各典型输入函数间的关系</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<link rel="stylesheet" href="../lesson03-svg.css">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .col { height:100%; display:flex; flex-direction:column; justify-content:space-evenly; }
+  .sec2 { font-size:30px; font-weight:700; color:var(--blue); margin:0; text-align:center; }
+  .chain { display:flex; align-items:center; justify-content:center; gap:0; margin:16px 0 6px; }
+  .node { background:#fff; border:2.5px solid var(--blue); border-radius:16px; padding:32px 34px; min-width:230px; text-align:center; }
+  .node .f { font-size:38px; color:var(--navy); }
+  .node .d { font-size:20px; color:var(--muted); margin-top:10px; }
+  .node.rsp { border-color:var(--orange); }
+  .link { display:flex; flex-direction:column; align-items:center; width:160px; flex:none; }
+  .link .a1 { font-size:21px; color:var(--muted); margin-bottom:6px; }
+  .link .a2 { font-size:21px; color:var(--muted); margin-top:6px; }
+  .link svg { width:132px; height:24px; display:block; }
+  .sub { text-align:center; font-size:26px; color:var(--navy); font-weight:700; margin:0 0 4px; }
+  .sub .tex { font-size:26px; }
+  .usec { background:var(--sky); border-radius:14px; padding:20px 34px; font-size:22.5px; line-height:1.7; color:var(--navy); }
+  .usec .tex { font-size:24px; }
+  [data-step]:not(.shown) { visibility:hidden; }
+  .act-note{font-size:23px;padding:16px 26px}
+</style>
+</head>
+<body data-title="各典型输入函数间的关系" data-page="9 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="col">
+    <section>
+    <div class="sec2">输入函数之间：依次积分，反向求导</div>
+    <div class="chain">
+      <div class="node" data-step="1"><div class="f tex"> \delta(t) </div><div class="d">脉冲函数</div></div>
+      <div class="link" data-step="2">
+        <span class="a1">积分 ⟶</span>
+        <svg viewBox="0 0 126 24"><line x1="4" y1="12" x2="110" y2="12" stroke="#F5821F" stroke-width="2.5"/><path d="M110,4 L124,12 L110,20 Z" fill="#F5821F"/></svg>
+        <span class="a2">⟵ 求导</span>
+      </div>
+      <div class="node" data-step="3"><div class="f tex"> 1(t) </div><div class="d">阶跃函数</div></div>
+      <div class="link" data-step="4">
+        <span class="a1">积分 ⟶</span>
+        <svg viewBox="0 0 126 24"><line x1="4" y1="12" x2="110" y2="12" stroke="#F5821F" stroke-width="2.5"/><path d="M110,4 L124,12 L110,20 Z" fill="#F5821F"/></svg>
+        <span class="a2">⟵ 求导</span>
+      </div>
+      <div class="node" data-step="5"><div class="f tex"> t\cdot 1(t) </div><div class="d">斜坡函数</div></div>
+      <div class="link" data-step="6">
+        <span class="a1">积分 ⟶</span>
+        <svg viewBox="0 0 126 24"><line x1="4" y1="12" x2="110" y2="12" stroke="#F5821F" stroke-width="2.5"/><path d="M110,4 L124,12 L110,20 Z" fill="#F5821F"/></svg>
+        <span class="a2">⟵ 求导</span>
+      </div>
+      <div class="node" data-step="7"><div class="f tex"> \dfrac{1}{2}t^{2}\cdot 1(t) </div><div class="d">抛物线函数</div></div>
+    </div>
+    </section>
+    <section>
+    <div class="sub" data-step="8">对应的响应之间：同样互为积分 / 求导关系</div>
+    <div class="chain" data-step="9" style="margin-top:8px">
+      <div class="node rsp"><div class="d" style="font-size:25px;color:var(--ink);font-weight:700">脉冲响应</div><div class="d">瞬时冲击的响应</div></div>
+      <div class="link">
+        <span class="a1">积分 ⟶</span>
+        <svg viewBox="0 0 126 24"><line x1="4" y1="12" x2="110" y2="12" stroke="#F5821F" stroke-width="2.5"/><path d="M110,4 L124,12 L110,20 Z" fill="#F5821F"/></svg>
+        <span class="a2">⟵ 求导</span>
+      </div>
+      <div class="node rsp"><div class="d" style="font-size:25px;color:var(--ink);font-weight:700">阶跃响应</div><div class="d">最常用</div></div>
+      <div class="link">
+        <span class="a1">积分 ⟶</span>
+        <svg viewBox="0 0 126 24"><line x1="4" y1="12" x2="110" y2="12" stroke="#F5821F" stroke-width="2.5"/><path d="M110,4 L124,12 L110,20 Z" fill="#F5821F"/></svg>
+        <span class="a2">⟵ 求导</span>
+      </div>
+      <div class="node rsp"><div class="d" style="font-size:25px;color:var(--ink);font-weight:700">斜坡响应</div><div class="d">跟踪等速信号</div></div>
+      <div class="link">
+        <span class="a1">积分 ⟶</span>
+        <svg viewBox="0 0 126 24"><line x1="4" y1="12" x2="110" y2="12" stroke="#F5821F" stroke-width="2.5"/><path d="M110,4 L124,12 L110,20 Z" fill="#F5821F"/></svg>
+        <span class="a2">⟵ 求导</span>
+      </div>
+      <div class="node rsp"><div class="d" style="font-size:25px;color:var(--ink);font-weight:700">抛物线响应</div><div class="d">跟踪等加速信号</div></div>
+    </div>
+    </section>
+    <div class="usec" data-step="10"><b>应用</b>：线性系统只需测得一种响应，即可推得其余 —— 脉冲响应 <span class="tex">k(t)=\dfrac{\mathrm{d}h(t)}{\mathrm{d}t}</span>，斜坡响应 <span class="tex">c(t)=\displaystyle\int_{0}^{t}h(\tau)\,\mathrm{d}\tau</span>，反之亦然（第四节将多次用到）。</div>
+    </div>
+  </div>
+  <div class="act-note" data-step="11"><span class="lead">意义</span>四种典型输入互为积分/求导关系，其响应也互为积分/求导关系（第二节小结将用到这一性质）。</div>
+</div></div>
+</body>
+</html>

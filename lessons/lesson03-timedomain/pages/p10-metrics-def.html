@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>阶跃响应的时域性能指标（定义）</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .top { background:var(--sky); border:2px solid var(--line); border-radius:14px; padding:20px 26px; font-size:25px; color:var(--navy); margin-bottom:26px; display:flex; align-items:center; justify-content:center; gap:16px; }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:22px 22px; }
+  .mi { background:#fff; border:2px solid var(--line); border-radius:14px; padding:22px 22px 22px 18px; display:flex; gap:16px; align-items:center; }
+  .mi .sym { flex:none; width:88px; text-align:center; background:var(--blue); color:#fff; border-radius:10px; padding:8px 0; font-size:24px; font-weight:700; }
+  .mi .tx { font-size:21px; color:var(--ink); line-height:1.5; }
+  .mi .tx b { color:var(--navy); font-size:22px; }
+  .mi.wide { grid-column:1 / -1; }
+</style>
+</head>
+<body data-title="二、阶跃响应的时域性能指标" data-page="11 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body fill">
+    <div class="top">时间响应可分解为：　<span class="tex" style="font-size:27px">c(t) = c_{t}(t) + c_{ss}(t)</span>　=　<span class="kw-r">暂态响应</span> + <span class="kw-r">稳态响应</span></div>
+    <div style="font-size:23px;font-weight:700;color:var(--blue);margin-bottom:12px">1. 暂态性能指标（在阶跃响应曲线上定义）</div>
+    <div class="grid">
+      <div class="mi"><div class="sym tex">t_{d}</div><div class="tx"><b>延迟时间</b>：输出响应第一次达到稳态值 <span class="tex">50\%</span> 所需的时间</div></div>
+      <div class="mi"><div class="sym tex">t_{r}</div><div class="tx"><b>上升时间</b>：响应第一次达到稳态值 <span class="tex">c(\infty)</span> 的时间（无超调时取稳态值的 10%→90%）</div></div>
+      <div class="mi"><div class="sym tex">t_{p}</div><div class="tx"><b>峰值时间</b>：响应超过稳态值 <span class="tex">c(\infty)</span> 达到第一个峰值（最大超调）的时间</div></div>
+      <div class="mi"><div class="sym tex">t_{s}</div><div class="tx"><b>调节时间</b>：响应与稳态值的偏差进入并保持在允许<span class="kw-r">误差带</span> <span class="tex">\Delta = 2\%</span> 或 <span class="tex">5\%</span> 内所需的时间</div></div>
+      <div class="mi wide"><div class="sym tex">\sigma\%</div><div class="tx"><b>最大超调量</b>：响应最大值 <span class="tex">c_{max}</span> 超过稳态值 <span class="tex">c(\infty)</span> 的百分数，又称百分比超调：
+        <span class="mathbox math eqline tex tex-d" style="display:inline-block;padding:6px 24px;font-size:26px;margin-left:14px">\sigma\% = \dfrac{c_{max} - c(\infty)}{c(\infty)} \times 100\%</span></div></div>
+    </div>
+  </div>
+</div></div>
+</body>
+</html>

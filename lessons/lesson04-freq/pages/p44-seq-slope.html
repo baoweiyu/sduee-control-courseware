@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>2.3 顺序斜率叠加法：折线逐段生长</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .colwrap { display:flex; flex-direction:column; gap:14px; height:100%; min-height:0; }
+  .modelband { background:#fff; border:2.5px solid var(--line); border-radius:14px; padding:8px 24px; display:flex; align-items:center; gap:24px; flex:none; }
+  .modelband .mb { font-size:26px; color:var(--navy); font-weight:700; flex:none; }
+  .modelband .mf { font-size:26px; padding:6px 14px; }
+  .modelband .wn { font-size:22px; color:var(--ink); }
+  .row { display:flex; gap:22px; flex:1; min-height:0; }
+  .lst { flex:0 0 30%; display:flex; flex-direction:column; gap:12px; min-height:0; }
+  .bigread { background:var(--sky); border:2.5px solid var(--line); border-radius:14px; padding:12px 20px; }
+  .bigread.hl { border-color:#D63A2F; background:#FDF1EF; }
+  .bigread .lab { font-size:20px; font-weight:800; color:var(--blue); display:block; margin-bottom:6px; }
+  .bigread .val { font-size:24px; line-height:1.45; color:var(--ink); font-weight:700; }
+  .bigread .val b { color:var(--navy); }
+  .slopenote { background:var(--sky); border-radius:12px; padding:10px 16px; font-size:19px; color:var(--navy); line-height:1.5; }
+  .playbar { display:flex; justify-content:flex-end; gap:10px; }
+  .playbtn { border:none; background:var(--blue); color:#fff; font-size:19px; font-weight:700; border-radius:10px; padding:9px 22px; cursor:pointer; }
+  .playbtn:hover { background:var(--navy); }
+  .figc { flex:1; display:flex; flex-direction:column; overflow:hidden; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:6px 12px; min-height:0; }
+  .figc svg { width:100%; height:100%; }
+</style>
+</head>
+<body data-title="2.3 顺序斜率叠加法：折线逐段生长" data-page="44 / 87">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="colwrap">
+      <div class="modelband">
+        <span class="mb">例题模型：</span>
+        <span class="mathbox math mf eqline tex tex-d">G(s)H(s)=\dfrac{40\,(0.5s+1)}{s\,(2s+1)\,\left(\dfrac{s}{30}+1\right)}</span>
+        <span class="wn">K=40（20lg40≈32dB）、ν=1；转角排序：<b>0.5（惯性）→ 2（一阶微分）→ 30（惯性）</b></span>
+      </div>
+      <div class="row">
+        <div class="lst">
+          <div class="playbar">
+            <button class="playbtn" id="stepb">⏭ 分步</button>
+            <button class="playbtn" id="resetb">⟲ 重置</button>
+            <button class="playbtn" id="play">▶ 连续播放</button>
+          </div>
+          <div class="bigread" id="cardCur"><span class="lab">① 当前步骤</span><span class="val" id="r-cur">点"分步"或"连续播放"开始</span></div>
+          <div class="bigread" id="cardSlp"><span class="lab">② 本段斜率动作</span><span class="val" id="r-slp">—</span></div>
+          <div class="bigread"><span class="lab">③ 合成结果</span><span class="val" id="r-cum">—</span></div>
+          <div class="slopenote">合成斜率序列：起点 <b>−20</b> →（0.5）<b>−40</b> →（2）<b>−20</b> →（30）<b>−40</b> dB/dec。</div>
+        </div>
+        <div class="act-card figc">
+          <div class="hd">对数幅频渐近线的"逐段生长"（ω：0.1 → 100）</div>
+          <div class="bd2"><svg id="fig" viewBox="0 0 1000 640"></svg></div>
+        </div>
+      </div>
+      <div data-step="1" style="display:none"></div>
+      <div data-step="2" style="display:none"></div>
+      <div data-step="3" style="display:none"></div>
+      <div data-step="4" style="display:none"></div>
+      <div data-step="5" style="display:none"></div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">相频</span><span>相频特性用<span class="kw-r">描点连线法</span>：写出 φ(ω)=−90°+arctg0.5ω−arctg2ω−arctg(ω/30)，选若干 ω 计算相角、连点描线即可。</span></div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("fig");
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const MF = "Cambria Math,STIX Two Math,Georgia,Microsoft YaHei,sans-serif";
+  const SUB = (n, s) => { const esc = t => t.replace(/&/g, "&amp;").replace(/</g, "&lt;"); let html = "", sub = false; for (const p of String(s).split(/(_\{[^}]*\})/)) { if (!p) continue; if (p.startsWith("_{")) { html += '<tspan' + (sub ? '' : ' dy="6"') + ' font-size="72%">' + esc(p.slice(2, -1)) + '</tspan>'; sub = true; } else { html += sub ? '<tspan dy="-6">' + esc(p) + '</tspan>' : esc(p); sub = false; } } n.innerHTML = html; };
+  const tx = (x, y, s, o, parent) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 22, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal", "font-family": MF }, parent); SUB(n, s); if (o && o.halo) n.setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:6;stroke-linejoin:round"); return n; };
+  const defs = mk("defs", {});
+  const m1 = mk("marker", { id: "a42", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, m1);
+  const x0 = 84, x1 = 952, DEC = (x1 - x0) / 3;   // ω: 0.1..100
+  const X = w => x0 + (Math.log10(w) + 1) * DEC;
+  const Lmax = 56, Lmin = -36, yT = 40, yB = 596;
+  const Y = v => yT + (Lmax - v) / (Lmax - Lmin) * (yB - yT);
+  mk("line", { x1: x0, y1: yB, x2: x1, y2: yB, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a42)" });
+  mk("line", { x1: x0, y1: yB, x2: x0, y2: yT, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a42)" });
+  [0.1, 1, 10, 100].forEach(w => { const x = X(w); mk("line", { x1: x, y1: yB, x2: x, y2: yT, stroke: "#EDF2FB", "stroke-width": 1 }); tx(x, yB + 26, String(w), { fs: 22, fill: "#5B6B8C" }); });
+  [40, 20, 0, -20].forEach(v => { const y = Y(v); mk("line", { x1: x0, y1: y, x2: x1, y2: y, stroke: v === 0 ? "#8AA6D8" : "#F0F4FC", "stroke-width": v === 0 ? 1.8 : 1, "stroke-dasharray": v === 0 ? "9 6" : "0" }); tx(x0 - 12, y + 7, v + "", { fs: 21, fill: "#5B6B8C", an: "end" }); });
+  tx(x1 + 4, yB + 8, "ω", { fs: 23, it: true, b: true, fill: "#5B6B8C", an: "start" });
+  tx(x0 - 12, yT - 4, "L/dB", { fs: 22, b: true, fill: "#1B3B8B", an: "end" });
+  const dyn = mk("g", {});
+  const LG = Math.log10;
+  // 各段端点（渐近线，全精度 20lg40=32.0416）
+  const PTS = [[0.1, 52.04], [0.5, 38.06], [2, 13.98], [30, -9.54], [100, -30.46]];
+  const SLP = ["−20", "−40", "−20", "−40"];
+  const STEPS = {
+    0: ["（未开始）", "—", "渐近线尚未绘制"],
+    1: ["定基准点", "基准点 (1, 32dB) 为低频延长线上的点", "标出转角 0.5 / 2 / 30"],
+    2: ["画低频段（ν=1）", "斜率 −20dB/dec", "过基准点延伸至 ω=0.5"],
+    3: ["过 ω=0.5（惯性）", "叠加 −20 → −40dB/dec", "延伸至 ω=2"],
+    4: ["过 ω=2（一阶微分）", "叠加 +20 → −20dB/dec", "延伸至 ω=30"],
+    5: ["过 ω=30（惯性）", "叠加 −20 → −40dB/dec", "延伸至高频，渐近线完成 ✓"],
+  };
+  let K = 0; const TOTAL = 5;
+  function paint() {
+    dyn.innerHTML = "";
+    const st = STEPS[Math.min(K, 5)];
+    document.getElementById("r-cur").textContent = st[0];
+    document.getElementById("r-slp").textContent = st[1];
+    document.getElementById("r-cum").textContent = st[2];
+    document.getElementById("cardCur").classList.toggle("hl", K >= 2 && K <= 5);
+    if (K >= 1) {
+      [0.5, 2, 30].forEach(w => {
+        mk("line", { x1: X(w), y1: yB, x2: X(w), y2: yT, stroke: "#C6D2EA", "stroke-width": 1.2, "stroke-dasharray": "5 5" }, dyn);
+        tx(X(w), yB + 28, String(w), { fs: 20, b: true, fill: "#5B6B8C" }, dyn);
+      });
+      mk("circle", { cx: X(1), cy: Y(32.04), r: 8, fill: "#F5821F" }, dyn);
+      tx(X(1) + 14, Y(32.04) - 12, "基准点 (1, 32dB)", { fs: 21, b: true, fill: "#F5821F", an: "start" }, dyn)
+        .setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:5");
+    }
+    if (K >= 2) {
+      const nseg = Math.min(K - 1, 4);
+      for (let i = 0; i < nseg; i++) {
+        const [wa, la] = PTS[i], [wb, lb] = PTS[i + 1];
+        mk("line", { x1: X(wa), y1: Y(la), x2: X(wb), y2: Y(lb), stroke: "#1D3FA0", "stroke-width": 4.6 }, dyn);
+        mk("circle", { cx: X(wa), cy: Y(la), r: 6, fill: "#1D3FA0" }, dyn);
+        const xm = (X(wa) + X(wb)) / 2, ym = (Y(la) + Y(lb)) / 2;
+        tx(xm + 6, ym - 12, "[" + SLP[i] + "]", { fs: 22, b: true, fill: "#D63A2F" }, dyn)
+          .setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:5");
+      }
+      const [wl, ll] = PTS[nseg];
+      mk("circle", { cx: X(wl), cy: Y(ll), r: 6, fill: "#1D3FA0" }, dyn);
+    }
+    if (K >= 5) {
+      tx(X(100) - 8, Y(-24) - 14, "渐近线完成 ✓", { fs: 22, b: true, fill: "#1D3FA0", an: "end" }, dyn);
+    }
+  }
+  const S = ACT.step, _next = S.next.bind(S), _reset = S.reset.bind(S);
+  S.next = function () { if (K < TOTAL) K++; const d = _next(); paint(); return d; };
+  S.reset = function () { K = 0; _reset(); paint(); };
+  window.prev = function () { const n = Math.max(0, S.cur - 1); S.reset(); for (let i = 0; i < n; i++) S.next(); };
+  let timer = null;
+  document.getElementById("play").addEventListener("click", () => {
+    if (timer) { clearInterval(timer); timer = null; return; }
+    if (K >= TOTAL) S.reset();
+    timer = setInterval(() => { if (K >= TOTAL) { clearInterval(timer); timer = null; } else S.next(); }, 1100);
+  });
+  document.getElementById("stepb").addEventListener("click", () => {
+    if (timer) { clearInterval(timer); timer = null; }
+    if (K >= TOTAL) S.reset();
+    S.next();
+  });
+  document.getElementById("resetb").addEventListener("click", () => {
+    if (timer) { clearInterval(timer); timer = null; }
+    S.reset();
+  });
+  paint();
+});
+</script>
+</body>
+</html>

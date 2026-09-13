@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>课堂互动 · 系数为零意味着什么</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:24px; height:100%; }
+  .lcol { flex:0.9; display:flex; flex-direction:column; gap:18px; }
+  .lcol .act-card { flex:1; display:flex; flex-direction:column; }
+  .revc .bd { flex:1; font-size:22.5px; line-height:1.9; display:flex; flex-direction:column; justify-content:center; gap:14px; }
+  .mini .bd { flex:1; font-size:21.5px; line-height:1.8; display:flex; flex-direction:column; justify-content:center; gap:10px; }
+  .mini .bd .tex { font-size:20.5px; }
+  .qcol { flex:1.1; display:flex; flex-direction:column; gap:18px; }
+  .qtype { display:inline-block; background:var(--orange); color:#fff; font-size:21px; font-weight:700; border-radius:10px; padding:7px 20px; width:fit-content; }
+  .qz { background:#fff; border:2px solid var(--line); border-radius:16px; padding:24px 30px; }
+  .qz .qt { font-size:24px; color:var(--navy); font-weight:700; margin-bottom:18px; line-height:1.6; }
+  .stage-tip { display:inline-block; margin-bottom:16px; font-size:19.5px; color:#fff; background:var(--blue); border-radius:20px; padding:6px 20px; width:fit-content; }
+  .opts { display:flex; flex-direction:column; gap:14px; }
+  .opt { background:var(--sky); border:2px solid var(--line); border-radius:12px; padding:14px 22px; font-size:22.5px; color:var(--ink); font-weight:700; position:relative; }
+  .opt.right { border-color:#1E9E57; background:#F0FAF4; }
+  .opt.right::after { content:"✓"; position:absolute; top:-14px; right:-10px; width:32px; height:32px; border-radius:50%; background:#1E9E57; color:#fff; font-weight:800; font-size:20px; display:grid; place-items:center; }
+  .ans { font-size:22px; color:var(--navy); background:var(--sky); border-radius:12px; padding:16px 24px; line-height:1.75; }
+  .ans b { color:var(--danger); }
+</style>
+</head>
+<body data-title="课堂互动 · 系数为零意味着什么" data-page="60 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="row">
+      <div class="lcol">
+      <div class="act-card revc">
+        <div class="hd">回顾 · 判稳的两道关</div>
+        <div class="bd">
+          <span>① <b>必要条件</b>：特征方程各项系数<span class="kw-r">全为正、不缺项</span>；不满足 → 不必列表，必不稳定。</span>
+          <span>② <b>充要条件（劳斯判据）</b>：<br>劳斯表<span class="kw-r">第一列全大于零</span>。</span>
+          <span>③ 第一列符号改变的次数 = <span class="kw-r">正实部根的数目</span>。</span>
+        </div>
+      </div>
+      <div class="act-card mini revc-sub">
+        <div class="hd">必要条件速判（不必列表）</div>
+        <div class="bd">
+          <span>例： <span class="tex">s^{3}+2s^{2}+3=0</span>（缺 s 项）→ <span class="kw-r">必不稳定</span></span>
+          <span>例： <span class="tex">s^{4}+3s^{3}-2s^{2}+s+5=0</span>（有负系数）→ <span class="kw-r">必不稳定</span></span>
+          <span>例： <span class="tex">s^{3}+s^{2}+2s+8=0</span>（全正不缺项）→ <span class="kw">满足必要条件，须列劳斯表再判</span></span>
+        </div>
+      </div>
+      </div>
+      <div class="qcol">
+        <span class="qtype">课堂投票　单选</span>
+        <div class="qz">
+          <div class="qt">系统特征方程 <span class="tex" style="font-size:23px">a_{0}s^{4}+a_{1}s^{3}+a_{2}s^{2}+a_{3}s+a_{4}=0</span>（a₀&gt;0），若各项系数中<span style="color:var(--danger)">有一项为 0</span>，则可判定：</div>
+          <span class="stage-tip">请先作出判断</span>
+          <div class="opts">
+            <div class="opt" data-mark="0">A　系统一定是稳定的</div>
+            <div class="opt" data-mark="1">B　系统一定是不稳定的</div>
+            <div class="opt" data-mark="0">C　系统可能稳定，也可能不稳定</div>
+          </div>
+        </div>
+        <div class="ans" data-step="2">
+          <b>答案：B。</b>系数全正是稳定的<span class="kw">必要条件</span>；某项系数为 0（缺项）意味着必要条件被破坏，因此系统<span class="kw">一定不稳定</span> —— 此时不必列劳斯表即可下结论，也不存在"可能稳定"的情形。
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const S = ACT.step, _n = S.next.bind(S), _r = S.reset.bind(S);
+  function mark() {
+    const on = S.cur >= 1;
+    document.querySelectorAll(".opt").forEach(o => o.classList.toggle("right", on && o.dataset.mark === "1"));
+  }
+  S.next = function () { const dd = _n(); mark(); return dd; };
+  S.reset = function () { _r(); mark(); };
+  window.prev = function () { const n = Math.max(0, S.cur - 1); S.reset(); for (let i = 0; i < n; i++) S.next(); };
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>例2-7 理想运算放大器</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .cols { display:flex; gap:26px; height:470px; margin-top:2px; }
+  .imgc { flex:1; overflow:hidden; display:flex; flex-direction:column; }
+  .imgc .bd2 { flex:1; display:grid; place-items:center; background:var(--sky); padding:8px; }
+  .imgc img { max-width:100%; max-height:100%; object-fit:contain; }
+  .cir { flex:1.15; display:flex; flex-direction:column; }
+  .cir .bd2 { flex:1; display:grid; place-items:center; padding:6px; }
+  .drv { margin-top:20px; display:flex; gap:20px; }
+  .ln { flex:1; background:#fff; border:2px solid var(--line); border-radius:12px; padding:14px 22px; font-size:21.5px; color:var(--ink); display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+  .math { font-size:22.5px; }
+  .fin { border-left:12px solid var(--danger); background:var(--sky); flex:1.45; }
+</style>
+</head>
+<body data-title="例2-7　理想运算放大器" data-page="26 / 51">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="cols">
+      <div class="act-card imgc">
+        <div class="hd" style="font-size:23px">运算放大器电路模块</div>
+        <div class="bd2"><img src="../../../assets/image2/opamp-board.png" alt="运算放大器电路板"></div>
+      </div>
+      <div class="act-card cir">
+        <div class="hd" style="font-size:23px">反相比例电路</div>
+        <div class="bd2">
+          <svg viewBox="0 0 460 260" width="96%" height="94%">
+            <g stroke="#1D3FA0" stroke-width="3" fill="none">
+              <!-- 运放三角形 -->
+              <path d="M190 70 L190 190 L300 130 Z" fill="#fff"/>
+              <!-- 输入 R₁ 支路 -->
+              <line x1="34" y1="105" x2="70" y2="105"/>
+              <rect x="70" y="91" width="60" height="28" fill="#fff"/>
+              <line x1="130" y1="105" x2="190" y2="105"/>
+              <!-- 反馈支路 R₂∥C：−端节点 → 输出端节点 -->
+              <polyline points="160,105 160,55 320,55 320,130"/>
+              <rect x="215" y="41" width="70" height="28" fill="#fff"/>
+              <!-- 输出 -->
+              <line x1="300" y1="130" x2="386" y2="130"/>
+              <!-- + 端接地 -->
+              <line x1="160" y1="155" x2="190" y2="155"/>
+              <line x1="170" y1="155" x2="170" y2="205"/>
+              <line x1="155" y1="205" x2="185" y2="205"/>
+              <line x1="160" y1="211" x2="180" y2="211"/>
+              <line x1="165" y1="217" x2="175" y2="217"/>
+            </g>
+            <circle cx="160" cy="105" r="4.5" fill="#1D3FA0"/>
+            <circle cx="320" cy="130" r="4.5" fill="#1D3FA0"/>
+            <text x="198" y="112" font-size="18" fill="#1B3B8B">−</text>
+            <text x="198" y="166" font-size="18" fill="#1B3B8B">+</text>
+            <text x="14" y="112" font-size="19" fill="#1B3B8B" font-style="italic">uᵢ</text>
+            <text x="100" y="84" text-anchor="middle" font-size="18" fill="#1B3B8B" font-style="italic">R₁</text>
+            <text x="250" y="34" text-anchor="middle" font-size="18" fill="#1B3B8B" font-style="italic">R₂ ∥ C</text>
+            <text x="394" y="136" font-size="19" fill="#1B3B8B" font-style="italic">uₒ</text>
+            <text x="120" y="140" text-anchor="middle" font-size="17" fill="#1B3B8B" font-style="italic">i₁ = i₂</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="drv">
+      <div class="ln" data-step><b>假设：</b><span class="math tex">u₊ = u_{-} = 0\text{，}i₊ = i_{-} = 0</span><span>本题 <span class="math tex">u_{b} \approx 0\text{，}i_{1} = i_{2}</span></span></div>
+      <div class="ln" data-step><b>阻抗：</b><span class="math tex">Z_{1} = R_{1}\text{，} Z_{2} = R_{2} \parallel \dfrac{1}{Cs} = \dfrac{R_{2}}{R_{2}Cs + 1}</span></div>
+      <div class="ln fin" data-step style="display:block"><b>传递函数：</b>
+        <div class="math tex tex-d" style="margin-top:8px;white-space:nowrap">G(s) = \dfrac{U_{o}(s)}{U_{i}(s)} = -\dfrac{Z_{2}}{Z_{1}} = \color{#D63A2F}{-\dfrac{R_{2}/R_{1}}{R_{2}Cs + 1} = -\dfrac{K}{\tau s + 1}}</div>
+      </div>
+    </div>
+  </div>
+</div></div>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>信号流图的绘制与等效变换</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .cols { display:flex; gap:18px; height:640px; }
+  .cl { flex:0 0 430px; display:flex; flex-direction:column; gap:14px; }
+  .cl .act-card { flex:1; }
+  .cl .bd2 { padding:14px 18px; }
+  .flow4 { display:flex; flex-direction:column; gap:8px; }
+  .fs { display:flex; align-items:center; gap:10px; font-size:18px; background:var(--sky); border-radius:9px; padding:7px 12px; white-space:nowrap; }
+  .fs b { color:var(--blue); }
+  .arr { color:var(--orange); font-weight:800; }
+  .prop { font-size:18.5px; line-height:1.5; color:var(--ink); }
+  .prop li { margin-bottom:8px; }
+  .cr { flex:1; }
+  .cr .bd2 { padding:8px 16px; display:flex; flex-direction:column; gap:4px; }
+  .rr { display:flex; align-items:center; gap:8px; border-bottom:1.5px dashed #D8DEF0; padding:5px 0; }
+  .rr:last-child { border-bottom:none; }
+  .rr .nm { flex:0 0 150px; font-size:18.5px; font-weight:800; color:var(--blue); }
+  .rr svg { flex:0 0 250px; }
+  .rr .to { flex:0 0 30px; text-align:center; color:var(--orange); font-size:22px; font-weight:800; }
+</style>
+</head>
+<body data-title="信号流图的绘制与等效变换（表2-2）" data-page="44 / 51">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="cols">
+      <div class="cl">
+        <div class="act-card">
+          <div class="hd" style="font-size:21px">绘制方法（与方框图相似）</div>
+          <div class="bd2">
+            <div class="flow4">
+              <div class="fs" data-step="1"><b>①</b> 物理方程 <span class="arr">➜</span> 拉氏变换成<b>代数方程</b></div>
+              <div class="fs" data-step="2"><b>②</b> 写成<b>因果式</b>（变量 = 其余变量的线性组合）</div>
+              <div class="fs" data-step="3"><b>③</b> 按因果式绘出<b>局部流图</b></div>
+              <div class="fs" data-step="4"><b>④</b> 互联成<b>系统信号流图</b></div>
+            </div>
+          </div>
+        </div>
+        <div class="act-card">
+          <div class="hd" style="font-size:21px">基本性质（4 条）</div>
+          <div class="bd2">
+            <ol class="prop" style="margin:0; padding-left:24px">
+              <li>节点表示变量：源节点=输入量，汇节点=输出量，混合节点=各支路变量的<b>代数和</b></li>
+              <li>支路表示变量的<b>传输与变换</b>过程</li>
+              <li>增加一条<b>单位传输</b>支路，可把混合节点化为汇节点</li>
+              <li>同一系统的信号流图<span class="kw-r">不唯一</span></li>
+            </ol>
+          </div>
+        </div>
+      </div>
+      <div class="act-card cr">
+        <div class="hd" style="font-size:21px">等效变换规则（表 2-2）</div>
+        <div class="bd2">
+          <div class="rr" data-step="5">
+            <div class="nm">① 串联合并</div>
+            <svg viewBox="0 0 250 64" height="56"><circle cx="20" cy="32" r="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.2"/><circle cx="125" cy="32" r="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.2"/><circle cx="230" cy="32" r="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.2"/>
+              <line x1="26" y1="32" x2="119" y2="32" stroke="#1D3FA0" stroke-width="2.2"/><line x1="131" y1="32" x2="224" y2="32" stroke="#1D3FA0" stroke-width="2.2"/>
+              <path d="M-4.5,-3.5 L6,0 L-4.5,3.5 Z" transform="translate(72,32)" fill="#1D3FA0"/><path d="M-4.5,-3.5 L6,0 L-4.5,3.5 Z" transform="translate(177,32)" fill="#1D3FA0"/>
+              <text x="66" y="24" font-size="15" fill="#1B3B8B" font-style="italic">a</text><text x="172" y="24" font-size="15" fill="#1B3B8B" font-style="italic">b</text></svg>
+            <div class="to">➜</div>
+            <svg viewBox="0 0 250 64" height="56"><circle cx="20" cy="32" r="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.2"/><circle cx="230" cy="32" r="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.2"/>
+              <line x1="26" y1="32" x2="224" y2="32" stroke="#1D3FA0" stroke-width="2.2"/>
+              <path d="M-4.5,-3.5 L6,0 L-4.5,3.5 Z" transform="translate(125,32)" fill="#1D3FA0"/>
+              <text x="116" y="24" font-size="15" fill="#D63A2F" font-style="italic" font-weight="700">a·b</text></svg>
+          </div>
+          <div class="rr" data-step="5">
+            <div class="nm">② 并联合并</div>
+            <svg viewBox="0 0 250 64" height="56"><circle cx="30" cy="32" r="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.2"/><circle cx="220" cy="32" r="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.2"/>
+              <path d="M 36 28 Q 125 -6 214 28" fill="none" stroke="#1D3FA0" stroke-width="2.2"/>
+              <path d="M 36 36 Q 125 70 214 36" fill="none" stroke="#1D3FA0" stroke-width="2.2"/>
+              <path d="M-4.5,-3.5 L6,0 L-4.5,3.5 Z" transform="translate(125,11)" fill="#1D3FA0"/><path d="M-4.5,-3.5 L6,0 L-4.5,3.5 Z" transform="translate(125,53)" fill="#1D3FA0"/>
+              <text x="102" y="12" font-size="15" fill="#1B3B8B" font-style="italic">a</text><text x="102" y="58" font-size="15" fill="#1B3B8B" font-style="italic">b</text></svg>
+            <div class="to">➜</div>
+            <svg viewBox="0 0 250 64" height="56"><circle cx="20" cy="32" r="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.2"/><circle cx="230" cy="32" r="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.2"/>
+              <line x1="26" y1="32" x2="224" y2="32" stroke="#1D3FA0" stroke-width="2.2"/>
+              <path d="M-4.5,-3.5 L6,0 L-4.5,3.5 Z" transform="translate(125,32)" fill="#1D3FA0"/>
+              <text x="110" y="24" font-size="15" fill="#D63A2F" font-style="italic" font-weight="700">a+b</text></svg>
+          </div>
+          <div class="rr" data-step="5">
+            <div class="nm">③ 混合节点消除</div>
+            <svg viewBox="0 0 250 64" height="56"><circle cx="20" cy="12" r="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.2"/><circle cx="20" cy="52" r="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.2"/>
+              <circle cx="125" cy="32" r="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.2"/><circle cx="230" cy="32" r="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.2"/>
+              <line x1="25" y1="15" x2="118" y2="30" stroke="#1D3FA0" stroke-width="2.2"/>
+              <line x1="25" y1="49" x2="118" y2="34" stroke="#1D3FA0" stroke-width="2.2"/>
+              <line x1="131" y1="32" x2="224" y2="32" stroke="#1D3FA0" stroke-width="2.2"/>
+              <path d="M-4.5,-3.5 L6,0 L-4.5,3.5 Z" transform="translate(71,22) rotate(9)" fill="#1D3FA0"/><path d="M-4.5,-3.5 L6,0 L-4.5,3.5 Z" transform="translate(71,42) rotate(-9)" fill="#1D3FA0"/><path d="M-4.5,-3.5 L6,0 L-4.5,3.5 Z" transform="translate(177,32)" fill="#1D3FA0"/>
+              <text x="60" y="12" font-size="14" fill="#1B3B8B" font-style="italic">a</text><text x="60" y="60" font-size="14" fill="#1B3B8B" font-style="italic">b</text><text x="172" y="24" font-size="14" fill="#1B3B8B" font-style="italic">c</text></svg>
+            <div class="to">➜</div>
+            <svg viewBox="0 0 250 64" height="56"><circle cx="20" cy="12" r="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.2"/><circle cx="20" cy="52" r="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.2"/><circle cx="230" cy="32" r="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.2"/>
+              <line x1="25" y1="15" x2="223" y2="29" stroke="#1D3FA0" stroke-width="2.2"/>
+              <line x1="25" y1="49" x2="223" y2="35" stroke="#1D3FA0" stroke-width="2.2"/>
+              <path d="M-4.5,-3.5 L6,0 L-4.5,3.5 Z" transform="translate(124,22) rotate(4)" fill="#1D3FA0"/><path d="M-4.5,-3.5 L6,0 L-4.5,3.5 Z" transform="translate(124,42) rotate(-4)" fill="#1D3FA0"/>
+              <text x="100" y="12" font-size="14" fill="#D63A2F" font-style="italic" font-weight="700">a·c</text><text x="100" y="60" font-size="14" fill="#D63A2F" font-style="italic" font-weight="700">b·c</text></svg>
+          </div>
+          <div class="rr" data-step="6">
+            <div class="nm">④ 回路消除</div>
+            <svg viewBox="0 0 250 64" height="56"><circle cx="20" cy="22" r="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.2"/><circle cx="125" cy="22" r="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.2"/><circle cx="230" cy="22" r="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.2"/>
+              <line x1="26" y1="22" x2="119" y2="22" stroke="#1D3FA0" stroke-width="2.2"/><line x1="131" y1="22" x2="224" y2="22" stroke="#1D3FA0" stroke-width="2.2"/>
+              <path d="M 224 30 Q 125 74 128 30" fill="none" stroke="#1D3FA0" stroke-width="2.2"/>
+              <path d="M-4.5,-3.5 L6,0 L-4.5,3.5 Z" transform="translate(72,22)" fill="#1D3FA0"/><path d="M-4.5,-3.5 L6,0 L-4.5,3.5 Z" transform="translate(177,22)" fill="#1D3FA0"/><path d="M-4.5,-3.5 L6,0 L-4.5,3.5 Z" transform="translate(150,52) rotate(180)" fill="#1D3FA0"/>
+              <text x="66" y="14" font-size="14" fill="#1B3B8B" font-style="italic">a</text><text x="172" y="14" font-size="14" fill="#1B3B8B" font-style="italic">b</text><text x="108" y="62" font-size="14" fill="#1B3B8B" font-style="italic">±c</text></svg>
+            <div class="to">➜</div>
+            <svg viewBox="0 0 250 64" height="56"><circle cx="20" cy="32" r="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.2"/><circle cx="230" cy="32" r="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.2"/>
+              <line x1="26" y1="32" x2="224" y2="32" stroke="#1D3FA0" stroke-width="2.2"/>
+              <path d="M-4.5,-3.5 L6,0 L-4.5,3.5 Z" transform="translate(125,32)" fill="#1D3FA0"/>
+              <text x="88" y="24" font-size="15" fill="#D63A2F" font-style="italic" font-weight="700">ab/(1∓bc)</text></svg>
+          </div>
+          <div class="rr" data-step="6">
+            <div class="nm">⑤ 自回路消除</div>
+            <svg viewBox="0 0 250 64" height="56"><circle cx="20" cy="26" r="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.2"/><circle cx="170" cy="26" r="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.2"/>
+              <line x1="26" y1="26" x2="164" y2="26" stroke="#1D3FA0" stroke-width="2.2"/>
+              <path d="M-4.5,-3.5 L6,0 L-4.5,3.5 Z" transform="translate(95,26)" fill="#1D3FA0"/>
+              <circle cx="170" cy="46" r="15" fill="none" stroke="#1D3FA0" stroke-width="2.2"/>
+              <path d="M-4.5,-3.5 L6,0 L-4.5,3.5 Z" transform="translate(155,46) rotate(-90)" fill="#1D3FA0"/>
+              <text x="86" y="18" font-size="14" fill="#1B3B8B" font-style="italic">a</text><text x="164" y="52" font-size="13" fill="#1B3B8B" font-style="italic">±b</text></svg>
+            <div class="to">➜</div>
+            <svg viewBox="0 0 250 64" height="56"><circle cx="20" cy="32" r="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.2"/><circle cx="230" cy="32" r="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.2"/>
+              <line x1="26" y1="32" x2="224" y2="32" stroke="#1D3FA0" stroke-width="2.2"/>
+              <path d="M-4.5,-3.5 L6,0 L-4.5,3.5 Z" transform="translate(125,32)" fill="#1D3FA0"/>
+              <text x="92" y="24" font-size="15" fill="#D63A2F" font-style="italic" font-weight="700">a/(1∓b)</text></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note">规则④⑤的分母"1∓回环传输"与负反馈分母"1+开环"一脉相承：负回环取 +、正回环取 −。有了这五条规则，信号流图也可逐步化简——但更快的方法是直接用梅逊公式（下一页起）。</div>
+</div></div>
+</body>
+</html>

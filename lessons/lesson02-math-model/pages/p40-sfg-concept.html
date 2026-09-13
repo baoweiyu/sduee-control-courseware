@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>信号流图基本概念</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .why { display:flex; gap:12px; align-items:center; background:#FDF0EF; border-left:6px solid var(--red);
+         border-radius:10px; padding:8px 18px; font-size:21px; margin-bottom:12px; }
+  .cols { display:flex; gap:20px; height:430px; }
+  .cl { flex:1; display:flex; flex-direction:column; }
+  .cl .bd2 { flex:1; display:flex; flex-direction:column; justify-content:center; gap:12px; padding:14px 22px; }
+  .eq { font-size:22px; }
+  .rw { display:flex; gap:22px; align-items:center; }
+  .rw .tag2 { flex:0 0 96px; font-size:19px; font-weight:800; color:var(--orange); }
+  .cr { flex:1.15; display:flex; flex-direction:column; }
+  .cr .bd2 { flex:1; display:flex; gap:6px; align-items:center; justify-content:center; padding:6px; }
+  .sg { text-align:center; }
+  .sg .t { font-size:18px; font-weight:800; color:var(--blue); }
+  .bar3 { margin-top:12px; display:flex; gap:14px; }
+  .b3 { flex:1; background:var(--sky); border-radius:12px; padding:10px 16px; font-size:19.5px;
+        display:flex; gap:10px; align-items:center; }
+  .b3 b { color:var(--blue); }
+</style>
+</head>
+<body data-title="信号流图基本概念" data-page="40 / 51">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="why">
+      <div style="font-size:24px">🤔</div>
+      <div>为什么引入信号流图？——方框图化简<span class="kw-r">繁琐、费时、易出错</span>。信号流图用图形表示<span class="kw-r">线性代数方程组</span>，与方框图对应，且可借助梅逊公式直接写出传递函数。</div>
+    </div>
+    <div class="cols">
+      <div class="act-card cl">
+        <div class="hd" style="font-size:21px">例：线性代数方程组及其"因果式"改写</div>
+        <div class="bd2 math">
+          <div class="eq tex">\begin{cases} a x_0 - x_1 + b x_2 = 0\\[4px] c x_0 + d x_1 - x_2 = 0 \end{cases}</div>
+          <div class="rw" data-step="1"><div class="tag2">改写 (a)</div>
+            <div class="eq tex">\begin{cases} x_1 = a x_0 + b x_2\\[4px] x_2 = c x_0 + d x_1 \end{cases}</div></div>
+          <div class="rw" data-step="2"><div class="tag2">改写 (b)</div>
+            <div class="eq tex" style="font-size:20.5px">\begin{cases} x_1 = -\dfrac{c}{d}\,x_0 + \dfrac{1}{d}\,x_2\\[8px] x_2 = -\dfrac{a}{b}\,x_0 + \dfrac{1}{b}\,x_1 \end{cases}</div></div>
+        </div>
+      </div>
+      <div class="act-card cr" data-step="3">
+        <div class="hd" style="font-size:21px">两种因果式 ⇒ 两张信号流图（不唯一！）</div>
+        <div class="bd2">
+          <div class="sg">
+            <svg viewBox="0 0 330 240" width="300" height="300">
+              <circle cx="36" cy="120" r="7" fill="#fff" stroke="#1D3FA0" stroke-width="2.5"/>
+              <circle cx="250" cy="46" r="7" fill="#fff" stroke="#1D3FA0" stroke-width="2.5"/>
+              <circle cx="250" cy="194" r="7" fill="#fff" stroke="#1D3FA0" stroke-width="2.5"/>
+              <g stroke="#1D3FA0" stroke-width="2.5" fill="none">
+                <line x1="42.6" y1="117.7" x2="243.4" y2="48.3"/>
+                <line x1="42.6" y1="122.3" x2="243.4" y2="191.7"/>
+                <path d="M 256 187 Q 292 120 258 53"/>
+                <path d="M 244 53 Q 208 120 242 187"/>
+              </g>
+              <g fill="#1D3FA0">
+                <path d="M-5,-4.5 L7,0 L-5,4.5 Z" transform="translate(143,83) rotate(-19)"/>
+                <path d="M-5,-4.5 L7,0 L-5,4.5 Z" transform="translate(143,157) rotate(19)"/>
+                <path d="M-5,-4.5 L7,0 L-5,4.5 Z" transform="translate(274,120) rotate(-89)"/>
+                <path d="M-5,-4.5 L7,0 L-5,4.5 Z" transform="translate(226,120) rotate(91)"/>
+              </g>
+              <g font-size="17" fill="#1B3B8B" font-style="italic">
+                <text x="22" y="112">x₀</text><text x="262" y="42">x₁</text><text x="262" y="200">x₂</text>
+                <text x="130" y="66">a</text><text x="130" y="180">c</text>
+                <text x="290" y="124">b</text><text x="200" y="124">d</text>
+              </g>
+            </svg>
+            <div class="t">(a)　支路 a、b、c、d</div>
+          </div>
+          <div class="sg">
+            <svg viewBox="0 0 330 240" width="300" height="300">
+              <circle cx="36" cy="120" r="7" fill="#fff" stroke="#1D3FA0" stroke-width="2.5"/>
+              <circle cx="250" cy="46" r="7" fill="#fff" stroke="#1D3FA0" stroke-width="2.5"/>
+              <circle cx="250" cy="194" r="7" fill="#fff" stroke="#1D3FA0" stroke-width="2.5"/>
+              <g stroke="#1D3FA0" stroke-width="2.5" fill="none">
+                <line x1="42.6" y1="117.7" x2="243.4" y2="48.3"/>
+                <line x1="42.6" y1="122.3" x2="243.4" y2="191.7"/>
+                <path d="M 256 187 Q 292 120 258 53"/>
+                <path d="M 244 53 Q 208 120 242 187"/>
+              </g>
+              <g fill="#1D3FA0">
+                <path d="M-5,-4.5 L7,0 L-5,4.5 Z" transform="translate(143,83) rotate(-19)"/>
+                <path d="M-5,-4.5 L7,0 L-5,4.5 Z" transform="translate(143,157) rotate(19)"/>
+                <path d="M-5,-4.5 L7,0 L-5,4.5 Z" transform="translate(274,120) rotate(-89)"/>
+                <path d="M-5,-4.5 L7,0 L-5,4.5 Z" transform="translate(226,120) rotate(91)"/>
+              </g>
+              <g font-size="16.5" fill="#1B3B8B" font-style="italic">
+                <text x="22" y="112">x₀</text><text x="262" y="42">x₁</text><text x="262" y="200">x₂</text>
+                <text x="120" y="62">−c/d</text><text x="120" y="184">−a/b</text>
+                <text x="288" y="124">1/b</text><text x="198" y="124">1/d</text>
+              </g>
+            </svg>
+            <div class="t">(b)　支路 −c/d、1/d、−a/b、1/b</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bar3">
+      <div class="b3" data-step="4"><div style="font-size:22px">⚪</div><div><b>节点</b>："○"表示变量（信号）</div></div>
+      <div class="b3" data-step="4"><div style="font-size:22px">➡️</div><div><b>支路</b>：连接节点的有向线段</div></div>
+      <div class="b3" data-step="4"><div style="font-size:22px">✖️</div><div><b>支路传输</b>：支路标注的数学关系（增益）</div></div>
+    </div>
+  </div>
+  <div class="act-note">关键认知：信号流图表达的是"因果关系"——每个节点变量等于其入支路传输与对应变量乘积之和。同一方程组可有多种因果式，因此信号流图不唯一。</div>
+</div></div>
+</body>
+</html>

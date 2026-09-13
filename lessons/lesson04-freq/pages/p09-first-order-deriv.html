@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>1.3 一阶系统频率响应的推导</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:26px; height:100%; min-height:0; }
+  .drv { flex:1.35; display:flex; flex-direction:column; min-height:0; }
+  .drv .bd { flex:1; display:flex; flex-direction:column; justify-content:space-evenly; gap:0; padding:20px 28px; font-size:20.5px; }
+  .st { background:var(--sky); border:2px solid var(--line); border-radius:14px; padding:16px 22px; font-size:20.5px; line-height:1.6; color:var(--ink); }
+  .st .no { display:inline-block; background:var(--blue); color:#fff; font-weight:700; border-radius:9px; padding:1px 12px; margin-right:10px; font-size:19px; }
+  .st .mathbox { margin:8px 0 2px; font-size:22px; padding:10px 16px; background:#fff; }
+  .rs { flex:1; display:flex; flex-direction:column; gap:20px; min-height:0; }
+  .rs .act-card { flex:1; display:flex; flex-direction:column; min-height:0; }
+  .rs .bd { flex:1; display:flex; flex-direction:column; justify-content:space-evenly; gap:0; font-size:21px; line-height:1.75; }
+  .hl-r { background:#FDF1EF; border-radius:10px; padding:16px 18px; }
+  .hl-b { background:var(--sky); border-radius:10px; padding:16px 18px; }
+</style>
+</head>
+<body data-title="1.3 一阶系统频率响应的推导" data-page="9 / 87">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="row">
+      <div class="act-card drv">
+        <div class="hd"><span style="flex:1">以 <span class="tex" style="font-size:20px">G(s)=\dfrac{1}{Ts+1}</span> 为例，逐步推导</span></div>
+        <div class="bd">
+          <div class="st" data-step="1">
+            <span class="no">第 1 步</span>写出输出象函数
+            <div class="mathbox math eqline tex tex-d">C(s)=\dfrac{1}{Ts+1}\cdot\dfrac{A\omega}{s^{2}+\omega^{2}}=\dfrac{C_0}{Ts+1}+\dfrac{C_1 s+C_2}{s^{2}+\omega^{2}}</div>
+          </div>
+          <div class="st" data-step="2">
+            <span class="no">第 2 步</span>留数法求系数
+            <div class="mathbox math eqline tex tex-d">C_0=\dfrac{A\,\omega T^{2}}{1+T^{2}\omega^{2}},\qquad C_1=\dfrac{-A\,\omega T}{1+T^{2}\omega^{2}},\qquad C_2=\dfrac{A\,\omega}{1+T^{2}\omega^{2}}</div>
+          </div>
+          <div class="st" data-step="3">
+            <span class="no">第 3 步</span>拉氏反变换，并用辅助角公式合并正弦项
+            <div class="mathbox math eqline tex tex-d">c(t)=\dfrac{A\,\omega T}{1+T^{2}\omega^{2}}\,e^{-t/T}+\dfrac{A}{\sqrt{1+T^{2}\omega^{2}}}\sin\!\big(\omega t-\operatorname{arctg}\omega T\big)</div>
+          </div>
+        </div>
+      </div>
+      <div class="rs">
+        <div class="act-card">
+          <div class="hd">结果解读：两项各司其职</div>
+          <div class="bd">
+            <div class="hl-r"><span class="kw-r">瞬态分量：</span><span class="tex">\dfrac{A\omega T}{1+T^{2}\omega^{2}}e^{-t/T}</span><br>按指数规律衰减，<span class="tex">t\to\infty</span> 时消失。</div>
+            <div class="hl-b"><span style="color:var(--navy);font-weight:700">稳态分量（频率响应）：</span><br><span class="tex">c(\infty)=\dfrac{A}{\sqrt{1+T^{2}\omega^{2}}}\sin(\omega t-\operatorname{arctg}\omega T)</span></div>
+          </div>
+        </div>
+        <div class="act-card">
+          <div class="hd">与 G(jω) 对照——惊人的吻合</div>
+          <div class="bd">
+            <div>幅值之比　<span class="tex">\dfrac{1}{\sqrt{1+T^{2}\omega^{2}}}=\Big|\dfrac{1}{1+j\omega T}\Big|=|G(j\omega)|</span></div>
+            <div>相角之差　<span class="tex">-\operatorname{arctg}\omega T=\angle G(j\omega)</span></div>
+            <div><span class="kw-r">稳态输出的幅值比与相角差，恰好由 G(jω) 给出！</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+</body>
+</html>

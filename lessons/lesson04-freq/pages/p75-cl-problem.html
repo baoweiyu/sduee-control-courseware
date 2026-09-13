@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>4.1 单位反馈闭环系统的频率响应：相量法</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; flex-direction:row-reverse; gap:22px; height:100%; min-height:0; }
+  .figc { flex:1.85; display:flex; flex-direction:column; overflow:hidden; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:6px 12px; min-height:0; }
+  .figc svg { width:100%; height:100%; }
+  .lst { flex:1; display:flex; flex-direction:column; justify-content:space-evenly; gap:10px; min-height:0; }
+  .seg { background:#fff; border:2px solid var(--line); border-radius:13px; padding:13px 17px; font-size:19.5px; line-height:1.6; }
+  .seg b { color:var(--navy); }
+  .seg .mathbox { font-size:19.5px; padding:6px 12px; }
+</style>
+</head>
+<body data-title="4.1 单位反馈闭环系统的频率响应：相量法" data-page="75 / 87">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="act-card figc">
+        <div class="hd">相量法：由开环 Nyquist 图量出闭环频率特性</div>
+        <div class="bd2"><svg id="fig" viewBox="0 0 960 640"></svg></div>
+      </div>
+      <div class="lst">
+        <div class="seg" data-step="1"><b>问题</b>：已知开环曲线上的一个点，怎样求同频率下的闭环响应？
+          <div class="mathbox math eqline tex tex-d">\varPhi(j\omega)=\dfrac{G(j\omega)}{1+G(j\omega)}\quad(\text{单位负反馈})</div></div>
+        <div class="seg" data-step="2"><b>相量分解</b>：A 对应一个确定的频率 ω₁；图中 <b>OA 表示 G(jω₁)</b>，<b>PA 表示 1+G(jω₁)</b>（P=(−1, j0)，PA = OA 减去 O→P）。</div>
+        <div class="seg" data-step="3"><b>结论</b>：闭环幅值取长度比、相角取角度差——
+          <div class="mathbox math eqline tex tex-d">M=\dfrac{|OA|}{|PA|},\qquad \alpha=\angle OA-\angle PA</div>
+          逐点量取即得闭环幅频 M(ω) 与相频 α(ω)。</div>
+        <div data-step="4" style="display:none"></div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">逐点法</span><span>闭环幅值由<span class="kw-r">到 O 与到 P 的距离比</span>决定，靠近 P 时分母变小、幅值可能很大。逐点量取可行但繁琐——下一页把等幅值的点组织成曲线（等 M 圆）。</span></div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("fig");
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const MF = "Cambria Math,STIX Two Math,Georgia,Microsoft YaHei,sans-serif";
+  const SUB = (n, s) => { const esc = t => t.replace(/&/g, "&amp;").replace(/</g, "&lt;"); let html = "", sub = false; for (const p of String(s).split(/(_\{[^}]*\})/)) { if (!p) continue; if (p.startsWith("_{")) { html += '<tspan' + (sub ? '' : ' dy="6"') + ' font-size="72%">' + esc(p.slice(2, -1)) + '</tspan>'; sub = true; } else { html += sub ? '<tspan dy="-6">' + esc(p) + '</tspan>' : esc(p); sub = false; } } n.innerHTML = html; };
+  const tx = (x, y, s, o, parent) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 17, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal", "font-family": MF }, parent); SUB(n, s); if (o && o.halo) n.setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:6;stroke-linejoin:round"); return n; };
+  const defs = mk("defs", {});
+  [["a70b", "#2B5CE6"], ["a70o", "#5B6B8C"], ["a70g", "#5B6B8C"]].forEach(([id, c]) => {
+    const m = mk("marker", { id, markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+    mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: c }, m);
+  });
+  const SC = 165, O = { x: 600, y: 300 };
+  const X = v => O.x + v * SC, Y = v => O.y - v * SC;
+  mk("line", { x1: 50, y1: O.y, x2: 920, y2: O.y, stroke: "#5B6B8C", "stroke-width": 1.6, "marker-end": "url(#a70g)" });
+  mk("line", { x1: O.x, y1: 600, x2: O.x, y2: 45, stroke: "#5B6B8C", "stroke-width": 1.6, "marker-end": "url(#a70g)" });
+  tx(914, O.y - 14, "Re", { fs: 20, it: true, b: true, fill: "#5B6B8C", an: "end" });
+  tx(O.x + 20, 60, "jIm", { fs: 20, it: true, b: true, fill: "#5B6B8C", an: "start" });
+  // P = (−1, j0) 与原点 O：常驻参照
+  const P = [-1, 0];
+  mk("circle", { cx: X(P[0]), cy: Y(P[1]), r: 9, fill: "#fff", stroke: "#D63A2F", "stroke-width": 3.4 });
+  tx(X(P[0]) - 8, Y(0) + 36, "P (−1, j0)", { fs: 17, b: true, fill: "#D63A2F", an: "end" });
+  tx(O.x + 8, O.y + 34, "O", { fs: 17, b: true, fill: "#5B6B8C", an: "start" });
+  // 开环 Nyquist 曲线 G=1.2/[s(s+1)(0.25s+1)]
+  const K0 = 1.2;
+  const Gp = w => {
+    const a = [-w * w, w];
+    const b = [a[0] - 0.25 * w * a[1], a[1] + 0.25 * w * a[0]];
+    const dd = b[0] * b[0] + b[1] * b[1];
+    return [K0 * b[0] / dd, -K0 * b[1] / dd];
+  };
+  let d = "", started = false;
+  for (let i = 0; i <= 500; i++) {
+    const w = 0.22 * Math.pow(400, i / 500); const [a, b] = Gp(w);
+    if (a < -2.1 || a > 0.9 || b < -2.2 || b > 1.5) { started = false; continue; }
+    d += (started ? "L" : "M") + X(a).toFixed(1) + "," + Y(b).toFixed(1); started = true;
+  }
+  mk("path", { d, fill: "none", stroke: "#1D3FA0", "stroke-width": 4 });
+  tx(392, Y(-1.35), "开环 G(jω)", { fs: 16.5, b: true, fill: "#1D3FA0", an: "end" }).setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:5");
+  // ===== 分步动态图层：取点 A → OA → PA → 读数（无静态预绘） =====
+  const dyn = mk("g", {});
+  const S = ACT.step, _n = S.next.bind(S), _r = S.reset.bind(S);
+  const A = Gp(0.55);
+  function paint() {
+    dyn.innerHTML = "";
+    const cur = S.cur;
+    if (cur >= 1) {
+      mk("circle", { cx: X(A[0]), cy: Y(A[1]), r: 9, fill: "#1D3FA0" }, dyn);
+      tx(X(A[0]) + 16, Y(A[1]) + 32, "A = G(jω₁)", { fs: 17, b: true, fill: "#1D3FA0", an: "start", halo: 1 }, dyn);
+    }
+    if (cur >= 2) {
+      mk("line", { x1: O.x, y1: O.y, x2: X(A[0]), y2: Y(A[1]), stroke: "#2B5CE6", "stroke-width": 3.4, "marker-end": "url(#a70b)" }, dyn);
+      tx((O.x + X(A[0])) / 2 - 20, (O.y + Y(A[1])) / 2 - 16, "OA（分子 G）", { fs: 16.5, b: true, fill: "#2B5CE6", an: "end", halo: 1 }, dyn);
+    }
+    if (cur >= 3) {
+      mk("line", { x1: X(P[0]), y1: Y(P[1]), x2: X(A[0]), y2: Y(A[1]), stroke: "#5B6B8C", "stroke-width": 3.4, "stroke-dasharray": "9 5", "marker-end": "url(#a70o)" }, dyn);
+      tx((X(P[0]) + X(A[0])) / 2 - 20, (Y(P[1]) + Y(A[1])) / 2 + 26, "PA（分母 1+G）", { fs: 16.5, b: true, fill: "#5B6B8C", an: "end", halo: 1 }, dyn);
+    }
+    if (cur >= 4) {
+      const moa = Math.hypot(A[0], A[1]), pa = Math.hypot(A[0] - P[0], A[1] - P[1]);
+      const M = moa / pa;
+      const al = (Math.atan2(A[1], A[0]) - Math.atan2(A[1], A[0] - P[0])) * 180 / Math.PI;
+      tx(700, 96, "本点 ω₁=0.55：M = |OA|/|PA| ≈ " + M.toFixed(2), { fs: 18, b: true, fill: "#1B3B8B", an: "start", halo: 1 }, dyn);
+      tx(700, 126, "α = ∠OA − ∠PA ≈ " + al.toFixed(1) + "°", { fs: 18, b: true, fill: "#1B3B8B", an: "start", halo: 1 }, dyn);
+    }
+  }
+  S.next = function () { const d2 = _n(); paint(); return d2; };
+  S.reset = function () { _r(); paint(); };
+  window.prev = function () { const n = Math.max(0, S.cur - 1); S.reset(); for (let i = 0; i < n; i++) S.next(); };
+  paint();
+});
+</script>
+</body>
+</html>

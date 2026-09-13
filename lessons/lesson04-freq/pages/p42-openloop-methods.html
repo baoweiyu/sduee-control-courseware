@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>2.3 开环系统 Bode 图的绘制方法</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .col3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px; flex:1.15; min-height:0; }
+  .mcard { background:#fff; border:2px solid var(--line); border-radius:16px; padding:22px 24px; display:flex; flex-direction:column; justify-content:space-evenly; gap:14px; }
+  .mcard .tag { align-self:flex-start; background:var(--blue); color:#fff; font-size:19px; font-weight:700; border-radius:9px; padding:5px 16px; }
+  .mcard h3 { font-size:26px; color:var(--navy); margin:0; }
+  .mcard .ds { font-size:21.5px; line-height:1.7; color:var(--ink); flex:1; }
+  .mcard .ft { font-size:18.5px; color:#fff; background:var(--navy); border-radius:10px; padding:9px 14px; line-height:1.45; }
+  .steps { background:#fff; border:2px solid var(--line); border-radius:16px; padding:18px 24px 20px; flex:1; display:flex; flex-direction:column; min-height:0; }
+  .steps .h { font-size:21.5px; font-weight:700; color:var(--blue); margin-bottom:16px; }
+  .srow { flex:1; display:grid; grid-template-columns:repeat(5,1fr); gap:16px; min-height:0; }
+  .sp { background:var(--sky); border-radius:12px; padding:22px 18px; font-size:24px; line-height:1.75; position:relative; display:flex; flex-direction:column; justify-content:flex-start; }
+  .sp b { display:block; color:var(--navy); font-size:25px; margin-bottom:12px; }
+  .sp .no { position:absolute; top:-14px; left:-10px; width:33px; height:33px; border-radius:50%; background:var(--orange); color:#fff; font-weight:800; font-size:18px; display:grid; place-items:center; }
+  .col-wrap { display:flex; flex-direction:column; gap:18px; height:100%; min-height:0; }
+</style>
+</head>
+<body data-title="2.3 开环系统 Bode 图的绘制方法" data-page="42 / 87">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="col-wrap">
+      <div class="col3">
+        <div class="mcard">
+          <span class="tag">方法一</span>
+          <h3>环节曲线迭加法</h3>
+          <div class="ds">把 G(jω)H(jω) 分解为典型环节，<b>分别画出</b>各环节的 L<sub>i</sub>(ω)、φ<sub>i</sub>(ω)，再<span class="kw-r">逐点相加</span>叠加成总曲线。原理最直观，适合理解"乘除变加减"。</div>
+          
+        </div>
+        <div class="mcard">
+          <span class="tag">方法二</span>
+          <h3>顺序斜率迭加法</h3>
+          <div class="ds">不求各环节曲线，直接利用"每过一个转角频率斜率改变 ±20/±40"的规律，<span class="kw-r">一笔画出</span>整条渐近线。工程上最快捷、最常用。</div>
+          
+        </div>
+        <div class="mcard">
+          <span class="tag">方法三</span>
+          <h3>计算法</h3>
+          <div class="ds">写出 L(ω)、φ(ω) 的表达式，代入若干选定 ω 计算数值，<b>描点连线</b>。结果最精确，用于渐近线误差大的场合（如振荡环节转角附近）。</div>
+          
+        </div>
+      </div>
+      <div class="steps">
+        <div class="h">绘制开环 Bode 图的五个基本步骤</div>
+        <div class="srow">
+          <div class="sp"><span class="no">1</span><b>化为标准式</b>各因子化为尾 1 型</div>
+          <div class="sp"><span class="no">2</span><b>提出 K 与 ν</b>确定增益 K 和型别 ν</div>
+          <div class="sp"><span class="no">3</span><b>算转角频率</b>ω=1/T（振荡 ω=ωn），从小到大排序</div>
+          <div class="sp"><span class="no">4</span><b>定低频段</b>过 (1, 20lgK) 作斜率 −20ν 直线</div>
+          <div class="sp"><span class="no">5</span><b>依次改斜率</b>遇转角频率即叠加斜率增量</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">主线</span><span>三种方法<span class="kw-r">同出一源</span>：对数把乘除变加减。迭加法看清各环节贡献，顺序斜率法求快，计算法求准——考试中顺序斜率法是首选。</span></div>
+</div></div>
+</body>
+</html>

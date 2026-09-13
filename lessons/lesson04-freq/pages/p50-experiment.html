@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>2.5 用实验法确定系统的传递函数</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:22px; height:100%; min-height:0; }
+  .lc { flex:1; display:flex; flex-direction:column; min-height:0; }
+  .lc .bd { flex:1; display:flex; flex-direction:column; gap:12px; padding:12px 18px; min-height:0; }
+  .imgc { flex:1; border-radius:12px; overflow:hidden; position:relative; min-height:0; background:#0E1F4E; }
+  .imgc img { width:100%; height:100%; object-fit:cover; display:block; }
+  .seg { background:var(--sky); border-radius:12px; padding:10px 16px; font-size:18.5px; line-height:1.55; }
+  .rc { flex:1.15; display:flex; flex-direction:column; min-height:0; }
+  .rc .bd { flex:1; display:flex; flex-direction:column; justify-content:space-evenly; gap:10px; padding:14px 18px; font-size:20px; line-height:1.58; overflow:hidden; }
+  .stp2 { background:var(--sky); border-radius:11px; padding:12px 14px 12px 40px; position:relative; }
+  .stp2 .no { position:absolute; top:8px; left:10px; width:25px; height:25px; border-radius:50%; background:var(--blue); color:#fff; font-weight:800; font-size:14.5px; display:grid; place-items:center; }
+  .rc .mathbox { font-size:19px; padding:7px 12px; }
+  .mini { display:grid; grid-template-columns:1fr 1fr; gap:9px; }
+  .mini .m { background:#FFF3E8; border-radius:10px; padding:7px 12px; font-size:18px; line-height:1.5; }
+</style>
+</head>
+<body data-title="2.5 用实验法确定系统的传递函数" data-page="50 / 87">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="act-card lc">
+        <div class="hd">（一）正弦信号相关分析法测频率特性</div>
+        <div class="bd">
+          <div class="imgc"><img src="../../../assets/image2/bode-lab.png" alt="频率特性测试实验台"></div>
+          <div class="seg">解析法建模往往困难，工程上常用<b>频率响应实验法</b>：给系统加正弦输入，逐点改变 ω，测稳态输出的幅值比与相角差，直接画出实验 Bode 图。</div>
+        </div>
+      </div>
+      <div class="act-card rc">
+        <div class="hd">（二）由实验 Bode 图反推传递函数</div>
+        <div class="bd">
+          <div class="stp2"><span class="no">1</span>用 <b>±20n dB/dec 的直线段</b>去近似实验所得对数幅频特性，得到渐近线。</div>
+          <div class="stp2"><span class="no">2</span><b>定 ν 与各环节</b>：最低频段斜率 −20ν 定型别；遇转角频率看斜率变化——</div>
+          <div class="mini">
+            <div class="m">Δ斜率 <b>−20</b> ⇒ 惯性 1/(Ts+1)</div>
+            <div class="m">Δ斜率 <b>+20</b> ⇒ 一阶微分 Ts+1</div>
+            <div class="m">Δ斜率 <b>−40</b> ⇒ 振荡环节（ζ 由实验曲线的谐振峰确定）</div>
+            <div class="m">Δ斜率 <b>+40</b> ⇒ 二阶微分环节</div>
+          </div>
+          <div class="stp2"><span class="no">3</span><b>定开环增益 K</b>：最常用 <span class="kw-r">ω=1 处读数 20lgK=L(1)</span>；或沿低频段直线任取一点递推——</div>
+          <div class="mathbox math eqline tex tex-d">20\lg K=L(\omega_{1})+20\nu\,\lg\omega_{1}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">工程观</span><span>实验法把"黑箱"变成 Bode 图，再<span class="kw-r">翻译</span>回传递函数——斜率读环节、低频读型别、高度读增益。</span></div>
+</div></div>
+</body>
+</html>

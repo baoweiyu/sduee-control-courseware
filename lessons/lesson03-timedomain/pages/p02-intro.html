@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>时域分析法引言</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:26px; height:100%; }
+  .lcol { flex:1.15; display:flex; flex-direction:column; gap:20px; }
+  .rcol { flex:1; display:flex; flex-direction:column; }
+  .def .bd { font-size:26px; line-height:1.8; padding:24px 30px; }
+  .flow { flex:1; display:flex; flex-direction:column; }
+  .flow .bd2 { flex:1; display:flex; align-items:center; gap:12px; padding:10px 24px; }
+  .fstep { flex:1; text-align:center; background:var(--sky); border:2px solid var(--line); border-radius:12px; padding:16px 8px; }
+  .fstep .t1 { font-size:21px; font-weight:800; color:var(--navy); }
+  .fstep .t2 { font-size:16.5px; color:var(--muted); margin-top:5px; }
+  .farr { color:var(--orange); font-size:30px; font-weight:700; flex:none; }
+  .feats { display:flex; gap:18px; }
+  .feat { flex:1; background:var(--sky); border:2px solid var(--line); border-radius:14px; padding:16px 22px; }
+  .feat .h { font-size:23px; font-weight:700; color:var(--blue); margin-bottom:6px; }
+  .feat .t { font-size:20.5px; color:var(--ink); line-height:1.55; }
+  .imgc { flex:1; display:flex; flex-direction:column; overflow:hidden; }
+  .imgc .bd2 { flex:1; display:grid; place-items:center; background:var(--sky); padding:10px; }
+  .imgc img { max-width:100%; max-height:100%; object-fit:contain; }
+  .cap2 { padding:10px 18px; font-size:19px; color:var(--muted); background:#fff; border-top:2px solid var(--line); }
+</style>
+</head>
+<body data-title="第三章　时域分析法 · 引言" data-page="2 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lcol">
+        <div class="act-card def">
+          <div class="hd">什么是时域分析法？</div>
+          <div class="bd">
+            时域分析法：根据控制系统的<span class="kw-r">时间响应</span>来分析系统的
+            <span class="kw-r">稳定性</span>、<span class="kw-r">暂态性能</span>和<span class="kw-r">稳态精度</span>。
+            它是在时间域内对系统进行分析与设计的<span class="kw-r">直接分析法</span>。
+          </div>
+        </div>
+        <div class="act-card flow">
+          <div class="hd">时域分析的基本思路</div>
+          <div class="bd2">
+            <div class="fstep"><div class="t1">建立模型</div><div class="t2">列写微分方程</div></div>
+            <div class="farr">➜</div>
+            <div class="fstep"><div class="t1">求解响应</div><div class="t2">得到 c(t) 曲线</div></div>
+            <div class="farr">➜</div>
+            <div class="fstep"><div class="t1">计算指标</div><div class="t2">σ%、t<sub>s</sub>、e<sub>ss</sub></div></div>
+            <div class="farr">➜</div>
+            <div class="fstep"><div class="t1">评价改进</div><div class="t2">分析 → 设计</div></div>
+          </div>
+        </div>
+        <div class="feats">
+          <div class="feat"><div class="h">直观</div><div class="t">响应曲线可直接观察，物理意义明确</div></div>
+          <div class="feat"><div class="h">准确</div><div class="t">直接求解微分方程，结果精确</div></div>
+          <div class="feat"><div class="h">适用范围</div><div class="t">尤其适用于<span class="kw-r">低阶系统</span></div></div>
+        </div>
+      </div>
+      <div class="rcol">
+        <div class="act-card imgc">
+          <div class="hd">生活中的时间响应</div>
+          <div class="bd2"><img src="../../../assets/image2/car-suspension.png" alt="汽车驶过减速带"></div>
+          <div class="cap2">汽车驶过减速带：车轮受到一个突变的输入，车身高度随时间的变化过程，就是一次典型的时间响应。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">本章内容</span>从系统时间响应的角度，对其稳定性、稳态误差和暂态性能等方面进行讨论。</div>
+</div></div>
+</body>
+</html>

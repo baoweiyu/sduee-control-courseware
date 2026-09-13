@@ -1,0 +1,7 @@
+/* Chapter-local labels share the formula font; Chinese uses the page font. */
+@font-face { font-family: "Lesson02 STIX2"; src: url("../../theme/mathjax/stix2/chtml/woff2/mjx-stx-n.woff2") format("woff2"); font-style: normal; font-weight: 400; }
+svg text { font-family: "Lesson02 STIX2", var(--font); }
+/* Undo the shared font shorthand so SVG presentation font-size attributes apply. */
+svg text.svgname, svg text.svgsub { font: revert; font-family: "Lesson02 STIX2", var(--font); }
+svg text.svgname { font-weight: 600; }
+svg text.svgsub { font-weight: 400; }

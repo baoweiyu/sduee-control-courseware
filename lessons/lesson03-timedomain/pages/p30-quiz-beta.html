@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>课堂互动 · 阻尼角 β 在哪里</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<link rel="stylesheet" href="../lesson03-svg.css">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:24px; height:100%; }
+  .figc { flex:1.15; display:flex; flex-direction:column; overflow:hidden; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:8px 14px; }
+  .figc svg { width:100%; height:100%; }
+  .qcol { flex:1; display:flex; flex-direction:column; gap:18px; }
+  .qtype { display:inline-block; background:var(--orange); color:#fff; font-size:21px; font-weight:700; border-radius:10px; padding:7px 20px; width:fit-content; }
+  .qz { background:#fff; border:2px solid var(--line); border-radius:16px; padding:26px 32px; }
+  .qz .qt { font-size:25.5px; color:var(--navy); font-weight:700; margin-bottom:20px; line-height:1.55; }
+  .stage-tip { display:inline-block; margin-bottom:18px; font-size:19.5px; color:#fff; background:var(--blue); border-radius:20px; padding:6px 20px; width:fit-content; }
+  .opts { display:grid; grid-template-columns:repeat(3, 1fr); gap:18px; }
+  .opt { text-align:center; background:var(--sky); border:2px solid var(--line); border-radius:12px; padding:18px 8px; font-size:28px; color:var(--ink); font-weight:700; position:relative; }
+  .opt small { display:block; font-size:17px; font-weight:400; color:#5B6B8C; margin-top:6px; }
+  .opt.right { border-color:#1E9E57; background:#F0FAF4; }
+  .opt.right::after { content:"✓"; position:absolute; top:-14px; right:-10px; width:32px; height:32px; border-radius:50%; background:#1E9E57; color:#fff; font-weight:800; font-size:20px; display:grid; place-items:center; }
+  .ans { font-size:22.5px; color:var(--navy); background:var(--sky); border-radius:12px; padding:16px 24px; line-height:1.75; }
+  .ans b { color:var(--danger); }
+  .ext { flex:1; display:flex; flex-direction:column; }
+  .ext .bd { flex:1; display:flex; flex-direction:column; justify-content:center; font-size:21.5px; line-height:1.9; }
+</style>
+</head>
+<body data-title="课堂互动 · 阻尼角 β 在哪里" data-page="32 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="row">
+      <div class="act-card figc">
+        <div class="hd">欠阻尼闭环极点的复平面位置</div>
+        <div class="bd2"><svg id="fig" viewBox="0 0 640 620"></svg></div>
+      </div>
+      <div class="qcol">
+        <span class="qtype">识图题　2 分</span>
+        <div class="qz">
+          <div class="qt">左图标注了三个角，哪一个是<span style="color:var(--danger)">阻尼角 β</span>？</div>
+          <span class="stage-tip">请先作出判断</span>
+          <div class="opts">
+            <div class="opt" data-mark="1">A<small>极点向量与负实轴</small></div>
+            <div class="opt" data-mark="0">B<small>极点向量与 +jω 轴</small></div>
+            <div class="opt" data-mark="0">C<small>极点向量与正实轴</small></div>
+          </div>
+        </div>
+        <div class="ans" data-step="2">
+          <b>答案：A。</b>阻尼角 β 定义为<span class="kw">极点向量与负实轴的夹角</span>。由几何关系
+          <span class="tex" style="font-size:24px">\cos\beta=\dfrac{\zeta\omega_{n}}{\omega_{n}}=\zeta</span>，
+          故 <span class="tex" style="font-size:24px">\beta=\arccos\zeta</span>：β 越大 ζ 越小，响应振荡越厉害；β = 0 时 ζ = 1（临界阻尼）。
+        </div>
+        <div class="act-card ext">
+          <div class="hd">拓展思考</div>
+          <div class="bd" style="font-size:20.5px;line-height:2">
+            <div>① β=0（极点在负实轴）→ ζ=1，<b>临界阻尼</b></div>
+            <div>② β=90°（极点在虚轴）→ ζ=0，<b>等幅振荡</b></div>
+            <div>③ β 变而 ω<sub>n</sub> 不变：<span class="kw-r">振荡程度变，快慢尺度不变</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("fig");
+  const O = { x: 340, y: 310 }, R = 235, beta = 55 * Math.PI / 180;
+  const P = th => ({ x: O.x + R * Math.cos(th), y: O.y - R * Math.sin(th) });
+  const s1 = P(Math.PI - beta);
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const tx = (x, y, s, o) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 20, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal" }); n.textContent = s; return n; };
+  const defs = mk("defs", {});
+  const m1 = mk("marker", { id: "a30", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, m1);
+  // 坐标轴
+  mk("line", { x1: 26, y1: O.y, x2: 616, y2: O.y, stroke: "#5B6B8C", "stroke-width": 1.6, "marker-end": "url(#a30)" });
+  mk("line", { x1: O.x, y1: 592, x2: O.x, y2: 20, stroke: "#5B6B8C", "stroke-width": 1.6, "marker-end": "url(#a30)" });
+  tx(612, O.y + 30, "Re", { fs: 20, it: true, b: true, fill: "#5B6B8C", an: "end" });
+  tx(O.x + 30, 34, "jω", { fs: 20, it: true, b: true, fill: "#5B6B8C", an: "start" });
+  tx(O.x - 14, O.y + 28, "O", { fs: 17, fill: "#5B6B8C", an: "end" });
+  // ωn 圆（左半，上下两弧）
+  mk("path", { d: `M ${O.x - R} ${O.y} A ${R} ${R} 0 0 1 ${O.x} ${O.y - R}`, fill: "none", stroke: "#C9D8F2", "stroke-width": 2, "stroke-dasharray": "7 6" });
+  mk("path", { d: `M ${O.x} ${O.y + R} A ${R} ${R} 0 0 1 ${O.x - R} ${O.y}`, fill: "none", stroke: "#C9D8F2", "stroke-width": 2, "stroke-dasharray": "7 6" });
+  tx(O.x - R * 0.58, O.y + R * 0.58, "ωn 圆", { fs: 18, fill: "#8AA6D8", it: true });
+  // 极点 s1、s2
+  mk("line", { x1: O.x, y1: O.y, x2: s1.x, y2: s1.y, stroke: "#1B3B8B", "stroke-width": 2 });
+  const cross = (x, y, lb, dy) => {
+    mk("line", { x1: x - 11, y1: y - 11, x2: x + 11, y2: y + 11, stroke: "#D63A2F", "stroke-width": 3.4 });
+    mk("line", { x1: x - 11, y1: y + 11, x2: x + 11, y2: y - 11, stroke: "#D63A2F", "stroke-width": 3.4 });
+    if (lb) tx(x + 4, y + dy, lb, { fs: 20, it: true, b: true, fill: "#D63A2F" });
+  };
+  cross(s1.x, s1.y, "s1", -22);
+  cross(s1.x, O.y + (O.y - s1.y), "s2", 34);
+  // 三个候选角
+  const arc = (r, a1, a2, color, wdt, dash, id) => {
+    const p1 = { x: O.x + r * Math.cos(a1), y: O.y - r * Math.sin(a1) };
+    const p2 = { x: O.x + r * Math.cos(a2), y: O.y - r * Math.sin(a2) };
+    const large = Math.abs(a2 - a1) > Math.PI ? 1 : 0;
+    const n = mk("path", { d: `M ${p1.x} ${p1.y} A ${r} ${r} 0 ${large} 1 ${p2.x} ${p2.y}`, fill: "none", stroke: color, "stroke-width": wdt });
+    if (dash) n.setAttribute("stroke-dasharray", dash);
+    if (id) n.id = id;
+    return n;
+  };
+  arc(62, Math.PI, Math.PI - beta, "#5B6B8C", 2.4, "6 5", "arcA");
+  arc(112, Math.PI - beta, Math.PI / 2, "#5B6B8C", 2.4, "6 5", "arcB");
+  arc(170, Math.PI - beta, 0, "#5B6B8C", 2.4, "6 5", "arcC");
+  const labA = tx(O.x - 92, O.y - 46, "A", { fs: 26, b: true, fill: "#5B6B8C" });
+  const labB = tx(O.x - 34, O.y - 128, "B", { fs: 26, b: true, fill: "#5B6B8C" });
+  const labC = tx(O.x + 40, O.y - 186, "C", { fs: 26, b: true, fill: "#5B6B8C" });
+  labA.id = "labA"; labB.id = "labB"; labC.id = "labC";
+  // 揭晓后的 σ、ωd 标注（初始隐藏，用 data-step）
+  const g = mk("g", { "data-step": "1", opacity: 1 });
+  mk("line", { x1: s1.x, y1: s1.y, x2: s1.x, y2: O.y, stroke: "#1E9E57", "stroke-width": 1.8, "stroke-dasharray": "6 5" }, g);
+  mk("line", { x1: O.x, y1: O.y, x2: s1.x, y2: O.y, stroke: "#1E9E57", "stroke-width": 2.6 }, g);
+  tx((O.x + s1.x) / 2, O.y + 58, "σ = ζωn", { fs: 20, it: true, b: true, fill: "#1E9E57" }).setAttribute("data-step", "1");
+  tx(s1.x - 16, (s1.y + O.y) / 2, "ωd", { fs: 20, it: true, b: true, fill: "#1E9E57", an: "end" }).setAttribute("data-step", "1");
+  tx(O.x - 38, O.y - 10, "β", { fs: 26, it: true, b: true, fill: "#1E9E57" }).setAttribute("data-step", "1");
+  // 三段式：先展示选项 → 正确选项高亮 + 正确角描绿
+  const S = ACT.step, _n = S.next.bind(S), _r = S.reset.bind(S);
+  function mark() {
+    const on = S.cur >= 1;
+    document.querySelectorAll(".opt").forEach(o => o.classList.toggle("right", on && o.dataset.mark === "1"));
+    document.getElementById("arcA").setAttribute("stroke", on ? "#1E9E57" : "#5B6B8C");
+    document.getElementById("arcA").setAttribute("stroke-width", on ? 4.5 : 2.4);
+    document.getElementById("arcA").setAttribute("stroke-dasharray", on ? "none" : "6 5");
+    document.getElementById("labA").setAttribute("fill", on ? "#1E9E57" : "#5B6B8C");
+    ["arcB", "arcC", "labB", "labC"].forEach(i => document.getElementById(i).setAttribute("opacity", on ? 0.22 : 1));
+  }
+  S.next = function () { const d = _n(); mark(); return d; };
+  S.reset = function () { _r(); mark(); };
+  window.prev = function () { const n = Math.max(0, S.cur - 1); S.reset(); for (let i = 0; i < n; i++) S.next(); };
+});
+</script>
+</body>
+</html>

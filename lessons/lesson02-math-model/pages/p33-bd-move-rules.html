@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>相加点与分支点的等效移动规则</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .grid3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:18px; height:600px; }
+  .rl { display:flex; flex-direction:column; }
+  .rl .bd2 { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; padding:12px 14px; }
+  .rl .nm { font-size:23px; font-weight:800; color:var(--blue); text-align:center; }
+  .rl .ds { font-size:19.5px; color:var(--muted); text-align:center; line-height:1.45; }
+  .ok { color:#2E9E6B; font-weight:800; }
+  .no { color:var(--red); font-weight:800; }
+  .warn { margin-top:20px; display:flex; gap:10px; align-items:center;
+          background:#FDF3EC; border-left:6px solid var(--orange); border-radius:10px;
+          padding:12px 18px; font-size:22px; color:var(--ink); }
+</style>
+</head>
+<body data-title="相加点与分支点的等效移动" data-page="33 / 51">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="grid3">
+      <div class="act-card rl" data-step="1">
+        <div class="bd2">
+          <div class="nm">相邻相加点 <span class="ok">✓ 可互换、可合并</span></div>
+          <svg viewBox="0 0 300 150" width="98%">
+            <defs><marker id="r331" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#1D3FA0"/></marker></defs>
+            <g font-size="16" fill="#1B3B8B">
+              <circle cx="52" cy="60" r="12" fill="#fff" stroke="#1D3FA0" stroke-width="2.2"/><path d="M 46.6,54.6 L 57.4,65.4 M 46.6,65.4 L 57.4,54.6" stroke="#1D3FA0" stroke-width="2.2" fill="none"/>
+              <circle cx="122" cy="60" r="12" fill="#fff" stroke="#1D3FA0" stroke-width="2.2"/><path d="M 116.6,54.6 L 127.4,65.4 M 116.6,65.4 L 127.4,54.6" stroke="#1D3FA0" stroke-width="2.2" fill="none"/>
+              <g stroke="#1D3FA0" stroke-width="2.2" fill="none" marker-end="url(#r331)">
+                <line x1="6" y1="60" x2="37" y2="60"/><line x1="64" y1="60" x2="107" y2="60"/>
+                <line x1="52" y1="14" x2="52" y2="45"/><line x1="122" y1="14" x2="122" y2="45"/>
+                <line x1="134" y1="60" x2="176" y2="60"/>
+              </g>
+              <text x="40" y="12" font-style="italic">X₁</text><text x="110" y="12" font-style="italic">X₂</text>
+            </g>
+            <text x="196" y="66" font-size="22" fill="#F5821F" font-weight="700">⇒</text>
+            <g font-size="16" fill="#1B3B8B">
+              <circle cx="248" cy="60" r="12" fill="#fff" stroke="#1D3FA0" stroke-width="2.2"/><path d="M 242.6,54.6 L 253.4,65.4 M 242.6,65.4 L 253.4,54.6" stroke="#1D3FA0" stroke-width="2.2" fill="none"/>
+              <g stroke="#1D3FA0" stroke-width="2.2" fill="none" marker-end="url(#r331)">
+                <line x1="196" y1="60" x2="233" y2="60"/><line x1="248" y1="14" x2="248" y2="45"/>
+                <line x1="248" y1="132" x2="248" y2="75"/><line x1="260" y1="60" x2="296" y2="60"/>
+              </g>
+              <text x="204" y="50" font-style="italic">X₁</text><text x="236" y="12" font-style="italic">X₂</text><text x="258" y="126" font-style="italic">X₃</text>
+            </g>
+          </svg>
+          <div class="ds">多个相加点相邻时，可交换次序，也可合并为一个（代数和与次序无关）</div>
+        </div>
+      </div>
+      <div class="act-card rl" data-step="2">
+        <div class="bd2">
+          <div class="nm">相邻分支点 <span class="ok">✓ 可互换、可合并</span></div>
+          <svg viewBox="0 0 300 150" width="98%">
+            <defs><marker id="r332" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#1D3FA0"/></marker></defs>
+            <g font-size="16" fill="#1B3B8B">
+              <line x1="8" y1="55" x2="170" y2="55" stroke="#1D3FA0" stroke-width="2.2" fill="none" marker-end="url(#r332)"/>
+              <circle cx="60" cy="55" r="4" fill="#1D3FA0"/><circle cx="120" cy="55" r="4" fill="#1D3FA0"/>
+              <g stroke="#1D3FA0" stroke-width="2.2" fill="none" marker-end="url(#r332)">
+                <polyline points="60,55 60,100"/><polyline points="120,55 120,130"/>
+              </g>
+              <text x="66" y="98" font-style="italic">a</text><text x="126" y="128" font-style="italic">b</text>
+            </g>
+            <text x="186" y="62" font-size="22" fill="#F5821F" font-weight="700">⇒</text>
+            <g font-size="16" fill="#1B3B8B">
+              <line x1="200" y1="55" x2="292" y2="55" stroke="#1D3FA0" stroke-width="2.2" fill="none" marker-end="url(#r332)"/>
+              <circle cx="246" cy="55" r="4" fill="#1D3FA0"/>
+              <g stroke="#1D3FA0" stroke-width="2.2" fill="none" marker-end="url(#r332)">
+                <polyline points="246,55 246,100"/><polyline points="246,55 246,132"/>
+              </g>
+              <text x="254" y="98" font-style="italic">a</text><text x="254" y="130" font-style="italic">b</text>
+            </g>
+          </svg>
+          <div class="ds">同一信号线上的相邻分支点，可交换次序，也可合并为一个分支点</div>
+        </div>
+      </div>
+      <div class="act-card rl" data-step="3">
+        <div class="bd2">
+          <div class="nm">相加点 ↔ 分支点 <span class="no">✗ 不能简单互换</span></div>
+          <svg viewBox="0 0 300 150" width="98%">
+            <defs><marker id="r333" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#1D3FA0"/></marker></defs>
+            <g font-size="16" fill="#1B3B8B">
+              <circle cx="60" cy="70" r="12" fill="#fff" stroke="#1D3FA0" stroke-width="2.2"/><path d="M 54.6,64.6 L 65.4,75.4 M 54.6,75.4 L 65.4,64.6" stroke="#1D3FA0" stroke-width="2.2" fill="none"/>
+              <line x1="8" y1="70" x2="45" y2="70" stroke="#1D3FA0" stroke-width="2.2" fill="none" marker-end="url(#r333)"/>
+              <line x1="60" y1="24" x2="60" y2="55" stroke="#1D3FA0" stroke-width="2.2" fill="none" marker-end="url(#r333)"/>
+              <line x1="72" y1="70" x2="150" y2="70" stroke="#1D3FA0" stroke-width="2.2" fill="none" marker-end="url(#r333)"/>
+              <circle cx="112" cy="70" r="4" fill="#1D3FA0"/>
+              <polyline points="112,70 112,112" stroke="#1D3FA0" stroke-width="2.2" fill="none" marker-end="url(#r333)"/>
+              <text x="48" y="18" font-style="italic">X₂</text><text x="118" y="110" font-style="italic">分支</text>
+              <line x1="190" y1="40" x2="255" y2="105" stroke="#D63A2F" stroke-width="5"/>
+              <line x1="255" y1="40" x2="190" y2="105" stroke="#D63A2F" stroke-width="5"/>
+            </g>
+          </svg>
+          <div class="ds">两类点性质不同，直接互换会改变信号关系；必须跨越时<span class="kw-r">要补等效环节</span>（下页）</div>
+        </div>
+      </div>
+    </div>
+    <div class="warn" data-step="4">
+      <div style="font-size:24px">⚠️</div>
+      <div><b>注意：</b>任何移动都必须保证——移动后<span class="kw-r">加入或引出的信号与移动前完全相同</span>（等效原则）。</div>
+    </div>
+  </div>
+  <div class="act-note">
+    <svg class="ico" viewBox="0 0 48 48"><circle cx="24" cy="24" r="18" fill="none" stroke="#1D3FA0" stroke-width="3"/><path d="M15 24 l7 7 l12-13" fill="none" stroke="#F5821F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span><span class="lead">小结：</span>同类相邻可交换、可合并；异类相邻不能直接互换，必须跨越时<span class="kw-r">要补等效环节</span>。</span>
+  </div>
+</div></div>
+</body>
+</html>

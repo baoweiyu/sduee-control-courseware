@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>脉冲函数</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<link rel="stylesheet" href="../lesson03-svg.css">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:26px; height:100%; align-items:stretch; }
+  .lcol { flex:1.05; display:flex; flex-direction:column; gap:16px; }
+  .name { font-size:27px; font-weight:700; color:var(--navy); }
+  .mathbox { font-size:27px; padding:18px 26px; }
+  .unit { background:#fff; border:2px solid var(--line); border-radius:14px; padding:14px 22px; font-size:21.5px; color:var(--ink); line-height:1.6; }
+  .figc { flex:1; display:flex; flex-direction:column; overflow:hidden; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:14px; }
+  .figc svg { width:100%; height:100%; }
+</style>
+</head>
+<body data-title="典型输入信号 · 脉冲函数" data-page="7 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body fill">
+    <div class="row">
+      <div class="lcol">
+        <div class="name">4、脉冲函数</div>
+        <div class="mathbox math eqline tex tex-d">r(t) = \begin{cases} \dfrac{A}{\varepsilon}, & 0 < t < \varepsilon \\[4pt] 0, & t < 0 \;\text{及}\; t > \varepsilon \end{cases}</div>
+        <div class="unit"><span class="tex">\varepsilon \to 0</span> 时记为 <span class="tex">\delta(t)</span>，即<b>单位脉冲函数</b>：
+          <span class="mathbox math eqline tex tex-d" style="margin-top:10px">\delta(t) = \begin{cases} \infty, & t = 0 \\ 0, & t \neq 0 \end{cases}, \qquad \int_{-\infty}^{+\infty} \delta(t)\,\mathrm{d}t = 1</span>
+        </div>
+        <div class="unit">拉氏变换 <span class="tex">\mathcal{L}[\delta(t)] = 1</span>。脉冲宽度 <span class="tex">\varepsilon</span> 趋于零、面积恒为 <span class="tex">A</span>，表示<span class="kw-r">瞬时冲击</span>作用，如敲击、碰撞、电网瞬时扰动。</div>
+      </div>
+      <div class="figc">
+        <div class="act-card figc">
+          <div class="hd">脉冲函数波形（ε → 0 的极限）</div>
+          <div class="bd2">
+            <svg viewBox="0 0 640 560">
+              <defs>
+                <marker id="arr7" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#5B6B8C"/></marker>
+                <marker id="arr7b" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#D63A2F"/></marker>
+              </defs>
+              <line x1="90" y1="470" x2="606" y2="470" stroke="#5B6B8C" stroke-width="2" marker-end="url(#arr7)"/>
+              <line x1="90" y1="470" x2="90" y2="40" stroke="#5B6B8C" stroke-width="2" marker-end="url(#arr7)"/>
+              <text x="600" y="508" class="svgname" font-size="23" text-anchor="end">t</text>
+              <text x="58" y="44" class="svgname" font-size="23" text-anchor="middle">r(t)</text>
+              <text x="64" y="480" class="svgsub" font-size="21">O</text>
+              <!-- 窄高矩形脉冲（0 到 ε） -->
+              <rect x="240" y="130" width="52" height="340" fill="#EEF3FD" stroke="#2B5CE6" stroke-width="3.5"/>
+              <text x="266" y="112" class="svgname" font-size="24" text-anchor="middle">A/ε</text>
+              <text x="240" y="508" class="svgsub" font-size="22" text-anchor="middle">0</text>
+              <text x="292" y="508" class="svgsub" font-size="22" text-anchor="middle">ε</text>
+              <!-- 面积标注 -->
+              <text x="392" y="260" class="svgname" font-size="24">面积 = (A/ε)·ε = A</text>
+              <line x1="300" y1="272" x2="380" y2="262" stroke="#5B6B8C" stroke-width="1.6"/>
+              <!-- ε→0 极限示意 -->
+              <line x1="240" y1="470" x2="240" y2="84" stroke="#D63A2F" stroke-width="3" marker-end="url(#arr7b)"/>
+              <text x="254" y="82" font-size="23" font-weight="700" fill="#D63A2F">ε→0：δ(t)</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+</body>
+</html>

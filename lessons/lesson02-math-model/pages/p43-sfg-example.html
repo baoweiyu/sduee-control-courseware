@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>术语对号入座</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .panel { background:var(--sky); border-radius:14px; padding:6px 12px; }
+  svg [data-step] { transform:none !important; }
+  .flow { stroke-dasharray:14 10; animation:fl 1s linear infinite; }
+  @keyframes fl { to { stroke-dashoffset:-24; } }
+  .legend { margin-top:8px; font-size:20px; text-align:center; color:var(--ink); }
+  .legend b { color:var(--red); }
+  .pair { display:inline-block; background:#fff; border:2px solid var(--blue); border-radius:8px;
+          padding:2px 12px; margin:0 6px; font-size:19px; font-weight:700; color:var(--navy); }
+</style>
+</head>
+<body data-title="术语对号入座（X₀…X₆）" data-page="43 / 51">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body fill">
+    <div class="panel">
+      <svg viewBox="0 0 1120 380" width="100%" height="372">
+        <defs><marker id="r42" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="#D63A2F"/></marker></defs>
+        <!-- 主链 -->
+        <g stroke="#1D3FA0" stroke-width="3" fill="none">
+          <line x1="90" y1="170" x2="220" y2="170"/><line x1="240" y1="170" x2="370" y2="170"/>
+          <line x1="390" y1="170" x2="520" y2="170"/><line x1="540" y1="170" x2="670" y2="170"/>
+          <line x1="690" y1="170" x2="820" y2="170"/><line x1="840" y1="170" x2="970" y2="170"/>
+        </g>
+        <!-- 回环支路（下方弧线） -->
+        <g stroke="#1D3FA0" stroke-width="2.5" fill="none">
+          <path d="M 372 178 Q 305 268 238 178"/>
+          <path d="M 522 178 Q 455 268 388 178"/>
+          <path d="M 672 178 Q 605 268 538 178"/>
+          <path d="M 822 178 Q 755 268 688 178"/>
+        </g>
+        <!-- 支路中点方向箭头 -->
+        <g fill="#1D3FA0">
+          <path d="M-6,-5 L8,0 L-6,5 Z" transform="translate(155,170)"/>
+          <path d="M-6,-5 L8,0 L-6,5 Z" transform="translate(305,170)"/>
+          <path d="M-6,-5 L8,0 L-6,5 Z" transform="translate(455,170)"/>
+          <path d="M-6,-5 L8,0 L-6,5 Z" transform="translate(605,170)"/>
+          <path d="M-6,-5 L8,0 L-6,5 Z" transform="translate(755,170)"/>
+          <path d="M-6,-5 L8,0 L-6,5 Z" transform="translate(905,170)"/>
+          <path d="M-6,-5 L8,0 L-6,5 Z" transform="translate(305,223) rotate(180)"/>
+          <path d="M-6,-5 L8,0 L-6,5 Z" transform="translate(455,223) rotate(180)"/>
+          <path d="M-6,-5 L8,0 L-6,5 Z" transform="translate(605,223) rotate(180)"/>
+          <path d="M-6,-5 L8,0 L-6,5 Z" transform="translate(755,223) rotate(180)"/>
+        </g>
+        <!-- 节点 -->
+        <g fill="#fff" stroke="#1D3FA0" stroke-width="3">
+          <circle cx="80" cy="170" r="10"/><circle cx="230" cy="170" r="10"/><circle cx="380" cy="170" r="10"/>
+          <circle cx="530" cy="170" r="10"/><circle cx="680" cy="170" r="10"/><circle cx="830" cy="170" r="10"/>
+          <circle cx="980" cy="170" r="10"/>
+        </g>
+        <g font-size="19" fill="#1B3B8B" font-style="italic">
+          <text x="70" y="146">x₀</text><text x="220" y="146">x₁</text><text x="370" y="146">x₂</text>
+          <text x="520" y="146">x₃</text><text x="670" y="146">x₄</text><text x="820" y="146">x₅</text><text x="970" y="146">x₆</text>
+          <text x="146" y="158">a</text><text x="296" y="158">b</text><text x="446" y="158">c</text>
+          <text x="596" y="158">d</text><text x="746" y="158">e</text><text x="896" y="158">j</text>
+          <text x="300" y="252">i</text><text x="450" y="252">h</text><text x="600" y="252">g</text><text x="750" y="252">f</text>
+        </g>
+        <!-- step1 节点分类 -->
+        <g data-step="1">
+          <circle cx="80" cy="170" r="17" fill="none" stroke="#D63A2F" stroke-width="3.5"/>
+          <circle cx="980" cy="170" r="17" fill="none" stroke="#D63A2F" stroke-width="3.5"/>
+          <g fill="none" stroke="#1D3FA0" stroke-width="2.5" stroke-dasharray="5 4">
+            <circle cx="230" cy="170" r="16"/><circle cx="380" cy="170" r="16"/><circle cx="530" cy="170" r="16"/>
+            <circle cx="680" cy="170" r="16"/><circle cx="830" cy="170" r="16"/>
+          </g>
+          <text x="46" y="210" font-size="17" fill="#D63A2F" font-weight="800">源节点</text>
+          <text x="946" y="210" font-size="17" fill="#D63A2F" font-weight="800">汇节点</text>
+          <text x="440" y="120" font-size="17" fill="#1D3FA0" font-weight="800">x₁…x₅：混合节点（先相加再引出）</text>
+        </g>
+        <!-- step2 前向通道 -->
+        <g data-step="2">
+          <polyline class="flow" points="80,170 980,170" fill="none" stroke="#D63A2F" stroke-width="5"/>
+          <text x="400" y="60" font-size="21" fill="#D63A2F" font-weight="800">前向通道（只有 1 条）：P = a·b·c·d·e·j</text>
+        </g>
+        <!-- step3 回环 -->
+        <g data-step="3">
+          <g stroke="#D63A2F" stroke-width="4" fill="none">
+            <path d="M 372 178 Q 305 268 238 178"/><path d="M 522 178 Q 455 268 388 178"/>
+            <path d="M 672 178 Q 605 268 538 178"/><path d="M 822 178 Q 755 268 688 178"/>
+          </g>
+          <g fill="#D63A2F">
+            <path d="M-6,-5 L8,0 L-6,5 Z" transform="translate(305,223) rotate(180)"/>
+            <path d="M-6,-5 L8,0 L-6,5 Z" transform="translate(455,223) rotate(180)"/>
+            <path d="M-6,-5 L8,0 L-6,5 Z" transform="translate(605,223) rotate(180)"/>
+            <path d="M-6,-5 L8,0 L-6,5 Z" transform="translate(755,223) rotate(180)"/>
+          </g>
+          <g stroke="#D63A2F" stroke-width="4" fill="none">
+            <line x1="230" y1="163" x2="230" y2="126"/><line x1="380" y1="163" x2="380" y2="126"/>
+            <line x1="380" y1="163" x2="380" y2="126" opacity="0"/>
+          </g>
+          <text x="240" y="320" font-size="20" fill="#D63A2F" font-weight="800">闭通道（回环）共 4 个：b·i　c·h　d·g　e·f</text>
+        </g>
+        <!-- step4 互不接触 -->
+        <g data-step="4">
+          <text x="230" y="356" font-size="20" fill="#1B3B8B" font-weight="800">两两互不接触的回环：bi 与 dg　✔　bi 与 ef　✔　ch 与 ef　✔（dg 与 ef 有公共节点 x₄，接触 ✗）</text>
+        </g>
+      </svg>
+    </div>
+    <div class="legend" data-step="4">普通通道（非前向）举例：<span class="pair">a·b·c·d·e</span>止于 <span class="tex">x_{5}</span>　<span class="pair">f·g·h·i</span>不构成源→汇——前向通道必须<span class="kw-r">从源节点到汇节点且节点不重复</span></div>
+  </div>
+</div></div>
+</body>
+</html>

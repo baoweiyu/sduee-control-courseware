@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>代数稳定判据的引入</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .col { display:flex; flex-direction:column; gap:20px; height:100%; }
+  .whyc { flex:1; }
+  .whyc .bd { font-size:23px; line-height:1.85; display:flex; flex-direction:column; justify-content:center; }
+  .flowc { flex:1.35; }
+  .flowc .bd { display:flex; flex-direction:column; justify-content:center; }
+  .flow { display:flex; align-items:center; justify-content:center; gap:16px; }
+  .fbox { background:var(--sky); border:2.5px solid var(--navy); border-radius:14px; padding:20px 26px; text-align:center; font-size:22.5px; color:var(--navy); font-weight:700; line-height:1.5; }
+  .farrow { font-size:36px; color:var(--orange); font-weight:800; }
+  .fmid { display:flex; flex-direction:column; gap:16px; }
+  .fbox.bad { background:#FCEBE9; border-color:#D63A2F; color:#D63A2F; font-weight:400; }
+  .fbox.bad b { font-weight:700; }
+  .fbox.good { background:#EAF6EE; border-color:#1E9E57; color:#1E9E57; }
+  .histc { flex:0.9; }
+  .histc .bd { font-size:22px; line-height:1.8; display:flex; flex-direction:column; justify-content:center; }
+</style>
+</head>
+<body data-title="代数稳定判据的引入" data-page="55 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="col">
+      <div class="act-card whyc">
+        <div class="hd">问题的提出</div>
+        <div class="bd">
+          <span>判稳需要知道<span class="kw-r">全部特征根实部的符号</span>。低阶方程可以直接求根；但对高阶系统，求根的工作量很大（五次以上代数方程没有一般求根公式）。于是人们希望寻求一种<span class="kw-r">不求解方程</span>、只利用特征方程的<span class="kw-r">系数进行代数运算</span>，就能判断稳定性的方法。</span>
+        </div>
+      </div>
+      <div class="act-card flowc">
+        <div class="hd">两条判稳路径</div>
+        <div class="bd">
+          <div class="flow">
+            <div class="fbox">特征方程<br><span class="tex" style="font-size:23px">D(s)=s^{n}+a_{1}s^{n-1}+\cdots+a_{n}=0</span></div>
+            <div class="farrow">→</div>
+            <div class="fmid">
+              <div class="fbox bad"><b>直接求根</b>：高阶困难，<br>工程上不可取 ✗</div>
+              <div class="fbox good"><b>系数代数运算</b>：<br>列劳斯表即可 ✓</div>
+            </div>
+            <div class="farrow">→</div>
+            <div class="fbox">全部根的实部<br>均为负？<br>是：稳定</div>
+          </div>
+        </div>
+      </div>
+      <div class="act-card histc">
+        <div class="hd">历史与本节主线</div>
+        <div class="bd">
+          <span>该方法由<b>劳斯</b>（Routh，1877）与<b>赫尔维茨</b>（Hurwitz，1895）分别独立提出，统称<span class="kw-r">劳斯–赫尔维茨判据</span>，又称<span class="kw-r">代数稳定判据</span>。<br>本节主线：劳斯表的构造 → 判据两条 → 两种特殊情况的处理。</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+</body>
+</html>

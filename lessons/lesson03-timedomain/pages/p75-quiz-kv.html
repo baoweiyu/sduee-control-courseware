@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>课堂互动 · Kv 与系统型别</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:24px; height:100%; }
+  .revc { flex:0.92; display:flex; flex-direction:column; }
+  .revc .bd { flex:1; font-size:24px; line-height:1.95; display:flex; flex-direction:column; justify-content:space-evenly; gap:14px; padding:14px 28px; }
+  .qcol { flex:1.08; display:flex; flex-direction:column; gap:18px; }
+  .qtype { display:inline-block; background:var(--orange); color:#fff; font-size:21px; font-weight:700; border-radius:10px; padding:7px 20px; width:fit-content; }
+  .qz { background:#fff; border:2px solid var(--line); border-radius:16px; padding:24px 30px; }
+  .qz .qt { font-size:24px; color:var(--navy); font-weight:700; margin-bottom:18px; line-height:1.65; }
+  .stage-tip { display:inline-block; margin-bottom:16px; font-size:19.5px; color:#fff; background:var(--blue); border-radius:20px; padding:6px 20px; width:fit-content; }
+  .opts { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .opt { background:var(--sky); border:2px solid var(--line); border-radius:12px; padding:14px 22px; font-size:22.5px; color:var(--ink); font-weight:700; position:relative; }
+  .opt.right { border-color:#1E9E57; background:#F0FAF4; }
+  .opt.right::after { content:"✓"; position:absolute; top:-14px; right:-10px; width:32px; height:32px; border-radius:50%; background:#1E9E57; color:#fff; font-weight:800; font-size:20px; display:grid; place-items:center; }
+  .ans { font-size:22px; color:var(--navy); background:var(--sky); border-radius:12px; padding:16px 24px; line-height:1.8; }
+  .ans b { color:var(--danger); }
+</style>
+</head>
+<body data-title="课堂互动 · Kv 与系统型别" data-page="79 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="row">
+      <div class="act-card revc">
+        <div class="hd">回顾 · 静态误差系数的定义</div>
+        <div class="bd">
+          <span>位置：<span class="tex tex-d" style="font-size:21px">K_{p}=\lim_{s\to 0}G(s)H(s)</span></span>
+          <span>速度：<span class="tex tex-d" style="font-size:21px">K_{v}=\lim_{s\to 0}s\,G(s)H(s)</span></span>
+          <span>加速度：<span class="tex tex-d" style="font-size:21px">K_{a}=\lim_{s\to 0}s^{2}G(s)H(s)</span></span>
+          <span>型别 ν —— 开环传递函数中<span class="kw">积分环节</span>（<span class="tex">1/s</span>）的个数。</span>
+        </div>
+      </div>
+      <div class="qcol">
+        <span class="qtype">课堂互动　选择</span>
+        <div class="qz">
+          <div class="qt">若某系统的静态速度误差系数 <span class="tex">K_{v}=\infty</span>，<br>则该系统<b>至少</b>应为几型？</div>
+          <span class="stage-tip">请先作出选择</span>
+          <div class="opts">
+            <div class="opt" data-mark="0">A　0 型</div>
+            <div class="opt" data-mark="0">B　1 型</div>
+            <div class="opt" data-mark="1">C　2 型</div>
+            <div class="opt" data-mark="0">D　3 型</div>
+          </div>
+        </div>
+        <div class="ans" data-step="2">
+          <b>答案：C。</b>ν = 0 时 <span class="tex">K_{v}=0</span>；ν = 1 时 <span class="tex">K_{v}=K</span>（有限值）；<span class="kw">ν ≥ 2</span> 时才有 <span class="tex">K_{v}=\infty</span>。<br>3 型当然也满足 <span class="tex">K_{v}=\infty</span>，但题目问"至少"，故为 <span class="kw-r">2 型</span>。
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const S = ACT.step, _n = S.next.bind(S), _r = S.reset.bind(S);
+  function mark() {
+    const on = S.cur >= 1;
+    document.querySelectorAll(".opt").forEach(o => o.classList.toggle("right", on && o.dataset.mark === "1"));
+  }
+  S.next = function () { const dd = _n(); mark(); return dd; };
+  S.reset = function () { _r(); mark(); };
+  window.prev = function () { const n = Math.max(0, S.cur - 1); S.reset(); for (let i = 0; i < n; i++) S.next(); };
+});
+</script>
+</body>
+</html>

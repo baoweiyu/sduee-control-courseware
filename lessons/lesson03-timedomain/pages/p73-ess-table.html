@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>静态误差系数 · 形象总表</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .col { display:flex; flex-direction:column; gap:18px; height:100%; }
+  .tabc { flex:1.7; display:flex; flex-direction:column; }
+  .tabc .bd { flex:1; display:flex; flex-direction:column; justify-content:center; gap:14px; }
+  .ptc { flex:0.55; }
+  .ptc .bd { display:flex; align-items:center; gap:26px; font-size:20.5px; color:var(--navy); line-height:1.6; padding:12px 24px; }
+  .big { border-collapse:collapse; width:100%; }
+  .big th, .big td { border:2.5px solid var(--line); padding:12px 8px; font-size:22px; text-align:center; }
+  .big th { background:var(--navy); color:#fff; font-weight:700; font-size:20px; line-height:1.45; }
+  .big th.sub { background:#2A4FA3; font-size:18.5px; padding:7px 6px; }
+  .big td.tp { background:var(--sky); font-weight:800; color:var(--navy); font-size:23px; }
+  .big td.z { background:#EAF6EE; color:#1E9E57; font-weight:800; }
+  .big td.k { background:#FDF3EC; color:var(--navy); font-weight:700; }
+  .big td.inf { background:#FCEBE9; color:#D63A2F; font-weight:800; }
+  .big td.in { background:#F4F7FF; color:var(--navy); font-weight:700; }
+  .lg { display:inline-block; width:18px; height:18px; border-radius:5px; vertical-align:-3px; margin-right:8px; border:1.5px solid var(--line); }
+</style>
+</head>
+<body data-title="静态误差系数总表" data-page="77 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="col">
+      <div class="act-card tabc">
+        <div class="hd">给定输入下稳态误差总表（静态误差系数法）</div>
+        <div class="bd">
+          <table class="big">
+            <tr><th rowspan="2" style="width:9%">型别<br>ν</th><th colspan="3" style="width:33%">静态误差系数</th><th colspan="3">稳态误差 <span class="tex" style="font-size:19px">e_{ss}</span>（幅值 A）</th></tr>
+            <tr>
+              <th class="sub"><span class="tex" style="font-size:18.5px">K_{p}</span></th><th class="sub"><span class="tex" style="font-size:18.5px">K_{v}</span></th><th class="sub"><span class="tex" style="font-size:18.5px">K_{a}</span></th>
+              <th class="sub">阶跃 <span class="tex" style="font-size:18.5px">A\cdot 1(t)</span><br><span class="tex" style="font-size:17.5px">A/(1+K_{p})</span></th>
+              <th class="sub">斜坡 <span class="tex" style="font-size:18.5px">A\cdot t</span><br><span class="tex" style="font-size:17.5px">A/K_{v}</span></th>
+              <th class="sub">抛物线 <span class="tex" style="font-size:18.5px">\frac{A}{2}t^{2}</span><br><span class="tex" style="font-size:17.5px">A/K_{a}</span></th>
+            </tr>
+            <tr data-step="1">
+              <td class="tp">0 型</td><td class="k">K</td><td class="in">0</td><td class="in">0</td>
+              <td class="k"><span class="tex" style="font-size:21px">\dfrac{A}{1+K}</span></td><td class="inf">∞</td><td class="inf">∞</td>
+            </tr>
+            <tr data-step="2">
+              <td class="tp">1 型</td><td class="in">∞</td><td class="k">K</td><td class="in">0</td>
+              <td class="z">0</td><td class="k"><span class="tex" style="font-size:21px">\dfrac{A}{K}</span></td><td class="inf">∞</td>
+            </tr>
+            <tr data-step="3">
+              <td class="tp">2 型</td><td class="in">∞</td><td class="in">∞</td><td class="k">K</td>
+              <td class="z">0</td><td class="z">0</td><td class="k"><span class="tex" style="font-size:21px">\dfrac{A}{K}</span></td>
+            </tr>
+          </table>
+          <div style="font-size:19.5px;color:#5B6B8C;line-height:1.55" data-step="4">
+            <span class="lg" style="background:#EAF6EE"></span>无差（ess = 0）　<span class="lg" style="background:#FDF3EC"></span>有恒定误差（∝ 1/K）　<span class="lg" style="background:#FCEBE9"></span>误差无穷大（不能跟踪）<br><b>记忆规律</b>：型别 ≥ 输入阶次 → 无差；低一阶 → A/K；低两阶 → ∞。
+          </div>
+        </div>
+      </div>
+      <div class="act-card ptc">
+        <div class="bd" data-step="5">
+          <span>① 系数只取 <b>0、定值、∞</b> 三种值；<br>系数越大，<span class="kw-r">消除稳态误差的能力</span>越强。</span>
+          <span>② 同一行（同一型别）：输入变化越"快"，误差越大；<br>同一列（同一输入）：型别越高，误差越小。</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>3.2 映射原理（幅角原理）总结</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .col-wrap { display:flex; flex-direction:column; gap:16px; height:100%; min-height:0; }
+  .big { background:#fff; border:2px solid var(--line); border-radius:16px; padding:16px 26px; text-align:center; }
+  .big .mathbox { font-size:26px; padding:12px 18px; }
+  .big .ds { font-size:20px; color:var(--ink); margin-top:8px; line-height:1.55; }
+  .row2 { display:grid; grid-template-columns:1.1fr 1fr; gap:18px; flex:1; min-height:0; }
+  .tc { background:#fff; border:2px solid var(--line); border-radius:16px; padding:12px 20px; display:flex; flex-direction:column; min-height:0; }
+  .tc .h { font-size:20px; font-weight:700; color:var(--blue); margin-bottom:8px; }
+  table.act-table { font-size:19.5px; }
+  .act-table th { font-size:19.5px; padding:12px 10px; }
+  .act-table td { padding:15px 10px; text-align:center; }
+  .why { flex:1; font-size:19.5px; line-height:1.65; color:var(--ink); display:flex; flex-direction:column; justify-content:space-evenly; gap:10px; }
+  .why .it { background:var(--sky); border-radius:11px; padding:13px 16px; }
+</style>
+</head>
+<body data-title="3.2 映射原理（幅角原理）总结" data-page="61 / 87">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="col-wrap">
+      <div class="big">
+        <div class="mathbox math eqline tex tex-d">\boxed{\;N=P-Z\;}</div>
+        <div class="ds">动点 s 沿封闭曲线 C <b>顺时针</b>走一圈 ⇒ 像轨迹 Г 在 F(s) 平面<b>逆时针包围原点 N 次</b>；<br>N&gt;0 逆时针、N&lt;0 顺时针、N=0 不包围。<b>数圈数 ⇔ 数转角</b>：N = Δ∠F(s) / 360°。</div>
+      </div>
+      <div class="row2">
+        <div class="tc">
+          <div class="h">情形回查表</div>
+          <table class="act-table">
+            <tr><th>围线 C 内</th><th>Z</th><th>P</th><th>N = P−Z</th><th>Г 包围原点情况</th></tr>
+            <tr><td>只含 1 零点</td><td>1</td><td>0</td><td class="kw-r">−1</td><td>顺时针 1 圈</td></tr>
+            <tr><td>只含 1 极点</td><td>0</td><td>1</td><td style="color:#1D3FA0;font-weight:700">+1</td><td>逆时针 1 圈</td></tr>
+            <tr><td>1 零点 + 1 极点</td><td>1</td><td>1</td><td style="color:#1E9E57;font-weight:700">0</td><td>不包围</td></tr>
+            <tr><td>不含零极点</td><td>0</td><td>0</td><td>0</td><td>不包围</td></tr>
+            <tr><td>2 重零点（如 s²）</td><td>2</td><td>0</td><td class="kw-r">−2</td><td>顺时针 2 圈</td></tr>
+          </table>
+        </div>
+        <div class="tc">
+          <div class="h">为什么它是 Nyquist 判据的地基？</div>
+          <div class="why">
+            <div class="it">① 稳定性问题 = 问"右半 s 平面有没有<b>闭环极点</b>"——也就是 F(s)=1+G(s)H(s) 的<span class="kw-r">零点个数 Z</span>。</div>
+            <div class="it">② Z 不好直接数，但 P（F 的极点 = <b>开环</b>右极点）已知，N（Г 包围原点的圈数）可以<span class="kw-r">从图上数出来</span>。</div>
+            <div class="it">③ 于是 <b>Z = P − N</b>：看图数圈 ⇒ 判稳定性。接下来只剩两件事：把 F 平面平移到 GH 平面、把围线 C 选成"Nyquist 轨线"。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">承上启下</span><span>映射原理只管 F(s) 的零极点；控制系统关心的是 <span class="kw-r">1+G(s)H(s)</span>。下一页：把 F 平面的"原点"翻译成 GH 平面的 <span class="kw-r">(−1, j0) 点</span>。</span></div>
+</div></div>
+</body>
+</html>

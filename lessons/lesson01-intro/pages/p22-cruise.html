@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>身边实例 · 汽车定速巡航</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .cols { display:flex; gap:28px; height:520px; margin-top:4px; }
+  .imgc { flex:1.2; position:relative; overflow:hidden; }
+  .imgc .bd2 { height:438px; display:grid; place-items:center; background:var(--sky); padding:10px; }
+  .imgc img.main { max-width:100%; max-height:100%; object-fit:contain; }
+  .flow { flex:1; display:flex; flex-direction:column; justify-content:space-evenly; gap:0; }
+  .fstep { background:var(--sky); border:2px solid var(--line); border-radius:12px; padding:16px 18px; font-size:22px; color:var(--navy); text-align:center; font-weight:700; }
+  .fstep small { display:block; font-weight:400; color:var(--muted); font-size:18px; margin-top:4px; }
+  .farr { text-align:center; color:var(--orange); font-size:26px; line-height:1.15; }
+</style>
+</head>
+<body data-title="身边实例：汽车定速巡航（闭环）" data-page="22 / 35">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="cols">
+      <div class="act-card imgc">
+        <div class="hd">设定速度后，车辆自动保持车速</div>
+        <div class="bd2">
+          <img class="main" src="../../../assets/image2/cruise-highway.png" alt="高速公路定速巡航">
+        </div>
+      </div>
+      <div class="flow">
+        <div class="fstep">定速巡航控制开关<small>驾驶员设定目标速度</small></div>
+        <div class="farr">▼</div>
+        <div class="fstep">发动机 ECU<small>轮速传感器 ⇢ ABS 模块提供车速反馈；变速箱 ECU 协同</small></div>
+        <div class="farr">▼</div>
+        <div class="fstep">控制节气门和自动变速箱进行调整</div>
+        <div class="farr">▼</div>
+        <div class="fstep">调整车速，保持设定速度</div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note">
+    <svg class="ico" viewBox="0 0 48 48"><path d="M40 24 a16 16 0 1 1 -6 -12" fill="none" stroke="#1D3FA0" stroke-width="3"/><path d="M40 6 v8 h-8" fill="none" stroke="#F5821F" stroke-width="3" stroke-linecap="round"/></svg>
+    <span><span class="lead">找一找：</span>被控对象（汽车）、被控量（车速）、测量元件（轮速传感器）、执行元件（节气门）分别在哪里？</span>
+  </div>
+</div></div>
+</body>
+</html>

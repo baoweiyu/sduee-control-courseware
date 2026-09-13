@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<!-- 播放器按键/翻页笔端到端测试（V2.16 映射：所有方向键/PgUp/PgDn/Space=上一步/下一步，
+     步尽自动翻页；直翻仅底栏按钮）：
+     通过 qa/run_keytest.py 加载，结果写入 #out（每行 PASS/FAIL），结尾 ALL DONE。 -->
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><title>keytest</title></head>
+<body>
+<iframe id="pl" style="width:1400px;height:900px"></iframe>
+<pre id="out">RUNNING</pre>
+<script>
+const out = document.getElementById("out");
+const pl = document.getElementById("pl");
+const lines = [];
+function log(ok, name, extra) {
+  lines.push((ok ? "PASS " : "FAIL ") + name + (extra ? "  [" + extra + "]" : ""));
+  out.textContent = lines.join("\n");
+}
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+async function until(fn, timeout = 15000) {
+  const t0 = Date.now();
+  while (Date.now() - t0 < timeout) {
+    try { const v = fn(); if (v) return v; } catch (e) {}
+    await sleep(120);
+  }
+  return null;
+}
+const doc = () => pl.contentDocument;
+const pg = () => doc().getElementById("pg").textContent.trim();
+const meta = () => doc().getElementById("meta").textContent;
+function key(code) {
+  pl.contentWindow.dispatchEvent(new pl.contentWindow.KeyboardEvent("keydown", { code, bubbles: true, cancelable: true }));
+}
+function clickBtn(id) { doc().getElementById(id).click(); }
+async function loadPlayer(lesson, p) {
+  pl.src = "../player/index.html?lesson=" + lesson + "&p=" + p;
+  await until(() => doc() && doc().getElementById("pg") && doc().getElementById("meta"));
+}
+async function waitState(pgPrefix, stepText) {
+  return until(() => pg().indexOf(pgPrefix) === 0 && (!stepText || meta().includes(stepText)) ? true : null);
+}
+
+(async () => {
+  // ---- A：lesson04 p43（6 步，原生 window.prev 页）←/→ 分步 ----
+  await loadPlayer("lesson04-freq", 43);
+  log(await waitState("43 /", "分步 0/6"), "A0 打开p43 步数0/6", meta());
+  key("ArrowRight");
+  log(await waitState("43 /", "分步 1/6"), "A1 → 分步1/6", meta());
+  key("ArrowRight");
+  log(await waitState("43 /", "分步 2/6"), "A2 → 分步2/6", meta());
+  key("ArrowLeft");
+  log(await waitState("43 /", "分步 1/6"), "A3 ← 回退1/6", meta());
+  key("ArrowLeft");
+  log(await waitState("43 /", "分步 0/6"), "A4 ← 回退0/6", meta());
+  key("ArrowLeft");
+  log(await waitState("42 /"), "A5 步尽再← 翻到p42", pg());
+
+  // ---- A2：翻页笔键（↓/PgDn=下一步，↑/PgUp=上一步）----
+  await loadPlayer("lesson04-freq", 43);
+  log(await waitState("43 /", "分步 0/6"), "A6 重新打开p43 0/6", meta());
+  key("ArrowDown");
+  log(await waitState("43 /", "分步 1/6"), "A7 ↓=下一步 1/6", meta());
+  key("PageDown");
+  log(await waitState("43 /", "分步 2/6"), "A8 PgDn=下一步 2/6", meta());
+  key("PageDown"); key("PageDown"); key("PageDown"); key("PageDown");
+  log(await waitState("43 /", "分步 6/6"), "A9 PgDn×4 到 6/6", meta());
+  key("PageDown");
+  log(await waitState("44 /"), "A10 步尽 PgDn 自动翻p44", pg());
+  key("PageUp");
+  log(await waitState("43 /", "分步 0/6"), "A11 p44零步 PgUp=上一步 回p43", pg() + " | " + meta());
+  key("ArrowUp");
+  log(await waitState("42 /"), "A12 p43零步 ↑=上一步 回p42", pg());
+
+  // ---- A3：底栏按钮（上一页/下一页 永远直翻）----
+  await loadPlayer("lesson04-freq", 43);
+  log(await waitState("43 /", "分步 0/6"), "A13 重新打开p43 0/6", meta());
+  clickBtn("stepFwd");
+  log(await waitState("43 /", "分步 1/6"), "A14 按钮[下一步]1/6", meta());
+  clickBtn("stepBack");
+  log(await waitState("43 /", "分步 0/6"), "A15 按钮[上一步]0/6", meta());
+  clickBtn("next");
+  log(await waitState("44 /"), "A16 按钮[下一页]直翻p44", pg());
+  clickBtn("prev");
+  log(await waitState("43 /"), "A17 按钮[上一页]直翻p43", pg());
+
+  // ---- B：lesson02 p47（13 步，重放式 window.prev）----
+  await loadPlayer("lesson02-math-model", 47);
+  log(await waitState("47 /", "分步 0/13"), "B0 打开p47 步数0/13", meta());
+  key("ArrowRight"); key("ArrowRight"); key("ArrowRight");
+  log(await waitState("47 /", "分步 3/13"), "B1 →×3 分步3/13", meta());
+  key("ArrowLeft");
+  log(await waitState("47 /", "分步 2/13"), "B2 ← 回退2/13", meta());
+  key("ArrowUp");
+  log(await waitState("47 /", "分步 1/13"), "B3 ↑=上一步 1/13", meta());
+  key("PageUp");
+  log(await waitState("47 /", "分步 0/13"), "B4 PgUp=上一步 0/13", meta());
+  key("PageUp");
+  log(await waitState("46 /"), "B5 步尽 PgUp 自动翻p46", pg());
+
+  // ---- C：lesson04 p55（el ¼ 步进页）----
+  await loadPlayer("lesson04-freq", 55);
+  log(await waitState("55 /", "分步 0/4"), "C0 打开p55 步数0/4", meta());
+  key("ArrowRight"); key("ArrowRight");
+  log(await waitState("55 /", "分步 2/4"), "C1 →×2 分步2/4", meta());
+  key("ArrowLeft");
+  log(await waitState("55 /", "分步 1/4"), "C2 ← 回退1/4", meta());
+  key("Space");
+  log(await waitState("55 /", "分步 2/4"), "C3 Space=下一步 2/4", meta());
+
+  // ---- D：无动画页（lesson01 p1 封面，0 步，步尽即翻页）----
+  await loadPlayer("lesson01-intro", 1);
+  log(await waitState("1 /"), "D0 打开p1", pg());
+  key("ArrowRight");
+  log(await waitState("2 /"), "D1 无动画页 → 翻页p2", pg());
+  key("ArrowLeft");
+  log(await waitState("1 /"), "D2 无动画页 ← 翻页p1", pg());
+  key("ArrowDown");
+  log(await waitState("2 /"), "D3 无动画页 ↓ 翻页p2", pg());
+  key("ArrowUp");
+  log(await waitState("1 /"), "D4 无动画页 ↑ 翻页p1", pg());
+  clickBtn("stepFwd");
+  log(await waitState("2 /"), "D5 无动画页[下一步]翻页p2", pg());
+  clickBtn("stepBack");
+  log(await waitState("1 /"), "D6 无动画页[上一步]翻页p1", pg());
+
+  lines.push("ALL DONE");
+  out.textContent = lines.join("\n");
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>对控制系统的基本要求（稳 · 快 · 准）</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .top3 { display:flex; gap:26px; margin-bottom:20px; }
+  .req { flex:1; text-align:center; padding:22px 18px; }
+  .req .big { font-size:44px; font-weight:700; color:#D63A2F; }
+  .req b { display:block; font-size:23px; color:var(--navy); margin:6px 0; }
+  .req span { font-size:19px; color:var(--muted); line-height:1.5; }
+  .figs { display:flex; gap:22px; height:472px; }
+  .figc { flex:1; display:flex; flex-direction:column; padding:10px; }
+  .figc .cap { text-align:center; font-size:19px; color:var(--navy); font-weight:700; padding:4px 0; }
+  svg text { font-family:var(--font); }
+  .ax { stroke:var(--muted); stroke-width:2; marker-end:url(#arrG); }
+  .cv1 { stroke:var(--blue2); stroke-width:3; fill:none; }
+  .cv2 { stroke:var(--orange); stroke-width:3; fill:none; }
+  .lb { fill:var(--ink); font-size:17px; }
+  .lbm { fill:var(--muted); font-size:16px; }
+</style>
+</head>
+<body data-title="第三节　自动控制理论概要 — 基本要求" data-page="33 / 35">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="top3">
+      <div class="act-card req"><div class="big">稳</div><b>绝对稳定性</b><span>系统必须稳定，动态过程平稳</span></div>
+      <div class="act-card req"><div class="big">快</div><b>动态性能</b><span>响应动作快，过渡过程短</span></div>
+      <div class="act-card req"><div class="big">准</div><b>稳态性能</b><span>跟踪值准确，稳态误差小</span></div>
+    </div>
+    <div class="figs">
+      <div class="act-card figc"><div class="cap">(a) 稳：动态过程是否平稳</div>
+        <svg viewBox="0 0 420 330" width="100%" height="88%">
+          <defs><marker id="arrG" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#5B6B8C"/></marker></defs>
+          <line class="ax" x1="36" y1="280" x2="400" y2="280"/><line class="ax" x1="36" y1="280" x2="36" y2="16"/>
+          <text class="lbm" x="392" y="304">t</text><text class="lbm" x="30" y="28" text-anchor="end">c(t)</text>
+          <line x1="36" y1="140" x2="400" y2="140" stroke="#C9D8F2" stroke-width="1.5" stroke-dasharray="6 5"/>
+          <path class="cv1" d="M36,280 C90,60 140,30 180,140 C210,222 250,100 300,140 C330,165 370,138 400,140"/>
+          <path class="cv2" d="M36,280 C100,120 180,100 250,132 C300,150 360,140 400,140"/>
+          <text class="lb" x="150" y="46" fill="#2B5CE6">变化剧烈</text>
+          <text class="lb" x="220" y="200" fill="#F5821F">响应平稳</text>
+        </svg>
+      </div>
+      <div class="act-card figc"><div class="cap">(b) 快：响应速度</div>
+        <svg viewBox="0 0 420 330" width="100%" height="88%">
+          <line class="ax" x1="36" y1="280" x2="400" y2="280"/><line class="ax" x1="36" y1="280" x2="36" y2="16"/>
+          <text class="lbm" x="392" y="304">t</text><text class="lbm" x="30" y="28" text-anchor="end">c(t)</text>
+          <line x1="36" y1="80" x2="400" y2="80" stroke="#C9D8F2" stroke-width="1.5" stroke-dasharray="6 5"/>
+          <text class="lb" x="320" y="66">给定值</text>
+          <path class="cv1" d="M36,280 C70,90 120,80 200,80 L400,80"/>
+          <path class="cv2" d="M36,280 C90,160 220,82 400,80" style="stroke-dasharray:none"/>
+          <text class="lb" x="80" y="120" fill="#2B5CE6">响应快速</text>
+          <text class="lb" x="200" y="180" fill="#F5821F">响应缓慢</text>
+        </svg>
+      </div>
+      <div class="act-card figc"><div class="cap">(c) 准：稳态误差</div>
+        <svg viewBox="0 0 420 330" width="100%" height="88%">
+          <defs><marker id="arrR" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto-start-reverse"><path d="M0,0 L7,3 L0,6 Z" fill="#D63A2F"/></marker></defs>
+          <line class="ax" x1="36" y1="280" x2="400" y2="280"/><line class="ax" x1="36" y1="280" x2="36" y2="16"/>
+          <text class="lbm" x="392" y="304">t</text><text class="lbm" x="30" y="28" text-anchor="end">c(t)</text>
+          <line x1="36" y1="280" x2="390" y2="30" stroke="#1D3FA0" stroke-width="2.5"/>
+          <text class="lb" x="246" y="40">给定（斜坡）</text>
+          <path class="cv2" d="M36,280 C120,270 180,240 240,180 C300,120 340,90 390,64" stroke-dasharray="8 6"/>
+          <line x1="356" y1="56" x2="356" y2="82" stroke="#D63A2F" stroke-width="2.5" marker-start="url(#arrR)" marker-end="url(#arrR)"/>
+          <line x1="330" y1="192" x2="346" y2="100" stroke="#D63A2F" stroke-width="1.5"/>
+          <text class="lb" x="246" y="204" fill="#D63A2F" font-weight="700">稳态误差</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div></div>
+</body>
+</html>

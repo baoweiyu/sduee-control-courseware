@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>例 3-14 · 动态误差系数的计算</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:24px; height:100%; }
+  .probc { flex:1.02; display:flex; flex-direction:column; }
+  .probc .bd { flex:1; display:flex; flex-direction:column; justify-content:center; gap:14px; }
+  .solc { flex:0.98; display:flex; flex-direction:column; }
+  .solc .bd { flex:1; display:flex; flex-direction:column; justify-content:center; gap:15px; }
+  .step { font-size:20.5px; line-height:1.72; color:var(--navy); }
+  .tt { border-collapse:collapse; width:100%; }
+  .tt th, .tt td { border:2px solid var(--line); padding:8px 4px; font-size:19.5px; text-align:center; }
+  .tt th { background:var(--navy); color:#fff; font-weight:700; font-size:19px; }
+  .tt td.hc { background:#FDF3EC; font-weight:700; }
+  .concl { background:#FCEBE9; border:2px solid #D63A2F; border-radius:12px; padding:11px 18px; font-size:20.5px; color:var(--navy); line-height:1.65; }
+  [data-step]:not(.shown) { visibility:hidden; }
+</style>
+</head>
+<body data-title="例 3-14 · 动态误差系数的计算" data-page="82 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="row">
+      <div class="act-card probc">
+        <div class="hd">例 3-14　求两系统的动态误差系数</div>
+        <div class="bd">
+          <div class="step">两单位反馈系统：<br><span class="tex" style="font-size:20px">G_{1}H_{1}=\dfrac{10}{s+1}\ (0\text{ 型}),\qquad G_{2}H_{2}=\dfrac{10}{s(5s+1)}\ (1\text{ 型})</span><br>输入 <span class="tex" style="font-size:20px">r(t)=A_{0}+A_{1}t+\dfrac{A_{2}}{2}t^{2}</span>，求 <span class="tex">e_{ss}(t)</span>。</div>
+          <div class="step" data-step="1">① 误差传递函数：<br><span class="tex" style="font-size:20px">\varPhi_{e1}(s)=\dfrac{1}{1+G_{1}H_{1}}=\dfrac{s+1}{s+11},\quad \varPhi_{e2}(s)=\dfrac{1}{1+G_{2}H_{2}}=\dfrac{s(5s+1)}{5s^{2}+s+10}</span></div>
+          <div class="step" data-step="2">② 在 <span class="tex">s=0</span> 邻域长除法展开（升幂级数），得各阶系数：</div>
+          <table class="tt" data-step="3">
+            <tr><th>系数</th><th>系统 1（0 型）</th><th>系统 2（1 型）</th></tr>
+            <tr><td class="hc"><span class="tex" style="font-size:18px">c_{0}</span></td><td><span class="tex" style="font-size:18px">\dfrac{1}{11}\approx 0.091</span></td><td>0</td></tr>
+            <tr><td class="hc"><span class="tex" style="font-size:18px">c_{1}</span></td><td><span class="tex" style="font-size:18px">\dfrac{10}{121}\approx 0.083</span></td><td><span class="tex" style="font-size:18px">\dfrac{1}{10}=0.1</span></td></tr>
+            <tr><td class="hc"><span class="tex" style="font-size:18px">c_{2}</span></td><td><span class="tex" style="font-size:18px">-\dfrac{10}{1331}\approx -0.0075</span></td><td><span class="tex" style="font-size:18px">\dfrac{49}{100}=0.49</span></td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="act-card solc">
+        <div class="hd">代入 ess(t) 通式</div>
+        <div class="bd">
+          <div class="step" data-step="4">系统 1：<br><span class="tex tex-d" style="font-size:20.5px">e_{ss1}(t)=0.091\,r(t)+0.083\,\dot{r}(t)-0.0075\,\ddot{r}(t)</span></div>
+          <div class="step" data-step="5">系统 2：<br><span class="tex tex-d" style="font-size:20.5px">e_{ss2}(t)=0.1\,\dot{r}(t)+0.49\,\ddot{r}(t)</span></div>
+          <div class="step" data-step="6">代入 <span class="tex">\dot{r}(t)=A_{1}+A_{2}t</span>，<span class="tex">\ddot{r}(t)=A_{2}</span>：<br><span class="tex" style="font-size:20px">e_{ss1}(t)=0.091\!\left(A_{0}+A_{1}t+\tfrac{A_{2}}{2}t^{2}\right)+0.083(A_{1}+A_{2}t)-0.0075A_{2}</span><br><span class="tex" style="font-size:20px">e_{ss2}(t)=0.1(A_{1}+A_{2}t)+0.49A_{2}</span></div>
+          <div class="concl" data-step="7">系统 1 的误差含 <span class="tex">t^{2}</span> 项，<span class="kw-r">随时间发散</span>；系统 2 的误差只有常值与 <span class="tex">t</span> 一次项 —— 与静态法"0 型不能跟踪斜坡、1 型不能跟踪抛物线"的结论一致。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+</body>
+</html>

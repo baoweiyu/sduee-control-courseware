@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>典型输入信号的选择原则</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:26px; height:100%; }
+  .rules { flex:1.25; display:flex; flex-direction:column; gap:18px; }
+  .rule { flex:1; display:flex; align-items:center; gap:20px; background:#fff; border:2px solid var(--line); border-radius:16px; padding:16px 24px; }
+  .rule .cond { flex:1.2; font-size:23px; color:var(--ink); line-height:1.5; }
+  .rule .pick { flex:none; background:var(--sky); border-radius:12px; padding:10px 22px; font-size:22px; font-weight:700; color:var(--blue); white-space:nowrap; }
+  .imgc { flex:1; display:flex; flex-direction:column; overflow:hidden; }
+  .imgc .bd2 { flex:1; display:grid; place-items:center; background:var(--sky); padding:10px; }
+  .imgc img { max-width:100%; max-height:100%; object-fit:contain; }
+  .cap2 { padding:10px 18px; font-size:19px; color:var(--muted); background:#fff; border-top:2px solid var(--line); }
+</style>
+</head>
+<body data-title="典型输入信号的选择原则" data-page="10 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="rules">
+        <div class="rule">
+          <div class="act-num">1</div>
+          <div class="cond">输入作用具有<b>突变</b>的性质（如给定值突然改变）</div>
+          <div class="pick">阶跃函数</div>
+        </div>
+        <div class="rule">
+          <div class="act-num">2</div>
+          <div class="cond">输入作用<b>随时间增长</b>而变化（如匀速运动的目标）</div>
+          <div class="pick">斜坡函数</div>
+        </div>
+        <div class="rule">
+          <div class="act-num">3</div>
+          <div class="cond">输入作用具有<b>周期性变化</b>（如振动、交流信号）</div>
+          <div class="pick">正弦函数</div>
+        </div>
+      </div>
+      <div class="imgc">
+        <div class="act-card imgc">
+          <div class="hd">例：雷达跟踪匀速目标</div>
+          <div class="bd2"><img src="../../../assets/image2/radar-track.png" alt="雷达跟踪目标"></div>
+          <div class="cap2">目标匀速飞行 → 天线转角随时间线性增长，宜用斜坡函数作为测试输入。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">约定</span>通常以<span class="kw-r">单位阶跃函数</span>为典型输入信号，便于各系统的特性在统一基础上进行比较。</div>
+</div></div>
+</body>
+</html>

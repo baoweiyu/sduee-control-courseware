@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>例2-3 他励直流电动机电枢控制</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .cols { display:flex; gap:26px; height:440px; margin-top:2px; }
+  .imgc { flex:1.15; overflow:hidden; display:flex; flex-direction:column; }
+  .imgc .bd2 { flex:1; display:grid; place-items:center; background:var(--sky); padding:8px; }
+  .imgc img { max-width:100%; max-height:100%; object-fit:contain; }
+  .eqc { flex:1; display:flex; flex-direction:column; gap:12px; }
+  .eq { flex:1; background:#fff; border:2px solid var(--line); border-radius:12px; padding:10px 20px; display:flex; flex-direction:column; justify-content:center; }
+  .eq .t { font-size:19px; color:var(--muted); margin-bottom:2px; }
+  .eq .f { font-size:22px; }
+  .drv { margin-top:20px; }
+  .ln { background:#fff; border:2px solid var(--line); border-left:12px solid var(--blue); border-radius:12px; padding:16px 26px; font-size:23px; color:var(--ink); line-height:1.75; }
+  .math { font-size:23px; }
+</style>
+</head>
+<body data-title="例2-3　他励直流电动机电枢控制" data-page="7 / 51">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="cols">
+      <div class="act-card imgc">
+        <div class="hd" style="font-size:23px">他励直流电动机（剖面）</div>
+        <div class="bd2"><img src="../../../assets/image2/dc-motor.png" alt="他励直流电动机剖面"></div>
+      </div>
+      <div class="eqc">
+        <div class="eq" data-step><div class="t">① 定输入输出</div><div class="f math tex tex-d">\text{输入：电枢电压} u_{a}\text{（给定）、负载转矩} m_{c}\text{（扰动）；输出：转速} n</div></div>
+        <div class="eq" data-step><div class="t">② 电枢回路电压方程</div><div class="f math tex tex-d">L_{a}\dfrac{di_{a}}{dt} + i_{a}R_{a} + e_{a} = u_{a}</div></div>
+        <div class="eq" data-step><div class="t">② 机电关系</div><div class="f math tex tex-d">e_{a} = C_{e}\cdot n\text{，} m = C_{m}\cdot i_{a}\text{，} J\dfrac{dn}{dt} = m - m_{c}</div></div>
+      </div>
+    </div>
+    <div class="drv">
+      <div class="ln" data-step><b>③ 消元标准化：</b><span class="math tex">T_{a}T_{m}\dfrac{d^{2}n}{dt^{2}} + T_{m}\dfrac{dn}{dt} + n = K_{u}\cdot u_{a} - K_{m}(T_{a}\dfrac{dm_{c}}{dt} + m_{c})</span>
+        <div style="font-size:19.5px;color:var(--muted);margin-top:8px">其中 <span class="math tex">T_{a} = L_{a}/R_{a}</span>、<span class="math tex">T_{m} = JR_{a}/(C_{e}C_{m})</span> 为时间常数，<span class="math tex">K_{u} = 1/C_{e}</span>、<span class="math tex">K_{m} = T_{m}/J</span> 为传递系数</div>
+      </div>
+    </div>
+  </div>
+</div></div>
+</body>
+</html>

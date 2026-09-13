@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>1.3 频率响应的定义</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .col { display:flex; flex-direction:column; gap:18px; height:100%; min-height:0; }
+  .top { display:flex; gap:26px; flex:1; min-height:0; }
+  .defc { flex:1.05; display:flex; flex-direction:column; min-height:0; }
+  .defc .bd { flex:1; display:flex; flex-direction:column; justify-content:center; gap:12px; font-size:22.5px; line-height:1.6; }
+  .defc .mathbox { font-size:24px; padding:12px 20px; }
+  .figc { flex:1.15; display:flex; flex-direction:column; overflow:hidden; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:8px 14px; min-height:0; }
+  .figc svg { width:100%; height:100%; }
+  .drv { flex:1.08; display:flex; flex-direction:column; min-height:0; }
+  .drv .bd { flex:1; display:flex; align-items:center; gap:22px; padding:8px 26px; }
+  .drv .eqs { flex:1.5; display:flex; flex-direction:column; justify-content:center; gap:10px; font-size:20.5px; line-height:1.5; }
+  .drv .eqs .mathbox { font-size:23px; padding:9px 16px; margin:0; }
+  .drv .side { flex:1; background:var(--sky); border-radius:14px; padding:12px 20px; font-size:21px; line-height:1.62; color:var(--ink); }
+</style>
+</head>
+<body data-title="1.3 频率响应的定义" data-page="8 / 87">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="col">
+      <div class="top">
+        <div class="act-card defc">
+          <div class="hd">定义</div>
+          <div class="bd">
+            <div>在正弦输入 <span class="tex">r(t)=R\sin\omega t</span> 的作用下，系统输出的<span class="kw-r">稳态值</span>称为<span class="kw-r">频率响应</span>。输出与输入拉氏变换之比（闭环传递函数）：</div>
+            <div class="mathbox math eqline tex tex-d">\varPhi(s)=\dfrac{C(s)}{R(s)}</div>
+          </div>
+        </div>
+        <div class="act-card figc">
+          <div class="hd">稳态输入 / 输出对比</div>
+          <div class="bd2"><svg id="fig" viewBox="0 0 900 460"></svg></div>
+        </div>
+      </div>
+      <div class="act-card drv">
+        <div class="hd">推导骨架（假设闭环极点互不相同）</div>
+        <div class="bd">
+          <div class="eqs">
+            <div class="mathbox math eqline tex tex-d">C(s)=\varPhi(s)\cdot\dfrac{R\omega}{s^{2}+\omega^{2}}={\color{#D63A2F}{\sum_{i=1}^{n}\dfrac{a_i}{s-p_i}}}+{\color{#2B5CE6}{\dfrac{a}{s-j\omega}+\dfrac{\bar{a}}{s+j\omega}}}</div>
+            <div class="mathbox math eqline tex tex-d">c(t)={\color{#D63A2F}{\sum_{i=1}^{n}a_i e^{p_i t}}}+{\color{#2B5CE6}{a e^{j\omega t}+\bar{a} e^{-j\omega t}}}</div>
+          </div>
+          <div class="side">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;"><span style="width:13px;height:13px;border-radius:50%;background:#D63A2F;flex:none;"></span><b style="color:#D63A2F;">瞬态分量</b>：<span class="tex">t\to\infty</span> 衰减为零</div>
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;"><span style="width:13px;height:13px;border-radius:50%;background:#2B5CE6;flex:none;"></span><b style="color:#2B5CE6;">稳态分量</b>：与输入同频正弦，幅值相角改变</div>
+            若系统<span class="kw-r">稳定</span>（全部 <span class="tex">p_i</span> 有负实部），瞬态项消失，留下<span class="kw-r">与输入同频率</span>的稳态输出。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">注意</span><span>以上推导假设无重根、严格性从略，但结论正确：<span class="kw-r">稳定系统的稳态输出是与输入同频率的正弦信号，只是幅值与相角发生了变化。</span></span></div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("fig");
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const MF = "Cambria Math,STIX Two Math,Georgia,Microsoft YaHei,sans-serif";
+  const SUB = (n, s) => { const esc = t => t.replace(/&/g, "&amp;").replace(/</g, "&lt;"); let html = "", sub = false; for (const p of String(s).split(/(_\{[^}]*\})/)) { if (!p) continue; if (p.startsWith("_{")) { html += '<tspan' + (sub ? '' : ' dy="6"') + ' font-size="72%">' + esc(p.slice(2, -1)) + '</tspan>'; sub = true; } else { html += sub ? '<tspan dy="-6">' + esc(p) + '</tspan>' : esc(p); sub = false; } } n.innerHTML = html; };
+  const tx = (x, y, s, o) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 20, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal" , "font-family": MF }); SUB(n, s); if (o && o.halo) n.setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:6;stroke-linejoin:round"); return n; };
+  const defs = mk("defs", {});
+  const m1 = mk("marker", { id: "a7", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, m1);
+  // MathJax 标注：foreignObject 内嵌 .tex（字体与页面公式一致，上下标正确）
+  const fo = (x, y, w, h, css, inner) => {
+    const f = mk("foreignObject", { x, y, width: w, height: h });
+    f.innerHTML = `<div xmlns="http://www.w3.org/1999/xhtml" style="${css}">${inner}</div>`;
+    return f;
+  };
+  const LBL = "font:700 34px/46px 'Microsoft YaHei','Segoe UI',sans-serif; white-space:nowrap;";
+  const wave = (y0, amp, ph, color) => {
+    mk("line", { x1: 50, y1: y0, x2: 856, y2: y0, stroke: "#5B6B8C", "stroke-width": 1.4, "marker-end": "url(#a7)" });
+    let d = "";
+    for (let i = 0; i <= 700; i++) { const t = 4 * Math.PI * i / 700; d += (i ? "L" : "M") + (60 + t / (4 * Math.PI) * 780).toFixed(1) + "," + (y0 - amp * Math.sin(t + ph)).toFixed(1); }
+    mk("path", { d, stroke: color, "stroke-width": 3.6, fill: "none" });
+  };
+  wave(150, 78, 0, "#2B5CE6");
+  wave(350, 47, -0.9, "#D63A2F");
+  // 波形标注（置于各自波峰上方，左对齐）
+  fo(62, 14, 560, 50, LBL + "color:#2B5CE6;", `输入 <span class="tex">r(t)=R\\sin\\omega t</span>`);
+  fo(62, 240, 780, 50, LBL + "color:#D63A2F;", `稳态输出 <span class="tex">c(t)=R\\,A(\\omega)\\,\\sin\\!\\left(\\omega t+\\varphi(\\omega)\\right)</span>`);
+  // 相位滞后标注
+  const y0 = 350, amp = 47, t1 = 0.9, t2 = 0;
+  const x1 = 60 + t1 / (4 * Math.PI) * 780, x2 = 60 + t2 / (4 * Math.PI) * 780;
+  mk("line", { x1: x1, y1: y0 - amp - 6, x2: x1, y2: y0 + 8, stroke: "#D63A2F", "stroke-width": 1.8, "stroke-dasharray": "5 4" });
+  mk("line", { x1: x2, y1: y0 - 84, x2: x2, y2: y0 + 8, stroke: "#2B5CE6", "stroke-width": 1.8, "stroke-dasharray": "5 4" });
+  mk("path", { d: `M ${x2} ${y0 + 30} L ${x1} ${y0 + 30}`, stroke: "#F5821F", "stroke-width": 2.4, "marker-end": "url(#a7)" });
+  fo(64, 392, 420, 50, LBL + "color:#F5821F;", `相位滞后 <span class="tex">\\varphi(\\omega)</span>`);
+  fo(852, 128, 44, 48, "font:700 30px/44px 'Microsoft YaHei',sans-serif; color:#5B6B8C;", `<span class="tex">t</span>`);
+  fo(852, 328, 44, 48, "font:700 30px/44px 'Microsoft YaHei',sans-serif; color:#5B6B8C;", `<span class="tex">t</span>`);
+});
+</script>
+</body>
+</html>

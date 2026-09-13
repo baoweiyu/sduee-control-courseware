@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>2.5 例 4-9：由实验曲线求传递函数</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:22px; height:100%; min-height:0; }
+  .lst { flex:1.02; display:flex; flex-direction:column; gap:10px; min-height:0; }
+  .stp { background:#fff; border:2px solid var(--line); border-radius:12px; padding:9px 15px 9px 46px; font-size:19px; line-height:1.52; position:relative; }
+  .stp .no { position:absolute; top:50%; left:10px; transform:translateY(-50%); width:29px; height:29px; border-radius:50%; background:var(--blue); color:#fff; font-weight:800; font-size:16.5px; display:grid; place-items:center; }
+  .stp b { color:var(--navy); }
+  .stp .mathbox { font-size:20px; padding:5px 10px; margin:6px 0 2px; }
+  .figc { flex:1.35; display:flex; flex-direction:column; overflow:hidden; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:6px 12px; min-height:0; }
+  .figc svg { width:100%; height:100%; }
+</style>
+</head>
+<body data-title="2.5 例 4-9：由实验曲线求传递函数" data-page="51 / 87">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lst">
+        <div class="stp" data-step="1"><span class="no">1</span><b>幅频定结构</b>：低频 −20 ⇒ ν=1；ω=1 处 20dB ⇒ K=10；转角 1 / 2 / 8 依次 −40、+20、−40：
+          <div class="mathbox math eqline tex tex-d">G_{1}(j\omega)H_{1}(j\omega)=\dfrac{10(1+0.5j\omega)}{j\omega(1+j\omega)(1+j\omega/8)}</div>
+        </div>
+        <div class="stp" data-step="2"><span class="no">2</span><b>相角验身份</b>：G₁ 计算相频（<b>蓝虚线</b>）与实验实测（<b>红实线</b>）高频段差距越来越大。</div>
+        <div class="stp" data-step="3"><span class="no">3</span><b>差值 ∝ ω</b>：ω=10 差 <b>110°</b>、ω=20 差 <b>230°</b>——延迟特征 Δφ=−57.3°·ωT<sub>D</sub>。</div>
+        <div class="stp" data-step="4"><span class="no">4</span><b>定 T<sub>D</sub>≈0.2s</b>（110/573≈0.19、230/1146≈0.20），写出完整模型：
+          <div class="mathbox math eqline tex tex-d">G(s)H(s)=\dfrac{10\,(0.5s+1)\,e^{-0.2s}}{s\,(s+1)\,(0.125s+1)}</div>
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd">实验 Bode 图：幅频渐近线（上）与相频对比（下）</div>
+        <div class="bd2"><svg id="fig" viewBox="0 0 1000 640"></svg></div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">识别口诀</span><span>幅频定结构、<span class="kw-r">相角验身份</span>：实测相角比最小相位值"越走越低"、差值∝ω——系统里藏着延迟环节。</span></div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("fig");
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const MF = "Cambria Math,STIX Two Math,Georgia,Microsoft YaHei,sans-serif";
+  const SUB = (n, s) => { const esc = t => t.replace(/&/g, "&amp;").replace(/</g, "&lt;"); let html = "", sub = false; for (const p of String(s).split(/(_\{[^}]*\})/)) { if (!p) continue; if (p.startsWith("_{")) { html += '<tspan' + (sub ? '' : ' dy="6"') + ' font-size="72%">' + esc(p.slice(2, -1)) + '</tspan>'; sub = true; } else { html += sub ? '<tspan dy="-6">' + esc(p) + '</tspan>' : esc(p); sub = false; } } n.innerHTML = html; };
+  const tx = (x, y, s, o, parent) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 19.5, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal" , "font-family": MF }, parent); SUB(n, s); if (o && o.halo) n.setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:6;stroke-linejoin:round"); return n; };
+  const defs = mk("defs", {});
+  const m1 = mk("marker", { id: "a49", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, m1);
+  const x0 = 84, x1 = 956, DEC = (x1 - x0) / 3;   // ω: 0.1..100
+  const X = w => x0 + (Math.log10(w) + 1) * DEC;
+  const LG = Math.log10, D = 180 / Math.PI;
+  const asym = w => 20 - 20 * LG(w) - (w > 1 ? 20 * LG(w) : 0) + (w > 2 ? 20 * LG(w / 2) : 0) - (w > 8 ? 20 * LG(w / 8) : 0);
+  const p1 = w => -90 - Math.atan(w) * D + Math.atan(0.5 * w) * D - Math.atan(w / 8) * D;
+  const p2 = w => p1(w) - 57.3 * w * 0.2;
+  // ===== 幅频 =====
+  const yT1 = 44, yB1 = 292, Lmax = 44, Lmin = -52;
+  const Y1 = v => yT1 + (Lmax - v) / (Lmax - Lmin) * (yB1 - yT1);
+  mk("line", { x1: x0, y1: yB1, x2: x1, y2: yB1, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a49)" });
+  mk("line", { x1: x0, y1: yB1, x2: x0, y2: yT1, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a49)" });
+  [0.1, 1, 10, 100].forEach(w => { const x = X(w); mk("line", { x1: x, y1: yB1, x2: x, y2: yT1, stroke: "#EDF2FB", "stroke-width": 1 }); tx(x, yB1 + 24, String(w), { fs: 19.5, fill: "#5B6B8C" }); });
+  [40, 20, 0, -20, -40].forEach(v => { const y = Y1(v); mk("line", { x1: x0, y1: y, x2: x1, y2: y, stroke: v === 0 ? "#8AA6D8" : "#F0F4FC", "stroke-width": v === 0 ? 1.7 : 1, "stroke-dasharray": v === 0 ? "9 6" : "0" }); tx(x0 - 12, y + 6, v + "", { fs: 19.5, fill: "#5B6B8C", an: "end" }); });
+  tx(x1 + 2, yB1 + 6, "ω", { fs: 20, it: true, b: true, fill: "#5B6B8C", an: "start" });
+  tx(x0 - 12, yT1 - 4, "L/dB", { fs: 19.5, b: true, an: "end" });
+  // 渐近折线
+  const PTS = [[0.1, asym(0.1)], [1, asym(1)], [2, asym(2)], [8, asym(8)], [100, asym(100)]];
+  let d = "M" + X(PTS[0][0]) + "," + Y1(PTS[0][1]);
+  PTS.slice(1).forEach(([w, v]) => d += "L" + X(w) + "," + Y1(v));
+  mk("path", { d, stroke: "#1D3FA0", "stroke-width": 4, fill: "none" });
+  PTS.slice(1, 4).forEach(([w, v]) => mk("circle", { cx: X(w), cy: Y1(v), r: 5.5, fill: "#1D3FA0" }));
+  [[1, "1"], [2, "2"], [8, "8"]].forEach(([w, s]) => tx(X(w), yB1 + 48, s, { fs: 19.5, b: true, fill: "#5B6B8C" }));
+  tx(X(0.4), (Y1(asym(0.4))) - 14, "[−20]", { fs: 19.5, b: true, fill: "#D63A2F" });
+  tx((X(1) + X(2)) / 2, (Y1(asym(1)) + Y1(asym(2))) / 2 - 12, "[−40]", { fs: 19.5, b: true, fill: "#D63A2F" });
+  tx((X(2) + X(8)) / 2, (Y1(asym(2)) + Y1(asym(8))) / 2 - 12, "[−20]", { fs: 19.5, b: true, fill: "#D63A2F" });
+  tx((X(8) + X(100)) / 2, (Y1(asym(8)) + Y1(asym(100))) / 2 - 12, "[−40]", { fs: 19.5, b: true, fill: "#D63A2F" });
+  tx(X(1) + 16, Y1(20) - 16, "ω=1，20dB ⇒ K=10", { fs: 19.5, b: true, fill: "#F5821F", an: "start" });
+  // ===== 相频 =====
+  const yT2 = 366, yB2 = 600;
+  const Y2 = v => yT2 + (-v) / 400 * (yB2 - yT2);
+  mk("line", { x1: x0, y1: yT2, x2: x1, y2: yT2, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a49)" });
+  mk("line", { x1: x0, y1: yB2, x2: x0, y2: yT2, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a49)" });
+  [0.1, 1, 10, 100].forEach(w => { const x = X(w); mk("line", { x1: x, y1: yB2, x2: x, y2: yT2, stroke: "#F0F4FC", "stroke-width": 1 }); tx(x, yB2 + 22, String(w), { fs: 19.5, fill: "#5B6B8C" }); });
+  [0, -90, -180, -270, -360].forEach(v => { const y = Y2(v); mk("line", { x1: x0, y1: y, x2: x1, y2: y, stroke: "#F0F4FC", "stroke-width": 1 }); tx(x0 - 12, y + 5, v + "°", { fs: 19.5, fill: "#5B6B8C", an: "end" }); });
+  tx(x1 + 2, yT2 + 6, "ω", { fs: 20, it: true, b: true, fill: "#5B6B8C", an: "start" });
+  tx(x0 - 12, yT2 - 4, "φ", { fs: 19.5, b: true, an: "end" });
+  let d1 = "", d2 = "";
+  { const cp = mk("defs", {}); const cr = mk("clipPath", { id: "clipPh51" }, cp); mk("rect", { x: x0, y: yT2, width: x1 - x0, height: yB2 - yT2 }, cr); }
+  for (let i = 0; i <= 320; i++) { const w = 0.1 * Math.pow(1000, i / 320); d1 += (i ? "L" : "M") + X(w).toFixed(1) + "," + Y2(p1(w)).toFixed(1); d2 += (i ? "L" : "M") + X(w).toFixed(1) + "," + Y2(p2(w)).toFixed(1); }
+  mk("path", { d: d1, stroke: "#2B5CE6", "stroke-width": 3, fill: "none", "stroke-dasharray": "9 6" });
+  mk("path", { d: d2, stroke: "#D63A2F", "stroke-width": 3.4, fill: "none", "clip-path": "url(#clipPh51)" });
+  tx(X(2.5), Y2(p1(2.5)) - 12, "G₁ 计算相频（虚线）", { fs: 19.5, b: true, fill: "#2B5CE6" });
+  mk("line", { x1: x0 + 18, y1: 540, x2: x0 + 56, y2: 540, stroke: "#D63A2F", "stroke-width": 3.4 });
+  tx(x0 + 66, 546, "实验实测相频（实线）", { fs: 19.5, b: true, fill: "#D63A2F", an: "start" });
+  // 差值标注
+  mk("line", { x1: X(10), y1: Y2(p1(10)), x2: X(10), y2: Y2(p2(10)), stroke: "#F5821F", "stroke-width": 2.2, "stroke-dasharray": "6 4" });
+  tx(X(10) + 12, (Y2(p1(10)) + Y2(p2(10))) / 2, "差 110°", { fs: 19.5, b: true, fill: "#F5821F", an: "start" }).setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:5");
+  mk("line", { x1: X(20), y1: Y2(p1(20)), x2: X(20), y2: Y2(p2(20)), stroke: "#F5821F", "stroke-width": 2.2, "stroke-dasharray": "6 4" });
+  tx(X(20) + 12, (Y2(p1(20)) + Y2(p2(20))) / 2, "差 230°", { fs: 19.5, b: true, fill: "#F5821F", an: "start" }).setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:5");
+  // 分步
+  const S = ACT.step;
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>2.3 例 4-5：五环节渐近线逐条叠加</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .colwrap { display:flex; flex-direction:column; gap:14px; height:100%; min-height:0; }
+  .modelband { background:#fff; border:2.5px solid var(--line); border-radius:14px; padding:10px 24px; display:flex; align-items:center; gap:24px; flex:none; }
+  .modelband .mb { font-size:26px; color:var(--navy); font-weight:700; flex:none; }
+  .modelband .mf { font-size:26px; padding:6px 14px; }
+  .modelband .wn { font-size:22px; color:var(--ink); }
+  .row { display:flex; gap:22px; flex:1; min-height:0; }
+  .lst { flex:0 0 30%; display:flex; flex-direction:column; gap:12px; min-height:0; }
+  .bigread { background:#fff; border:2.5px solid var(--line); border-radius:14px; padding:12px 20px; }
+  .bigread .lab { font-size:20px; font-weight:800; color:var(--blue); display:block; margin-bottom:6px; }
+  .bigread .val { font-size:24px; line-height:1.45; color:var(--ink); font-weight:700; }
+  .bigread .val b { color:var(--navy); }
+  .bigread.hl { border-color:#D63A2F; background:#FDF1EF; }
+  .slopenote { background:var(--sky); border-radius:12px; padding:10px 16px; font-size:19px; color:var(--navy); line-height:1.5; }
+  .playbar { display:flex; justify-content:flex-end; }
+  .playbtn { border:none; background:var(--blue); color:#fff; font-size:19px; font-weight:700; border-radius:10px; padding:9px 22px; cursor:pointer; }
+  .playbtn:hover { background:var(--navy); }
+  .figc { flex:1; display:flex; flex-direction:column; overflow:hidden; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:6px 12px; min-height:0; }
+  .figc svg { width:100%; height:100%; }
+</style>
+</head>
+<body data-title="2.3 例 4-5：五环节渐近线逐条叠加" data-page="43 / 87">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="colwrap">
+      <div class="modelband">
+        <span class="mb">例 4-5 模型：</span>
+        <span class="mathbox math mf eqline tex tex-d">G(s)H(s)=\dfrac{4\,(1+0.5s)}{s\,(1+2s)\,(1+0.05s+s^{2}/64)}</span>
+        <span class="wn">二阶因子：ω<sub>n</sub>=8 rad/s、ζ=0.2</span>
+      </div>
+      <div class="row">
+        <div class="lst">
+          <div class="playbar"><button class="playbtn" id="stepb">⏭ 分步</button><button class="playbtn" id="resetb">⟲ 重置</button><button class="playbtn" id="play">▶ 连续播放</button></div>
+          <div class="bigread" id="cardFac"><span class="lab">① 当前因子</span><span class="val" id="r-fac">点"连续播放"开始逐条叠加</span></div>
+          <div class="bigread"><span class="lab">② 本环节斜率贡献</span><span class="val" id="r-slp">—</span></div>
+          <div class="bigread"><span class="lab">③ 已合成结果</span><span class="val" id="r-cum">—</span></div>
+          <div class="slopenote">合成斜率序列：起点 <b>−20</b> →（0.5）<b>−40</b> →（2）<b>−20</b> →（8）<b>−60</b> dB/dec。</div>
+        </div>
+        <div class="act-card figc">
+          <div class="hd"><span style="flex:1"><span class="tex">L(\omega)=L_{1}+L_{2}+L_{3}+L_{4}+L_{5}</span> 的叠加过程（ω：0.1 → 100）</span></div>
+          <div class="bd2"><svg id="fig" viewBox="0 0 1000 665"></svg></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">要领</span><span>叠加只在<span class="kw-r">转角频率处改变斜率</span>：0.5 处 −40、2 处 −20、8 处 −60；转角点处把各环节 dB 数<span class="kw-r">直接相加</span>即得合成值。</span></div>
+</div></div>
+<div style="display:none" aria-hidden="true"><span data-step="1"></span><span data-step="2"></span><span data-step="3"></span><span data-step="4"></span><span data-step="5"></span><span data-step="6"></span></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("fig");
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const MF = "Cambria Math,STIX Two Math,Georgia,Microsoft YaHei,sans-serif";
+  const SUB = (n, s) => { const esc = t => t.replace(/&/g, "&amp;").replace(/</g, "&lt;"); let html = "", sub = false; for (const p of String(s).split(/(_\{[^}]*\})/)) { if (!p) continue; if (p.startsWith("_{")) { html += '<tspan' + (sub ? '' : ' dy="6"') + ' font-size="72%">' + esc(p.slice(2, -1)) + '</tspan>'; sub = true; } else { html += sub ? '<tspan dy="-6">' + esc(p) + '</tspan>' : esc(p); sub = false; } } n.innerHTML = html; };
+  const tx = (x, y, s, o, parent) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 22, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal", "font-family": MF }, parent); SUB(n, s); if (o && o.halo) n.setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:6;stroke-linejoin:round"); return n; };
+  const defs = mk("defs", {});
+  const m1 = mk("marker", { id: "a41", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, m1);
+  const x0 = 84, x1 = 952, DEC = (x1 - x0) / 3;    // ω: 0.1..100
+  const X = w => x0 + (Math.log10(w) + 1) * DEC;
+  const Lmax = 36, Lmin = -92, yT = 40, yB = 600;
+  const Y = v => yT + (Lmax - v) / (Lmax - Lmin) * (yB - yT);
+  // 静态坐标
+  mk("line", { x1: x0, y1: yB, x2: x1, y2: yB, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a41)" });
+  mk("line", { x1: x0, y1: yB, x2: x0, y2: yT, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a41)" });
+  [0.1, 1, 10, 100].forEach(w => { const x = X(w); mk("line", { x1: x, y1: yB, x2: x, y2: yT, stroke: "#EDF2FB", "stroke-width": 1 }); tx(x, yB + 26, String(w), { fs: 22, fill: "#5B6B8C" }); });
+  [20, 0, -20, -40, -60, -80].forEach(v => { const y = Y(v); mk("line", { x1: x0, y1: y, x2: x1, y2: y, stroke: v === 0 ? "#8AA6D8" : "#F0F4FC", "stroke-width": v === 0 ? 1.8 : 1, "stroke-dasharray": v === 0 ? "9 6" : "0" }); tx(x0 - 12, y + 7, v + "", { fs: 21, fill: "#5B6B8C", an: "end" }); });
+  tx(x1 + 4, yB + 8, "ω", { fs: 23, it: true, b: true, fill: "#5B6B8C", an: "start" });
+  tx(x0 - 12, yT - 4, "L/dB", { fs: 22, b: true, fill: "#1B3B8B", an: "end" });
+  // 转角频率竖虚线
+  [[0.5, "0.5"], [2, "2"], [8, "8"]].forEach(([w, s]) => {
+    mk("line", { x1: X(w), y1: yB, x2: X(w), y2: yT, stroke: "#C6D2EA", "stroke-width": 1.2, "stroke-dasharray": "5 5" });
+    tx(X(w), yB + 50, s, { fs: 21, b: true, fill: "#5B6B8C" });
+  });
+  const dyn = mk("g", {});
+  { const cp = mk("defs", {}); const cr = mk("clipPath", { id: "clipL43" }, cp); mk("rect", { x: x0, y: yT, width: x1 - x0, height: yB - yT }, cr); }
+  const LG = Math.log10;
+  const LK = 20 * Math.log10(4);   // 全精度 20lg4 ≈ 12.0412
+  const eL = [
+    w => LK,
+    w => -20 * LG(w),
+    w => w > 0.5 ? -20 * LG(w / 0.5) : 0,
+    w => w > 2 ? 20 * LG(w / 2) : 0,
+    w => w > 8 ? -40 * LG(w / 8) : 0
+  ];
+  const names = ["L₁ 比例", "L₂ 积分", "L₃ 惯性", "L₄ 一阶微分", "L₅ 振荡"];
+  const cum = (w, k) => { let v = 0; for (let i = 0; i < Math.min(k, 5); i++) v += eL[i](w); return v; };
+  const exact = w => LK - 20 * LG(w) - 10 * LG(1 + 4 * w * w) + 10 * LG(1 + 0.25 * w * w) - 10 * LG((1 - w * w / 64) ** 2 + (0.05 * w) ** 2);
+  // 三项大读数内容（按步）
+  const FACTS = {
+    0: ["（未开始）", "—", "渐近线尚未叠加"],
+    1: ["比例环节 K=4", "+12.04dB 水平线（斜率 0）", "整体抬高至 " + LK.toFixed(2) + "dB 的水平线"],
+    2: ["积分环节 1/s", "斜率 −20dB/dec（全频段）", "过 ω=1 的 −20dB/dec 直线"],
+    3: ["惯性环节 1/(1+2s)，转角 0.5", "转角后增加 −20dB/dec", "合成斜率变为 −40dB/dec"],
+    4: ["一阶微分 (1+0.5s)，转角 2", "转角后增加 +20dB/dec", "合成斜率回到 −20dB/dec"],
+    5: ["振荡环节，ωn=8、ζ=0.2", "转角后增加 −40dB/dec", "合成斜率变为 −60dB/dec"],
+    6: ["精确校核（虚线）", "ωn=8 处谐振隆起（ζ=0.2 小阻尼）", "渐近线 + 精确曲线对照"]
+  };
+  let K = 0; const TOTAL = 6;
+  function pathOf(fn, wlo, whi) {
+    let d = "";
+    for (let i = 0; i <= 320; i++) { const w = wlo * Math.pow(whi / wlo, i / 320); d += (i ? "L" : "M") + X(w).toFixed(1) + "," + Y(fn(w)).toFixed(1); }
+    return d;
+  }
+  // 图例（左下空旷区）
+  {
+    const lg = mk("g", {});
+    const items = [["#B9C4D8", "已叠加环节"], ["#D63A2F", "当前新加环节"], ["#1D3FA0", "合成渐近线"]];
+    items.forEach(([c, s], i) => {
+      const y = yB - 108 + i * 34;
+      mk("line", { x1: x0 + 26, y1: y, x2: x0 + 64, y2: y, stroke: c, "stroke-width": i === 2 ? 5 : 4 }, lg);
+      tx(x0 + 76, y + 6, s, { fs: 21, b: true, fill: c === "#B9C4D8" ? "#8A97B5" : c, an: "start" }, lg);
+    });
+  }
+  function paint() {
+    dyn.innerHTML = "";
+    // 侧栏三项读数
+    const f = FACTS[Math.min(K, 6)];
+    document.getElementById("r-fac").textContent = f[0];
+    document.getElementById("cardFac").classList.toggle("hl", K >= 1 && K <= 5);
+    document.getElementById("r-slp").textContent = f[1];
+    document.getElementById("r-cum").textContent = f[2];
+    // 各环节渐近线：已叠加=灰，当前新加=红
+    const lp = [
+      [X(100) - 6, Y(12.04) - 8, "end"],
+      [X(0.3), Y(eL[1](0.3)) + 26, "middle"],
+      [X(1.5), Y(eL[2](1.5)) + 24, "middle"],
+      [X(55), Y(eL[3](55)) - 16, "middle"],
+      [X(20), Y(eL[4](20)) - 18, "middle"],
+    ];
+    for (let i = 0; i < Math.min(K, 5); i++) {
+      const cur = (i === K - 1);
+      const col = cur ? "#D63A2F" : "#B9C4D8";
+      mk("path", { d: pathOf(eL[i], 0.1, 100), stroke: col, "stroke-width": cur ? 3 : 2, fill: "none" }, dyn);
+      tx(lp[i][0], lp[i][1], names[i], { fs: 21, b: true, fill: cur ? "#D63A2F" : "#9AA7C0", an: lp[i][2] }, dyn)
+        .setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:5");
+    }
+    // 合成渐近线（深蓝粗线）
+    if (K >= 1) {
+      mk("path", { d: pathOf(w => cum(w, K), 0.1, 100), stroke: "#1D3FA0", "stroke-width": 4.6, fill: "none" }, dyn);
+      const vp = { 0.5: [10, -16, "start"], 2: [-18, 40, "end"], 8: [-14, 36, "end"] };
+      [0.5, 2, 8].forEach(w => {
+        const v = cum(w, K);
+        if (v > Lmin + 2) {
+          mk("circle", { cx: X(w), cy: Y(v), r: 6, fill: "#1D3FA0" }, dyn);
+          tx(X(w) + vp[w][0], Y(v) + vp[w][1], v.toFixed(1) + "dB", { fs: 21, b: true, fill: "#1D3FA0", an: vp[w][2] }, dyn)
+            .setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:5");
+        }
+      });
+      if (K >= 2) { mk("circle", { cx: X(1), cy: Y(cum(1, K)), r: 6, fill: "#F5821F" }, dyn); tx(X(1) + 10, Y(cum(1, K)) - 10, "ω=1", { fs: 21, b: true, fill: "#F5821F", an: "start" }, dyn); }
+    }
+    // 精确曲线（修正步）
+    if (K >= 6) {
+      mk("path", { d: pathOf(exact, 0.1, 100), stroke: "#D63A2F", "stroke-width": 3.2, fill: "none", "stroke-dasharray": "8 5", "clip-path": "url(#clipL43)" }, dyn);
+      mk("line", { x1: X(6.5) - 6, y1: Y(-10) - 20, x2: X(6.9) + 4, y2: Y(exact(6.9)) - 4, stroke: "#D63A2F", "stroke-width": 1.3, "stroke-dasharray": "3 3" }, dyn);
+      tx(X(6.5) - 12, Y(-10) - 24, "精确曲线", { fs: 22, b: true, fill: "#D63A2F", an: "end" }, dyn)
+        .setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:5");
+    }
+  }
+  const S = ACT.step, _next = S.next.bind(S), _reset = S.reset.bind(S);
+  S.next = function () { if (K < TOTAL) K++; const d = _next(); paint(); return d; };
+  S.reset = function () { K = 0; _reset(); paint(); };
+  window.prev = function () { const n = Math.max(0, S.cur - 1); S.reset(); for (let i = 0; i < n; i++) S.next(); };
+  let timer = null;
+  document.getElementById("play").addEventListener("click", () => {
+    if (timer) { clearInterval(timer); timer = null; return; }
+    if (K >= TOTAL) S.reset();
+    timer = setInterval(() => { if (K >= TOTAL) { clearInterval(timer); timer = null; } else S.next(); }, 1100);
+  });
+  document.getElementById("stepb").addEventListener("click", () => {
+    if (timer) { clearInterval(timer); timer = null; }
+    if (K >= TOTAL) S.reset();
+    S.next();
+  });
+  document.getElementById("resetb").addEventListener("click", () => {
+    if (timer) { clearInterval(timer); timer = null; }
+    S.reset();
+  });
+  paint();
+});
+</script>
+</body>
+</html>

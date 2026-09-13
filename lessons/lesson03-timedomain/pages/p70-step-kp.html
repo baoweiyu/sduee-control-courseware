@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>阶跃输入 · 静态位置误差系数 Kp</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:24px; height:100%; }
+  .derc { flex:1.05; display:flex; flex-direction:column; }
+  .derc .bd { flex:1; font-size:22.5px; line-height:1.85; display:flex; flex-direction:column; justify-content:center; gap:16px; }
+  .disc { flex:0.95; display:flex; flex-direction:column; }
+  .disc .bd { flex:1; display:flex; flex-direction:column; justify-content:center; gap:15px; }
+  .hl { background:var(--sky); border-radius:12px; padding:12px 16px; }
+  .tt { border-collapse:collapse; width:100%; }
+  .tt th, .tt td { border:2px solid var(--line); padding:9px 6px; font-size:20.5px; text-align:center; }
+  .tt th { background:var(--navy); color:#fff; font-weight:700; font-size:19px; }
+  .tt td.hc { background:#FDF3EC; font-weight:700; }
+  .tt td.zero { background:#EAF6EE; color:#1E9E57; font-weight:800; }
+  .concl { background:#FCEBE9; border:2px solid #D63A2F; border-radius:12px; padding:12px 18px; font-size:21.5px; color:var(--navy); line-height:1.65; }
+</style>
+</head>
+<body data-title="阶跃输入 · 静态位置误差系数" data-page="74 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="row">
+      <div class="act-card derc">
+        <div class="hd">三、给定输入下的稳态误差　1. 阶跃输入</div>
+        <div class="bd">
+          <span>阶跃输入：<span class="tex">r(t)=A\cdot 1(t)</span>，<span class="tex">R(s)=\dfrac{A}{s}</span></span>
+          <span data-step="1"><span class="tex tex-d" style="font-size:23px">e_{ss}=\lim_{s\to 0}\frac{sR(s)}{1+G(s)H(s)}=\lim_{s\to 0}\frac{A}{1+G(s)H(s)}</span></span>
+          <span data-step="2">令 <span class="tex tex-d" style="font-size:23px">K_{p}=\lim_{s\to 0}G(s)H(s)</span><br>—— <span class="kw-r">静态位置误差系数</span>，则</span>
+          <div class="hl" data-step="3"><span class="tex tex-d" style="font-size:25px">e_{ss}=\frac{A}{1+K_{p}}</span></div>
+        </div>
+      </div>
+      <div class="act-card disc">
+        <div class="hd">按型别讨论（ν = 0, 1, 2）</div>
+        <div class="bd">
+          <table class="tt" data-step="4">
+            <tr><th>型别 ν</th><th><span class="tex" style="font-size:19px">K_{p}</span></th><th><span class="tex" style="font-size:19px">e_{ss}</span></th><th>跟踪能力</th></tr>
+            <tr><td class="hc">0 型</td><td>K</td><td><span class="tex" style="font-size:19px">\dfrac{A}{1+K}</span></td><td>有恒定误差</td></tr>
+            <tr><td class="hc">1 型</td><td>∞</td><td class="zero">0</td><td>准确跟踪</td></tr>
+            <tr><td class="hc">2 型</td><td>∞</td><td class="zero">0</td><td>准确跟踪</td></tr>
+          </table>
+          <div class="concl" data-step="5"><b>结论</b>：0 型系统在阶跃输入下有误差，常称<span class="kw-r">有差系统</span>。<br>要减小误差可增大 K；要使阶跃输入下 <span class="tex">e_{ss}=0</span>，<br>必须 <span class="tex">\nu\geq 1</span>。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+</body>
+</html>

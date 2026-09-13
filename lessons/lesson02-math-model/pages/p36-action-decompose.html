@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>作用分解：处理交叉反馈</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<link rel="stylesheet" href="../lesson02-svg.css">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .cap { font-size:21.5px; font-weight:700; color:var(--blue); margin:8px 0 5px; }
+  .panel { background:var(--sky); border-radius:12px; padding:4px 12px; }
+  .prob { margin-top:8px; display:flex; gap:12px; align-items:center;
+          background:#FDF0EF; border-left:6px solid var(--red); border-radius:10px;
+          padding:10px 22px; font-size:22px; color:var(--ink); line-height:1.5; }
+  .idea { margin-top:8px; display:flex; gap:12px; align-items:center;
+          background:#EFF4FD; border-left:6px solid var(--blue); border-radius:10px;
+          padding:10px 22px; font-size:22px; color:var(--ink); line-height:1.5; }
+  .rule { margin-top:10px; display:flex; gap:12px; align-items:center;
+          background:#FDF3EC; border-left:6px solid var(--orange); border-radius:10px;
+          padding:12px 22px; font-size:22.5px; color:var(--ink); line-height:1.55; }
+  .hl36rect { animation: hl36k 0.7s ease-in-out 3; }
+  @keyframes hl36k { 0%,100% { opacity:1; } 50% { opacity:0.15; } }
+</style>
+</head>
+<body data-title="方框图等效变换：作用分解（处理交叉反馈）" data-page="36 / 51">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="cap">原图：<span class="tex">H_{1}</span> 的引出点跨在 <span class="tex">H_{3}</span> 环之外——两环交叉，不能直接逐环化简</div>
+    <div class="panel">
+      <svg viewBox="0 0 960 210" width="100%" height="238">
+        <defs><marker id="a36" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#1D3FA0"/></marker></defs>
+        <g font-size="21" fill="#1B3B8B">
+          <circle cx="72" cy="104" r="14" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><path d="M 65.6,97.6 L 78.4,110.4 M 65.6,110.4 L 78.4,97.6" stroke="#1D3FA0" stroke-width="2.2" fill="none"/>
+          <rect x="124" y="82" width="116" height="44" rx="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><text x="182" y="112" text-anchor="middle" font-style="italic">G<tspan dy="4" font-size="15">1</tspan></text>
+          <rect x="318" y="82" width="116" height="44" rx="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><text x="376" y="112" text-anchor="middle" font-style="italic">G<tspan dy="4" font-size="15">2</tspan></text>
+          <circle cx="514" cy="104" r="14" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><path d="M 507.6,97.6 L 520.4,110.4 M 507.6,110.4 L 520.4,97.6" stroke="#1D3FA0" stroke-width="2.2" fill="none"/>
+          <rect x="570" y="82" width="116" height="44" rx="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><text x="628" y="112" text-anchor="middle" font-style="italic">G<tspan dy="4" font-size="15">3</tspan></text>
+          <rect x="200" y="14" width="116" height="40" rx="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><text x="258" y="43" text-anchor="middle" font-style="italic">G<tspan dy="4" font-size="15">4</tspan></text>
+          <rect x="680" y="146" width="116" height="40" rx="6" fill="#fff" stroke="#F5821F" stroke-width="2.4"/><text x="738" y="174" text-anchor="middle" font-style="italic" fill="#F5821F">H<tspan dy="4" font-size="15">3</tspan></text>
+          <circle cx="279" cy="166" r="13" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><path d="M 273.1,160.1 L 284.9,171.9 M 273.1,171.9 L 284.9,160.1" stroke="#1D3FA0" stroke-width="2.2" fill="none"/>
+          <rect x="110" y="146" width="116" height="40" rx="6" fill="#fff" stroke="#F5821F" stroke-width="2.4"/><text x="168" y="174" text-anchor="middle" font-style="italic" fill="#F5821F">H<tspan dy="4" font-size="15">1</tspan></text>
+        </g>
+        <g stroke="#1D3FA0" stroke-width="2.4" fill="none" marker-end="url(#a36)">
+          <line x1="18" y1="104" x2="54" y2="104"/><line x1="86" y1="104" x2="124" y2="104"/>
+          <line x1="240" y1="104" x2="318" y2="104"/>
+          <line x1="434" y1="104" x2="500" y2="104"/>
+          <line x1="528" y1="104" x2="570" y2="104"/>
+          <line x1="686" y1="104" x2="922" y2="104"/>
+          <polyline points="36,104 36,34 200,34"/>
+          <polyline points="316,34 514,34 514,88"/>
+          <polyline points="860,104 860,166 800,166"/>
+          <line x1="680" y1="166" x2="296" y2="166"/>
+          <line x1="514" y1="166" x2="514" y2="120"/>
+          <line x1="279" y1="104" x2="279" y2="149"/>
+          <line x1="266" y1="166" x2="230" y2="166"/>
+          <polyline points="110,166 72,166 72,120"/>
+        </g>
+        <circle cx="36" cy="104" r="4.5" fill="#1D3FA0"/><circle cx="279" cy="104" r="4.5" fill="#1D3FA0"/>
+        <circle cx="860" cy="104" r="4.5" fill="#1D3FA0"/><circle cx="514" cy="166" r="4.5" fill="#1D3FA0"/>
+        <text x="12" y="94" font-size="18" fill="#1B3B8B" font-style="italic">R</text>
+        <text x="930" y="94" font-size="18" fill="#1B3B8B" font-style="italic">C</text>
+        <text x="46" y="94" font-size="15" fill="#D63A2F">+</text><text x="84" y="132" font-size="15" fill="#D63A2F">−</text>
+        <text x="528" y="76" font-size="15" fill="#D63A2F">+</text><text x="530" y="140" font-size="15" fill="#D63A2F">−</text>
+        <text x="291" y="146" font-size="15" fill="#D63A2F">+</text><text x="304" y="159" font-size="15" fill="#D63A2F">+</text>
+        <g data-step="1" style="transform:none">
+          <rect class="hl36rect" x="58" y="136" width="618" height="58" rx="10" fill="none" stroke="#D63A2F" stroke-width="3" stroke-dasharray="9 6"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="prob" data-step="2">
+      <div style="font-size:24px">❌</div>
+      <div><b>问题：</b><span class="tex">H_{3}</span> 的输出汇入了 <span class="tex">H_{1}</span> 支路，两环<span class="kw-r">共用一段通道</span>——环与环交叉，无法把某一环单独合并化简。</div>
+    </div>
+
+    <div class="idea" data-step="3">
+      <div style="font-size:24px">💡</div>
+      <div><b>分解依据：</b>汇入第一个相加点的信号 = <span class="tex">H_{1}</span>×(<span class="tex">G_{1}</span> 后信号) ＋ <span class="tex">H_{3}H_{1}\,C</span>——按来源拆成两路：<b>内环 <span class="tex">H_{1}</span></b>（从 <span class="tex">G_{1}</span> 后引出，套住 <span class="tex">G_{1}</span>）＋ <b>外环 <span class="tex">H_{3}H_{1}</span></b>（从输出 <span class="tex">C</span> 引出，套住全系统），叠加效果不变。</div>
+    </div>
+
+    <div data-step="4">
+      <div class="cap">作用分解：<span class="tex">H_{1}</span> 拆为两路——内环 <span class="tex">H_{1}</span>（套住 <span class="tex">G_{1}</span>）＋ 外环 <span class="tex">H_{3}H_{1}</span>（套住全系统），环与环不再交叉</div>
+      <div class="panel">
+        <svg viewBox="0 0 960 250" width="100%" height="272">
+          <defs>
+            <marker id="b36" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#1D3FA0"/></marker>
+            <marker id="b36r" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#D63A2F"/></marker>
+          </defs>
+          <g font-size="21" fill="#1B3B8B">
+            <circle cx="66" cy="110" r="14" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><path d="M 59.6,103.6 L 72.4,116.4 M 59.6,116.4 L 72.4,103.6" stroke="#1D3FA0" stroke-width="2.2" fill="none"/>
+            <circle cx="108" cy="110" r="14" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><path d="M 101.6,103.6 L 114.4,116.4 M 101.6,116.4 L 114.4,103.6" stroke="#1D3FA0" stroke-width="2.2" fill="none"/>
+            <rect x="152" y="88" width="116" height="44" rx="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><text x="210" y="118" text-anchor="middle" font-style="italic">G<tspan dy="4" font-size="15">1</tspan></text>
+            <rect x="336" y="88" width="116" height="44" rx="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><text x="394" y="118" text-anchor="middle" font-style="italic">G<tspan dy="4" font-size="15">2</tspan></text>
+            <circle cx="528" cy="110" r="14" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><path d="M 521.6,103.6 L 534.4,116.4 M 521.6,116.4 L 534.4,103.6" stroke="#1D3FA0" stroke-width="2.2" fill="none"/>
+            <rect x="574" y="88" width="116" height="44" rx="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><text x="632" y="118" text-anchor="middle" font-style="italic">G<tspan dy="4" font-size="15">3</tspan></text>
+            <rect x="190" y="16" width="116" height="40" rx="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><text x="248" y="45" text-anchor="middle" font-style="italic">G<tspan dy="4" font-size="15">4</tspan></text>
+            <rect x="154" y="144" width="116" height="40" rx="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><text x="212" y="173" text-anchor="middle" font-style="italic">H<tspan dy="4" font-size="15">1</tspan></text>
+            <rect x="628" y="144" width="116" height="40" rx="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><text x="686" y="173" text-anchor="middle" font-style="italic">H<tspan dy="4" font-size="15">3</tspan></text>
+            <rect x="646" y="196" width="116" height="40" rx="6" fill="#FDF0EF" stroke="#D63A2F" stroke-width="2.6"/><text x="704" y="224" text-anchor="middle" font-style="italic" fill="#D63A2F" font-weight="700">H<tspan dy="4" font-size="15">3</tspan></text>
+            <rect x="210" y="196" width="116" height="40" rx="6" fill="#FDF0EF" stroke="#D63A2F" stroke-width="2.6"/><text x="268" y="224" text-anchor="middle" font-style="italic" fill="#D63A2F" font-weight="700">H<tspan dy="4" font-size="15">1</tspan></text>
+          </g>
+          <g stroke="#1D3FA0" stroke-width="2.4" fill="none" marker-end="url(#b36)">
+            <line x1="18" y1="110" x2="50" y2="110"/><line x1="80" y1="110" x2="94" y2="110"/>
+            <line x1="122" y1="110" x2="152" y2="110"/>
+            <line x1="268" y1="110" x2="336" y2="110"/>
+            <line x1="452" y1="110" x2="514" y2="110"/>
+            <line x1="542" y1="110" x2="574" y2="110"/>
+            <line x1="690" y1="110" x2="916" y2="110"/>
+            <polyline points="30,110 30,36 190,36"/>
+            <polyline points="306,36 528,36 528,94"/>
+            <polyline points="316,110 316,164 270,164"/>
+            <polyline points="154,164 108,164 108,126"/>
+            <polyline points="800,110 800,164 744,164"/>
+            <polyline points="628,164 528,164 528,126"/>
+          </g>
+          <line x1="864" y1="110" x2="864" y2="216" stroke="#D63A2F" stroke-width="2.4" fill="none"/>
+          <g stroke="#D63A2F" stroke-width="2.4" fill="none" marker-end="url(#b36r)">
+            <polyline points="864,216 762,216"/>
+            <polyline points="646,216 326,216"/>
+            <polyline points="210,216 66,216 66,126"/>
+          </g>
+          <circle cx="30" cy="110" r="4.5" fill="#1D3FA0"/><circle cx="316" cy="110" r="4.5" fill="#1D3FA0"/>
+          <circle cx="800" cy="110" r="4.5" fill="#1D3FA0"/><circle cx="864" cy="110" r="4.5" fill="#D63A2F"/>
+          <text x="12" y="100" font-size="18" fill="#1B3B8B" font-style="italic">R</text>
+          <text x="924" y="100" font-size="18" fill="#1B3B8B" font-style="italic">C</text>
+          <text x="420" y="210" font-size="16" fill="#D63A2F" font-weight="700">外环：H<tspan dy="4" font-size="12">3</tspan><tspan dy="-4">·H</tspan><tspan dy="4" font-size="12">1</tspan></text>
+          <text x="40" y="100" font-size="15" fill="#D63A2F">+</text><text x="50" y="142" font-size="15" fill="#D63A2F">−</text>
+          <text x="120" y="142" font-size="15" fill="#D63A2F">−</text>
+          <text x="542" y="80" font-size="15" fill="#D63A2F">+</text><text x="544" y="142" font-size="15" fill="#D63A2F">−</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="rule" data-step="5">
+      <div style="font-size:26px">📏</div>
+      <div class="math"><b>结论：</b>引出点交叉的反馈，可按信号关系<span class="kw-r">分解为两路独立反馈</span>；分解后内环 <span class="tex">H_{1}</span>、内环 <span class="tex">H_{3}</span> 与外环 <span class="tex">H_{3}H_{1}</span> 互不交叉，即可逐环合并化简。</div>
+    </div>
+  </div>
+</div></div>
+</body>
+</html>

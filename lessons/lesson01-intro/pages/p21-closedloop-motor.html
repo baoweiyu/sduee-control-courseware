@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>直流电动机转速闭环控制系统</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .pane { height:700px; display:flex; gap:24px; }
+  .lft { flex:0 0 430px; display:flex; flex-direction:column; }
+  .lft .bd2 { flex:1; display:grid; place-items:center; padding:10px; }
+  .lft img { max-width:100%; max-height:100%; object-fit:contain; }
+  .rgt { flex:1; display:flex; flex-direction:column; }
+  .rgt .bd2 { flex:1; display:grid; place-items:center; padding:8px; }
+  .cap { text-align:center; font-size:19px; color:var(--muted); padding-bottom:10px; }
+  svg text { font-family:var(--font); }
+  .blk { fill:#fff; stroke:var(--blue); stroke-width:2.5; }
+  .blkt { fill:var(--navy); font-size:22px; font-weight:700; }
+  .sig { stroke:var(--blue); stroke-width:2.5; fill:none; marker-end:url(#arr); }
+  .sigt { fill:var(--blue); font-size:20px; font-style:italic; font-family:var(--font-math); }
+  .lab { fill:var(--ink); font-size:20px; }
+  .sum { fill:#fff; stroke:var(--blue); stroke-width:2.5; }
+  .sumt { fill:var(--navy); font-size:19px; font-weight:700; }
+  .dist { stroke:#D63A2F; stroke-width:2.5; stroke-dasharray:7 5; marker-end:url(#arrO); }
+  .distt { fill:#D63A2F; font-size:20px; }
+  .fb { stroke:var(--blue); stroke-width:2.5; fill:none; }
+</style>
+</head>
+<body data-title="直流电动机转速闭环控制系统" data-page="21 / 35">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="pane">
+      <div class="act-card lft">
+        <div class="bd2">
+          <svg viewBox="0 0 430 470" width="96%" height="94%">
+            <defs>
+              <marker id="arr2" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#1D3FA0"/></marker>
+            </defs>
+            <!-- 给定电位器 -->
+            <rect x="30" y="60" width="70" height="120" rx="10" class="blk"/>
+            <line x1="65" y1="80" x2="65" y2="160" stroke="var(--blue)" stroke-width="3"/>
+            <path d="M52 120 L78 112" stroke="var(--orange)" stroke-width="3.5"/>
+            <path d="M78 112 L70 108 M78 112 L74 120" stroke="var(--orange)" stroke-width="3"/>
+            <text class="blkt" x="65" y="205" text-anchor="middle" font-size="18">给定电位器</text>
+            <!-- 比较点 -->
+            <circle class="sum" cx="150" cy="120" r="18"/>
+            <path d="M141.5,111.5 L158.5,128.5 M141.5,128.5 L158.5,111.5" stroke="#1D3FA0" stroke-width="2.5" fill="none"/>
+            <text class="sumt" x="124" y="102" text-anchor="middle">+</text>
+            <text class="sumt" x="138" y="164" text-anchor="middle">−</text>
+            <line x1="100" y1="120" x2="128" y2="120" stroke="var(--blue)" stroke-width="2.5" marker-end="url(#arr2)"/>
+            <!-- 放大器 -->
+            <path d="M196 86 L196 154 L252 120 Z" fill="#fff" stroke="var(--blue)" stroke-width="2.5"/>
+            <line x1="168" y1="120" x2="194" y2="120" stroke="var(--blue)" stroke-width="2.5"/>
+            <text class="blkt" x="215" y="176" text-anchor="middle" font-size="18">放大器</text>
+            <!-- 电动机 -->
+            <line x1="252" y1="120" x2="290" y2="120" stroke="var(--blue)" stroke-width="2.5" marker-end="url(#arr2)"/>
+            <circle cx="330" cy="120" r="40" class="blk"/>
+            <text class="blkt" x="330" y="130" text-anchor="middle" font-size="26">M</text>
+            <text class="blkt" x="330" y="182" text-anchor="middle" font-size="18">直流电动机</text>
+            <!-- 输出轴 -->
+            <line x1="330" y1="160" x2="330" y2="300" stroke="var(--muted)" stroke-width="3" stroke-dasharray="8 6"/>
+            <text class="lab" x="342" y="240" font-size="16">同轴</text>
+            <!-- 测速发电机 -->
+            <circle cx="330" cy="340" r="34" class="blk"/>
+            <text class="blkt" x="330" y="348" text-anchor="middle" font-size="20">TG</text>
+            <text class="blkt" x="330" y="398" text-anchor="middle" font-size="18">测速发电机</text>
+            <!-- 反馈线 -->
+            <polyline points="296,340 150,340 150,142" fill="none" stroke="var(--blue)" stroke-width="2.5" marker-end="url(#arr2)"/>
+            <text class="lab" x="180" y="326" font-size="17" font-style="italic">反馈电压 u<tspan baseline-shift="sub" font-size="13">f</tspan></text>
+            <text class="lab" x="30" y="30" font-size="17" font-style="italic">给定电压 u<tspan baseline-shift="sub" font-size="13">g</tspan></text>
+            <text class="lab" x="266" y="104" font-size="16" font-style="italic">u<tspan baseline-shift="sub" font-size="12">a</tspan></text>
+          </svg>
+        </div>
+        <div class="cap">图 1-3　直流电动机转速闭环控制原理示意</div>
+      </div>
+      <div class="act-card rgt">
+        <div class="bd2">
+          <svg viewBox="0 0 720 470" width="96%" height="94%">
+            <defs>
+              <marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#1D3FA0"/></marker>
+              <marker id="arrO" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#D63A2F"/></marker>
+            </defs>
+            <text class="lab" x="14" y="168">输入量</text>
+            <line class="sig" x1="26" y1="186" x2="92" y2="186"/>
+            <circle class="sum" cx="118" cy="186" r="21"/>
+            <path d="M108,176 L128,196 M108,196 L128,176" stroke="#1D3FA0" stroke-width="2.5" fill="none"/>
+            <text class="sumt" x="95" y="168" text-anchor="middle">+</text>
+            <text class="sumt" x="104" y="232" text-anchor="middle">−</text>
+            <text class="lab" x="150" y="168">偏差量</text>
+            <line class="sig" x1="139" y1="186" x2="212" y2="186"/>
+            <rect class="blk" x="214" y="152" width="130" height="68" rx="8"/>
+            <text class="blkt" x="279" y="193" text-anchor="middle">放大器</text>
+            <text class="lab" x="352" y="168">控制量</text>
+            <line class="sig" x1="344" y1="186" x2="424" y2="186"/>
+            <rect class="blk" x="426" y="152" width="130" height="68" rx="8"/>
+            <text class="blkt" x="491" y="193" text-anchor="middle">电动机</text>
+            <text class="distt" x="452" y="100">扰动量</text>
+            <line class="dist" x1="491" y1="108" x2="491" y2="148"/>
+            <line class="sig" x1="556" y1="186" x2="648" y2="186"/>
+            <text class="lab" x="592" y="168">输出量</text>
+            <polyline class="fb" points="640,186 640,330 118,330 118,210"/>
+            <rect class="blk" x="270" y="352" width="170" height="62" rx="8"/>
+            <text class="blkt" x="355" y="390" text-anchor="middle">测速发电机</text>
+            <line class="fb" x1="355" y1="330" x2="355" y2="352"/>
+            <text class="lab" x="160" y="316">反馈量</text>
+          </svg>
+        </div>
+        <div class="cap">图 1-4　闭环系统方框图（测速发电机提供转速反馈）</div>
+      </div>
+    </div>
+  </div>
+</div></div>
+</body>
+</html>

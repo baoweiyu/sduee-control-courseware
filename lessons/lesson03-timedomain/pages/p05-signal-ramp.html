@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>斜坡函数</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<link rel="stylesheet" href="../lesson03-svg.css">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:26px; height:100%; align-items:stretch; }
+  .lcol { flex:1.05; display:flex; flex-direction:column; gap:18px; }
+  .name { font-size:27px; font-weight:700; color:var(--navy); }
+  .name small { font-size:20px; color:var(--muted); font-weight:400; margin-left:10px; }
+  .mathbox { font-size:30px; padding:24px 28px; }
+  .unit { background:#fff; border:2px solid var(--line); border-radius:14px; padding:16px 22px; font-size:22px; color:var(--ink); line-height:1.6; }
+  .figc { flex:1; display:flex; flex-direction:column; overflow:hidden; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:14px; }
+  .figc svg { width:100%; height:100%; }
+</style>
+</head>
+<body data-title="典型输入信号 · 斜坡函数" data-page="5 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body fill">
+    <div class="row">
+      <div class="lcol">
+        <div class="name">2、斜坡函数<small>等速度函数</small></div>
+        <div class="mathbox math eqline tex tex-d">r(t) = \begin{cases} A\,t, & t \geq 0 \\ 0, & t < 0 \end{cases}</div>
+        <div class="unit">
+          <b>单位斜坡函数</b>：令 <span class="tex">A=1</span>，记为 <span class="tex">t\cdot 1(t)</span>，其拉氏变换
+          <span class="mathbox math eqline tex tex-d" style="display:inline-block;padding:8px 22px;font-size:26px;margin-left:12px">\mathcal{L}\left[t\cdot 1(t)\right] = \dfrac{1}{s^{2}}</span>
+        </div>
+        <div class="unit">表示随时间<span class="kw-r">匀速增长</span>的信号，如雷达天线跟踪匀速飞行的目标、数控机床的等速进给。</div>
+      </div>
+      <div class="figc">
+        <div class="act-card figc">
+          <div class="hd">斜坡函数波形</div>
+          <div class="bd2">
+            <svg viewBox="0 0 640 560">
+              <defs>
+                <marker id="arr5" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#5B6B8C"/></marker>
+              </defs>
+              <line x1="90" y1="470" x2="606" y2="470" stroke="#5B6B8C" stroke-width="2" marker-end="url(#arr5)"/>
+              <line x1="90" y1="470" x2="90" y2="40" stroke="#5B6B8C" stroke-width="2" marker-end="url(#arr5)"/>
+              <text x="600" y="508" class="svgname" font-size="23" text-anchor="end">t</text>
+              <text x="58" y="44" class="svgname" font-size="23" text-anchor="middle">r(t)</text>
+              <text x="64" y="480" class="svgsub" font-size="21">O</text>
+              <!-- 波形：t<0 为 0，t≥0 为 At -->
+              <line x1="90" y1="470" x2="240" y2="470" stroke="#2B5CE6" stroke-width="4"/>
+              <line x1="240" y1="470" x2="570" y2="110" stroke="#2B5CE6" stroke-width="4"/>
+              <!-- 斜率标注（端点取在图线上） -->
+              <line x1="400" y1="295" x2="520" y2="295" stroke="#F5821F" stroke-width="2.5" stroke-dasharray="9 7"/>
+              <line x1="520" y1="295" x2="520" y2="165" stroke="#F5821F" stroke-width="2.5" stroke-dasharray="9 7"/>
+              <text x="460" y="322" class="svgsub" font-size="21" text-anchor="middle">1</text>
+              <text x="538" y="236" class="svgsub" font-size="21">A</text>
+              <text x="296" y="196" class="svgname" font-size="23">斜率 = A</text>
+              <line x1="384" y1="214" x2="398" y2="288" stroke="#5B6B8C" stroke-width="1.6"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+</body>
+</html>

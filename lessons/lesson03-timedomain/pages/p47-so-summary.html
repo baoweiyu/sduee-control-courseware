@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>第三、四节小结</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:24px; height:100%; }
+  .tabc { flex:1.25; display:flex; flex-direction:column; overflow:hidden; }
+  .tabc .bd3 { flex:1; background:#fff; padding:18px 22px; display:grid; place-items:center; }
+  .act-table { font-size:23px; }
+  .act-table td, .act-table th { padding:15px 16px; }
+  .act-table td.c { text-align:center; }
+  .rcol { flex:1; display:flex; flex-direction:column; gap:16px; }
+  .cc { flex:1; background:#fff; border:2px solid var(--line); border-radius:14px; padding:18px 24px; font-size:22.5px; line-height:1.95; color:var(--ink); }
+  .cc .t { font-size:23.5px; font-weight:700; color:var(--blue); margin-bottom:8px; }
+</style>
+</head>
+<body data-title="小结 · 二阶与高阶系统" data-page="49 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="row">
+      <div class="act-card tabc">
+        <div class="hd">欠阻尼二阶系统（0&lt;ζ&lt;1）指标公式一览</div>
+        <div class="bd3">
+          <table class="act-table">
+            <tr><th style="width:30%">指标</th><th style="width:38%">公式</th><th>要点</th></tr>
+            <tr><td>上升时间 t<sub>r</sub></td><td class="c"><span class="tex" style="font-size:23px">t_{r}=\dfrac{\pi-\beta}{\omega_{d}}</span></td><td>与 ω<sub>n</sub> 成反比</td></tr>
+            <tr><td>峰值时间 t<sub>p</sub></td><td class="c"><span class="tex" style="font-size:23px">t_{p}=\dfrac{\pi}{\omega_{d}}</span></td><td>半个阻尼振荡周期</td></tr>
+            <tr><td>调节时间 t<sub>s</sub></td><td class="c"><span class="tex" style="font-size:23px">t_{s}\approx\dfrac{4}{\zeta\omega_{n}}\,(2\%)</span></td><td>与 σ=ζω<sub>n</sub> 成反比</td></tr>
+            <tr><td>超调量 σ%</td><td class="c"><span class="tex" style="font-size:23px">\sigma\%=e^{-\pi\zeta/\sqrt{1-\zeta^{2}}}\times100\%</span></td><td><span class="kw-r">只与 ζ 有关</span></td></tr>
+            <tr><td>斜坡稳态误差</td><td class="c"><span class="tex" style="font-size:23px">e_{ss}=\dfrac{2\zeta}{\omega_{n}}</span></td><td>ζ 大则精度差（权衡）</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="rcol">
+        <div class="cc"><div class="t">① 参数影响链</div>
+          <b>ζ 管平稳</b>：ζ↑ → β↓ → σ%↓；ζ = 0.4~0.8 为工程推荐区间。<br>
+          <b>ω<sub>n</sub> 管快慢</b>：ω<sub>n</sub>↑ → t<sub>r</sub>、t<sub>p</sub>、t<sub>s</sub> 同步减小，σ% 不变。<br>
+          <b>速度反馈</b>：ω<sub>n</sub> 不变、ζ 增大，是改善平稳性的利器。
+        </div>
+        <div class="cc"><div class="t">② 高阶系统的处理思想</div>
+          响应 = 若干一阶、二阶分量之和：<br><span class="kw-r">衰减快慢看实部、运动类型看极点、形状还看零点</span>；<br>用<span class="kw-r">主导极点</span>近似降阶（实部 5 倍判据），用<span class="kw-r">偶极子</span>抵消进一步简化。
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+</body>
+</html>

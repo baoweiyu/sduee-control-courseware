@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>1.5 典型环节的极坐标图① 比例·积分·微分</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:26px; height:100%; min-height:0; }
+  .col { flex:1; display:flex; flex-direction:column; min-height:0; }
+  .col .hd { display:flex; align-items:center; justify-content:space-between; gap:10px; }
+  .hdbtns { flex:none; display:flex; gap:8px; flex-wrap:nowrap; }
+  .pbtn { font-size:15px; padding:3px 12px; border-radius:8px; border:none; background:#fff; color:var(--blue); font-weight:700; white-space:nowrap; cursor:pointer; }
+  .pbtn.ghost { background:transparent; color:#fff; border:1.5px solid rgba(255,255,255,.75); }
+  .col .bd { flex:1; display:flex; flex-direction:column; justify-content:space-evenly; gap:8px; font-size:20.5px; line-height:1.6; min-height:0; overflow:hidden; }
+  .col .mathbox { font-size:21px; padding:9px 14px; }
+  .figc { flex:1.25; display:flex; flex-direction:column; overflow:hidden; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:8px 14px; min-height:0; }
+  .figc svg { width:100%; height:100%; }
+  .figc .ds { flex:none; padding:6px 16px 12px; font-size:20px; line-height:1.5; color:var(--ink); text-align:center; }
+</style>
+</head>
+<body data-title="1.5 典型环节的极坐标图① 比例·积分·微分" data-page="16 / 87">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="row">
+      <div class="act-card col">
+        <div class="hd"><span>比例环节</span><span class="hdbtns"><button class="pbtn" id="playK">▶ 播放</button><button class="pbtn ghost" id="rstK">⟲ 重画</button></span></div>
+        <div class="bd">
+          <div class="mathbox math eqline tex tex-d">G(s)=K\;\Rightarrow\;G(j\omega)=K\angle 0^{\circ}</div>
+          <div class="figc">
+            <div class="bd2"><svg id="figK" viewBox="0 0 360 330"></svg></div>
+            <div class="ds">曲线退化为正实轴上一点 <span class="kw-r">K</span>，与 ω 无关</div>
+          </div>
+        </div>
+      </div>
+      <div class="act-card col">
+        <div class="hd"><span>积分环节</span><span class="hdbtns"><button class="pbtn" id="playI">▶ 播放</button><button class="pbtn ghost" id="rstI">⟲ 重画</button></span></div>
+        <div class="bd">
+          <div class="mathbox math eqline tex tex-d">G(s)=\dfrac{1}{s}\;\Rightarrow\;G(j\omega)=\dfrac{1}{\omega}\angle{-90^{\circ}}</div>
+          <div class="figc">
+            <div class="bd2"><svg id="figI" viewBox="0 0 360 330"></svg></div>
+            <div class="ds">沿<span class="kw-r">负虚轴</span>自 ∞ → 0（相角恒 −90°）</div>
+          </div>
+        </div>
+      </div>
+      <div class="act-card col">
+        <div class="hd"><span>微分环节</span><span class="hdbtns"><button class="pbtn" id="playD">▶ 播放</button><button class="pbtn ghost" id="rstD">⟲ 重画</button></span></div>
+        <div class="bd">
+          <div class="mathbox math eqline tex tex-d">G(s)=s\;\Rightarrow\;G(j\omega)=\omega\angle{+90^{\circ}}</div>
+          <div class="figc">
+            <div class="bd2"><svg id="figD" viewBox="0 0 360 330"></svg></div>
+            <div class="ds">沿<span class="kw-r">正虚轴</span>自 0 → ∞（相角恒 +90°）</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div data-step="1" style="display:none"></div>
+    <div data-step="2" style="display:none"></div>
+    <div data-step="3" style="display:none"></div>
+  </div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const mk = (svg, tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const tx = (svg, x, y, s, o) => { const n = mk(svg, "text", { x, y, "font-size": (o && o.fs) || 16, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#5B6B8C", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal" }); n.textContent = s; return n; };
+
+  // 复平面底盘：x∈[-1.6,1.6], y∈[-1.6,1.6]
+  function plane(id, mid) {
+    const svg = document.getElementById(id);
+    const defs = mk(svg, "defs", {});
+    const m1 = mk(svg, "marker", { id: mid, markerWidth: 9, markerHeight: 9, refX: 6.5, refY: 2.7, orient: "auto" }, defs);
+    mk(svg, "path", { d: "M0,0 L6.5,2.7 L0,5.4 Z", fill: "#8A97B5" }, m1);
+    const O = { x: 180, y: 168 }, S = 98;
+    mk(svg, "line", { x1: 16, y1: O.y, x2: 344, y2: O.y, stroke: "#8A97B5", "stroke-width": 1.4, "marker-end": "url(#" + mid + ")" });
+    mk(svg, "line", { x1: O.x, y1: 314, x2: O.x, y2: 16, stroke: "#8A97B5", "stroke-width": 1.4, "marker-end": "url(#" + mid + ")" });
+    tx(svg, 338, O.y + 22, "Re", { fs: 17.5, it: true, b: true, fill: "#8A97B5", an: "end" });
+    tx(svg, O.x + 20, 26, "jIm", { fs: 17.5, it: true, b: true, fill: "#8A97B5", an: "start" });
+    tx(svg, O.x - 10, O.y + 20, "O", { fs: 16.5, fill: "#8A97B5", an: "end" });
+    const dyn = mk(svg, "g", {});
+    return { svg, O, S, dyn, X: v => O.x + v * S, Y: v => O.y - v * S };
+  }
+  const PK = plane("figK", "m13a"), PI = plane("figI", "m13b"), PD = plane("figD", "m13c");
+
+  // 初始淡色完整轨迹：绘制在独立底层组（动画只清 dyn 层，底层永久保留，不会被清空）
+  const baseG = (P) => { const g = document.createElementNS(NS, "g"); P.svg.insertBefore(g, P.dyn); return g; };
+  const bK = baseG(PK), bI = baseG(PI), bD = baseG(PD);
+  mk(PK.svg, "circle", { cx: PK.X(1), cy: PK.Y(0), r: 9, fill: "none", stroke: "#C9D6F2", "stroke-width": 3 }, bK);
+  mk(PI.svg, "line", { x1: PI.O.x, y1: PI.Y(-1.35), x2: PI.O.x, y2: PI.Y(0), stroke: "#C9D6F2", "stroke-width": 3.6 }, bI);
+  mk(PD.svg, "line", { x1: PD.O.x, y1: PD.Y(0), x2: PD.O.x, y2: PD.Y(1.35), stroke: "#C9D6F2", "stroke-width": 3.6 }, bD);
+
+  // 比例：固定点 K=(1,0)
+  function drawK(f) {
+    PK.dyn.innerHTML = "";
+    if (f <= 0) return;
+    mk(PK.svg, "circle", { cx: PK.X(1), cy: PK.Y(0), r: 8, fill: "#D63A2F" }, PK.dyn);
+    tx(PK.dyn, PK.X(1), PK.Y(0) - 20, "K", { fs: 20, b: true, it: true, fill: "#D63A2F" });
+    tx(PK.dyn, PK.X(1), PK.Y(0) + 30, "（一个点）", { fs: 16.5, fill: "#5B6B8C" });
+  }
+  // 积分：负虚轴 从 -1.35(ω→0) 到 0(ω→∞)，箭头跟随运动端点
+  function drawI(f) {
+    PI.dyn.innerHTML = "";
+    if (f <= 0) return;
+    const y0 = PI.Y(-1.35), y1 = PI.Y(-1.35 + 1.35 * f);
+    mk(PI.svg, "line", { x1: PI.O.x, y1: y0, x2: PI.O.x, y2: Math.min(y1, y0 - 2), stroke: "#1D3FA0", "stroke-width": 3.6 }, PI.dyn);
+    mk(PI.svg, "path", { d: `M ${PI.O.x - 6.5} ${y1 + 9} l 6.5 -14 l 6.5 14 Z`, fill: "#1D3FA0" }, PI.dyn);
+    tx(PI.dyn, PI.O.x + 14, y0 + 8, "ω→0", { fs: 16.5, an: "start" });
+    if (f > 0.9) tx(PI.dyn, PI.O.x + 14, PI.O.y - 8, "ω→∞", { fs: 16.5, it: true, fill: "#D63A2F", an: "start" });
+  }
+  // 微分：正虚轴 从 0 到 +1.35，箭头跟随运动端点
+  function drawD(f) {
+    PD.dyn.innerHTML = "";
+    if (f <= 0) return;
+    const y0 = PD.Y(0), y1 = PD.Y(1.35 * f);
+    mk(PD.svg, "line", { x1: PD.O.x, y1: y0, x2: PD.O.x, y2: y1 - 8, stroke: "#1D3FA0", "stroke-width": 3.6 }, PD.dyn);
+    mk(PD.svg, "path", { d: `M ${PD.O.x - 6.5} ${y1 + 6} l 6.5 -14 l 6.5 14 Z`, fill: "#1D3FA0" }, PD.dyn);
+    tx(PD.dyn, PD.O.x + 14, PD.O.y - 8, "ω=0", { fs: 16.5, an: "start" });
+    if (f > 0.9) tx(PD.dyn, PD.O.x + 14, y1 + 22, "ω→∞", { fs: 16.5, it: true, fill: "#D63A2F", an: "start" });
+  }
+
+  // 每张图独立播放 / 重画
+  function playOne(draw, btn) {
+    if (btn.dataset.busy) return;
+    btn.dataset.busy = "1";
+    const t0 = performance.now(), DUR = 2600;
+    (function fr(ts) {
+      const f = Math.min(1, (ts - t0) / DUR);
+      draw(f);
+      if (f < 1) requestAnimationFrame(fr);
+      else delete btn.dataset.busy;
+    })(t0);
+  }
+  document.getElementById("playK").onclick = () => playOne(drawK, document.getElementById("playK"));
+  document.getElementById("playI").onclick = () => playOne(drawI, document.getElementById("playI"));
+  document.getElementById("playD").onclick = () => playOne(drawD, document.getElementById("playD"));
+  document.getElementById("rstK").onclick = () => drawK(0);
+  document.getElementById("rstI").onclick = () => drawI(0);
+  document.getElementById("rstD").onclick = () => drawD(0);
+
+  // Space 分步：依次播放 比例 → 积分 → 微分（与按钮同一入口）
+  const PANELS = [["playK", drawK], ["playI", drawI], ["playD", drawD]];
+  const SPB = ACT.step, _sn = SPB.next.bind(SPB), _sr = SPB.reset.bind(SPB);
+  SPB.next = function () { const p = PANELS[SPB.cur - 1]; if (p) playOne(p[1], document.getElementById(p[0])); return _sn(); };
+  SPB.reset = function () { _sr(); drawK(0); drawI(0); drawD(0); };
+  const qp = new URLSearchParams(location.search).get("play");
+  if (qp === "k") drawK(1);
+  if (qp === "i") drawI(1);
+  if (qp === "d") drawD(1);
+});
+</script>
+</body>
+</html>

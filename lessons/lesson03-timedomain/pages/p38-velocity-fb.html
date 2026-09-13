@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>速度反馈改善二阶系统性能</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<link rel="stylesheet" href="../lesson03-svg.css">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .col { display:flex; flex-direction:column; gap:16px; height:100%; }
+  .dia { flex:0.7; display:flex; flex-direction:column; overflow:hidden; min-height:0; }
+  .dia .hd, .cmp .hd { flex:none; }
+  .dia .bd2 { flex:1; min-height:0; display:grid; place-items:center; background:#fff; padding:6px 14px; }
+  .dia svg { width:100%; height:100%; }
+  .brow { flex:1; display:flex; gap:22px; min-height:0; }
+  .drv { flex:1.15; }
+  .drv .bd { font-size:20.5px; line-height:1.5; padding:16px 26px; }
+  .drv .mathbox { padding-top:7px; padding-bottom:7px; }
+  .cmp { flex:1; display:flex; flex-direction:column; overflow:hidden; min-height:0; }
+  .cmp .bd2 { flex:1; min-height:0; display:grid; place-items:center; background:#fff; padding:6px 12px; }
+  .cmp svg { width:100%; height:100%; }
+</style>
+</head>
+<body data-title="二阶系统性能的改善 · 速度反馈" data-page="40 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="col">
+      <div class="act-card dia">
+        <div class="hd">速度反馈（测速反馈）结构图</div>
+        <div class="bd2"><svg id="dia" viewBox="0 0 1000 330"></svg></div>
+      </div>
+      <div class="brow">
+        <div class="act-card drv">
+          <div class="hd">等效分析</div>
+          <div class="bd">
+            <div data-step="1">① 闭环传递函数：
+              <div class="mathbox math eqline tex tex-d" style="font-size:22px;margin:8px 0">\varPhi(s)=\dfrac{K}{Ts^{2}+(1+K\tau)s+K}</div>
+            </div>
+            <div data-step="2">② 与标准型比对：<span class="tex" style="font-size:22.5px">\omega_{n}=\sqrt{\dfrac{K}{T}}</span>（<span class="kw-r">不变</span>）；
+              <div style="display:flex;align-items:center;gap:14px;margin-top:6px">
+                <div class="mathbox math eqline tex tex-d" style="font-size:21.5px;flex:1;margin:0">\zeta_{1}=\dfrac{1+K\tau}{2\sqrt{KT}}=\zeta+\dfrac{\tau\omega_{n}}{2}</div>
+                <span class="kw-r" style="flex:none;font-weight:700">（增大）</span>
+              </div>
+            </div>
+            <div data-step="3" style="margin-top:4px">③ <b>结论</b>：速度反馈不改变 ω<sub>n</sub>、只增大阻尼比——<br><span class="kw-r">σ% 显著减小、t<sub>s</sub> 缩短</span>，平稳性改善。</div>
+          </div>
+        </div>
+        <div class="act-card cmp">
+          <div class="hd">效果对比（τ=0.0625：ζ 0.25 → 0.5）</div>
+          <div class="bd2"><svg id="fig" viewBox="0 0 900 480"></svg></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const mk = (svg, tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const tx = (svg, x, y, s, o, parent) => { const n = mk(svg, "text", { x, y, "font-size": (o && o.fs) || 20, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal" }, parent); n.textContent = s; return n; };
+
+  /* ---------- 结构图 ---------- */
+  const D = document.getElementById("dia");
+  const dd = mk(D, "defs", {});
+  const m1 = mk(D, "marker", { id: "a38", markerWidth: 11, markerHeight: 11, refX: 7.5, refY: 3.2, orient: "auto" }, dd);
+  mk(D, "path", { d: "M0,0 L7.5,3.2 L0,6.4 Z", fill: "#1B3B8B" }, m1);
+  const L = attrs => mk(D, "line", Object.assign({ stroke: "#1B3B8B", "stroke-width": 2.2, "marker-end": "url(#a38)" }, attrs));
+  const W = attrs => mk(D, "line", Object.assign({ stroke: "#1B3B8B", "stroke-width": 2.2 }, attrs)); // 无箭头连线
+  const sum = (cx, cy) => {
+    mk(D, "circle", { cx, cy, r: 16, fill: "#fff", stroke: "#1B3B8B", "stroke-width": 2.2 });
+    mk(D, "line", { x1: cx - 6.5, y1: cy - 6.5, x2: cx + 6.5, y2: cy + 6.5, stroke: "#1B3B8B", "stroke-width": 1.8 });
+    mk(D, "line", { x1: cx - 6.5, y1: cy + 6.5, x2: cx + 6.5, y2: cy - 6.5, stroke: "#1B3B8B", "stroke-width": 1.8 });
+  };
+  const y0 = 128;
+  L({ x1: 26, y1: y0, x2: 104, y2: y0 });
+  tx(D, 56, y0 - 18, "R(s)", { fs: 21, it: true, b: true });
+  sum(126, y0);
+  tx(D, 92, y0 - 24, "+", { fs: 23, b: true });
+  tx(D, 152, 178, "−", { fs: 26, b: true, fill: "#D63A2F" });
+  L({ x1: 142, y1: y0, x2: 196, y2: y0 });
+  sum(218, y0);
+  tx(D, 244, 178, "−", { fs: 26, b: true, fill: "#D63A2F" });
+  tx(D, 186, y0 - 22, "+", { fs: 21, b: true });
+  L({ x1: 234, y1: y0, x2: 292, y2: y0 });
+  mk(D, "rect", { x: 292, y: y0 - 34, width: 235, height: 68, rx: 10, fill: "#EAF1FD", stroke: "#1B3B8B", "stroke-width": 2.2 });
+  tx(D, 409, y0 + 8, "K / [ s(Ts+1) ]", { fs: 24, it: true, b: true });
+  L({ x1: 527, y1: y0, x2: 768, y2: y0 });
+  tx(D, 726, y0 - 18, "C(s)", { fs: 21, it: true, b: true });
+  mk(D, "circle", { cx: 700, cy: y0, r: 5, fill: "#1B3B8B" });
+  // 内环：τs 支路
+  W({ x1: 700, y1: y0, x2: 700, y2: 216 });
+  W({ x1: 700, y1: 216, x2: 500, y2: 216 });
+  mk(D, "rect", { x: 380, y: 198, width: 120, height: 38, rx: 8, fill: "#FFF4E8", stroke: "#F5821F", "stroke-width": 2.2 });
+  tx(D, 440, 224, "τs", { fs: 22, it: true, b: true, fill: "#F5821F" });
+  W({ x1: 380, y1: 216, x2: 218, y2: 216 });
+  L({ x1: 218, y1: 216, x2: 218, y2: y0 + 20 });
+  tx(D, 596, 244, "速度反馈支路", { fs: 17.5, fill: "#F5821F", b: true });
+  // 外环：单位负反馈
+  W({ x1: 740, y1: y0, x2: 740, y2: 296 });
+  W({ x1: 740, y1: 296, x2: 126, y2: 296 });
+  L({ x1: 126, y1: 296, x2: 126, y2: y0 + 20 });
+  tx(D, 430, 322, "单位负反馈", { fs: 17.5, fill: "#5B6B8C" });
+
+  /* ---------- 对比曲线 ---------- */
+  const F = document.getElementById("fig");
+  const fd = mk(F, "defs", {});
+  const m2 = mk(F, "marker", { id: "a38f", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, fd);
+  mk(F, "path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, m2);
+  const wn = 8, T = 3, YM = 1.6;
+  const X = t => 86 + t / T * 760;
+  const Y = v => 400 - v / YM * 350;
+  const mkU = z => { const sg = z * wn, wd = wn * Math.sqrt(1 - z * z), be = Math.acos(z), A = 1 / Math.sqrt(1 - z * z); return t => t <= 0 ? 0 : 1 - A * Math.exp(-sg * t) * Math.sin(wd * t + be); };
+  mk(F, "line", { x1: 86, y1: 400, x2: 862, y2: 400, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a38f)" });
+  mk(F, "line", { x1: 86, y1: 400, x2: 86, y2: 24, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a38f)" });
+  tx(F, 866, 406, "t", { fs: 20, an: "start", it: true, b: true });
+  tx(F, 52, 32, "h(t)", { fs: 20, it: true, b: true });
+  tx(F, 66, 406, "O", { fs: 17, fill: "#5B6B8C" });
+  mk(F, "line", { x1: 86, y1: Y(1), x2: 850, y2: Y(1), stroke: "#F5821F", "stroke-width": 1.8, "stroke-dasharray": "9 6" });
+  tx(F, 72, Y(1) + 6, "1", { an: "end", fs: 18, b: true });
+  const curve = (fn, color, wdt) => {
+    let d = "";
+    for (let i = 0; i <= 400; i++) { const t = T * i / 400; d += (i ? "L" : "M") + X(t).toFixed(1) + "," + Y(fn(t)).toFixed(1); }
+    mk(F, "path", { d, stroke: color, "stroke-width": wdt, fill: "none" });
+  };
+  curve(mkU(0.25), "#9FB3D9", 3);
+  curve(mkU(0.5), "#2B5CE6", 3.6);
+  // 图例
+  mk(F, "line", { x1: 470, y1: 52, x2: 530, y2: 52, stroke: "#9FB3D9", "stroke-width": 3 });
+  tx(F, 542, 59, "原系统 ζ=0.25（σ%=44%）", { fs: 19, an: "start", fill: "#5B6B8C" });
+  mk(F, "line", { x1: 470, y1: 88, x2: 530, y2: 88, stroke: "#2B5CE6", "stroke-width": 3.6 });
+  tx(F, 542, 95, "速度反馈 ζ=0.5（σ%=16%）", { fs: 19, an: "start", b: true, fill: "#2B5CE6" });
+});
+</script>
+</body>
+</html>

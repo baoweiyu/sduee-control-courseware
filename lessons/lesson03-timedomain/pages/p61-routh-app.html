@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>稳定判据的应用 · 例 3-11</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<link rel="stylesheet" href="../lesson03-svg.css">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:24px; height:100%; }
+  .appc { flex:0.78; display:flex; flex-direction:column; }
+  .appc .bd { flex:1; font-size:22.5px; line-height:1.9; display:flex; flex-direction:column; justify-content:center; gap:18px; }
+  .exc { flex:1.22; display:flex; flex-direction:column; }
+  .exc .bd { flex:1; display:flex; flex-direction:column; justify-content:center; gap:11px; }
+  .figw { background:#fff; border:1.5px solid var(--line); border-radius:12px; padding:6px 8px; }
+  .figw svg { display:block; width:100%; height:auto; }
+  .step { font-size:21.5px; line-height:1.7; color:var(--navy); }
+  .concl { background:#FCEBE9; border:2px solid #D63A2F; border-radius:12px; padding:11px 18px; font-size:21.5px; color:var(--navy); line-height:1.6; }
+  .ap { display:flex; gap:14px; align-items:flex-start; }
+  .ap .no { flex:none; width:40px; height:40px; border-radius:50%; background:var(--navy); color:#fff; display:grid; place-items:center; font-size:21px; font-weight:800; margin-top:4px; }
+  .ap .tx b { color:var(--navy); }
+  [data-step]:not(.shown) { visibility:hidden; }
+</style>
+</head>
+<body data-title="稳定判据的应用" data-page="64 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="row">
+      <div class="act-card appc">
+        <div class="hd">五、稳定判据的应用</div>
+        <div class="bd">
+          <div class="ap"><div class="no">1</div><div class="tx"><b>判别系统的稳定性</b><br>由特征方程系数直接列劳斯表（或赫尔维茨行列式），不必求解特征根。</div></div>
+          <div class="ap"><div class="no">2</div><div class="tx"><b>分析参数变化对稳定性的影响</b><br>令判据不等式成立，反推出参数的允许范围与<span class="kw-r">临界值</span>。<br>→ 见例 3-11</div></div>
+          <div class="ap"><div class="no">3</div><div class="tx"><b>检验稳定裕度</b><br>令 <span class="tex">s=z-\sigma\ (\sigma&gt;0)</span> 代入特征方程，对 z 的多项式判稳，检验系统的相对稳定性。<br>→ 见例 3-12</div></div>
+        </div>
+      </div>
+      <div class="act-card exc">
+        <div class="hd">例 3-11　参数临界值的确定</div>
+        <div class="bd">
+          <div class="figw">
+            <svg viewBox="0 0 640 240">
+              <defs><marker id="ar61" markerWidth="11" markerHeight="11" refX="7.5" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#1B3B8B"/></marker></defs>
+              <text x="10" y="106" font-size="20" fill="#1B3B8B" font-style="italic">R(s)</text>
+              <line x1="56" y1="100" x2="84" y2="100" stroke="#1B3B8B" stroke-width="2.2" marker-end="url(#ar61)"/>
+              <circle cx="104" cy="100" r="15" fill="#fff" stroke="#1B3B8B" stroke-width="2.2"/>
+              <line x1="96" y1="92" x2="112" y2="108" stroke="#1B3B8B" stroke-width="2"/>
+              <line x1="112" y1="92" x2="96" y2="108" stroke="#1B3B8B" stroke-width="2"/>
+              <text x="72" y="132" font-size="19" fill="#1B3B8B">+</text>
+              <text x="124" y="150" font-size="19" fill="#1B3B8B">−</text>
+              <line x1="119" y1="100" x2="146" y2="100" stroke="#1B3B8B" stroke-width="2.2"/>
+              <rect x="150" y="64" width="240" height="72" rx="8" fill="#EAF0FE" stroke="#1B3B8B" stroke-width="2.2"/>
+              <foreignObject x="158" y="76" width="224" height="48"><div xmlns="http://www.w3.org/1999/xhtml" class="tex" style="font-size:20px;text-align:center">\dfrac{K_{1}}{s(s+1)(s+2)}</div></foreignObject>
+              <line x1="390" y1="100" x2="556" y2="100" stroke="#1B3B8B" stroke-width="2.2" marker-end="url(#ar61)"/>
+              <circle cx="500" cy="100" r="4" fill="#1B3B8B"/>
+              <text x="566" y="106" font-size="20" fill="#1B3B8B" font-style="italic">C(s)</text>
+              <polyline points="500,100 500,192 104,192 104,118" fill="none" stroke="#1B3B8B" stroke-width="2.2" marker-end="url(#ar61)"/>
+              <text x="290" y="214" font-size="17" fill="#5B6B8C" text-anchor="middle">单位负反馈</text>
+            </svg>
+          </div>
+          <div class="step" data-step="1"><b>解</b>　闭环特征方程：<span class="tex tex-d" style="font-size:21px">s(s+1)(s+2)+K_{1}=s^{3}+3s^{2}+2s+K_{1}=0</span></div>
+          <div class="step" data-step="2">① 各系数均大于零　→　<span class="tex">K_{1}&gt;0</span></div>
+          <div class="step" data-step="3">② <span class="tex">a_{1}a_{2}-a_{0}a_{3}&gt;0</span>　→　<span class="tex">3\times 2-1\times K_{1}&gt;0</span>，即 <span class="tex">K_{1}&lt;6</span></div>
+          <div class="concl" data-step="4">稳定要求 <span class="tex">0&lt;K_{1}&lt;6</span>，<span class="tex">K_{1}</span> 的临界值为 <span class="kw-r">6</span>；<br>开环放大倍数 <span class="tex">K=K_{1}/2</span>，故其临界值 <span class="tex">K_{c}=3</span>。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>复习 · 拉氏变换定义与常用变换</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .sec { font-size:28px; font-weight:700; color:var(--blue); margin:4px 0 18px; }
+  .mathbox { font-size:28px; padding:18px 30px; margin-bottom:24px; }
+  table { width:100%; border-collapse:collapse; font-size:23px; }
+  th { background:var(--blue); color:#fff; padding:12px 16px; border:2px solid var(--line); }
+  td { border:2px solid var(--line); padding:10px 16px; background:#fff; text-align:center; }
+  tr:nth-child(even) td { background:var(--sky); }
+  td .math { font-size:24px; }
+</style>
+</head>
+<body data-title="复习：拉氏变换" data-page="9 / 51">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body fill">
+    <div class="sec">二、系统微分方程的求解 —— 复习：拉氏变换</div>
+    <div class="mathbox math eqline tex tex-d">F(s) = \int _{0}^{\infty } f(t)\cdot e^{-st} dt = \mathcal{L}[f(t)]</div>
+    <table>
+      <tr><th style="width:36%">f(t)（原函数）</th><th>F(s)（象函数）</th><th style="width:36%">f(t)（原函数）</th><th>F(s)（象函数）</th></tr>
+      <tr><td class="math tex">\delta (t)\text{单位脉冲}</td><td class="math tex">1</td><td class="math tex">e^{-at}</td><td class="math tex">\dfrac{1}{s + a}</td></tr>
+      <tr><td class="math tex">1(t)\text{单位阶跃}</td><td class="math tex">\dfrac{1}{s}</td><td class="math tex">t</td><td class="math tex">\dfrac{1}{s^{2}}</td></tr>
+      <tr><td class="math tex">t^{n}</td><td class="math tex">\dfrac{n!}{s^{n+1}}</td><td class="math tex">\dfrac{t^{2}}{2!}</td><td class="math tex">\dfrac{1}{s^{3}}</td></tr>
+      <tr><td class="math tex">\sin \omega t</td><td class="math tex">\dfrac{\omega }{s^{2} + \omega ^{2}}</td><td class="math tex">\cos \omega t</td><td class="math tex">\dfrac{s}{s^{2} + \omega ^{2}}</td></tr>
+    </table>
+  </div>
+  <div class="act-note">
+    <svg class="ico" viewBox="0 0 48 48"><path d="M8 36 L20 24 L28 30 L42 12" fill="none" stroke="#1D3FA0" stroke-width="3"/><path d="M42 12 h-8 M42 12 v8" stroke="#F5821F" stroke-width="3" fill="none"/></svg>
+    <span><span class="lead">思想：</span>拉氏变换把「微分方程」变成「代数方程」求解，是经典控制理论的基本工具。</span>
+  </div>
+</div></div>
+</body>
+</html>

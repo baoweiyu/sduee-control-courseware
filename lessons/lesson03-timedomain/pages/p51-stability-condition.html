@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>稳定的充分必要条件</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<link rel="stylesheet" href="../lesson03-svg.css">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:24px; height:100%; }
+  .solc { flex:1.05; }
+  .solc .bd { font-size:22px; line-height:1.8; display:flex; flex-direction:column; justify-content:center; gap:15px; }
+  .condc { flex:1; display:flex; flex-direction:column; overflow:hidden; }
+  .condc .bd { flex:1; display:flex; flex-direction:column; gap:14px; padding:18px 22px; min-height:0; }
+  .cond { background:#FDF3EC; border:2px solid var(--orange); border-radius:14px; padding:14px 22px; font-size:23px; color:var(--navy); line-height:1.65; text-align:center; flex:none; }
+  .planec { flex:1; display:grid; place-items:center; background:var(--sky); border-radius:14px; border:2px solid var(--line); min-height:0; padding:8px; }
+  .planec svg { width:100%; height:100%; }
+  .ind { flex:none; font-size:21.5px; color:var(--ink); background:#fff; border:2px solid var(--line); border-radius:12px; padding:12px 20px; line-height:1.6; text-align:center; }
+</style>
+</head>
+<body data-title="稳定的充分必要条件" data-page="54 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="row">
+      <div class="act-card solc">
+        <div class="hd">暂态分量 c₁(t) 的一般结构</div>
+        <div class="bd">
+          <span><b>① 无重根时</b>（r 个实根 + q 对共轭复根），通解为</span>
+          <div class="mathbox math eqline tex tex-d" style="font-size:25px">c_{1}(t)=\sum_{i=1}^{r}A_{i}e^{s_{i}t}+\sum_{k=1}^{q}B_{k}e^{\sigma_{k}t}\sin(\omega_{k}t+\varphi_{k})</div>
+          <span><b>② 有重根时</b>，如 l 重根 s<sub>j</sub>，则出现</span>
+          <div class="mathbox math eqline tex tex-d" style="font-size:25px">e^{s_{j}t},\;\; t\,e^{s_{j}t},\;\; \cdots,\;\; t^{\,l-1}e^{s_{j}t}</div>
+          <span>每一项都含有指数因子 <span class="tex" style="font-size:23px">e^{\mathrm{Re}(s_{i})\,t}</span> —— 只有<span class="kw-r">全部根的实部为负</span>，c₁(t) 才收敛到零；只要有一个根实部为正，对应项必然发散。</span>
+        </div>
+      </div>
+      <div class="act-card condc">
+        <div class="hd">充要条件与 s 平面图景</div>
+        <div class="bd">
+          <div class="cond">线性定常系统稳定的<span class="kw-r">充要条件</span>：<br>全部特征根的实部均为负，即所有根位于 <span class="kw-r">s 左半平面</span></div>
+          <div class="planec"><svg id="plane" viewBox="0 0 560 330"></svg></div>
+          <div class="ind">不必求出根的具体值，只要能判断"实部是否全负"即可 —— 这就是<span class="kw-r">间接方法</span>（代数判据）的思想。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("plane");
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const tx = (x, y, s, o) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 19, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal" }); n.textContent = s; return n; };
+  const OX = 300, OY = 170, SC = 42;
+  mk("rect", { x: 55, y: 22, width: OX - 55, height: 296, fill: "#EAF6EE" });
+  const defs = mk("defs", {});
+  const m1 = mk("marker", { id: "a51", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, m1);
+  mk("line", { x1: 55, y1: OY, x2: 545, y2: OY, stroke: "#5B6B8C", "stroke-width": 1.8, "marker-end": "url(#a51)" });
+  mk("line", { x1: OX, y1: 318, x2: OX, y2: 22, stroke: "#5B6B8C", "stroke-width": 1.8, "marker-end": "url(#a51)" });
+  tx(550, OY + 6, "σ", { fs: 21, an: "end", it: true, b: true });
+  tx(OX + 14, 34, "jω", { fs: 21, an: "start", it: true, b: true });
+  tx(OX - 12, OY + 22, "O", { fs: 17, fill: "#5B6B8C", an: "end" });
+  tx(170, 52, "左半平面：稳定区", { fs: 20, b: true, fill: "#1E9E57" });
+  tx(440, 52, "右半平面", { fs: 20, b: true, fill: "#D63A2F" });
+  function cross(s, w, color) {
+    const x = OX + s * SC, y = OY - w * SC;
+    mk("line", { x1: x - 9, y1: y - 9, x2: x + 9, y2: y + 9, stroke: color, "stroke-width": 4.5, "stroke-linecap": "round" });
+    mk("line", { x1: x - 9, y1: y + 9, x2: x + 9, y2: y - 9, stroke: color, "stroke-width": 4.5, "stroke-linecap": "round" });
+  }
+  cross(-2.2, 1.6, "#2B5CE6"); cross(-2.2, -1.6, "#2B5CE6"); cross(-3.6, 0, "#2B5CE6"); cross(-1.1, 0.7, "#2B5CE6"); cross(-1.1, -0.7, "#2B5CE6");
+  cross(1.4, 1.0, "#D63A2F"); cross(1.4, -1.0, "#D63A2F");
+  tx(OX + 1.4 * SC, OY - 1.0 * SC - 20, "× 不允许", { fs: 17, b: true, fill: "#D63A2F" });
+});
+</script>
+</body>
+</html>

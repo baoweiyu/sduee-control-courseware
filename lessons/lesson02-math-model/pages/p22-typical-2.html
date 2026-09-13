@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>典型环节：积分与振荡</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .cols { display:flex; gap:26px; height:640px; margin-top:4px; }
+  .cc { flex:1; display:flex; flex-direction:column; }
+  .cc .bd2 { flex:1; padding:20px 26px; display:flex; flex-direction:column; gap:14px; justify-content:center; }
+  .math { font-size:24px; color:var(--ink); }
+  .cap { font-size:19px; color:var(--muted); text-align:center; }
+</style>
+</head>
+<body data-title="典型环节（二）" data-page="22 / 51">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="cols">
+      <div class="act-card cc">
+        <div class="hd">3、积分环节</div>
+        <div class="bd2">
+          <div class="math tex tex-d">c(t) = K\int r(t)dt</div>
+          <div class="math tex tex-d" style="background:var(--sky);border-radius:12px;padding:14px 18px">G(s) = \dfrac{C(s)}{R(s)} = \color{#D63A2F}{\dfrac{K}{s}}</div>
+          <div class="math tex tex-d" style="font-size:21px">\text{单位阶跃：}c(t) = K\cdot t\text{，}t \ge 0</div>
+          <svg viewBox="0 0 400 200" width="92%">
+            <defs><marker id="ax22a" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#8B93B8"/></marker></defs>
+            <line x1="40" y1="170" x2="390" y2="170" stroke="#8B93B8" stroke-width="2" marker-end="url(#ax22a)"/>
+            <line x1="40" y1="170" x2="40" y2="12" stroke="#8B93B8" stroke-width="2" marker-end="url(#ax22a)"/>
+            <path d="M46 170 L46 108 L386 108" fill="none" stroke="#4A7BD6" stroke-width="2.5" stroke-dasharray="7 5"/>
+            <line x1="40" y1="170" x2="352" y2="34" stroke="#F5821F" stroke-width="3.5"/>
+            <text x="64" y="96" font-size="16.5" fill="#4A7BD6">r(t) = 1(t)</text>
+            <text x="160" y="140" font-size="17" fill="#F5821F">c(t) = K·t</text>
+            <text x="10" y="38" font-size="16" fill="#8B93B8">c(t)</text>
+            <text x="24" y="188" font-size="15" fill="#8B93B8">0</text>
+            <text x="372" y="198" font-size="16" fill="#8B93B8">t</text>
+          </svg>
+          <div class="cap">输出随时间线性增长（斜坡）</div>
+        </div>
+      </div>
+      <div class="act-card cc">
+        <div class="hd">4、振荡环节</div>
+        <div class="bd2">
+          <div class="math tex tex-d" style="font-size:22px">T^{2}\dfrac{d^{2}c(t)}{dt^{2}} + 2\zeta T\dfrac{dc(t)}{dt} + c(t) = K\cdot r(t)</div>
+          <div class="math tex tex-d" style="background:var(--sky);border-radius:12px;padding:12px 18px;font-size:22px">G(s) = \color{#D63A2F}{\dfrac{K}{T^{2}s^{2} + 2\zeta Ts + 1}} = \dfrac{K\omega _{n}^{2}}{s^{2} + 2\zeta \omega _{n}s + \omega _{n}^{2}}</div>
+          <div class="math tex tex-d" style="font-size:20.5px">\text{极点：}p_{1,2} = -\zeta \omega _{n} \pm j\omega _{n}\sqrt{1-\zeta ^{2}}\text{，}0 \le \zeta < 1\text{，}T = 1/\omega _{n}</div>
+          <svg viewBox="0 0 400 200" width="92%">
+            <defs><marker id="ax22b" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#8B93B8"/></marker></defs>
+            <line x1="55" y1="120" x2="386" y2="120" stroke="#B9C2DC" stroke-width="1.5" stroke-dasharray="6 5"/>
+            <line x1="55" y1="185" x2="390" y2="185" stroke="#8B93B8" stroke-width="2" marker-end="url(#ax22b)"/>
+            <line x1="55" y1="185" x2="55" y2="10" stroke="#8B93B8" stroke-width="2" marker-end="url(#ax22b)"/>
+            <path d="M60,58.0 L68,63.2 L76,68.0 L84,72.4 L92,76.4 L100,80.1 L108,83.4 L116,86.5 L124,89.3 L132,91.9 L140,94.3 L148,96.4 L156,98.4 L164,100.3 L172,101.9 L180,103.4 L188,104.8 L196,106.1 L204,107.3 L212,108.4 L220,109.3 L228,110.2 L236,111.1 L244,111.8 L252,112.5 L260,113.1 L268,113.7 L276,114.2 L284,114.7 L292,115.2 L300,115.6 L308,115.9 L316,116.3 L324,116.6 L332,116.9 L340,117.2 L348,117.4 L356,117.6 L364,117.8 L372,118.0 L380,118.2" fill="none" stroke="#C9D8F2" stroke-width="1.5"/>
+            <path d="M60,182.0 L68,176.8 L76,172.0 L84,167.6 L92,163.6 L100,159.9 L108,156.6 L116,153.5 L124,150.7 L132,148.1 L140,145.7 L148,143.6 L156,141.6 L164,139.7 L172,138.1 L180,136.6 L188,135.2 L196,133.9 L204,132.7 L212,131.6 L220,130.7 L228,129.8 L236,128.9 L244,128.2 L252,127.5 L260,126.9 L268,126.3 L276,125.8 L284,125.3 L292,124.8 L300,124.4 L308,124.1 L316,123.7 L324,123.4 L332,123.1 L340,122.8 L348,122.6 L356,122.4 L364,122.2 L372,122.0 L380,121.8" fill="none" stroke="#C9D8F2" stroke-width="1.5"/>
+            <path d="M60,182.0 L64,176.4 L68,165.9 L72,151.9 L76,136.1 L80,120.0 L84,105.3 L88,93.2 L92,84.7 L96,80.3 L100,80.1 L104,83.7 L108,90.4 L112,99.4 L116,109.7 L120,120.0 L124,129.5 L128,137.2 L132,142.7 L136,145.6 L140,145.7 L144,143.4 L148,139.1 L152,133.2 L156,126.7 L160,120.0 L164,113.9 L168,108.9 L172,105.4 L176,103.5 L180,103.4 L184,104.9 L188,107.7 L192,111.5 L196,115.7 L200,120.0 L204,123.9 L208,127.2 L212,129.4 L216,130.6 L220,130.7 L224,129.7 L228,127.9 L232,125.5 L236,122.8 L240,120.0 L244,117.5 L248,115.4 L252,113.9 L256,113.2 L260,113.1 L264,113.7 L268,114.9 L272,116.5 L276,118.2 L280,120.0 L284,121.6 L288,123.0 L292,123.9 L296,124.4 L300,124.4 L304,124.0 L308,123.3 L312,122.3 L316,121.1 L320,120.0 L324,119.0 L328,118.1 L332,117.5 L336,117.2 L340,117.2 L344,117.4 L348,117.9 L352,118.5 L356,119.3 L360,120.0 L364,120.7 L368,121.2 L372,121.6 L376,121.8 L380,121.8" fill="none" stroke="#F5821F" stroke-width="3"/>
+            <text x="296" y="105" font-size="16.5" fill="#8B93B8">c(∞) = K</text>
+            <text x="27" y="38" font-size="16" fill="#8B93B8">c(t)</text>
+            <text x="41" y="198" font-size="15" fill="#8B93B8">0</text>
+            <text x="368" y="178" font-size="16" fill="#8B93B8">t</text>
+          </svg>
+          <div class="cap">单位阶跃下呈衰减振荡，最终趋稳</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>4.2 二阶系统：相角裕度 γ 与阻尼比 ζ</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:22px; height:100%; min-height:0; }
+  .lst { flex:1.05; display:flex; flex-direction:column; justify-content:space-evenly; gap:12px; min-height:0; }
+  .seg { background:#fff; border:2px solid var(--line); border-radius:13px; padding:9px 15px; font-size:17.5px; line-height:1.5; }
+  .seg b { color:var(--navy); }
+  .seg .mathbox { font-size:18.5px; padding:5px 11px; }
+  .seg .no { display:inline-grid; place-items:center; width:26px; height:26px; border-radius:50%; background:var(--blue); color:#fff; font-weight:800; font-size:15px; margin-right:6px; }
+  .res { background:#FFF3E8; border-left:5px solid var(--orange); }
+  .figc { flex:1; display:flex; flex-direction:column; overflow:hidden; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:6px 12px; min-height:0; }
+  .figc svg { width:100%; height:100%; }
+</style>
+</head>
+<body data-title="4.2 二阶系统：相角裕度 γ 与阻尼比 ζ" data-page="80 / 87">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lst">
+        <div class="seg" data-step="1"><span class="no">1</span><b>典型二阶系统的开环</b>：
+          <div class="mathbox math eqline tex tex-d">G(j\omega)=\dfrac{\omega_n^{2}}{j\omega\left(j\omega+2\zeta\omega_n\right)}</div>
+        </div>
+        <div class="seg" data-step="2"><span class="no">2</span><b>由 |G(jωc)|=1 求截止频率</b>：
+          <div class="mathbox math eqline tex tex-d">\omega_c=\omega_n\sqrt{\sqrt{1+4\zeta^{4}}-2\zeta^{2}}</div>
+        </div>
+        <div class="seg" data-step="3"><span class="no">3</span><b>代入 γ=180°+φ(ωc) 得</b>：
+          <div class="mathbox math eqline tex tex-d">\gamma=\operatorname{arctg}\dfrac{2\zeta\omega_n}{\omega_c}=\operatorname{arctg}\dfrac{2\zeta}{\sqrt{\sqrt{1+4\zeta^{4}}-2\zeta^{2}}}</div>
+        </div>
+        <div class="seg res" data-step="4"><span class="no">4</span><b>结论</b>：二阶系统的 <span class="kw-r">γ 只与 ζ 有关</span>（与 ωn 无关）：γ↑ → ζ↑ → <b>σ%↓</b>。γ 与 ζ 一一对应，工程上希望 <b>30°≤γ≤70°</b>，常用近似 <span class="tex">\gamma\approx 100\zeta\ (\gamma\text{ 以度计},\ \zeta\le 0.6)</span>。
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd">γ—ζ 关系曲线（二阶系统）</div>
+        <div class="bd2"><svg id="fig" viewBox="0 0 760 640"></svg></div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">意义</span><span>对二阶系统，<span class="kw-r">频域指标 γ 与时域指标 ζ（σ%）可以互相换算</span>——频域设计不再是「黑箱」，而是与时域要求直接挂钩。</span></div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("fig");
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const MF = "Cambria Math,STIX Two Math,Georgia,Microsoft YaHei,sans-serif";
+  const SUB = (n, s) => { const esc = t => t.replace(/&/g, "&amp;").replace(/</g, "&lt;"); let html = "", sub = false; for (const p of String(s).split(/(_\{[^}]*\})/)) { if (!p) continue; if (p.startsWith("_{")) { html += '<tspan' + (sub ? '' : ' dy="6"') + ' font-size="72%">' + esc(p.slice(2, -1)) + '</tspan>'; sub = true; } else { html += sub ? '<tspan dy="-6">' + esc(p) + '</tspan>' : esc(p); sub = false; } } n.innerHTML = html; };
+  const tx = (x, y, s, o) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 17.5, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal" , "font-family": MF }); SUB(n, s); if (o && o.halo) n.setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:6;stroke-linejoin:round"); return n; };
+  const defs = mk("defs", {});
+  const m1 = mk("marker", { id: "a75", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, m1);
+  const x0 = 100, x1 = 712, y0 = 552, y1 = 64;   // ζ ∈ [0, 1.2], γ ∈ [0, 100°]
+  const X = z => x0 + z / 1.2 * (x1 - x0);
+  const Y = g => y0 - g / 100 * (y0 - y1);
+  const gam = z => Math.atan2(2 * z, Math.sqrt(Math.sqrt(1 + 4 * z ** 4) - 2 * z * z)) * 180 / Math.PI;
+  // 坐标轴与网格
+  mk("line", { x1: x0, y1: y0, x2: x1 + 16, y2: y0, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a75)" });
+  mk("line", { x1: x0, y1: y0, x2: x0, y2: y1 - 14, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a75)" });
+  for (let z = 0; z <= 1.21; z += 0.2) { mk("line", { x1: X(z), y1: y0, x2: X(z), y2: y1, stroke: "#F0F4FC", "stroke-width": 1 }); tx(X(z), y0 + 26, z.toFixed(1), { fs: 17.5, fill: "#5B6B8C" }); }
+  for (let g = 0; g <= 100; g += 20) { mk("line", { x1: x0, y1: Y(g), x2: x1, y2: Y(g), stroke: "#F0F4FC", "stroke-width": 1 }); tx(x0 - 12, Y(g) + 5, g + "°", { fs: 17.5, fill: "#5B6B8C", an: "end" }); }
+  tx(x1 + 8, y0 + 6, "ζ", { fs: 19, it: true, b: true, fill: "#5B6B8C", an: "start" });
+  tx(x0 - 12, y1 - 20, "γ", { fs: 19, it: true, b: true, fill: "#1B3B8B", an: "end" });
+  // 工程推荐区 30°~70°
+  mk("rect", { x: x0, y: Y(70), width: x1 - x0, height: Y(30) - Y(70), fill: "rgba(30,158,87,0.09)" });
+  tx(X(1.02), Y(52), "工程推荐 30°~70°", { fs: 17.5, b: true, fill: "#1E9E57" });
+  // 精确曲线
+  let d = "";
+  for (let i = 0; i <= 240; i++) { const z = 1.2 * i / 240; d += (i ? "L" : "M") + X(z).toFixed(1) + "," + Y(gam(z)).toFixed(1); }
+  mk("path", { d, stroke: "#2B5CE6", "stroke-width": 3.8, fill: "none" });
+  tx(X(0.62), Y(gam(0.62)) + 34, "精确曲线", { fs: 17.5, b: true, fill: "#2B5CE6" });
+  // 近似 γ=100ζ（ζ≤0.6）
+  let d2 = "";
+  for (let i = 0; i <= 60; i++) { const z = 0.6 * i / 60; d2 += (i ? "L" : "M") + X(z).toFixed(1) + "," + Y(100 * z).toFixed(1); }
+  mk("path", { d: d2, stroke: "#F5821F", "stroke-width": 2.6, fill: "none", "stroke-dasharray": "9 6" });
+  tx(170, 505, "近似 γ≈100ζ", { fs: 17.5, b: true, fill: "#F5821F", an: "start" }).setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:5");
+  // 特征点标注
+  [[0.4, "ζ=0.4 → γ≈43°", "L"], [0.707, "ζ=0.707 → γ≈65.5°", "RB"]].forEach(([z, lab, pos]) => {
+    const g = gam(z);
+    mk("line", { x1: X(z), y1: y0, x2: X(z), y2: Y(g), stroke: "#1D3FA0", "stroke-width": 1.4, "stroke-dasharray": "6 5" });
+    mk("line", { x1: x0, y1: Y(g), x2: X(z), y2: Y(g), stroke: "#1D3FA0", "stroke-width": 1.4, "stroke-dasharray": "6 5" });
+    mk("circle", { cx: X(z), cy: Y(g), r: 7, fill: "#D63A2F" });
+    if (pos === "L") tx(X(z) - 14, Y(g) - 24, lab, { fs: 17.5, b: true, fill: "#D63A2F", an: "end" }).setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:5");
+    else tx(X(z) + 14, Y(g) + 30, lab, { fs: 17.5, b: true, fill: "#D63A2F", an: "start" }).setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:5");
+  });
+});
+</script>
+</body>
+</html>

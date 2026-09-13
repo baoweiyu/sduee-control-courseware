@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>系统类型（按稳态误差分类）</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:24px; height:100%; }
+  .typc { flex:1.05; display:flex; flex-direction:column; }
+  .typc .bd { flex:1; font-size:22px; line-height:1.8; display:flex; flex-direction:column; justify-content:center; gap:15px; }
+  .essc { flex:0.95; display:flex; flex-direction:column; }
+  .essc .bd { flex:1; font-size:22px; line-height:1.8; display:flex; flex-direction:column; justify-content:center; gap:16px; }
+  .hl { background:var(--sky); border-radius:12px; padding:12px 16px; }
+  .typetab { border-collapse:collapse; width:100%; }
+  .typetab th, .typetab td { border:2px solid var(--line); padding:10px 6px; font-size:21px; text-align:center; }
+  .typetab th { background:var(--navy); color:#fff; font-weight:700; font-size:19.5px; }
+  .typetab td.hlcell { background:#FDF3EC; font-weight:800; color:var(--navy); }
+  .note2 { background:#F4F7FF; border-left:5px solid var(--navy); border-radius:0 10px 10px 0; padding:11px 16px; font-size:20.5px; line-height:1.65; }
+</style>
+</head>
+<body data-title="系统类型" data-page="73 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="row">
+      <div class="act-card typc">
+        <div class="hd">二、系统类型</div>
+        <div class="bd">
+          <span>设系统开环传递函数为</span>
+          <div class="hl"><span class="tex tex-d" style="font-size:20.5px">G(s)H(s)=\frac{K(\tau_{1}s+1)(\tau_{2}s+1)\cdots(\tau_{m}s+1)}{s^{\nu}(T_{1}s+1)(T_{2}s+1)\cdots(T_{n-\nu}s+1)}</span></div>
+          <span>研究稳态误差时，按开环传递函数中<span class="kw-r">积分环节的个数 ν</span> 分类：</span>
+          <table class="typetab">
+            <tr><th>积分环节数 ν</th><th>0</th><th>1</th><th>2</th></tr>
+            <tr><td><b>系统型别</b></td><td class="hlcell">0 型</td><td class="hlcell">1 型</td><td class="hlcell">2 型</td></tr>
+          </table>
+          <div class="note2">ν 每增加 1，系统的<b>无差度</b>提高一阶 —— 但积分环节增多会<b>降低稳定性</b>，实际系统一般不超过 2 型。</div>
+        </div>
+      </div>
+      <div class="act-card essc">
+        <div class="hd">稳态误差的一般表达式</div>
+        <div class="bd">
+          <span>当 <span class="tex">s\to 0</span> 时各一阶因子 <span class="tex">(\tau s+1)\to 1</span>，<span class="tex">(Ts+1)\to 1</span>，故 <span class="tex">G(s)H(s)\to K/s^{\nu}</span>，于是</span>
+          <div class="hl"><span class="tex tex-d" style="font-size:23px">e_{ss}=\lim_{s\to 0}\frac{sR(s)}{1+G(s)H(s)}=\lim_{s\to 0}\frac{s^{\nu+1}R(s)}{s^{\nu}+K}</span></div>
+          <span>可见影响稳态误差的因素有<b>三个</b>：</span>
+          <span>① 开环增益 <span class="tex">K</span>；<br>② 输入信号的形式与幅值 <span class="tex">R(s)</span>；<br>③ 积分环节数目 <span class="tex">\nu</span>（系统型别）。</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+</body>
+</html>

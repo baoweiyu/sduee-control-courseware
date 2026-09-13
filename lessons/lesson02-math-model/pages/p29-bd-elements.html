@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>方框图的组成</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .def { display:flex; gap:14px; align-items:center; background:var(--sky);
+         border-radius:14px; padding:16px 22px; font-size:23px; color:var(--ink); margin-bottom:18px; }
+  .def b { color:var(--blue); }
+  .grid4 { display:grid; grid-template-columns:repeat(4,1fr); gap:18px; height:400px; }
+  .el { display:flex; flex-direction:column; }
+  .el .bd2 { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; padding:12px; }
+  .el .nm { font-size:22px; font-weight:700; color:var(--blue); }
+  .el .ds { font-size:18.5px; color:var(--muted); text-align:center; line-height:1.45; }
+</style>
+</head>
+<body data-title="方框图的组成（4 要素）" data-page="29 / 51">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="def">
+      <div style="font-size:30px">📐</div>
+      <div><b>定义：</b>由具有一定函数关系的<span class="kw-r">环节</span>组成、且标有<span class="kw-r">信号流向</span>的图，称为方框图。方框图由以下 4 个要素组成：</div>
+    </div>
+    <div class="grid4">
+      <div class="act-card el">
+        <div class="bd2">
+          <svg viewBox="0 0 200 110" width="88%">
+            <defs><marker id="m1" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#1D3FA0"/></marker></defs>
+            <rect x="62" y="28" width="76" height="54" rx="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.5"/>
+            <text x="100" y="61" text-anchor="middle" font-size="21" fill="#1B3B8B" font-style="italic">G(s)</text>
+            <line x1="10" y1="55" x2="56" y2="55" stroke="#1D3FA0" stroke-width="2.5" marker-end="url(#m1)"/>
+            <line x1="144" y1="55" x2="192" y2="55" stroke="#1D3FA0" stroke-width="2.5" marker-end="url(#m1)"/>
+          </svg>
+          <div class="nm">① 方框（环节）</div>
+          <div class="ds">代表系统中的一个环节，框内写该环节的传递函数</div>
+        </div>
+      </div>
+      <div class="act-card el">
+        <div class="bd2">
+          <svg viewBox="0 0 200 110" width="88%">
+            <defs><marker id="m2" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#1D3FA0"/></marker></defs>
+            <line x1="14" y1="55" x2="182" y2="55" stroke="#1D3FA0" stroke-width="2.5" marker-end="url(#m2)"/>
+            <text x="98" y="42" text-anchor="middle" font-size="20" fill="#1B3B8B" font-style="italic">X(s)</text>
+          </svg>
+          <div class="nm">② 信号线</div>
+          <div class="ds">带箭头的线段，箭头表示信号传递方向，线上标注信号</div>
+        </div>
+      </div>
+      <div class="act-card el">
+        <div class="bd2">
+          <svg viewBox="0 0 200 110" width="88%">
+            <defs><marker id="m3" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#1D3FA0"/></marker></defs>
+            <circle cx="96" cy="55" r="16" fill="#fff" stroke="#1D3FA0" stroke-width="2.5"/>
+            <line x1="88" y1="47" x2="104" y2="63" stroke="#1D3FA0" stroke-width="1.8"/>
+            <line x1="104" y1="47" x2="88" y2="63" stroke="#1D3FA0" stroke-width="1.8"/>
+            <line x1="14" y1="55" x2="76" y2="55" stroke="#1D3FA0" stroke-width="2.5" marker-end="url(#m3)"/>
+            <line x1="96" y1="10" x2="96" y2="35" stroke="#1D3FA0" stroke-width="2.5" marker-end="url(#m3)"/>
+            <line x1="116" y1="55" x2="186" y2="55" stroke="#1D3FA0" stroke-width="2.5" marker-end="url(#m3)"/>
+            <text x="66" y="46" font-size="17" fill="#D63A2F">+</text>
+            <text x="106" y="30" font-size="17" fill="#D63A2F">−</text>
+            <text x="30" y="44" font-size="16" fill="#1B3B8B" font-style="italic">X₁</text>
+            <text x="104" y="12" font-size="16" fill="#1B3B8B" font-style="italic">X₂</text>
+            <text x="136" y="44" font-size="16" fill="#1B3B8B" font-style="italic">X₁−X₂</text>
+          </svg>
+          <div class="nm">③ 相加点（比较点）</div>
+          <div class="ds">对两个以上信号进行加减运算，"<span style="color:#D63A2F">+</span> / <span style="color:#D63A2F">−</span>"标在信号进入侧</div>
+        </div>
+      </div>
+      <div class="act-card el">
+        <div class="bd2">
+          <svg viewBox="0 0 200 110" width="88%">
+            <defs><marker id="m4" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#1D3FA0"/></marker></defs>
+            <line x1="14" y1="55" x2="90" y2="55" stroke="#1D3FA0" stroke-width="2.5"/>
+            <circle cx="94" cy="55" r="4.5" fill="#1D3FA0"/>
+            <line x1="94" y1="55" x2="180" y2="55" stroke="#1D3FA0" stroke-width="2.5" marker-end="url(#m4)"/>
+            <line x1="94" y1="55" x2="94" y2="92" stroke="#1D3FA0" stroke-width="2.5"/>
+            <line x1="94" y1="92" x2="170" y2="92" stroke="#1D3FA0" stroke-width="2.5" marker-end="url(#m4)"/>
+            <text x="30" y="44" font-size="16" fill="#1B3B8B" font-style="italic">X</text>
+            <text x="140" y="44" font-size="16" fill="#1B3B8B" font-style="italic">X</text>
+            <text x="136" y="108" font-size="16" fill="#1B3B8B" font-style="italic">X</text>
+          </svg>
+          <div class="nm">④ 分支点（引出点）</div>
+          <div class="ds">同一信号分两路（或多路）取出，各路信号相同</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note">强调两个易混点：相加点做"运算"（信号代数和），分支点只是"取出"（信号不变）；± 号标在对应信号箭头进入圆圈的一侧。</div>
+</div></div>
+</body>
+</html>

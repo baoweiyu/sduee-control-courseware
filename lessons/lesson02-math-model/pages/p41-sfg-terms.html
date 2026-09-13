@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>信号流图常用术语</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .demo { background:var(--sky); border-radius:12px; padding:2px 10px 6px; margin-bottom:12px; text-align:center; }
+  .grid4 { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; height:392px; }
+  .gp { display:flex; flex-direction:column; }
+  .gp .bd2 { flex:1; padding:12px 14px; display:flex; flex-direction:column; gap:9px; }
+  .tm { background:var(--sky); border-radius:10px; padding:7px 12px; }
+  .tm .n { font-size:19px; font-weight:800; color:var(--blue); }
+  .tm .d { font-size:16.5px; color:var(--muted); line-height:1.35; margin-top:2px; }
+  .tm.hot { background:#FDF0EF; }
+  .tm.hot .n { color:var(--red); }
+</style>
+</head>
+<body data-title="信号流图常用术语" data-page="41 / 51">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="demo">
+      <svg viewBox="0 0 1100 150" width="92%" height="132">
+        <g font-size="16" fill="#1B3B8B" font-style="italic">
+          <circle cx="60" cy="75" r="7" fill="#FDF0EF" stroke="#D63A2F" stroke-width="3"/>
+          <circle cx="300" cy="75" r="7" fill="#fff" stroke="#1D3FA0" stroke-width="2.5"/>
+          <circle cx="540" cy="75" r="7" fill="#fff" stroke="#1D3FA0" stroke-width="2.5"/>
+          <circle cx="780" cy="75" r="7" fill="#fff" stroke="#1D3FA0" stroke-width="2.5"/>
+          <circle cx="1020" cy="75" r="7" fill="#FDF0EF" stroke="#D63A2F" stroke-width="3"/>
+          <text x="48" y="52">x₀</text><text x="288" y="52">x₁</text><text x="528" y="52">x₂</text><text x="768" y="52">x₃</text><text x="1008" y="52">x₄</text>
+        </g>
+        <g stroke="#1D3FA0" stroke-width="2.5" fill="none">
+          <line x1="67" y1="75" x2="293" y2="75"/><line x1="307" y1="75" x2="533" y2="75"/>
+          <line x1="547" y1="75" x2="773" y2="75"/><line x1="787" y1="75" x2="1013" y2="75"/>
+          <path d="M 540 68 Q 420 -8 306 62" stroke="#D63A2F"/>
+        </g>
+        <g fill="#1D3FA0">
+          <path d="M-5,-4.5 L7,0 L-5,4.5 Z" transform="translate(180,75)"/>
+          <path d="M-5,-4.5 L7,0 L-5,4.5 Z" transform="translate(420,75)"/>
+          <path d="M-5,-4.5 L7,0 L-5,4.5 Z" transform="translate(660,75)"/>
+          <path d="M-5,-4.5 L7,0 L-5,4.5 Z" transform="translate(900,75)"/>
+          <path d="M-5,-4.5 L7,0 L-5,4.5 Z" transform="translate(421,28) rotate(181)" fill="#D63A2F"/>
+        </g>
+        <g font-size="16" font-style="italic">
+          <text x="170" y="62" fill="#1B3B8B">a</text><text x="410" y="62" fill="#1B3B8B">b</text>
+          <text x="650" y="62" fill="#1B3B8B">c</text><text x="890" y="62" fill="#1B3B8B">d</text>
+          <text x="408" y="18" fill="#D63A2F">e（回环支路）</text>
+        </g>
+        <g font-size="15.5" fill="#8B93B8">
+          <text x="30" y="112">源节点</text><text x="270" y="112">混合节点</text><text x="985" y="112">汇节点</text>
+          <text x="640" y="112">支路（标传输）</text>
+        </g>
+      </svg>
+    </div>
+    <div class="grid4">
+      <div class="act-card gp" data-step="1"><div class="bd2">
+        <div class="tm"><div class="n">源节点</div><div class="d">只有出支路的节点 = 输入节点</div></div>
+        <div class="tm"><div class="n">汇节点</div><div class="d">只有入支路的节点 = 输出节点</div></div>
+        <div class="tm"><div class="n">混合节点</div><div class="d">既有入支路又有出支路（变量代数和）</div></div>
+      </div></div>
+      <div class="act-card gp" data-step="2"><div class="bd2">
+        <div class="tm"><div class="n">出支路</div><div class="d">离开节点的支路</div></div>
+        <div class="tm"><div class="n">入支路</div><div class="d">指向节点的支路</div></div>
+        <div class="tm"><div class="n">通道（路径）</div><div class="d">沿支路箭头方向依次经过的路径</div></div>
+      </div></div>
+      <div class="act-card gp" data-step="3"><div class="bd2">
+        <div class="tm"><div class="n">开通道</div><div class="d">通道中每个节点只经过一次</div></div>
+        <div class="tm hot"><div class="n">前向通道</div><div class="d">从源节点到汇节点的开通道</div></div>
+        <div class="tm hot"><div class="n">闭通道（回环）</div><div class="d">起点与终点为同一节点的通道；只经过一个节点的称自回环</div></div>
+      </div></div>
+      <div class="act-card gp" data-step="4"><div class="bd2">
+        <div class="tm hot"><div class="n">互不接触回环</div><div class="d">没有公共节点和支路的回环</div></div>
+        <div class="tm"><div class="n">通道传输（增益）</div><div class="d">通道上各支路传输的乘积</div></div>
+        <div class="tm"><div class="n">回环传输（增益）</div><div class="d">闭通道中各支路传输的乘积</div></div>
+      </div></div>
+    </div>
+  </div>
+  <div class="act-note">这些术语是梅逊公式的"词汇表"——前向通道、回环、互不接触回环（红卡）是重中之重。</div>
+</div></div>
+</body>
+</html>

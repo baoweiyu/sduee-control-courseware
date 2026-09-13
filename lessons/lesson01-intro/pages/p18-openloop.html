@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>开环控制</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .def { background:#fff; border:2px solid var(--line); border-left:12px solid var(--blue); border-radius:16px; padding:36px 42px; font-size:31px; line-height:1.9; color:var(--ink); margin:8px 0 36px; }
+  .def b { color:var(--navy); }
+  .row { display:flex; gap:28px; }
+  .pc { flex:1; padding:32px 36px; }
+  .pc h4 { font-size:27px; margin-bottom:16px; }
+  .adv h4 { color:var(--blue); } .dis h4 { color:#D63A2F; }
+  .pc ul { list-style:none; font-size:26px; line-height:2.1; color:var(--ink); }
+  .pc li::before { content:"●"; margin-right:10px; font-size:17px; vertical-align:2px; }
+  .adv li::before { color:var(--blue); } .dis li::before { color:#D63A2F; }
+  .ex { margin-top:34px; font-size:25px; color:var(--navy); background:var(--sky); border-radius:12px; padding:22px 30px; }
+</style>
+</head>
+<body data-title="1、开环控制" data-page="18 / 35">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body fill">
+    <div class="def"><b>定义：</b>如果系统的<span class="kw-r">输出量不参与</span>对系统的控制，则称为<b>开环控制</b>。</div>
+    <div class="row">
+      <div class="act-card pc adv"><h4>优点</h4><ul><li>线路简单</li><li>成本低</li><li>工作稳定</li></ul></div>
+      <div class="act-card pc dis"><h4>缺点</h4><ul><li>控制精度低</li><li>无法自动补偿扰动的影响</li></ul></div>
+    </div>
+    <div class="ex"><b style="color:var(--orange)">例子：</b>直流电动机转速开环控制系统（下一页展开）。</div>
+  </div>
+</div></div>
+</body>
+</html>

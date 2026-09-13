@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>1.5 典型环节极坐标图一览</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .wrap { height:100%; display:flex; flex-direction:column; }
+  .grpbar { flex:none; display:flex; gap:12px; padding:12px 18px 0; }
+  .gbtn { border:2px solid var(--line); background:#F6F9FF; color:var(--navy); font-size:20px; font-weight:700; border-radius:10px; padding:9px 22px; cursor:pointer; }
+  .gbtn.active { background:var(--blue); border-color:var(--blue); color:#fff; }
+  .gbtn:not(.active):hover { background:#E8F0FE; }
+  .wrap .bd { flex:1; display:flex; flex-direction:column; padding:12px 18px 4px; min-height:0; }
+  .grid4 { flex:1; display:grid; grid-template-columns:repeat(4,1fr); gap:14px; min-height:0; }
+  .card { background:var(--sky); border:2px solid var(--line); border-radius:14px; padding:12px 14px; display:flex; flex-direction:column; align-items:center; gap:8px; min-height:0; }
+  .card .nm { font-size:22px; font-weight:800; color:var(--navy); }
+  .card .mf { font-size:21px; padding:5px 12px; background:#fff; border-radius:10px; }
+  .card .miniplot { width:100%; flex:1; min-height:0; }
+  .card .ft { font-size:17.5px; line-height:1.45; color:var(--ink); text-align:center; }
+  .card .ft b { color:var(--navy); }
+</style>
+</head>
+<body data-title="1.5 典型环节极坐标图一览" data-page="25 / 87">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="act-card wrap">
+      <div class="hd">典型环节的 Nyquist 轨迹（红●=ω=0 起点，蓝线=ω 增大方向）</div>
+      <div class="grpbar">
+        <button class="gbtn active" id="gb1">第一组：比例 · 积分 · 微分 · 惯性</button>
+        <button class="gbtn" id="gb2">第二组：一阶微分 · 振荡 · 二阶微分 · 延迟</button>
+      </div>
+      <div class="bd">
+        <div class="grid4" id="grp1">
+          <div class="card"><div class="nm">比例</div><div class="mathbox math mf eqline tex tex-d">G(s)=K</div><svg class="miniplot" id="g1" viewBox="0 0 128 96"></svg><div class="ft">轨迹退化为正实轴上一点 <b>K</b>——与 ω 无关</div></div>
+          <div class="card"><div class="nm">积分</div><div class="mathbox math mf eqline tex tex-d">G(s)=\dfrac{1}{s}</div><svg class="miniplot" id="g2" viewBox="0 0 128 96"></svg><div class="ft">沿<b>负虚轴</b>自 ∞ → 0，相角恒 −90°</div></div>
+          <div class="card"><div class="nm">微分</div><div class="mathbox math mf eqline tex tex-d">G(s)=s</div><svg class="miniplot" id="g3" viewBox="0 0 128 96"></svg><div class="ft">沿<b>正虚轴</b>自 0 → ∞，相角恒 +90°</div></div>
+          <div class="card"><div class="nm">惯性</div><div class="mathbox math mf eqline tex tex-d">G(s)=\dfrac{1}{Ts+1}</div><svg class="miniplot" id="g4" viewBox="0 0 128 96"></svg><div class="ft"><b>下半圆</b>：(1, j0) → 原点，相角 0 → −90°</div></div>
+        </div>
+        <div class="grid4" id="grp2" style="display:none">
+          <div class="card"><div class="nm">一阶微分</div><div class="mathbox math mf eqline tex tex-d">G(s)=Ts+1</div><svg class="miniplot" id="g5" viewBox="0 0 128 96"></svg><div class="ft">自 (1, j0) 沿<b>正虚轴</b>向上，相角 0 → +90°</div></div>
+          <div class="card"><div class="nm">振荡</div><div class="mathbox math mf eqline tex tex-d">G(s)=\dfrac{1}{T^{2}s^{2}+2\zeta Ts+1}</div><svg class="miniplot" id="g6" viewBox="0 0 128 96"></svg><div class="ft">起于 (1, j0)，ζ&lt;1/√2 时<b>类圆回卷</b>，相角 0 → −180°</div></div>
+          <div class="card"><div class="nm">二阶微分</div><div class="mathbox math mf eqline tex tex-d">G(s)=T^{2}s^{2}+2\zeta Ts+1</div><svg class="miniplot" id="g7" viewBox="0 0 128 96"></svg><div class="ft">振荡的<b>上半平面镜像</b>，相角 0 → +180°</div></div>
+          <div class="card"><div class="nm">延迟</div><div class="mathbox math mf eqline tex tex-d">G(s)=e^{-T_{D}s}</div><svg class="miniplot" id="g8" viewBox="0 0 128 96"></svg><div class="ft"><b>单位圆</b>顺时针无限绕行，相角 −ωT<sub>D</sub> 无界</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">记忆</span><span>抓住<span class="kw-r">起点、终点、所在象限</span>三件事：积分↔微分、惯性↔一阶微分、振荡↔二阶微分<span class="kw-r">互为倒数</span>（幅值互换、相角反号）；比例与延迟没有倒数配对。</span></div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  // 小图坐标轴（过原点，带小箭头）；Ox/Oy 为原点像素位置
+  const axes = (mk, Ox, Oy) => {
+    mk("line", { x1: 6, y1: Oy, x2: 118, y2: Oy, stroke: "#8A97B5", "stroke-width": 1.1 });
+    mk("path", { d: `M118,${Oy} l-6,-3 l0,6 Z`, fill: "#8A97B5" });
+    mk("line", { x1: Ox, y1: 92, x2: Ox, y2: 8, stroke: "#8A97B5", "stroke-width": 1.1 });
+    mk("path", { d: `M${Ox},8 l-3,6 l6,0 Z`, fill: "#8A97B5" });
+    mk("circle", { cx: Ox, cy: Oy, r: 2.2, fill: "#8A97B5" });
+  };
+  function draw(id, fn) {
+    const svg = document.getElementById(id);
+    const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+    fn(mk);
+  }
+  const dot = (mk, x, y) => mk("circle", { cx: x, cy: y, r: 4, fill: "#D63A2F" });
+  const tangentArrow = (mk, a, b, c, color) => {
+    const dx = c[0] - a[0], dy = c[1] - a[1], L = Math.hypot(dx, dy) || 1;
+    const ux = dx / L, uy = dy / L, x = b[0], y = b[1], s = 7;
+    const px = -uy, py = ux;
+    mk("path", { d: `M ${x + ux * s} ${y + uy * s} L ${x - ux * s * .6 + px * s * .6} ${y - uy * s * .6 + py * s * .6} L ${x - ux * s * .6 - px * s * .6} ${y - uy * s * .6 - py * s * .6} Z`, fill: color });
+  };
+  const fitted = (mk, pts, color) => {
+    let rMin = 1e9, rMax = -1e9, iMin = 1e9, iMax = -1e9;
+    for (const [re, im] of pts) { if (re < rMin) rMin = re; if (re > rMax) rMax = re; if (im < iMin) iMin = im; if (im > iMax) iMax = im; }
+    const m = 10, W = 128, H = 96;
+    const SC = Math.min((W - 2 * m) / Math.max(rMax - rMin, 1e-6), (H - 2 * m) / Math.max(iMax - iMin, 1e-6));
+    const O = { x: 64 - (rMin + rMax) / 2 * SC, y: 50 + (iMin + iMax) / 2 * SC };
+    const X = v => O.x + v * SC, Y = v => O.y - v * SC;
+    axes(mk, O.x, O.y);
+    let d = "";
+    for (let i = 0; i < pts.length; i++) d += (i ? "L" : "M") + X(pts[i][0]).toFixed(1) + "," + Y(pts[i][1]).toFixed(1);
+    mk("path", { d, fill: "none", stroke: color, "stroke-width": 2.6 });
+    return { pts: pts.map(([re, im]) => [X(re), Y(im)]) };
+  };
+  draw("g1", mk => { axes(mk, 64, 50); dot(mk, 96, 50); const t = mk("text", { x: 96, y: 40, "font-size": 15, "text-anchor": "middle", fill: "#D63A2F", "font-weight": 700 }); t.textContent = "K"; });
+  draw("g2", mk => { axes(mk, 64, 50); mk("line", { x1: 64, y1: 90, x2: 64, y2: 56, stroke: "#2B5CE6", "stroke-width": 2.6 }); dot(mk, 64, 90); mk("path", { d: "M60,58 l4,-9 l4,9 Z", fill: "#2B5CE6" }); });
+  draw("g3", mk => { axes(mk, 64, 50); mk("line", { x1: 64, y1: 50, x2: 64, y2: 10, stroke: "#2B5CE6", "stroke-width": 2.6 }); dot(mk, 64, 50); mk("path", { d: "M60,12 l4,-9 l4,9 Z", fill: "#2B5CE6" }); });
+  draw("g4", mk => {
+    const pts = []; for (let i = 0; i <= 200; i++) { const w = 10 * i / 200; pts.push([1 / (1 + w * w), -w / (1 + w * w)]); }
+    const { pts: sp } = fitted(mk, pts, "#2B5CE6");
+    dot(mk, sp[0][0], sp[0][1]);
+    const k = 100; tangentArrow(mk, sp[k - 2], sp[k], sp[k + 2], "#2B5CE6");
+  });
+  draw("g5", mk => { axes(mk, 64, 50); mk("line", { x1: 90, y1: 50, x2: 90, y2: 10, stroke: "#2B5CE6", "stroke-width": 2.6 }); dot(mk, 90, 50); mk("path", { d: "M86,12 l4,-9 l4,9 Z", fill: "#2B5CE6" }); });
+  draw("g6", mk => {
+    const z = 0.3, pts = [];
+    for (let i = 0; i <= 600; i++) { const w = 2 * i / 600; const dd = (1 - w * w) ** 2 + (2 * z * w) ** 2; const A = 1 / Math.sqrt(dd), ph = Math.atan2(-2 * z * w, 1 - w * w); pts.push([A * Math.cos(ph), A * Math.sin(ph)]); }
+    for (let i = 1; i <= 80; i++) { const w = 2 + 5 * i / 80; const dd = (1 - w * w) ** 2 + (2 * z * w) ** 2; const A = 1 / Math.sqrt(dd), ph = Math.atan2(-2 * z * w, 1 - w * w); pts.push([A * Math.cos(ph), A * Math.sin(ph)]); }
+    const { pts: sp } = fitted(mk, pts, "#2B5CE6");
+    dot(mk, sp[0][0], sp[0][1]);
+    const k = 545; tangentArrow(mk, sp[k - 3], sp[k], sp[k + 3], "#2B5CE6");
+  });
+  draw("g7", mk => {
+    const z = 0.3, pts = [];
+    for (let i = 0; i <= 600; i++) { const w = 2 * i / 600; const dd = (1 - w * w) ** 2 + (2 * z * w) ** 2; const A = 1 / Math.sqrt(dd), ph = Math.atan2(-2 * z * w, 1 - w * w); pts.push([A * Math.cos(ph), -A * Math.sin(ph)]); }
+    for (let i = 1; i <= 80; i++) { const w = 2 + 5 * i / 80; const dd = (1 - w * w) ** 2 + (2 * z * w) ** 2; const A = 1 / Math.sqrt(dd), ph = Math.atan2(-2 * z * w, 1 - w * w); pts.push([A * Math.cos(ph), -A * Math.sin(ph)]); }
+    const { pts: sp } = fitted(mk, pts, "#2B5CE6");
+    dot(mk, sp[0][0], sp[0][1]);
+    const k = 545; tangentArrow(mk, sp[k - 3], sp[k], sp[k + 3], "#2B5CE6");
+  });
+  draw("g8", mk => {
+    axes(mk, 64, 50);
+    mk("circle", { cx: 64, cy: 50, r: 34, fill: "none", stroke: "#2B5CE6", "stroke-width": 2.4, "stroke-dasharray": "5 4" });
+    dot(mk, 98, 50);
+    tangentArrow(mk, [56, 16], [64, 16], [72, 16], "#2B5CE6");
+  });
+  // 分组切换
+  const g1d = document.getElementById("grp1"), g2d = document.getElementById("grp2");
+  const b1 = document.getElementById("gb1"), b2 = document.getElementById("gb2");
+  function showGroup(n) {
+    g1d.style.display = n === 1 ? "" : "none";
+    g2d.style.display = n === 2 ? "" : "none";
+    b1.classList.toggle("active", n === 1);
+    b2.classList.toggle("active", n === 2);
+  }
+  b1.addEventListener("click", () => showGroup(1));
+  b2.addEventListener("click", () => showGroup(2));
+});
+</script>
+</body>
+</html>

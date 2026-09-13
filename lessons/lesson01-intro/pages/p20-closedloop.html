@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>闭环控制</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .def { background:#fff; border:2px solid var(--line); border-left:12px solid var(--blue); border-radius:16px; padding:28px 38px; font-size:28px; line-height:1.8; color:var(--ink); margin:4px 0 24px; }
+  .def b { color:var(--navy); }
+  .fb { background:var(--sky); border-radius:16px; padding:24px 34px; font-size:25px; line-height:1.75; color:var(--navy); margin-bottom:24px; }
+  .fb b { color:var(--danger); }
+  .row { display:flex; gap:28px; }
+  .pc { flex:1; padding:22px 30px; }
+  .pc h4 { font-size:25px; margin-bottom:12px; }
+  .adv h4 { color:var(--blue); } .dis h4 { color:#D63A2F; }
+  .pc ul { list-style:none; font-size:23.5px; line-height:1.9; color:var(--ink); }
+  .pc li::before { content:"●"; margin-right:10px; font-size:15px; vertical-align:2px; }
+  .adv li::before { color:var(--blue); } .dis li::before { color:#D63A2F; }
+</style>
+</head>
+<body data-title="2、闭环控制" data-page="20 / 35">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body fill">
+    <div class="def"><b>定义：</b>如果系统的<span class="kw-r">输出量参与</span>对系统的控制，则称为<b>闭环控制</b>。</div>
+    <div class="fb"><b>负反馈控制原理：</b>将系统输出量引回输入端，与输入量相比较，利用所得<b>偏差</b>进行控制，使偏差减小或消除。</div>
+    <div class="row">
+      <div class="act-card pc adv"><h4>优点</h4><ul><li>具有较强的抗干扰能力</li><li>控制精度高</li></ul></div>
+      <div class="act-card pc dis"><h4>缺点</h4><ul><li>系统参数配合不当时，容易产生振荡甚至不稳定，使系统无法工作</li></ul></div>
+    </div>
+  </div>
+  <div class="act-note">
+    <svg class="ico" viewBox="0 0 48 48"><path d="M40 24 a16 16 0 1 1 -6 -12" fill="none" stroke="#1D3FA0" stroke-width="3"/><path d="M40 6 v8 h-8" fill="none" stroke="#F5821F" stroke-width="3" stroke-linecap="round"/></svg>
+    <span><span class="lead">关键词：</span>反馈 — 偏差 — 纠偏。闭环 = 有「眼睛」的控制。</span>
+  </div>
+</div></div>
+</body>
+</html>

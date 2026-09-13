@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>例 3-1 · 二阶系统指标计算</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<link rel="stylesheet" href="../lesson03-svg.css">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:24px; height:100%; }
+  .lcol { flex:1.15; display:flex; flex-direction:column; gap:16px; }
+  .prob { background:var(--navy); color:#fff; border-radius:14px; padding:16px 26px; font-size:23px; line-height:1.6; }
+  .prob .tag { display:inline-block; background:var(--orange); border-radius:8px; padding:3px 14px; font-size:19px; font-weight:700; margin-right:12px; vertical-align:3px; }
+  .prob .tex { color:#fff; }
+  .solv { flex:1; }
+  .solv .bd { font-size:22.5px; line-height:1.75; padding:24px 30px; }
+  .stp { display:flex; gap:14px; align-items:flex-start; margin-bottom:15px; }
+  .stp .no { flex:none; width:34px; height:34px; border-radius:50%; background:var(--blue); color:#fff; display:grid; place-items:center; font-size:19px; font-weight:700; margin-top:2px; }
+  .asum { display:flex; gap:14px; margin-top:18px; }
+  .ach { flex:1; text-align:center; background:var(--sky); border:2px solid var(--line); border-radius:12px; padding:13px 6px; font-size:22px; color:var(--navy); }
+  .ach b { color:#1D3FA0; font-style:italic; }
+  .figc { flex:1; display:flex; flex-direction:column; overflow:hidden; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:8px 14px; }
+  .figc svg { width:100%; height:100%; }
+</style>
+</head>
+<body data-title="例 3-1 · 指标计算" data-page="38 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="row">
+      <div class="lcol">
+        <div class="prob"><span class="tag">例 3-1</span>已知单位反馈二阶系统的闭环传递函数
+          <span class="tex" style="font-size:25px">\varPhi(s)=\dfrac{25}{s^{2}+6s+25}</span>，求 t<sub>r</sub>、t<sub>p</sub>、t<sub>s</sub>（Δ=2%）与 σ%。</div>
+        <div class="act-card solv">
+          <div class="hd">规范解题四步</div>
+          <div class="bd">
+            <div class="stp" data-step="1"><div class="no">1</div><div><b>比对标准型求参数</b>：
+              <span class="tex" style="font-size:23px">\omega_{n}=\sqrt{25}=5\;\text{rad/s}</span>，<span class="tex" style="font-size:23px">\zeta=\dfrac{6}{2\omega_{n}}=0.6</span>（欠阻尼）</div></div>
+            <div class="stp" data-step="2"><div class="no">2</div><div><b>导出量</b>：
+              <span class="tex" style="font-size:23px">\omega_{d}=\omega_{n}\sqrt{1-\zeta^{2}}=4</span>，<span class="tex" style="font-size:23px">\beta=\arccos 0.6=53.1^{\circ}=0.93\;\text{rad}</span></div></div>
+            <div class="stp" data-step="3"><div class="no">3</div><div><b>快速性指标</b>：
+              <span class="tex" style="font-size:23px">t_{r}=\dfrac{\pi-\beta}{\omega_{d}}=0.55\;\text{s}</span>，<span class="tex" style="font-size:23px">t_{p}=\dfrac{\pi}{\omega_{d}}=0.785\;\text{s}</span>，<span class="tex" style="font-size:23px">t_{s}=\dfrac{4}{\zeta\omega_{n}}=1.33\;\text{s}</span></div></div>
+            <div class="stp" data-step="4"><div class="no">4</div><div><b>平稳性指标</b>：
+              <span class="tex" style="font-size:23px">\sigma\%=e^{-\pi\zeta/\sqrt{1-\zeta^{2}}}\times 100\%=9.5\%</span></div></div>
+            <div class="asum" data-step="5">
+              <span class="ach">t<sub>r</sub> = <b>0.55 s</b></span>
+              <span class="ach">t<sub>p</sub> = <b>0.785 s</b></span>
+              <span class="ach">t<sub>s</sub> = <b>1.33 s</b></span>
+              <span class="ach">σ% = <b>9.5%</b></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd">该系统的单位阶跃响应（标注各指标）</div>
+        <div class="bd2"><svg id="fig" viewBox="0 0 1000 800"></svg></div>
+      </div>
+    </div>
+  </div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("fig");
+  const z = 0.6, wn = 5, sg = z * wn, wd = 4, beta = Math.acos(z), A = 1 / Math.sqrt(1 - z * z);
+  const h = t => t <= 0 ? 0 : 1 - A * Math.exp(-sg * t) * Math.sin(wd * t + beta);
+  const tr = (Math.PI - beta) / wd, tp = Math.PI / wd, ts = 4 / sg, po = Math.exp(-Math.PI * z / Math.sqrt(1 - z * z));
+  const T = 2, YM = 1.35;
+  const X = t => 96 + t / T * 850;
+  const Y = v => 700 - v / YM * 580;
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const tx = (x, y, s, o) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 20, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal" }); n.textContent = s; return n; };
+  const defs = mk("defs", {});
+  const m1 = mk("marker", { id: "a36", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, m1);
+  mk("line", { x1: 96, y1: 700, x2: 960, y2: 700, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a36)" });
+  mk("line", { x1: 96, y1: 700, x2: 96, y2: 56, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a36)" });
+  tx(966, 706, "t", { fs: 22, an: "start", it: true, b: true });
+  tx(58, 66, "h(t)", { fs: 22, it: true, b: true });
+  tx(74, 706, "O", { fs: 19, fill: "#5B6B8C" });
+  [0.5, 1, 1.5, 2].forEach(v => { tx(X(v), 734, v.toFixed(1), { fs: 18, fill: "#5B6B8C" }); mk("line", { x1: X(v), y1: 700, x2: X(v), y2: 76, stroke: "#C9D8F2", "stroke-width": 1, "stroke-dasharray": "5 6" }); });
+  mk("line", { x1: 96, y1: Y(1), x2: 946, y2: Y(1), stroke: "#F5821F", "stroke-width": 2, "stroke-dasharray": "10 7" });
+  tx(80, Y(1) + 7, "1", { an: "end", fs: 20, b: true });
+  let d = "";
+  for (let i = 0; i <= 500; i++) { const t = T * i / 500; d += (i ? "L" : "M") + X(t).toFixed(1) + "," + Y(h(t)).toFixed(1); }
+  mk("path", { d, stroke: "#2B5CE6", "stroke-width": 3.5, fill: "none" });
+  // tp + σ%
+  const hp = 1 + po;
+  mk("circle", { cx: X(tp), cy: Y(hp), r: 6.5, fill: "#D63A2F" });
+  mk("line", { x1: X(tp), y1: Y(hp), x2: X(tp), y2: 700, stroke: "#F5821F", "stroke-width": 1.8, "stroke-dasharray": "7 6" });
+  tx(X(tp), 768, "tp=0.785", { fs: 19, b: true, it: true, fill: "#D63A2F" });
+  tx(X(tp) + 20, Y(hp) - 18, "σ%=9.5%", { fs: 20, b: true, it: true, fill: "#D63A2F", an: "start" });
+  // tr
+  mk("circle", { cx: X(tr), cy: Y(1), r: 6, fill: "#1D3FA0" });
+  mk("line", { x1: X(tr), y1: Y(1), x2: X(tr), y2: 700, stroke: "#1D3FA0", "stroke-width": 1.6, "stroke-dasharray": "4 5" });
+  tx(X(tr) - 14, 768, "tr=0.55", { fs: 19, b: true, it: true, fill: "#1D3FA0", an: "end" });
+  // ts
+  mk("line", { x1: X(ts), y1: Y(1.02), x2: X(ts), y2: 700, stroke: "#1E9E57", "stroke-width": 1.8, "stroke-dasharray": "7 6" });
+  tx(X(ts), 768, "ts=1.33", { fs: 19, b: true, it: true, fill: "#1E9E57" });
+});
+</script>
+</body>
+</html>

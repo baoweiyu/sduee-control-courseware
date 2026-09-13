@@ -1,0 +1,72 @@
+lesson_id: lesson02-math-model
+title: 第二章 控制系统的数学模型
+source: bwy-ori-oldPPT/chapt2.pdf（80 页）
+status: Draft
+design:
+  page_count: 50
+  rule: 旧 80 页 → 50 页；公式/方框图/信号流图一律程序绘制（HTML+SVG）；
+        例子配图一律 image2 重绘；强调色仅红色 #D63A2F；
+        交互页 Space/按钮分步，遵循 act-base.js 分步协议与 act-key/act-poke 转发。
+pages:
+  - { n: 01, file: p01-cover.html,            src: [1],       title: 第二章封面, complexity: L0 }
+  - { n: 02, file: p02-model-intro.html,      src: [2],       title: 数学模型概念与建模方法, complexity: L1 }
+  - { n: 03, file: p03-contents.html,         src: [3],       title: 本章内容导览, complexity: L0 }
+  - { n: 04, file: p04-ode-build.html,        src: [4,5,6,10,11], title: 微分方程的建立（4 步骤+一般形式）, complexity: L1 }
+  - { n: 05, file: p05-ex-rlc.html,           src: [7],       title: 例2-1 RLC 串联电路, complexity: L1, assets: [image2 rlc-circuit] }
+  - { n: 06, file: p06-ex-spring.html,        src: [8],       title: 例2-2 弹簧-质量-阻尼器, complexity: L1, assets: [image2 spring-mass-damper] }
+  - { n: 07, file: p07-ex-motor.html,         src: [9],       title: 例2-3 他励直流电动机, complexity: L1, assets: [image2 dc-motor] }
+  - { n: 08, file: p08-quiz-common.html,      src: [12],      title: 课堂互动：三例共同点（多选）, complexity: L2 }
+  - { n: 09, file: p09-laplace-table.html,    src: [13],      title: 拉氏变换定义与常用变换表, complexity: L1 }
+  - { n: 10, file: p10-laplace-theorems.html, src: [14,15],   title: 拉氏变换基本定理, complexity: L1 }
+  - { n: 11, file: p11-laplace-inverse.html,  src: [16,17],   title: 拉氏反变换（部分分式法）, complexity: L1 }
+  - { n: 12, file: p12-ode-solve.html,        src: [18,19,20], title: 拉氏变换法求解微分方程, complexity: L1 }
+  - { n: 13, file: p13-ode-example.html,      src: [21],      title: 求解示例与 MATLAB, complexity: L1 }
+  - { n: 14, file: p14-quiz-solution.html,    src: [22],      title: 课堂互动：稳态解与暂态解（单选）, complexity: L2 }
+  - { n: 15, file: p15-linearization.html,    src: [23,24,25], title: 非线性特性的线性化（切线法）, complexity: L1 }
+  - { n: 16, file: p16-tf-definition.html,    src: [26],      title: 传递函数的定义, complexity: L1 }
+  - { n: 17, file: p17-tf-derive.html,        src: [27],      title: 由微分方程求传递函数, complexity: L1 }
+  - { n: 18, file: p18-tf-properties.html,    src: [28],      title: 传递函数的性质（6 条）, complexity: L1 }
+  - { n: 19, file: p19-tf-forms.html,         src: [29,30,31], title: 传递函数的两种表示与一般形式, complexity: L1 }
+  - { n: 20, file: p20-quiz-tf.html,          src: [32],      title: 课堂互动：判断（物理性质与传递函数）, complexity: L2 }
+  - { n: 21, file: p21-typical-1.html,        src: [33],      title: 典型环节：比例与惯性, complexity: L1 }
+  - { n: 22, file: p22-typical-2.html,        src: [34],      title: 典型环节：积分与振荡, complexity: L1 }
+  - { n: 23, file: p23-typical-3.html,        src: [35],      title: 典型环节：微分与延迟, complexity: L1 }
+  - { n: 24, file: p24-quiz-tf2.html,         src: [36,37],   title: 课堂互动：传递函数概念（单选+判断）, complexity: L2 }
+  - { n: 25, file: p25-ex-rlc-tf.html,        src: [38],      title: 例2-6 RLC 传递函数（复阻抗法）, complexity: L1 }
+  - { n: 26, file: p26-ex-opamp.html,         src: [39],      title: 例2-7 理想运算放大器, complexity: L1, assets: [image2 opamp-board] }
+  - { n: 27, file: p27-ex-speed-system.html,  src: [40],      title: 例2-8 速度控制系统, complexity: L2, assets: [image2 speed-control-system] }
+  - { n: 28, file: p28-ex-speed-tf.html,      src: [41,42],   title: 例2-8 各环节传递函数与综合, complexity: L1 }
+  - { n: 29, file: p29-bd-elements.html,      src: [43],      title: 方框图的组成（4 要素）, complexity: L1 }
+  - { n: 30, file: p30-bd-draw.html,          src: [44,45,46], title: 方框图的绘制（例2-9）, complexity: L1 }
+  - { n: 31, file: p31-bd-equiv-principle.html, src: [47],    title: 等效变换的两类与两原则, complexity: L1 }
+  - { n: 32, file: p32-bd-basic-anim.html,    src: [48,49,50,51,52], title: ★交互：串联/并联/反馈合并, complexity: L3 }
+  - { n: 33, file: p33-bd-move-rules.html,    src: [53],      title: 相加点与分支点的等效移动规则, complexity: L1 }
+  - { n: 34, file: p34-bd-branch-move.html,   src: [54],      title: ★交互：分支点等效移动, complexity: L2 }
+  - { n: 35, file: p35-bd-sum-move.html,      src: [55,56,57], title: 相加点移动辨析（投票+错例+作用分解）, complexity: L2 }
+  - { n: 36, file: p36-bd-reduce-ex210.html,  src: [58],      title: ★交互：例2-10 环节合并化简, complexity: L3 }
+  - { n: 37, file: p37-ex-rc-ladder.html,     src: [59],      title: 例2-11 两级 RC 网络方框图变换, complexity: L1, assets: [image2 rc-ladder] }
+  - { n: 38, file: p38-closedloop-tf.html,    src: [60,61,62], title: 典型闭环系统的传递函数, complexity: L1 }
+  - { n: 39, file: p39-sfg-concept.html,      src: [63,64],   title: 信号流图基本概念, complexity: L1 }
+  - { n: 40, file: p40-sfg-terms.html,        src: [65],      title: 信号流图常用术语, complexity: L1 }
+  - { n: 41, file: p41-sfg-mapping.html,      src: [66],      title: 方框图↔信号流图对照, complexity: L1 }
+  - { n: 42, file: p42-sfg-example.html,      src: [67,68],   title: 术语对号入座（X0…X6）, complexity: L2 }
+  - { n: 43, file: p43-sfg-rules.html,        src: [69,70],   title: 信号流图绘制与等效变换规则（表2-2）, complexity: L1 }
+  - { n: 44, file: p44-sfg-convert.html,      src: [71,72,73], title: ★交互：方框图⇄信号流图（例2-13）, complexity: L3 }
+  - { n: 45, file: p45-mason-formula.html,    src: [74],      title: 梅逊公式及各项含义, complexity: L1 }
+  - { n: 46, file: p46-mason-lab.html,        src: [75,76],   title: ★★旗舰交互：梅逊公式分步（例2-14）, complexity: L3 }
+  - { n: 47, file: p47-mason-rc.html,         src: [77],      title: ★交互：梅逊公式 R-C 例练习, complexity: L3 }
+  - { n: 48, file: p48-keypoints.html,        src: [78],      title: 本章学习要点, complexity: L0 }
+  - { n: 49, file: p49-exercise.html,         src: [79],      title: 课后练习（X4/X1，分步揭示答案）, complexity: L2 }
+  - { n: 50, file: p50-quiz-furnace.html,     src: [80],      title: 课堂互动：加热炉控制方式（单选）, complexity: L2, assets: [image2 furnace-heating] }
+image2_assets:
+  - { name: rlc-circuit,        size: 1536x1024, scene: RLC 电路实验板 }
+  - { name: spring-mass-damper, size: 1536x1024, scene: 弹簧-质量-阻尼器实验装置 }
+  - { name: dc-motor,           size: 1536x1024, scene: 他励直流电动机剖面 }
+  - { name: opamp-board,        size: 1536x1024, scene: 运算放大器电路板 }
+  - { name: speed-control-system, size: 1536x1024, scene: 直流电机速度控制系统（电机+减速器+测速发电机+负载） }
+  - { name: rc-ladder,          size: 1536x1024, scene: 两级 RC 滤波电路板 }
+  - { name: furnace-heating,    size: 1536x1024, scene: 工业加热炉温度控制系统 }
+qa:
+  - 页面总数 50（旧 80 页全覆盖，quiz 4 页、练习 1 页、交互 L3 5 页、L2 4 页）
+  - 2026-08-26 全部 50 页完成；静态校验通过（资源引用 0 失效、内联 JS node --check 全过、SVG 标签配对正常、index.json/lesson.json 一致）
+  - 已打包 act-courseware-ch2-v0.9-draft.zip（含第一章定稿 + 第二章初稿，剔除 image2_config.json 防泄露 key）

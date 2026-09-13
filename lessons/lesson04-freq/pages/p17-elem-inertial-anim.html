@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>1.5 惯性环节：数值表逐点绘图</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:24px; height:100%; min-height:0; }
+  .tbl { flex:1; display:flex; flex-direction:column; min-height:0; }
+  .tbl .bd { flex:1; display:flex; flex-direction:column; justify-content:space-evenly; padding:14px 20px; gap:10px; }
+  .tbl table { font-size:18px; }
+  .tbl th, .tbl td { padding:7px 5px; text-align:center; }
+  .tbl td { font-family:var(--font-math); font-style:italic; }
+  .tbl tr.hot td { background:#FDF3EC !important; color:#D63A2F; font-weight:700; }
+  .figc { flex:1.15; display:flex; flex-direction:column; overflow:hidden; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:8px 12px; min-height:0; }
+  .figc svg { width:100%; height:100%; }
+  .figc .cap { flex:none; font-size:19px; color:var(--navy); background:var(--sky); border-radius:12px; padding:11px 18px; margin:0 14px 14px; }
+  .ctl { display:flex; align-items:center; gap:12px; justify-content:center; }
+  .btn { background:var(--blue); color:#fff; border:none; border-radius:10px; font-size:19px; font-weight:700; padding:8px 22px; cursor:pointer; }
+  .btn.ghost { background:#fff; color:var(--blue); border:2px solid var(--blue); }
+  .prog { font-size:18px; color:var(--muted); min-width:70px; }
+</style>
+</head>
+<body data-title="1.5 惯性环节：数值表逐点绘图" data-page="17 / 87">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="act-card tbl">
+        <div class="hd"><span style="flex:1">数值表法：<span class="tex" style="font-size:19px">G(s)=\dfrac{1}{0.5s+1}</span></span></div>
+        <div class="bd">
+          <div style="font-size:20px; text-align:center"> <span class="tex">A(\omega)=\dfrac{1}{\sqrt{0.25\omega^{2}+1}},\quad \varphi(\omega)=-\operatorname{tg}^{-1}0.5\omega</span></div>
+          <table class="act-table" id="tbl">
+            <tr><th>ω</th><th>0</th><th>0.5</th><th>1</th><th>2</th><th>4</th><th>5</th><th>8</th><th>20</th></tr>
+            <tr><td style="font-style:normal">A(ω)</td><td>1</td><td>0.97</td><td>0.89</td><td>0.71</td><td>0.45</td><td>0.37</td><td>0.24</td><td>0.10</td></tr>
+            <tr><td style="font-style:normal">φ(ω)</td><td>0°</td><td>−14°</td><td>−26.6°</td><td>−45°</td><td>−63.4°</td><td>−68.2°</td><td>−76°</td><td>−84°</td></tr>
+          </table>
+          <div style="font-size:19.5px; color:var(--muted); text-align:center">逐行取点：每取一个 ω，就在右图按 <b style="color:var(--navy)">幅值 A</b> 与 <b style="color:var(--navy)">相角 φ</b> 描一个点</div>
+          <div class="ctl">
+            <button class="btn" id="play">▶ 播放</button>
+            <button class="btn ghost" onclick="ACT.step.reset()">↺ 重画</button>
+            <span class="prog" id="prog">0 / 8</span>
+          </div>
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd">逐点连线 → 半圆浮现</div>
+        <div class="bd2"><svg id="fig" viewBox="0 0 760 600"></svg></div>
+        <div class="cap">取点越多折线越光滑——极限就是<b>下半圆</b>：圆心 (1/2, 0)、半径 1/2（下一页证明）。</div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">观察</span><span>不必证明圆方程，用<span class="kw-r">数值表逐点描图</span>是最朴素也最可靠的方法——试验测频响正是这样做的。</span></div>
+  <div data-step="1" style="display:none"></div><div data-step="2" style="display:none"></div><div data-step="3" style="display:none"></div><div data-step="4" style="display:none"></div>
+  <div data-step="5" style="display:none"></div><div data-step="6" style="display:none"></div><div data-step="7" style="display:none"></div><div data-step="8" style="display:none"></div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("fig");
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const MF = "Cambria Math,STIX Two Math,Georgia,Microsoft YaHei,sans-serif";
+  const tx = (x, y, s, o, parent) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 19, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal", "font-family": MF }, parent); const esc = t => t.replace(/&/g, "&amp;").replace(/</g, "&lt;"); let html = "", sub = false; for (const p of String(s).split(/(_\{[^}]*\})/)) { if (!p) continue; if (p.startsWith("_{")) { html += `<tspan${sub ? "" : " dy=\"6\""} font-size="72%">${esc(p.slice(2, -1))}</tspan>`; sub = true; } else { html += sub ? `<tspan dy="-6">${esc(p)}</tspan>` : esc(p); sub = false; } } n.innerHTML = html; if (o && o.halo) n.setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:6;stroke-linejoin:round"); return n; };
+  const defs = mk("defs", {});
+  const m1 = mk("marker", { id: "a15", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, m1);
+  const O = { x: 120, y: 170 }, SC = 430;
+  const X = v => O.x + v * SC, Y = v => O.y - v * SC;
+  mk("line", { x1: 30, y1: O.y, x2: 730, y2: O.y, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a15)" });
+  mk("line", { x1: O.x, y1: 570, x2: O.x, y2: 30, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a15)" });
+  tx(724, O.y - 12, "Re", { fs: 20, it: true, b: true, fill: "#5B6B8C", an: "end" });
+  tx(O.x + 22, 42, "jIm", { fs: 20, it: true, b: true, fill: "#5B6B8C", an: "start" });
+  tx(O.x - 12, O.y + 24, "O", { fs: 18, fill: "#5B6B8C", an: "end" });
+  tx(X(0.5), O.y + 26, "0.5", { fs: 19, fill: "#5B6B8C" });
+  tx(X(1), O.y + 26, "1", { fs: 19, fill: "#5B6B8C" });
+  mk("line", { x1: X(0.5), y1: O.y - 5, x2: X(0.5), y2: O.y + 5, stroke: "#5B6B8C", "stroke-width": 1.5 });
+  mk("line", { x1: X(1), y1: O.y - 5, x2: X(1), y2: O.y + 5, stroke: "#5B6B8C", "stroke-width": 1.5 });
+  // 参考半圆（淡）
+  mk("path", { d: `M ${X(1)} ${Y(0)} A ${SC / 2} ${SC / 2} 0 0 1 ${X(0)} ${Y(0)}`, fill: "none", stroke: "#E4EAF7", "stroke-width": 2.4, "stroke-dasharray": "8 7" });
+
+  const WS = [0, 0.5, 1, 2, 4, 5, 8, 20];
+  const PT = w => { const d = 1 + 0.25 * w * w; return [1 / d, -0.5 * w / d]; };
+  const dyn = mk("g", {});
+  const tbl = document.getElementById("tbl");
+
+  function render(f) { // f∈[0,1] 连续进度
+    dyn.innerHTML = "";
+    const total = WS.length - 1; // 7 段
+    const pos = f * total;
+    const kFull = Math.floor(pos);
+    // 已完成的点与连线
+    let prev = null;
+    for (let i = 0; i <= kFull; i++) {
+      const [re, im] = PT(WS[i]), x = X(re), y = Y(im);
+      if (prev) mk("line", { x1: prev[0], y1: prev[1], x2: x, y2: y, stroke: "#2B5CE6", "stroke-width": 3.4 }, dyn);
+      mk("circle", { cx: x, cy: y, r: 7, fill: "#1D3FA0" }, dyn);
+      if (WS[i] === 20) tx(x + 16, y + 26, "ω=" + WS[i], { fs: 18, b: true, fill: "#1D3FA0", halo: 1, an: "start" }, dyn);
+      else tx(x, y - 17, "ω=" + WS[i], { fs: 18, b: true, fill: "#1D3FA0", halo: 1 }, dyn);
+      prev = [x, y];
+    }
+    // 当前段插值
+    if (kFull < total && f > 0) {
+      const t = pos - kFull;
+      const w = WS[kFull] + (WS[kFull + 1] - WS[kFull]) * t;
+      const [re, im] = PT(w), x = X(re), y = Y(im);
+      if (prev) mk("line", { x1: prev[0], y1: prev[1], x2: x, y2: y, stroke: "#2B5CE6", "stroke-width": 3.4 }, dyn);
+      mk("circle", { cx: x, cy: y, r: 8.5, fill: "#D63A2F" }, dyn);
+    }
+  }
+  const TOTAL = 8;
+  let K = 0, playing = false;
+  function paint() {
+    render(K / TOTAL);
+    for (let c = 1; c <= 8; c++) {
+      tbl.rows[1].cells[c].parentElement.classList.remove("hot");
+      const hot = K >= c;
+      tbl.rows[0].cells[c].style.background = hot ? "#FDF3EC" : "";
+      tbl.rows[1].cells[c].style.background = hot ? "#FDF3EC" : "";
+      tbl.rows[2].cells[c].style.background = hot ? "#FDF3EC" : "";
+      tbl.rows[0].cells[c].style.color = hot ? "#D63A2F" : "";
+      tbl.rows[1].cells[c].style.color = hot ? "#D63A2F" : "";
+      tbl.rows[2].cells[c].style.color = hot ? "#D63A2F" : "";
+    }
+    document.getElementById("prog").textContent = K + " / " + TOTAL;
+  }
+  const S = ACT.step;
+  const _next = S.next.bind(S), _reset = S.reset.bind(S);
+  S.next = function () { if (K < TOTAL) K++; const d = _next(); paint(); return d; };
+  S.reset = function () { K = 0; playing = false; _reset(); paint(); };
+  window.prev = function () { if (K <= 0) return; const t = K - 1; S.reset(); for (let i = 0; i < t; i++) S.next(); };
+  document.getElementById("play").onclick = () => {
+    if (playing) return;
+    playing = true; S.reset();
+    const t0 = performance.now(), DUR = 5200;
+    (function fr(ts) {
+      const f = Math.min(1, (ts - t0) / DUR);
+      render(f);
+      if (f < 1) requestAnimationFrame(fr);
+      else { playing = false; K = TOTAL; for (let i = 0; i < TOTAL; i++) _next(); paint(); }
+    })(t0);
+  };
+  paint();
+});
+</script>
+</body>
+</html>

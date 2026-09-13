@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>课后练习：G(s)=X₄/X₁</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .ctl { display:flex; align-items:center; gap:12px; margin-bottom:6px; }
+  .btn { border:none; background:var(--blue); color:#fff; font-size:18.5px; font-weight:700;
+         border-radius:9px; padding:7px 18px; cursor:pointer; font-family:inherit; }
+  .btn.ghost { background:#fff; color:var(--blue); border:2px solid var(--blue); }
+  .cap2 { font-size:20px; font-weight:800; color:var(--red); flex:1; }
+  .prog { font-size:17px; color:var(--muted); }
+  .panel { background:var(--sky); border-radius:14px; padding:2px 10px; }
+  .hl { opacity:0; transition:opacity .35s; fill:none; stroke-linecap:round; stroke-linejoin:round; }
+  .hl.red { stroke:#D63A2F; } .hl.blue { stroke:#1D3FA0; } .hl.grn { stroke:#2E9E6B; }
+  .flow { stroke-dasharray:20 14; animation:fl .9s linear infinite; }
+  @keyframes fl { to { stroke-dashoffset:-34; } }
+  .work { margin-top:8px; display:flex; gap:12px; }
+  .wc { flex:1; background:#fff; border:2px solid var(--blue); border-radius:12px; padding:8px 14px;
+        opacity:0; transform:translateY(12px); transition:.4s; font-size:18.5px; line-height:1.5; }
+  .wc.on { opacity:1; transform:none; }
+  .wc .h { font-weight:800; color:var(--blue); font-size:18px; margin-bottom:3px; }
+  .wc.fin { border-color:var(--red); background:#FDF0EF; flex:1.3; }
+  .wc.fin .h { color:var(--red); }
+</style>
+</head>
+<body data-title="课后练习　G(s)=X₄/X₁" data-page="50 / 51">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="ctl">
+      <button class="btn ghost" onclick="prev()">◀ 上一步</button>
+      <button class="btn" onclick="ACT.step.next()">揭示下一步 ▶</button>
+      <button class="btn ghost" onclick="ACT.step.reset()">↺</button>
+      <div class="cap2" id="cap">主观题（5 分）：用梅逊公式求 G(s)=X₄/X₁——先自己数通道与回环</div>
+      <div class="prog" id="prog">0 / 8</div>
+    </div>
+    <div class="panel">
+      <svg viewBox="0 0 1150 400" width="100%" height="360">
+        <defs><marker id="a49" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="#1D3FA0"/></marker></defs>
+        <g stroke="#1D3FA0" stroke-width="3" fill="none" marker-end="url(#a49)">
+          <line x1="112" y1="260" x2="366" y2="260"/>
+          <line x1="394" y1="260" x2="666" y2="260"/>
+          <line x1="694" y1="260" x2="926" y2="260"/>
+          <line x1="392" y1="248" x2="518" y2="122"/>
+          <line x1="544" y1="122" x2="668" y2="248"/>
+          <path d="M 672 272 Q 530 352 390 272"/>
+          <circle cx="531" cy="66" r="37"/>
+        </g>
+        <g fill="#fff" stroke="#1D3FA0" stroke-width="3">
+          <circle cx="100" cy="260" r="10"/><circle cx="380" cy="260" r="10"/>
+          <circle cx="680" cy="260" r="10"/><circle cx="940" cy="260" r="10"/>
+          <circle cx="531" cy="116" r="10"/>
+        </g>
+        <g font-size="20" fill="#1B3B8B" font-style="italic">
+          <text x="88" y="294">X₁</text><text x="368" y="294">X₂</text><text x="668" y="294">X₃</text><text x="928" y="294">X₄</text>
+          <text x="520" y="146">X₅</text>
+          <text x="230" y="246">a</text><text x="520" y="246">e</text><text x="800" y="246">f</text>
+          <text x="428" y="180">b</text><text x="620" y="180">c</text>
+          <text x="520" y="352">−g</text><text x="580" y="66">−d（自回环）</text>
+        </g>
+        <!-- 高亮层 -->
+        <path id="hl-p1" class="hl red flow" stroke-width="6" d="M 100 260 L 940 260"/>
+        <path id="hl-p2" class="hl red flow" stroke-width="6" d="M 100 260 L 380 258 L 522 116 L 542 118 L 680 258 L 940 260"/>
+        <circle id="hl-l1" class="hl red flow" stroke-width="6" cx="531" cy="66" r="37"/>
+        <path id="hl-l2" class="hl red flow" stroke-width="6" d="M 384 256 L 676 258 Q 530 348 388 274"/>
+        <path id="hl-l3" class="hl red flow" stroke-width="6" d="M 384 256 L 522 116 L 542 118 L 676 256 Q 530 348 388 274"/>
+        <g id="lb" font-size="20" font-weight="800" opacity="0" style="transition:opacity .3s">
+          <text id="lb-t" x="440" y="388" fill="#D63A2F"></text>
+        </g>
+      </svg>
+    </div>
+    <div class="work math">
+      <div class="wc" id="wA">
+        <div class="h">① 前向通道（2 条）</div>
+        <span id="wA1" style="opacity:0"><span class="tex">P_{1} = a\cdot e\cdot f</span><br></span>
+        <span id="wA2" style="opacity:0"><span class="tex">P_{2} = a\cdot b\cdot c\cdot f</span></span>
+      </div>
+      <div class="wc" id="wB">
+        <div class="h">② 回环（3 个）</div>
+        <span id="wB1" style="opacity:0"><span class="tex">L_{1} = -d</span>（自回环）　<span class="tex">L_{2} = -eg</span><br></span>
+        <span id="wB2" style="opacity:0"><span class="tex">L_{3} = -bcg</span></span>
+      </div>
+      <div class="wc" id="wC">
+        <div class="h">③ 互不接触与 <span class="tex">\Delta _{k}</span></div>
+        <span style="font-size:17.5px">仅 <span class="tex">L_{1}\cdot L_{2}</span> 互不接触 ⇒ <span class="tex">\sum L_{2} = deg</span><br><span class="tex">\Delta _{1} = 1+d</span>（<span class="tex">L_{1}</span> 不接触 <span class="tex">P_{1}</span>）；<span class="tex">\Delta _{2} = 1</span></span>
+      </div>
+      <div class="wc fin" id="wD">
+        <div class="h">✔ 结果</div>
+        <div style="font-size:17.5px"><span class="tex">\dfrac{X_{4}}{X_{1}} = \dfrac{aef(1+d) + abcf}{1 + d + eg + bcg + deg}</span></div>
+      </div>
+    </div>
+  </div>
+  <div data-step="1" style="display:none"></div><div data-step="2" style="display:none"></div>
+  <div data-step="3" style="display:none"></div><div data-step="4" style="display:none"></div>
+  <div data-step="5" style="display:none"></div><div data-step="6" style="display:none"></div>
+  <div data-step="7" style="display:none"></div><div data-step="8" style="display:none"></div>
+</div></div>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const TOTAL = 8;
+    let K = 0;
+    const $ = id => document.getElementById(id);
+    const HLS = ["hl-p1","hl-p2","hl-l1","hl-l2","hl-l3"];
+    const CAP = [
+      null,
+      "\\text{① 前向通道 }P_{1} = a\\cdot e\\cdot f\\text{（沿主链）}",
+      "\\text{② 前向通道 }P_{2} = a\\cdot b\\cdot c\\cdot f\\text{（经上支路 }b\\text{、}c\\text{）}",
+      "\\text{③ 回环 }L_{1} = -d\\text{：}X_{5}\\text{ 上的自回环（容易漏！）}",
+      "\\text{④ 回环 }L_{2} = -eg\\text{（}X_{2}\\to X_{3}\\to X_{2}\\text{）}",
+      "\\text{⑤ 回环 }L_{3} = -bcg\\text{（}X_{2}\\to X_{5}\\to X_{3}\\to X_{2}\\text{）}",
+      "\\text{⑥ 互不接触：只有 }L_{1}\\text{ 与 }L_{2}\\text{（红= }L_{1}\\text{，绿= }L_{2}\\text{）；}L_{3}\\text{ 与谁都接触}",
+      "\\text{⑦ 余子式：}P_{1}\\text{ 不接触 }L_{1}\\Rightarrow \\Delta _{1} = 1+d\\text{；}P_{2}\\text{ 接触所有环 }\\Rightarrow \\Delta _{2} = 1",
+      "\\text{✔ 合成 }G(s) = X_{4}/X_{1}"
+    ];
+    function setHL(id, on, grn) {
+      const el = $(id);
+      el.style.opacity = on ? 1 : 0;
+      el.classList.toggle("grn", !!grn);
+      el.classList.toggle("red", !grn);
+    }
+    function label(txt) { $("lb").style.opacity = txt ? 1 : 0; $("lb-t").textContent = txt || ""; }
+    function paint() {
+      HLS.forEach(h => setHL(h, false)); label("");
+      $("wA").classList.toggle("on", K >= 1);
+      $("wA1").style.opacity = K >= 1 ? 1 : 0;
+      $("wA2").style.opacity = K >= 2 ? 1 : 0;
+      $("wB").classList.toggle("on", K >= 3);
+      $("wB1").style.opacity = K >= 4 ? 1 : 0;
+      $("wB2").style.opacity = K >= 5 ? 1 : 0;
+      $("wC").classList.toggle("on", K >= 6);
+      $("wD").classList.toggle("on", K >= 8);
+      if (K === 1) { setHL("hl-p1", 1); label("P₁ = aef"); }
+      if (K === 2) { setHL("hl-p2", 1); label("P₂ = abcf"); }
+      if (K === 3) { setHL("hl-l1", 1); label("L₁ = −d（自回环）"); }
+      if (K === 4) { setHL("hl-l2", 1); label("L₂ = −eg"); }
+      if (K === 5) { setHL("hl-l3", 1); label("L₃ = −bcg"); }
+      if (K === 6) { setHL("hl-l1", 1); setHL("hl-l2", 1, true); label("互不接触：L₁·L₂ = deg"); }
+      if (K === 7) { setHL("hl-p1", 1); setHL("hl-l1", 1, true); label("P₁ 不接触 L₁ ⇒ Δ₁ = 1+d"); }
+      if (!(CAP[K] && window.mjxTypeset && mjxTypeset($("cap"), CAP[K]))) $("cap").textContent = "主观题（5 分）：用梅逊公式求 G(s)=X₄/X₁——先自己数通道与回环";
+      $("prog").textContent = K + " / " + TOTAL;
+    }
+    const S = ACT.step;
+    const _next = S.next.bind(S), _reset = S.reset.bind(S);
+    S.next = function () { if (K < TOTAL) K++; const d = _next(); paint(); return d; };
+    S.reset = function () { K = 0; _reset(); paint(); };
+    window.prev = function () {
+      if (K <= 0) return;
+      const t = K - 1; S.reset();
+      for (let i = 0; i < t; i++) S.next();
+    };
+    paint();
+  });
+</script>
+</body>
+</html>

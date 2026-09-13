@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>方框图 ↔ 信号流图对照</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .map { display:flex; flex-direction:column; gap:38px; margin-top:26px; }
+  .mr { display:flex; align-items:center; gap:14px; background:var(--sky); border-radius:12px; padding:24px 26px; }
+  .mr .side { flex:1; display:flex; align-items:center; gap:12px; }
+  .mr .side .t { font-size:23px; font-weight:700; color:var(--navy); }
+  .mr .mid { flex:0 0 60px; text-align:center; font-size:32px; color:var(--orange); font-weight:800; }
+  .mr .side svg { flex:0 0 150px; }
+  .mr.hot { background:#FDF0EF; }
+  .mr .warn { font-size:19px; color:var(--red); font-weight:800; }
+  .cap-l { flex:0 0 150px; font-size:20px; color:var(--muted); font-weight:700; text-align:center; }
+</style>
+</head>
+<body data-title="方框图 ↔ 信号流图对照" data-page="42 / 51">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="map">
+      <div class="mr" data-step="1">
+        <div class="cap-l">方框图</div>
+        <div class="side">
+          <svg viewBox="0 0 150 56" height="60"><defs><marker id="m41a" markerWidth="7" markerHeight="7" refX="5.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#1D3FA0"/></marker></defs>
+            <line x1="8" y1="28" x2="86" y2="28" stroke="#1D3FA0" stroke-width="2.5" marker-end="url(#m41a)"/>
+            <text x="14" y="20" font-size="16" fill="#1B3B8B" font-style="italic">R(s)</text></svg>
+          <div class="t">输入信号</div>
+        </div>
+        <div class="mid">⇄</div>
+        <div class="side">
+          <svg viewBox="0 0 150 56" height="60"><circle cx="30" cy="28" r="8" fill="#fff" stroke="#1D3FA0" stroke-width="2.5"/>
+            <text x="52" y="34" font-size="16" fill="#1B3B8B" font-style="italic">源节点 x₀</text></svg>
+          <div class="t">源节点（只有出支路）</div>
+        </div>
+      </div>
+      <div class="mr" data-step="1">
+        <div class="cap-l">方框图</div>
+        <div class="side">
+          <svg viewBox="0 0 150 56" height="60"><defs><marker id="m41b" markerWidth="7" markerHeight="7" refX="5.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#1D3FA0"/></marker></defs>
+            <line x1="8" y1="28" x2="86" y2="28" stroke="#1D3FA0" stroke-width="2.5" marker-end="url(#m41b)"/>
+            <text x="14" y="20" font-size="16" fill="#1B3B8B" font-style="italic">C(s)</text></svg>
+          <div class="t">输出信号</div>
+        </div>
+        <div class="mid">⇄</div>
+        <div class="side">
+          <svg viewBox="0 0 150 56" height="60"><circle cx="30" cy="28" r="8" fill="#fff" stroke="#1D3FA0" stroke-width="2.5"/>
+            <text x="52" y="34" font-size="16" fill="#1B3B8B" font-style="italic">汇节点 xₙ</text></svg>
+          <div class="t">汇节点（只有入支路）</div>
+        </div>
+      </div>
+      <div class="mr hot" data-step="2">
+        <div class="cap-l">方框图</div>
+        <div class="side">
+          <svg viewBox="0 0 150 72" height="76"><defs><marker id="m41c" markerWidth="7" markerHeight="7" refX="5.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#1D3FA0"/></marker></defs>
+            <circle cx="34" cy="34" r="11" fill="#fff" stroke="#1D3FA0" stroke-width="2.2"/><path d="M 29.0,29.0 L 39.0,39.0 M 29.0,39.0 L 39.0,29.0" stroke="#1D3FA0" stroke-width="2.2" fill="none"/>
+            <line x1="4" y1="34" x2="20" y2="34" stroke="#1D3FA0" stroke-width="2.2" marker-end="url(#m41c)"/>
+            <line x1="45" y1="34" x2="120" y2="34" stroke="#1D3FA0" stroke-width="2.2" marker-end="url(#m41c)"/>
+            <line x1="34" y1="6" x2="34" y2="20" stroke="#1D3FA0" stroke-width="2.2" marker-end="url(#m41c)"/>
+            <circle cx="86" cy="34" r="3.5" fill="#1D3FA0"/>
+            <line x1="86" y1="34" x2="86" y2="62" stroke="#1D3FA0" stroke-width="2.2" marker-end="url(#m41c)"/></svg>
+          <div class="t">相加点 + 引出点</div>
+        </div>
+        <div class="mid">⇄</div>
+        <div class="side">
+          <svg viewBox="0 0 150 72" height="76"><circle cx="70" cy="34" r="8" fill="#fff" stroke="#1D3FA0" stroke-width="2.5"/>
+            <g stroke="#1D3FA0" stroke-width="2.2">
+              <line x1="8" y1="34" x2="62" y2="34"/>
+              <line x1="78" y1="34" x2="140" y2="34"/>
+              <line x1="70" y1="6" x2="70" y2="26"/>
+              <line x1="70" y1="42" x2="70" y2="66"/>
+            </g>
+            <g fill="#1D3FA0">
+              <path d="M-4.5,-3.5 L6,0 L-4.5,3.5 Z" transform="translate(35,34)"/>
+              <path d="M-4.5,-3.5 L6,0 L-4.5,3.5 Z" transform="translate(109,34)"/>
+              <path d="M-4.5,-3.5 L6,0 L-4.5,3.5 Z" transform="translate(70,16) rotate(90)"/>
+              <path d="M-4.5,-3.5 L6,0 L-4.5,3.5 Z" transform="translate(70,54) rotate(90)"/>
+            </g></svg>
+          <div class="t">混合节点　<span class="warn">注意：先相加，再引出！</span></div>
+        </div>
+      </div>
+      <div class="mr" data-step="3">
+        <div class="cap-l">方框图</div>
+        <div class="side">
+          <svg viewBox="0 0 150 56" height="60"><defs><marker id="m41e" markerWidth="7" markerHeight="7" refX="5.5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 Z" fill="#1D3FA0"/></marker></defs>
+            <rect x="42" y="8" width="66" height="40" rx="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.2"/>
+            <text x="75" y="34" text-anchor="middle" font-size="16" fill="#1B3B8B" font-style="italic">G(s)</text>
+            <line x1="4" y1="28" x2="38" y2="28" stroke="#1D3FA0" stroke-width="2.2" marker-end="url(#m41e)"/>
+            <line x1="112" y1="28" x2="146" y2="28" stroke="#1D3FA0" stroke-width="2.2" marker-end="url(#m41e)"/></svg>
+          <div class="t">环节（传递函数）</div>
+        </div>
+        <div class="mid">⇄</div>
+        <div class="side">
+          <svg viewBox="0 0 150 56" height="60"><circle cx="24" cy="28" r="8" fill="#fff" stroke="#1D3FA0" stroke-width="2.5"/>
+            <circle cx="126" cy="28" r="8" fill="#fff" stroke="#1D3FA0" stroke-width="2.5"/>
+            <line x1="32" y1="28" x2="118" y2="28" stroke="#1D3FA0" stroke-width="2.2"/>
+            <path d="M-4.5,-3.5 L6,0 L-4.5,3.5 Z" transform="translate(75,28)" fill="#1D3FA0"/>
+            <text x="66" y="20" font-size="16" fill="#1B3B8B" font-style="italic">G</text></svg>
+          <div class="t">支路 + 支路增益（传输）</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note">注意：方框图的"相加点+引出点"在信号流图中合并为一个混合节点，符号（±）转移到支路增益上，且节点处先相加再引出。</div>
+</div></div>
+</body>
+</html>

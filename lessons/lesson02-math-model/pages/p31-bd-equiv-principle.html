@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>方框图的等效变换</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .two { display:flex; gap:22px; margin-bottom:20px; }
+  .two .act-card { flex:1; }
+  .two .bd2 { display:flex; align-items:center; gap:18px; padding:22px 24px; }
+  .ic { font-size:44px; }
+  .tt { font-size:24px; font-weight:700; color:var(--blue); margin-bottom:6px; }
+  .dd { font-size:20px; color:var(--muted); line-height:1.5; }
+  .prin .bd2 { padding:24px 30px; }
+  .pitem { display:flex; gap:16px; align-items:flex-start; margin-top:14px; }
+  .pnum { flex:0 0 40px; height:40px; border-radius:50%; background:var(--blue); color:#fff;
+          display:grid; place-items:center; font-size:22px; font-weight:700; }
+  .ptx { font-size:23px; color:var(--ink); line-height:1.55; padding-top:4px; }
+  .goal { margin-top:16px; text-align:center; font-size:21px; color:var(--muted); }
+</style>
+</head>
+<body data-title="方框图的等效变换" data-page="31 / 51">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body fill">
+    <div class="two">
+      <div class="act-card">
+        <div class="bd2">
+          <div class="ic">🧩</div>
+          <div>
+            <div class="tt">第 1 类：环节的合并</div>
+            <div class="dd">串联、并联、反馈联接的多个环节 → 合并为一个等效环节</div>
+          </div>
+        </div>
+      </div>
+      <div class="act-card">
+        <div class="bd2">
+          <div class="ic">🔀</div>
+          <div>
+            <div class="tt">第 2 类：信号点的等效移动</div>
+            <div class="dd">分支点（引出点）或相加点跨越环节移动，使结构便于合并</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="act-card prin">
+      <div class="hd">遵循的原则：变换前后数学关系保持不变</div>
+      <div class="bd2">
+        <div class="pitem" data-step>
+          <div class="pnum">1</div>
+          <div class="ptx math">变换前后，<span class="kw-r">前向通道</span>中传递函数的<span class="kw-r">乘积保持不变</span></div>
+        </div>
+        <div class="pitem" data-step>
+          <div class="pnum">2</div>
+          <div class="ptx math">变换前后，<span class="kw-r">回路</span>中传递函数的<span class="kw-r">乘积保持不变</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="goal" data-step>目的：把复杂方框图逐步化简为一个等效环节，直接写出 Φ(s) = C(s) / R(s)</div>
+  </div>
+  <div class="act-note">这页是后续所有化简题的"游戏规则"。可反问：为什么移动分支点时要补一个环节？——正是为了保证前向通道/回路乘积不变。</div>
+</div></div>
+</body>
+</html>

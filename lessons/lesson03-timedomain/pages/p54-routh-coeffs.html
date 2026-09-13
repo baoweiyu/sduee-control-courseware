@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>劳斯表系数的计算</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<link rel="stylesheet" href="../lesson03-svg.css">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:24px; height:100%; }
+  .fxc { flex:1; }
+  .fxc .bd { display:flex; flex-direction:column; justify-content:center; gap:16px; }
+  .fxgrp { display:flex; flex-direction:column; gap:10px; }
+  .fxlab { font-size:21.5px; font-weight:700; color:var(--navy); }
+  .rule { margin-top:8px; background:var(--sky); border:2px solid var(--line); border-radius:12px; padding:14px 18px; font-size:21px; color:var(--ink); line-height:1.7; }
+  .figc { flex:1.1; display:flex; flex-direction:column; overflow:hidden; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:8px 14px; }
+  .figc svg { width:100%; height:100%; }
+</style>
+</head>
+<body data-title="劳斯表系数的计算" data-page="57 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="row">
+      <div class="act-card fxc">
+        <div class="hd">第三、四行系数的计算公式</div>
+        <div class="bd">
+          <div class="fxgrp">
+            <div class="fxlab">sⁿ⁻² 行（b 行）：</div>
+            <div class="mathbox math eqline tex tex-d" style="font-size:24px">b_{1}=\dfrac{a_{1}a_{2}-a_{0}a_{3}}{a_{1}},\quad b_{2}=\dfrac{a_{1}a_{4}-a_{0}a_{5}}{a_{1}}</div>
+            <div class="mathbox math eqline tex tex-d" style="font-size:24px">b_{3}=\dfrac{a_{1}a_{6}-a_{0}a_{7}}{a_{1}}</div>
+          </div>
+          <div class="fxgrp">
+            <div class="fxlab">sⁿ⁻³ 行（c 行）：</div>
+            <div class="mathbox math eqline tex tex-d" style="font-size:24px">c_{1}=\dfrac{b_{1}a_{3}-a_{1}b_{2}}{b_{1}},\quad c_{2}=\dfrac{b_{1}a_{5}-a_{1}b_{3}}{b_{1}}</div>
+          </div>
+          <div class="rule">
+            规律：以<span class="kw-r">靠下一行的首列元素作分母</span>；分子为"交叉相乘之差" —— 下行首列 × 上行右列 − 上行首列 × 下行右列；右列逐次右移一列，即得该行的 b₂、b₃…（c₂、c₃…）。
+          </div>
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd">交叉相乘图示</div>
+        <div class="bd2"><svg id="fig" viewBox="0 0 600 600"></svg></div>
+      </div>
+    </div>
+  </div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("fig");
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const defs = mk("defs", {});
+  const m1 = mk("marker", { id: "a54", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#1E9E57" }, m1);
+  function txSub(x, y, base, sub, o) {
+    const t = mk("text", { x, y, "font-size": (o && o.fs) || 25, "text-anchor": "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": 700, "font-style": "italic" });
+    t.textContent = base;
+    if (sub) { const ts = mk("tspan", { dy: "0.32em", "font-size": "0.68em" }, t); ts.textContent = sub; }
+    return t;
+  }
+  function cell(cx, cy, base, sub, hi) {
+    mk("rect", { x: cx - 48, y: cy - 25, width: 96, height: 50, rx: 10, fill: hi ? "#FDF3EC" : "#fff", stroke: hi ? "#F5821F" : "#1B3B8B", "stroke-width": hi ? 3 : 2 });
+    txSub(cx, cy + 9, base, sub, { fill: hi ? "#D63A2F" : "#1B3B8B" });
+  }
+  function title(x, y, s) { const t = mk("text", { x, y, "font-size": 23, "font-weight": 700, fill: "#17306B" }); t.textContent = s; }
+  function dots(x, y) { const t = mk("text", { x, y, "font-size": 24, "font-weight": 700, fill: "#8A97B5", "text-anchor": "middle" }); t.textContent = "…"; }
+  const CX = [160, 280, 400];
+  function cross2x2(yTop, yBot) {
+    mk("rect", { x: CX[0] - 58, y: yTop - 33, width: CX[1] - CX[0] + 116, height: yBot - yTop + 66, rx: 14, fill: "none", stroke: "#F5821F", "stroke-width": 2.5, "stroke-dasharray": "9 6" });
+    mk("line", { x1: CX[0] + 16, y1: yBot - 27, x2: CX[1] - 16, y2: yTop + 27, stroke: "#1E9E57", "stroke-width": 3.5 });
+    mk("line", { x1: CX[0] + 16, y1: yTop + 27, x2: CX[1] - 16, y2: yBot - 27, stroke: "#D63A2F", "stroke-width": 3.5, "stroke-dasharray": "8 6" });
+  }
+  // ---------- 图 1：b 行 ----------
+  title(26, 36, "① b 行（sⁿ⁻² 行）的计算");
+  const Y0 = 92, Y1 = 168, Y2 = 262;
+  [["a", "0"], ["a", "2"], ["a", "4"]].forEach((c, i) => cell(CX[i], Y0, c[0], c[1]));
+  [["a", "1"], ["a", "3"], ["a", "5"]].forEach((c, i) => cell(CX[i], Y1, c[0], c[1]));
+  cell(CX[0], Y2, "b", "1", true); cell(CX[1], Y2, "b", "2"); cell(CX[2], Y2, "b", "3");
+  dots(478, Y0 + 8); dots(478, Y1 + 8); dots(478, Y2 + 8);
+  cross2x2(Y0, Y1);
+  mk("line", { x1: CX[0], y1: Y1 + 31, x2: CX[0], y2: Y2 - 31, stroke: "#1E9E57", "stroke-width": 3, "marker-end": "url(#a54)" });
+  // 图例行
+  mk("line", { x1: 150, y1: 316, x2: 192, y2: 316, stroke: "#1E9E57", "stroke-width": 3.5 });
+  const lg1 = mk("text", { x: 202, y: 323, "font-size": 20, "font-weight": 700, fill: "#1E9E57" }); lg1.textContent = "实线相乘（+）";
+  mk("line", { x1: 360, y1: 316, x2: 402, y2: 316, stroke: "#D63A2F", "stroke-width": 3.5, "stroke-dasharray": "8 6" });
+  const lg2 = mk("text", { x: 412, y: 323, "font-size": 20, "font-weight": 700, fill: "#D63A2F" }); lg2.textContent = "虚线相乘（−）";
+  // ---------- 图 2：c 行 ----------
+  title(26, 384, "② c 行（sⁿ⁻³ 行）的计算");
+  const Z0 = 428, Z1 = 494, Z2 = 568;
+  [["a", "1"], ["a", "3"], ["a", "5"]].forEach((c, i) => cell(CX[i], Z0, c[0], c[1]));
+  [["b", "1"], ["b", "2"], ["b", "3"]].forEach((c, i) => cell(CX[i], Z1, c[0], c[1]));
+  cell(CX[0], Z2, "c", "1", true); cell(CX[1], Z2, "c", "2");
+  dots(478, Z0 + 8); dots(478, Z1 + 8);
+  cross2x2(Z0, Z1);
+  mk("line", { x1: CX[0], y1: Z1 + 27, x2: CX[0], y2: Z2 - 27, stroke: "#1E9E57", "stroke-width": 3, "marker-end": "url(#a54)" });
+});
+</script>
+</body>
+</html>

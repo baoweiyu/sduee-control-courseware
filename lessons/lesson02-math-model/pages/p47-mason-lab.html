@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>例2-14 梅逊公式分步演练</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .ctl { display:flex; align-items:center; gap:12px; margin-bottom:6px; }
+  .btn { border:none; background:var(--blue); color:#fff; font-size:18.5px; font-weight:700;
+         border-radius:9px; padding:7px 18px; cursor:pointer; font-family:inherit; }
+  .btn.ghost { background:#fff; color:var(--blue); border:2px solid var(--blue); }
+  .cap2 { font-size:20.5px; font-weight:800; color:var(--red); flex:1; }
+  .prog { font-size:17px; color:var(--muted); }
+  .panel { background:var(--sky); border-radius:14px; padding:2px 10px; }
+  .hl { opacity:0; transition:opacity .35s; fill:none; stroke-linecap:round; }
+  .hl.red { stroke:#D63A2F; } .hl.blue { stroke:#1D3FA0; } .hl.grn { stroke:#2E9E6B; }
+  .flow { stroke-dasharray:20 14; animation:fl .9s linear infinite; }
+  @keyframes fl { to { stroke-dashoffset:-34; } }
+  .work { margin-top:8px; display:flex; gap:12px; }
+  .wc { flex:1; background:#fff; border:2px solid var(--blue); border-radius:12px; padding:8px 14px;
+        opacity:0; transform:translateY(12px); transition:.4s; font-size:18.5px; line-height:1.5; }
+  .wc.on { opacity:1; transform:none; }
+  .wc .h { font-weight:800; color:var(--blue); font-size:18.5px; margin-bottom:3px; }
+  .wc.fin { border-color:var(--red); background:#FDF0EF; flex:1.35; }
+  .wc.fin .h { color:var(--red); }
+</style>
+</head>
+<body data-title="例2-14　梅逊公式分步演练" data-page="47 / 51">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="ctl">
+      <button class="btn ghost" onclick="prev()">◀ 上一步</button>
+      <button class="btn" onclick="ACT.step.next()">下一步 ▶</button>
+      <button class="btn ghost" onclick="ACT.step.reset()">↺</button>
+      <div class="cap2 tex" id="cap">\text{任务：用梅逊公式求 }\Phi (s)=C(s)/R(s)\text{——先观察信号流图的结构}</div>
+      <div class="prog" id="prog">0 / 13</div>
+    </div>
+    <div class="panel">
+      <svg viewBox="0 0 1150 420" width="100%" height="392">
+        <!-- 基图 -->
+        <g stroke="#1D3FA0" stroke-width="3" fill="none">
+          <line x1="69" y1="210" x2="251" y2="210"/><line x1="269" y1="210" x2="421" y2="210"/>
+          <line x1="439" y1="210" x2="591" y2="210"/><line x1="609" y1="210" x2="761" y2="210"/>
+          <line x1="779" y1="210" x2="971" y2="210"/>
+          <path d="M 265 200 Q 430 92 595 200"/>
+          <path d="M 435 198 Q 705 36 968 198"/>
+          <path d="M 764 222 Q 685 302 606 222"/>
+          <path d="M 972 224 Q 617 396 268 224"/>
+        </g>
+        <g fill="#1D3FA0">
+          <path d="M-6,-5 L8,0 L-6,5 Z" transform="translate(160,210)"/>
+          <path d="M-6,-5 L8,0 L-6,5 Z" transform="translate(345,210)"/>
+          <path d="M-6,-5 L8,0 L-6,5 Z" transform="translate(515,210)"/>
+          <path d="M-6,-5 L8,0 L-6,5 Z" transform="translate(685,210)"/>
+          <path d="M-6,-5 L8,0 L-6,5 Z" transform="translate(875,210)"/>
+          <path d="M-6,-5 L8,0 L-6,5 Z" transform="translate(430,146)"/>
+          <path d="M-6,-5 L8,0 L-6,5 Z" transform="translate(703,117)"/>
+          <path d="M-6,-5 L8,0 L-6,5 Z" transform="translate(685,262) rotate(180)"/>
+          <path d="M-6,-5 L8,0 L-6,5 Z" transform="translate(618,310) rotate(180)"/>
+        </g>
+        <g fill="#fff" stroke="#1D3FA0" stroke-width="3">
+          <circle cx="60" cy="210" r="9"/><circle cx="260" cy="210" r="9"/><circle cx="430" cy="210" r="9"/>
+          <circle cx="600" cy="210" r="9"/><circle cx="770" cy="210" r="9"/><circle cx="980" cy="210" r="9"/>
+        </g>
+        <g font-size="19" fill="#1B3B8B" font-style="italic">
+          <text x="40" y="240">R(s)</text><text x="968" y="240">C(s)</text>
+          <text x="150" y="196">G₁</text><text x="336" y="196">G₂</text><text x="508" y="196">G₃</text>
+          <text x="678" y="196">G₄</text><text x="866" y="196">G₅</text>
+          <text x="418" y="126">G₆</text><text x="694" y="64">G₇</text>
+          <text x="664" y="296">−H₁</text><text x="600" y="388">−H₂</text>
+          <text x="254" y="240" font-size="15" fill="#8B93B8">n₁</text><text x="424" y="240" font-size="15" fill="#8B93B8">n₂</text>
+          <text x="594" y="240" font-size="15" fill="#8B93B8">n₃</text><text x="764" y="240" font-size="15" fill="#8B93B8">n₄</text>
+        </g>
+        <!-- 变灰层（Δ₃ 演示用） -->
+        <rect id="dim" x="0" y="0" width="1150" height="420" fill="#EDF3FC" opacity="0" style="transition:opacity .4s"/>
+        <!-- 高亮层 -->
+        <path id="hl-p1" class="hl red flow" stroke-width="6" d="M 60 210 L 980 210"/>
+        <path id="hl-p2" class="hl red flow" stroke-width="6" d="M 60 210 L 262 208 Q 430 90 596 200 L 604 210 L 980 210"/>
+        <path id="hl-p3" class="hl red flow" stroke-width="6" d="M 60 210 L 432 206 Q 705 38 966 200 L 980 210"/>
+        <path id="hl-l1" class="hl red flow" stroke-width="6" d="M 604 206 L 762 206 Q 685 298 608 224"/>
+        <path id="hl-l2" class="hl red flow" stroke-width="6" d="M 264 206 L 428 206 Q 705 40 964 202 Q 617 388 268 226"/>
+        <path id="hl-l3" class="hl red flow" stroke-width="6" d="M 262 206 Q 430 90 596 200 L 604 210 L 966 210 Q 617 388 268 226"/>
+        <path id="hl-l4" class="hl red flow" stroke-width="6" d="M 262 210 L 966 210 Q 617 388 268 226"/>
+        <g id="lb" font-size="19" font-weight="800" opacity="0" style="transition:opacity .3s">
+          <text id="lb-t" x="480" y="330" fill="#D63A2F"></text>
+        </g>
+      </svg>
+    </div>
+    <div class="work math">
+      <div class="wc" id="wA">
+        <div class="h">① 前向通道（共 3 条）</div>
+        <span class="tex">P_{1} = G_{1}G_{2}G_{3}G_{4}G_{5}</span><br><span class="tex">P_{2} = G_{1}G_{6}G_{4}G_{5}</span><br><span class="tex">P_{3} = G_{1}G_{2}G_{7}</span>
+      </div>
+      <div class="wc" id="wB">
+        <div class="h">② 回环（共 4 个）</div>
+        <span class="tex">\sum L_{1} = -G_{4}H_{1} - G_{2}G_{7}H_{2}</span><br><span class="tex">\quad - G_{6}G_{4}G_{5}H_{2} - G_{2}G_{3}G_{4}G_{5}H_{2}</span>
+      </div>
+      <div class="wc" id="wC">
+        <div class="h">③ 特征式与余子式</div>
+        <span id="wC1" style="opacity:0"><span class="tex">\text{互不接触：仅 }L_{1}\cdot L_{2}\Rightarrow \sum L_{2} = G_{4}H_{1}G_{2}G_{7}H_{2}</span><br></span>
+        <span id="wC2" style="opacity:0"><span class="tex">\Delta = 1-\sum L_{1}+\sum L_{2}</span>（负负得正，各项均 +）<br></span>
+        <span id="wC3" style="opacity:0"><span class="tex">\Delta _{1}=\Delta _{2}=1</span>；<span class="tex">P_{3}</span> 仅与 <span class="tex">L_{1}</span> 不接触 ⇒ <span class="tex">\Delta _{3}=1+G_{4}H_{1}</span></span>
+      </div>
+      <div class="wc fin" id="wD">
+        <div class="h">✔ 合成结果</div>
+        <div style="font-size:17.5px"><span class="tex">\Phi (s) = \dfrac{G_{1}G_{2}G_{3}G_{4}G_{5} + G_{1}G_{6}G_{4}G_{5} + G_{1}G_{2}G_{7}(1+G_{4}H_{1})}{1 + G_{4}H_{1} + G_{2}G_{7}H_{2} + G_{6}G_{4}G_{5}H_{2} + G_{2}G_{3}G_{4}G_{5}H_{2} + G_{4}H_{1}G_{2}G_{7}H_{2}}</span></div>
+      </div>
+    </div>
+  </div>
+  <div data-step="1" style="display:none"></div><div data-step="2" style="display:none"></div>
+  <div data-step="3" style="display:none"></div><div data-step="4" style="display:none"></div>
+  <div data-step="5" style="display:none"></div><div data-step="6" style="display:none"></div>
+  <div data-step="7" style="display:none"></div><div data-step="8" style="display:none"></div>
+  <div data-step="9" style="display:none"></div><div data-step="10" style="display:none"></div>
+  <div data-step="11" style="display:none"></div><div data-step="12" style="display:none"></div>
+  <div data-step="13" style="display:none"></div>
+</div></div>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const TOTAL = 13;
+    let K = 0;
+    const $ = id => document.getElementById(id);
+    const HLS = ["hl-p1","hl-p2","hl-p3","hl-l1","hl-l2","hl-l3","hl-l4"];
+    const CAP0 = [
+      "任务：用梅逊公式求 Φ(s)=C(s)/R(s)——先观察信号流图的结构",
+      "① 前向通道 P₁ = G₁G₂G₃G₄G₅（沿主链流动）",
+      "② 前向通道 P₂ = G₁G₆G₄G₅（经上支路 G₆）",
+      "③ 前向通道 P₃ = G₁G₂G₇（经上支路 G₇ 直达输出）",
+      "✔ 前向通道共 3 条，记入推导区",
+      "⑤ 回环 L₁ = −G₄H₁（套在 G₄ 上的局部小环）",
+      "⑥ 回环 L₂ = −G₂G₇H₂（经 G₂、G₇、−H₂）",
+      "⑦ 回环 L₃ = −G₆G₄G₅H₂（经 G₆、G₄G₅、−H₂）",
+      "⑧ 回环 L₄ = −G₂G₃G₄G₅H₂（沿主链的大环）",
+      "✔ 回环共 4 个，ΣL₁ 记入推导区",
+      "⑨ 找互不接触回环：只有 L₁ 与 L₂ 无公共节点！（红/绿同时高亮）",
+      "⑩ 拼特征式：Δ = 1 − ΣL₁ + ΣL₂（注意负负得正）",
+      "⑪ 余子式：P₃ 只与 L₁ 不接触（其余环变灰）⇒ Δ₃ = 1+G₄H₁；Δ₁=Δ₂=1",
+      "✔ 合成 Φ(s) = (P₁Δ₁+P₂Δ₂+P₃Δ₃)/Δ，与例2-13 类题对照"
+    ];
+    const CAP = [
+      "\\text{任务：用梅逊公式求 }\\Phi (s)=C(s)/R(s)\\text{——先观察信号流图的结构}",
+      "\\text{① 前向通道 }P_{1} = G_{1}G_{2}G_{3}G_{4}G_{5}\\text{（沿主链流动）}",
+      "\\text{② 前向通道 }P_{2} = G_{1}G_{6}G_{4}G_{5}\\text{（经上支路 }G_{6}\\text{）}",
+      "\\text{③ 前向通道 }P_{3} = G_{1}G_{2}G_{7}\\text{（经上支路 }G_{7}\\text{ 直达输出）}",
+      "\\text{✔ 前向通道共 3 条，记入推导区}",
+      "\\text{⑤ 回环 }L_{1} = -G_{4}H_{1}\\text{（套在 }G_{4}\\text{ 上的局部小环）}",
+      "\\text{⑥ 回环 }L_{2} = -G_{2}G_{7}H_{2}\\text{（经 }G_{2}\\text{、}G_{7}\\text{、}-H_{2}\\text{）}",
+      "\\text{⑦ 回环 }L_{3} = -G_{6}G_{4}G_{5}H_{2}\\text{（经 }G_{6}\\text{、}G_{4}G_{5}\\text{、}-H_{2}\\text{）}",
+      "\\text{⑧ 回环 }L_{4} = -G_{2}G_{3}G_{4}G_{5}H_{2}\\text{（沿主链的大环）}",
+      "\\text{✔ 回环共 4 个，}\\sum L_{1}\\text{ 记入推导区}",
+      "\\text{⑨ 找互不接触回环：只有 }L_{1}\\text{ 与 }L_{2}\\text{ 无公共节点！（红/绿同时高亮）}",
+      "\\text{⑩ 拼特征式：}\\Delta = 1 - \\sum L_{1} + \\sum L_{2}\\text{（注意负负得正）}",
+      "\\text{⑪ 余子式：}P_{3}\\text{ 只与 }L_{1}\\text{ 不接触（其余环变灰）}\\Rightarrow \\Delta _{3} = 1+G_{4}H_{1}\\text{；}\\Delta _{1}=\\Delta _{2}=1",
+      "\\text{✔ 合成 }\\Phi (s) = (P_{1}\\Delta _{1}+P_{2}\\Delta _{2}+P_{3}\\Delta _{3})/\\Delta \\text{，与例2-13 类题对照}"
+    ];
+    function setHL(id, on, grn) {
+      const el = $(id);
+      el.style.opacity = on ? 1 : 0;
+      el.classList.toggle("grn", !!grn);
+      el.classList.toggle("red", !grn);
+    }
+    function label(txt) { $("lb").style.opacity = txt ? 1 : 0; $("lb-t").textContent = txt || ""; }
+    function paint() {
+      HLS.forEach(h => setHL(h, false));
+      $("dim").style.opacity = 0; label("");
+      $("wA").classList.toggle("on", K >= 4);
+      $("wB").classList.toggle("on", K >= 9);
+      $("wC").classList.toggle("on", K >= 10);
+      $("wC1").style.opacity = K >= 10 ? 1 : 0;
+      $("wC2").style.opacity = K >= 11 ? 1 : 0;
+      $("wC3").style.opacity = K >= 12 ? 1 : 0;
+      $("wD").classList.toggle("on", K >= 13);
+      if (K === 1) { setHL("hl-p1", 1); label("P₁"); }
+      if (K === 2) { setHL("hl-p2", 1); label("P₂"); }
+      if (K === 3) { setHL("hl-p3", 1); label("P₃"); }
+      if (K === 5) { setHL("hl-l1", 1); label("L₁ = −G₄H₁"); }
+      if (K === 6) { setHL("hl-l2", 1); label("L₂ = −G₂G₇H₂"); }
+      if (K === 7) { setHL("hl-l3", 1); label("L₃ = −G₆G₄G₅H₂"); }
+      if (K === 8) { setHL("hl-l4", 1); label("L₄ = −G₂G₃G₄G₅H₂"); }
+      if (K === 10) { setHL("hl-l1", 1); setHL("hl-l2", 1, true); label("L₁ 与 L₂ 互不接触 ✔"); }
+      if (K === 12) { $("dim").style.opacity = .72; setHL("hl-p3", 1); setHL("hl-l1", 1); label("P₃ 通道上：只有 L₁ 不接触"); }
+      if (!(window.mjxTypeset && mjxTypeset($("cap"), CAP[K]))) $("cap").textContent = CAP0[K];
+      $("prog").textContent = K + " / " + TOTAL;
+    }
+    const S = ACT.step;
+    const _next = S.next.bind(S), _reset = S.reset.bind(S);
+    S.next = function () { if (K < TOTAL) K++; const d = _next(); paint(); return d; };
+    S.reset = function () { K = 0; _reset(); paint(); };
+    window.prev = function () {
+      if (K <= 0) return;
+      const t = K - 1; S.reset();
+      for (let i = 0; i < t; i++) S.next();
+    };
+    paint();
+  });
+</script>
+</body>
+</html>

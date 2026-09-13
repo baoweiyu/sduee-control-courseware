@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>自动控制的基本方式</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .sec { font-size:28px; font-weight:700; color:var(--blue); margin:10px 0 26px; }
+  .cards { display:flex; gap:30px; height:640px; }
+  .cc { flex:1; text-align:center; padding:30px 22px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:30px; }
+  .cc .n { width:86px; height:86px; border-radius:50%; background:var(--blue); color:#fff; font-size:38px; font-weight:700; display:grid; place-items:center; }
+  .cc h3 { font-size:34px; color:var(--navy); }
+  .cc p { font-size:23px; color:var(--muted); line-height:1.75; }
+  .cc .k { display:inline-block; background:var(--sky); border-radius:9px; padding:8px 20px; font-size:22px; color:var(--navy); }
+</style>
+</head>
+<body data-title="二、自动控制的基本方式" data-page="17 / 35">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body fill">
+    <div class="cards">
+      <div class="act-card cc"><div class="n">1</div><h3>开环控制</h3><div class="k">输出量不参与控制</div><p>信号单向传递<br>结构简单、成本低</p></div>
+      <div class="act-card cc"><div class="n">2</div><h3>闭环控制</h3><div class="k">输出量参与控制</div><p>反馈形成闭合回路<br>精度高、抗干扰</p></div>
+      <div class="act-card cc"><div class="n">3</div><h3>复合控制</h3><div class="k">开环 + 闭环结合</div><p>前馈补偿<br>提前抵消扰动影响</p></div>
+    </div>
+  </div>
+</div></div>
+</body>
+</html>

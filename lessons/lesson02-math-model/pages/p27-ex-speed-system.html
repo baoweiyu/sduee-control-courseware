@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>例2-8 速度控制系统</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .cols { display:flex; gap:26px; height:472px; margin-top:2px; }
+  .imgc { flex:1.05; overflow:hidden; display:flex; flex-direction:column; }
+  .imgc .bd2 { flex:1; display:grid; place-items:center; background:var(--sky); padding:8px; }
+  .imgc img { max-width:100%; max-height:100%; object-fit:contain; }
+  .sch { flex:1.25; display:flex; flex-direction:column; }
+  .sch .bd2 { flex:1; display:grid; place-items:center; padding:6px; }
+  .cap { text-align:center; font-size:19px; color:var(--muted); padding-bottom:6px; }
+  .map { margin-top:12px; display:flex; gap:10px; align-items:center; justify-content:center; flex-wrap:wrap; }
+  .unit { background:var(--sky); border:2px solid var(--blue); border-radius:10px; padding:6px 12px; font-size:19px; color:var(--navy); font-weight:700; text-align:center; }
+  .unit small { display:block; font-weight:400; color:var(--muted); font-size:16px; }
+  .arr { color:var(--orange); font-size:22px; font-weight:700; }
+</style>
+</head>
+<body data-title="例2-8　速度控制系统" data-page="27 / 51">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="cols">
+      <div class="act-card imgc">
+        <div class="hd" style="font-size:23px">速度控制系统（电机 + 减速器 + 测速机）</div>
+        <div class="bd2"><img src="../../../assets/image2/speed-control-system.png" alt="直流电机速度控制系统"></div>
+      </div>
+      <div class="act-card sch">
+        <div class="hd" style="font-size:23px">原理结构划分（图 2-13）</div>
+        <div class="bd2">
+          <svg viewBox="0 0 560 300" width="97%" height="92%">
+            <defs>
+              <marker id="ar27" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 Z" fill="#1D3FA0"/></marker>
+              <marker id="ar27r" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 Z" fill="#D63A2F"/></marker>
+            </defs>
+            <!-- 负载扰动（红色，自上方进入电动机） -->
+            <line x1="497" y1="64" x2="497" y2="112" stroke="#D63A2F" stroke-width="2" fill="none" marker-end="url(#ar27r)"/>
+            <foreignObject x="380" y="34" width="170" height="24"><div xmlns="http://www.w3.org/1999/xhtml" class="tex" style="font-size:13px;color:#D63A2F">m_c\ (\text{负载扰动})</div></foreignObject>
+            <!-- 主通道各方框 -->
+            <rect x="8" y="120" width="70" height="60" rx="4" class="svgblk"/>
+            <text x="43" y="143" text-anchor="middle" class="svgname">电位器</text>
+            <foreignObject x="13" y="150" width="60" height="26"><div xmlns="http://www.w3.org/1999/xhtml" class="tex" style="font-size:14px;text-align:center">u_r</div></foreignObject>
+            <rect x="104" y="120" width="96" height="60" rx="4" class="svgblk"/>
+            <text x="152" y="143" text-anchor="middle" class="svgname">运算放大器Ⅰ</text>
+            <foreignObject x="122" y="150" width="60" height="26"><div xmlns="http://www.w3.org/1999/xhtml" class="tex" style="font-size:14px;text-align:center">G_1</div></foreignObject>
+            <rect x="226" y="120" width="96" height="60" rx="4" class="svgblk"/>
+            <text x="274" y="143" text-anchor="middle" class="svgname">运算放大器Ⅱ</text>
+            <foreignObject x="244" y="150" width="60" height="26"><div xmlns="http://www.w3.org/1999/xhtml" class="tex" style="font-size:14px;text-align:center">G_2</div></foreignObject>
+            <rect x="348" y="120" width="84" height="60" rx="4" class="svgblk"/>
+            <text x="390" y="143" text-anchor="middle" class="svgname">功率放大器</text>
+            <foreignObject x="360" y="150" width="60" height="26"><div xmlns="http://www.w3.org/1999/xhtml" class="tex" style="font-size:14px;text-align:center">G_3</div></foreignObject>
+            <rect x="462" y="120" width="70" height="60" rx="4" class="svgblk"/>
+            <text x="497" y="143" text-anchor="middle" class="svgname">电动机</text>
+            <foreignObject x="467" y="150" width="60" height="26"><div xmlns="http://www.w3.org/1999/xhtml" class="tex" style="font-size:14px;text-align:center">G_u</div></foreignObject>
+            <!-- 反馈通道方框 -->
+            <rect x="226" y="226" width="140" height="56" rx="4" fill="#fff" stroke="#F5821F" stroke-width="2"/>
+            <text x="296" y="248" text-anchor="middle" class="svgname" fill="#F5821F">测速发电机</text>
+            <foreignObject x="236" y="254" width="120" height="24"><div xmlns="http://www.w3.org/1999/xhtml" class="tex" style="font-size:13px;text-align:center;color:#F5821F">G_f\ (\text{反馈联接})</div></foreignObject>
+            <!-- 信号线：箱间留 26px，箭头清晰 -->
+            <g class="svgline">
+              <line x1="78" y1="150" x2="98" y2="150" marker-end="url(#ar27)"/>
+              <line x1="200" y1="150" x2="220" y2="150" marker-end="url(#ar27)"/>
+              <line x1="322" y1="150" x2="342" y2="150" marker-end="url(#ar27)"/>
+              <line x1="432" y1="150" x2="456" y2="150" marker-end="url(#ar27)"/>
+              <line x1="532" y1="150" x2="552" y2="150" marker-end="url(#ar27)"/>
+              <polyline points="497,180 497,254 372,254" stroke-dasharray="7 5"/>
+              <polyline points="226,254 43,254 43,186" stroke-dasharray="7 5" marker-end="url(#ar27)"/>
+            </g>
+            <foreignObject x="536" y="124" width="24" height="26"><div xmlns="http://www.w3.org/1999/xhtml" class="tex" style="font-size:15px">n</div></foreignObject>
+          </svg>
+        </div>
+        <div class="cap">测速发电机把转速 <span class="tex">n</span> 转换为反馈电压 <span class="tex">u_f</span>，形成速度闭环</div>
+      </div>
+    </div>
+    <div class="map" data-step>
+      <div class="unit">电位器<small>给定 <span class="tex">u_r</span></small></div><div class="arr">➜</div>
+      <div class="unit">运放Ⅰ <span class="tex">G_1</span><small>比例</small></div><div class="arr">➜</div>
+      <div class="unit">运放Ⅱ <span class="tex">G_2</span><small>校正</small></div><div class="arr">➜</div>
+      <div class="unit">功放 <span class="tex">G_3</span><small>放大</small></div><div class="arr">➜</div>
+      <div class="unit">电动机 <span class="tex">G_u</span><small><span class="tex">n</span> 输出，<span class="tex">M_c</span> 扰动</small></div><div class="arr">➜</div>
+      <div class="unit" style="border-color:var(--orange)">测速机 <span class="tex">G_f</span><small>反馈 <span class="tex">u_f</span></small></div>
+    </div>
+  </div>
+</div></div>
+</body>
+</html>

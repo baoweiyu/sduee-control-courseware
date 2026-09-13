@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>1.5 振荡环节的谐振</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:24px; height:100%; min-height:0; }
+  .lcol { flex:1.08; display:flex; flex-direction:column; gap:16px; min-height:0; }
+  .lcol .act-card { flex:1; display:flex; flex-direction:column; min-height:0; }
+  .lcol .bd { flex:1; display:flex; flex-direction:column; justify-content:space-evenly; gap:10px; font-size:21px; line-height:1.62; padding:14px 20px; }
+  .lcol .mathbox { font-size:23px; padding:11px 14px; }
+  .figc { flex:1; display:flex; flex-direction:column; overflow:hidden; }
+  .figc .bd2 { flex:1; display:grid; grid-template-columns:1fr 1fr; gap:10px; padding:10px; background:#fff; min-height:0; }
+  .cell { border:2px solid var(--line); border-radius:12px; display:flex; flex-direction:column; overflow:hidden; }
+  .cell .hh { font-size:16.5px; font-weight:700; color:var(--navy); background:var(--sky); text-align:center; padding:5px 6px; }
+  .cell svg { flex:1; width:100%; min-height:0; }
+  .ex { background:#FDF3EC; border-radius:10px; padding:8px 14px; font-size:19px; }
+</style>
+</head>
+<body data-title="1.5 振荡环节的谐振" data-page="21 / 87">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="row">
+      <div class="lcol">
+        <div class="act-card">
+          <div class="hd">谐振从何而来？——求幅值的极值</div>
+          <div class="bd">
+            <div>令 <span class="tex">\dfrac{\mathrm{d}|G(j\omega)|}{\mathrm{d}\omega}=0</span>，即分母 <span class="tex">(1-T^{2}\omega^{2})^{2}+(2\zeta T\omega)^{2}</span> 取极小：</div>
+            <div class="mathbox math eqline tex tex-d">\omega_r=\omega_n\sqrt{1-2\zeta^{2}},\qquad M_r=\dfrac{1}{2\zeta\sqrt{1-\zeta^{2}}}</div>
+            <div>只有 <span class="kw-r">0 ≤ ζ ≤ 0.707</span> 时 <span class="tex">\omega_r</span> 才为实数——<span class="kw-r">才存在谐振</span>。</div>
+          </div>
+        </div>
+        <div class="act-card">
+          <div class="hd">ζ 的四档讨论（右图一一对应）</div>
+          <div class="bd">
+            <div><b>① ζ > 0.707：</b>无谐振，幅值随 ω <span class="kw-r">单调下降</span>；</div>
+            <div><b>② ζ = 0.707：</b>临界，<span class="tex">\omega_r=0</span>、<span class="tex">M_r=1</span>；</div>
+            <div><b>③ 0 &lt; ζ &lt; 0.707：</b>出现谐振；ζ 越小，<span class="tex">\omega_r\to\omega_n</span>、<span class="tex">M_r</span> 越大；</div>
+            <div><b>④ ζ = 0：</b><span class="tex">\omega_r=\omega_n</span>、<span class="tex">M_r\to\infty</span>——无阻尼，幅值发散。</div>
+          </div>
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd">四档 ζ 下的 Nyquist 曲线（T=1）</div>
+        <div class="bd2">
+          <div class="cell"><div class="hh">① ζ=1.0（无谐振）</div><svg id="c1" viewBox="0 0 300 230"></svg></div>
+          <div class="cell"><div class="hh">② ζ=0.707（临界）</div><svg id="c2" viewBox="0 0 300 230"></svg></div>
+          <div class="cell"><div class="hh">③ ζ=0.3（谐振 Mr=1.75）</div><svg id="c3" viewBox="0 0 300 230"></svg></div>
+          <div class="cell"><div class="hh">④ ζ=0.05（剧烈谐振）</div><svg id="c4" viewBox="0 0 300 230"></svg></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  function cell(id, z, markR) {
+    const svg = document.getElementById(id);
+    const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+    const defs = mk("defs", {});
+    const m1 = mk("marker", { id: id + "m", markerWidth: 8, markerHeight: 8, refX: 6, refY: 2.5, orient: "auto" }, defs);
+    mk("path", { d: "M0,0 L6,2.5 L0,5 Z", fill: "#5B6B8C" }, m1);
+    const m2 = mk("marker", { id: id + "b", markerWidth: 10, markerHeight: 10, refX: 6.5, refY: 2.7, orient: "auto" }, defs);
+    mk("path", { d: "M0,0 L6.5,2.7 L0,5.4 Z", fill: "#2B5CE6" }, m2);
+    const PT = w => { const d2 = (1 - w * w) * (1 - w * w) + (2 * z * w) * (2 * z * w); const A = 1 / Math.sqrt(d2); const ph = Math.atan2(-2 * z * w, 1 - w * w); return [A * Math.cos(ph), A * Math.sin(ph)]; };
+    // 分段采样：ω∈[0,2] 密（谐振形状都在这里），[2,wmax] 疏（贴近原点）
+    const wmax = z < 0.3 ? 10 : 6, pts = [];
+    for (let i = 0; i <= 1400; i++) pts.push(PT(2 * i / 1400));
+    for (let i = 1; i <= 200; i++) pts.push(PT(2 + (wmax - 2) * i / 200));
+    // 按数据包围盒自适应取比例与原点位置，避免裁切与"折线感"
+    let rMin = 1e9, rMax = -1e9, iMin = 1e9, iMax = -1e9;
+    for (const [re, im] of pts) { if (re < rMin) rMin = re; if (re > rMax) rMax = re; if (im < iMin) iMin = im; if (im > iMax) iMax = im; }
+    rMax = Math.max(rMax, 1); iMax = Math.max(iMax, 0);
+    const W = 300, H = 230, m = 24;
+    const SC = Math.min((W - 2 * m) / (rMax - rMin), (H - 2 * m - 12) / (iMax - iMin));
+    const O = { x: m - rMin * SC, y: m + iMax * SC };
+    const X = v => O.x + v * SC, Y = v => O.y - v * SC;
+    mk("line", { x1: 8, y1: O.y, x2: 292, y2: O.y, stroke: "#5B6B8C", "stroke-width": 1.2, "marker-end": `url(#${id}m)` });
+    mk("line", { x1: O.x, y1: 222, x2: O.x, y2: 8, stroke: "#5B6B8C", "stroke-width": 1.2, "marker-end": `url(#${id}m)` });
+    let d = "";
+    for (let i = 0; i < pts.length; i++) d += (i ? "L" : "M") + X(pts[i][0]).toFixed(1) + "," + Y(pts[i][1]).toFixed(1);
+    mk("path", { d, stroke: "#2B5CE6", "stroke-width": 2.8, fill: "none" });
+    mk("circle", { cx: X(1), cy: Y(0), r: 4.5, fill: "#1D3FA0" });
+    mk("circle", { cx: O.x, cy: O.y, r: 4, fill: "#F5821F" });
+    // 方向箭头（沿 ω 增大方向）
+    const ia = Math.round(1.2 / 2 * 1400), pa = pts[ia], pb = pts[ia + 12];
+    mk("line", { x1: X(pa[0]), y1: Y(pa[1]), x2: X(pb[0]), y2: Y(pb[1]), stroke: "#2B5CE6", "stroke-width": 2.4, "marker-end": `url(#${id}b)` });
+    if (markR) {
+      const wr = Math.sqrt(Math.max(0, 1 - 2 * z * z));
+      const [re, im] = PT(wr);
+      mk("circle", { cx: X(re), cy: Y(im), r: 5, fill: "#D63A2F" });
+      mk("line", { x1: O.x, y1: O.y, x2: X(re), y2: Y(im), stroke: "#D63A2F", "stroke-width": 1.6, "stroke-dasharray": "5 4" });
+      const t = mk("text", { x: X(re) + 10, y: Y(im) - 9, "font-size": 17, "font-weight": 700, fill: "#D63A2F", "font-style": "italic", "font-family": "Cambria Math,STIX Two Math,Georgia,Microsoft YaHei,sans-serif", style: "paint-order:stroke;stroke:#FFFFFF;stroke-width:5;stroke-linejoin:round" });
+      t.innerHTML = "M<tspan dy=\"5\" font-size=\"72%\">r</tspan><tspan dy=\"-5\">=" + (1 / (2 * z * Math.sqrt(1 - z * z))).toFixed(2) + "</tspan>";
+    }
+  }
+  cell("c1", 1.0, false);
+  cell("c2", 0.707, false);
+  cell("c3", 0.3, true);
+  cell("c4", 0.05, true);
+});
+</script>
+</body>
+</html>

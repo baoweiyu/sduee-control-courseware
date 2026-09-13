@@ -1,0 +1,46 @@
+# Lesson Spec / Page Map — 第 1 课（第 1 章 自动控制概述）正式课
+lesson_id: lesson01-intro
+title: 第一章 自动控制概述
+source: bwy-ori-oldPPT/chapt1.pdf（48 页全覆盖，无遗漏）
+principles: 先导概述课，以静态/L1 视觉增强为主；框图类全部 SVG 程序重绘；实例类大量使用 image2 图片；原始照片/草图素材提取保留（assets/legacy/chapt1/）
+pages:
+  - { page_id: l1-p01, src: [1,2,8],    title: 课程封面, complexity: L0, legacy_action: REDESIGN }
+  - { page_id: l1-p02, src: [1],        title: 教学团队与联系方式, complexity: L0, legacy_action: REDESIGN }
+  - { page_id: l1-p03, src: [3],        title: 教学环节（线下60+线上20学时）, complexity: L0, legacy_action: REDESIGN }
+  - { page_id: l1-p04, src: [4,5],      title: 考核评价方式与标准, complexity: L0, legacy_action: REDESIGN }
+  - { page_id: l1-p05, src: [6],        title: 线上慕课登录方法, complexity: L0, legacy_action: POLISH, assets: [legacy QR 码] }
+  - { page_id: l1-p06, src: [7],        title: 教材信息, complexity: L0, legacy_action: POLISH, assets: [legacy 教材封面] }
+  - { page_id: l1-p07, src: [9],        title: 本章主要内容（四节）, complexity: L0, legacy_action: REDESIGN }
+  - { page_id: l1-p08, src: [10],       title: 专业培养计划模块图, complexity: L0, legacy_action: REDESIGN, note: HTML 重绘层级图 }
+  - { page_id: l1-p09, src: [11],       title: 与相关学科的关系, complexity: L0, legacy_action: REDESIGN, note: HTML 重绘关系图 }
+  - { page_id: l1-p10, src: [12],       title: 课程内容安排（16 周教学日历）, complexity: L0, legacy_action: REDESIGN, note: 双栏表格 }
+  - { page_id: l1-p11, src: [13],       title: 第一节 · 自动控制的概念, complexity: L0, legacy_action: POLISH, note: 关键词彩色高亮 }
+  - { page_id: l1-p12, src: [14,15],    title: 应用实例 · 无人机与天问一号, complexity: L1, legacy_action: REDESIGN, assets: [image2: tianwen-landing, uav-recon; legacy 原照片] }
+  - { page_id: l1-p13, src: [16,17],    title: 应用实例 · 智能驾驶汽车（感知-决策-执行）, complexity: L1, legacy_action: REDESIGN, assets: [image2: intelligent-driving], note: HTML 重绘人体类比 }
+  - { page_id: l1-p14, src: [18],       title: 课堂互动 · 填空题, complexity: L2, legacy_action: POLISH, note: Space 揭示答案 }
+  - { page_id: l1-p15, src: [19],       title: 自动控制的基本方式（总览）, complexity: L0, legacy_action: REDESIGN }
+  - { page_id: l1-p16, src: [20],       title: 开环控制（定义与特点）, complexity: L0, legacy_action: POLISH }
+  - { page_id: l1-p17, src: [21],       title: 直流电动机转速开环控制系统, complexity: L0, legacy_action: REDESIGN, note: SVG 重绘原理示意+框图 }
+  - { page_id: l1-p18, src: [22],       title: 闭环控制（定义·负反馈原理·特点）, complexity: L0, legacy_action: POLISH }
+  - { page_id: l1-p19, src: [23],       title: 直流电动机转速闭环控制系统, complexity: L0, legacy_action: REDESIGN, note: SVG 重绘框图（图1-4） }
+  - { page_id: l1-p20, src: [24],       title: 身边实例 · 汽车定速巡航, complexity: L1, legacy_action: REDESIGN, assets: [image2: cruise-control], note: HTML 重绘信号流 }
+  - { page_id: l1-p21, src: [25,26],    title: 复合控制（按扰动输入）, complexity: L0, legacy_action: REDESIGN, note: SVG 重绘复合框图 }
+  - { page_id: l1-p22, src: [27],       title: 举例 · 恒温箱自动控制系统, complexity: L1, legacy_action: REDESIGN, assets: [image2: incubator; legacy 图1-6 原理图], note: SVG 重绘方框图（图1-7） }
+  - { page_id: l1-p23, src: [28,29],    title: 举例 · 液位控制系统（家用→工业）, complexity: L1, legacy_action: REDESIGN, assets: [legacy 马桶水箱图, legacy 液位原理图, image2: water-tank-level-control] }
+  - { page_id: l1-p24, src: [30],       title: 课堂互动 · 多选题, complexity: L2, legacy_action: POLISH, note: Space 揭示答案 AC }
+  - { page_id: l1-p25, src: [31],       title: 自动控制的发展史（三阶段总览）, complexity: L0, legacy_action: REDESIGN }
+  - { page_id: l1-p26, src: [32,33,34], title: 经典控制理论（1765–1948 时间线）, complexity: L1, legacy_action: REDESIGN, assets: [image2: centrifugal-governor 瓦特离心调速器] }
+  - { page_id: l1-p27, src: [35,36],    title: 现代控制理论（20 世纪 60 年代）, complexity: L1, legacy_action: REDESIGN, assets: [legacy 雷达制导示意图] }
+  - { page_id: l1-p28, src: [37,38],    title: 大系统理论与智能控制（含中国古代成就）, complexity: L1, legacy_action: REDESIGN, assets: [image2: robot-arm] }
+  - { page_id: l1-p29, src: [39,40],    title: 第二节 · 自动控制系统的组成, complexity: L0, legacy_action: REDESIGN, note: SVG 重绘组成框图 }
+  - { page_id: l1-p30, src: [41],       title: 控制系统常用术语, complexity: L0, legacy_action: POLISH }
+  - { page_id: l1-p31, src: [42],       title: 自动控制系统的分类, complexity: L0, legacy_action: REDESIGN }
+  - { page_id: l1-p32, src: [43,44],    title: 第三节 · 对控制系统的基本要求（稳·快·准）, complexity: L0, legacy_action: REDESIGN, note: SVG 重绘三曲线对比 }
+  - { page_id: l1-p33, src: [45],       title: 自动控制系统的设计原则与步骤, complexity: L0, legacy_action: REDESIGN }
+  - { page_id: l1-p34, src: [46,47],    title: 本课程主要内容（含方法矩阵）, complexity: L0, legacy_action: REDESIGN }
+  - { page_id: l1-p35, src: [48],       title: 本章小结, complexity: L0, legacy_action: POLISH }
+status: Draft
+qa:
+  - 页面总数 36（目标 30 左右）
+  - 旧页 48 → 36 页，合页关系见 src 字段，内容全覆盖
+  - v0.3（2026-08-26）：播放器键盘/导航修复（act-key/act-poke 转发）；9 张 image2 图替换旧素材贴图（仅保留二维码与教材封面真图）；强调色统一为红色 #D63A2F（theme.css !important 兜底）；p07/15/16/18/25/31/32/34 排版饱满化（.act-body.fill）

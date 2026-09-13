@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>三种控制方式比较</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .cards { display:flex; gap:24px; height:618px; margin-top:4px; }
+  .mc { flex:1; display:flex; flex-direction:column; padding:0; overflow:hidden; }
+  .mc .mh { text-align:center; padding:14px 8px 12px; color:#fff; }
+  .mc .mh h3 { font-size:27px; letter-spacing:1px; }
+  .mc .mh .en { font-size:16px; opacity:.85; margin-top:2px; }
+  .mc.ol .mh { background:var(--blue2); }
+  .mc.cl .mh { background:var(--navy); }
+  .mc.cp .mh { background:var(--blue); }
+  .mc .dg { height:196px; padding:10px 14px; background:#F6F9FF; border-bottom:1.5px solid var(--line); display:grid; place-items:center; }
+  .mc .dg svg { max-height:100%; max-width:100%; }
+  .mc .rows { padding:12px 20px 14px; display:flex; flex-direction:column; gap:9px; flex:1; }
+  .rw { display:flex; gap:12px; font-size:19.5px; line-height:1.5; color:var(--ink); }
+  .rw .tg { flex:0 0 64px; font-weight:800; color:var(--navy); }
+  .rw.stars { margin-top:auto; flex-direction:column; gap:7px; border-top:1.5px dashed var(--line); padding-top:10px; }
+  .rw.stars .sr { display:flex; align-items:center; gap:10px; font-size:18.5px; }
+  .rw.stars .sr .tg { flex:0 0 74px; font-weight:400; color:var(--muted); }
+  .st { color:var(--orange); font-size:19px; letter-spacing:3px; }
+  .st .off { color:#D7DFEF; }
+  svg text { font-family:var(--font); }
+  .blk { fill:#fff; stroke:var(--blue); stroke-width:2; }
+  .blkt { fill:var(--navy); font-size:15px; font-weight:700; }
+  .sg { stroke:var(--blue); stroke-width:2; fill:none; marker-end:url(#am); }
+  .sg2 { stroke:var(--blue); stroke-width:2; fill:none; }
+  .lb { fill:var(--ink); font-size:14.5px; font-style:italic; }
+  .sm { fill:#fff; stroke:var(--blue); stroke-width:2; }
+  .smt { fill:var(--navy); font-size:13px; font-weight:700; }
+  .ff { stroke:#D63A2F; stroke-width:2; fill:none; marker-end:url(#amr); }
+  .ffb { fill:#FBE9E7; stroke:#D63A2F; stroke-width:2; }
+  .ffbt { fill:#D63A2F; font-size:13.5px; font-weight:700; }
+</style>
+</head>
+<body data-title="开环 · 闭环 · 复合 —— 三种控制方式比较" data-page="26 / 35">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="cards">
+      <!-- 开环 -->
+      <div class="act-card mc ol">
+        <div class="mh"><h3>开环控制</h3><div class="en">Open-loop</div></div>
+        <div class="dg">
+          <svg viewBox="0 0 380 108" width="100%">
+            <defs><marker id="am" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#1D3FA0"/></marker></defs>
+            <text class="lb" x="6" y="40">r</text>
+            <line class="sg" x1="16" y1="52" x2="56" y2="52"/>
+            <rect class="blk" x="58" y="26" width="110" height="52" rx="7"/><text class="blkt" x="113" y="58" text-anchor="middle">控制器 C(s)</text>
+            <line class="sg" x1="168" y1="52" x2="208" y2="52"/>
+            <rect class="blk" x="210" y="26" width="120" height="52" rx="7"/><text class="blkt" x="270" y="58" text-anchor="middle">被控对象 G(s)</text>
+            <line class="sg" x1="330" y1="52" x2="368" y2="52"/>
+            <text class="lb" x="360" y="40">y</text>
+          </svg>
+        </div>
+        <div class="rows">
+          <div class="rw"><span class="tg">定义</span><span>无反馈的控制方式</span></div>
+          <div class="rw"><span class="tg">优点</span><span>结构简单、成本低</span></div>
+          <div class="rw"><span class="tg">缺点</span><span>精度低、抗扰差</span></div>
+          <div class="rw stars">
+            <div class="sr"><span class="tg">抗扰性</span><span class="st">★<span class="off">★★★★</span></span></div>
+            <div class="sr"><span class="tg">精度</span><span class="st">★<span class="off">★★★★</span></span></div>
+            <div class="sr"><span class="tg">复杂度</span><span class="st">★<span class="off">★★★★</span></span></div>
+          </div>
+        </div>
+      </div>
+      <!-- 闭环 -->
+      <div class="act-card mc cl">
+        <div class="mh"><h3>闭环控制</h3><div class="en">Feedback</div></div>
+        <div class="dg">
+          <svg viewBox="0 0 380 148" width="100%">
+            <text class="lb" x="4" y="40">r</text>
+            <line class="sg" x1="14" y1="52" x2="44" y2="52"/>
+            <circle class="sm" cx="58" cy="52" r="13"/>
+            <path d="M52,46 L64,58 M52,58 L64,46" stroke="#1D3FA0" stroke-width="1.8" fill="none"/>
+            <text class="smt" x="44" y="40" text-anchor="middle">+</text><text class="smt" x="44" y="76" text-anchor="middle">−</text>
+            <line class="sg" x1="71" y1="52" x2="102" y2="52"/>
+            <rect class="blk" x="104" y="26" width="104" height="52" rx="7"/><text class="blkt" x="156" y="58" text-anchor="middle">控制器 C(s)</text>
+            <line class="sg" x1="208" y1="52" x2="238" y2="52"/>
+            <rect class="blk" x="240" y="26" width="106" height="52" rx="7"/><text class="blkt" x="293" y="58" text-anchor="middle">对象 G(s)</text>
+            <line class="sg" x1="346" y1="52" x2="372" y2="52"/>
+            <text class="lb" x="360" y="40">y</text>
+            <polyline class="sg2" points="358,52 358,118 58,118 58,68" marker-end="url(#am)"/>
+            <rect class="blk" x="130" y="104" width="104" height="34" rx="6"/><text class="blkt" x="182" y="126" text-anchor="middle" style="font-size:13.5px">传感器 H(s)</text>
+          </svg>
+        </div>
+        <div class="rows">
+          <div class="rw"><span class="tg">定义</span><span>利用反馈信号的控制方式</span></div>
+          <div class="rw"><span class="tg">优点</span><span>精度高、抗扰能力强</span></div>
+          <div class="rw"><span class="tg">缺点</span><span>结构复杂、可能不稳定</span></div>
+          <div class="rw stars">
+            <div class="sr"><span class="tg">抗扰性</span><span class="st">★★★★<span class="off">★</span></span></div>
+            <div class="sr"><span class="tg">精度</span><span class="st">★★★★<span class="off">★</span></span></div>
+            <div class="sr"><span class="tg">复杂度</span><span class="st">★★★★<span class="off">★</span></span></div>
+          </div>
+        </div>
+      </div>
+      <!-- 复合 -->
+      <div class="act-card mc cp">
+        <div class="mh"><h3>复合控制</h3><div class="en">Feedforward + Feedback</div></div>
+        <div class="dg">
+          <svg viewBox="0 0 380 172" width="100%">
+            <defs><marker id="amr" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#D63A2F"/></marker></defs>
+            <text class="ffbt" x="236" y="15" text-anchor="middle">扰动 n(t)</text>
+            <line class="ff" x1="236" y1="23" x2="236" y2="79"/>
+            <circle cx="236" cy="38" r="3.5" fill="#D63A2F"/>
+            <line class="ff" x1="236" y1="38" x2="170" y2="38"/>
+            <rect class="ffb" x="62" y="22" width="104" height="34" rx="6"/><text class="ffbt" x="114" y="44" text-anchor="middle">前馈通道 Gf(s)</text>
+            <polyline class="ff" points="62,38 58,38 58,79"/>
+            <text class="lb" x="4" y="84">r</text>
+            <line class="sg" x1="14" y1="96" x2="44" y2="96"/>
+            <circle class="sm" cx="58" cy="96" r="13"/>
+            <path d="M52,90 L64,102 M52,102 L64,90" stroke="#1D3FA0" stroke-width="1.8" fill="none"/>
+            <text class="smt" x="44" y="84" text-anchor="middle">+</text><text class="smt" x="44" y="120" text-anchor="middle">−</text><text class="smt" x="76" y="84" text-anchor="middle">+</text>
+            <line class="sg" x1="71" y1="96" x2="102" y2="96"/>
+            <rect class="blk" x="104" y="70" width="104" height="52" rx="7"/><text class="blkt" x="156" y="102" text-anchor="middle">控制器 C(s)</text>
+            <line class="sg" x1="208" y1="96" x2="223" y2="96"/>
+            <circle class="sm" cx="236" cy="96" r="13"/>
+            <path d="M230,90 L242,102 M230,102 L242,90" stroke="#1D3FA0" stroke-width="1.8" fill="none"/>
+            <text class="smt" x="222" y="84" text-anchor="middle">+</text><text class="smt" x="252" y="84" text-anchor="middle">+</text>
+            <rect class="blk" x="262" y="70" width="84" height="52" rx="7"/><text class="blkt" x="304" y="102" text-anchor="middle">对象 G(s)</text>
+            <line class="sg" x1="249" y1="96" x2="260" y2="96"/>
+            <line class="sg" x1="346" y1="96" x2="372" y2="96"/>
+            <polyline class="sg2" points="358,96 358,152 58,152 58,112" marker-end="url(#am)"/>
+            <text class="lb" x="362" y="84">y</text>
+          </svg>
+        </div>
+        <div class="rows">
+          <div class="rw"><span class="tg">定义</span><span>前馈与反馈相结合的控制方式</span></div>
+          <div class="rw"><span class="tg">优点</span><span>抗扰强、响应快、性能优</span></div>
+          <div class="rw"><span class="tg">缺点</span><span>设计较复杂、实现成本高</span></div>
+          <div class="rw stars">
+            <div class="sr"><span class="tg">抗扰性</span><span class="st">★★★★★</span></div>
+            <div class="sr"><span class="tg">精度</span><span class="st">★★★★★</span></div>
+            <div class="sr"><span class="tg">复杂度</span><span class="st">★★★★★</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note">
+    <svg class="ico" viewBox="0 0 48 48"><path d="M8 36 L20 24 L28 30 L42 12" fill="none" stroke="#1D3FA0" stroke-width="3"/><path d="M42 12 h-8 M42 12 v8" stroke="#F5821F" stroke-width="3" fill="none"/></svg>
+    <span><span class="lead">一句话总结：</span>闭环靠<b>反馈</b>提高精度，复合控制在前馈补偿下进一步<b>增强抗扰</b>。</span>
+  </div>
+</div></div>
+</body>
+</html>

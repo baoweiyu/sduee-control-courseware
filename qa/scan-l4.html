@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><title>QA Scan L4</title></head>
+<body>
+<div id="log">scan harness lesson04</div>
+<iframe id="fr" style="width:1300px;height:800px"></iframe>
+<script>
+var PAGES = "p01-cover p02-part1-cover p03-history p04-idea-map p05-features p06-quiz-tf p07-freqresp-def p08-first-order-deriv p09-conclusion p10-ex41-42 p11-freqchar-def p12-representations p13-elem-pid p14-elem-inertial-proof p15-elem-inertial-anim p16-elem-firstdiff p17-elem-osc p18-elem-osc-resonance p19-resonance-apps p20-osc-lab p21-elem-delay p22-elem-table p23-general-method p24-start-end p25-ex44 p26-part1-summary p27-part2-cover p28-bode-intro p29-bode-why p30-elem-k p31-elem-intdiff p32-elem-inertial-bode p33-inertial-correct p34-firstdiff-bode p35-osc-bode p36-osc-bode-lab p37-sec-diff-delay p38-bode-table p39-openloop-methods p40-ex45-decompose p41-ex45-superpose p42-seq-slope p43-ex46 p44-calc-method p45-min-phase p46-bode-ess p47-quiz-ka p48-experiment p49-ex49 p50-part2-summary p51-part3-cover p52-alg-to-freq p53-map-point p54-map-contour p55-map-zp p56-map-conclusion p57-f-to-gh p58-nyquist-contour p59-nyquist-criterion p60-ex410 p61-ex410-concl p62-ex412 p63-quiz-nyquist p64-conditional-stab p65-margin-intro p66-margin-nyquist p67-margin-bode p68-notes-summary p69-part4-cover p70-cl-problem p71-mcircle-deriv p72-mcircle-plot p73-ncircle p74-nichols p75-gamma-zeta p76-wc-ts p77-cl-metrics p78-cl-zeta-lab p79-highorder-empirical p80-three-band p81-quiz-metrics p82-ch4-summary p83-rootlocus-preview".split(" ").map(function(n){return n + ".html";});
+var BASE = "../lessons/lesson04-freq/pages/";
+
+function scanOne(name) {
+  return new Promise(function (resolve) {
+    var fr = document.getElementById('fr');
+    fr.onload = function () {
+      var w = fr.contentWindow, d = fr.contentDocument;
+      var t0 = Date.now();
+      var timer = setInterval(function () {
+        var done = d.body && d.body.getAttribute('data-mjx-done');
+        if (done || Date.now() - t0 > 12000) {
+          clearInterval(timer);
+          setTimeout(function () {
+            try {
+              try { if (w.ACT && w.ACT.step) { for (var i = 0; i < 40; i++) w.ACT.step.next(); } } catch (e) {}
+              var o = { p: name.replace('.html', '') };
+              o.mjx = d.querySelectorAll('mjx-container').length;
+              o.merr = d.querySelectorAll('mjx-merror').length;
+              var ru = 0, samples = [];
+              d.querySelectorAll('mjx-mtext[data-latex]').forEach(function (n) {
+                var t = n.getAttribute('data-latex') || '';
+                if (/^\\[a-zA-Z]+$/.test(t)) { ru++; if (samples.length < 3) samples.push(t); }
+              });
+              o.redUndef = ru;
+              if (samples.length) o.samples = samples;
+              o.errs = (w.__mjxErrs || []).slice(0, 3);
+              o.img404 = 0;
+              var imgs = d.querySelectorAll('img');
+              imgs.forEach(function (im) { if (im.src && !im.complete) o.img404++; });
+              resolve(o);
+            } catch (e) { resolve({ p: name, scanErr: String(e && e.message || e).slice(0, 80) }); }
+          }, 3000);
+        }
+      }, 200);
+    };
+    fr.src = BASE + name + '?scan=1';
+  });
+}
+
+window.runScan = function (from, to) {
+  var list = PAGES.slice(from, to);
+  var out = [];
+  return list.reduce(function (chain, name) {
+    return chain.then(function () {
+      document.getElementById('log').textContent = 'scanning ' + name;
+      return scanOne(name).then(function (r) { out.push(r); });
+    });
+  }, Promise.resolve()).then(function () { return JSON.stringify(out); });
+};
+</script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>二阶系统的单位脉冲响应</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<link rel="stylesheet" href="../lesson03-svg.css">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:24px; height:100%; }
+  .lcol { flex:1; display:flex; flex-direction:column; gap:16px; }
+  .drv { flex:1; }
+  .drv .bd { font-size:23.5px; line-height:1.8; display:flex; flex-direction:column; justify-content:center; }
+  .feat { background:#fff; border:2px solid var(--line); border-radius:14px; padding:16px 24px; font-size:22.5px; line-height:1.9; color:var(--ink); }
+  .figc { flex:1.35; display:flex; flex-direction:column; overflow:hidden; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:8px 14px; }
+  .figc svg { width:100%; height:100%; }
+  .act-note{font-size:23px;padding:16px 26px}
+</style>
+</head>
+<body data-title="二阶系统的单位脉冲响应" data-page="42 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lcol">
+        <div class="act-card drv">
+          <div class="hd">脉冲响应 = 阶跃响应的导数</div>
+          <div class="bd">
+            <span>由 <span class="tex" style="font-size:25px">k(t)=\dfrac{dh(t)}{dt}</span>，对欠阻尼情形求导得</span>
+            <div class="mathbox math eqline tex tex-d" style="font-size:27px">k(t)=\dfrac{\omega_{n}}{\sqrt{1-\zeta^{2}}}\,e^{-\zeta\omega_{n} t}\sin(\omega_{d} t)\quad(t\geq 0)</div>
+            <div style="font-size:22px;color:#5B6B8C">ζ ≥ 1 时同样有解析式，且 k(t) ≥ 0（不变号）。</div>
+          </div>
+        </div>
+        <div class="feat">
+          ① ζ ≥ 1：k(t) <span class="kw-r">不变号</span>（阶跃响应单调的必然结果）；<br>
+          ② 0 &lt; ζ &lt; 1：k(t) 首次过零的时刻 <span class="kw-r">恰好是 t<sub>p</sub></span>（极值点导数为零）；<br>
+          ③ 0 ~ t<sub>p</sub> 间 k(t) 与 t 轴围成的<span class="kw-r">面积 = 1 + σ%</span>（积分即 h(t<sub>p</sub>) − h(0)）。
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd">欠阻尼脉冲响应（ζ=0.5，ωn=1，阴影面积=1+σ%）</div>
+        <div class="bd2"><svg id="fig" viewBox="0 0 1000 620"></svg></div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">联系</span><span>脉冲响应把"微分—积分"关系变成可读图信息：k(t) <span class="kw-r">首次过零 → t<sub>p</sub></span>，<span class="kw-r">首波面积 → 1+σ%</span>。</span></div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("fig");
+  const z = 0.5, wn = 1, sg = z * wn, wd = wn * Math.sqrt(1 - z * z);
+  const k = t => t <= 0 ? 0 : (wn / Math.sqrt(1 - z * z)) * Math.exp(-sg * t) * Math.sin(wd * t);
+  const tp = Math.PI / wd;
+  const T = 10;
+  const X = t => 96 + t / T * 850;
+  const Y = v => 440 - v / 0.9 * 400;   // v ∈ [-0.2, 0.7]
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k2 in attrs) n.setAttribute(k2, attrs[k2]); (parent || svg).appendChild(n); return n; };
+  const tx = (x, y, s, o) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 20, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal" }); n.textContent = s; return n; };
+  const defs = mk("defs", {});
+  const m1 = mk("marker", { id: "a40", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, m1);
+  mk("line", { x1: 96, y1: Y(0), x2: 960, y2: Y(0), stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a40)" });
+  mk("line", { x1: 96, y1: 556, x2: 96, y2: 40, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a40)" });
+  tx(966, Y(0) + 6, "t", { fs: 21, an: "start", it: true, b: true });
+  tx(58, 50, "k(t)", { fs: 21, it: true, b: true });
+  tx(74, Y(0) + 26, "O", { fs: 18, fill: "#5B6B8C" });
+  // 阴影面积 0~tp
+  let da = "M" + X(0) + "," + Y(0);
+  for (let i = 0; i <= 200; i++) { const t = tp * i / 200; da += "L" + X(t).toFixed(1) + "," + Y(k(t)).toFixed(1); }
+  da += "L" + X(tp) + "," + Y(0) + " Z";
+  mk("path", { d: da, fill: "#FFE9D6", opacity: 0.9 });
+  // 曲线
+  let d = "";
+  for (let i = 0; i <= 500; i++) { const t = T * i / 500; d += (i ? "L" : "M") + X(t).toFixed(1) + "," + Y(k(t)).toFixed(1); }
+  mk("path", { d, stroke: "#2B5CE6", "stroke-width": 3.5, fill: "none" });
+  // tp 首次过零标注
+  mk("circle", { cx: X(tp), cy: Y(0), r: 6.5, fill: "#D63A2F" });
+  mk("line", { x1: X(tp), y1: Y(0), x2: X(tp), y2: 540, stroke: "#F5821F", "stroke-width": 2, "stroke-dasharray": "8 6" });
+  const t1 = mk("text", { x: X(tp), y: 574, "font-size": 19.5, "text-anchor": "middle", fill: "#D63A2F", "font-weight": 700, "font-style": "italic" });
+  t1.appendChild(document.createTextNode("首次过零：t = t"));
+  const t1s = mk("tspan", { dy: "0.3em", "font-size": "0.7em" }, t1); t1s.textContent = "p";
+  tx(X(tp / 2), 400, "面积 = 1 + σ%", { fs: 19.5, b: true, fill: "#F5821F" });
+});
+</script>
+</body>
+</html>

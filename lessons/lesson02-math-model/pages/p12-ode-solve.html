@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>拉氏变换法求解微分方程</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .steps { display:flex; gap:0; margin-bottom:30px; }
+  .st { flex:1; text-align:center; }
+  .st .no { width:58px; height:58px; border-radius:50%; background:var(--blue); color:#fff; font-size:27px; font-weight:700; display:grid; place-items:center; margin:0 auto 10px; }
+  .st .bx { background:var(--sky); border:2px solid var(--line); border-radius:14px; padding:16px 14px; margin:0 8px; height:175px; display:flex; align-items:center; justify-content:center; font-size:22.5px; color:var(--navy); line-height:1.5; }
+  .arr { color:var(--orange); font-size:30px; font-weight:700; align-self:center; flex:none; }
+  .ex { background:#fff; border:2px solid var(--line); border-radius:14px; padding:26px 34px; }
+  .ex .t { font-size:25.5px; font-weight:700; color:var(--blue); margin-bottom:14px; }
+  .ex .math { font-size:26px; line-height:2.15; color:var(--ink); }
+  .twocol { display:flex; gap:26px; }
+  .twocol > div { flex:1; }
+  .res { background:var(--sky); border-radius:14px; padding:22px 30px; font-size:25.5px; color:var(--navy); line-height:2.1; }
+  /* 公式项下标注：列式布局保证标注与项严格对齐 */
+  .term { display:inline-flex; flex-direction:column; align-items:center; vertical-align:middle; margin:0 .1em; }
+  .term .sub2 { font-size:18px; color:var(--muted); border-top:2.5px dashed #B9C8EA; padding-top:4px; margin-top:4px; font-style:normal; }
+</style>
+</head>
+<body data-title="拉氏变换法求解微分方程" data-page="12 / 51">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body fill">
+    <div class="steps">
+      <div class="st"><div class="no">1</div><div class="bx">方程两边取<b>拉氏变换</b></div></div><div class="arr">➜</div>
+      <div class="st"><div class="no">2</div><div class="bx">代入<b>初始条件</b>与<b>输入信号</b></div></div><div class="arr">➜</div>
+      <div class="st"><div class="no">3</div><div class="bx">由代数方程求出 <b>Y(s)</b></div></div><div class="arr">➜</div>
+      <div class="st"><div class="no">4</div><div class="bx"><span><b>拉氏反变换</b><br>求输出的时间解</span></div></div>
+    </div>
+    <div class="ex">
+      <div class="t">以二阶系统为例：<span class="tex">a_{0}\ddot{y} + a_{1}\dot{y} + a_{2}y = b_{0}\dot{x} + b_{1}x</span></div>
+      <div class="twocol">
+        <div class="math" data-step>
+          ① 两边取拉氏变换（含初始条件）：<br>
+          <span class="tex">a_{0}[s^{2}Y(s) - s y(0) - \dot{y}(0)] + a_{1}[sY(s) - y(0)] + a_{2}Y(s) = b_{0}[sX(s) - x(0)] + b_{1}X(s)</span><br>
+          ② 整理得：<span class="tex">Y(s) = \dfrac{b_{0}s + b_{1}}{a_{0}s^{2} + a_{1}s + a_{2}}X(s) + \dfrac{a_{0}y(0)s + a_{0}\dot{y}(0) + a_{1}y(0) - b_{0}x(0)}{a_{0}s^{2} + a_{1}s + a_{2}}</span>
+        </div>
+        <div class="res" data-step>
+          ③ 反变换得时间解：<br>
+          <span class="tex">y(t) =</span> <b>零初始响应</b> + <b>零输入响应</b><br>
+          研究动态特性一般只研究<span class="kw-r">零初始响应</span><br>
+          <span class="math"><span class="tex">y</span> = <span class="term"><span>稳态解（强迫解）</span><span class="sub2">稳态精度</span></span> + <span class="term"><span>暂态解（自由解）</span><span class="sub2">暂态过程</span></span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+</body>
+</html>

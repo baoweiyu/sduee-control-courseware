@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>自动控制系统的设计原则与步骤</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .prin { background:#fff; border:2px solid var(--line); border-left:12px solid var(--blue); border-radius:16px; padding:30px 38px; font-size:27px; line-height:1.85; color:var(--ink); margin:6px 0 44px; }
+  .prin b { color:var(--navy); }
+  .prin .em { color:var(--danger); font-weight:700; }
+  .steps { display:flex; align-items:stretch; gap:0; }
+  .st { flex:1; text-align:center; display:flex; flex-direction:column; }
+  .st .no { width:72px; height:72px; border-radius:50%; background:var(--blue); color:#fff; font-size:31px; font-weight:700; display:grid; place-items:center; margin:0 auto 16px; flex:none; }
+  .st .bx { background:var(--sky); border:2px solid var(--line); border-radius:14px; padding:26px 16px; margin:0 10px; flex:1; display:flex; flex-direction:column; justify-content:center; }
+  .st .bx b { display:block; font-size:26px; color:var(--navy); margin-bottom:8px; }
+  .st .bx span { font-size:19.5px; color:var(--muted); line-height:1.6; }
+  .arr { color:var(--orange); font-size:36px; font-weight:700; flex:none; align-self:center; }
+</style>
+</head>
+<body data-title="二、自动控制系统的设计原则" data-page="34 / 35">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body fill">
+    <div class="prin"><b>设计原则：</b>保证系统的输出在<span class="em">满足给定性能要求</span>的基础上<span class="em">跟踪输入信号</span>，并且要有一定的<span class="em">抗干扰能力</span>。</div>
+    <div class="steps">
+      <div class="st"><div class="no">1</div><div class="bx"><b>系统分析</b><span>建立模型，分析稳定性、动态与稳态性能</span></div></div>
+      <div class="arr">➜</div>
+      <div class="st"><div class="no">2</div><div class="bx"><b>系统设计</b><span>确定结构与参数，选择校正方案</span></div></div>
+      <div class="arr">➜</div>
+      <div class="st"><div class="no">3</div><div class="bx"><b>实验仿真</b><span>仿真验证设计结果</span></div></div>
+      <div class="arr">➜</div>
+      <div class="st"><div class="no">4</div><div class="bx"><b>控制实现</b><span>工程实现与调试运行</span></div></div>
+    </div>
+  </div>
+  <div class="act-note">
+    <svg class="ico" viewBox="0 0 48 48"><path d="M10 38 h28 M14 38 V22 l10-8 10 8 v16" fill="none" stroke="#1D3FA0" stroke-width="3"/><rect x="20" y="26" width="8" height="12" fill="#F5821F"/></svg>
+    <span><span class="lead">流程观：</span>分析 → 设计 → 仿真 → 实现，本课程重点在前三步的理论方法。</span>
+  </div>
+</div></div>
+</body>
+</html>

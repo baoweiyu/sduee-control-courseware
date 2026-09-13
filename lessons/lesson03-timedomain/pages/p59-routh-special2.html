@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>特殊情况② · 例 3-8</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:24px; height:100%; }
+  .spc { flex:0.85; display:flex; flex-direction:column; gap:18px; }
+  .spc .act-card { flex:1; display:flex; flex-direction:column; }
+  .spc .bd { flex:1; font-size:22px; line-height:1.85; display:flex; flex-direction:column; justify-content:center; gap:12px; }
+  .tabc { flex:1.15; display:flex; flex-direction:column; }
+  .tabc .bd { flex:1; display:flex; flex-direction:column; justify-content:center; gap:12px; }
+  .rt { border-collapse:collapse; width:100%; }
+  .rt th, .rt td { border:2px solid var(--line); padding:7px 6px; font-size:21.5px; text-align:center; }
+  .rt th { background:var(--navy); color:#fff; font-weight:700; font-size:19px; }
+  .rt td.rl { background:var(--sky); font-weight:700; color:var(--navy); }
+  .rt td.fc { background:#FDF3EC; font-weight:700; }
+  .rt td.calc { font-size:18px; color:#5B6B8C; text-align:left; padding-left:12px; line-height:1.45; }
+  .rt td.zero { background:#FCEBE9; color:#D63A2F; font-weight:800; }
+  .neg { color:#D63A2F; font-weight:800; }
+  .concl { background:var(--sky); border:2px solid var(--line); border-radius:12px; padding:12px 18px; font-size:21px; color:var(--navy); line-height:1.65; }
+  tr[data-step] { transform:none !important; }
+  tr[data-step]:not(.shown) td { border-color:transparent !important; }
+</style>
+</head>
+<body data-title="特殊情况② · 例 3-8" data-page="62 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="row">
+      <div class="spc">
+        <div class="act-card">
+          <div class="hd">特殊情况②：出现全零行</div>
+          <div class="bd">
+            <span><b>现象</b>：劳斯表某一行元素<span class="kw-r">全为零</span> —— 说明特征方程存在<span class="kw-r">关于原点对称的根</span>（大小相等、符号相反的实根，或纯虚根）。</span>
+            <span><b>对策</b>：用全零行<span class="kw-r">上一行</span>的系数构造<span class="kw-r">辅助方程</span> Q(s)（只含 s 的偶次幂），将 Q(s) 对 s 求导，用 dQ/ds 的系数代替全零行继续计算。辅助方程的解是特征方程解的<span class="kw-r">子集</span>。</span>
+          </div>
+        </div>
+        <div class="act-card">
+          <div class="hd">例 3-8 题目</div>
+          <div class="bd">
+            <span>系统特征方程为</span>
+            <div class="mathbox math eqline tex tex-d" style="font-size:24px">D(s)=s^{5}+s^{4}+3s^{3}+3s^{2}+2s+2=0</div>
+            <span>试判别系统的稳定性。（系数全正，需列劳斯表）</span>
+          </div>
+        </div>
+      </div>
+      <div class="act-card tabc">
+        <div class="hd">劳斯表</div>
+        <div class="bd">
+          <table class="rt">
+            <tr><th>行标</th><th>第 1 列</th><th>第 2 列</th><th>第 3 列</th><th>计算说明</th></tr>
+            <tr><td class="rl"><span class="tex" style="font-size:21px">s^{5}</span></td><td class="fc">1</td><td>3</td><td>2</td><td class="calc">首两行：系数隔项排列</td></tr>
+            <tr><td class="rl"><span class="tex" style="font-size:21px">s^{4}</span></td><td class="fc">1</td><td>3</td><td>2</td><td class="calc">← 辅助方程 Q(s) 的系数</td></tr>
+            <tr data-step="1"><td class="rl"><span class="tex" style="font-size:21px">s^{3}</span></td><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="calc">全零行：存在原点对称根</td></tr>
+            <tr data-step="2"><td class="rl"><span class="tex" style="font-size:21px">s^{3}</span>′</td><td class="fc">4</td><td>6</td><td>0</td><td class="calc">Q(s)=s⁴+3s²+2，dQ/ds=4s³+6s<br>求导系数 4、6 代替全零行</td></tr>
+            <tr data-step="3"><td class="rl"><span class="tex" style="font-size:21px">s^{2}</span></td><td class="fc">3</td><td>4</td><td></td><td class="calc">b₁=(4×3−1×6)/4=3/2，b₂=2<br>本行同乘 2 化简为 3、4</td></tr>
+            <tr data-step="4"><td class="rl"><span class="tex" style="font-size:21px">s^{1}</span></td><td class="fc">2/3</td><td>0</td><td></td><td class="calc">c₁=(3×6−4×4)/3=2/3</td></tr>
+            <tr data-step="5"><td class="rl"><span class="tex" style="font-size:21px">s^{0}</span></td><td class="fc">4</td><td></td><td></td><td class="calc">d₁=((2/3)×4−3×0)/(2/3)=4</td></tr>
+          </table>
+          <div class="concl" data-step="6">
+            第一列 1、1、4、3、2/3、4 <span class="kw-r">全为正</span> → <span class="kw-r">无正实部根</span>；解辅助方程 <span class="tex" style="font-size:21px">Q(s)=(s^{2}+1)(s^{2}+2)=0</span> 得纯虚根 <span class="tex" style="font-size:21px">s=\pm j,\ \pm j\sqrt{2}</span><br>→ 等幅振荡，系统处于<span class="kw-r">临界状态</span>（不是渐近稳定）。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+</body>
+</html>

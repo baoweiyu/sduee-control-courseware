@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>附加零点对二阶响应的影响</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<link rel="stylesheet" href="../lesson03-svg.css">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:24px; height:100%; }
+  .lcol { flex:1; display:flex; flex-direction:column; gap:16px; }
+  .drv { flex:1; }
+  .drv .bd { font-size:23.5px; line-height:1.8; display:flex; flex-direction:column; justify-content:center; }
+  .feat { background:#fff; border:2px solid var(--line); border-radius:14px; padding:16px 24px; font-size:22.5px; line-height:1.9; color:var(--ink); }
+  .figc { flex:1.35; display:flex; flex-direction:column; overflow:hidden; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:8px 14px; }
+  .figc svg { width:100%; height:100%; }
+</style>
+</head>
+<body data-title="附加零点的影响" data-page="44 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lcol">
+        <div class="act-card drv">
+          <div class="hd">具有零点的二阶系统</div>
+          <div class="bd">
+            <div data-step="1">
+              <div class="mathbox math eqline tex tex-d" style="font-size:26px">\varPhi(s)=\dfrac{\omega_{n}^{2}\,(1+\tau s)}{s^{2}+2\zeta\omega_{n} s+\omega_{n}^{2}}</div>
+              <span>附加零点 <span class="tex" style="font-size:25px">s=-\dfrac{1}{\tau}</span>（τ 越大，零点越靠近虚轴）。</span>
+            </div>
+            <div data-step="2" style="margin-top:22px"><span>输出 = 主响应 + 微分附加项：</span>
+              <div class="mathbox math eqline tex tex-d" style="font-size:26px">c(t)=h(t)+\tau\,\dfrac{dh(t)}{dt}=h(t)+\tau k(t)</div>
+              <div style="font-size:22px;color:#5B6B8C">（分子 (1+τs) 中的 τs 对应时域微分）</div>
+            </div>
+          </div>
+        </div>
+        <div class="feat" data-step="3">
+          <b>影响规律</b>：附加零点使上升<span class="kw-r">加快</span>，但 <span class="kw-r">σ% 增大</span>；零点越靠近虚轴（τ 越大），附加项越强，超调越严重。零点远离虚轴（τ→0）时影响消失。
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd">对比：标准二阶 vs 附加零点（ζ=0.5，ωn=1，τ=0.8）</div>
+        <div class="bd2"><svg id="fig" viewBox="0 0 1000 800"></svg></div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">结论</span><span>零点<span class="kw-r">不改变极点</span>（振荡模式不变），但改变各分量的"权重"——靠虚轴近的零点会显著放大超调。</span></div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("fig");
+  const z = 0.5, wn = 1, sg = z * wn, wd = wn * Math.sqrt(1 - z * z), be = Math.acos(z), A = 1 / Math.sqrt(1 - z * z), tau = 0.8;
+  const h = t => t <= 0 ? 0 : 1 - A * Math.exp(-sg * t) * Math.sin(wd * t + be);
+  const k = t => t <= 0 ? 0 : (wn / Math.sqrt(1 - z * z)) * Math.exp(-sg * t) * Math.sin(wd * t);
+  const c = t => h(t) + tau * k(t);
+  const T = 10, YM = 1.7;
+  const X = t => 96 + t / T * 850;
+  const Y = v => 700 - v / YM * 580;
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k2 in attrs) n.setAttribute(k2, attrs[k2]); (parent || svg).appendChild(n); return n; };
+  const tx = (x, y, s, o) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 20, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal" }); n.textContent = s; return n; };
+  const defs = mk("defs", {});
+  const m1 = mk("marker", { id: "a42", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, m1);
+  mk("line", { x1: 96, y1: 700, x2: 960, y2: 700, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a42)" });
+  mk("line", { x1: 96, y1: 700, x2: 96, y2: 56, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a42)" });
+  tx(966, 706, "t", { fs: 22, an: "start", it: true, b: true });
+  tx(58, 66, "c(t)", { fs: 22, it: true, b: true });
+  tx(74, 706, "O", { fs: 19, fill: "#5B6B8C" });
+  mk("line", { x1: 96, y1: Y(1), x2: 946, y2: Y(1), stroke: "#F5821F", "stroke-width": 2, "stroke-dasharray": "10 7" });
+  tx(80, Y(1) + 7, "1", { an: "end", fs: 19, b: true });
+  const curve = (fn, color, wdt) => {
+    let d = "";
+    for (let i = 0; i <= 500; i++) { const t = T * i / 500; d += (i ? "L" : "M") + X(t).toFixed(1) + "," + Y(fn(t)).toFixed(1); }
+    mk("path", { d, stroke: color, "stroke-width": wdt, fill: "none" });
+  };
+  curve(h, "#9FB3D9", 3);
+  curve(c, "#2B5CE6", 3.6);
+  // 峰值标注
+  let tp0 = 0, mx0 = 0, tp1 = 0, mx1 = 0;
+  for (let i = 0; i <= 1000; i++) { const t = 5 * i / 1000; if (h(t) > mx0) { mx0 = h(t); tp0 = t; } if (c(t) > mx1) { mx1 = c(t); tp1 = t; } }
+  mk("circle", { cx: X(tp0), cy: Y(mx0), r: 6, fill: "#8AA6D8" });
+  mk("line", { x1: X(tp0) + 8, y1: Y(mx0) - 6, x2: X(tp0) + 22, y2: Y(mx0) - 26, stroke: "#8AA6D8", "stroke-width": 1.6 });
+  tx(X(tp0) + 28, Y(mx0) - 26, "σ% = 16%", { fs: 20, b: true, fill: "#5B6B8C", an: "start" });
+  mk("circle", { cx: X(tp1), cy: Y(mx1), r: 6.5, fill: "#D63A2F" });
+  tx(X(tp1) - 12, Y(mx1) - 20, "σ% 增大", { fs: 20, b: true, fill: "#D63A2F", an: "end" });
+  // 图例
+  mk("line", { x1: 520, y1: 70, x2: 585, y2: 70, stroke: "#9FB3D9", "stroke-width": 3 });
+  tx(598, 77, "标准二阶 h(t)", { fs: 20, an: "start", fill: "#5B6B8C" });
+  mk("line", { x1: 520, y1: 110, x2: 585, y2: 110, stroke: "#2B5CE6", "stroke-width": 3.6 });
+  tx(598, 117, "附加零点 c(t)（τ=0.8）", { fs: 20, an: "start", b: true, fill: "#2B5CE6" });
+});
+</script>
+</body>
+</html>

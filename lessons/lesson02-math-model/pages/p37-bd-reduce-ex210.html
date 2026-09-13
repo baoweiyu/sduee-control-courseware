@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>例2-10 方框图化简（环节合并）</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .ctl { display:flex; align-items:center; gap:14px; margin-bottom:8px; }
+  .btn { border:none; background:var(--blue); color:#fff; font-size:19px; font-weight:700;
+         border-radius:9px; padding:8px 22px; cursor:pointer; font-family:inherit; }
+  .btn.ghost { background:#fff; color:var(--blue); border:2px solid var(--blue); }
+  .phase { font-size:21px; font-weight:800; color:var(--red); }
+  .tip { font-size:17.5px; color:var(--muted); margin-left:auto; }
+  .panel { background:var(--sky); border-radius:14px; padding:4px 10px; position:relative; }
+  .st { transition:opacity .55s ease; }
+  .hlG { transition:opacity .3s ease; }
+  .dash { fill:none; stroke:#F5821F; stroke-width:3.5; stroke-dasharray:10 7; animation:march 1.2s linear infinite; }
+  @keyframes march { to { stroke-dashoffset:-34; } }
+  .fbar { margin-top:8px; display:flex; flex-direction:column; gap:6px; }
+  .fline { display:flex; align-items:center; gap:12px; background:#fff; border:2px solid var(--blue);
+           border-radius:10px; padding:6px 16px; font-size:20.5px;
+           opacity:0; transform:translateY(10px); transition:.4s; }
+  .fline.on { opacity:1; transform:none; }
+  .fline .no { flex:0 0 30px; height:30px; border-radius:50%; background:var(--orange); color:#fff;
+               display:grid; place-items:center; font-size:18px; font-weight:800; }
+  .fline.final { border-color:var(--red); background:#FDF0EF; }
+  .fline.final .no { background:var(--red); }
+</style>
+</head>
+<body data-title="例2-10　环节合并化简" data-page="37 / 51">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="ctl">
+      <button class="btn" onclick="ACT.step.next()">化简下一步 ▸</button>
+      <button class="btn ghost" onclick="ACT.step.reset()">↺ 重置</button>
+      <div class="phase" id="phase">原图：先观察结构，找出可合并的部分</div>
+    </div>
+    <div class="panel">
+      <svg viewBox="0 0 1120 330" width="100%" height="330">
+        <defs><marker id="a36" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#1D3FA0"/></marker>
+        <marker id="o36" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#D63A2F"/></marker></defs>
+
+        <!-- st0 原图 -->
+        <g class="st" id="st0" font-size="17" fill="#1B3B8B">
+          <circle cx="60" cy="90" r="13" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><path d="M 54.1,84.1 L 65.9,95.9 M 54.1,95.9 L 65.9,84.1" stroke="#1D3FA0" stroke-width="2.2" fill="none"/>
+          <rect x="100" y="68" width="80" height="44" rx="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><text x="140" y="96" text-anchor="middle" font-style="italic">G₁</text>
+          <circle cx="220" cy="90" r="13" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><path d="M 214.1,84.1 L 225.9,95.9 M 214.1,95.9 L 225.9,84.1" stroke="#1D3FA0" stroke-width="2.2" fill="none"/>
+          <rect x="260" y="68" width="80" height="44" rx="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><text x="300" y="96" text-anchor="middle" font-style="italic">G₂</text>
+          <rect x="380" y="68" width="80" height="44" rx="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><text x="420" y="96" text-anchor="middle" font-style="italic">G₃</text>
+          <circle cx="220" cy="170" r="13" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><path d="M 214.1,164.1 L 225.9,175.9 M 214.1,175.9 L 225.9,164.1" stroke="#1D3FA0" stroke-width="2.2" fill="none"/>
+          <rect x="330" y="148" width="80" height="40" rx="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><text x="370" y="174" text-anchor="middle" font-style="italic">G₄</text>
+          <rect x="330" y="225" width="80" height="40" rx="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><text x="370" y="251" text-anchor="middle" font-style="italic">G₅</text>
+          <rect x="100" y="285" width="80" height="34" rx="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><text x="140" y="307" text-anchor="middle" font-style="italic">G₆</text>
+          <g stroke="#1D3FA0" stroke-width="2.4" fill="none" marker-end="url(#a36)">
+            <line x1="28" y1="90" x2="44" y2="90"/><line x1="73" y1="90" x2="96" y2="90"/>
+            <line x1="180" y1="90" x2="204" y2="90"/><line x1="233" y1="90" x2="256" y2="90"/>
+            <line x1="340" y1="90" x2="376" y2="90"/><line x1="460" y1="90" x2="560" y2="90"/>
+            <line x1="500" y1="170" x2="414" y2="170"/><line x1="330" y1="170" x2="237" y2="170"/>
+            <line x1="500" y1="245" x2="414" y2="245"/>
+            <polyline points="330,245 220,245 220,187"/>
+            <line x1="220" y1="157" x2="220" y2="106"/>
+            <polyline points="500,302 184,302"/>
+            <polyline points="96,302 60,302 60,106"/>
+          </g>
+          <line x1="500" y1="90" x2="500" y2="302" stroke="#1D3FA0" stroke-width="2.4" fill="none"/>
+          <circle cx="500" cy="90" r="4.5" fill="#1D3FA0"/><circle cx="500" cy="170" r="4" fill="#1D3FA0"/>
+          <text x="4" y="82" font-size="16" font-style="italic">R(s)</text><text x="566" y="82" font-size="16" font-style="italic">C(s)</text>
+          <text x="40" y="80" font-size="14" fill="#D63A2F">+</text><text x="48" y="122" font-size="14" fill="#D63A2F">−</text>
+          <text x="202" y="80" font-size="14" fill="#D63A2F">+</text><text x="228" y="122" font-size="14" fill="#D63A2F">−</text>
+          <text x="240" y="162" font-size="14" fill="#D63A2F">+</text><text x="228" y="212" font-size="14" fill="#D63A2F">+</text>
+        </g>
+
+        <!-- st1 并联合并后 -->
+        <g class="st" id="st1" opacity="0" font-size="17" fill="#1B3B8B">
+          <circle cx="60" cy="90" r="13" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><path d="M 54.1,84.1 L 65.9,95.9 M 54.1,95.9 L 65.9,84.1" stroke="#1D3FA0" stroke-width="2.2" fill="none"/>
+          <rect x="100" y="68" width="80" height="44" rx="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><text x="140" y="96" text-anchor="middle" font-style="italic">G₁</text>
+          <circle cx="220" cy="90" r="13" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><path d="M 214.1,84.1 L 225.9,95.9 M 214.1,95.9 L 225.9,84.1" stroke="#1D3FA0" stroke-width="2.2" fill="none"/>
+          <rect x="260" y="68" width="80" height="44" rx="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><text x="300" y="96" text-anchor="middle" font-style="italic">G₂</text>
+          <rect x="380" y="68" width="80" height="44" rx="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><text x="420" y="96" text-anchor="middle" font-style="italic">G₃</text>
+          <rect x="300" y="198" width="100" height="44" rx="6" fill="#fff" stroke="#D63A2F" stroke-width="3"/><text x="350" y="226" text-anchor="middle" font-style="italic" fill="#D63A2F" font-weight="700">G₄+G₅</text>
+          <rect x="100" y="285" width="80" height="34" rx="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><text x="140" y="307" text-anchor="middle" font-style="italic">G₆</text>
+          <g stroke="#1D3FA0" stroke-width="2.4" fill="none" marker-end="url(#a36)">
+            <line x1="28" y1="90" x2="44" y2="90"/><line x1="73" y1="90" x2="96" y2="90"/>
+            <line x1="180" y1="90" x2="204" y2="90"/><line x1="233" y1="90" x2="256" y2="90"/>
+            <line x1="340" y1="90" x2="376" y2="90"/><line x1="460" y1="90" x2="560" y2="90"/>
+            <line x1="500" y1="220" x2="404" y2="220"/>
+            <polyline points="300,220 220,220 220,106"/>
+            <polyline points="500,302 184,302"/>
+            <polyline points="96,302 60,302 60,106"/>
+          </g>
+          <line x1="500" y1="90" x2="500" y2="302" stroke="#1D3FA0" stroke-width="2.4" fill="none"/>
+          <circle cx="500" cy="90" r="4.5" fill="#1D3FA0"/>
+          <text x="4" y="82" font-size="16" font-style="italic">R(s)</text><text x="566" y="82" font-size="16" font-style="italic">C(s)</text>
+          <text x="40" y="80" font-size="14" fill="#D63A2F">+</text><text x="48" y="122" font-size="14" fill="#D63A2F">−</text>
+          <text x="202" y="80" font-size="14" fill="#D63A2F">+</text><text x="228" y="122" font-size="14" fill="#D63A2F">−</text>
+        </g>
+
+        <!-- st2 内环合并后 -->
+        <g class="st" id="st2" opacity="0" font-size="17" fill="#1B3B8B">
+          <circle cx="60" cy="90" r="13" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><path d="M 54.1,84.1 L 65.9,95.9 M 54.1,95.9 L 65.9,84.1" stroke="#1D3FA0" stroke-width="2.2" fill="none"/>
+          <rect x="100" y="68" width="80" height="44" rx="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><text x="140" y="96" text-anchor="middle" font-style="italic">G₁</text>
+          <rect x="255" y="62" width="215" height="56" rx="6" fill="#fff" stroke="#D63A2F" stroke-width="3"/>
+          <text x="362" y="86" text-anchor="middle" font-style="italic" fill="#D63A2F" font-weight="700" font-size="15">G₂G₃</text>
+          <text x="362" y="106" text-anchor="middle" font-style="italic" fill="#D63A2F" font-weight="700" font-size="14">1+G₂G₃(G₄+G₅)</text>
+          <line x1="290" y1="94" x2="434" y2="94" stroke="#D63A2F" stroke-width="2"/>
+          <rect x="100" y="285" width="80" height="34" rx="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><text x="140" y="307" text-anchor="middle" font-style="italic">G₆</text>
+          <g stroke="#1D3FA0" stroke-width="2.4" fill="none" marker-end="url(#a36)">
+            <line x1="28" y1="90" x2="44" y2="90"/><line x1="73" y1="90" x2="96" y2="90"/>
+            <line x1="180" y1="90" x2="251" y2="90"/><line x1="470" y1="90" x2="560" y2="90"/>
+            <polyline points="500,302 184,302"/>
+            <polyline points="96,302 60,302 60,106"/>
+          </g>
+          <line x1="500" y1="90" x2="500" y2="302" stroke="#1D3FA0" stroke-width="2.4" fill="none"/>
+          <circle cx="500" cy="90" r="4.5" fill="#1D3FA0"/>
+          <text x="4" y="82" font-size="16" font-style="italic">R(s)</text><text x="566" y="82" font-size="16" font-style="italic">C(s)</text>
+          <text x="40" y="80" font-size="14" fill="#D63A2F">+</text><text x="48" y="122" font-size="14" fill="#D63A2F">−</text>
+        </g>
+
+        <!-- st3 串联 G1 后 -->
+        <g class="st" id="st3" opacity="0" font-size="17" fill="#1B3B8B">
+          <circle cx="60" cy="90" r="13" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><path d="M 54.1,84.1 L 65.9,95.9 M 54.1,95.9 L 65.9,84.1" stroke="#1D3FA0" stroke-width="2.2" fill="none"/>
+          <rect x="100" y="62" width="370" height="56" rx="6" fill="#fff" stroke="#D63A2F" stroke-width="3"/>
+          <text x="285" y="86" text-anchor="middle" font-style="italic" fill="#D63A2F" font-weight="700" font-size="16">G₁G₂G₃</text>
+          <text x="285" y="106" text-anchor="middle" font-style="italic" fill="#D63A2F" font-weight="700" font-size="14">1+G₂G₃(G₄+G₅)</text>
+          <line x1="150" y1="94" x2="420" y2="94" stroke="#D63A2F" stroke-width="2"/>
+          <rect x="100" y="285" width="80" height="34" rx="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><text x="140" y="307" text-anchor="middle" font-style="italic">G₆</text>
+          <g stroke="#1D3FA0" stroke-width="2.4" fill="none" marker-end="url(#a36)">
+            <line x1="28" y1="90" x2="44" y2="90"/><line x1="73" y1="90" x2="96" y2="90"/>
+            <line x1="470" y1="90" x2="560" y2="90"/>
+            <polyline points="500,302 184,302"/>
+            <polyline points="96,302 60,302 60,106"/>
+          </g>
+          <line x1="500" y1="90" x2="500" y2="302" stroke="#1D3FA0" stroke-width="2.4" fill="none"/>
+          <circle cx="500" cy="90" r="4.5" fill="#1D3FA0"/>
+          <text x="4" y="82" font-size="16" font-style="italic">R(s)</text><text x="566" y="82" font-size="16" font-style="italic">C(s)</text>
+          <text x="40" y="80" font-size="14" fill="#D63A2F">+</text><text x="48" y="122" font-size="14" fill="#D63A2F">−</text>
+        </g>
+
+        <!-- st4 最终结果 -->
+        <g class="st" id="st4" opacity="0" font-size="17" fill="#1B3B8B">
+          <rect x="300" y="52" width="290" height="76" rx="8" fill="#FDF0EF" stroke="#D63A2F" stroke-width="3.5"/>
+          <text x="445" y="80" text-anchor="middle" font-style="italic" fill="#D63A2F" font-weight="700" font-size="17">G₁G₂G₃</text>
+          <text x="445" y="106" text-anchor="middle" font-style="italic" fill="#D63A2F" font-weight="700" font-size="14.5">1+G₂G₃(G₄+G₅)+G₁G₂G₃G₆</text>
+          <line x1="330" y1="88" x2="560" y2="88" stroke="#D63A2F" stroke-width="2"/>
+          <g stroke="#1D3FA0" stroke-width="2.4" fill="none" marker-end="url(#a36)">
+            <line x1="60" y1="90" x2="294" y2="90"/><line x1="590" y1="90" x2="680" y2="90"/>
+          </g>
+          <text x="10" y="82" font-size="17" font-style="italic">R(s)</text><text x="690" y="82" font-size="17" font-style="italic">C(s)</text>
+        </g>
+
+        <!-- 高亮层 -->
+        <g class="hlG" id="hl1" opacity="0">
+          <rect class="dash" x="196" y="140" width="322" height="136" rx="12"/>
+          <text x="205" y="132" font-size="18" fill="#F5821F" font-weight="800">① 并联的两条反馈支路</text>
+        </g>
+        <g class="hlG" id="hl2" opacity="0">
+          <rect class="dash" x="200" y="52" width="320" height="200" rx="12"/>
+          <text x="208" y="44" font-size="18" fill="#F5821F" font-weight="800">② G₂G₃ 与 (G₄+G₅) 构成负反馈内环</text>
+        </g>
+        <g class="hlG" id="hl3" opacity="0">
+          <rect class="dash" x="88" y="52" width="392" height="76" rx="12"/>
+          <text x="96" y="44" font-size="18" fill="#F5821F" font-weight="800">③ G₁ 与等效内环串联</text>
+        </g>
+        <g class="hlG" id="hl4" opacity="0">
+          <rect class="dash" x="30" y="48" width="560" height="282" rx="14"/>
+          <text x="40" y="40" font-size="18" fill="#F5821F" font-weight="800">④ 与 G₆ 构成外环负反馈</text>
+        </g>
+      </svg>
+    </div>
+    <div class="fbar math">
+      <div class="fline" id="fl1"><div class="no">1</div><div>并联：<span class="tex">G_{4}</span> 与 <span class="tex">G_{5}</span> 相加 ⇒ <b><span class="tex">G_{4} + G_{5}</span></b></div></div>
+      <div class="fline" id="fl2"><div class="no">2</div><div>内环负反馈：⇒ <span class="tex">\dfrac{G_{2}G_{3}}{1 + G_{2}G_{3}(G_{4}+G_{5})}</span></div></div>
+      <div class="fline" id="fl3"><div class="no">3</div><div>与 <span class="tex">G_{1}</span> 串联：⇒ <span class="tex">\dfrac{G_{1}G_{2}G_{3}}{1 + G_{2}G_{3}(G_{4}+G_{5})}</span></div></div>
+      <div class="fline final" id="fl4"><div class="no">4</div><div>外环负反馈：<span class="tex">\Phi (s) = \dfrac{C(s)}{R(s)} = \dfrac{G_{1}G_{2}G_{3}}{1 + G_{2}G_{3}(G_{4}+G_{5}) + G_{1}G_{2}G_{3}G_{6}}</span></div></div>
+    </div>
+  </div>
+  <div class="act-note">化简次序：由内向外、逐环合并；内环反馈的极性由相加点符号决定（负反馈分母取 1+…）。</div>
+  <div data-step="1" style="display:none"></div><div data-step="2" style="display:none"></div>
+  <div data-step="3" style="display:none"></div><div data-step="4" style="display:none"></div>
+  <div data-step="5" style="display:none"></div><div data-step="6" style="display:none"></div>
+  <div data-step="7" style="display:none"></div><div data-step="8" style="display:none"></div>
+</div></div>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const S = ACT.step;
+    const CAP = [
+      null,
+      "\\text{第①步：高亮 }G_{4}\\text{、}G_{5}\\text{ 两条并联反馈支路}",
+      "\\text{合并完成：两条支路 }\\Rightarrow \\text{ 一个环节 }G_{4}+G_{5}",
+      "\\text{第②步：高亮 }G_{2}G_{3}\\text{ 与 }(G_{4}+G_{5})\\text{ 构成的内环}",
+      "\\text{合并完成：内环 }\\Rightarrow G_{2}G_{3}/(1+G_{2}G_{3}(G_{4}+G_{5}))",
+      "\\text{第③步：高亮 }G_{1}\\text{ 与内环等效环节的串联}",
+      "\\text{合并完成：串联 }\\Rightarrow G_{1}G_{2}G_{3}/(1+G_{2}G_{3}(G_{4}+G_{5}))",
+      "\\text{第④步：高亮最外环（与 }G_{6}\\text{ 构成的负反馈）}",
+      "\\text{化简完毕：一个等效环节 }\\Phi (s) = C(s)/R(s)"
+    ];
+    function paint() {
+      const cur = S.cur;
+      const st = Math.min(Math.floor(cur / 2), 4);
+      for (let i = 0; i <= 4; i++) document.getElementById("st" + i).style.opacity = (i === st) ? 1 : 0;
+      for (let i = 1; i <= 4; i++) {
+        document.getElementById("hl" + i).style.opacity = (cur === 2 * i - 1) ? 1 : 0;
+        document.getElementById("fl" + i).classList.toggle("on", cur >= 2 * i);
+      }
+      const ck = CAP[Math.min(cur, CAP.length - 1)], pel = document.getElementById("phase");
+      if (!(ck && window.mjxTypeset && mjxTypeset(pel, ck))) pel.textContent = "原图：先观察结构，找出可合并的部分";
+    }
+    const _next = S.next.bind(S), _reset = S.reset.bind(S);
+    S.next = function () { const d = _next(); paint(); return d; };
+    S.reset = function () { _reset(); paint(); };
+    window.prev = function () { const n = Math.max(0, S.cur - 1); S.reset(); for (let i = 0; i < n; i++) S.next(); };
+    paint();
+  });
+</script>
+</body>
+</html>

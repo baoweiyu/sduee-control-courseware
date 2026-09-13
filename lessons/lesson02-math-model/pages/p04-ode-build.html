@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>系统微分方程的建立</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .sec { font-size:28px; font-weight:700; color:var(--blue); margin:4px 0 18px; }
+  .steps { display:flex; align-items:stretch; gap:0; margin-bottom:26px; }
+  .st { flex:1; text-align:center; }
+  .st .no { width:58px; height:58px; border-radius:50%; background:var(--blue); color:#fff; font-size:26px; font-weight:700; display:grid; place-items:center; margin:0 auto 12px; }
+  .st .bx { background:var(--sky); border:2px solid var(--line); border-radius:14px; padding:16px 14px; margin:0 8px; height:150px; display:flex; align-items:center; justify-content:center; }
+  .st .bx span { font-size:20px; color:var(--navy); line-height:1.55; }
+  .arr { color:var(--orange); font-size:32px; font-weight:700; align-self:center; flex:none; }
+  .mathbox { font-size:25px; padding:20px 26px; }
+  .vars { margin-top:28px; padding:0 90px; display:flex; flex-direction:column; gap:14px; font-size:22.5px; color:var(--ink); }
+  .vars .vrow { display:flex; align-items:baseline; gap:22px; }
+  .vars .vs { flex:0 0 200px; text-align:right; color:var(--navy); font-weight:600; }
+  .vars .vd { flex:1; }
+</style>
+</head>
+<body data-title="第一节　线性系统的微分方程" data-page="4 / 51">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="sec">一、系统微分方程的建立</div>
+    <div class="steps">
+      <div class="st"><div class="no">1</div><div class="bx"><span>确定系统和各元件的<b>输入量</b>（给定量、扰动量）与<b>输出量</b>（被控制量，即系统响应）</span></div></div>
+      <div class="arr">➜</div>
+      <div class="st"><div class="no">2</div><div class="bx"><span>列写系统<b>各部分</b>的微分方程</span></div></div>
+      <div class="arr">➜</div>
+      <div class="st"><div class="no">3</div><div class="bx"><span><b>消去中间变量</b>，求出输入、输出变量的微分方程</span></div></div>
+      <div class="arr">➜</div>
+      <div class="st"><div class="no">4</div><div class="bx"><span><b>标准化</b>：输出项在左、输入项在右，导数降幂排列</span></div></div>
+    </div>
+    <div class="mathbox math eqline tex tex-d">a_{n}\dfrac{d^{n}c(t)}{dt^{n}} + a_{n-1}\dfrac{d^{n-1}c(t)}{dt^{n-1}} + \cdots + a_{0}c(t) = b_{m}\dfrac{d^{m}r(t)}{dt^{m}} + b_{m-1}\dfrac{d^{m-1}r(t)}{dt^{m-1}} + \cdots + b_{0}r(t)</div>
+    <div class="vars">
+      <div class="vrow"><span class="vs tex">r(t)</span><span class="vd">—— 系统输入量（给定量）</span></div>
+      <div class="vrow"><span class="vs tex">c(t)</span><span class="vd">—— 系统输出量（被控制量，即系统响应）</span></div>
+      <div class="vrow"><span class="vs tex">a_{i}、b_{j}</span><span class="vd">—— 由系统结构和参数决定的常量</span></div>
+      <div class="vrow"><span class="vs tex">m、n</span><span class="vd">—— 输入量 / 输出量导数的最高阶次（一般 <span class="tex">n \geq m</span>）</span></div>
+    </div>
+  </div>
+</div></div>
+</body>
+</html>

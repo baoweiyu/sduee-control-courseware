@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>例2-11 两级 RC 网络</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<link rel="stylesheet" href="../lesson02-svg.css">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row1 { display:flex; gap:18px; height:218px; margin-bottom:6px; }
+  .imgc { flex:0 0 400px; overflow:hidden; }
+  .imgc .bd2 { height:100%; display:grid; place-items:center; background:var(--sky); padding:6px; }
+  .imgc img { max-width:100%; max-height:100%; object-fit:contain; }
+  .cir { flex:1; }
+  .cir .bd2 { display:grid; place-items:center; padding:4px; }
+  .cap { font-size:18px; font-weight:700; color:var(--blue); margin:2px 0 2px; }
+  .panel { background:var(--sky); border-radius:12px; padding:2px 8px; }
+  .warn { margin-top:6px; display:flex; gap:10px; align-items:center;
+          background:#FDF0EF; border-left:6px solid var(--red); border-radius:10px;
+          padding:7px 18px; font-size:20px; color:var(--ink); }
+  .res { margin-top:6px; text-align:center; font-size:19.5px; }
+</style>
+</head>
+<body data-title="例2-11　两级 RC 网络（方框图变换）" data-page="38 / 51">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="row1">
+      <div class="act-card imgc"><div class="bd2"><img src="../../../assets/image2/rc-ladder.png" alt="两级RC滤波电路板"></div></div>
+      <div class="act-card cir"><div class="bd2">
+        <svg viewBox="0 0 640 200" width="96%" height="200">
+          <g stroke="#1D3FA0" stroke-width="2.5" fill="none">
+            <!-- 左竖支路：输入电压源 ui（上 + 下 −），位于左侧中部 -->
+            <line x1="58" y1="76" x2="58" y2="108"/>
+            <circle cx="58" cy="126" r="17"/>
+            <line x1="58" y1="143" x2="58" y2="176"/>
+            <!-- 顶线 → R1（矩形电阻） -->
+            <line x1="58" y1="76" x2="96" y2="76"/>
+            <rect x="96" y="60" width="80" height="32" fill="#fff"/>
+            <line x1="176" y1="76" x2="236" y2="76"/>
+            <!-- 节点 A：C1 支路（平行板电容） -->
+            <line x1="236" y1="76" x2="236" y2="100"/>
+            <line x1="221" y1="100" x2="251" y2="100"/>
+            <line x1="221" y1="111" x2="251" y2="111"/>
+            <line x1="236" y1="111" x2="236" y2="176"/>
+            <!-- 顶线 → R2 -->
+            <line x1="236" y1="76" x2="296" y2="76"/>
+            <rect x="296" y="60" width="80" height="32" fill="#fff"/>
+            <line x1="376" y1="76" x2="436" y2="76"/>
+            <!-- 节点 B：C2 支路 -->
+            <line x1="436" y1="76" x2="436" y2="100"/>
+            <line x1="421" y1="100" x2="451" y2="100"/>
+            <line x1="421" y1="111" x2="451" y2="111"/>
+            <line x1="436" y1="111" x2="436" y2="176"/>
+            <!-- 输出引线与公共地线 -->
+            <line x1="436" y1="76" x2="534" y2="76"/>
+            <line x1="58" y1="176" x2="534" y2="176"/>
+          </g>
+          <!-- 节点与输出端子 -->
+          <circle cx="236" cy="76" r="4" fill="#1D3FA0"/>
+          <circle cx="436" cy="76" r="4" fill="#1D3FA0"/>
+          <circle cx="540" cy="76" r="5" fill="#fff" stroke="#1D3FA0" stroke-width="2.5"/>
+          <circle cx="540" cy="176" r="5" fill="#fff" stroke="#1D3FA0" stroke-width="2.5"/>
+          <!-- 电流方向小箭头 -->
+          <path d="M198,70 L210,76 L198,82 Z" fill="#1D3FA0"/>
+          <path d="M398,70 L410,76 L398,82 Z" fill="#1D3FA0"/>
+          <path d="M242,126 L236,138 L230,126 Z" fill="#1D3FA0"/>
+          <!-- 电源极性（上 + 下 −） -->
+          <text x="30" y="102" font-size="17" fill="#D63A2F">+</text>
+          <text x="30" y="156" font-size="17" fill="#D63A2F">−</text>
+          <!-- 标识（MathJax/STIX2，真下标） -->
+          <foreignObject x="2" y="110" width="42" height="32"><div xmlns="http://www.w3.org/1999/xhtml" class="tex" style="font-size:20px">u_i</div></foreignObject>
+          <foreignObject x="118" y="22" width="48" height="32"><div xmlns="http://www.w3.org/1999/xhtml" class="tex" style="font-size:20px">R_1</div></foreignObject>
+          <foreignObject x="318" y="22" width="48" height="32"><div xmlns="http://www.w3.org/1999/xhtml" class="tex" style="font-size:20px">R_2</div></foreignObject>
+          <foreignObject x="254" y="118" width="48" height="32"><div xmlns="http://www.w3.org/1999/xhtml" class="tex" style="font-size:20px">C_1</div></foreignObject>
+          <foreignObject x="454" y="118" width="48" height="32"><div xmlns="http://www.w3.org/1999/xhtml" class="tex" style="font-size:20px">C_2</div></foreignObject>
+          <foreignObject x="242" y="38" width="36" height="30"><div xmlns="http://www.w3.org/1999/xhtml" class="tex" style="font-size:20px">u</div></foreignObject>
+          <foreignObject x="550" y="110" width="50" height="32"><div xmlns="http://www.w3.org/1999/xhtml" class="tex" style="font-size:20px">u_o</div></foreignObject>
+          <foreignObject x="188" y="40" width="38" height="28"><div xmlns="http://www.w3.org/1999/xhtml" class="tex" style="font-size:18px">i_1</div></foreignObject>
+          <foreignObject x="388" y="40" width="38" height="28"><div xmlns="http://www.w3.org/1999/xhtml" class="tex" style="font-size:18px">i_2</div></foreignObject>
+          <foreignObject x="196" y="122" width="30" height="28"><div xmlns="http://www.w3.org/1999/xhtml" class="tex" style="font-size:18px">i</div></foreignObject>
+        </svg>
+      </div></div>
+    </div>
+
+    <div class="cap">(a) 由电路方程直接绘制：<span class="tex">I_{1}=(U_{i}-U)/R_{1}</span>，<span class="tex">I=I_{1}-I_{2}</span>，<span class="tex">U=I/(C_{1}s)</span>，<span class="tex">I_{2}=(U-U_{o})/R_{2}</span>，<span class="tex">U_{o}=I_{2}/(C_{2}s)</span></div>
+    <div class="panel">
+      <svg viewBox="0 0 1120 190" width="100%" height="128">
+        <defs><marker id="a37" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#1D3FA0"/></marker></defs>
+        <g font-size="20" fill="#1B3B8B">
+          <circle cx="70" cy="72" r="14" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><path d="M 63.6,65.6 L 76.4,78.4 M 63.6,78.4 L 76.4,65.6" stroke="#1D3FA0" stroke-width="2.2" fill="none"/>
+          <rect x="122" y="50" width="112" height="44" rx="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><text x="178" y="79" text-anchor="middle" font-style="italic">1/R<tspan dy="4" font-size="14">1</tspan></text>
+          <circle cx="308" cy="72" r="14" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><path d="M 301.6,65.6 L 314.4,78.4 M 301.6,78.4 L 314.4,65.6" stroke="#1D3FA0" stroke-width="2.2" fill="none"/>
+          <rect x="356" y="50" width="116" height="44" rx="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><text x="414" y="79" text-anchor="middle" font-style="italic">1/(C<tspan dy="4" font-size="14">1</tspan><tspan dy="-4">s</tspan>)</text>
+          <circle cx="544" cy="72" r="14" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><path d="M 537.6,65.6 L 550.4,78.4 M 537.6,78.4 L 550.4,65.6" stroke="#1D3FA0" stroke-width="2.2" fill="none"/>
+          <rect x="592" y="50" width="112" height="44" rx="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><text x="648" y="79" text-anchor="middle" font-style="italic">1/R<tspan dy="4" font-size="14">2</tspan></text>
+          <rect x="760" y="50" width="116" height="44" rx="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><text x="818" y="79" text-anchor="middle" font-style="italic">1/(C<tspan dy="4" font-size="14">2</tspan><tspan dy="-4">s</tspan>)</text>
+        </g>
+        <g stroke="#1D3FA0" stroke-width="2.4" fill="none" marker-end="url(#a37)">
+          <line x1="16" y1="72" x2="52" y2="72"/><line x1="84" y1="72" x2="118" y2="72"/>
+          <line x1="234" y1="72" x2="290" y2="72"/><line x1="322" y1="72" x2="352" y2="72"/>
+          <line x1="472" y1="72" x2="526" y2="72"/><line x1="558" y1="72" x2="588" y2="72"/>
+          <line x1="704" y1="72" x2="756" y2="72"/><line x1="876" y1="72" x2="1030" y2="72"/>
+          <polyline points="518,72 518,150 70,150 70,92"/>
+          <polyline points="750,72 750,118 308,118 308,92"/>
+          <polyline points="970,72 970,176 544,176 544,92"/>
+        </g>
+        <circle cx="518" cy="72" r="4.5" fill="#1D3FA0"/><circle cx="750" cy="72" r="4.5" fill="#1D3FA0"/><circle cx="970" cy="72" r="4.5" fill="#1D3FA0"/>
+        <text x="10" y="64" font-size="17" fill="#1B3B8B" font-style="italic">U<tspan dy="4" font-size="12">i</tspan></text>
+        <text x="1038" y="64" font-size="17" fill="#1B3B8B" font-style="italic">U<tspan dy="4" font-size="12">o</tspan></text>
+        <text x="256" y="62" font-size="17" fill="#1B3B8B" font-style="italic">I<tspan dy="4" font-size="12">1</tspan></text>
+        <text x="494" y="62" font-size="17" fill="#1B3B8B" font-style="italic">U</text>
+        <text x="726" y="62" font-size="17" fill="#1B3B8B" font-style="italic">I<tspan dy="4" font-size="12">2</tspan></text>
+        <text x="86" y="102" font-size="15" fill="#D63A2F">−</text>
+        <text x="324" y="104" font-size="15" fill="#D63A2F">−</text>
+        <text x="560" y="104" font-size="15" fill="#D63A2F">−</text>
+      </svg>
+    </div>
+
+    <div data-step="1">
+      <div class="cap">(b) 等效移动后：相加点靠拢相加点、分支点靠拢分支点（<span class="tex">R_{1}</span>、<span class="tex">C_{2}s</span> 为补偿环节）</div>
+      <div class="panel">
+        <svg viewBox="0 0 1120 220" width="100%" height="140">
+          <defs>
+            <marker id="b37" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#1D3FA0"/></marker>
+            <marker id="b37r" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#D63A2F"/></marker>
+          </defs>
+          <g font-size="20" fill="#1B3B8B">
+            <circle cx="60" cy="92" r="14" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><path d="M 53.6,85.6 L 66.4,98.4 M 53.6,98.4 L 66.4,85.6" stroke="#1D3FA0" stroke-width="2.2" fill="none"/>
+            <circle cx="102" cy="92" r="14" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><path d="M 95.6,85.6 L 108.4,98.4 M 95.6,98.4 L 108.4,85.6" stroke="#1D3FA0" stroke-width="2.2" fill="none"/>
+            <rect x="150" y="70" width="112" height="44" rx="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><text x="206" y="99" text-anchor="middle" font-style="italic">1/R<tspan dy="4" font-size="14">1</tspan></text>
+            <rect x="318" y="70" width="116" height="44" rx="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><text x="376" y="99" text-anchor="middle" font-style="italic">1/(C<tspan dy="4" font-size="14">1</tspan><tspan dy="-4">s</tspan>)</text>
+            <circle cx="506" cy="92" r="14" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><path d="M 499.6,85.6 L 512.4,98.4 M 499.6,98.4 L 512.4,85.6" stroke="#1D3FA0" stroke-width="2.2" fill="none"/>
+            <rect x="554" y="70" width="112" height="44" rx="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><text x="610" y="99" text-anchor="middle" font-style="italic">1/R<tspan dy="4" font-size="14">2</tspan></text>
+            <rect x="722" y="70" width="116" height="44" rx="6" fill="#fff" stroke="#1D3FA0" stroke-width="2.4"/><text x="780" y="99" text-anchor="middle" font-style="italic">1/(C<tspan dy="4" font-size="14">2</tspan><tspan dy="-4">s</tspan>)</text>
+            <rect x="190" y="14" width="112" height="38" rx="6" fill="#FDF0EF" stroke="#D63A2F" stroke-width="2.6"/><text x="246" y="41" text-anchor="middle" font-style="italic" fill="#D63A2F" font-weight="700">R<tspan dy="4" font-size="14">1</tspan></text>
+            <rect x="640" y="14" width="116" height="38" rx="6" fill="#FDF0EF" stroke="#D63A2F" stroke-width="2.6"/><text x="698" y="41" text-anchor="middle" font-style="italic" fill="#D63A2F" font-weight="700">C<tspan dy="4" font-size="14">2</tspan><tspan dy="-4">s</tspan></text>
+          </g>
+          <g stroke="#1D3FA0" stroke-width="2.4" fill="none" marker-end="url(#b37)">
+            <line x1="16" y1="92" x2="42" y2="92"/><line x1="74" y1="92" x2="84" y2="92"/>
+            <line x1="116" y1="92" x2="146" y2="92"/>
+            <line x1="262" y1="92" x2="314" y2="92"/>
+            <line x1="434" y1="92" x2="488" y2="92"/>
+            <line x1="520" y1="92" x2="550" y2="92"/>
+            <line x1="666" y1="92" x2="718" y2="92"/>
+            <line x1="838" y1="92" x2="1010" y2="92"/>
+            <polyline points="480,92 480,206 102,206 102,110"/>
+            <polyline points="950,92 950,170 506,170 506,110"/>
+          </g>
+          <g stroke="#D63A2F" stroke-width="2.4" fill="none" marker-end="url(#b37r)">
+            <polyline points="950,92 950,33 760,33"/>
+            <line x1="636" y1="33" x2="306" y2="33"/>
+            <polyline points="190,33 60,33 60,74"/>
+          </g>
+          <circle cx="480" cy="92" r="4.5" fill="#1D3FA0"/>
+          <circle cx="950" cy="92" r="4.5" fill="#1D3FA0"/>
+          <text x="10" y="84" font-size="17" fill="#1B3B8B" font-style="italic">U<tspan dy="4" font-size="12">i</tspan></text>
+          <text x="1016" y="84" font-size="17" fill="#1B3B8B" font-style="italic">U<tspan dy="4" font-size="12">o</tspan></text>
+          <text x="456" y="82" font-size="17" fill="#1B3B8B" font-style="italic">U</text>
+          <text x="688" y="82" font-size="17" fill="#1B3B8B" font-style="italic">I<tspan dy="4" font-size="12">2</tspan></text>
+          <text x="74" y="66" font-size="15" fill="#D63A2F">−</text>
+          <text x="116" y="104" font-size="15" fill="#D63A2F">−</text>
+          <text x="520" y="104" font-size="15" fill="#D63A2F">−</text>
+        </svg>
+      </div>
+      <div class="warn" data-step="2">
+        <div style="font-size:24px">⚠️</div>
+        <div><b>注意：</b><span class="kw-r">相加点移到相加点上，分支点移到分支点上；且相加点与分支点不能交叉移。</span></div>
+      </div>
+      <div class="res math tex tex-d" data-step="3">\text{继续逐环化简可得} \Phi (s) = \dfrac{U_{o}(s)}{U_{i}(s)} = \dfrac{1}{R_{1}R_{2}C_{1}C_{2}s^{2} + (R_{1}C_{1}+R_{2}C_{2}+R_{1}C_{2})s + 1}</div>
+    </div>
+  </div>
+  <div class="act-note">两级 RC 存在负载效应（第二级影响第一级），所以不能简单分成两个独立一阶环节串联——方框图(b)中 R₁、C₂s 两个"补偿"环节串成的大反馈正体现了这种耦合。最后可对照 p25 例2-6 复阻抗法结果验证。</div>
+</div></div>
+</body>
+</html>

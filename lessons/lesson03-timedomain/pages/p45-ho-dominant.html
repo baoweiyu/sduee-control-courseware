@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>主导极点与偶极子</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<link rel="stylesheet" href="../lesson03-svg.css">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .row { display:flex; gap:24px; height:100%; }
+  .lcol { flex:1.05; display:flex; flex-direction:column; gap:16px; }
+  .drv { flex:1; }
+  .drv .bd { font-size:23.5px; line-height:1.8; display:flex; flex-direction:column; justify-content:center; gap:10px; }
+  .feat { background:#fff; border:2px solid var(--line); border-radius:14px; padding:16px 24px; font-size:22.5px; line-height:1.9; color:var(--ink); }
+  .figc { flex:1.3; display:flex; flex-direction:column; overflow:hidden; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:8px 14px; }
+  .figc svg { width:100%; height:100%; }
+</style>
+</head>
+<body data-title="主导极点与偶极子" data-page="47 / 85">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lcol">
+        <div class="act-card drv">
+          <div class="hd">闭环主导极点</div>
+          <div class="bd">
+            <div>在全部闭环极点中，<span class="kw-r">对响应起决定作用</span>的极点称为闭环主导极点。判定条件：</div>
+            <div>① 距虚轴<span class="kw-r">最近</span>——其他极点的实部 ≥ 其模的 <b>5 倍</b>（分量衰减快 5 倍以上，可忽略）；</div>
+            <div>② 附近<span class="kw-r">没有闭环零点</span>。</div>
+            <div>满足时，高阶系统可按主导极点——<br><span class="kw-r">近似为一阶或二阶系统</span>，直接套用前面的指标公式。</div>
+          </div>
+        </div>
+        <div class="feat">
+          <b>偶极子</b>：一对靠得很近的闭环零、极点（间距远小于到原点的距离）；<br>留数很小、作用近似<span class="kw-r">相互抵消</span>，工程上可一并略去（但仍可能影响稳态附近的细微形状）。
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd">复平面示意：主导极点 · 非主导极点 · 偶极子</div>
+        <div class="bd2"><svg id="fig" viewBox="0 0 1000 620"></svg></div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">方法论</span><span>主导极点思想 = <span class="kw-r">"抓主要矛盾"</span>：用低阶模型估算高阶系统性能，是时域分析走向工程应用的关键一步。</span></div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("fig");
+  const O = { x: 750, y: 320 }, SC = 110;
+  const X = v => O.x + v * SC, Y = v => O.y - v * SC;
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const tx = (x, y, s, o) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 20, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal" }); n.textContent = s; return n; };
+  const defs = mk("defs", {});
+  const m1 = mk("marker", { id: "a45", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, m1);
+  mk("line", { x1: 40, y1: O.y, x2: 966, y2: O.y, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a45)" });
+  mk("line", { x1: O.x, y1: 580, x2: O.x, y2: 32, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a45)" });
+  tx(962, O.y + 30, "Re", { fs: 20, it: true, b: true, fill: "#5B6B8C", an: "end" });
+  tx(O.x + 28, 44, "jω", { fs: 20, it: true, b: true, fill: "#5B6B8C", an: "start" });
+  tx(O.x - 13, O.y + 28, "O", { fs: 17, fill: "#5B6B8C", an: "end" });
+  const cross = (x, y, color, wdt) => {
+    mk("line", { x1: x - 11, y1: y - 11, x2: x + 11, y2: y + 11, stroke: color, "stroke-width": wdt || 3.4 });
+    mk("line", { x1: x - 11, y1: y + 11, x2: x + 11, y2: y - 11, stroke: color, "stroke-width": wdt || 3.4 });
+  };
+  // 主导极点（红色 ×）
+  cross(X(-1), Y(1.5), "#D63A2F"); cross(X(-1), Y(-1.5), "#D63A2F");
+  mk("ellipse", { cx: X(-1), cy: O.y, rx: 105, ry: 225, fill: "none", stroke: "#D63A2F", "stroke-width": 1.8, "stroke-dasharray": "8 6", opacity: 0.6 });
+  tx(X(-1), Y(1.5) - 22, "主导极点", { fs: 20, b: true, fill: "#D63A2F" });
+  tx(X(-1) + 18, Y(1.5) + 7, "s1, s2", { fs: 17, it: true, fill: "#D63A2F", an: "start" });
+  tx(X(-1), 572, "距虚轴最近、附近无零点", { fs: 17.5, fill: "#D63A2F" });
+  // 非主导极点（灰色 ×）
+  cross(X(-5.3), Y(1.1), "#9AA7BF", 3); cross(X(-5.3), Y(-1.1), "#9AA7BF", 3);
+  tx(X(-5.3), Y(1.1) - 20, "非主导极点", { fs: 19, b: true, fill: "#9AA7BF" });
+  tx(X(-5.3), Y(-1.1) + 34, "|Re| ≥ 5×|Re(主导)|，可忽略", { fs: 17, fill: "#9AA7BF" });
+  // 偶极子：极点 + 零点紧邻
+  cross(X(-3.1), Y(0.75), "#1D3FA0", 3);
+  mk("circle", { cx: X(-3.3), cy: Y(1.0), r: 9, fill: "none", stroke: "#1D3FA0", "stroke-width": 3 });
+  mk("ellipse", { cx: X(-3.2), cy: Y(0.87), rx: 58, ry: 44, fill: "none", stroke: "#1D3FA0", "stroke-width": 1.8, "stroke-dasharray": "7 6" });
+  tx(X(-3.2), Y(0.87) + 72, "偶极子（零极点紧邻，近似抵消）", { fs: 17.5, fill: "#1D3FA0" });
+});
+</script>
+</body>
+</html>

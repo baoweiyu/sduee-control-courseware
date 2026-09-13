@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>本章学习要点</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .kp { display:flex; flex-direction:column; gap:20px; }
+  .krow { display:flex; gap:18px; align-items:flex-start; background:var(--sky); border-radius:16px;
+          padding:24px 28px; }
+  .kno { flex:0 0 62px; height:62px; border-radius:50%; background:var(--blue); color:#fff;
+         display:grid; place-items:center; font-size:32px; font-weight:800; }
+  .kt { font-size:23px; line-height:1.55; color:var(--ink); }
+  .kt b { color:var(--blue); }
+  .chain { margin-top:20px; display:flex; align-items:center; justify-content:center; gap:10px;
+           font-size:20px; color:var(--muted); flex-wrap:wrap; }
+  .chain .node { background:#fff; border:2px solid var(--blue); color:var(--navy); border-radius:10px;
+                 padding:6px 14px; font-weight:700; }
+  .chain .ar { color:var(--orange); font-weight:800; }
+</style>
+</head>
+<body data-title="本章学习要点" data-page="49 / 51">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body fill">
+    <div class="kp">
+      <div class="krow" data-step="1">
+        <div class="kno">1</div>
+        <div class="kt"><b>微分方程建模：</b>了解自动控制系统（物理系统）微分方程数学模型的<b>建立步骤</b>及其动态特性；会用拉氏变换法求解微分方程。</div>
+      </div>
+      <div class="krow" data-step="2">
+        <div class="kno">2</div>
+        <div class="kt"><b>传递函数：</b>理解传递函数的概念与不同表示形式，熟练掌握<b>由微分方程求传递函数</b>的方法；掌握典型环节的传递函数并深刻理解其<b>物理含义</b>。</div>
+      </div>
+      <div class="krow" data-step="3">
+        <div class="kno">3</div>
+        <div class="kt"><b>结构图等效变换：</b>理解方框图与信号流图的概念，掌握基于方框图（等效化简）或信号流图（<b>梅逊公式</b>）求等效传递函数的方法。</div>
+      </div>
+    </div>
+    <div class="chain" data-step="4">
+      <span>本章主线：</span>
+      <span class="node">物理系统</span><span class="ar">➜</span>
+      <span class="node">微分方程</span><span class="ar">➜</span>
+      <span class="node">传递函数</span><span class="ar">➜</span>
+      <span class="node">方框图 / 信号流图</span><span class="ar">➜</span>
+      <span class="node" style="border-color:var(--red); color:var(--red)">Φ(s) = C(s)/R(s)</span>
+    </div>
+  </div>
+  <div class="act-note">收束全章：三种数学模型（微分方程、传递函数、结构图）本质等价、各有适用场合。预告：第三章将基于这些模型分析系统的时域响应。</div>
+</div></div>
+</body>
+</html>

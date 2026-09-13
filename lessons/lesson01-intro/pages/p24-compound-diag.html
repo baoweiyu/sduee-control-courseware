@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>复合控制框图（按扰动补偿）</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .fig { padding:10px 20px 4px; }
+  .fig svg { width:100%; display:block; }
+  svg text { font-family:var(--font); }
+  .blk { fill:#fff; stroke:var(--blue); stroke-width:2.5; }
+  .blkt { fill:var(--navy); font-size:21px; font-weight:700; }
+  .sig { stroke:var(--blue); stroke-width:2.5; fill:none; marker-end:url(#arr); }
+  .ffw { stroke:#D63A2F; stroke-width:2.5; fill:none; marker-end:url(#arrR); }
+  .ffb { fill:#FBE9E7; stroke:#D63A2F; stroke-width:2.5; }
+  .ffbt { fill:#D63A2F; font-size:21px; font-weight:700; }
+  .ffs { fill:#D63A2F; font-size:22px; font-weight:700; }
+  .lab { fill:var(--ink); font-size:20px; }
+  .sum { fill:#fff; stroke:var(--blue); stroke-width:2.5; }
+  .sumt { fill:var(--navy); font-size:20px; font-weight:700; }
+  .dist { stroke:#5B6B8C; stroke-width:2.5; stroke-dasharray:8 6; marker-end:url(#arrO); fill:none; }
+  .distt { fill:#5B6B8C; font-size:20px; font-weight:700; }
+  .fb { stroke:var(--blue); stroke-width:2.5; fill:none; }
+  .trio { display:flex; gap:22px; margin-top:14px; }
+  .tp { flex:1; background:#fff; border:2px solid var(--line); border-radius:14px; padding:14px 22px; font-size:21px; line-height:1.55; color:var(--ink); }
+  .tp b { display:block; font-size:22px; margin-bottom:6px; }
+  .tp.r { border-color:#F0B8B2; background:#FDF6F5; }
+  .tp.r b { color:#D63A2F; }
+  .tp.b b { color:var(--blue); }
+  .tp.g b { color:var(--navy); }
+  .tp .em { color:#D63A2F; font-weight:700; }
+</style>
+</head>
+<body data-title="3、复合控制 — 按扰动补偿的框图" data-page="24 / 35">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body fill">
+    <div class="act-card fig">
+      <svg viewBox="0 140 1180 372">
+        <defs>
+          <marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#1D3FA0"/></marker>
+          <marker id="arrR" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#D63A2F"/></marker>
+          <marker id="arrO" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#5B6B8C"/></marker>
+        </defs>
+        <!-- 扰动量：竖直向下直接进入被控对象；分支往左经前馈控制器，再竖直向下入相加点 -->
+        <circle cx="767" cy="200" r="4.5" fill="#5B6B8C"/>
+        <text class="distt" x="782" y="207">扰动量</text>
+        <line class="dist" x1="767" y1="208" x2="767" y2="292"/>
+        <text class="distt" x="777" y="254" font-size="16">扰动作用通道</text>
+        <!-- 前馈通道（红色）：扰动 → 往左 → 前馈控制器 → 往下 → 相加点 -->
+        <line class="ffw" x1="762" y1="200" x2="638" y2="200"/>
+        <rect class="ffb" x="444" y="164" width="192" height="72" rx="8"/>
+        <text class="ffbt" x="540" y="208" text-anchor="middle">前馈控制器</text>
+        <line class="ffw" x1="540" y1="236" x2="540" y2="306"/>
+        <text class="ffs" x="558" y="298" text-anchor="middle">−</text>
+        <!-- 主通道 -->
+        <text class="lab" x="24" y="318">输入量</text>
+        <line class="sig" x1="30" y1="330" x2="90" y2="330"/>
+        <circle class="sum" cx="116" cy="330" r="22"/>
+        <path d="M105,319 L127,341 M105,341 L127,319" stroke="#1D3FA0" stroke-width="2.5" fill="none"/>
+        <text class="sumt" x="92" y="312" text-anchor="middle">+</text>
+        <text class="sumt" x="100" y="378" text-anchor="middle">−</text>
+        <text class="lab" x="148" y="318">偏差量</text>
+        <line class="sig" x1="138" y1="330" x2="250" y2="330"/>
+        <rect class="blk" x="252" y="294" width="152" height="72" rx="8"/>
+        <text class="blkt" x="328" y="338" text-anchor="middle">控制器</text>
+        <text class="lab" x="420" y="318">控制量</text>
+        <line class="sig" x1="404" y1="330" x2="514" y2="330"/>
+        <circle class="sum" cx="540" cy="330" r="22"/>
+        <path d="M529,319 L551,341 M529,341 L551,319" stroke="#1D3FA0" stroke-width="2.5" fill="none"/>
+        <text class="sumt" x="516" y="312" text-anchor="middle">+</text>
+        <line class="sig" x1="562" y1="330" x2="674" y2="330"/>
+        <rect class="blk" x="676" y="294" width="182" height="72" rx="8"/>
+        <text class="blkt" x="767" y="338" text-anchor="middle">被控对象</text>
+        <line class="sig" x1="858" y1="330" x2="1006" y2="330"/>
+        <text class="lab" x="1022" y="318">输出量</text>
+        <circle cx="980" cy="330" r="4.5" fill="#1D3FA0"/>
+        <!-- 反馈通道 -->
+        <polyline class="fb" points="980,330 980,472 564,472"/>
+        <rect class="blk" x="404" y="441" width="160" height="62" rx="8"/>
+        <text class="blkt" x="484" y="480" text-anchor="middle">测量元件</text>
+        <polyline class="fb" points="404,472 116,472 116,356" marker-end="url(#arr)"/>
+        <text class="lab" x="150" y="458">反馈量</text>
+      </svg>
+    </div>
+    <div class="trio">
+      <div class="tp r"><b>前馈通道（红）</b>直接测量扰动，提前产生与扰动影响相反的补偿作用——<span class="em">「扰动未至，补偿先行」</span>。</div>
+      <div class="tp b"><b>反馈回路（蓝）</b>按偏差调节，消除前馈补偿后的<span class="em">残余偏差</span>，保证稳态精度。</div>
+      <div class="tp g"><b>复合控制优势</b>前馈快速抗扰 + 反馈保证精度，适用于<span class="em">扰动可测、精度要求高</span>的场合。</div>
+    </div>
+  </div>
+</div></div>
+</body>
+</html>

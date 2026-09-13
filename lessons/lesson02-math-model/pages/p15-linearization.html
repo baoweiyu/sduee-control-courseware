@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>非线性特性的线性化</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=216">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=216" defer></script>
+<style>
+  .cols { display:flex; gap:26px; height:430px; margin-top:2px; }
+  .lft { flex:1.05; display:flex; flex-direction:column; gap:14px; }
+  .cat { flex:1; background:#fff; border:2px solid var(--line); border-radius:14px; padding:14px 24px; display:flex; flex-direction:column; justify-content:center; }
+  .cat b { font-size:23px; color:var(--navy); }
+  .cat span { font-size:19.5px; color:var(--muted); line-height:1.5; margin-top:4px; }
+  .rgt { flex:1; display:flex; flex-direction:column; }
+  .rgt .bd2 { flex:1; display:grid; place-items:center; padding:8px; }
+  .eqs { margin-top:20px; display:flex; gap:24px; }
+  .eqs .mathbox { flex:1; font-size:23px; padding:16px 24px; }
+  .notes { margin-top:18px; display:flex; gap:18px; }
+  .notes span { flex:1; background:var(--sky); border-radius:10px; padding:10px 16px; font-size:19.5px; color:var(--navy); text-align:center; }
+</style>
+</head>
+<body data-title="非线性特性的线性化" data-page="15 / 51">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="cols">
+      <div class="lft">
+        <div class="cat"><b>⑴ 线性系统</b><span>输入-输出特性为线性，有成熟理论 —— 本课程研究对象</span></div>
+        <div class="cat"><b>⑵ 拟（近似）线性系统</b><span>在某工作点附近可近似线性化；常用<span class="kw-r">小偏差法（增量法、切线法）</span>：工作点处用斜率直线代替曲线，即 Taylor 展开去掉 2 次以上项</span></div>
+        <div class="cat"><b>⑶ 本质非线性系统</b><span>不能用小偏差线性化，需专门理论（后续课程）</span></div>
+      </div>
+      <div class="act-card rgt">
+        <div class="hd" style="font-size:23px">切线法：工作点 <span class="tex">A(x_{0}, y_{0})</span> 附近线性化</div>
+        <div class="bd2">
+          <svg viewBox="0 0 420 280" width="94%" height="94%">
+            <defs><marker id="ax15" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="#8B93B8"/></marker></defs>
+            <line x1="40" y1="240" x2="392" y2="240" stroke="#8B93B8" stroke-width="2" marker-end="url(#ax15)"/>
+            <line x1="40" y1="240" x2="40" y2="18" stroke="#8B93B8" stroke-width="2" marker-end="url(#ax15)"/>
+            <text x="396" y="262" font-size="18" fill="#8B93B8" font-style="italic">x</text>
+            <text x="16" y="26" font-size="18" fill="#8B93B8" font-style="italic">y</text>
+            <!-- 非线性曲线：过 A 点且在该处与切线相切 -->
+            <path d="M60 228 Q160 180 210 130 Q260 80 370 42" fill="none" stroke="#1D3FA0" stroke-width="3.5"/>
+            <!-- 切线：过 A(210,130)，斜率与曲线一致 -->
+            <line x1="115" y1="225" x2="305" y2="35" stroke="#F5821F" stroke-width="3"/>
+            <!-- 斜率三角形：Δx、Δy -->
+            <line x1="210" y1="130" x2="270" y2="130" stroke="#5B6B8C" stroke-width="2" stroke-dasharray="5 4"/>
+            <line x1="270" y1="130" x2="270" y2="70" stroke="#5B6B8C" stroke-width="2" stroke-dasharray="5 4"/>
+            <text x="240" y="150" text-anchor="middle" font-size="17" fill="#5B6B8C" font-style="italic">Δx</text>
+            <text x="280" y="104" font-size="17" fill="#5B6B8C" font-style="italic">Δy</text>
+            <!-- 工作点 A -->
+            <circle cx="210" cy="130" r="7" fill="#D63A2F"/>
+            <text x="204" y="118" text-anchor="end" font-size="19" fill="#D63A2F" font-weight="700">A(x₀, y₀)</text>
+            <!-- 曲线与切线标注（避线放置） -->
+            <text x="330" y="26" text-anchor="middle" font-size="19" fill="#1D3FA0" font-style="italic">y = f(x)</text>
+            <text x="250" y="205" font-size="18" fill="#F5821F" font-style="italic">切线 Δy = k·Δx</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div class="eqs">
+      <div class="mathbox math tex tex-d" data-step>y = f(x_{0}) + \dfrac{dy}{dx}|_{x_{0}}(x-x_{0}) + \dfrac{1}{2!}\dfrac{d^{2}y}{dx^{2}}|_{x_{0}}(x-x_{0})^{2} + \cdots</div>
+      <div class="mathbox math tex tex-d" data-step>\text{忽略高次项：}\color{#D63A2F}{\Delta y = k\cdot \Delta x}\text{，}k = \dfrac{dy}{dx}|_{x=x_{0}}</div>
+    </div>
+    <div class="notes" data-step>
+      <span>① 参数与工作点有关</span><span>② 仅小偏差成立</span><span>③ 特性需连续可微</span><span>④ 得到的是增量方程</span>
+    </div>
+  </div>
+</div></div>
+</body>
+</html>
