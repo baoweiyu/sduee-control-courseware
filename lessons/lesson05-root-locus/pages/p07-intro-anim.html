@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>引例（3）：根轨迹的定义</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=218">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=218" defer></script>
+<script src="../fig.js?v=507"></script>
+<script src="../data/intro.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:.84;display:flex;flex-direction:column;gap:10px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:6px;padding:10px 18px}
+  .kv{background:var(--sky);border-radius:12px;padding:7px 14px;font-size:19.5px;line-height:1.4}
+  .kv.sm{font-size:17.5px;padding:5px 12px}
+  .kv.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .kv.on{background:#FDF3EC;border-left:5px solid var(--danger);border-top-left-radius:0;border-bottom-left-radius:0;font-weight:700;box-shadow:0 0 0 2px rgba(214,58,47,.22)}
+  .kv.stp{cursor:pointer}
+  .figc{flex:1.16;display:flex;flex-direction:column;overflow:hidden;position:relative}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .segfloat{position:absolute;top:56px;right:14px;z-index:5;max-width:74%;background:#fff;
+    border:2px solid var(--blue);border-radius:10px;padding:5px 14px;font-size:18px;font-weight:700;
+    color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 2px 10px rgba(20,40,90,.18)}
+  .ctl{display:flex;align-items:center;gap:10px;justify-content:center;padding:8px 0 10px}
+  .btn{background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:19px;font-weight:700;padding:8px 20px;cursor:pointer}
+  .btn.ghost{background:#fff;color:var(--blue);border:2px solid var(--blue)}
+  .prog{position:absolute;top:60px;left:16px;z-index:5;font-size:17px;color:var(--muted);
+    background:rgba(255,255,255,.88);padding:2px 10px;border-radius:8px}
+  .ctl #prog{right:auto;left:16px;top:60px}  /* 覆盖 theme v0.5 的右上角定位：prog 在左上、chip 在右上 */
+  @keyframes rlPulse{0%,100%{opacity:1}50%{opacity:.1}}
+  .rl-flash{animation:rlPulse .85s ease-in-out infinite}
+</style>
+</head>
+<body data-title="引例（3）：根轨迹的定义" data-page="7 / 61">
+<div class="act-stage"><div class="act-slide">
+
+<div class="act-body has-note">
+  <div class="row">
+    <div class="lft">
+      <div class="act-card">
+        <div class="hd">引例系统（单位负反馈）</div>
+        <div class="bd" style="font-size:19.5px;line-height:1.4;">
+          <div><span class="tex">G(s)=\dfrac{K}{s(0.5s+1)}</span>，根轨迹增益 <span class="tex">K_{1}=2K</span></div>
+          <div>闭环特征方程 <span class="tex">\varDelta(s)=s^{2}+2s+K_{1}=0</span></div>
+          <div>闭环极点 <span class="tex">s_{1,2}=-1\pm\sqrt{1-K_{1}}</span></div>
+        </div>
+      </div>
+      <div class="act-card">
+        <div class="hd">实时读数（随 K₁ 联动）</div>
+        <div class="bd" style="gap:7px">
+          <div class="kv">K₁ = <b id="lv" style="color:var(--danger)">0</b></div>
+          <div class="kv">闭环极点：<b id="lp" style="color:var(--navy)">0，−2</b></div>
+          <div class="kv">ζ = <b id="kz">≫1</b>　σ% = <b id="ks">无超调</b>　t<sub>s</sub> = <b id="kt">—</b></div>
+        </div>
+      </div>
+      <div class="act-card">
+        <div class="hd">运动过程</div>
+        <div class="bd" style="gap:5px">
+          <div class="kv sm stp" id="s1">① 计算开环极点：p₁=0、p₂=−2</div>
+          <div class="kv sm stp" id="s2">② 确定实轴段根轨迹：[−2, 0]</div>
+          <div class="kv sm stp" id="s3">③ K₁=0.5：两实根沿实轴靠拢</div>
+          <div class="kv sm stp" id="s4">④ K₁=1：在 s=−1 会合（重根）</div>
+          <div class="kv sm stp" id="s5">⑤ K₁=2：分离为共轭复根 −1±j</div>
+          <div class="kv sm stp" id="s6">⑥ K₁→∞：沿 σ=−1 趋向 −1±j∞</div>
+        </div>
+      </div>
+    </div>
+    <div class="act-card figc">
+      <div class="hd"><span style="flex:1">K₁：0→∞，闭环极点在 s 平面上的运动轨迹</span></div>
+      <span class="segfloat" id="segChip" style="display:none"></span>
+      <div class="bd2"><svg id="fig"></svg></div>
+      <div class="ctl">
+        <button class="btn" id="play">▶ 播放</button>
+        <button class="btn ghost" id="step">⧉ 分步</button>
+        <button class="btn ghost" onclick="ACT.step.reset()">↺ 重置</button>
+        <span class="prog" id="prog">0 / 6</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">定义</span><span>根轨迹：开环零、极点已知时，某一参数（此处 K₁）从 0 变到 ∞，<span class="kw-r">闭环特征根在 s 平面上走过的路径</span>——把「逐点试算」变成「一图看全」。</span></div>
+
+<div data-step="1" style="display:none"></div><div data-step="2" style="display:none"></div>
+<div data-step="3" style="display:none"></div><div data-step="4" style="display:none"></div>
+<div data-step="5" style="display:none"></div><div data-step="6" style="display:none"></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const F = RL.figure("fig", "intro", { vw: 960, vh: 600, ylim: [-2.6, 2.6], asym: false, segs: false, brkDots: false });
+  const FS = [0, 0, 0, F.f_of_K(0.5), F.f_of_K(1), F.f_of_K(2), 1];
+  /* 实时读数：由 K₁ 解析计算（数字读数一律在图外面板，图内不出现数字） */
+  const nb = v => { let s = v.toFixed(2).replace(/(\.\d*?)0+$/, "$1").replace(/\.$/, ""); return s.replace("-", "−"); };
+  function poleTxt(K1) {
+    if (K1 <= 1) { const r = Math.sqrt(Math.max(0, 1 - K1)); return nb(-1 + r) + "，" + nb(-1 - r); }
+    return "−1 ± j" + nb(Math.sqrt(K1 - 1));
+  }
+  function frame(f) {
+    const inf = f >= 0.999;
+    const K1 = F.K_of_f(f);
+    document.getElementById("lv").textContent = inf ? "→ ∞" : RL.fmtK(K1);
+    document.getElementById("lp").textContent = inf ? "−1 ± j∞" : poleTxt(K1);
+    document.getElementById("kz").textContent = inf ? "→ 0" :
+      K1 <= 1e-6 ? "—（开环极点）" : K1 < 1 ? "＞1" : K1 < 1.001 ? "1（临界）" : (1 / Math.sqrt(K1)).toFixed(2);
+    document.getElementById("ks").textContent = inf ? "→ 100%" :
+      K1 <= 1.001 ? "无超调" : "≈ " + (100 * Math.exp(-Math.PI / Math.sqrt(K1 - 1))).toFixed(1) + "%";
+    document.getElementById("kt").textContent = K1 < 0.98 ? "—" : "≈ 4 s";
+  }
+  /* 当前步骤对应的图元素闪烁突出；上一步元素随 gDyn 清空转为常显（闪烁只保留当前步） */
+  const ring = (x, y, r) => {
+    const c = F.mk("circle", { cx: F.X(x), cy: F.Y(y), r: r || 17, fill: "none",
+      stroke: RL.FOCUS, "stroke-width": 4.5, "pointer-events": "none" }, F.gDyn);
+    c.classList.add("rl-flash"); return c;
+  };
+  function paint(K) {
+    F.segEls.forEach(e => { e.style.opacity = K >= 2 ? .32 : 0; e.classList.toggle("rl-flash", K === 2); });
+    if (K === 1) { ring(0, 0); ring(-2, 0); }              // ① 开环极点 p₁、p₂ 闪烁
+    if (K === 3) { ring(-0.29, 0); ring(-1.71, 0); }       // ③ K₁=0.5 两实根闪烁
+    if (K >= 4) {  // 会合点记号（数字读数在左面板）
+      const x = F.X(-1), y = F.Y(0);
+      F.mk("circle", { cx: x, cy: y, r: 9, fill: RL.FOCUS, stroke: "#fff", "stroke-width": 2.5 }, F.gDyn);
+      F.tx(F.gDyn, x - 16, y - 40, "会合点", { fs: 25, fill: RL.FOCUS, b: 1, an: "end" });
+      if (K === 4) ring(-1, 0, 21);                        // ④ 会合点闪烁
+    }
+    if (K === 5) { ring(-1, 1); ring(-1, -1); }            // ⑤ K₁=2 共轭复根闪烁
+    if (K >= 6) {  // 趋向无穷远
+      F.tx(F.gDyn, F.X(-1) + 16, F.Y(2.3), "沿渐近线趋向无穷远", { fs: 25, fill: RL.FOCUS, b: 1, an: "start" });
+      F.tx(F.gDyn, F.X(-1) + 16, F.Y(-2.3) + 8, "沿渐近线趋向无穷远", { fs: 25, fill: RL.FOCUS, b: 1, an: "start" });
+      if (K === 6) { ring(-1, 2.25, 15); ring(-1, -2.25, 15); }  // ⑥ 渐近方向闪烁
+    }
+    for (let i = 1; i <= 6; i++)
+      document.getElementById("s" + i).classList.toggle("on", i === K);
+  }
+  RL.wire(6, paint, {
+    figs: [F], FS, dur: 10000,
+    frame: f => frame(f),
+    pick: hit => {
+      const K1 = hit.K;
+      document.getElementById("lv").textContent = RL.fmtK(K1);
+      document.getElementById("lp").textContent = poleTxt(K1);
+    }
+  });
+  /* ---- ⧉分步（金标准）：点一下推进一步；左栏步骤与右图元素 1:1 同步高亮 ---- */
+  const STEPS = ["① 开环极点 p₁=0、p₂=−2", "② 实轴段根轨迹 [−2, 0]", "③ K₁=0.5：两实根靠拢",
+                 "④ K₁=1：s=−1 会合（重根）", "⑤ K₁=2：共轭复根 −1±j", "⑥ K₁→∞：趋向 −1±j∞"];
+  const chip = document.getElementById("segChip"), total = 6;
+  const stepBtn = document.getElementById("step");
+  const wNext = ACT.step.next, wReset = ACT.step.reset;
+  let segRaf = null, segTok = 0;
+  function segEnable() { stepBtn.disabled = false; stepBtn.style.opacity = ""; stepBtn.style.cursor = ""; }
+  function segStopUI() {
+    segTok++;
+    if (segRaf) { cancelAnimationFrame(segRaf); segRaf = null; }
+    segEnable();
+    if (chip) chip.style.display = "none";
+  }
+  ACT.step.next = function () { segStopUI(); return wNext(); };
+  ACT.step.reset = function () { segStopUI(); return wReset(); };
+  const playBtn = document.getElementById("play");
+  if (playBtn && playBtn.onclick) { const po = playBtn.onclick; playBtn.onclick = e => { segStopUI(); po(e); }; }
+  function segGo(instant) {
+    segStopUI();
+    if (ACT.step.cur >= total) wReset();
+    wNext();                                    // K→cur+1：applyK+paint（左栏高亮 + 图内当前步闪烁）
+    const k = ACT.step.cur, f0 = FS[k - 1], f1 = FS[k];
+    if (chip) { chip.textContent = "分步 " + k + " / " + total + "　" + STEPS[k - 1]; chip.style.display = ""; }
+    if (instant || f1 <= f0 + 1e-9) { F.setAllF(f1); frame(f1); return; }
+    F.setAllF(f0); frame(f0);
+    stepBtn.disabled = true; stepBtn.style.opacity = ".55"; stepBtn.style.cursor = "default";  // 防连击：生长动画播完才恢复
+    const t0 = performance.now(), D = 1700, tok = segTok;
+    const tick = now => {
+      if (tok !== segTok) return;
+      const u = Math.min(1, (now - t0) / D), f = f0 + (f1 - f0) * u;
+      F.setAllF(f); frame(f);
+      if (u < 1) segRaf = requestAnimationFrame(tick); else { segRaf = null; segEnable(); }
+    };
+    segRaf = requestAnimationFrame(tick);
+  }
+  stepBtn.onclick = () => segGo(false);
+  /* 左栏步骤可点击：点第 k 项直接跳到第 k 步 */
+  function segJump(k) {
+    segStopUI();
+    wReset();
+    for (let i = 0; i < k; i++) wNext();
+    if (chip) { chip.textContent = "分步 " + k + " / " + total + "　" + STEPS[k - 1]; chip.style.display = ""; }
+  }
+  for (let i = 1; i <= total; i++)
+    document.getElementById("s" + i).onclick = () => segJump(i);
+  /* QA 钩子：?step=N 直达分步第 N 步（瞬时确定态） */
+  window.addEventListener("load", () => {
+    const n = +(new URLSearchParams(location.search).get("step") || 0);
+    for (let i = 0; i < Math.min(n, total); i++) segGo(true);
+  });
+});
+</script>
+</div></div>
+</body>
+</html>

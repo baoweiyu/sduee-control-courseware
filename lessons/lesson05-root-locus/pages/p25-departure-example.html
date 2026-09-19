@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>出射角计算示例</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=218">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=218" defer></script>
+<script src="../fig.js?v=507"></script>
+<script src="../data/dep.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:1.04;display:flex;flex-direction:column;gap:10px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:5px;padding:7px 14px;font-size:18.5px;line-height:1.38}
+  .eq{background:var(--sky);border-radius:12px;padding:5px 12px;text-align:center;font-size:19px;line-height:1.45}
+  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .kv{background:var(--sky);border-radius:12px;padding:5px 12px;font-size:17.5px;line-height:1.36}
+  .kv.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .kv.on{background:#FDF3EC;border-left:5px solid var(--danger);border-top-left-radius:0;border-bottom-left-radius:0;font-weight:700;box-shadow:0 0 0 2px rgba(214,58,47,.22)}
+  .figc{flex:1.08;display:flex;flex-direction:column;overflow:hidden;position:relative}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .segfloat{position:absolute;top:56px;right:14px;z-index:5;max-width:74%;background:#fff;
+    border:2px solid var(--blue);border-radius:10px;padding:5px 14px;font-size:18px;font-weight:700;
+    color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 2px 10px rgba(20,40,90,.18)}
+  .prog{position:absolute;top:60px;left:16px;z-index:5;font-size:17px;color:var(--muted);
+    background:rgba(255,255,255,.88);padding:2px 10px;border-radius:8px}
+  .ctl #prog{right:auto;left:16px;top:60px}  /* 覆盖 theme v0.5 的右上角定位：本页 prog 在左上、segfloat 在右上 */
+  .ctl{display:flex;align-items:center;gap:10px;justify-content:center;padding:8px 0 10px}
+  .btn{background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:19px;font-weight:700;padding:8px 20px;cursor:pointer;min-width:112px;text-align:center}
+  .btn.ghost{background:#fff;color:var(--blue);border:2px solid var(--blue)}
+  .kr{font-size:19px;color:var(--navy);font-weight:700;background:var(--sky);border-radius:10px;padding:7px 12px;white-space:nowrap}
+  .kr b{display:inline-block;text-align:left;font-variant-numeric:tabular-nums;min-width:5.5ch}
+  @keyframes rlPulse{0%,100%{opacity:1}50%{opacity:.25}}
+  .rl-flash{animation:rlPulse .9s ease-in-out infinite}
+</style>
+</head>
+<body data-title="出射角计算示例" data-page="25 / 61">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lft">
+        <div class="act-card" style="flex:.72">
+          <div class="hd">题设</div>
+          <div class="bd">
+            <div style="text-align:center"><span class="tex">G(s)H(s)=\dfrac{K_{1}}{s(s+2)(s^{2}+2s+2)}</span></div>
+            <div>四个开环极点：<span class="tex">p_{1}=0</span>、<span class="tex">p_{2}=-2</span>、<span class="tex">p_{3,4}=-1\pm j</span>（无开环零点）。</div>
+          </div>
+        </div>
+        <div class="act-card" style="flex:1.38">
+          <div class="hd">计算过程：求 <span class="tex">p_{3}=-1+j</span> 的出射角</div>
+          <div class="bd">
+            <div class="kv" id="c1">其余极点指向 <span class="tex">p_{3}</span> 的向量相角：<span class="tex">\angle(p_{3}-p_{1})=135^{\circ}</span>，<span class="tex">\angle(p_{3}-p_{2})=45^{\circ}</span>，<span class="tex">\angle(p_{3}-p_{4})=90^{\circ}</span>（见右图）。</div>
+            <div class="eq" id="c2"><span class="tex">\theta_{p_{3}}=180^{\circ}-(135^{\circ}+45^{\circ}+90^{\circ})=-90^{\circ}</span></div>
+            <div class="eq hl" id="c3"><span class="tex">\theta_{p_{3}}=-90^{\circ},\;\theta_{p_{4}}=+90^{\circ}</span>：两条复分支<span class="kw-r">垂直离开</span>复极点。</div>
+            <div class="kv" id="c4">印证（本例可严格求解）：特征方程即 <span class="tex">(s+1)^{4}=1-K_{1}</span>，复分支先竖直进入 <span class="tex">s=-1</span>（四重根点，<span class="tex">K_{1}=1</span>），再沿 <span class="tex">\pm45^{\circ}</span>、<span class="tex">\pm135^{\circ}</span> 渐近线射出。</div>
+          </div>
+        </div>
+        <div class="act-card" style="flex:1.06">
+          <div class="hd">量取步骤（与右图分步一一对应）</div>
+          <div class="bd" style="gap:6px">
+            <div class="kv" id="s1">① 标出四个开环极点与实轴段 [−2, 0]</div>
+            <div class="kv" id="s2">② 由 p₁ 向 p₃ 引向量：∠(p₃−p₁)=135°</div>
+            <div class="kv" id="s3">③ 由 p₂、p₄ 向 p₃ 引向量：45°、90°</div>
+            <div class="kv" id="s4">④ 列方程解出 θ=−90°：复分支垂直出射（p₄ 镜像）</div>
+          </div>
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd"><span style="flex:1">逐角量取：从 <span class="tex">p_{1}</span>、<span class="tex">p_{2}</span>、<span class="tex">p_{4}</span> 向 <span class="tex">p_{3}</span> 引向量</span></div>
+        <span class="segfloat" id="segChip" style="display:none"></span>
+        <span class="prog" id="prog">0 / 4</span>
+        <div class="bd2"><svg id="fig"></svg></div>
+        <div class="ctl">
+          <button class="btn" id="play">▶ 播放</button>
+          <button class="btn ghost" id="step">⧉ 分步</button>
+          <button class="btn ghost" onclick="ACT.step.reset()">↺ 重置</button>
+          <span class="kr">K₁ = <b id="kv" style="color:var(--danger)">0</b></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">要点</span><span>出射角把相角条件<span class="kw-r">落到"一个未知方向"上</span>：其余向量相角全部已知，方向角一解即出。</span></div>
+
+<div data-step="1" style="display:none"></div><div data-step="2" style="display:none"></div>
+<div data-step="3" style="display:none"></div><div data-step="4" style="display:none"></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  /* 放大到关键区域（1:1 不变）：p₃ 邻域的向量与相角看得更清楚 */
+  const F = RL.figure("fig", "dep", { vw: 960, vh: 600, asym: true, asymLabels: false, sigA: false, brkDots: false, crossSq: false,
+                                      xlim: [-3.6, 1.0], ylim: [-1.7, 2.3] });
+  const p3 = [-1, 1], p4 = [-1, -1];
+  const FS = [0, .15, .3, .45, 1];     // 播放节奏；轨迹分支仅第④步（印证）开始生长
+  /* 逐层向量：只画当前步所需，颜色统一分组（向量 INK、相角值 #B3541E） */
+  const SRC = [[[0, 0], [-16, -14]], [[-2, 0], [22, 6]], [[-1, -1], [-58, 0]]];
+  function drawVector(g, ix, flash) {
+    const [q, off] = [SRC[ix][0], SRC[ix][1]];
+    const ang = Math.atan2(p3[1] - q[1], p3[0] - q[0]) * 180 / Math.PI;
+    const a = [F.X(q[0]), F.Y(q[1])], b = [F.X(p3[0]), F.Y(p3[1])];
+    const dx = b[0] - a[0], dy = b[1] - a[1], L = Math.hypot(dx, dy);
+    const gv = F.mk("g", { "class": flash ? "rl-flash" : "" }, g);
+    F.mk("line", { x1: a[0] + dx / L * 30, y1: a[1] + dy / L * 30, x2: b[0] - dx / L * 26, y2: b[1] - dy / L * 26,
+      stroke: RL.INK, "stroke-width": 2.4, "marker-end": "url(#rxfig)" }, gv);
+    F.tx(gv, (a[0] + b[0]) / 2 + off[0], (a[1] + b[1]) / 2 + off[1] + 8,
+      ang.toFixed(0) + "°", { fs: 24, fill: "#B3541E", b: 1 });
+  }
+  function drawDeparture(g) {
+    /* 规范圆弧：数学角区间升序传参（θ=−90° → 90~180；θ=+90° → 0~90），弧心即极点、半径一致 */
+    F.angleArc(p3[0], p3[1], 90, 180, g, { stroke: "#D63A2F", width: 3.4, r: 48 });
+    F.angleArc(p4[0], p4[1], 0, 90, g, { stroke: "#D63A2F", width: 3.4, r: 48 });
+    const R = 0.52;
+    [[p3, -90, "θ_{p3}=−90°", [0.08, 1.26]], [p4, 90, "θ_{p4}=+90°", [0.08, -1.26]]].forEach(([p, deg, lab, lp]) => {
+      const a = deg * Math.PI / 180, x1 = F.X(p[0]), y1 = F.Y(p[1]);
+      const x2 = F.X(p[0] + R * Math.cos(a)), y2 = F.Y(p[1] + R * Math.sin(a));
+      F.mk("line", { x1, y1, x2, y2, stroke: "#D63A2F", "stroke-width": 6, "stroke-linecap": "round" }, g);
+      const ux = Math.cos(a), uy = -Math.sin(a), px = -uy, py = ux;
+      const tip = [x2 + ux * 20, y2 + uy * 20];
+      F.mk("polygon", { points: `${tip[0]},${tip[1]} ${x2 + px * 9},${y2 + py * 9} ${x2 - px * 9},${y2 - py * 9}`, fill: "#D63A2F" }, g);
+      F.tx(g, F.X(lp[0]), F.Y(lp[1]), lab, { fs: 26, fill: "#B3541E", b: 1, an: "start" });
+    });
+  }
+  function frame(f, K) {
+    if ((K || 0) < 4) F.setAllF(0);   // 印证步之前轨迹不露头（播放逐帧兜底）
+    document.getElementById("kv").textContent = (K || 0) >= 4 ? RL.fmtK(F.K_of_f(f)) : "0";
+  }
+  function paint(K) {
+    if (K < 4) F.setAllF(0);
+    for (let i = 1; i <= 4; i++) document.getElementById("s" + i).classList.toggle("on", i === K);
+    document.getElementById("c1").classList.toggle("hl", K === 2 || K === 3);
+    ["c2", "c3", "c4"].forEach(id => document.getElementById(id).classList.toggle("hl", K === 4));
+    F.segEls.forEach(e => { e.style.opacity = K >= 1 ? .9 : 0; e.classList.toggle("rl-flash", K === 1); });
+    F.gAsym.style.opacity = K >= 4 ? 1 : 0;      // 渐近线只在印证全图时出现
+    if (K === 1) {  // ① 四个开环极点闪烁
+      const g = F.mk("g", { "class": "rl-flash" }, F.gDyn);
+      F.data.poles.forEach(p => F.mk("circle", { cx: F.X(p[0]), cy: F.Y(p[1]), r: 22,
+        fill: "none", stroke: RL.FOCUS, "stroke-width": 3.5 }, g));
+    }
+    if (K === 2) drawVector(F.gDyn, 0, true);                 // ② 135°
+    if (K === 3) { drawVector(F.gDyn, 0, false); drawVector(F.gDyn, 1, true); drawVector(F.gDyn, 2, true); }  // ③ 45°、90°
+    if (K >= 4) {   // ④ 结果：撤掉量取向量，只保留出射角结论 + 完整轨迹印证
+      drawDeparture(F.gDyn);
+      F.tx(F.gDyn, F.X(-1) - 20, F.Y(0) + 46, "四重根点 s=−1（K_{1}=1）", { fs: 24, fill: RL.FOCUS, b: 1, an: "end" });
+    }
+  }
+  RL.wire(4, paint, {
+    figs: [F], FS, dur: 12000,
+    frame: (f, K) => frame(f, K),
+    pick: hit => { document.getElementById("kv").textContent = RL.fmtK(hit.K); }
+  });
+  /* ---- ⧉分步：点一下推进一步；左栏步骤与右图元素 1:1 同步高亮 ---- */
+  const STEPS = ["① 标出四个开环极点", "② p₁→p₃ 向量：135°", "③ p₂、p₄→p₃ 向量：45°、90°",
+                 "④ θ=−90° 垂直出射（完整轨迹印证）"];
+  const chip = document.getElementById("segChip"), total = 4;
+  const wNext = ACT.step.next, wReset = ACT.step.reset;
+  let segRaf = null, segTok = 0;
+  function segStopUI() {
+    segTok++;
+    if (segRaf) { cancelAnimationFrame(segRaf); segRaf = null; }
+    if (chip) chip.style.display = "none";
+  }
+  ACT.step.next = function () { segStopUI(); return wNext(); };
+  ACT.step.reset = function () { segStopUI(); return wReset(); };
+  const playBtn = document.getElementById("play");
+  if (playBtn && playBtn.onclick) { const po = playBtn.onclick; playBtn.onclick = e => { segStopUI(); po(e); }; }
+  function segGo(instant) {
+    segStopUI();
+    if (ACT.step.cur >= total) wReset();
+    wNext();                                    // K→cur+1：applyK+paint（左栏高亮 + 图内当前步闪烁）
+    const k = ACT.step.cur, f0 = k >= 4 ? 0 : FS[k - 1], f1 = FS[k];   // 印证步轨迹自 0 生长
+    if (chip) { chip.textContent = "分步 " + k + " / " + total + "　" + STEPS[k - 1]; chip.style.display = ""; }
+    if (instant || f1 <= f0 + 1e-9) { F.setAllF(k >= 4 ? f1 : 0); frame(k >= 4 ? f1 : 0, k); return; }
+    F.setAllF(f0); frame(f0, k);
+    const t0 = performance.now(), D = 2600, tok = segTok;
+    const tick = now => {
+      if (tok !== segTok) return;
+      const u = Math.min(1, (now - t0) / D), f = f0 + (f1 - f0) * u;
+      F.setAllF(f); frame(f, k);
+      if (u < 1) segRaf = requestAnimationFrame(tick); else segRaf = null;
+    };
+    segRaf = requestAnimationFrame(tick);
+  }
+  document.getElementById("step").onclick = () => segGo(false);
+  /* QA 钩子：?step=N 直达分步第 N 步（瞬时确定态） */
+  window.addEventListener("load", () => {
+    const n = +(new URLSearchParams(location.search).get("step") || 0);
+    for (let i = 0; i < Math.min(n, total); i++) segGo(true);
+  });
+});
+</script>
+</div></div>
+</body>
+</html>

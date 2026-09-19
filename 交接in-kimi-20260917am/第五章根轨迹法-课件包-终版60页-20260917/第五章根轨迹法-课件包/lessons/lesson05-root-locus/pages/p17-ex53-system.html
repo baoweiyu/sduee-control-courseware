@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>例5-3①：系统与实轴段</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=505">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=505" defer></script>
+<script src="../fig.js?v=506"></script>
+<script src="../data/ex53.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:1;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:8px;padding:12px 20px;font-size:21.5px;line-height:1.5}
+  .eq{background:var(--sky);border-radius:12px;padding:10px 14px;text-align:center;font-size:22.5px;line-height:1.5}
+  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .figc{flex:1.16;display:flex;flex-direction:column;overflow:hidden;position:relative}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .segfloat{position:absolute;top:58px;left:50%;transform:translateX(-50%);z-index:5;background:#fff;
+    border:2px solid var(--blue);border-radius:10px;padding:5px 16px;font-size:18px;font-weight:700;
+    color:var(--navy);white-space:nowrap;box-shadow:0 2px 10px rgba(20,40,90,.18)}
+  .ctl{display:flex;align-items:center;gap:10px;justify-content:center;padding:8px 0 10px}
+  .btn{background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:19px;font-weight:700;padding:8px 20px;cursor:pointer}
+  .btn.ghost{background:#fff;color:var(--blue);border:2px solid var(--blue)}
+  .prog{font-size:18px;color:var(--muted);min-width:64px}
+</style>
+</head>
+<body data-title="例5-3①：系统与实轴段" data-page="17 / 60">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lft">
+        <div class="act-card" style="flex:1">
+          <div class="hd">题设（单位反馈）</div>
+          <div class="bd">
+            <div class="eq"><span class="tex">G(s)=\dfrac{K_{1}(s+2)}{s(s+1)}</span></div>
+            <div>开环零点 <span class="tex">z_{1}=-2</span>；开环极点 <span class="tex">p_{1}=0</span>、<span class="tex">p_{2}=-1</span>（<span class="tex">n=2,m=1</span>）。</div>
+          </div>
+        </div>
+        <div class="act-card" style="flex:1.35">
+          <div class="hd">求解：实轴段根轨迹（法则三）</div>
+          <div class="bd">
+            <div class="eq">闭环特征方程：<span class="tex">D(s)=s^{2}+(1+K_{1})s+2K_{1}=0</span></div>
+            <div class="eq hl">实轴段：<span class="tex">[-1,\,0]</span>（右侧 1 个实极点，奇）<br><span class="tex">(-\infty,\,-2]</span>（右侧 3 个实零极点，奇）</div>
+            <div>两条分支的舞台已经定好：<span class="tex">[-1,0]</span> 段两支<span class="kw-r">相向而行</span>，由连续性和端点分布可判断存在分离过程，<span class="tex">(-\infty,-2]</span> 段<span class="kw-r">另行会合</span>——中间那段实轴（<span class="tex">(-2,-1)</span>）右侧偶数个，不是轨迹。</div>
+          </div>
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd"><span style="flex:1">零、极点分布与实轴段（分支从下一页开始）</span></div>
+        <span class="segfloat" id="segChip" style="display:none"></span>
+        <div class="bd2"><svg id="fig"></svg></div>
+        <div class="ctl">
+          <button class="btn" id="play">▶ 播放</button>
+          <button class="btn ghost" id="step">⧉ 分步</button>
+          <button class="btn ghost" onclick="ACT.step.reset()">↺ 重置</button>
+          <span class="prog" id="prog">0 / 3</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">看点</span><span>这个系统的复平面根轨迹形状很特别——<span class="kw-r">下一页先证明它是圆</span>，分离点计算等学完法则五再回来（见例5-3③）。</span></div>
+
+<div data-step="1" style="display:none"></div><div data-step="2" style="display:none"></div>
+<div data-step="3" style="display:none"></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const F = RL.figure("fig", "ex53", { vw: 960, vh: 600, ylim: [-2.6, 2.6],
+                                       asym: false, brkDots: false, crossSq: false });
+  /* 本页只展示零极点与实轴段：分支始终不生长，末态淡显完整轨迹预告（track 预轨迹底轨层） */
+  const tracks = () => F.svg.querySelectorAll('path[stroke="#C9D6F2"]');
+  function paint(K) {
+    F.setAllF(0);
+    F.segEls.forEach(e => e.style.opacity = K >= 2 ? .5 : 0);
+    if (K >= 2) {  // 两个实轴段标注
+      F.tx(F.gDyn, F.X(-0.5), F.Y(0) - 32, "[−1, 0]", { fs: 24, fill: "#1D3FA0", b: 1 });
+      F.tx(F.gDyn, F.X(-4.6), F.Y(0) - 32, "(−∞, −2]", { fs: 24, fill: "#1D3FA0", b: 1 });
+    }
+    tracks().forEach(e => e.style.opacity = K >= 3 ? .3 : 0);   // 末态淡显完整轨迹预告
+    if (K >= 3) F.tx(F.gDyn, F.X(-2), F.Y(1.9), "完整轨迹预告：形状很特别——下一页证明它是圆", { fs: 24, fill: "#5B6B8C", b: 1 });
+  }
+  RL.wire(3, paint, {
+    figs: [F], FS: [0, 0, 0, 0], dur: 6000,
+    /* 连贯播放也只推进步骤、不生长分支（本页分支从下一页开始）；轨迹预告透明度由 paint 控制 */
+    frame: () => { F.setAllF(0); },
+    segLabel: txt => { const c = document.getElementById("segChip"); if (!c) return; if (txt) { c.textContent = txt; c.style.display = ""; } else c.style.display = "none"; },
+    segPaint: () => { F.setAllF(0); F.segEls.forEach(e => e.style.opacity = 0); tracks().forEach(e => e.style.opacity = 0); F.gDyn.innerHTML = ""; },
+    segments: [
+      { label: "① 计算零极点：z₁=−2（○），p₁=0、p₂=−1（×）", parts: [],
+        draw(t, g) { F.segEls.forEach(e => e.style.opacity = 0); } },
+      { label: "② 确定实轴段根轨迹：[−1,0] 与 (−∞,−2]（右侧奇数个）", parts: [],
+        draw(t, g) {
+          F.segEls.forEach(e => e.style.opacity = .5);
+          F.tx(g, F.X(-0.5), F.Y(0) - 32, "[−1, 0]", { fs: 24, fill: "#1D3FA0", b: 1 });
+          F.tx(g, F.X(-4.6), F.Y(0) - 32, "(−∞, −2]", { fs: 24, fill: "#1D3FA0", b: 1 });
+        } },
+      { label: "③ 完整轨迹预告（淡显）：下一页证明它是圆", parts: [],
+        draw(t, g) {
+          F.segEls.forEach(e => e.style.opacity = .5);
+          tracks().forEach(e => e.style.opacity = .3);
+          F.tx(g, F.X(-2), F.Y(1.9), "完整轨迹预告：形状很特别——下一页证明它是圆", { fs: 24, fill: "#5B6B8C", b: 1 });
+        } },
+    ], segDur: 2600
+  });
+});
+</script>
+</div></div>
+</body>
+</html>

@@ -14,7 +14,7 @@
     1. git add -A，如有改动则 commit；
     2. 打标签 vX.Y（已存在则报错，防止覆盖历史）；
     3. push main + 标签；
-    4. gh release create 上传 5 个 zip。
+    4. gh release create 上传 6 个 zip。
 """
 import glob
 import os
@@ -25,7 +25,7 @@ ROOT = r"H:\D_tools\courseware-system-kimi"
 GH = r"C:\Program Files\GitHub CLI\gh.exe"
 LOCAL_DIR = os.path.join(ROOT, "版本迭代-本地播放用")
 WEB_DIR = os.path.join(ROOT, "版本迭代-服务器部署用")
-CHAPTERS = ["Ch1", "Ch2", "Ch3", "Ch4"]
+CHAPTERS = ["Ch1", "Ch2", "Ch3", "Ch4", "Ch5"]
 
 REDLINE_PATTERNS = ["image2_config.json", "assets/image2/generate.py", "assets/image2/prompts/"]
 
@@ -71,9 +71,9 @@ def main():
         if not z:
             sys.exit("缺本地播放包: %s V%s" % (ch, vernum))
         zips.append(z)
-    web = find_zip(WEB_DIR, "-Ch1-Ch4-V%s" % vernum)
+    web = find_zip(WEB_DIR, "-Ch1-Ch5-V%s" % vernum)
     if not web:
-        sys.exit("缺网页部署包: Ch1-Ch4 V%s" % vernum)
+        sys.exit("缺网页部署包: Ch1-Ch5 V%s" % vernum)
     zips.append(web)
     for z in zips:
         print("  资产:", os.path.relpath(z, ROOT))
@@ -100,8 +100,8 @@ def main():
     # ---- 4. release ----
     print("== 4. 创建 Release ==")
     notes = "自动控制理论三层 HTML 课件 %s\r\n\r\n" % ver
-    notes += "- 4 个章节 zip：本地播放版（解压后双击 start.bat / start.command 即可离线播放）\r\n"
-    notes += "- act-courseware-web-deploy：网页部署版（静态站点，含全部四章）\r\n"
+    notes += "- 5 个章节 zip：本地播放版（解压后双击 start.bat / start.command 即可离线播放）\r\n"
+    notes += "- act-courseware-web-deploy：网页部署版（静态站点，含全部五章）\r\n"
     run([GH, "release", "create", ver, "--title", "课件 %s" % ver, "--notes", notes] + zips)
     print("完成:", out([GH, "release", "view", ver, "--json", "url", "-q", ".url"]))
 

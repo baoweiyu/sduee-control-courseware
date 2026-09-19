@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>例5-3：分离点与会合点</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=218">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=218" defer></script>
+<script src="../fig.js?v=507"></script>
+<script src="../data/ex53.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:1.02;display:flex;flex-direction:column;gap:12px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:6px;padding:10px 18px;font-size:19.5px;line-height:1.45}
+  .eq{background:var(--sky);border-radius:12px;padding:7px 14px;text-align:center;font-size:20px;line-height:1.45}
+  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .kv{background:var(--sky);border-radius:12px;padding:6px 14px;line-height:1.4}
+  .kv.on{background:#FDF3EC;border-left:5px solid var(--danger);border-top-left-radius:0;border-bottom-left-radius:0;font-weight:700;box-shadow:0 0 0 2px rgba(214,58,47,.22)}
+  .figc{flex:1.1;display:flex;flex-direction:column;overflow:hidden;position:relative}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .segfloat{position:absolute;top:56px;right:14px;z-index:5;max-width:74%;background:#fff;
+    border:2px solid var(--blue);border-radius:10px;padding:5px 14px;font-size:18px;font-weight:700;
+    color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 2px 10px rgba(20,40,90,.18)}
+  .prog{position:absolute;top:60px;left:16px;z-index:5;font-size:17px;color:var(--muted);
+    background:rgba(255,255,255,.88);padding:2px 10px;border-radius:8px}
+  .ctl #prog{right:auto;left:16px;top:60px}  /* 覆盖 theme v0.5 的右上角定位：本页 prog 在左上、segfloat 在右上 */
+  .ctl{display:flex;align-items:center;gap:10px;justify-content:center;padding:8px 0 10px}
+  .btn{background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:19px;font-weight:700;padding:8px 20px;cursor:pointer;min-width:112px;text-align:center}
+  .btn.ghost{background:#fff;color:var(--blue);border:2px solid var(--blue)}
+  .kr{font-size:19px;color:var(--navy);font-weight:700;background:var(--sky);border-radius:10px;padding:7px 12px;white-space:nowrap}
+  .kr b{display:inline-block;text-align:left;font-variant-numeric:tabular-nums;min-width:5.5ch}
+  @keyframes rlPulse{0%,100%{opacity:1}50%{opacity:.25}}
+  .rl-flash{animation:rlPulse .9s ease-in-out infinite}
+</style>
+</head>
+<body data-title="例5-3：分离点与会合点" data-page="22 / 61">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lft">
+        <div class="act-card" style="flex:1.3">
+          <div class="hd">求分离 / 会合点（<span class="tex">\frac{dK_{1}}{ds}=0</span>）</div>
+          <div class="bd">
+            <div class="kv" style="background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0">回到例5-3：<span class="tex">G(s)=\dfrac{K_{1}(s+2)}{s(s+1)}</span>（法则五的应用）</div>
+            <div class="eq">由特征方程解出 <span class="tex">K_{1}=-\dfrac{s(s+1)}{s+2}</span></div>
+            <div class="eq"><span class="tex">\dfrac{dK_{1}}{ds}=0\;\Rightarrow\;s^{2}+4s+2=0</span><br><span class="tex">d_{1}=-2+\sqrt{2}\approx-0.586,\quad d_{2}=-2-\sqrt{2}\approx-3.414</span></div>
+            <div class="eq hl">代回幅值条件：<span class="tex">K_{1}(d_{1})\approx0.172</span>，<span class="tex">K_{1}(d_{2})\approx5.828</span>（均 &gt; 0 ✓）</div>
+            <div class="eq">判别式互证：<span class="tex">K_{1}^{2}-6K_{1}+1=0\Rightarrow K_{1}=3\pm2\sqrt{2}</span></div>
+          </div>
+        </div>
+        <div class="act-card" style="flex:1">
+          <div class="hd">分步演示（与右图逐步联动）</div>
+          <div class="bd" style="gap:6px">
+            <div class="kv" id="s1">① 实轴段根轨迹：两支根自 p₁=0、p₂=−1 出发</div>
+            <div class="kv" id="s2">② 相向移动 → d₁=−0.586 分离（K₁=0.172）</div>
+            <div class="kv" id="s3">③ 沿圆（圆心 −2，半径 √2）绕行</div>
+            <div class="kv" id="s4">④ d₂=−3.414 会合（K₁=5.828）</div>
+            <div class="kv" id="s5">⑤ 归宿：一支入零点 z₁=−2，一支 → −∞</div>
+          </div>
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd"><span style="flex:1">圆轨迹上的分离点 <span class="tex">d_{1}</span> 与会合点 <span class="tex">d_{2}</span></span></div>
+        <span class="segfloat" id="segChip" style="display:none"></span>
+        <span class="prog" id="prog">0 / 5</span>
+        <div class="bd2"><svg id="fig"></svg></div>
+        <div class="ctl">
+          <button class="btn" id="play">▶ 播放</button>
+          <button class="btn ghost" id="step">⧉ 分步</button>
+          <button class="btn ghost" onclick="ACT.step.reset()">↺ 重置</button>
+          <span class="kr">K₁ = <b id="kv" style="color:var(--danger)">0</b></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">校验习惯</span><span>解出的 d 必须<span class="kw-r">落在实轴段上且代回 K₁&gt;0</span> 才有效（本例两点全通过）；圆与实轴的交点 −2±√2 正是 d₁、d₂。</span></div>
+
+<div data-step="1" style="display:none"></div><div data-step="2" style="display:none"></div>
+<div data-step="3" style="display:none"></div><div data-step="4" style="display:none"></div>
+<div data-step="5" style="display:none"></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const F = RL.figure("fig", "ex53", { vw: 960, vh: 600, asym: false, brkDots: false, circle: false });
+  const fB = F.f_of_K(0.1716), fC = F.f_of_K(5.8284);
+  const FS = [0, 0, fB, fC, fC, 1];
+  function frame(f) {
+    const K1 = F.K_of_f(f);
+    document.getElementById("kv").textContent = f >= 0.999 ? "→ ∞" : RL.fmtK(K1);
+  }
+  function unflash() {
+    F.segEls.forEach(e => e.classList.remove("rl-flash"));
+    if (F.circleEl) F.circleEl.classList.remove("rl-flash");
+  }
+  function paint(K) {
+    unflash();
+    F.segEls.forEach(e => { e.style.opacity = K >= 1 ? .55 : 0; if (K === 1) e.classList.add("rl-flash"); });
+    if (K >= 2) {  // 分离点 d1（闪烁当前步；数值随标注给出）
+      const g = F.mk("g", { "class": K === 2 ? "rl-flash" : "" }, F.gDyn);
+      const x = F.X(-0.5858), y = F.Y(0);
+      F.mk("circle", { cx: x, cy: y, r: 9, fill: RL.FOCUS, stroke: "#fff", "stroke-width": 2.5 }, g);
+      F.tx(g, x + 20, y + 36, "分离点 d_{1}=−0.586", { fs: 22, fill: RL.FOCUS, b: 1, an: "start" });
+      F.tx(g, x + 20, y + 66, "K_{1}=0.172", { fs: 20, fill: RL.FOCUS, b: 1, an: "start" });
+    }
+    if (F.circleEl) { F.circleEl.style.opacity = K >= 3 ? .9 : 0; if (K === 3) F.circleEl.classList.add("rl-flash"); }
+    if (K >= 4) {  // 会合点 d2
+      const g = F.mk("g", { "class": K === 4 ? "rl-flash" : "" }, F.gDyn);
+      const x = F.X(-3.4142), y = F.Y(0);
+      F.mk("circle", { cx: x, cy: y, r: 9, fill: RL.FOCUS, stroke: "#fff", "stroke-width": 2.5 }, g);
+      F.tx(g, x - 10, y - 44, "会合点 d_{2}=−3.414", { fs: 22, fill: RL.FOCUS, b: 1, an: "end" });
+      F.tx(g, x - 10, y - 16, "K_{1}=5.828", { fs: 20, fill: RL.FOCUS, b: 1, an: "end" });
+    }
+    if (K >= 5) {  // 终点说明（短语，无数值）
+      F.tx(F.gDyn, F.X(-2) - 16, F.Y(0) + 50, "止于零点 z_{1}", { fs: 24, fill: "#1B3B8B", an: "end" });
+      F.tx(F.gDyn, F.X(-6.7), F.Y(0) + 50, "沿负实轴 → −∞", { fs: 24, fill: "#1B3B8B", an: "start" });
+    }
+    for (let i = 1; i <= 5; i++)
+      document.getElementById("s" + i).classList.toggle("on", i === K);
+  }
+  RL.wire(5, paint, {
+    figs: [F], FS, dur: 11000,
+    frame: f => frame(f),
+    pick: hit => { document.getElementById("kv").textContent = RL.fmtK(hit.K); }
+  });
+  /* ---- ⧉分步：点一下推进一步；左栏步骤与右图元素 1:1 同步高亮 ---- */
+  const STEPS = ["① 实轴段根轨迹", "② d₁=−0.586 分离（K₁=0.172）", "③ 沿圆绕行（圆心 −2，r=√2）",
+                 "④ d₂=−3.414 会合（K₁=5.828）", "⑤ 一支入零点，一支 → −∞"];
+  const chip = document.getElementById("segChip"), total = 5;
+  const wNext = ACT.step.next, wReset = ACT.step.reset;
+  let segRaf = null, segTok = 0;
+  function segStopUI() {
+    segTok++;
+    if (segRaf) { cancelAnimationFrame(segRaf); segRaf = null; }
+    if (chip) chip.style.display = "none";
+  }
+  ACT.step.next = function () { segStopUI(); return wNext(); };
+  ACT.step.reset = function () { segStopUI(); return wReset(); };
+  const playBtn = document.getElementById("play");
+  if (playBtn && playBtn.onclick) { const po = playBtn.onclick; playBtn.onclick = e => { segStopUI(); po(e); }; }
+  function segGo(instant) {
+    segStopUI();
+    if (ACT.step.cur >= total) wReset();
+    wNext();                                    // K→cur+1：applyK+paint（左栏高亮 + 图内当前步闪烁）
+    const k = ACT.step.cur, f0 = FS[k - 1], f1 = FS[k];
+    if (chip) { chip.textContent = "分步 " + k + " / " + total + "　" + STEPS[k - 1]; chip.style.display = ""; }
+    if (instant || f1 <= f0 + 1e-9) { F.setAllF(f1); frame(f1); return; }
+    F.setAllF(f0); frame(f0);
+    const t0 = performance.now(), D = 1700, tok = segTok;
+    const tick = now => {
+      if (tok !== segTok) return;
+      const u = Math.min(1, (now - t0) / D), f = f0 + (f1 - f0) * u;
+      F.setAllF(f); frame(f);
+      if (u < 1) segRaf = requestAnimationFrame(tick); else segRaf = null;
+    };
+    segRaf = requestAnimationFrame(tick);
+  }
+  document.getElementById("step").onclick = () => segGo(false);
+  /* QA 钩子：?step=N 直达分步第 N 步（瞬时确定态） */
+  window.addEventListener("load", () => {
+    const n = +(new URLSearchParams(location.search).get("step") || 0);
+    for (let i = 0; i < Math.min(n, total); i++) segGo(true);
+  });
+});
+</script>
+</div></div>
+</body>
+</html>

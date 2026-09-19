@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>(3) 闭环零极点分布对性能的影响</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=505">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=505" defer></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:1.08;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:8px;padding:12px 20px;font-size:20.5px;line-height:1.45}
+  .kv{background:var(--sky);border-radius:12px;padding:8px 14px;line-height:1.45}
+  .kv.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .figc{flex:1;display:flex;flex-direction:column;overflow:hidden}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:6px 10px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .figc .cap{flex:none;font-size:19.5px;color:var(--navy);background:var(--sky);border-radius:12px;padding:9px 16px;margin:0 14px 12px;line-height:1.45}
+</style>
+</head>
+<body data-title="(3) 闭环零极点分布对性能的影响" data-page="53 / 60">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lft">
+        <div class="act-card" style="flex:2.05">
+          <div class="hd">四条规律（各配一句"为什么"）</div>
+          <div class="bd">
+            <div class="kv" data-step="1">① <b>稳定性</b>：全部闭环极点在 <span class="tex">s</span> 左半平面 ⟺ 渐近稳定——因为每个模态 <span class="tex">e^{p_{i}t}</span> 都衰减；零点不改稳定性，只改响应形状与峰值。</div>
+            <div class="kv" data-step="2">② <b>运动形态</b>：实极点 → 单调分量 <span class="tex">e^{pt}</span>；共轭复极点 → 振荡分量 <span class="tex">e^{\sigma t}\sin(\omega t+\varphi)</span>。</div>
+            <div class="kv" data-step="3">③ <b>平稳性</b>：阻尼角 <span class="tex">\beta</span> 越小（<span class="tex">\zeta</span> 越大）振荡越弱越平稳——<span class="tex">\beta</span> 直接定超调量；常取 <span class="tex">\zeta=0.5\sim0.707</span>（<span class="tex">\beta\approx60^{\circ}\sim45^{\circ}</span>）。</div>
+            <div class="kv" data-step="4">④ <b>快速性</b>：主导极点离虚轴越远，<span class="tex">e^{\sigma t}</span> 衰减越快，调节时间 <span class="tex">t_{s}\approx3\sim4\,/\,|\sigma|</span> 越短。</div>
+          </div>
+        </div>
+        <div class="act-card" style="flex:1">
+          <div class="hd">主导极点（本页核心概念）</div>
+          <div class="bd">
+            <div class="kv" data-step="5">高阶系统中<b>离虚轴最近且附近无零点</b>的一对（个）极点衰减最慢、系数最大，主导整个响应；其余极点作用可近似忽略。</div>
+            <div class="kv hl" data-step="6">量化判据预告：远极点实部 ≥ 主导极点实部的 5 倍即可降阶——例5-15（第57页）完整演算。</div>
+          </div>
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd"><span style="flex:1">s 平面分区示意：β 角扇区与主导极点对</span></div>
+        <div class="bd2"><svg id="pz" viewBox="0 0 700 560" preserveAspectRatio="xMidYMid meet"></svg></div>
+        <div class="cap">红对为主导极点（近虚轴、决定响应）；远虚轴的极点衰减快；β 扇区越小响应越平稳。</div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">要点</span><span>抓住<span class="kw-r">主导极点</span>，就抓住了高阶系统动态响应的主要矛盾。</span></div>
+<script>
+/* s 平面分区示意图（程序绘制）：β 角扇区、近/远虚轴速度对比、主导极点对高亮 */
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("pz");
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag);
+    for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const MF = '"Cambria Math","STIX Two Math",Georgia,"Times New Roman","Microsoft YaHei",serif';
+  const X0 = 84, X1 = 664, Y0 = 44, Y1 = 496, XL = [-4.4, 0.9], YL = [-2.35, 2.35];
+  const X = x => X0 + (x - XL[0]) / (XL[1] - XL[0]) * (X1 - X0);
+  const Y = y => Y1 - (y - YL[0]) / (YL[1] - YL[0]) * (Y1 - Y0);
+  const tx = (x, y, s, o) => { o = o || {};
+    const n = mk("text", { x, y, "font-size": o.fs || 22, "text-anchor": o.an || "middle",
+      fill: o.fill || "#5B6B8C", "font-weight": o.b ? 700 : 400, "font-family": MF }, svg);
+    n.textContent = s;
+    n.setAttribute("style", "paint-order:stroke;stroke:#FFF;stroke-width:5;stroke-linejoin:round"); return n; };
+  /* β 角扇区（ζ=0.5，β=60° 两条阻尼射线之间的高亮区） */
+  const beta = Math.PI / 3, R = 4.3, cb = Math.cos(beta), sb = Math.sin(beta);
+  const fan = sy => `M${X(0)},${Y(0)} L${X(-R * cb)},${Y(sy * R * sb)} L${X(-R)},${Y(sy * R * sb)} L${X(-R)},${Y(sy * 0)} Z`;
+  [-1, 1].forEach(sy => mk("path", { d: fan(sy), fill: "#FFE28A", opacity: .35, stroke: "none" }, svg));
+  [-1, 1].forEach(sy => mk("line", { x1: X(0), y1: Y(0), x2: X(-R * cb), y2: Y(sy * R * sb),
+    stroke: "#7A4E2D", "stroke-width": 2.4, "stroke-dasharray": "3 5" }, svg));
+  mk("path", { d: `M${X(-0.85)},${Y(0)} A${X(0) - X(-0.85)},${X(0) - X(-0.85)} 0 0 0 ${X(-0.85 * cb)},${Y(0.85 * sb)}`,
+    fill: "none", stroke: "#7A4E2D", "stroke-width": 2 }, svg);
+  tx(X(-0.72), Y(0.42), "β", { fs: 26, fill: "#7A4E2D", b: 1 });
+  tx(X(-1.75), Y(-2.0), "β 扇区越小越平稳（ζ 越大）", { fs: 21, fill: "#7A4E2D", b: 1 });
+  /* 坐标轴 */
+  const defs = mk("defs", {}, svg);
+  const am = mk("marker", { id: "ax53", markerWidth: 10, markerHeight: 8, refX: 7, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, am);
+  mk("line", { x1: X0 - 10, y1: Y(0), x2: X1 + 8, y2: Y(0), stroke: "#5B6B8C", "stroke-width": 2.2, "marker-end": "url(#ax53)" }, svg);
+  mk("line", { x1: X(0), y1: Y1 + 8, x2: X(0), y2: Y0 - 12, stroke: "#5B6B8C", "stroke-width": 2.2, "marker-end": "url(#ax53)" }, svg);
+  [-4, -3, -2, -1].forEach(v => { mk("line", { x1: X(v), y1: Y(0) - 6, x2: X(v), y2: Y(0) + 6, stroke: "#5B6B8C", "stroke-width": 1.6 }, svg); tx(X(v), Y(0) + 30, String(v), { fs: 20 }); });
+  tx(X1 + 4, Y(0) + 34, "Re", { fs: 22, b: 1 }); tx(X(0) + 22, Y0 - 18, "Im", { fs: 22, b: 1, an: "start" });
+  const cross = (x, y, color, r) => {
+    mk("line", { x1: X(x) - r, y1: Y(y) - r, x2: X(x) + r, y2: Y(y) + r, stroke: color, "stroke-width": 5, "stroke-linecap": "round" }, svg);
+    mk("line", { x1: X(x) - r, y1: Y(y) + r, x2: X(x) + r, y2: Y(y) - r, stroke: color, "stroke-width": 5, "stroke-linecap": "round" }, svg);
+  };
+  /* 主导极点对（红）+ 远极点（蓝灰） */
+  cross(-0.5, 0.87, "#D63A2F", 13); cross(-0.5, -0.87, "#D63A2F", 13);
+  cross(-3.6, 1.5, "#8A97B5", 12); cross(-3.6, -1.5, "#8A97B5", 12); cross(-2.8, 0, "#8A97B5", 12);
+  tx(X(-0.55), Y(0.87) - 26, "主导极点对", { fs: 21, fill: "#D63A2F", b: 1 });
+  tx(X(-3.6), Y(1.5) - 26, "远极点：衰减快，可忽略", { fs: 21, fill: "#8A97B5", b: 1 });
+  tx(X(-2.8), Y(0) + 34, "", { fs: 20 });
+  /* 近/远虚轴速度注释 */
+  tx(X(-0.25), Y(2.1), "← 近虚轴：慢", { fs: 21, fill: "#B3541E", b: 1, an: "start" });
+  tx(X(-4.25), Y(2.1), "远虚轴：快 →", { fs: 21, fill: "#B3541E", b: 1, an: "start" });
+});
+</script>
+</div></div>
+</body>
+</html>

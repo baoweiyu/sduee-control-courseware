@@ -1,0 +1,487 @@
+{
+  "lesson_id": "lesson05-root-locus",
+  "title": "第五章 根轨迹法",
+  "source": "bwy-ori-oldPPT/chapt5 根轨迹法V2.pdf；逐页制作依据：素材/第五章逐页spec与根轨迹绘制规范.md；P6/P15/P19/P21/P37 为已验收样片并入终版页位；2026-09-17 按修改Spec完成全章重构（5.1–5.4 共 60 页）",
+  "pages": [
+    {
+      "id": "l5-p01",
+      "file": "pages/p01-cover.html",
+      "title": "第五章封面",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p02",
+      "file": "pages/p02-schedule.html",
+      "title": "本章课次安排",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p03",
+      "file": "pages/p03-part1-cover.html",
+      "title": "5.1节封面：根轨迹的基本概念",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p04",
+      "file": "pages/p04-intro.html",
+      "title": "引言：为什么需要根轨迹",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p05",
+      "file": "pages/p05-ex-derive.html",
+      "title": "引例（1）：系统与闭环特征方程",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p06",
+      "file": "pages/p06-ex-table.html",
+      "title": "引例（2）：特征根随 K₁ 变化的数值表",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p07",
+      "file": "pages/p07-intro-anim.html",
+      "title": "引例（3）：根轨迹的诞生",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p08",
+      "file": "pages/p08-perf-link.html",
+      "title": "引例（4）：由根轨迹读取系统性能",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p09",
+      "file": "pages/p09-equation.html",
+      "title": "根轨迹方程",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p10",
+      "file": "pages/p10-ex51-complex.html",
+      "title": "两个条件的应用·示例一：复平面试验点判定",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p11",
+      "file": "pages/p11-ex51-real.html",
+      "title": "两个条件的应用·示例二：实轴试验点与求 K₁",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p12",
+      "file": "pages/p12-quiz1.html",
+      "title": "课堂互动①：方程与两个条件",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p13",
+      "file": "pages/p13-sec52-cover.html",
+      "title": "5.2节封面：绘制根轨迹的基本规则",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p14",
+      "file": "pages/p14-rule1-symmetry.html",
+      "title": "法则一：分支数与对称性",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p15",
+      "file": "pages/p15-rule2-endpoints.html",
+      "title": "法则二：起点与终点",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p16",
+      "file": "pages/p16-rule3.html",
+      "title": "法则三：实轴上的根轨迹",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p17",
+      "file": "pages/p17-ex53-system.html",
+      "title": "例5-3①：系统与实轴段",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p18",
+      "file": "pages/p18-ex53-circle-proof.html",
+      "title": "例5-3②：解析证明根轨迹是圆",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p19",
+      "file": "pages/p19-rule4-asymptote.html",
+      "title": "法则四：渐近线",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p20",
+      "file": "pages/p20-asym-dual.html",
+      "title": "渐近线计算示例（双例对照）",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p21",
+      "file": "pages/p21-rule5-breakaway.html",
+      "title": "法则五：分离点与会合点",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p22",
+      "file": "pages/p22-ex53-breakaway.html",
+      "title": "例5-3③：分离点与会合点计算",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p23",
+      "file": "pages/p23-ex53-circle.html",
+      "title": "例5-3④：圆根轨迹完整绘制",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p24",
+      "file": "pages/p24-rule6-angles.html",
+      "title": "法则六：出射角与入射角",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p25",
+      "file": "pages/p25-departure-example.html",
+      "title": "出射角计算示例",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p26",
+      "file": "pages/p26-rule7-crossing.html",
+      "title": "法则七：根轨迹与虚轴的交点",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p27",
+      "file": "pages/p27-rules-table.html",
+      "title": "绘制法则总表",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p28",
+      "file": "pages/p28-quiz2.html",
+      "title": "课堂互动②：实轴段与渐近线",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p29",
+      "file": "pages/p29-ex54-calc-full.html",
+      "title": "例5-4①：关键要素完整计算",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p30",
+      "file": "pages/p30-ex54-anim.html",
+      "title": "例5-4②：完整根轨迹绘制",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p31",
+      "file": "pages/p31-ex52-analysis.html",
+      "title": "例5-2①：分析与计算",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p32",
+      "file": "pages/p32-ex52-full.html",
+      "title": "例5-2②：完整根轨迹绘制",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p33",
+      "file": "pages/p33-ex57-finale.html",
+      "title": "例5-7：完整根轨迹绘制（条件稳定型）",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p34",
+      "file": "pages/p34-part3-cover.html",
+      "title": "5.3节封面：广义根轨迹",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p35",
+      "file": "pages/p35-general-idea.html",
+      "title": "广义根轨迹：概念与黄金法则",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p36",
+      "file": "pages/p36-ex58a-equiv.html",
+      "title": "例5-8①：等效变换",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p37",
+      "file": "pages/p37-ex58b-anim.html",
+      "title": "例5-8②：参量根轨迹动画（圆轨迹）",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p38",
+      "file": "pages/p38-ex59-family.html",
+      "title": "例5-9：双参数根轨迹族",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p39",
+      "file": "pages/p39-zero-a.html",
+      "title": "零度根轨迹：由来与相角条件",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p40",
+      "file": "pages/p40-zero-b.html",
+      "title": "零度根轨迹：规则对照表",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p41",
+      "file": "pages/p41-ex510a-analyze.html",
+      "title": "例5-10①：0° 规则逐项分析",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p42",
+      "file": "pages/p42-ex510b-dual-anim.html",
+      "title": "例5-10②：180° 与 0° 对照动画",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p43",
+      "file": "pages/p43-nonmin-phase.html",
+      "title": "非最小相位系统：概念与判型",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p44",
+      "file": "pages/p44-ex511-classify.html",
+      "title": "例5-11①：判型与等效整理",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p45",
+      "file": "pages/p45-ex511-dual-anim.html",
+      "title": "例5-11②：根轨迹绘制对照动画",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p46",
+      "file": "pages/p46-cond-stable-concept.html",
+      "title": "条件稳定系统：概念",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p47",
+      "file": "pages/p47-ex512-cond-stable.html",
+      "title": "例5-12：条件稳定系统",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p48",
+      "file": "pages/p48-part4-cover.html",
+      "title": "5.4节封面：根轨迹分析方法",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p49",
+      "file": "pages/p49-closed-zero-gain.html",
+      "title": "闭环零点与闭环增益",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p50",
+      "file": "pages/p50-trial-method.html",
+      "title": "闭环极点的确定：试探法与根之和校验",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p51",
+      "file": "pages/p51-ex513a-zeta.html",
+      "title": "例5-13①：按 ζ=0.5 选点求 K₁",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p52",
+      "file": "pages/p52-ex513b-phi.html",
+      "title": "例5-13②：求其余极点，写出 Φ(s)",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p53",
+      "file": "pages/p53-pole-effects.html",
+      "title": "闭环零极点分布对性能的影响",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p54",
+      "file": "pages/p54-dipole.html",
+      "title": "闭环偶极子",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p55",
+      "file": "pages/p55-ex514a-two-systems.html",
+      "title": "例5-14①：两系统同轨迹不同零点",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p56",
+      "file": "pages/p56-ex514b-response-anim.html",
+      "title": "例5-14②：闭环零点的影响（响应对比动画）",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p57",
+      "file": "pages/p57-ex515-dominant.html",
+      "title": "例5-15：主导极点与高阶降阶",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p58",
+      "file": "pages/p58-ex516-zero-move-anim.html",
+      "title": "例5-16：开环零点位置的影响（五情形对照）",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p59",
+      "file": "pages/p59-three-rules.html",
+      "title": "零极点配置的三大规律",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p60",
+      "file": "pages/p60-summary-quiz3.html",
+      "title": "本章小结 + 课堂互动③",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    }
+  ]
+}

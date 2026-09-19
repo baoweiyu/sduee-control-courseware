@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>两个条件的应用·示例一：复平面试验点判定</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=505">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=505" defer></script>
+<script src="../fig.js?v=506"></script>
+<script src="../data/ex51.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:1;display:flex;flex-direction:column;gap:10px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:6px;padding:10px 18px;font-size:21px;line-height:1.5}
+  .eq{background:var(--sky);border-radius:12px;padding:8px 12px;text-align:center;font-size:21px;line-height:1.5}
+  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .kv{background:var(--sky);border-radius:12px;padding:9px 14px;line-height:1.45}
+  .err{background:var(--sky);border:2px dashed var(--orange);border-radius:12px;padding:10px 16px;font-size:19px;line-height:1.5;color:var(--ink)}
+  .err b{color:var(--danger)}
+  .figc{flex:1.16;display:flex;flex-direction:column;overflow:hidden}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .cap{flex:none;font-size:20px;color:var(--navy);background:var(--sky);border-radius:12px;padding:8px 16px;margin:0 14px 12px;line-height:1.4}
+</style>
+</head>
+<body data-title="两个条件的应用·示例一：复平面试验点判定" data-page="10 / 60">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lft">
+        <div class="act-card">
+          <div class="hd">系统与试验点</div>
+          <div class="bd">
+            <div class="eq"><span class="tex">G(s)H(s)=\dfrac{K_{1}(s+4)}{(s+2)(s+6.6)}</span></div>
+            <div class="kv" data-step="1">开环零点 <span class="tex">z_{1}=-4</span>；开环极点 <span class="tex">p_{1}=-2</span>、<span class="tex">p_{2}=-6.6</span>。</div>
+            <div class="kv" data-step="2">取复平面试验点 <span class="tex">s=-1.5+j2.55</span>，问：它在根轨迹上吗？</div>
+          </div>
+        </div>
+        <div class="act-card" style="flex:1.3">
+          <div class="hd">逐项量相角（相角条件）</div>
+          <div class="bd">
+            <div class="eq" data-step="3"><span class="tex">\angle(s-z_{1})=45.6^{\circ},\quad \angle(s-p_{1})=78.9^{\circ},\quad \angle(s-p_{2})=26.6^{\circ}</span></div>
+            <div class="eq hl" data-step="4"><span class="tex">45.6^{\circ}-78.9^{\circ}-26.6^{\circ}=-59.9^{\circ}\neq(2q+1)\times180^{\circ}</span>　→　该点<span class="kw-r">不在</span>根轨迹上</div>
+          </div>
+        </div>
+        <div class="act-card" style="flex:.75" data-step="5">
+          <div class="hd">附注：原教材数据勘误</div>
+          <div class="bd">
+            <div class="err">原教材以该点演示并得 <span class="tex">K_{1}\approx12.15</span>；<b>经复算该点不满足相角条件</b>，原数据与本系统不自洽。示例二给出一个真正在轨迹上的点。</div>
+          </div>
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd"><span style="flex:1">零极点指向试验点的向量与相角</span></div>
+        <div class="bd2"><svg id="fig"></svg></div>
+        <div class="cap">每个开环零、极点指向试验点 <span class="tex">s</span> 的向量，都可量出一个相角——相角条件就是把它们<span class="kw-r">求代数和</span>。</div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">方法</span><span>相角条件是<span class="kw-r">充要判据</span>：点在不在轨迹上，量相角就知道；<span class="tex">K_{1}</span> 的事交给幅值条件（示例二演示）。</span></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  /* 与 N11 同构图：同一系统、同一坐标范围；否定例不显示轨迹 */
+  const F = RL.figure("fig", "ex51", { vw: 960, vh: 600, ylim: [-2.2, 3.0], static: true,
+                                       asym: false, brkDots: false, crossSq: false,
+                                       extra: api => {
+    const sx = -1.5, sy = 2.55;
+    const ZP = [[-4, "z"], [-2, "p"], [-6.6, "p"]];
+    /* 向量 + 相角弧 + 角度读数（角度由 atan2 现算，不手填） */
+    ZP.forEach(([vx]) => {
+      const ang = Math.atan2(sy - 0, sx - vx) * 180 / Math.PI;
+      const x1 = api.X(vx), y1 = api.Y(0), x2 = api.X(sx), y2 = api.Y(sy);
+      api.mk("line", { x1, y1, x2: x2 - (x2 - x1) * 0.05, y2: y2 - (y2 - y1) * 0.05,
+        stroke: RL.INK, "stroke-width": 2.6, "marker-end": "url(#rxfig)" }, api.gDyn);
+      api.angleArc(vx, 0, 90, 90 - ang, api.gDyn, { r: 46 });
+      const hm = (ang / 2) * Math.PI / 180, rl = 46 + 34;   // 角平分线方向放置读数
+      api.tx(api.gDyn, x1 + rl * Math.cos(hm), y1 - rl * Math.sin(hm),
+        ang.toFixed(1) + "°", { fs: 23, b: 1, fill: "#B3541E" });
+    });
+    /* 试验点 */
+    api.mk("circle", { cx: api.X(sx), cy: api.Y(sy), r: 10, fill: RL.FOCUS, stroke: "#fff", "stroke-width": 2.5 }, api.gDyn);
+    api.tx(api.gDyn, api.X(sx) + 18, api.Y(sy) - 16, "s（试验点）", { fs: 25, b: 1, fill: RL.FOCUS, an: "start" });
+  } });
+  F.setAllF(0);
+});
+</script>
+</div></div>
+</body>
+</html>

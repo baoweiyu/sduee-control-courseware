@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>例5-2①：分析与计算</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=505">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=505" defer></script>
+<script src="../fig.js?v=506"></script>
+<script src="../data/ex52.js"></script>
+<style>
+  .row{display:flex;gap:20px;height:100%;min-height:0}
+  .lft{flex:1.06;display:flex;flex-direction:column;gap:10px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.hd{padding:5px 16px;font-size:20px}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:4px;padding:4px 12px;font-size:19px;line-height:1.38}
+  .eq{background:var(--sky);border-radius:12px;padding:3px 10px;text-align:center;font-size:19px;line-height:1.42}
+  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .kv{background:var(--sky);border-radius:12px;padding:4px 12px;line-height:1.38}
+  .kv.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  table{border-collapse:collapse;margin:0 auto;font-size:16.5px;line-height:1.28}
+  th,td{border:2px solid var(--line);padding:2px 12px;text-align:center;color:var(--ink)}
+  th{background:var(--sky);color:var(--navy);font-weight:700}
+  td .tex{white-space:nowrap}
+  .figc{flex:1;display:flex;flex-direction:column;overflow:hidden}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
+  .figc svg{width:100%;height:100%}
+</style>
+</head>
+<body data-title="例5-2①：分析与计算" data-page="31 / 60">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lft">
+        <div class="act-card" style="flex:1">
+          <div class="hd">① 零极点与实轴段（法则一~三）</div>
+          <div class="bd">
+            <div class="eq"><span class="tex">G(s)H(s)=\dfrac{K_{1}}{s(s+1)(s+2)}</span></div>
+            <div class="kv" data-step="1">极点 <span class="tex">0,\,-1,\,-2</span>（<span class="tex">n=3,m=0</span>）；实轴段 <span class="tex">[-1,\,0]</span> 与 <span class="tex">(-\infty,\,-2]</span>。</div>
+          </div>
+        </div>
+        <div class="act-card" style="flex:1.28">
+          <div class="hd">② 渐近线　③ 分离点（法则四、五）</div>
+          <div class="bd">
+            <div data-step="2"><div class="eq"><span class="tex">n-m=3</span> 条：<span class="tex">\sigma_{a}=(0-1-2)/3=-1</span>，<span class="tex">\varphi_{a}=\pm60^{\circ},\,180^{\circ}</span></div></div>
+            <div data-step="3"><div class="eq hl"><span class="tex">\dfrac{dK_{1}}{ds}=0\Rightarrow3s^{2}+6s+2=0\Rightarrow d=-0.423</span>（<span class="tex">K_{1}\approx0.385</span>）；<span class="tex">-1.577</span> 不在实轴段，舍</div></div>
+            <div class="kv" data-step="3">本系统即法则五示例系统，分离点计算此处快速过。</div>
+          </div>
+        </div>
+        <div class="act-card" style="flex:1.42">
+          <div class="hd">④ 虚轴交点 · 劳斯判据（n=3 完整排表）</div>
+          <div class="bd">
+            <div class="eq" data-step="4"><span class="tex">D(s)=s^{3}+3s^{2}+2s+K_{1}=0</span></div>
+            <div style="display:flex;gap:12px;align-items:center" data-step="4">
+              <table style="flex:none">
+                <tr><td><span class="tex">s^{3}</span></td><td>1</td><td>2</td></tr>
+                <tr><td><span class="tex">s^{2}</span></td><td>3</td><td><span class="tex">K_{1}</span></td></tr>
+                <tr><td><span class="tex">s^{1}</span></td><td><span class="tex">(6-K_{1})/3</span></td><td>0</td></tr>
+                <tr><td><span class="tex">s^{0}</span></td><td><span class="tex">K_{1}</span></td><td>—</td></tr>
+              </table>
+              <div class="eq hl" style="flex:1;text-align:left"><span class="tex">s^{1}</span> 行首为零 <span class="tex">\Rightarrow K_{1}=6</span>；辅助方程 <span class="tex">3s^{2}+6=0\Rightarrow s=\pm j\sqrt{2}</span>；稳定 <span class="tex">0&lt;K_{1}&lt;6</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="act-card" style="flex:1.22">
+          <div class="hd">⑤ s=jω 法与两法互证</div>
+          <div class="bd">
+            <div data-step="5"><div class="eq"><span class="tex">D(j\omega)=(K_{1}-3\omega^{2})+j\omega(2-\omega^{2})=0\Rightarrow\omega=\sqrt{2},\ K_{1}=6</span></div></div>
+            <div class="kv hl" data-step="5">两法互证 ✓：劳斯法顺手给出稳定范围，<span class="tex">s=j\omega</span> 法直接联立、不排表。</div>
+          </div>
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd"><span style="flex:1">例5-2 根轨迹骨架：实轴段、渐近线与关键点</span></div>
+        <div class="bd2"><svg id="fig"></svg></div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">分工</span><span>本页完成例5-2 的<span class="kw-r">全部分析计算</span>（骨架如右图）；轨迹分支的正式绘制见下一页例5-2② 动画。</span></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  /* 静态骨架图：零极点 + 实轴段 + 渐近线 + 分离点 + 虚轴方块全标注，轨迹分支留给 N32 */
+  const F = RL.figure("fig", "ex52", { vw: 960, vh: 600, static: true, brkDots: false, crossSq: false, sigA: false });
+  F.setAllF(0);
+  F.segEls.forEach(e => e.style.opacity = .9);
+  F.crossSq.forEach(el => el.style.opacity = 1);
+  /* 渐近线中心标注（角度标注由 drawAsym 自动给出） */
+  F.mk("circle", { cx: F.X(-1), cy: F.Y(0), r: 16, fill: "none", stroke: RL.ASY, "stroke-width": 2.2, opacity: .8 }, F.gDyn);
+  F.tx(F.gDyn, F.X(-1), F.Y(0) + 52, "σ_{a}=−1", { fs: 26, fill: RL.ASY, b: 1 });
+  /* 分离点 */
+  const x = F.X(-0.4226), y = F.Y(0);
+  F.mk("circle", { cx: x, cy: y, r: 9, fill: RL.FOCUS, stroke: "#fff", "stroke-width": 2.5 }, F.gDyn);
+  F.mk("line", { x1: x + 9, y1: y + 9, x2: x + 50, y2: y + 40, stroke: RL.FOCUS, "stroke-width": 1.5, opacity: .6 }, F.gDyn);
+  F.tx(F.gDyn, x + 56, y + 52, "d=−0.423", { fs: 24, fill: RL.FOCUS, b: 1, an: "start" });
+  /* 虚轴交点 */
+  F.tx(F.gDyn, F.X(0) + 24, F.Y(1.4142) - 16, "±j√2", { fs: 24, fill: "#B3541E", b: 1, an: "start" });
+  /* QA 直达钩子：?step=N 直接进到第 N 步（须等 act-base 的 Step.init 完成后执行） */
+  window.addEventListener("load", () => {
+    const q = +(new URLSearchParams(location.search).get("step") || 0);
+    let guard = 0;
+    const todo = () => [...document.querySelectorAll("[data-step]:not(.shown)")].some(e => +e.dataset.step <= q);
+    while (todo() && guard++ < 40) ACT.step.next();
+  });
+});
+</script>
+</div></div>
+</body>
+</html>

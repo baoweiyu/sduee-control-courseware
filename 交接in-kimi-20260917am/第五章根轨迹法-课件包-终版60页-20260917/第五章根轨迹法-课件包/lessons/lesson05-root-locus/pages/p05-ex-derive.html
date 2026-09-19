@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>引例（1）：系统与闭环特征方程</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=505">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=505" defer></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .col{flex:1.35;display:flex;flex-direction:column;gap:16px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:10px;padding:16px 24px;font-size:23px;line-height:1.5}
+  .eq{background:var(--sky);border-radius:12px;padding:12px 18px;text-align:center;font-size:24px}
+  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .st{font-size:20px;color:var(--muted);line-height:1.4}
+  .figc{flex:1;display:flex;flex-direction:column;overflow:hidden}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:8px 12px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .figc .cap{flex:none;font-size:19.5px;color:var(--navy);background:var(--sky);border-radius:12px;padding:9px 16px;margin:0 14px 12px;line-height:1.45}
+</style>
+</head>
+<body data-title="引例（1）：系统与闭环特征方程" data-page="5 / 60">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="col">
+        <div class="act-card" style="flex:.9">
+          <div class="hd">引例系统（单位负反馈）</div>
+          <div class="bd">
+            <div class="eq"><span class="tex">G(s)=\dfrac{K}{s(0.5s+1)}</span></div>
+            <div>两个开环极点：把 <span class="tex">s(0.5s+1)=0</span> 化成零极点形式 <span class="tex">s(s+2)=0</span>，得 <span class="tex">p_{1}=0</span>、<span class="tex">p_{2}=-2</span>，无开环零点。</div>
+          </div>
+        </div>
+        <div class="act-card" style="flex:1.35">
+          <div class="hd">闭环特征方程（换算成根轨迹增益）</div>
+          <div class="bd">
+            <div data-step="1"><div class="eq">特征方程 <span class="tex">1+G(s)=0\;\Rightarrow\;s(0.5s+1)+K=0</span></div></div>
+            <div data-step="2"><div class="eq">两边乘 2：<span class="tex">s^{2}+2s+2K=0</span>，令根轨迹增益 <span class="tex">K_{1}=2K</span></div></div>
+            <div data-step="3"><div class="eq hl"><span class="tex">\varDelta(s)=s^{2}+2s+K_{1}=0,\qquad s_{1,2}=-1\pm\sqrt{1-K_{1}}</span></div></div>
+            <div class="st" data-step="4">闭环极点是特征方程 <span class="tex">\varDelta(s)=0</span> 的根——它随 <span class="tex">K_{1}</span> 连续变化。本章关心的不只是根怎么动，还有：何时稳定、振荡多剧烈、响应多快。<span class="kw-r">下一页：代入具体数值看根怎么动。</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd"><span style="flex:1">引例系统的结构图（单位负反馈）</span></div>
+        <div class="bd2"><svg id="blk" viewBox="0 0 640 430" preserveAspectRatio="xMidYMid meet"></svg></div>
+        <div class="cap">前向通道 <span class="tex">G(s)=\dfrac{K}{s(0.5s+1)}</span>，反馈通道 <span class="tex">H(s)=1</span>——闭环特征方程即 <span class="tex">1+G(s)=0</span>。</div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">要点</span><span><span class="tex">K_{1}</span> 是<span class="kw-r">根轨迹增益</span>（零极点形式下的增益），它与原系统增益 <span class="tex">K</span> 差常数倍（<span class="tex">K_{1}=2K</span>），不影响轨迹形状。</span></div>
+<script>
+/* 单位负反馈方框图（程序绘制，可复用模式：mkSum 求和点 / mkBlock 方框 / wire 信号线带箭头）。
+   口径参照老教材图 5-1：R(s) → Σ(+,−) → G(s) → C(s)，H(s)=1 单位反馈下绕行。 */
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("blk");
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag);
+    for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const MF = '"Cambria Math","STIX Two Math",Georgia,"Times New Roman","Microsoft YaHei",serif';
+  const NAVY = "#12266E", BLUE = "#1D3FA0", LINE = "#C9D8F2";
+  const defs = mk("defs", {}, svg);
+  const m = mk("marker", { id: "arB", markerWidth: 12, markerHeight: 10, refX: 8.5, refY: 4, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L9,4 L0,8 Z", fill: BLUE }, m);
+  const label = (x, y, s, o) => { o = o || {};
+    const n = mk("text", { x, y, "font-size": o.fs || 24, "text-anchor": o.an || "middle",
+      fill: o.fill || NAVY, "font-style": "italic", "font-family": MF });
+    n.textContent = s; return n; };
+  /* 信号线（可带折点），末端箭头 */
+  const wire = pts => {
+    const d = pts.map((p, i) => (i ? "L" : "M") + p[0] + "," + p[1]).join("");
+    mk("path", { d, fill: "none", stroke: BLUE, "stroke-width": 3, "marker-end": "url(#arB)" }, svg);
+  };
+  /* 求和点：圆圈 + × 叉丝 + 符号标注 */
+  const mkSum = (cx, cy, signs) => {
+    mk("circle", { cx, cy, r: 20, fill: "#fff", stroke: BLUE, "stroke-width": 3 }, svg);
+    mk("line", { x1: cx - 12, y1: cy, x2: cx + 12, y2: cy, stroke: BLUE, "stroke-width": 2 }, svg);
+    mk("line", { x1: cx, y1: cy - 12, x2: cx, y2: cy + 12, stroke: BLUE, "stroke-width": 2 }, svg);
+    (signs || []).forEach(([x, y, s]) => label(x, y, s, { fs: 26, fill: NAVY }));
+  };
+  /* 方框：白底描边圆角 + 两行文字 */
+  const mkBlock = (x, y, w, h, lines) => {
+    mk("rect", { x, y, width: w, height: h, rx: 10, fill: "#fff", stroke: LINE, "stroke-width": 3 }, svg);
+    lines.forEach((s, i) => label(x + w / 2, y + h / 2 + (i - (lines.length - 1) / 2) * 30 + 8, s, { fs: 25 }));
+  };
+  const Y0 = 170;                       // 主通道高度
+  label(36, Y0 - 30, "R(s)", { an: "start" });
+  wire([[30, Y0], [120, Y0]]);
+  mkSum(146, Y0, [[116, Y0 - 30, "+"], [166, Y0 + 48, "−"]]);
+  wire([[166, Y0], [226, Y0]]);
+  mkBlock(232, Y0 - 58, 200, 116, ["G(s) = K /", "[s(0.5s+1)]"]);
+  wire([[432, Y0], [560, Y0]]);
+  label(566, Y0 - 30, "C(s)", { an: "start" });
+  /* 单位反馈下绕行：取输出点 → 下 → 回求和点 */
+  mk("circle", { cx: 500, cy: Y0, r: 5.5, fill: BLUE }, svg);
+  mk("path", { d: "M500," + Y0 + " L500,316 L146,316 L146," + (Y0 + 22), fill: "none",
+    stroke: BLUE, "stroke-width": 3.5, "marker-end": "url(#arB)" }, svg);
+  label(323, 352, "H(s) = 1（单位负反馈）", { fs: 23 });
+});
+</script>
+</div></div>
+</body>
+</html>

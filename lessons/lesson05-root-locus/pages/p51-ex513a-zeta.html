@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>② 闭环极点的确定｜例5-13：按 ζ=0.5 选点求 K₁</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=218">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=218" defer></script>
+<script src="../fig.js?v=507"></script>
+<script src="../data/ex54.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:1.04;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:6px;padding:8px 18px;font-size:19.5px;line-height:1.42}
+  .eq{background:var(--sky);border-radius:12px;padding:8px 13px;text-align:center;font-size:20.5px;line-height:1.5}
+  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .kv{background:var(--sky);border-radius:12px;padding:8px 14px;line-height:1.45}
+  .figc{flex:1.08;display:flex;flex-direction:column;overflow:hidden}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
+  .figc svg{width:100%;height:100%}
+</style>
+</head>
+<body data-title="② 闭环极点的确定｜例5-13：按 ζ=0.5 选点求 K₁" data-page="51 / 61">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lft">
+        <div class="act-card" style="flex:1.05">
+          <div class="hd">题设</div>
+          <div class="bd">
+            <div class="eq">开环传递函数（即例5-4 系统）：<span class="tex">G(s)H(s)=\dfrac{K_{1}}{s(s+3)(s^{2}+2s+2)}</span></div>
+            <div>由其根轨迹（见右图），确定使闭环主导极点具有阻尼比 <span class="tex">\zeta=0.5</span> 的 <span class="tex">K_{1}</span> 值。</div>
+          </div>
+        </div>
+        <div class="act-card" style="flex:.92">
+          <div class="hd">指标几何化：ζ → β 射线</div>
+          <div class="bd">
+            <div class="kv" data-step="1">ζ=0.5 ⇔ 阻尼角 <span class="tex">\beta=60^{\circ}</span>：过原点作与负实轴夹角 60° 的射线，与轨迹的交点即所求闭环极点。</div>
+          </div>
+        </div>
+        <div class="act-card" style="flex:1.18">
+          <div class="hd">交点与增益（幅值条件）</div>
+          <div class="bd">
+            <div class="kv" data-step="2">交点（数值求根）：<span class="tex">s_{1,2}=-0.409\pm j0.709</span>，即 <span class="tex">|s|=0.819</span>、<span class="tex">\angle s=120^{\circ}</span>。</div>
+            <div data-step="3"><div class="eq hl"><span class="tex">K_{1}=|s|\cdot|s+3|\cdot|s^{2}+2s+2|=0.819\times2.686\times1.190\approx2.62</span></div></div>
+            <div class="kv" data-step="4">各开环极点到交点的向量长度连乘即得增益——这就是"幅值条件定 K₁"的用法。</div>
+          </div>
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd"><span style="flex:1">ζ=0.5 阻尼射线与轨迹交点（棕色点）</span></div>
+        <div class="bd2"><svg id="fig"></svg></div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">承接</span><span>性能指标 → 阻尼射线 → 轨迹交点 → 幅值条件定增益；主导对已定，<span class="kw-r">其余两个闭环极点</span>怎么求？——下一页继续例5-13，写出 Φ(s)。</span></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  /* zoom:false —— 关闭缩放/平移/取点，保证 ζ 射线与交点标注始终保留 */
+  const F = RL.figure("fig", "ex54", { vw: 960, vh: 600, static: true, asym: false, zoom: false });
+  const T = 3.4, c = Math.cos(Math.PI / 3), sn = Math.sin(Math.PI / 3);
+  [1, -1].forEach(sg => F.mk("line", { x1: F.X(0), y1: F.Y(0), x2: F.X(-c * T), y2: F.Y(sg * sn * T),
+    stroke: RL.REF.color.zeta, "stroke-width": 2.4, "stroke-dasharray": RL.REF.dash.zeta, opacity: .85 }, F.gDyn));
+  F.tx(F.gDyn, F.X(-c * 2.9) - 8, F.Y(sn * 2.9) - 6, "ζ=0.5（β=60°）", { fs: 24, fill: RL.REF.color.zeta, b: 1, an: "end" });
+  [[-0.4093, 0.7089], [-0.4093, -0.7089]].forEach(p => F.mk("circle", { cx: F.X(p[0]), cy: F.Y(p[1]), r: 10,
+    fill: RL.REF.color.zeta, stroke: "#fff", "stroke-width": 2.5 }, F.gDyn));
+  F.tx(F.gDyn, F.X(-0.4093) - 4, F.Y(0.7089) - 40, "s_{1,2}=-0.41±j0.71", { fs: 23, fill: RL.REF.color.zeta, b: 1 });
+});
+</script>
+</div></div>
+</body>
+</html>

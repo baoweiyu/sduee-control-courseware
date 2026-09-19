@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>绘制根轨迹的基本法则总表</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=505">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=505" defer></script>
+<style>
+  .col{display:flex;flex-direction:column;gap:10px;height:100%;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:center;padding:6px 14px;min-height:0}
+  .motto{flex:none;display:flex;align-items:center;justify-content:center;gap:18px;background:var(--blue);color:#fff;
+    border-radius:14px;padding:8px 22px;font-size:22px;font-weight:700;letter-spacing:2px}
+  .motto .sep{opacity:.55;font-weight:400}
+  .mid{flex:1;display:flex;gap:16px;min-height:0}
+  .act-table{font-size:19px;line-height:1.3}
+  .act-table th{white-space:nowrap;text-align:center;padding:7px 12px}
+  .act-table td{vertical-align:middle;padding:5px 12px}
+  .act-table td.c{text-align:center;white-space:nowrap;color:var(--navy);font-weight:700}
+  .act-table td .tex{white-space:nowrap}
+  .icons{display:flex;flex-direction:column;gap:5px;min-height:0}
+  .ic{flex:1;display:flex;align-items:center;gap:12px;background:#fff;border:2px solid var(--line);border-radius:12px;padding:2px 10px;min-height:0}
+  .ic svg{flex:none;width:56px;height:56px}
+  .ic .t{font-size:17.5px;color:var(--navy);font-weight:700;line-height:1.28}
+  .ic .t small{display:block;font-size:15px;color:var(--muted);font-weight:400}
+  .hint{flex:none;background:#FDF3EC;border-left:5px solid var(--orange);border-radius:0 12px 12px 0;padding:8px 16px;font-size:19.5px;line-height:1.45;color:var(--ink)}
+  .hint b{color:var(--danger)}
+</style>
+</head>
+<body data-title="绘制根轨迹的基本法则总表" data-page="27 / 60">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="col">
+      <div class="motto">用法口诀：先数分支定骨架<span class="sep">，</span>再补关键点成形</div>
+      <div class="mid">
+        <div class="act-card" style="flex:1.62">
+          <div class="bd">
+            <table class="act-table">
+              <tr><th style="width:64px">法则</th><th style="width:305px">结论</th><th>公式 / 要点</th></tr>
+              <tr><td class="c">一</td><td>分支数与对称性</td><td>分支数 = 闭环极点数 = <span class="tex">n</span>；轨迹连续、对称于实轴</td></tr>
+              <tr><td class="c">二</td><td>起点与终点</td><td><span class="tex">K_{1}=0</span> 起于 <span class="tex">n</span> 个开环极点；<span class="tex">m</span> 条止于零点，<span class="tex">n-m</span> 条趋于无穷远</td></tr>
+              <tr><td class="c">三</td><td>实轴上的根轨迹</td><td>某段右侧实零、实极点数目之和为<span class="kw-r">奇数</span> → 该段是根轨迹段</td></tr>
+              <tr><td class="c">四</td><td>渐近线</td><td><span class="tex">n-m</span> 条：<span class="tex">\sigma_{a}=\dfrac{\sum p_{i}-\sum z_{j}}{n-m}</span>，<span class="tex">\varphi_{a}=\dfrac{(2q+1)180^{\circ}}{n-m}</span></td></tr>
+              <tr><td class="c">五</td><td>分离点 / 会合点</td><td><span class="tex">\dfrac{dK_{1}}{ds}=0</span> 或 <span class="tex">\sum\dfrac{1}{d-z_{j}}=\sum\dfrac{1}{d-p_{i}}</span>；解出的 d 须在实轴段上且 <span class="tex">K_{1}\geq0</span></td></tr>
+              <tr><td class="c">六</td><td>出射角 / 入射角</td><td><span class="tex">\theta_{p_{k}}=(2q+1)180^{\circ}+\sum\angle(p_{k}-z_{j})-\sum\limits_{i\neq k}\angle(p_{k}-p_{i})</span>（入射角对称）</td></tr>
+              <tr><td class="c">七</td><td>与虚轴的交点</td><td>法①劳斯判据 + 辅助方程；法②令 <span class="tex">s=j\omega</span>，实部、虚部分别为零 → 临界 <span class="tex">K_{1}</span> 与 <span class="tex">\pm j\omega</span></td></tr>
+            </table>
+          </div>
+        </div>
+        <div class="icons" style="flex:1">
+          <div class="ic"><svg viewBox="0 0 60 60">
+            <line x1="6" y1="30" x2="54" y2="30" stroke="#5B6B8C" stroke-width="2"/>
+            <path d="M14,30 L30,30 L44,12" fill="none" stroke="#1D3FA0" stroke-width="3.4"/>
+            <path d="M14,30 L30,30 L44,48" fill="none" stroke="#1D3FA0" stroke-width="3.4"/>
+            <text x="13" y="27" font-size="15" font-weight="700" fill="#16324F">×</text>
+          </svg><span class="t">一 · 分支数<small>n 条、对称于实轴</small></span></div>
+          <div class="ic"><svg viewBox="0 0 60 60">
+            <text x="6" y="27" font-size="15" font-weight="700" fill="#16324F">×</text>
+            <line x1="14" y1="22" x2="34" y2="22" stroke="#1D3FA0" stroke-width="3" marker-end="url(#mAr)"/>
+            <circle cx="42" cy="22" r="5" fill="none" stroke="#0E7A36" stroke-width="2.6"/>
+            <text x="6" y="52" font-size="15" font-weight="700" fill="#16324F">×</text>
+            <line x1="14" y1="47" x2="34" y2="47" stroke="#1D3FA0" stroke-width="3" marker-end="url(#mAr)"/>
+            <text x="40" y="53" font-size="15" fill="#16324F">∞</text>
+            <defs><marker id="mAr" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1D3FA0"/></marker></defs>
+          </svg><span class="t">二 · 起终点<small>始于极点，止于零点 / ∞</small></span></div>
+          <div class="ic"><svg viewBox="0 0 60 60">
+            <line x1="4" y1="30" x2="56" y2="30" stroke="#5B6B8C" stroke-width="2"/>
+            <line x1="18" y1="30" x2="42" y2="30" stroke="#1D3FA0" stroke-width="6" stroke-linecap="round"/>
+            <text x="12" y="27" font-size="15" font-weight="700" fill="#16324F">×</text>
+            <text x="38" y="27" font-size="15" font-weight="700" fill="#16324F">×</text>
+          </svg><span class="t">三 · 实轴段<small>右侧零极点之和为奇数</small></span></div>
+          <div class="ic"><svg viewBox="0 0 60 60">
+            <line x1="6" y1="30" x2="54" y2="30" stroke="#5B6B8C" stroke-width="2"/>
+            <circle cx="30" cy="30" r="3.4" fill="#F5821F"/>
+            <line x1="30" y1="30" x2="52" y2="8" stroke="#F5821F" stroke-width="2.4" stroke-dasharray="5 4"/>
+            <line x1="30" y1="30" x2="8" y2="8" stroke="#F5821F" stroke-width="2.4" stroke-dasharray="5 4"/>
+            <line x1="30" y1="30" x2="8" y2="52" stroke="#F5821F" stroke-width="2.4" stroke-dasharray="5 4"/>
+            <line x1="30" y1="30" x2="52" y2="52" stroke="#F5821F" stroke-width="2.4" stroke-dasharray="5 4"/>
+          </svg><span class="t">四 · 渐近线<small>n−m 条，共点 σₐ</small></span></div>
+          <div class="ic"><svg viewBox="0 0 60 60">
+            <line x1="4" y1="34" x2="56" y2="34" stroke="#5B6B8C" stroke-width="2"/>
+            <text x="8" y="31" font-size="15" font-weight="700" fill="#16324F">×</text>
+            <text x="42" y="31" font-size="15" font-weight="700" fill="#16324F">×</text>
+            <line x1="16" y1="34" x2="26" y2="34" stroke="#1D3FA0" stroke-width="3" marker-end="url(#mAr2)"/>
+            <line x1="44" y1="34" x2="34" y2="34" stroke="#1D3FA0" stroke-width="3" marker-end="url(#mAr2)"/>
+            <circle cx="30" cy="34" r="4.6" fill="#D63A2F"/>
+            <line x1="30" y1="34" x2="38" y2="12" stroke="#1D3FA0" stroke-width="3" marker-end="url(#mAr2)"/>
+            <line x1="30" y1="34" x2="38" y2="56" stroke="#1D3FA0" stroke-width="3" marker-end="url(#mAr2)"/>
+            <defs><marker id="mAr2" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1D3FA0"/></marker></defs>
+          </svg><span class="t">五 · 分离点<small>dK₁/ds=0，代回检验</small></span></div>
+          <div class="ic"><svg viewBox="0 0 60 60">
+            <line x1="6" y1="42" x2="54" y2="42" stroke="#5B6B8C" stroke-width="2"/>
+            <text x="14" y="24" font-size="16" font-weight="700" fill="#16324F">×</text>
+            <line x1="22" y1="20" x2="50" y2="34" stroke="#1D3FA0" stroke-width="3" marker-end="url(#mAr3)"/>
+            <path d="M38,20 A16,16 0 0 1 37,28" fill="none" stroke="#F5821F" stroke-width="2.4"/>
+            <defs><marker id="mAr3" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#1D3FA0"/></marker></defs>
+          </svg><span class="t">六 · 出射角<small>各零极点角度代数和</small></span></div>
+          <div class="ic"><svg viewBox="0 0 60 60">
+            <line x1="6" y1="30" x2="54" y2="30" stroke="#5B6B8C" stroke-width="2"/>
+            <line x1="30" y1="4" x2="30" y2="56" stroke="#5B6B8C" stroke-width="2"/>
+            <path d="M14,46 L22,30 L26,16" fill="none" stroke="#1D3FA0" stroke-width="3"/>
+            <rect x="25" y="11" width="10" height="10" fill="#fff" stroke="#D63A2F" stroke-width="2.4"/>
+            <rect x="25" y="39" width="10" height="10" fill="#fff" stroke="#D63A2F" stroke-width="2.4"/>
+          </svg><span class="t">七 · 虚轴交点<small>劳斯 / s=jω 两法</small></span></div>
+        </div>
+      </div>
+      <div class="hint" data-step="1"><b>应用顺序：</b>法则一 → 三先<span class="kw-r">定性画骨架</span>（几条分支、实轴走哪几段）；法则四 → 七再<span class="kw-r">定量补关键点</span>（渐近线、分离点、出射角、虚轴交点）；最后按相角条件连成平滑曲线。例5-4 将从头到尾完整走一遍（计算见 p29，绘制见 p30）。</div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">提示</span><span>法则表是<span class="kw-r">作图的工序卡</span>：按顺序逐条执行，一张完整的根轨迹就出来了。</span></div>
+</div></div>
+</body>
+</html>

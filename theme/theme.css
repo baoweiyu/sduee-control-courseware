@@ -224,3 +224,32 @@ html, body {
 .tex-d mjx-container { margin:0.2em 0 !important; }
 
 /* 中文正文使用中文字体栈；数学字体仅作用于 .tex/MathJax 公式（审计 3.6） */
+
+/* ---------- 动画控制条全局修复（v0.5，第五章 A1 批次） ----------
+   G1 按钮跳动：K 读数框宽度随数值位数变化，把 ▶播放/⧉分步/↺重置 挤得来回跳。
+   读数数字容器钉死几何（min-width 按最长值 "→ ∞"/"0.385" 留足，等宽数字）。
+   G2 分步提示挤压：fig.js wire 写入 #prog 的「分步 n / N」把按钮挤成两行。
+   把 #prog 移出按钮行，绝对定位到图区右上角（图容器 .figc 需 position:relative）。 */
+.figc { position: relative; }                       /* G2：确立 #prog 的定位上下文（页内已设则无效冲突） */
+.ctl .kr {                                          /* G1：K 读数框整体不折行、等宽数字 */
+  display: inline-flex; align-items: center; white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.ctl .kr b {                                        /* G1：变位数读数钉死宽度，框画大不跳动 */
+  display: inline-block; min-width: 3.2em; text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+.kbox {                                             /* G1 工具类：任何读数框可直接套用 */
+  display: inline-block; min-width: 3.2em; text-align: center;
+  font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+.ctl .btn {                                         /* G1 补充：▶播放/❚❚暂停 标签切换不改变按钮宽度 */
+  min-width: 6.5em; text-align: center;
+}
+.ctl #prog {                                        /* G2：分步/进度提示钉到图区右上角，永离按钮行 */
+  position: absolute; top: 64px; right: 14px; z-index: 6;
+  min-width: 0; margin: 0; white-space: nowrap; pointer-events: none;
+  background: rgba(255, 255, 255, .92); border: 1.5px solid var(--line);
+  border-radius: 8px; padding: 2px 10px;
+  font-size: 17px; color: var(--muted); font-variant-numeric: tabular-nums;
+}

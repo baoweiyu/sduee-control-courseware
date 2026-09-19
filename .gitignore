@@ -45,20 +45,22 @@ node_modules/
 Thumbs.db
 .DS_Store
 
-# ===== 未验收章节草稿（第五、六章复审通过前不入库，规范第 131 条）=====
-# 章节验收交付时：删除本块、提交源码、并同步扩充 pack/release 脚本的章节列表
-lessons/lesson05-root-locus/
+# ===== 未验收章节草稿（第六章复审通过前不入库，规范第 131 条）=====
+# （第五章已于 2026-09-19 验收并随 V2.18 入库）
 lessons/lesson06-compensation/
-qa/build_ch5*.py
 qa/build_ch6*.py
-qa/build_lib.py
-qa/rlocus_gen.py
 qa/bode_gen.py
-qa/gen_ch5_data.py
 qa/gen_ch6_data.py
 qa/gen_images_ch56.py
 qa/render_ch56_pages.py
 qa/ch56-orig-pages/
+
+# ===== 章节备份目录 =====
+lessons/*.bak*/
+
+# ===== 后续交接文件夹 =====
+交接in-2026-09-19pm/
+交接out-2026-09-14eve/
 
 # ===== Python 缓存与日志 =====
 __pycache__/

@@ -1,0 +1,1 @@
+RL.data["rule3"] = {"kmin": 0.01, "kmax": 10.0, "xlim": [-6.6, 1.4], "ylim": [-3.0, 3.0], "poles": [[0, 0], [-2, 0], [-5, 0]], "zeros": [[-3, 0]], "segments": [[-5.0, -3.0], [-2.0, 0.0]], "asym": {"sigma": null, "angles": []}, "breakaways": [], "crossings": [], "ks": [], "branches": [], "groups": [], "pairs": []};

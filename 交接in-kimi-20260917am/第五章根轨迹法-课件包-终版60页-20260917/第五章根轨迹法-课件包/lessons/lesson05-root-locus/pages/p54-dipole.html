@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>闭环偶极子</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=505">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=505" defer></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:1;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:10px;padding:12px 20px;font-size:21px;line-height:1.5}
+  .eq{background:var(--sky);border-radius:12px;padding:10px 14px;text-align:center;font-size:21px;line-height:1.5}
+  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .kv{background:var(--sky);border-radius:12px;padding:8px 14px;line-height:1.5}
+  .figc{display:flex;flex-direction:column;overflow:hidden}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .rcol{flex:1.18;display:flex;flex-direction:column;gap:14px;min-height:0}
+</style>
+</head>
+<body data-title="闭环偶极子" data-page="54 / 60">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lft">
+        <div class="act-card" style="flex:.95">
+          <div class="hd">定义</div>
+          <div class="bd">
+            <div class="kv">一对相距很近的闭环零、极点——两者间距远小于它们到其他零极点的距离（右上图：<span class="tex">d\ll D</span>）。</div>
+          </div>
+        </div>
+        <div class="act-card" style="flex:1.4">
+          <div class="hd">对消条件与影响</div>
+          <div class="bd">
+            <div data-step="1">偶极子的局部模态贡献通常很小，主要暂态指标计算中可近似抵消；但仍可能影响响应的起始段或高频细节，并非毫无影响。</div>
+            <div data-step="2">右下图：有偶极子的三阶系统与对消后的二阶系统，单位阶跃响应几乎重合——这就是"响应降阶"的依据。</div>
+          </div>
+        </div>
+        <div class="act-card" style="flex:1.05">
+          <div class="hd">工程判据</div>
+          <div class="bd">
+            <div class="eq hl"><span class="tex">|z-p|\ll|p-p_{k}|</span>（"间距为其他零极点距离的 1/5 以下"只是工程经验量级而非严格阈值，能否忽略还应结合响应误差验证）</div>
+          </div>
+        </div>
+      </div>
+      <div class="rcol">
+        <div class="act-card figc" style="flex:1">
+          <div class="hd"><span style="flex:1">s 平面：紧贴的 ○× 偶极子 vs 远处零极点（d≪D）</span></div>
+          <div class="bd2"><svg id="pz" viewBox="0 0 760 300" preserveAspectRatio="xMidYMid meet"></svg></div>
+        </div>
+        <div class="act-card figc" style="flex:1.15">
+          <div class="hd"><span style="flex:1">有无偶极子的单位阶跃响应几乎重合（解析式计算）</span></div>
+          <div class="bd2"><svg id="rsp" viewBox="0 0 760 330" preserveAspectRatio="xMidYMid meet"></svg></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">要点</span><span>注意区分：<span class="kw-r">闭环偶极子</span>用于响应降阶近似；<span class="kw-r">开环偶极子</span>用于说明轨迹形状近似不变而稳态增益改变（见第59页）——二者不要混称。</span></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const MF = '"Cambria Math","STIX Two Math",Georgia,"Times New Roman","Microsoft YaHei",serif';
+  const mks = svg => (tag, attrs) => { const n = document.createElementNS(NS, tag);
+    for (const k in attrs) n.setAttribute(k, attrs[k]); svg.appendChild(n); return n; };
+  const txt = (mk, x, y, s, o) => { o = o || {};
+    const n = mk("text", { x, y, "font-size": o.fs || 20, "text-anchor": o.an || "middle",
+      fill: o.fill || "#5B6B8C", "font-weight": o.b ? 700 : 400, "font-family": MF });
+    n.textContent = s;
+    n.setAttribute("style", "paint-order:stroke;stroke:#FFF;stroke-width:5;stroke-linejoin:round"); return n; };
+  /* ---- 上图：s 平面偶极子示意 ---- */
+  {
+    const svg = document.getElementById("pz"), mk = mks(svg);
+    const X0 = 60, X1 = 730, Yc = 158, S = 118;   /* 比例尺 px/单位 */
+    const X = x => X0 + (x + 3.2) * S, Y = y => Yc - y * S;
+    const defs = mk("defs", {});
+    const am = document.createElementNS(NS, "marker");
+    [["id", "ax54"], ["markerWidth", 10], ["markerHeight", 8], ["refX", 7], ["refY", 3], ["orient", "auto"]].forEach(([k, v]) => am.setAttribute(k, v));
+    defs.appendChild(am);
+    const amp = document.createElementNS(NS, "path");
+    amp.setAttribute("d", "M0,0 L7,3 L0,6 Z"); amp.setAttribute("fill", "#5B6B8C"); am.appendChild(amp);
+    mk("line", { x1: X0 - 10, y1: Yc, x2: X1, y2: Yc, stroke: "#5B6B8C", "stroke-width": 2.2, "marker-end": "url(#ax54)" });
+    mk("line", { x1: X(0), y1: 280, x2: X(0), y2: 22, stroke: "#5B6B8C", "stroke-width": 2.2, "marker-end": "url(#ax54)" });
+    txt(mk, X1 - 6, Yc + 30, "Re", { fs: 20, b: 1, an: "end" }); txt(mk, X(0) + 18, 40, "Im", { fs: 20, b: 1, an: "start" });
+    const cross = (x, y, color, r) => {
+      mk("line", { x1: X(x) - r, y1: Y(y) - r, x2: X(x) + r, y2: Y(y) + r, stroke: color, "stroke-width": 4.5, "stroke-linecap": "round" });
+      mk("line", { x1: X(x) - r, y1: Y(y) + r, x2: X(x) + r, y2: Y(y) - r, stroke: color, "stroke-width": 4.5, "stroke-linecap": "round" });
+    };
+    /* 远处主导对 ×× 与其他极点 */
+    cross(-1, 2, "#1D3FA0", 11); cross(-1, -2, "#1D3FA0", 11);
+    txt(mk, X(-1) + 16, Y(2) - 12, "主导对 −1±j2", { fs: 20, fill: "#1D3FA0", b: 1, an: "start" });
+    /* 偶极子：p=−0.5（× 红）、z=−0.55（○ 绿），紧贴 */
+    cross(-0.5, 0, "#D63A2F", 10);
+    mk("circle", { cx: X(-0.55), cy: Y(0), r: 9, fill: "none", stroke: "#0E7A36", "stroke-width": 4 });
+    txt(mk, X(-0.52), Y(0) - 26, "偶极子：p=−0.5（×）、z=−0.55（○）", { fs: 20, fill: "#B3541E", b: 1 });
+    /* 距离对照：d 与 D */
+    mk("line", { x1: X(-0.55), y1: Y(0) + 24, x2: X(-0.5), y2: Y(0) + 24, stroke: "#B3541E", "stroke-width": 2 });
+    txt(mk, X(-0.45), Y(0) + 48, "d=0.05", { fs: 19, fill: "#B3541E", b: 1, an: "start" });
+    mk("line", { x1: X(-0.52), y1: Y(0) - 6, x2: X(-1) + 4, y2: Y(2) + 8, stroke: "#8A97B5", "stroke-width": 1.8, "stroke-dasharray": "4 5" });
+    txt(mk, (X(-0.52) + X(-1)) / 2 - 20, (Y(0) + Y(2)) / 2 - 8, "D≈2.1", { fs: 19, fill: "#8A97B5", b: 1, an: "end" });
+    txt(mk, X(-2.1), Yc + 52, "d≪D：偶极子内部间距 ≈ 对外距离的 1/40", { fs: 20, fill: "#B3541E", b: 1 });
+  }
+  /* ---- 下图：阶跃响应对比（解析式计算，非手画） ----
+     有偶极子三阶：Φa(s)=2.5(s+0.55)/[0.55(s+0.5)(s²+2s+5)] → ya=1−0.107e^{−0.5t}−e^{−t}(0.893cos2t+0.4733sin2t)
+     对消后二阶：  Φb(s)=5/(s²+2s+5)                        → yb=1−e^{−t}(cos2t+0.5sin2t)（均保 Φ(0)=1） */
+  {
+    const svg = document.getElementById("rsp"), mk = mks(svg);
+    const X0 = 66, X1 = 736, Y1 = 292, Y0 = 26, T = 8, YM = [-0.05, 1.45];
+    const X = t => X0 + (t / T) * (X1 - X0), Y = y => Y1 - (y - YM[0]) / (YM[1] - YM[0]) * (Y1 - Y0);
+    const ya = t => 1 - 0.107 * Math.exp(-0.5 * t) - Math.exp(-t) * (0.893 * Math.cos(2 * t) + 0.4733 * Math.sin(2 * t));
+    const yb = t => 1 - Math.exp(-t) * (Math.cos(2 * t) + 0.5 * Math.sin(2 * t));
+    mk("line", { x1: X0 - 8, y1: Y1 + 6, x2: X1 + 10, y2: Y1 + 6, stroke: "#5B6B8C", "stroke-width": 2.2 });
+    mk("line", { x1: X0, y1: Y1 + 6, x2: X0, y2: Y0 - 10, stroke: "#5B6B8C", "stroke-width": 2.2 });
+    [0.5, 1.0, 1.4].forEach(v => { mk("line", { x1: X0 - 6, y1: Y(v), x2: X0 + 6, y2: Y(v), stroke: "#5B6B8C", "stroke-width": 1.6 }); txt(mk, X0 - 12, Y(v) + 6, v.toFixed(1), { fs: 18, an: "end" }); });
+    [2, 4, 6, 8].forEach(v => { mk("line", { x1: X(v), y1: Y1, x2: X(v), y2: Y1 + 6, stroke: "#5B6B8C", "stroke-width": 1.6 }); txt(mk, X(v), Y1 + 26, String(v), { fs: 18 }); });
+    mk("line", { x1: X0, y1: Y(1), x2: X1, y2: Y(1), stroke: "#C9D6F2", "stroke-width": 2, "stroke-dasharray": "6 5" });
+    txt(mk, X1 - 4, Y1 + 26, "t/s", { fs: 19, b: 1, an: "end" });
+    const pathOf = f => { let d = ""; for (let i = 0; i <= 400; i++) { const t = T * i / 400; d += (i ? "L" : "M") + X(t).toFixed(1) + "," + Y(f(t)).toFixed(1); } return d; };
+    mk("path", { d: pathOf(yb), fill: "none", stroke: "#1D3FA0", "stroke-width": 4 });
+    mk("path", { d: pathOf(ya), fill: "none", stroke: "#C02A20", "stroke-width": 4, "stroke-dasharray": "10 6" });
+    txt(mk, 300, 66, "实线：对消后二阶 5/(s²+2s+5)", { fs: 19, b: 1, fill: "#1D3FA0", an: "start" });
+    txt(mk, 300, 98, "虚线：带偶极子三阶（零点 −0.55 / 极点 −0.5）", { fs: 19, b: 1, fill: "#C02A20", an: "start" });
+  }
+});
+</script>
+</div></div>
+</body>
+</html>

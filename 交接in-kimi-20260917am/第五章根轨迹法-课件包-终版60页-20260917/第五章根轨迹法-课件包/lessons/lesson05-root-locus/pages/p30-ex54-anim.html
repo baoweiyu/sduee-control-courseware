@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>例5-4②：完整根轨迹绘制</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=505">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=505" defer></script>
+<script src="../fig.js?v=506"></script>
+<script src="../data/ex54.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:.9;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:8px;padding:12px 18px}
+  .kv{background:var(--sky);border-radius:12px;padding:7px 14px;font-size:19.5px;line-height:1.4}
+  .kv.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .figc{flex:1.2;display:flex;flex-direction:column;overflow:hidden;position:relative}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .segfloat{position:absolute;top:58px;left:50%;transform:translateX(-50%);z-index:5;background:#fff;
+    border:2px solid var(--blue);border-radius:10px;padding:5px 16px;font-size:18px;font-weight:700;
+    color:var(--navy);white-space:nowrap;box-shadow:0 2px 10px rgba(20,40,90,.18)}
+  .ctl{display:flex;align-items:center;gap:10px;justify-content:center;padding:8px 0 10px}
+  .btn{background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:19px;font-weight:700;padding:8px 20px;cursor:pointer}
+  .btn.ghost{background:#fff;color:var(--blue);border:2px solid var(--blue)}
+  .kr{font-size:20px;color:var(--navy);font-weight:700;background:var(--sky);border-radius:10px;padding:7px 14px;white-space:nowrap}
+  .stab{border-radius:10px;padding:7px 14px;font-size:20px;font-weight:700;color:#fff;background:var(--blue);white-space:nowrap}
+  .prog{font-size:18px;color:var(--muted);min-width:64px}
+</style>
+</head>
+<body data-title="例5-4②：完整根轨迹绘制" data-page="30 / 60">
+<div class="act-stage"><div class="act-slide">
+
+<div class="act-body has-note">
+  <div class="row">
+    <div class="lft">
+      <div class="act-card">
+        <div class="hd">题设与计算过程</div>
+        <div class="bd" style="font-size:20px;line-height:1.45">
+          <div style="text-align:center"><span class="tex">G(s)H(s)=\dfrac{K_{1}}{s(s+3)(s^{2}+2s+2)}</span></div>
+          <div class="kv" id="c1">渐近线：<span class="tex">\sigma_{a}=-1.25</span>，<span class="tex">\varphi_{a}=\pm45^{\circ}</span>、<span class="tex">\pm135^{\circ}</span></div>
+          <div class="kv" id="c2">分离点：<span class="tex">4s^{3}+15s^{2}+16s+6=0\Rightarrow d=-2.289</span>（<span class="tex">K_{1}=4.33</span>）；出射角 <span class="tex">\theta_{p_{3}}=-71.6^{\circ}</span></div>
+          <div class="kv" id="c3">虚轴交点：劳斯判据（演算见例5-4①）<span class="tex">K_{1}=8.16</span>，<span class="tex">s=\pm j1.095</span></div>
+          <div class="kv">ζ=0.5 选点 <span class="tex">K_{1}\approx2.62</span>：闭环极点 <span class="tex">-0.409\pm j0.709</span>、<span class="tex">-1.41</span>、<span class="tex">-2.77</span>（自洽口径，见例5-13）</div>
+        </div>
+      </div>
+      <div class="act-card">
+        <div class="hd">绘制步骤</div>
+        <div class="bd" style="gap:6px">
+          <div class="kv" id="s1">① 计算四个开环极点（含复极点 −1±j）</div>
+          <div class="kv" id="s2">② 确定实轴段根轨迹：[−3, 0]</div>
+          <div class="kv" id="s3">③ 四条渐近线：σₐ=−1.25，±45°、±135°</div>
+          <div class="kv" id="s4">④ d=−2.289 分离（K₁=4.33）；p₃、p₄ 沿 ∓71.6° 出射</div>
+          <div class="kv" id="s5">⑤ 过虚轴 ±j1.095（K₁=8.16，临界）</div>
+        </div>
+      </div>
+    </div>
+    <div class="act-card figc">
+      <div class="hd"><span style="flex:1">例5-4 四分支根轨迹绘制过程</span></div>
+      <span class="segfloat" id="segChip" style="display:none"></span>
+      <div class="bd2"><svg id="fig"></svg></div>
+      <div class="ctl">
+        <button class="btn" id="play">▶ 播放</button>
+        <button class="btn ghost" id="step">⧉ 分步</button>
+        <button class="btn ghost" id="rst">↺ 重置</button>
+        <span class="kr">K₁ = <b id="kv" style="color:var(--danger)">0</b></span>
+        <span class="stab" id="stab">0&lt;K₁&lt;8.16 稳定</span>
+        <span class="prog" id="prog">0 / 5</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">要点</span><span>法则一→七逐条落图：<span class="kw-r">实轴段定骨架，渐近线定去向，分离点/出射角定形状，虚轴交点定稳定范围</span> 0&lt;K₁&lt;8.16。</span></div>
+
+<div data-step="1" style="display:none"></div><div data-step="2" style="display:none"></div>
+<div data-step="3" style="display:none"></div><div data-step="4" style="display:none"></div>
+<div data-step="5" style="display:none"></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const F = RL.figure("fig", "ex54", { vw: 960, vh: 600, asym: false, brkDots: false, crossSq: false });
+  const fD = F.f_of_K(4.3316), fC = F.f_of_K(8.16);
+  const FS = [0, 0, 0, 0, fD, fC, 1];
+  /* 实时读数：K₁ 与稳定状态（图外面板逐帧联动） */
+  function stabUI(K1, inf) {
+    const st = document.getElementById("stab");
+    if (inf || K1 > 8.21) { st.textContent = "K₁>8.16 不稳定"; st.style.background = "var(--danger)"; }
+    else if (Math.abs(K1 - 8.16) <= 0.05) { st.textContent = "K₁=8.16 临界"; st.style.background = "var(--orange)"; }
+    else { st.textContent = "0<K₁<8.16 稳定"; st.style.background = "var(--blue)"; }
+  }
+  function frame(f) {
+    const inf = f >= 0.999, K1 = F.K_of_f(f);
+    document.getElementById("kv").textContent = inf ? "→ ∞" : RL.fmtK(K1);
+    stabUI(K1, inf);
+  }
+  /* 出射方向箭头（p₃、p₄ 沿 ∓71.6°，与分离点同一步出现） */
+  function departArrows() {
+    const TH = 71.6 * Math.PI / 180, L = 0.95 * F.s;
+    [[-1, 1, -1], [-1, -1, 1]].forEach(([sx, sy, sg]) => {
+      const x = F.X(sx), y = F.Y(sy);
+      F.mk("line", { x1: x, y1: y, x2: x + L * Math.cos(TH), y2: y - sg * L * Math.sin(TH),
+        stroke: RL.FOCUS, "stroke-width": 3, "marker-end": "url(#rxfig)" }, F.gDyn);
+      F.tx(F.gDyn, x + L * Math.cos(TH) + 14, y - sg * L * Math.sin(TH) + (sg > 0 ? 26 : -10),
+        (sg > 0 ? "+71.6°" : "−71.6°"), { fs: 22, fill: "#B3541E", b: 1, an: "start" });
+    });
+  }
+  function paint(K) {
+    F.segEls.forEach(e => e.style.opacity = K >= 2 ? .32 : 0);
+    F.gAsym.style.opacity = K >= 3 ? 1 : 0;
+    if (K >= 3) {  // 渐近线中心 σₐ（角度标注由 drawAsym 自动给出）
+      F.mk("circle", { cx: F.X(-1.25), cy: F.Y(0), r: 16, fill: "none", stroke: RL.ASY, "stroke-width": 2.2, opacity: .8 }, F.gDyn);
+      F.tx(F.gDyn, F.X(-1.25), F.Y(0) + 52, "σ_{a}=−1.25", { fs: 25, fill: RL.ASY, b: 1 });
+    }
+    if (K >= 4) {  // 分离点 + 出射方向
+      const x = F.X(-2.289), y = F.Y(0);
+      F.mk("circle", { cx: x, cy: y, r: 9, fill: RL.FOCUS, stroke: "#fff", "stroke-width": 2.5 }, F.gDyn);
+      departArrows();
+    }
+    if (K >= 5) {  // 虚轴交点（方块+短语）
+      F.crossSq.forEach(el => el.style.opacity = 1);
+
+    } else F.crossSq.forEach(el => el.style.opacity = 0);
+    const ROW = [1, 1, 2, 3, 4, 5];
+    for (let i = 1; i <= 5; i++)
+      document.getElementById("s" + i).classList.toggle("hl", i === ROW[K]);
+    ["c1", "c2", "c3"].forEach((id, j) =>
+      document.getElementById(id).classList.toggle("hl", K === j + 3));
+  }
+  RL.wire(5, paint, {
+    figs: [F], FS, dur: 12000,
+    frame: (f, K) => frame(f),
+    segLabel: txt => { const c = document.getElementById("segChip"); if (!c) return; if (txt) { c.textContent = txt; c.style.display = ""; } else c.style.display = "none"; },
+    pick: hit => {
+      document.getElementById("kv").textContent = RL.fmtK(hit.K);
+      stabUI(hit.K, false);
+    },
+    segments: [
+      { label: "① 支 p₁(0)、p₂(−3)：沿实轴相向靠拢，至 d=−2.289 分离（K₁→4.33）", parts: [{ F, b: [0, 1], f0: 0, f1: fD }] },
+      { label: "② 分离后的两支沿 ±135° 渐近线趋向无穷远", parts: [{ F, b: [0, 1], f0: fD, f1: 1 }] },
+      { label: "③ 支 p₃(−1+j)、p₄(−1−j)：沿 ∓71.6° 出射，趋向 ±45° 渐近线", parts: [{ F, b: [2, 3], f0: 0, f1: fC }] },
+      { label: "④ 越过虚轴 ±j1.095（K₁→8.16）进入右半平面 → 失稳", parts: [{ F, b: [2, 3], f0: fC, f1: 1 }] },
+    ], segDur: 3200
+  });
+  /* 重置走 wire 的 stopAll 状态机（wire 已把 ACT.step.reset 包装为 stopAll+归零重绘） */
+  document.getElementById("rst").onclick = () => ACT.step.reset();
+});
+</script>
+</div></div>
+</body>
+</html>

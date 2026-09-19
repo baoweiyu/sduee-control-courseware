@@ -7,10 +7,10 @@ components/ + 实际引用的 assets + DEPLOY-部署说明.md + 可选 server.js
 import os, re, json, zipfile
 
 ROOT = r"H:\D_tools\courseware-system-kimi"
-OUT = os.path.join(ROOT, "act-courseware-web-deploy-v2.17.zip")
+OUT = os.path.join(ROOT, "act-courseware-web-deploy-v2.18.zip")
 
 COMMON_DIRS = ["player", "components", "theme"]
-LESSON_IDS = ["lesson01-intro", "lesson02-math-model", "lesson03-timedomain", "lesson04-freq"]
+LESSON_IDS = ["lesson01-intro", "lesson02-math-model", "lesson03-timedomain", "lesson04-freq", "lesson05-root-locus"]
 ASSET_RE = re.compile(r"assets/(?:image2|legacy)/[^\"'\)\s>]+")
 
 def arc(rel):
@@ -50,17 +50,20 @@ DEPLOY_MD = """# 《自动控制理论》交互课件 — Web 部署说明
 ## 源码仓库与版本
 源码托管于 GitHub（公开仓库）：
 https://github.com/baoweiyu/sduee-control-courseware
-各版本打包下载（本地播放版四章包 + 本网页部署版）见 Releases：
+各版本打包下载（本地播放版五章包 + 本网页部署版）见 Releases：
 https://github.com/baoweiyu/sduee-control-courseware/releases
 
 ## 这是什么
-纯静态 HTML 课件站点（无后端、无数据库、无构建步骤），内含第一~四章共 258 页：
+纯静态 HTML 课件站点（无后端、无数据库、无构建步骤），内含第一~五章共 319 页：
 - 第一章 绪论（35 页）
 - 第二章 控制系统的数学模型（51 页）
 - 第三章 时域分析法（85 页）
 - 第四章 频率响应法（87 页，含外部精修终审全部修复）
+- 第五章 根轨迹法（61 页，数值严谨绘制 + 连贯/分步动画 + 图面缩放）
 
-整体版本 V2.17（2026-09-14）。本地播放版与网页部署版使用同一版本号。
+整体版本 V2.18（2026-09-19）。本地播放版与网页部署版使用同一版本号。
+V2.18 更新：第五章《根轨迹法》首次发布（61 页）；
+前四章内容未变，随第五章主题更新统一版本号。
 V2.17 更新（第三章 6 页修复）：P6 抛物线按解析式精确绘制、特征点落在线上、
 图内公式改 MathJax；P14 稳态误差定义换行修复、指标徽章补峰值时间 tp；
 P25 求根公式补 ζ≥1 适用条件；P27-30 四种阻尼响应页左上卡统一为
@@ -87,14 +90,14 @@ V2.16 更新：①全部页面 theme.css/act-base.js 引用加版本号缓存破
 - 直达某章某页：`/?lesson=<章节id>&p=<页码>`（页码从 1 开始），例如：
   - 第一章第 1 页：`/?lesson=lesson01-intro&p=1`
   - 第四章第 56 页：`/?lesson=lesson04-freq&p=56`
-- 章节 id：lesson01-intro / lesson02-math-model / lesson03-timedomain / lesson04-freq
+- 章节 id：lesson01-intro / lesson02-math-model / lesson03-timedomain / lesson04-freq / lesson05-root-locus
 - 播放器操作：←/→/↑/↓/PgUp/PgDn/Space = 上一步/下一步（步尽自动翻页，无动画页等同翻页，翻页笔两种映射均可）；底栏「上一页/下一页」直接翻页；F 全屏；R 重置本页；右上角「导航」按页码+关键词跳转。
 
 ## 目录结构（请勿重命名/移动任何目录）
 ```
 index.html          根入口（自动转 player/，透传查询参数）
 player/             播放器（index.html）
-lessons/            四章页面与数据（index.json + <章节>/lesson.json + pages/*.html）
+lessons/            五章页面与数据（index.json + <章节>/lesson.json + pages/*.html）
 theme/              主题 CSS + act-base.js + 本地 MathJax 库（theme/mathjax/ 必须完整保留）
 components/         公共组件
 assets/             页面实际引用的图片（image2 生成图 + 原始素材提取图）
@@ -134,7 +137,7 @@ missing = [a for a in assets if not os.path.isfile(os.path.join(ROOT, a))]
 if missing:
     print("!! 引用但源文件缺失:", missing)
 
-# 校验四章 lesson.json
+# 校验五章 lesson.json
 n_pages = {}
 for lid in LESSON_IDS:
     with open(os.path.join(ROOT, "lessons", lid, "lesson.json"), encoding="utf-8") as f:

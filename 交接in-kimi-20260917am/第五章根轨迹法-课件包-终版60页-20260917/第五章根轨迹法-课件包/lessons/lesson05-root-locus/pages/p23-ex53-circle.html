@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>例5-3④：圆根轨迹完整绘制</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=505">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=505" defer></script>
+<script src="../fig.js?v=506"></script>
+<script src="../data/ex53.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:.86;display:flex;flex-direction:column;gap:10px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:6px;padding:10px 18px}
+  .kv{background:var(--sky);border-radius:12px;padding:6px 14px;font-size:19.5px;line-height:1.4}
+  .kv.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .figc{flex:1.14;display:flex;flex-direction:column;overflow:hidden;position:relative}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .segfloat{position:absolute;top:58px;left:50%;transform:translateX(-50%);z-index:5;background:#fff;
+    border:2px solid var(--blue);border-radius:10px;padding:5px 16px;font-size:18px;font-weight:700;
+    color:var(--navy);white-space:nowrap;box-shadow:0 2px 10px rgba(20,40,90,.18)}
+  .ctl{display:flex;align-items:center;gap:10px;justify-content:center;padding:8px 0 10px}
+  .btn{background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:19px;font-weight:700;padding:8px 20px;cursor:pointer}
+  .btn.ghost{background:#fff;color:var(--blue);border:2px solid var(--blue)}
+  .kr{font-size:19px;color:var(--navy);font-weight:700;background:var(--sky);border-radius:10px;padding:7px 12px;white-space:nowrap}
+  .prog{font-size:18px;color:var(--muted);min-width:64px}
+</style>
+</head>
+<body data-title="例5-3④：圆根轨迹完整绘制" data-page="23 / 60">
+<div class="act-stage"><div class="act-slide">
+
+<div class="act-body has-note">
+  <div class="row">
+    <div class="lft">
+      <div class="act-card" style="flex:.85">
+        <div class="hd">题设</div>
+        <div class="bd" style="font-size:20px;line-height:1.45">
+          <div style="text-align:center"><span class="tex">G(s)=\dfrac{K_{1}(s+2)}{s(s+1)},\quad \varDelta(s)=s^{2}+(1+K_{1})s+2K_{1}=0</span></div>
+          <div>零点 z₁=−2，极点 p₁=0、p₂=−1；实轴段 [−1,0]、(−∞,−2]（例5-3①）。</div>
+        </div>
+      </div>
+      <div class="act-card" style="flex:1">
+        <div class="hd">关键结果（证明见例5-3②、③）</div>
+        <div class="bd" style="font-size:20px;line-height:1.4;gap:5px">
+          <div>圆方程：<span class="tex">(\sigma+2)^{2}+\omega^{2}=2</span>（圆心 −2 恰为零点 z₁，半径 <span class="tex">\sqrt{2}</span>）。</div>
+          <div>分离点 <span class="tex">d_{1}=-2+\sqrt{2}\approx-0.586</span>，<span class="tex">K_{1}=3-2\sqrt{2}\approx0.172</span>。</div>
+          <div>会合点 <span class="tex">d_{2}=-2-\sqrt{2}\approx-3.414</span>，<span class="tex">K_{1}=3+2\sqrt{2}\approx5.828</span>。</div>
+        </div>
+      </div>
+      <div class="act-card" style="flex:1.2">
+        <div class="hd">绘制步骤</div>
+        <div class="bd" style="gap:5px">
+          <div class="kv" id="s1">① 计算零极点，确定实轴段根轨迹</div>
+          <div class="kv" id="s2">② 靠拢至 d₁=−0.586 分离（K₁=0.172）</div>
+          <div class="kv" id="s3">③ 沿圆绕行（圆心 −2，半径 √2）</div>
+          <div class="kv" id="s4">④ d₂=−3.414 会合（K₁=5.83）</div>
+          <div class="kv" id="s5">⑤ 一支入零点 −2，一支趋向 −∞</div>
+        </div>
+      </div>
+    </div>
+    <div class="act-card figc">
+        <div class="hd">例5-3 根轨迹绘制过程（含解析圆验证）</div>
+      <span class="segfloat" id="segChip" style="display:none"></span>
+      <div class="bd2"><svg id="fig"></svg></div>
+      <div class="ctl">
+        <button class="btn" id="play">▶ 播放</button>
+        <button class="btn ghost" id="step">⧉ 分步</button>
+        <button class="btn ghost" onclick="ACT.step.reset()">↺ 重置</button>
+        <span class="kr">K₁ = <b id="kv" style="color:var(--danger)">0</b>　s₁,₂ = <b id="kp" style="color:var(--navy)">0，−1</b></span>
+        <span class="prog" id="prog">0 / 5</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">结论</span><span>两个极点、一个零点的系统，复数段根轨迹是<span class="kw-r">以零点为圆心、零点到分离点距离为半径的圆</span>；分离点/会合点由 <span class="tex">\frac{dK_{1}}{ds}=0</span> 解出并代回校验。</span></div>
+
+<div data-step="1" style="display:none"></div><div data-step="2" style="display:none"></div>
+<div data-step="3" style="display:none"></div><div data-step="4" style="display:none"></div>
+<div data-step="5" style="display:none"></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const F = RL.figure("fig", "ex53", { vw: 960, vh: 600, asym: false, segs: false, brkDots: false });
+  const FS = [0, 0, F.f_of_K(0.1716), F.f_of_K(1), F.f_of_K(5.8284), 1];
+  const fB = F.f_of_K(0.1716), fC = F.f_of_K(5.8284);
+  const nb = v => v.toFixed(2).replace(/(\.\d*?)0+$/, "$1").replace(/\.$/, "").replace("-", "−");
+  /* Δ(s)=s²+(1+K₁)s+2K₁=0 的两根（实时读数，图外面板） */
+  function poleTxt(K1) {
+    const b = 1 + K1, d = b * b - 8 * K1;
+    if (d >= 0) { const q = Math.sqrt(d); return nb((-b + q) / 2) + "，" + nb((-b - q) / 2); }
+    return nb(-b / 2) + " ± j" + nb(Math.sqrt(-d) / 2);
+  }
+  function frame(f) {
+    const K1 = F.K_of_f(f);
+    document.getElementById("kv").textContent = f >= 0.999 ? "→ ∞" : RL.fmtK(K1);
+    document.getElementById("kp").textContent = f >= 0.999 ? "−∞，−2" : poleTxt(K1);
+  }
+  function paint(K) {
+    F.segEls.forEach(e => e.style.opacity = K >= 1 ? .32 : 0);
+    if (K >= 2) {  // 分离点 d1（记号+短语，数值在左卡与面板）
+      const x = F.X(-0.5858), y = F.Y(0);
+      F.mk("circle", { cx: x, cy: y, r: 9, fill: RL.FOCUS, stroke: "#fff", "stroke-width": 2.5 }, F.gDyn);
+      F.tx(F.gDyn, x + 22, y + 52, "分离点 d_{1}", { fs: 24, fill: RL.FOCUS, b: 1, an: "start" });
+    }
+    if (K >= 3) {  // 圆轨迹验证
+      F.circleEl.style.opacity = .9;
+    } else if (F.circleEl) F.circleEl.style.opacity = 0;
+    if (K >= 4) {  // 会合点 d2
+      const x = F.X(-3.4142), y = F.Y(0);
+      F.mk("circle", { cx: x, cy: y, r: 9, fill: RL.FOCUS, stroke: "#fff", "stroke-width": 2.5 }, F.gDyn);
+      F.tx(F.gDyn, x - 4, F.Y(2.1), "会合点 d_{2}", { fs: 24, fill: RL.FOCUS, b: 1, an: "end" });
+    }
+    if (K >= 5) {  // 终点说明（短语，无数值）
+      F.tx(F.gDyn, F.X(-2) - 16, F.Y(0) + 50, "止于零点 z_{1}", { fs: 24, fill: "#1B3B8B", an: "end" });
+      F.tx(F.gDyn, F.X(-6.7), F.Y(0) + 50, "沿负实轴 → −∞", { fs: 24, fill: "#1B3B8B", an: "start" });
+    }
+    const ROW = [1, 1, 2, 3, 4, 5]; // K→步骤行：计算与确定→①，分离→②，绕行→③，会合→④，归宿→⑤
+    for (let i = 1; i <= 5; i++)
+      document.getElementById("s" + i).classList.toggle("hl", i === ROW[K]);
+  }
+  RL.wire(5, paint, {
+    figs: [F], FS, dur: 11000,
+    frame: f => frame(f),
+    segLabel: txt => { const c = document.getElementById("segChip"); if (!c) return; if (txt) { c.textContent = txt; c.style.display = ""; } else c.style.display = "none"; },
+    pick: hit => {
+      document.getElementById("kv").textContent = RL.fmtK(hit.K);
+      document.getElementById("kp").textContent = poleTxt(hit.K);
+    },
+    segments: [
+      { label: "① 两实根沿实轴靠拢至分离点 d₁（K₁：0 → 0.172）", parts: [{ F, b: [0, 1], f0: 0, f1: fB }] },
+      { label: "② 分离后沿圆绕行（上、下支对称，圆心 z₁）", parts: [{ F, b: [0, 1], f0: fB, f1: fC }] },
+      { label: "③ 会合后一支止于零点 z₁（其余分支弱化）", parts: [{ F, b: [1], f0: fC, f1: 1 }] },
+      { label: "④ 另一支沿负实轴趋向 −∞", parts: [{ F, b: [0], f0: fC, f1: 1 }] },
+    ], segDur: 3000
+  });
+});
+</script>
+</div></div>
+</body>
+</html>

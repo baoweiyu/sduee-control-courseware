@@ -1,0 +1,9 @@
+{
+  "name": "act-courseware",
+  "version": "0.1.0",
+  "private": true,
+  "description": "自动控制理论三层 HTML 课件生产系统（Course Player / Review Mode 静态预览）",
+  "scripts": {
+    "dev": "node server.js"
+  }
+}

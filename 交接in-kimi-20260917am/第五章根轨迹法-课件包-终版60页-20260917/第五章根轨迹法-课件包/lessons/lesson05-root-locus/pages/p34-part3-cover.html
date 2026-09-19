@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>5.3节封面：广义根轨迹</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=505">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=505" defer></script>
+<style>
+  .cover { position:absolute; inset:0; display:flex; align-items:center; gap:56px; padding:64px 72px 84px; }
+  .left { flex:1.12; display:flex; flex-direction:column; align-items:flex-start; gap:18px; }
+  .left .part { display:inline-block; background:var(--navy); color:#fff; font-size:24px; font-weight:700; letter-spacing:6px; border-radius:12px; padding:10px 26px; }
+  .left h1 { font-size:58px; color:var(--navy); letter-spacing:3px; }
+  .left .deco { width:150px; height:10px; border-radius:5px; background:var(--orange); position:relative; }
+  .left .deco::after { content:""; position:absolute; right:-28px; top:0; width:12px; height:10px; border-radius:5px; background:var(--orange); }
+  .left .sub { font-size:36px; color:var(--blue); font-weight:700; letter-spacing:2px; }
+  .left .meta { font-size:23px; color:var(--muted); }
+  .toc { display:grid; grid-template-columns:1fr; gap:11px; margin-top:2px; width:100%; }
+  .toc .it { background:var(--sky); border:2px solid var(--line); border-radius:12px; padding:11px 22px; font-size:22px; color:var(--navy); font-weight:700; white-space:nowrap; }
+  .toc .it b { color:var(--orange); margin-right:8px; }
+  .goal { width:100%; background:#FDF3EC; border-left:6px solid var(--orange); border-radius:0 14px 14px 0; padding:11px 20px; font-size:21px; color:var(--navy); line-height:1.5; }
+  .goal b { color:var(--danger); }
+  .right { flex:1; height:100%; display:flex; align-items:stretch; }
+  .imgc { width:100%; border:2px solid var(--line); border-radius:20px; overflow:hidden; background:#fff; box-shadow:0 10px 34px rgba(18,38,110,.14); display:flex; flex-direction:column; justify-content:center; }
+  .imgc svg { flex:none; width:100%; height:auto !important; aspect-ratio:720/620; display:block; }
+  .imgc .cpt { flex:none; text-align:center; font-size:21px; font-weight:700; color:var(--navy); background:var(--sky); padding:12px 16px; }
+</style>
+</head>
+<body data-nochrome="1" data-title="5.3节封面：广义根轨迹" data-page="34 / 60">
+<div class="act-stage"><div class="act-slide">
+  <div class="cover">
+    <div class="left">
+      <span class="part">5.3</span>
+      <h1>广义根轨迹</h1>
+      <div class="deco"></div>
+      <div class="sub">换一套"开环"，七条法则照旧</div>
+      <div class="meta">变化的参数不一定是增益，反馈不一定是负的——法则照旧，换一套"开环"而已</div>
+      <div class="toc">
+        <div class="it"><b>引</b>概念与黄金法则：整理成标准形</div>
+        <div class="it"><b>(1)</b>参量根轨迹：例5-8 圆轨迹、例5-9 根轨迹族</div>
+        <div class="it"><b>(2)</b>零度根轨迹：规则对照 · 例5-10</div>
+        <div class="it"><b>(3)</b>非最小相位系统：判型 · 例5-11</div>
+        <div class="it"><b>(4)</b>条件稳定系统：例5-12</div>
+      </div>
+      <div class="goal"><b>学习目标：</b>会把任意"非标准"特征方程整理成 <span class="tex">1+G^{*}(s)H^{*}(s)=0</span>，判准按 180° 还是 0° 法则，再用同一套法则画出根轨迹。</div>
+    </div>
+    <div class="right">
+      <div class="imgc">
+        <svg id="flow" viewBox="0 0 720 620"></svg>
+        <div class="cpt">广义根轨迹的统一入口：换参 → 标准形 → 法则照旧</div>
+      </div>
+    </div>
+  </div>
+  <div class="act-foot"></div><div class="act-footno">34</div>
+<script>
+/* 换参流程小图（程序绘制）：特征方程 → ÷Q(s) → 标准形 → 法则一~七 → 根轨迹 */
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("flow");
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag);
+    for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const NAVY = "#12266E", BLUE = "#1D3FA0", SKY = "#EEF3FD", LINE = "#C9D8F2", ORANGE = "#F5821F", RED = "#D63A2F";
+  const defs = mk("defs", {}, svg);
+  const m = mk("marker", { id: "arF", markerWidth: 12, markerHeight: 10, refX: 8.5, refY: 4, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L9,4 L0,8 Z", fill: ORANGE }, m);
+  const label = (x, y, s, o) => { o = o || {};
+    const n = mk("text", { x, y, "font-size": o.fs || 30, "text-anchor": "middle",
+      fill: o.fill || NAVY, "font-weight": o.b ? 700 : 400, "font-style": o.it ? "italic" : "normal",
+      "font-family": '"Cambria Math","STIX Two Math",Georgia,"Times New Roman","Microsoft YaHei",serif' });
+    n.textContent = s; return n; };
+  const block = (cx, cy, w, h, lines, hl) => {
+    mk("rect", { x: cx - w / 2, y: cy - h / 2, width: w, height: h, rx: 16,
+      fill: hl ? "#FDF3EC" : SKY, stroke: hl ? ORANGE : LINE, "stroke-width": hl ? 3.5 : 2.5 }, svg);
+    lines.forEach((t, i) => label(cx, cy + (i - (lines.length - 1) / 2) * 40 + 11, t.s || t,
+      { fs: t.fs || 30, fill: t.fill || NAVY, b: t.b, it: 1 }));
+  };
+  const arrow = (x1, y1, x2, y2, tag) => {
+    mk("line", { x1, y1, x2, y2, stroke: ORANGE, "stroke-width": 4, "marker-end": "url(#arF)" }, svg);
+    if (tag) label((x1 + x2) / 2 + 120, (y1 + y2) / 2 + 9, tag, { fs: 25, fill: ORANGE, b: 1, it: 0 });
+  };
+  block(360, 92, 560, 104, [{ s: "闭环特征方程（含参量 a 或负反馈变正）", fs: 26, it: 0, b: 1 },
+    { s: "a·P(s) + Q(s) = 0", fs: 34 }]);
+  arrow(360, 148, 360, 208, "同除 Q(s)");
+  block(360, 268, 560, 104, [{ s: "整理成标准形：1 + a·P(s)/Q(s) = 0", fs: 27 },
+    { s: "等效开环 G*(s)H*(s) = a·P(s)/Q(s)", fs: 27 }], true);
+  arrow(360, 324, 360, 384, "法则一~七照旧");
+  /* 底部：示意根轨迹小图（圆轨迹 |s|=2，例5-8 预告） */
+  mk("rect", { x: 80, y: 388, width: 560, height: 200, rx: 16, fill: "#fff", stroke: LINE, "stroke-width": 2.5 }, svg);
+  const gx = 260, gy = 492, us = 42;   // 小图原点与比例
+  mk("line", { x1: 100, y1: gy, x2: 410, y2: gy, stroke: "#5B6B8C", "stroke-width": 2 }, svg);
+  mk("line", { x1: gx, y1: 404, x2: gx, y2: 580, stroke: "#5B6B8C", "stroke-width": 2 }, svg);
+  mk("circle", { cx: gx, cy: gy, r: 2 * us, fill: "none", stroke: BLUE, "stroke-width": 4 }, svg);
+  mk("line", { x1: gx - 10, y1: gy - 2 * us - 10, x2: gx + 10, y2: gy - 2 * us + 10, stroke: BLUE, "stroke-width": 3.5 }, svg);
+  mk("line", { x1: gx - 10, y1: gy - 2 * us + 10, x2: gx + 10, y2: gy - 2 * us - 10, stroke: BLUE, "stroke-width": 3.5 }, svg);
+  mk("line", { x1: gx - 10, y1: gy + 2 * us - 10, x2: gx + 10, y2: gy + 2 * us + 10, stroke: BLUE, "stroke-width": 3.5 }, svg);
+  mk("line", { x1: gx - 10, y1: gy + 2 * us + 10, x2: gx + 10, y2: gy + 2 * us - 10, stroke: BLUE, "stroke-width": 3.5 }, svg);
+  mk("circle", { cx: gx, cy: gy, r: 9, fill: "none", stroke: BLUE, "stroke-width": 3.5 }, svg);
+  mk("circle", { cx: gx - 2 * us, cy: gy, r: 7, fill: RED, stroke: "#fff", "stroke-width": 2 }, svg);
+  label(gx - 46, gy - 2 * us + 8, "±j2", { fs: 24 });
+  label(gx + 26, gy + 30, "0", { fs: 24 });
+  label(gx - 2 * us, gy + 40, "−2", { fs: 24, fill: RED, b: 1 });
+  label(452, 440, "根轨迹", { fs: 27, b: 1, fill: BLUE, it: 0 });
+  label(452, 486, "（例5-8：", { fs: 24, fill: "#5B6B8C", it: 0 });
+  label(452, 524, "圆 |s|=2）", { fs: 24, fill: "#5B6B8C", it: 0 });
+});
+</script>
+</div></div>
+</body>
+</html>

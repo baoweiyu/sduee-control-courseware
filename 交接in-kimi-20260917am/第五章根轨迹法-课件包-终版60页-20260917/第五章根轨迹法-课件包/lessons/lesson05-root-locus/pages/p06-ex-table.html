@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>引例（2）：特征根随 K₁ 变化的数值表</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=505">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=505" defer></script>
+<script src="../fig.js?v=506"></script>
+<script src="../data/intro.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:1;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:14px 20px}
+  table{border-collapse:collapse;width:100%;font-size:20.5px;line-height:1.35}
+  th,td{border:2px solid var(--line);padding:8px 10px;text-align:center;color:var(--ink)}
+  th{background:var(--sky);color:var(--navy);font-weight:700}
+  tr.hl td{background:#FDF3EC}
+  .tip{background:var(--sky);border-radius:12px;padding:9px 14px;font-size:19.5px;line-height:1.4}
+  .figc{flex:1.16;display:flex;flex-direction:column;overflow:hidden}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
+  .figc svg{width:100%;height:100%}
+</style>
+</head>
+<body data-title="引例（2）：特征根随 K₁ 变化的数值表" data-page="6 / 60">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lft">
+        <div class="act-card" style="flex:1.6">
+          <div class="hd">代入 <span class="tex">s_{1,2}=-1\pm\sqrt{1-K_{1}}</span> 逐点计算</div>
+          <div class="bd">
+            <table>
+              <tr><th><span class="tex">K_{1}</span></th><th>闭环极点 <span class="tex">s_{1},s_{2}</span></th><th>根的性质</th></tr>
+              <tr><td>0</td><td>0，−2</td><td>从开环极点出发</td></tr>
+              <tr><td>0.5</td><td>−0.29，−1.71</td><td>两不等负实根（单调）</td></tr>
+              <tr class="hl"><td>1</td><td>−1，−1</td><td>负实重根（临界阻尼）</td></tr>
+              <tr><td>2</td><td>−1 ± j</td><td>共轭复根（振荡）</td></tr>
+              <tr><td>→ ∞</td><td>−1 ± j∞</td><td>沿 <span class="tex">\sigma=-1</span> 趋向无穷远</td></tr>
+            </table>
+          </div>
+        </div>
+        <div class="act-card" style="flex:1">
+          <div class="hd">读表</div>
+          <div class="bd" style="justify-content:space-evenly;gap:6px">
+            <div class="tip" data-step="1"><span class="tex">K_{1}&lt;1</span>：根号内为正，<b>两个负实根</b>——阶跃响应单调。</div>
+            <div class="tip" data-step="2"><span class="tex">K_{1}=1</span>：重根 <b>−1</b>——<b>临界阻尼</b>（二阶响应的分界，不是稳定性临界）；本例 K₁≥0 时极点始终在左半平面。</div>
+            <div class="tip" data-step="3"><span class="tex">K_{1}&gt;1</span>：根号内为负，<b>共轭复根</b>——响应出现振荡，且 <span class="tex">K_{1}</span> 越大虚部越大。</div>
+          </div>
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd"><span style="flex:1">把表里的每组根标到 s 平面上</span></div>
+        <div class="bd2"><svg id="fig"></svg></div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">预告</span><span>逐点试算只能看到<span class="kw-r">离散的几组根</span>；把所有 <span class="tex">K_{1}</span> 对应的点连起来，就是下一页的<span class="kw-r">根轨迹动画</span>。</span></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const F = RL.figure("fig", "intro", { vw: 960, vh: 600, ylim: [-2.2, 2.2], static: true,
+                                        segs: true, asym: false, brkDots: false,
+                                        extra: api => {
+    const pts = [
+      [[-0.29, 0], [-1.71, 0], "K₁=0.5", 0.5],
+      [[-1, 1], [-1, -1], "K₁=2", 2],
+    ];
+    pts.forEach(([a, b, lab, dy]) => {
+      [a, b].forEach(p => api.mk("circle", { cx: api.X(p[0]), cy: api.Y(p[1]), r: 10,
+        fill: RL.FOCUS, stroke: "#fff", "stroke-width": 2.5 }, api.gTop));
+      const lx = api.X(a[0] === b[0] ? a[0] : (a[0] + b[0]) / 2);
+      const ly = api.Y(a[1] === b[1] ? 0 : a[1]) + (a[1] === b[1] ? -46 : -26);
+      api.tx(api.gTop, lx, ly, lab, { fs: 25, fill: RL.FOCUS, b: 1 });
+    });
+    /* K₁=1 重根：空心方框标记 */
+    api.mk("rect", { x: api.X(-1) - 10, y: api.Y(0) - 10, width: 20, height: 20,
+      fill: "#fff", stroke: RL.FOCUS, "stroke-width": 3 }, api.gTop);
+    api.tx(api.gTop, api.X(-1), api.Y(0) + 48, "K₁=1（重根）", { fs: 25, fill: RL.FOCUS, b: 1 });
+  } });
+});
+</script>
+</div></div>
+</body>
+</html>

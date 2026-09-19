@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>② 闭环极点的确定：试探法与根之和校验</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=218">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=218" defer></script>
+<script src="../fig.js?v=507"></script>
+<script src="../data/ex54.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:1.05;display:flex;flex-direction:column;gap:12px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:6px;padding:8px 18px;font-size:19.5px;line-height:1.42}
+  .eq{background:var(--sky);border-radius:12px;padding:8px 13px;text-align:center;font-size:20.5px;line-height:1.5}
+  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .kv{background:var(--sky);border-radius:12px;padding:7px 13px;line-height:1.45}
+  .kv.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .figc{flex:1.08;display:flex;flex-direction:column;overflow:hidden}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
+  .figc svg{width:100%;height:100%}
+</style>
+</head>
+<body data-title="② 闭环极点的确定：试探法与根之和校验" data-page="50 / 61">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lft">
+        <div class="act-card" style="flex:.8">
+          <div class="hd">问题</div>
+          <div class="bd">
+            <div>轨迹画好了，给定 <span class="tex">K_{1}</span>（或给定性能指标 <span class="tex">\zeta</span>）时，闭环极点的<span class="kw-r">具体坐标</span>怎么定？</div>
+          </div>
+        </div>
+        <div class="act-card" style="flex:1.3">
+          <div class="hd">幅值条件试探</div>
+          <div class="bd">
+            <div data-step="1"><div class="eq">在轨迹上取试验点 <span class="tex">s</span>，算 <span class="tex">K_{1}=\dfrac{\prod|s-p_{i}|}{\prod|s-z_{j}|}</span></div></div>
+            <div data-step="1">与期望值的差值指导下一次取点（右图：试验点到各零极点的距离连乘），逐步逼近，直到 <span class="tex">K_{1}</span> 符合要求。</div>
+          </div>
+        </div>
+        <div class="act-card" style="flex:1.1">
+          <div class="hd">根之和校验：减少试探次数</div>
+          <div class="bd">
+            <div data-step="2">当 <span class="tex">n-m\geq2</span> 时，<span class="tex">K_{1}N(s)</span> 不影响 <span class="tex">s^{n-1}</span> 项系数 ⟹ 闭环极点之和为常数 <span class="tex">-a_{n-1}</span>（本章常见系统即开环极点之和）。</div>
+            <div data-step="2">已知部分极点即可由根之和解出剩余极点，根之积可反代校验 <span class="tex">K_{1}</span>。</div>
+          </div>
+        </div>
+        <div class="act-card" style="flex:1.15">
+          <div class="hd">例5-2：快速校验</div>
+          <div class="bd">
+            <div data-step="3"><div class="eq">例5-2 中 <span class="tex">K_{1}=6</span>：已知 <span class="tex">s_{1,2}=\pm j\sqrt{2}</span>，则 <span class="tex">s_{3}=-3-(j\sqrt{2}-j\sqrt{2})=-3</span></div></div>
+            <div data-step="3">根之积反代校验：<span class="tex">(j\sqrt{2})(-j\sqrt{2})(-3)=-6\Rightarrow K_{1}=6</span> ✓。</div>
+          </div>
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd"><span style="flex:1">在轨迹上取试验点（例5-4 系统）：到各极点的距离连乘定 K₁</span></div>
+        <div class="bd2"><svg id="fig"></svg></div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">承接</span><span>幅值条件<span class="kw-r">计算</span>、根之和/根之积<span class="kw-r">校验</span>，两者互补——下一页例5-13 完整演示这一流程。</span></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  /* zoom:false —— 关闭缩放/平移/取点，保证取点距离标注始终保留 */
+  const F = RL.figure("fig", "ex54", { vw: 960, vh: 600, static: true, asym: false, zoom: false });
+  const PT = [-0.4093, 0.7089];                       /* 试验点（ζ=0.5 交点，与例5-13 同一口径） */
+  const poles = [[0, 0, "0.82"], [-3, 0, "2.69"], [-1, 1, "0.66"], [-1, -1, "1.81"]];
+  poles.forEach(p => {
+    F.mk("line", { x1: F.X(PT[0]), y1: F.Y(PT[1]), x2: F.X(p[0]), y2: F.Y(p[1]),
+      stroke: "#B3541E", "stroke-width": 2, "stroke-dasharray": "4 5", opacity: .85 }, F.gDyn);
+    F.tx(F.gDyn, (F.X(PT[0]) + F.X(p[0])) / 2 + 26, (F.Y(PT[1]) + F.Y(p[1])) / 2 - 4, p[2],
+      { fs: 22, fill: "#B3541E", b: 1 });
+  });
+  F.mk("circle", { cx: F.X(PT[0]), cy: F.Y(PT[1]), r: 11, fill: "#D63A2F", stroke: "#fff", "stroke-width": 2.5 }, F.gDyn);
+  F.tx(F.gDyn, F.X(PT[0]) - 6, F.Y(PT[1]) - 44, "试验点 s=-0.41+j0.71", { fs: 23, fill: "#D63A2F", b: 1, an: "end" });
+  F.tx(F.gDyn, F.X(-2.2), F.Y(-3.6), "K_{1}=0.82×2.69×0.66×1.81≈2.62", { fs: 24, fill: "#B3541E", b: 1 });
+});
+</script>
+</div></div>
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>例5-14①：两系统同轨迹不同零点</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=505">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=505" defer></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:1;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:9px;padding:12px 20px;font-size:20.5px;line-height:1.45}
+  .eq{background:var(--sky);border-radius:12px;padding:8px 13px;text-align:center;font-size:20.5px;line-height:1.5}
+  .kv{background:var(--sky);border-radius:12px;padding:7px 13px;line-height:1.45}
+  .kv.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .rcol{flex:1.16;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .figc{display:flex;flex-direction:column;overflow:hidden}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .figc .cap{flex:none;font-size:19px;color:var(--navy);background:var(--sky);border-radius:12px;padding:8px 14px;margin:0 14px 12px;line-height:1.4}
+</style>
+</head>
+<body data-title="例5-14①：两系统同轨迹不同零点" data-page="55 / 60">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lft">
+        <div class="act-card" style="flex:1.15">
+          <div class="hd">两系统（结构见右上图）</div>
+          <div class="bd">
+            <div>(a) 比例微分控制：<span class="tex">G_{a}(s)=\dfrac{K(0.8s+1)}{s(s+5)}</span>，<span class="tex">H(s)=1</span>——零点在<b>前向通道</b>。</div>
+            <div>(b) 速度反馈控制：<span class="tex">G_{b}(s)=\dfrac{K}{s(s+5)}</span>，<span class="tex">H_{b}(s)=0.8s+1</span>——同一环节挪到<b>反馈通道</b>。</div>
+            <div class="kv" data-step="1">两系统开环 <span class="tex">GH</span> 完全相同 ⟹ 根轨迹完全相同（右下图：同一条轨迹，不是口头声明）。</div>
+          </div>
+        </div>
+        <div class="act-card" style="flex:1.25">
+          <div class="hd">闭环传递函数（回扣上页结论①）</div>
+          <div class="bd">
+            <div><span class="tex">\varPhi_{a}(s)=\dfrac{K(0.8s+1)}{s(s+5)+K(0.8s+1)}</span>——有闭环零点 <span class="tex">-1.25</span>（来自前向通道零点）。</div>
+            <div><span class="tex">\varPhi_{b}(s)=\dfrac{K}{s(s+5)+K(0.8s+1)}</span>——<span class="tex">0.8s+1</span> 在反馈通道，其零点 <span class="tex">-1.25</span> 不进分子：<b>无闭环零点</b>；两者闭环极点相同。</div>
+          </div>
+        </div>
+        <div class="act-card" data-step="2" style="flex:.85">
+          <div class="hd">问题</div>
+          <div class="bd">
+            <div class="kv hl">同一根轨迹、同一组闭环极点，只差一个附加闭环零点 <span class="tex">-1.25</span>，响应会差多少？——下一页见分晓。</div>
+          </div>
+        </div>
+      </div>
+      <div class="rcol">
+        <div class="act-card figc" style="flex:1.18">
+          <div class="hd"><span style="flex:1">结构图对比：零点在前向通道 vs 在反馈通道</span></div>
+          <div class="bd2"><svg id="blk" viewBox="0 0 760 380" preserveAspectRatio="xMidYMid meet"></svg></div>
+        </div>
+        <div class="act-card figc" style="flex:1">
+          <div class="hd"><span style="flex:1">两系统共同的根轨迹（特征方程 s²+(5+0.8K)s+K=0 逐点计算）</span></div>
+          <div class="bd2"><svg id="rl" viewBox="0 0 760 300" preserveAspectRatio="xMidYMid meet"></svg></div>
+          <div class="cap">极点 <span class="tex">0,-5</span>、零点 <span class="tex">-1.25</span>；判别式 <span class="tex">(5+0.8K)^{2}-4K>0</span> 恒成立，本例轨迹全在实轴上：一支 <span class="tex">0\to-1.25</span>，一支 <span class="tex">-5\to-\infty</span>。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">要点</span><span>闭环零点 = 前向通道零点 + 反馈通道极点（<span class="kw-r">上页结论①的直接应用</span>）：环节挪到反馈通道，轨迹不变、零点消失。</span></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const MF = '"Cambria Math","STIX Two Math",Georgia,"Times New Roman","Microsoft YaHei",serif';
+  const NAVY = "#12266E", BLUE = "#1D3FA0", LINE = "#C9D8F2";
+  /* ---- 上：两系统方框图（复用 p05 组件模式） ---- */
+  {
+    const svg = document.getElementById("blk");
+    const mk = (tag, attrs) => { const n = document.createElementNS(NS, tag);
+      for (const k in attrs) n.setAttribute(k, attrs[k]); svg.appendChild(n); return n; };
+    const defs = mk("defs", {});
+    const m = document.createElementNS(NS, "marker");
+    [["id", "ar55"], ["markerWidth", 11], ["markerHeight", 9], ["refX", 7.5], ["refY", 3.5], ["orient", "auto"]].forEach(([k, v]) => m.setAttribute(k, v));
+    defs.appendChild(m);
+    const mp = document.createElementNS(NS, "path"); mp.setAttribute("d", "M0,0 L8,3.5 L0,7 Z"); mp.setAttribute("fill", BLUE); m.appendChild(mp);
+    const label = (x, y, s, o) => { o = o || {};
+      const n = mk("text", { x, y, "font-size": o.fs || 19, "text-anchor": o.an || "middle",
+        fill: o.fill || NAVY, "font-style": "italic", "font-family": MF });
+      n.textContent = s; return n; };
+    const wire = pts => mk("path", { d: pts.map((p, i) => (i ? "L" : "M") + p[0] + "," + p[1]).join(""),
+      fill: "none", stroke: BLUE, "stroke-width": 2.6, "marker-end": "url(#ar55)" });
+    const mkSum = (cx, cy, signs) => {
+      mk("circle", { cx, cy, r: 14, fill: "#fff", stroke: BLUE, "stroke-width": 2.6 });
+      mk("line", { x1: cx - 8, y1: cy, x2: cx + 8, y2: cy, stroke: BLUE, "stroke-width": 1.8 });
+      mk("line", { x1: cx, y1: cy - 8, x2: cx, y2: cy + 8, stroke: BLUE, "stroke-width": 1.8 });
+      (signs || []).forEach(([x, y, s]) => label(x, y, s, { fs: 20 }));
+    };
+    const mkBlock = (x, y, w, h, lines, hl) => {
+      mk("rect", { x, y, width: w, height: h, rx: 9, fill: hl ? "#FDF3EC" : "#fff", stroke: hl ? "#F5821F" : LINE, "stroke-width": 2.6 });
+      lines.forEach((s, i) => label(x + w / 2, y + h / 2 + (i - (lines.length - 1) / 2) * 22 + 7, s, { fs: 19 }));
+    };
+    /* (a) 比例微分：零点在前向通道 */
+    let Y0 = 82;
+    label(60, Y0 - 58, "(a) 比例微分控制", { fs: 21, b: 0, fill: "#B3541E", an: "start" });
+    label(40, Y0 - 24, "R(s)", { an: "start", fs: 18 });
+    wire([[34, Y0], [96, Y0]]);
+    mkSum(114, Y0, [[92, Y0 - 22, "+"], [130, Y0 + 36, "−"]]);
+    wire([[128, Y0], [172, Y0]]);
+    mkBlock(178, Y0 - 30, 150, 60, ["K(0.8s+1) /", "s(s+5)"], true);
+    wire([[328, Y0], [540, Y0]]);
+    label(546, Y0 - 22, "C(s)", { an: "start", fs: 18 });
+    mk("circle", { cx: 470, cy: Y0, r: 4.5, fill: BLUE });
+    mk("path", { d: `M470,${Y0} L470,${Y0 + 62} L114,${Y0 + 62} L114,${Y0 + 16}`, fill: "none", stroke: BLUE, "stroke-width": 2.6, "marker-end": "url(#ar55)" });
+    label(300, Y0 + 84, "H(s) = 1（单位反馈）", { fs: 17 });
+    label(610, Y0 - 12, "闭环有零点", { fs: 19, fill: "#C2410C", an: "start" });
+    label(610, Y0 + 14, "−1.25", { fs: 19, fill: "#C2410C", an: "start" });
+    /* (b) 速度反馈：零点在反馈通道 */
+    Y0 = 262;
+    label(60, Y0 - 66, "(b) 速度反馈控制", { fs: 21, fill: "#B3541E", an: "start" });
+    label(40, Y0 - 24, "R(s)", { an: "start", fs: 18 });
+    wire([[34, Y0], [96, Y0]]);
+    mkSum(114, Y0, [[92, Y0 - 22, "+"], [130, Y0 + 36, "−"]]);
+    wire([[128, Y0], [172, Y0]]);
+    mkBlock(178, Y0 - 30, 150, 60, ["K /", "s(s+5)"]);
+    wire([[328, Y0], [540, Y0]]);
+    label(546, Y0 - 22, "C(s)", { an: "start", fs: 18 });
+    mk("circle", { cx: 470, cy: Y0, r: 4.5, fill: BLUE });
+    wire([[470, Y0], [470, Y0 + 66], [396, Y0 + 66]]);
+    mkBlock(246, Y0 + 40, 140, 52, ["0.8s+1"], true);
+    mk("path", { d: `M246,${Y0 + 66} L114,${Y0 + 66} L114,${Y0 + 16}`, fill: "none", stroke: BLUE, "stroke-width": 2.6, "marker-end": "url(#ar55)" });
+    label(610, Y0 - 12, "闭环无附加", { fs: 19, fill: "#C2410C", an: "start" });
+    label(610, Y0 + 14, "零点", { fs: 19, fill: "#C2410C", an: "start" });
+  }
+  /* ---- 下：共同根轨迹（数值求根 s²+(5+0.8K)s+K=0，对数扫掠 K） ---- */
+  {
+    const svg = document.getElementById("rl");
+    const mk = (tag, attrs) => { const n = document.createElementNS(NS, tag);
+      for (const k in attrs) n.setAttribute(k, attrs[k]); svg.appendChild(n); return n; };
+    const X0 = 60, X1 = 730, Yc = 150, XL = [-8.6, 0.8];
+    const X = x => X0 + (x - XL[0]) / (XL[1] - XL[0]) * (X1 - X0);
+    const defs = mk("defs", {});
+    const m2 = document.createElementNS(NS, "marker");
+    [["id", "ax55"], ["markerWidth", 10], ["markerHeight", 8], ["refX", 7], ["refY", 3], ["orient", "auto"]].forEach(([k, v]) => m2.setAttribute(k, v));
+    defs.appendChild(m2);
+    const mp2 = document.createElementNS(NS, "path"); mp2.setAttribute("d", "M0,0 L7,3 L0,6 Z"); mp2.setAttribute("fill", "#5B6B8C"); m2.appendChild(mp2);
+    const m3 = document.createElementNS(NS, "marker");
+    [["id", "ar55b"], ["markerWidth", 10], ["markerHeight", 8], ["refX", 7], ["refY", 3], ["orient", "auto"]].forEach(([k, v]) => m3.setAttribute(k, v));
+    defs.appendChild(m3);
+    const mp3 = document.createElementNS(NS, "path"); mp3.setAttribute("d", "M0,0 L7,3 L0,6 Z"); mp3.setAttribute("fill", "#1D3FA0"); m3.appendChild(mp3);
+    mk("line", { x1: X0 - 10, y1: Yc, x2: X1, y2: Yc, stroke: "#5B6B8C", "stroke-width": 2.2, "marker-end": "url(#ax55)" });
+    mk("line", { x1: X(0), y1: 280, x2: X(0), y2: 20, stroke: "#5B6B8C", "stroke-width": 2.2, "marker-end": "url(#ax55)" });
+    const tx = (x, y, s, o) => { o = o || {};
+      const n = mk("text", { x, y, "font-size": o.fs || 19, "text-anchor": o.an || "middle",
+        fill: o.fill || "#5B6B8C", "font-weight": o.b ? 700 : 400, "font-family": MF });
+      n.textContent = s;
+      n.setAttribute("style", "paint-order:stroke;stroke:#FFF;stroke-width:5;stroke-linejoin:round"); return n; };
+    [-8, -6, -4, -2].forEach(v => { mk("line", { x1: X(v), y1: Yc - 6, x2: X(v), y2: Yc + 6, stroke: "#5B6B8C", "stroke-width": 1.6 }); tx(X(v), Yc + 28, String(v), { fs: 18 }); });
+    tx(X1 - 4, Yc + 30, "Re", { fs: 19, b: 1, an: "end" }); tx(X(0) + 16, 36, "Im", { fs: 19, b: 1, an: "start" });
+    /* 分支：数值求根 */
+    const b1 = [], b2 = [];
+    for (let i = 0; i <= 400; i++) {
+      const K = Math.pow(10, -2 + 6 * i / 400);
+      const a = 5 + 0.8 * K, disc = Math.sqrt(a * a - 4 * K);
+      b1.push((-a + disc) / 2); b2.push((-a - disc) / 2);
+    }
+    const path = arr => { let d = ""; arr.forEach((s, i) => { if (s > XL[0] - 0.2) d += (d ? "L" : "M") + X(Math.max(s, XL[0] - 0.2)).toFixed(1) + "," + Yc; }); return d; };
+    mk("path", { d: path(b1), fill: "none", stroke: "#1D3FA0", "stroke-width": 5 });
+    mk("path", { d: path(b2), fill: "none", stroke: "#1D3FA0", "stroke-width": 5 });
+    /* K 增大方向箭头 */
+    mk("line", { x1: X(-0.7), y1: Yc, x2: X(-0.75), y2: Yc, stroke: "#1D3FA0", "stroke-width": 5, "marker-end": "url(#ar55b)" });
+    mk("line", { x1: X(-6.4), y1: Yc, x2: X(-6.45), y2: Yc, stroke: "#1D3FA0", "stroke-width": 5, "marker-end": "url(#ar55b)" });
+    /* 零极点记号 */
+    const cross = (x, color, r) => {
+      mk("line", { x1: X(x) - r, y1: Yc - r, x2: X(x) + r, y2: Yc + r, stroke: color, "stroke-width": 4.5, "stroke-linecap": "round" });
+      mk("line", { x1: X(x) - r, y1: Yc + r, x2: X(x) + r, y2: Yc - r, stroke: color, "stroke-width": 4.5, "stroke-linecap": "round" });
+    };
+    cross(0, "#C02A20", 11); cross(-5, "#C02A20", 11);
+    mk("circle", { cx: X(-1.25), cy: Yc, r: 10, fill: "none", stroke: "#0E7A36", "stroke-width": 4 });
+    tx(X(0), Yc - 24, "× p=0", { fs: 19, fill: "#C02A20", b: 1 });
+    tx(X(-5), Yc - 24, "× p=−5", { fs: 19, fill: "#C02A20", b: 1 });
+    tx(X(-1.25), Yc - 26, "○ z=−1.25", { fs: 19, fill: "#0E7A36", b: 1 });
+    tx(X(-2.9), Yc - 60, "支①：0 → −1.25", { fs: 19, fill: "#1D3FA0", b: 1 });
+    tx(X(-6.2), Yc - 60, "支②：−5 → −∞", { fs: 19, fill: "#1D3FA0", b: 1 });
+  }
+});
+</script>
+</div></div>
+</body>
+</html>

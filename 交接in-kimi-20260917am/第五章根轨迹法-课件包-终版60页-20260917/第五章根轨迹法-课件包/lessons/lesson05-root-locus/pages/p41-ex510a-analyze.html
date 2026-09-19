@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>例5-10①：正反馈系统分析</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=505">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=505" defer></script>
+<script src="../fig.js?v=506"></script>
+<script src="../data/zex52.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:1.04;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:8px;padding:12px 20px;font-size:21px;line-height:1.5}
+  .eq{background:var(--sky);border-radius:12px;padding:9px 14px;text-align:center;font-size:21.5px;line-height:1.5}
+  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .kv{background:var(--sky);border-radius:12px;padding:8px 14px;line-height:1.45}
+  .figc{flex:1.08;display:flex;flex-direction:column;overflow:hidden}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
+  .figc svg{width:100%;height:100%}
+</style>
+</head>
+<body data-title="例5-10①：正反馈系统分析" data-page="41 / 60">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lft">
+        <div class="act-card" style="flex:1.02">
+          <div class="hd">正反馈系统（零度根轨迹）</div>
+          <div class="bd">
+            <div class="eq"><span class="tex">G(s)H(s)=\dfrac{K_{1}}{s(s+1)(s+2)}</span><span>（正反馈）</span></div>
+            <div class="kv" data-step="1">与例5-2 同一开环，但接成正反馈 → 相角条件 0°+2qπ → 按<span class="kw-r">零度根轨迹</span>绘制。</div>
+          </div>
+        </div>
+        <div class="act-card" style="flex:1.35">
+          <div class="hd">按 0° 规则逐条分析</div>
+          <div class="bd">
+            <div data-step="2"><div class="eq">实轴段（右侧偶数）：<span class="tex">[-2,\,-1]</span> 与 <span class="tex">[0,\,+\infty)</span></div></div>
+            <div data-step="3"><div class="eq"><span class="tex">\sigma_{a}=-1</span>，<span class="tex">\varphi_{a}=\dfrac{2q\times180^{\circ}}{3}=0^{\circ},\,\pm120^{\circ}</span></div></div>
+            <div data-step="4"><div class="eq">分离点：<span class="tex">3s^{2}+6s+2=0</span> 的两根中取 <span class="tex">s=-1.58</span>（−0.42 属负反馈情形）</div></div>
+            <div class="kv" data-step="5"><b>直观解释</b>：为什么正实轴 [0,+∞) 整段都是根轨迹——0° 规则要求右侧实零极点数为<b>偶数</b>，而正实轴上任意点右侧恰有 <b>0</b> 个（偶数）→ 一支闭环极点<span class="kw-r">常驻右半平面</span>。</div>
+          </div>
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd"><span style="flex:1">完整 0° 根轨迹：实轴段、渐近线、分离点全标注</span></div>
+        <div class="bd2"><svg id="fig"></svg></div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">注意</span><span>同一开环、同一极点：只因反馈极性不同，实轴段判据由奇变偶、渐近线角由 ±60°/180° 变为 0°/±120°。</span></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const F = RL.figure("fig", "zex52", { vw: 960, vh: 600, static: true });
+  F.setAllF(1);
+  /* 关键要素标注（渐近线角/σₐ 由 fig.js 自动标注，这里只补实轴段与分离点） */
+  F.tx(F.gDyn, F.X(1.7), F.Y(0) - 42, "[0,+∞) 整段", { fs: 24, fill: RL.FOCUS, b: 1 });
+  F.tx(F.gDyn, F.X(-1.5), F.Y(0) - 58, "[−2,−1]", { fs: 24, fill: "#1B3B8B", b: 1 });
+  const bx = F.X(-1.5774), by = F.Y(0);
+  F.mk("circle", { cx: bx, cy: by, r: 9, fill: RL.FOCUS, stroke: "#fff", "stroke-width": 2.5 }, F.gDyn);
+  F.tx(F.gDyn, bx - 16, by + 54, "分离点 −1.58", { fs: 23, fill: RL.FOCUS, b: 1, an: "end" });
+});
+</script>
+</div></div>
+</body>
+</html>

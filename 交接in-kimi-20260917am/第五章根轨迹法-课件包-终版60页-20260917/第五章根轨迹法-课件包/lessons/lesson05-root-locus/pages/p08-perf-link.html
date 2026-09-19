@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>引例（4）：由根轨迹读取系统性能</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=505">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=505" defer></script>
+<script src="../fig.js?v=506"></script>
+<script src="../data/intro.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:1;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:12px 20px}
+  table{border-collapse:collapse;width:100%;font-size:20px;line-height:1.35}
+  th,td{border:2px solid var(--line);padding:7px 8px;text-align:center;color:var(--ink)}
+  th{background:var(--sky);color:var(--navy);font-weight:700}
+  td b{color:var(--danger)}
+  .tip{background:var(--sky);border-radius:12px;padding:9px 14px;font-size:20px;line-height:1.45}
+  .tip b{color:var(--danger)}
+  .figc{flex:1.16;display:flex;flex-direction:column;overflow:hidden}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
+  .figc svg{width:100%;height:100%}
+</style>
+</head>
+<body data-title="引例（4）：由根轨迹读取系统性能" data-page="8 / 60">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lft">
+        <div class="act-card" style="flex:1.5">
+          <div class="hd">性能指标随 <span class="tex">K_{1}</span> 的变化</div>
+          <div class="bd">
+            <div class="tip" style="text-align:center;margin-bottom:2px"><span class="tex">\omega_{n}=\sqrt{K_{1}},\qquad \zeta=\dfrac{1}{\sqrt{K_{1}}}</span></div>
+            <table>
+              <tr><th><span class="tex">K_{1}</span></th><th><span class="tex">\zeta</span></th><th><span class="tex">\sigma\%</span></th><th><span class="tex">t_{s}</span></th></tr>
+              <tr><td>0.25</td><td>2（过阻尼）</td><td>0（单调，无超调）</td><td>—</td></tr>
+              <tr><td>1</td><td>1</td><td>0</td><td>≈ 4 s</td></tr>
+              <tr><td>2</td><td>0.707</td><td>4.3%</td><td>≈ 4 s</td></tr>
+              <tr><td>4</td><td>0.5</td><td>16.3%</td><td>≈ 4 s</td></tr>
+              <tr><td>10</td><td>0.316</td><td>35.1%</td><td>≈ 4 s</td></tr>
+            </table>
+          </div>
+        </div>
+        <div class="act-card" style="flex:1.1">
+          <div class="hd">三条规律</div>
+          <div class="bd" style="justify-content:space-evenly;gap:7px">
+            <div class="tip" data-step="1"><span class="tex">K_{1}\uparrow\;\Rightarrow\;\zeta\downarrow\;\Rightarrow\;\sigma\%\uparrow</span>：极点沿轨迹上行，<b>振荡加剧</b>。</div>
+            <div class="tip" data-step="2"><span class="tex">t_{s}=\dfrac{4}{\zeta\omega_{n}}=\dfrac{4}{1}=4\,s</span> 不变：本例中 <span class="tex">\zeta\omega_{n}=|\sigma|=1</span> 恒定，<b>快速性不变</b>。</div>
+            <div class="tip" data-step="3">稳态精度：<span class="tex">K_{v}=\dfrac{K_{1}}{2}\uparrow</span>——增益加大，<b>稳态误差减小</b>，代价是超调变大。</div>
+          </div>
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd"><span style="flex:1">在轨迹上直接读出性能：叠加 <span class="tex">\zeta=0.5</span> 阻尼射线</span></div>
+        <div class="bd2"><svg id="fig"></svg></div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">要点</span><span>根轨迹是<span class="kw-r">参数与性能的对照图</span>：极点离虚轴越远越快，与负实轴夹角越小越平稳；选定性能指标，就是在轨迹上<span class="kw-r">选点</span>。</span></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const F = RL.figure("fig", "intro", { vw: 960, vh: 600, ylim: [-2.4, 2.4], static: true,
+                                        segs: true, asym: false, brkDots: false,
+                                        extra: api => {
+    /* ζ=0.5 射线：s = t·(−cos60° ± j·sin60°)，与轨迹交于 K₁=4：−1±j1.73 */
+    const T = 3.1, c = Math.cos(Math.PI / 3), sn = Math.sin(Math.PI / 3);
+    [1, -1].forEach(sg => {
+      api.mk("line", { x1: api.X(0), y1: api.Y(0), x2: api.X(-c * T), y2: api.Y(sg * sn * T),
+        stroke: RL.REF.color.zeta, "stroke-width": 2.4, "stroke-dasharray": RL.REF.dash.zeta,
+        opacity: .85 }, api.gDyn);
+    });
+    api.tx(api.gDyn, api.X(-c * 2.62) - 8, api.Y(sn * 2.62) - 6, "ζ=0.5（β=60°）",
+      { fs: 24, fill: RL.REF.color.zeta, b: 1, an: "end" });
+    [[-1, 1.732], [-1, -1.732]].forEach(p => {
+      api.mk("circle", { cx: api.X(p[0]), cy: api.Y(p[1]), r: 10, fill: RL.FOCUS,
+        stroke: "#fff", "stroke-width": 2.5 }, api.gDyn);
+    });
+    api.tx(api.gDyn, api.X(-1) + 16, api.Y(1.732) - 14, "K₁=4：−1 ± j1.73",
+      { fs: 24, fill: RL.FOCUS, b: 1, an: "start" });
+  } });
+});
+</script>
+</div></div>
+</body>
+</html>

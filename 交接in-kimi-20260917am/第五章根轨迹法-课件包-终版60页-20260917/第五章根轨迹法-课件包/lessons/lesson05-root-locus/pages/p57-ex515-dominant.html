@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>例5-15：主导极点与高阶降阶</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=505">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=505" defer></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:1.02;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:8px;padding:10px 18px;font-size:19.5px;line-height:1.42}
+  .eq{background:var(--sky);border-radius:12px;padding:8px 13px;text-align:center;font-size:20px;line-height:1.5}
+  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .err{background:var(--sky);border:2px dashed var(--orange);border-radius:12px;padding:9px 15px;font-size:18.5px;line-height:1.45;color:var(--ink)}
+  .err b{color:var(--danger)}
+  .rcol{flex:1.14;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .figc{display:flex;flex-direction:column;overflow:hidden}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
+  .figc svg{width:100%;height:100%}
+</style>
+</head>
+<body data-title="例5-15：主导极点与高阶降阶" data-page="57 / 60">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lft">
+        <div class="act-card" style="flex:.74">
+          <div class="hd">原题（教材口径）</div>
+          <div class="bd">
+            <div class="eq"><span class="tex">\varPhi(s)=\dfrac{7.2}{s^{3}+5s^{2}+4s+7.2}</span>，极点约 <span class="tex">-4.465</span>、<span class="tex">-0.267\pm j1.241</span></div>
+          </div>
+        </div>
+        <div class="act-card" style="flex:.86">
+          <div class="hd">勘误说明（对照原素材）</div>
+          <div class="bd">
+            <div class="err">原素材后续演算使用的极点 <span class="tex">-4.2</span>、<span class="tex">-0.4\pm j0.69</span> 与二阶近似 <span class="tex">\dfrac{0.64}{s^{2}+0.8s+0.64}</span> 对应特征多项式常数项约 <span class="tex">2.7</span> 而非 <span class="tex">7.2</span>——<b>两组数据不自洽</b>，本课件采用自洽口径。</div>
+          </div>
+        </div>
+        <div class="act-card" style="flex:1.66">
+          <div class="hd">自洽口径：降阶演算</div>
+          <div class="bd">
+            <div data-step="1"><span class="tex">\varPhi(s)=\dfrac{2.7}{s^{3}+5s^{2}+4s+2.7}</span>：闭环极点 <span class="tex">-4.201</span>、<span class="tex">-0.400\pm j0.695</span>（数值求根验证）。</div>
+            <div data-step="2">远极点与主导极点实部之比 <span class="tex">4.201/0.400\approx10.5\gg5</span> ⟹ 主导极点对 <span class="tex">-0.400\pm j0.695</span>（右上图：距离比直观可见）。</div>
+            <div data-step="3">二阶近似 <span class="tex">\varPhi_{2}(s)\approx\dfrac{0.64}{s^{2}+0.8s+0.64}</span>（<span class="tex">\omega_{n}=0.8</span>、<span class="tex">\zeta=0.5</span>）；分子取 0.64 是为保持 <span class="tex">\varPhi_{2}(0)=1</span>，并非截取原分子 2.7。</div>
+            <div data-step="4">右下图：三阶与二阶的单位阶跃响应几乎重合（<span class="tex">\sigma\%\approx16\%/16.3\%</span>、<span class="tex">t_{p}\approx4.6/4.55\,\mathrm{s}</span>、<span class="tex">t_{s}\approx10\,\mathrm{s}</span>）——降阶对这些指标有效。</div>
+          </div>
+        </div>
+      </div>
+      <div class="rcol">
+        <div class="act-card figc" style="flex:1">
+          <div class="hd"><span style="flex:1">s 平面极点分布：主导对 vs 远极点（实部比 ≈10.5）</span></div>
+          <div class="bd2"><svg id="pz" viewBox="0 0 760 300" preserveAspectRatio="xMidYMid meet"></svg></div>
+        </div>
+        <div class="act-card figc" style="flex:1.15">
+          <div class="hd"><span style="flex:1">三阶原系统 vs 二阶近似：单位阶跃响应（解析式计算）</span></div>
+          <div class="bd2"><svg id="rsp" viewBox="0 0 760 330" preserveAspectRatio="xMidYMid meet"></svg></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">要点</span><span>高阶系统降阶前必须<span class="kw-r">核对数值自洽</span>；近似有效判据：远极点与主导极点实部之比大于 5。</span></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const MF = '"Cambria Math","STIX Two Math",Georgia,"Times New Roman","Microsoft YaHei",serif';
+  const mks = svg => (tag, attrs) => { const n = document.createElementNS(NS, tag);
+    for (const k in attrs) n.setAttribute(k, attrs[k]); svg.appendChild(n); return n; };
+  const txt = (mk, x, y, s, o) => { o = o || {};
+    const n = mk("text", { x, y, "font-size": o.fs || 19, "text-anchor": o.an || "middle",
+      fill: o.fill || "#5B6B8C", "font-weight": o.b ? 700 : 400, "font-family": MF });
+    n.textContent = s;
+    n.setAttribute("style", "paint-order:stroke;stroke:#FFF;stroke-width:5;stroke-linejoin:round"); return n; };
+  const addArrowMarker = (mk, id, color) => {
+    const defs = mk("defs", {});
+    const m = document.createElementNS(NS, "marker");
+    [["id", id], ["markerWidth", 10], ["markerHeight", 8], ["refX", 7], ["refY", 3], ["orient", "auto"]].forEach(([k, v]) => m.setAttribute(k, v));
+    defs.appendChild(m);
+    const p = document.createElementNS(NS, "path"); p.setAttribute("d", "M0,0 L7,3 L0,6 Z"); p.setAttribute("fill", color); m.appendChild(p);
+  };
+  /* ---- 上：极点分布图 ---- */
+  {
+    const svg = document.getElementById("pz"), mk = mks(svg);
+    addArrowMarker(mk, "ax57", "#5B6B8C");
+    const X0 = 56, X1 = 734, Yc = 152, XL = [-5.2, 0.7], YL = [-1.35, 1.35];
+    const X = x => X0 + (x - XL[0]) / (XL[1] - XL[0]) * (X1 - X0);
+    const Y = y => Yc - y / (YL[1] - YL[0]) * 264;
+    mk("line", { x1: X0 - 10, y1: Yc, x2: X1, y2: Yc, stroke: "#5B6B8C", "stroke-width": 2.2, "marker-end": "url(#ax57)" });
+    mk("line", { x1: X(0), y1: 282, x2: X(0), y2: 18, stroke: "#5B6B8C", "stroke-width": 2.2, "marker-end": "url(#ax57)" });
+    [-5, -4, -3, -2, -1].forEach(v => { mk("line", { x1: X(v), y1: Yc - 6, x2: X(v), y2: Yc + 6, stroke: "#5B6B8C", "stroke-width": 1.6 }); txt(mk, X(v), Yc + 28, String(v), { fs: 18 }); });
+    txt(mk, X1 - 4, Yc + 30, "Re", { fs: 19, b: 1, an: "end" }); txt(mk, X(0) + 16, 34, "Im", { fs: 19, b: 1, an: "start" });
+    const cross = (x, y, color, r) => {
+      mk("line", { x1: X(x) - r, y1: Y(y) - r, x2: X(x) + r, y2: Y(y) + r, stroke: color, "stroke-width": 5, "stroke-linecap": "round" });
+      mk("line", { x1: X(x) - r, y1: Y(y) + r, x2: X(x) + r, y2: Y(y) - r, stroke: color, "stroke-width": 5, "stroke-linecap": "round" });
+    };
+    cross(-0.4, 0.695, "#D63A2F", 13); cross(-0.4, -0.695, "#D63A2F", 13); cross(-4.201, 0, "#8A97B5", 12);
+    txt(mk, X(-0.4) + 14, Y(0.695) - 16, "主导对 −0.40±j0.70", { fs: 19, fill: "#D63A2F", b: 1, an: "start" });
+    txt(mk, X(-4.201), Y(0) - 26, "远极点 −4.20", { fs: 19, fill: "#8A97B5", b: 1 });
+    /* 距离比可视化：两段双向虚线 */
+    mk("line", { x1: X(0), y1: Yc + 52, x2: X(-0.4), y2: Yc + 52, stroke: "#D63A2F", "stroke-width": 2.4 });
+    mk("line", { x1: X(0), y1: Yc + 78, x2: X(-4.201), y2: Yc + 78, stroke: "#8A97B5", "stroke-width": 2.4 });
+    txt(mk, X(-0.2), Yc + 44, "×1", { fs: 18, fill: "#D63A2F", b: 1 });
+    txt(mk, X(-2.1), Yc + 70, "×10.5", { fs: 18, fill: "#8A97B5", b: 1 });
+  }
+  /* ---- 下：阶跃响应对比（部分分式解析式，非手画） ----
+     三阶：y3(t)=1−0.0430e^{−4.201t}−e^{−0.3996t}(0.9570cos0.695t+0.8104sin0.695t)
+     二阶：y2(t)=1−e^{−0.4t}(cos0.6928t+0.5774sin0.6928t)（ωd=0.8√0.75） */
+  {
+    const svg = document.getElementById("rsp"), mk = mks(svg);
+    const X0 = 66, X1 = 736, Y1 = 292, Y0 = 24, T = 12, YM = [-0.05, 1.35];
+    const X = t => X0 + (t / T) * (X1 - X0), Y = y => Y1 - (y - YM[0]) / (YM[1] - YM[0]) * (Y1 - Y0);
+    const y3 = t => 1 - 0.0430 * Math.exp(-4.201 * t) - Math.exp(-0.3996 * t) * (0.9570 * Math.cos(0.6950 * t) + 0.8104 * Math.sin(0.6950 * t));
+    const y2 = t => 1 - Math.exp(-0.4 * t) * (Math.cos(0.6928 * t) + 0.5774 * Math.sin(0.6928 * t));
+    mk("line", { x1: X0 - 8, y1: Y1 + 6, x2: X1 + 10, y2: Y1 + 6, stroke: "#5B6B8C", "stroke-width": 2.2 });
+    mk("line", { x1: X0, y1: Y1 + 6, x2: X0, y2: Y0 - 10, stroke: "#5B6B8C", "stroke-width": 2.2 });
+    [0.5, 1.0].forEach(v => { mk("line", { x1: X0 - 6, y1: Y(v), x2: X0 + 6, y2: Y(v), stroke: "#5B6B8C", "stroke-width": 1.6 }); txt(mk, X0 - 12, Y(v) + 6, v.toFixed(1), { fs: 18, an: "end" }); });
+    [2, 4, 6, 8, 10].forEach(v => { mk("line", { x1: X(v), y1: Y1, x2: X(v), y2: Y1 + 6, stroke: "#5B6B8C", "stroke-width": 1.6 }); txt(mk, X(v), Y1 + 26, String(v), { fs: 18 }); });
+    mk("line", { x1: X0, y1: Y(1), x2: X1, y2: Y(1), stroke: "#C9D6F2", "stroke-width": 2, "stroke-dasharray": "6 5" });
+    txt(mk, X1 - 4, Y1 + 26, "t/s", { fs: 19, b: 1, an: "end" });
+    const pathOf = f => { let d = ""; for (let i = 0; i <= 480; i++) { const t = T * i / 480; d += (i ? "L" : "M") + X(t).toFixed(1) + "," + Y(f(t)).toFixed(1); } return d; };
+    mk("path", { d: pathOf(y2), fill: "none", stroke: "#1D3FA0", "stroke-width": 4 });
+    mk("path", { d: pathOf(y3), fill: "none", stroke: "#C02A20", "stroke-width": 4, "stroke-dasharray": "10 6" });
+    txt(mk, 330, 168, "实线：二阶近似（σ%≈16.3%，tp≈4.55s）", { fs: 18.5, b: 1, fill: "#1D3FA0", an: "start" });
+    txt(mk, 330, 200, "虚线：三阶原系统（σ%≈16%，tp≈4.6s）", { fs: 18.5, b: 1, fill: "#C02A20", an: "start" });
+    txt(mk, 330, 240, "两曲线几乎重合——降阶有效", { fs: 18.5, b: 1, fill: "#B3541E", an: "start" });
+  }
+});
+</script>
+</div></div>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>绘制根轨迹的基本法则总表</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=218">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=218" defer></script>
+<style>
+  .act-body.has-note{bottom:150px}
+  .col{display:flex;flex-direction:column;gap:12px;height:100%;min-height:0}
+  .order{flex:none;display:flex;align-items:center;gap:14px;background:#FDF3EC;border-left:6px solid var(--orange);
+    border-radius:0 14px 14px 0;padding:8px 18px;font-size:20px;line-height:1.35;color:var(--ink)}
+  .order b{color:var(--danger);white-space:nowrap}
+  .order .flow{display:flex;align-items:center;gap:10px;color:var(--navy);font-weight:700;white-space:nowrap}
+  .order .arr{color:var(--orange);font-size:25px}
+  .act-card{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.hd{padding:10px 22px;font-size:23px}
+  .act-card>.bd{flex:1;padding:8px 14px 12px;min-height:0}
+  .act-table{font-size:18.5px;line-height:1.28;table-layout:fixed;height:100%}
+  .act-table th{padding:7px 10px;text-align:center;white-space:nowrap;font-size:19px}
+  .act-table td{vertical-align:middle;padding:5px 10px}
+  .act-table td.no{width:62px;text-align:center;color:var(--navy);font-weight:800;font-size:20px}
+  .act-table td.name{width:205px;color:var(--navy);font-weight:800}
+  .act-table td.key{color:var(--ink)}
+  .act-table td .tex{white-space:nowrap}
+  .kw{color:var(--danger);font-weight:700}
+</style>
+</head>
+<body data-title="绘制根轨迹的基本法则总表" data-page="27 / 61">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="col">
+      <div class="order"><b>应用顺序</b><span class="flow">① 定骨架<span class="arr">→</span>② 定走向<span class="arr">→</span>③ 补关键点<span class="arr">→</span>④ 平滑连线</span></div>
+      <div class="act-card">
+        <div class="hd">七条基本法则：公式与使用要点</div>
+        <div class="bd">
+          <table class="act-table">
+            <colgroup><col style="width:62px"><col style="width:205px"><col></colgroup>
+            <tr><th>序号</th><th>法则名称</th><th>公式或要点</th></tr>
+            <tr><td class="no">一</td><td class="name">分支数与对称性</td><td class="key"><span class="tex">n</span> 条分支；连续；关于实轴对称。</td></tr>
+            <tr><td class="no">二</td><td class="name">起点与终点</td><td class="key"><span class="tex">K_{1}=0</span> 起于开环极点；<span class="tex">m</span> 条止于零点，<span class="tex">n-m</span> 条趋向无穷远。</td></tr>
+            <tr><td class="no">三</td><td class="name">实轴上的根轨迹</td><td class="key">某段右侧实零点、实极点数目之和为 <span class="kw">奇数</span>，该段即根轨迹段。</td></tr>
+            <tr><td class="no">四</td><td class="name">渐近线</td><td class="key"><span class="tex">n-m</span> 条；<span class="tex">\sigma_{a}=\dfrac{\sum p_{i}-\sum z_{j}}{n-m}</span>，<span class="tex">\varphi_{a}=\dfrac{(2q+1)180^{\circ}}{n-m}</span>。</td></tr>
+            <tr><td class="no">五</td><td class="name">分离点 / 会合点</td><td class="key"><span class="tex">\dfrac{dK_{1}}{ds}=0</span>（或倒数和方程）；解必须落在实轴根轨迹段上，且 <span class="tex">K_{1}\geq0</span>。</td></tr>
+            <tr><td class="no">六</td><td class="name">出射角 / 入射角</td><td class="key"><span class="tex">\theta_{p_{k}}=(2q+1)180^{\circ}+\sum\angle(p_{k}-z_{j})-\sum\limits_{i\ne k}\angle(p_{k}-p_{i})</span>；入射角同理。</td></tr>
+            <tr><td class="no">七</td><td class="name">与虚轴的交点</td><td class="key">劳斯判据 + 辅助方程，或令 <span class="tex">s=j\omega</span> 联立实部、虚部为零，求临界 <span class="tex">K_{1}</span> 与 <span class="tex">\pm j\omega</span>。</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">应用顺序</span><span>先确定分支数、起终点与实轴段，再画渐近线，最后算分离点、出射角和虚轴交点。</span></div>
+</div></div>
+</body>
+</html>

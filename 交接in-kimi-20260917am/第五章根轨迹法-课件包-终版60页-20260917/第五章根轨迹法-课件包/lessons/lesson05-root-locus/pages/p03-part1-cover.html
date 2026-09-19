@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>5.1 节封面 · 根轨迹的基本概念</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=505">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=505" defer></script>
+<style>
+  .cover { position:absolute; inset:0; display:flex; align-items:center; gap:52px; padding:56px 72px 76px; }
+  .left { flex:1.12; display:flex; flex-direction:column; align-items:flex-start; gap:22px; }
+  .left .part { display:inline-block; background:var(--navy); color:#fff; font-size:24px; font-weight:700; letter-spacing:6px; border-radius:12px; padding:10px 26px; }
+  .left h1 { font-size:58px; color:var(--navy); letter-spacing:3px; }
+  .left .deco { width:150px; height:10px; border-radius:5px; background:var(--orange); position:relative; }
+  .left .deco::after { content:""; position:absolute; right:-28px; top:0; width:12px; height:10px; border-radius:5px; background:var(--orange); }
+  .left .meta { font-size:23.5px; color:var(--muted); line-height:1.45; }
+  .goal { width:100%; background:var(--sky); border:2px solid var(--line); border-radius:12px; padding:14px 22px; font-size:21.5px; color:var(--ink); line-height:1.55; }
+  .goal b { color:var(--navy); }
+  .toc { display:grid; grid-template-columns:1fr; gap:14px; width:100%; }
+  .toc .it { background:var(--sky); border:2px solid var(--line); border-radius:12px; padding:16px 22px; font-size:22.5px; color:var(--navy); font-weight:700; white-space:nowrap; }
+  .toc .it b { color:var(--orange); margin-right:8px; }
+  .right { flex:1; height:100%; display:flex; align-items:stretch; }
+  .figc { width:100%; border:2px solid var(--line); border-radius:20px; overflow:hidden; background:#fff; box-shadow:0 10px 34px rgba(18,38,110,.14); display:flex; }
+  .figc svg { width:100%; height:100%; display:block; }
+</style>
+</head>
+<body data-nochrome="1" data-page="3 / 60">
+<div class="act-stage"><div class="act-slide">
+  <div class="cover">
+    <div class="left">
+      <span class="part">5.1</span>
+      <h1>根轨迹的基本概念</h1>
+      <div class="deco"></div>
+      <div class="meta">一个引例让轨迹诞生，根轨迹方程给出依据，两个条件成为全章工具</div>
+      <div class="goal"><b>学习目标：</b>学完本节，你应能——说出根轨迹的定义；写出根轨迹方程与幅值 / 相角条件；用量相角的方法判断试验点是否在根轨迹上。</div>
+      <div class="toc">
+        <div class="it"><b>①</b>引言：为什么需要根轨迹</div>
+        <div class="it"><b>②</b>引例：一个二阶系统的根轨迹</div>
+        <div class="it"><b>③</b>根轨迹方程与两个条件</div>
+        <div class="it"><b>④</b>试验点判定与课堂互动</div>
+      </div>
+    </div>
+    <div class="right">
+      <div class="figc"><svg id="trio" viewBox="0 0 560 800" preserveAspectRatio="xMidYMid meet"></svg></div>
+    </div>
+  </div>
+  <div class="act-foot"></div><div class="act-footno">3</div>
+<script>
+/* 三联示意图：K₁ 增大 → 闭环极点在 s 平面移动 → 阶跃响应形态变化（单调→临界→振荡）
+   全部程序绘制；阶跃响应由二阶系统解析式逐点计算（引例系统 Δ(s)=s²+2s+K₁，ωn=√K₁，ζ=1/√K₁）。 */
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("trio");
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag);
+    for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const MF = '"Cambria Math","STIX Two Math",Georgia,"Times New Roman","Microsoft YaHei",serif';
+  const ZH = '"Microsoft YaHei",sans-serif';
+  const NAVY = "#12266E", BLUE = "#1D3FA0", BLUE2 = "#2B5CE6", ORANGE = "#F5821F",
+        MUTED = "#5B6B8C", LINE = "#C9D8F2", SKY = "#EEF3FD", GREEN = "#0E7A36", GRAY = "#8A97B5";
+  const tx = (x, y, s, o) => { o = o || {};
+    const n = mk("text", { x, y, "font-size": o.fs || 20, "text-anchor": o.an || "middle",
+      fill: o.fill || NAVY, "font-weight": o.b ? 700 : 400, "font-style": o.it ? "italic" : "normal",
+      "font-family": o.zh ? ZH : MF });
+    n.textContent = s;
+    n.setAttribute("style", "paint-order:stroke;stroke:#FFF;stroke-width:5;stroke-linejoin:round");
+    return n; };
+  const defs = mk("defs", {}, svg);
+  const arrow = (id, color) => { const m = mk("marker", { id, markerWidth: 11, markerHeight: 9, refX: 7.5, refY: 3.5, orient: "auto" }, defs);
+    mk("path", { d: "M0,0 L8,3.5 L0,7 Z", fill: color }, m); };
+  arrow("arO", ORANGE); arrow("arB", MUTED); arrow("arD", BLUE);
+
+  /* 面板底框 */
+  const panel = (y, h, title) => {
+    mk("rect", { x: 18, y, width: 524, height: h, rx: 16, fill: "#fff", stroke: LINE, "stroke-width": 2.5 }, svg);
+    mk("rect", { x: 18, y, width: 524, height: 46, rx: 16, fill: SKY }, svg);
+    mk("rect", { x: 18, y: y + 24, width: 524, height: 22, fill: SKY }, svg);
+    tx(40, y + 32, title, { fs: 22, b: 1, zh: 1, an: "start", fill: NAVY });
+  };
+  /* 联间橙色箭头 */
+  const link = y => mk("line", { x1: 280, y1: y, x2: 280, y2: y + 30, stroke: ORANGE, "stroke-width": 6, "marker-end": "url(#arO)" }, svg);
+
+  /* ── 第一联：K₁ 增大 ── */
+  panel(10, 128, "① 参数变化：开环增益 K₁ 从 0 增大到 ∞");
+  mk("line", { x1: 60, y1: 96, x2: 470, y2: 96, stroke: BLUE2, "stroke-width": 4, "marker-end": "url(#arD)" }, svg);
+  [[70, "0"], [170, "0.5"], [260, "1"], [350, "2"], [452, "∞"]].forEach(([x, s]) => {
+    mk("line", { x1: x, y1: 88, x2: x, y2: 104, stroke: BLUE2, "stroke-width": 2.5 }, svg);
+    tx(x, 128, s, { fs: 20, fill: BLUE, b: 1 });
+  });
+  tx(265, 78, "K₁", { fs: 24, it: 1, b: 1, fill: BLUE });
+  link(138);
+
+  /* ── 第二联：闭环极点在 s 平面移动（引例系统根轨迹示意） ── */
+  panel(172, 268, "② 闭环极点在 s 平面上连续移动");
+  const cx0 = 205, cy0 = 336, SC = 60;   // s 平面原点与比例（1:1）
+  const PX = v => cx0 + v * SC, PY = v => cy0 - v * SC;
+  mk("line", { x1: 66, y1: cy0, x2: 272, y2: cy0, stroke: MUTED, "stroke-width": 2, "marker-end": "url(#arB)" }, svg);
+  mk("line", { x1: cx0, y1: 420, x2: cx0, y2: 236, stroke: MUTED, "stroke-width": 2, "marker-end": "url(#arB)" }, svg);
+  tx(266, cy0 + 26, "σ", { fs: 22, it: 1, b: 1, fill: MUTED });
+  tx(cx0 + 14, 244, "jω", { fs: 22, it: 1, b: 1, fill: MUTED, an: "start" });
+  /* 轨迹：实轴段 [−2,0] + 分离后沿 σ=−1 上下两支（解析：s=−1±√(1−K₁)） */
+  mk("line", { x1: PX(-2), y1: cy0, x2: PX(0), y2: cy0, stroke: BLUE, "stroke-width": 4.5, "stroke-linecap": "round" }, svg);
+  let dU = "", dD = "";
+  for (let i = 0; i <= 40; i++) { const w = i / 40 * 1.32;   // s = −1 ± jw（K₁ = 1+w²）
+    dU += (i ? "L" : "M") + PX(-1).toFixed(1) + "," + PY(w).toFixed(1);
+    dD += (i ? "L" : "M") + PX(-1).toFixed(1) + "," + PY(-w).toFixed(1); }
+  mk("path", { d: dU, fill: "none", stroke: BLUE, "stroke-width": 4.5, "stroke-linecap": "round" }, svg);
+  mk("path", { d: dD, fill: "none", stroke: BLUE, "stroke-width": 4.5, "stroke-linecap": "round" }, svg);
+  /* 方向箭头（小三角，用户空间尺寸） */
+  const tri = (x, y, deg) => { const g = mk("g", { transform: `translate(${x},${y}) rotate(${deg})` }, svg);
+    mk("path", { d: "M9,0 L-7,6 L-7,-6 Z", fill: BLUE, stroke: "#fff", "stroke-width": 1 }, g); };
+  tri(PX(-0.62), cy0, 180); tri(PX(-1.38), cy0, 0);
+  tri(PX(-1), PY(0.62), -90); tri(PX(-1), PY(-0.62), 90);
+  /* 开环极点 ×（0 与 −2） */
+  [[0, "p₁=0"], [-2, "p₂=−2"]].forEach(([v, lab]) => {
+    [1, -1].forEach(sg => mk("line", { x1: PX(v) - 9, y1: cy0 - sg * 9, x2: PX(v) + 9, y2: cy0 + sg * 9,
+      stroke: "#16324F", "stroke-width": 4, "stroke-linecap": "round" }, svg));
+    tx(PX(v), cy0 + 32, lab, { fs: 19, b: 1, fill: "#16324F" });
+  });
+  tx(PX(-1), cy0 + 32, "−1", { fs: 19, b: 1, fill: MUTED });
+  /* 右侧三帧极点位置快照（各带小坐标轴） */
+  mk("line", { x1: 300, y1: 236, x2: 300, y2: 420, stroke: LINE, "stroke-width": 2, "stroke-dasharray": "4 5" }, svg);
+  tx(420, 240, "闭环极点三帧", { fs: 19, b: 1, zh: 1, fill: MUTED });
+  const snap = (yc, K, pts, lab) => {
+    const x0 = 400;
+    mk("line", { x1: x0 - 64, y1: yc, x2: x0 + 64, y2: yc, stroke: MUTED, "stroke-width": 1.6, "marker-end": "url(#arB)" }, svg);
+    mk("line", { x1: x0, y1: yc + 22, x2: x0, y2: yc - 22, stroke: MUTED, "stroke-width": 1.6, "marker-end": "url(#arB)" }, svg);
+    pts.forEach(p => mk("circle", { cx: x0 + p[0] * 26, cy: yc - p[1] * 26, r: 7, fill: "#D63A2F", stroke: "#fff", "stroke-width": 2 }, svg));
+    tx(474, yc - 3, K, { fs: 17, b: 1, fill: NAVY, an: "start" });
+    tx(474, yc + 18, lab, { fs: 16, zh: 1, fill: MUTED, an: "start" });
+  };
+  snap(282, "K₁=0.5", [[-0.6, 0], [-2.4, 0]], "两负实根");
+  snap(336, "K₁=1", [[-1.5, 0]], "重根");
+  snap(390, "K₁=4", [[-1.5, 0.8], [-1.5, -0.8]], "共轭复根");
+  link(440);
+
+  /* ── 第三联：阶跃响应形态变化（解析式逐点计算） ── */
+  panel(474, 316, "③ 阶跃响应形态随之改变");
+  const ox = 74, oy = 730, TX = 420, TY = 188;   // 坐标原点、量程像素
+  mk("line", { x1: ox, y1: oy, x2: ox + TX + 26, y2: oy, stroke: MUTED, "stroke-width": 2, "marker-end": "url(#arB)" }, svg);
+  mk("line", { x1: ox, y1: oy, x2: ox, y2: oy - TY - 14, stroke: MUTED, "stroke-width": 2, "marker-end": "url(#arB)" }, svg);
+  tx(ox + TX + 24, oy + 26, "t", { fs: 22, it: 1, b: 1, fill: MUTED });
+  tx(ox + 8, oy - TY - 4, "c(t)", { fs: 22, it: 1, b: 1, fill: MUTED, an: "start" });
+  mk("line", { x1: ox, y1: oy - TY * 0.78, x2: ox + TX, y2: oy - TY * 0.78, stroke: LINE, "stroke-width": 2, "stroke-dasharray": "7 6" }, svg);
+  tx(ox - 12, oy - TY * 0.78 + 7, "1", { fs: 19, fill: MUTED, an: "end" });
+  /* 二阶单位反馈闭环（ωn=√K₁，ζ=1/√K₁）阶跃响应解析式 */
+  function stepResp(K1, t) {
+    const wn = Math.sqrt(K1), z = 1 / wn;
+    if (Math.abs(z - 1) < 1e-9) return 1 - Math.exp(-wn * t) * (1 + wn * t);
+    if (z > 1) { const wd = wn * Math.sqrt(z * z - 1);
+      return 1 - Math.exp(-z * wn * t) * (Math.cosh(wd * t) + z * wn / wd * Math.sinh(wd * t)); }
+    const wd = wn * Math.sqrt(1 - z * z);
+    return 1 - Math.exp(-z * wn * t) * (Math.cos(wd * t) + z * wn / wd * Math.sin(wd * t));
+  }
+  const TMAX = 8, CMAX = 1.9;
+  const curve = (K1, color, w) => {
+    let d = "";
+    for (let i = 0; i <= 220; i++) { const t = i / 220 * TMAX, c = stepResp(K1, t);
+      d += (i ? "L" : "M") + (ox + t / TMAX * TX).toFixed(1) + "," + (oy - c / CMAX * TY).toFixed(1); }
+    mk("path", { d, fill: "none", stroke: color, "stroke-width": w || 3.5, "stroke-linecap": "round" }, svg);
+  };
+  curve(0.5, GRAY); curve(1, BLUE2, 4); curve(4, GREEN);
+  tx(500, 692, "单调（K₁=0.5）", { fs: 18, b: 1, zh: 1, fill: GRAY, an: "end" });
+  tx(500, 614, "临界（K₁=1）", { fs: 18, b: 1, zh: 1, fill: BLUE2, an: "end" });
+  tx(150, 654, "振荡（K₁=4）", { fs: 18, b: 1, zh: 1, fill: GREEN });
+});
+</script>
+</div></div>
+</body>
+</html>

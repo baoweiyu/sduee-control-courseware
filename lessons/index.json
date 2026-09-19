@@ -18,5 +18,10 @@
     "lesson_id": "lesson04-freq",
     "path": "lesson04-freq/lesson.json",
     "title": "第四章 频率响应法"
+  },
+  {
+    "lesson_id": "lesson05-root-locus",
+    "path": "lesson05-root-locus/lesson.json",
+    "title": "第五章 根轨迹法"
   }
 ]

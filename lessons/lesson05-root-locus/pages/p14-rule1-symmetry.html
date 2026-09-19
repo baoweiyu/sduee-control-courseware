@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>法则一：分支数与对称性</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=218">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=218" defer></script>
+<script src="../fig.js?v=507"></script>
+<script src="../data/rule1.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .act-body.has-note{bottom:150px}
+  .lft{flex:1;display:flex;flex-direction:column;gap:10px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:5px;padding:8px 16px;font-size:19.5px;line-height:1.42}
+  .law{background:#FDF3EC;border-left:5px solid var(--orange);border-radius:0 12px 12px 0;padding:9px 16px;line-height:1.45}
+  .law b{color:var(--danger)}
+  .tip{background:var(--sky);border-radius:12px;padding:7px 13px;line-height:1.4}
+  .figc{flex:1.16;display:flex;flex-direction:column;overflow:hidden;position:relative}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .segfloat{position:absolute;top:58px;left:50%;transform:translateX(-50%);z-index:5;background:#fff;
+    border:2px solid var(--blue);border-radius:10px;padding:5px 16px;font-size:18px;font-weight:700;
+    color:var(--navy);white-space:nowrap;box-shadow:0 2px 10px rgba(20,40,90,.18)}
+  .ctl{display:flex;align-items:center;gap:10px;justify-content:center;padding:8px 0 10px}
+  .btn{background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:19px;font-weight:700;padding:8px 20px;cursor:pointer}
+  .btn.ghost{background:#fff;color:var(--blue);border:2px solid var(--blue)}
+  .kr{font-size:19px;color:var(--navy);font-weight:700;background:var(--sky);border-radius:10px;padding:7px 12px;white-space:nowrap}
+  .prog{font-size:18px;color:var(--muted);min-width:64px}
+</style>
+</head>
+<body data-title="法则一：分支数与对称性" data-page="14 / 61">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lft">
+        <div class="act-card" style="flex:1.12">
+          <div class="hd">法则内容（<span class="tex">n\geq m</span>）</div>
+          <div class="bd">
+            <div class="law"><b>分支数 = 闭环极点数 = 开环极点数 n</b>：每个开环极点出发一条分支（<span class="tex">K_{1}=0</span> 时根就是开环极点）。</div>
+            <div class="law"><b>根轨迹连续</b>：特征根随系数 <span class="tex">K_{1}</span> 连续变化，故轨迹是连续曲线。</div>
+            <div class="law"><b>对称于实轴</b>：实系数特征方程的复根必共轭成对出现，轨迹上下镜像对称。</div>
+          </div>
+        </div>
+        <div class="act-card" style="flex:0.88">
+          <div class="hd">怎么来的</div>
+          <div class="bd">
+            <div class="tip">特征方程是 <b>n 次代数方程</b>（<span class="tex">n\geq m</span>）→ 任意 <span class="tex">K_{1}</span> 对应 n 个根 → n 条分支。</div>
+            <div class="tip">根随系数<b>连续</b>变化；实系数复根<b>共轭成对</b> → 轨迹连续、对称于实轴。</div>
+          </div>
+        </div>
+        <div class="act-card" style="flex:0.92">
+          <div class="hd">示例（<span class="tex">G(s)=\dfrac{K_{1}}{s(s+2)}</span>，<span class="tex">n=2</span>）</div>
+          <div class="bd">
+            <div class="tip"><span class="tex">n=2</span> → <b>2 条分支</b>：分别从 <span class="tex">p_{1}=0</span>、<span class="tex">p_{2}=-2</span> 出发；上下两支互为共轭，<span class="kw-r">同色成对</span>。</div>
+            <div class="tip">对称性是检查图对不对的<span class="kw-r">第一道关</span>：不对称必错。</div>
+          </div>
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd"><span style="flex:1">两条分支 · 上下对称 · 共轭同色</span></div>
+        <div class="bd2"><svg id="fig"></svg></div>
+        <div class="ctl">
+          <button class="btn" id="play">▶ 播放</button>
+          <button class="btn ghost" onclick="ACT.step.reset()">↺ 重置</button>
+          <span class="kr">K₁ = <b id="kv" style="color:var(--danger)">0</b></span>
+          <span class="prog" id="prog">0 / 3</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">要点</span><span>拿到系统先数<span class="kw-r">分支数</span>（=n），画完先查<span class="kw-r">对称性</span>——这两条不占计算量，却能拦住大错。</span></div>
+
+<div data-step="1" style="display:none"></div><div data-step="2" style="display:none"></div>
+<div data-step="3" style="display:none"></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const F = RL.figure("fig", "rule1", { vw: 960, vh: 600, asym: false, crossSq: false });
+  const fB = F.f_of_K(1);              // 分离点 s=−1（K₁=1）
+  const FS = [0, 0, fB, 1];
+  const nb = v => v.toFixed(2).replace(/(\.\d*?)0+$/, "$1").replace(/\.$/, "").replace("-", "−");
+  /* Δ(s)=s²+2s+K₁=0 的两根（图外面板实时读数） */
+  function poleTxt(K1) {
+    const d = 4 - 4 * K1;
+    if (d >= 0) { const q = Math.sqrt(d); return nb((-2 + q) / 2) + "，" + nb((-2 - q) / 2); }
+    return "−1 ± j" + nb(Math.sqrt(-d) / 2);
+  }
+  function frame(f) {
+    const K1 = F.K_of_f(f);
+    document.getElementById("kv").textContent = f >= 0.999 ? "→ ∞" : RL.fmtK(K1);
+  }
+  function paint(K) {
+    F.segEls.forEach(e => e.style.opacity = K >= 1 ? .32 : 0);
+    if (K >= 3) {  // 对称性结语（短语标注，读数在面板）
+      F.tx(F.gDyn, F.X(-1), F.Y(2.9), "共轭分支：上下镜像对称", { fs: 25, fill: "#1B3B8B", b: 1 });
+      F.tx(F.gDyn, F.X(-1), F.Y(-2.9) + 8, "（实轴为对称轴）", { fs: 22, fill: "#5B6B8C" });
+    }
+  }
+  RL.wire(3, paint, {
+    figs: [F], FS, dur: 10000,
+    frame: f => frame(f),
+    pick: hit => {
+      document.getElementById("kv").textContent = RL.fmtK(hit.K);
+      document.getElementById("prog").textContent = "s=" + RL.fmtC(hit.point);
+    }
+  });
+});
+</script>
+</div></div>
+</body>
+</html>

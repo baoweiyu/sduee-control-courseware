@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>例5-8②：参量根轨迹动画</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=505">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=505" defer></script>
+<script src="../fig.js?v=506"></script>
+<script src="../data/ex58.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:1;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:8px;padding:12px 18px;font-size:20px;line-height:1.45}
+  .kv{background:var(--sky);border-radius:12px;padding:7px 13px;line-height:1.42}
+  .kv.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .figc{flex:1.25;display:flex;flex-direction:column;overflow:hidden;position:relative}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .segfloat{position:absolute;top:58px;left:50%;transform:translateX(-50%);z-index:5;background:#fff;
+    border:2px solid var(--blue);border-radius:10px;padding:5px 16px;font-size:18px;font-weight:700;
+    color:var(--navy);white-space:nowrap;box-shadow:0 2px 10px rgba(20,40,90,.18)}
+  .ctl{display:flex;align-items:center;gap:10px;justify-content:center;padding:8px 0 10px}
+  .btn{background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:19px;font-weight:700;padding:8px 20px;cursor:pointer}
+  .btn.ghost{background:#fff;color:var(--blue);border:2px solid var(--blue)}
+  .kr{font-size:20px;color:var(--navy);font-weight:700;background:var(--sky);border-radius:10px;padding:7px 14px;white-space:nowrap}
+  .prog{font-size:18px;color:var(--muted);min-width:64px}
+</style>
+</head>
+<body data-title="例5-8②：参量根轨迹动画" data-page="37 / 60">
+<div class="act-stage"><div class="act-slide">
+
+<div class="act-body has-note">
+  <div class="row">
+    <div class="lft">
+      <div class="act-card" style="flex:1.25">
+        <div class="hd">等效系统与实时读数</div>
+        <div class="bd">
+          <div style="text-align:center;font-size:21px"><span class="tex">G^{*}(s)H^{*}(s)=\dfrac{as}{(s+j2)(s-j2)}</span></div>
+          <div class="kv">参量 a：0 → ∞（时间常数型参量的标准形态）</div>
+          <div class="kv">a = <b id="kv" style="color:var(--danger)">0</b></div>
+          <div class="kv">闭环极点：<b id="lp" style="color:var(--navy)">±j2</b></div>
+          <div class="kv">出射角：θ=180°（自 ±j2 沿圆左行）</div>
+        </div>
+      </div>
+      <div class="act-card">
+        <div class="hd">绘制步骤</div>
+        <div class="bd" style="gap:5px">
+          <div class="kv" id="s1">① 等效零点 0、等效极点 ±j2</div>
+          <div class="kv" id="s2">② a:0→4，两支沿圆 |s|=2 相向绕行</div>
+          <div class="kv" id="s3">③ a=4 会合于 s=−2（重根）</div>
+          <div class="kv" id="s4">④ a→∞：一支止于零点 0，一支沿负实轴趋向 −∞</div>
+        </div>
+      </div>
+    </div>
+    <div class="act-card figc">
+      <div class="hd"><span style="flex:1">参量根轨迹：a 变化时闭环极点沿圆 |s|=2 移动</span></div>
+      <span class="segfloat" id="segChip" style="display:none"></span>
+      <div class="bd2"><svg id="fig"></svg></div>
+      <div class="ctl">
+        <button class="btn" id="play">▶ 播放</button>
+        <button class="btn ghost" id="step">⧉ 分步</button>
+        <button class="btn ghost" onclick="ACT.step.reset()">↺ 重置</button>
+        <span class="prog" id="prog">0 / 4</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">要点</span><span>等效系统的"增益"就是参量 a 本身——根轨迹是一条完整的圆（|s|=2），说明闭环极点始终不改变模长，只绕原点转动再落到负实轴。</span></div>
+
+<div data-step="1" style="display:none"></div><div data-step="2" style="display:none"></div>
+<div data-step="3" style="display:none"></div><div data-step="4" style="display:none"></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const F = RL.figure("fig", "ex58", { vw: 960, vh: 600, asym: false, brkDots: false });
+  const fA = F.f_of_K(4);
+  const FS = [0, 0, fA, fA, 1];
+  const nb = v => { let s = Math.abs(v).toFixed(2).replace(/(\.\d*?)0+$/, "$1").replace(/\.$/, ""); return (v < -1e-9 ? "−" : "") + s; };
+  function poleTxt(a) {
+    if (a <= 4 + 1e-6) { const r = Math.sqrt(Math.max(0, 4 - a * a)); return nb(-a / 2) + " ± j" + nb(Math.sqrt(4 - a * a) / 2); }
+    const q = Math.sqrt(a * a - 16) / 2;
+    return nb(-a / 2 + q) + "，" + nb(-a / 2 - q);
+  }
+  function frame(f) {
+    const a = F.K_of_f(f);
+    document.getElementById("kv").textContent = f >= 0.999 ? "→ ∞" : RL.fmtK(a);
+    document.getElementById("lp").textContent = f >= 0.999 ? "0，−∞" : poleTxt(a);
+  }
+  function paint(K) {
+    if (K >= 3) {
+      const x = F.X(-2), y = F.Y(0);
+      F.mk("circle", { cx: x, cy: y, r: 9, fill: RL.FOCUS, stroke: "#fff", "stroke-width": 2.5 }, F.gDyn);
+      F.tx(F.gDyn, x - 20, y - 40, "会合点 s=−2", { fs: 24, fill: RL.FOCUS, b: 1, an: "end" });
+    }
+    if (K >= 4) {
+      F.tx(F.gDyn, F.X(-1) + 14, F.Y(0) + 50, "止于零点 0", { fs: 23, fill: "#1B3B8B", b: 1, an: "start" });
+      F.tx(F.gDyn, F.X(-3.4), F.Y(0) + 50, "沿负实轴 → −∞", { fs: 23, fill: "#1B3B8B", b: 1, an: "start" });
+    }
+    const ROW = [1, 1, 2, 3, 4];
+    for (let i = 1; i <= 4; i++)
+      document.getElementById("s" + i).classList.toggle("hl", i === ROW[K]);
+  }
+  RL.wire(4, paint, {
+    figs: [F], FS, dur: 9000,
+    frame: f => frame(f),
+    segLabel: txt => { const c = document.getElementById("segChip"); if (!c) return; if (txt) { c.textContent = txt; c.style.display = ""; } else c.style.display = "none"; },
+    pick: hit => {
+      document.getElementById("kv").textContent = RL.fmtK(hit.K);
+      document.getElementById("lp").textContent = poleTxt(hit.K);
+    },
+    segments: [
+      { label: "① a:0→4，两支沿圆 |s|=2 相向绕行至 s=−2 会合", parts: [{ F, b: [0, 1], f0: 0, f1: fA }] },
+      { label: "② a→∞：一支止于零点 0（其余分支弱化）", parts: [{ F, b: [1], f0: fA, f1: 1 }] },
+      { label: "③ 另一支沿负实轴趋向 −∞", parts: [{ F, b: [0], f0: fA, f1: 1 }] },
+    ], segDur: 3000
+  });
+});
+</script>
+</div></div>
+</body>
+</html>

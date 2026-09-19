@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>④ 条件稳定系统：根轨迹与稳定域（例5-12）</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=218">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=218" defer></script>
+<script src="../fig.js?v=507"></script>
+<script src="../data/ex512.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:.95;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:8px;padding:12px 18px;font-size:20px;line-height:1.45}
+  .eq{background:var(--sky);border-radius:12px;padding:9px 14px;text-align:center;font-size:21px;line-height:1.5}
+  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .kv{background:var(--sky);border-radius:12px;padding:7px 13px;line-height:1.42}
+  .figc{flex:1.25;display:flex;flex-direction:column;overflow:hidden;position:relative}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .segfloat{position:absolute;top:58px;left:50%;transform:translateX(-50%);z-index:5;background:#fff;
+    border:2px solid var(--blue);border-radius:10px;padding:5px 16px;font-size:18px;font-weight:700;
+    color:var(--navy);white-space:nowrap;box-shadow:0 2px 10px rgba(20,40,90,.18)}
+  .ctl{display:flex;align-items:center;gap:10px;justify-content:center;padding:8px 0 10px}
+  .btn{background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:19px;font-weight:700;padding:8px 20px;cursor:pointer}
+  .btn.ghost{background:#fff;color:var(--blue);border:2px solid var(--blue)}
+  .kr{font-size:20px;color:var(--navy);font-weight:700;background:var(--sky);border-radius:10px;padding:7px 14px;white-space:nowrap}
+  .stab{border-radius:10px;padding:7px 14px;font-size:20px;font-weight:700;color:#fff;background:var(--danger);white-space:nowrap}
+  #stab{min-width:9.6em;text-align:center}  /* 判定文字五种长度，钉死防按钮跳动（A1-G1） */
+  .prog{font-size:18px;color:var(--muted);min-width:64px}
+</style>
+</head>
+<body data-title="④ 条件稳定系统：根轨迹与稳定域（例5-12）" data-page="47 / 61">
+<div class="act-stage"><div class="act-slide">
+
+<div class="act-body has-note">
+  <div class="row">
+    <div class="lft">
+      <div class="act-card" style="flex:1.34">
+        <div class="hd">系统与关键点</div>
+        <div class="bd" style="font-size:19.5px;gap:6px;padding:8px 16px">
+          <div style="text-align:center"><span class="tex">G(s)H(s)=\dfrac{K_{1}(s^{2}-2s+5)}{(s+2)(s-0.5)}</span></div>
+          <div class="kv">RHP 极点 +0.5、复零点 1±j2——标准形下仍按 180° 绘制。</div>
+          <div class="kv" id="c1">分离点：d=−0.41（K₁=0.242）</div>
+          <div class="kv" id="c2">实轴段上 s=0：K₁=0.2（下限）</div>
+          <div class="kv" id="c3">虚轴交点 ±j1.25：K₁=0.75（上限）</div>
+          <div class="kv">复零点 z₁=1+j2 的入射角 ≈199°</div>
+          <div class="kv" style="font-size:18px;color:var(--muted)">入射角注：θ=180°−90°+33.7°+76.0°≈199.7°（图5-14 口径）。</div>
+        </div>
+      </div>
+      <div class="act-card" style="flex:.9">
+        <div class="hd">条件稳定结论</div>
+        <div class="bd" style="font-size:19.5px;gap:6px;padding:8px 16px">
+          <div class="eq hl">稳定范围：0.2&lt;K₁&lt;0.75</div>
+          <div class="kv">0&lt;K₁&lt;0.2：从 +0.5 出发的分支仍在右半平面——不稳定；K₁=0.2：该支到原点（下限临界）。</div>
+          <div class="kv">0.2&lt;K₁&lt;0.75：全部闭环极点在左半平面，系统稳定。</div>
+          <div class="kv">K₁&gt;0.75：过虚轴 ±j1.25 再次失稳——称<b>条件稳定系统</b>。</div>
+        </div>
+      </div>
+    </div>
+    <div class="act-card figc">
+      <div class="hd"><span style="flex:1">例5-12 根轨迹：起点 RHP，终点复零点</span></div>
+      <span class="segfloat" id="segChip" style="display:none"></span>
+      <div class="bd2"><svg id="fig"></svg></div>
+      <div class="ctl">
+        <button class="btn" id="play">▶ 播放</button>
+        <button class="btn ghost" id="step">⧉ 分步</button>
+        <button class="btn ghost" onclick="ACT.step.reset()">↺ 重置</button>
+        <span class="kr">K₁ = <b id="kv" style="color:var(--danger)">0</b></span>
+        <span class="stab" id="stab">K₁&lt;0.2 不稳定</span>
+        <span class="prog" id="prog">0 / 4</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">要点</span><span>轨迹的"起点"在右半平面、终点是复零点——稳定与否取决于 K₁ 落在哪一段：<span class="kw-r">0.2&lt;K₁&lt;0.75</span>。</span></div>
+
+<div data-step="1" style="display:none"></div><div data-step="2" style="display:none"></div>
+<div data-step="3" style="display:none"></div><div data-step="4" style="display:none"></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const F = RL.figure("fig", "ex512", { vw: 960, vh: 600, asym: false, brkDots: false, crossSq: false });
+  const fO = F.f_of_K(0.2), fD = F.f_of_K(0.2416), fC = F.f_of_K(0.75);
+  const FS = [0, 0, fO, fD, fC, 1];
+  function stabUI(K1) {
+    const st = document.getElementById("stab");
+    if (K1 < 0.2 - 0.005) { st.textContent = "K₁<0.2 不稳定"; st.style.background = "var(--danger)"; }
+    else if (Math.abs(K1 - 0.2) <= 0.005) { st.textContent = "K₁=0.2 临界"; st.style.background = "var(--orange)"; }
+    else if (K1 > 0.75 + 0.005) { st.textContent = "K₁>0.75 不稳定"; st.style.background = "var(--danger)"; }
+    else if (Math.abs(K1 - 0.75) <= 0.005) { st.textContent = "K₁=0.75 临界"; st.style.background = "var(--orange)"; }
+    else { st.textContent = "0.2<K₁<0.75 稳定"; st.style.background = "var(--blue)"; }
+  }
+  function frame(f) {
+    const K1 = F.K_of_f(f);
+    document.getElementById("kv").textContent = RL.fmtK(K1);
+    stabUI(K1);
+  }
+  function paint(K) {
+    F.segEls.forEach(e => e.style.opacity = K >= 1 ? .32 : 0);
+    if (K >= 1) {  // 稳定区间色带（0.2<K₁<0.75 段叠绿强调，与徽章联动）
+      const ks = F.data.ks;
+      F.data.branches.forEach(b => {
+        const pts = [];
+        for (let j = 0; j < b.length; j++)
+          if (ks[j] >= 0.2 - 1e-9 && ks[j] <= 0.75 + 1e-9) pts.push([F.X(b[j][0]), F.Y(b[j][1])]);
+        if (pts.length > 1)
+          F.mk("path", { d: F.toPath(F.clipPoly(pts, F.PLOT)), fill: "none", stroke: "#0E7A36",
+            "stroke-width": 8, opacity: .45, "stroke-linecap": "round" }, F.gDyn);
+      });
+    }
+    if (K >= 2) {  // 原点穿越（下限）
+      F.mk("circle", { cx: F.X(0), cy: F.Y(0), r: 9, fill: RL.FOCUS, stroke: "#fff", "stroke-width": 2.5 }, F.gDyn);
+      F.tx(F.gDyn, F.X(0) + 18, F.Y(0) - 34, "s=0：K₁=0.2", { fs: 22, fill: "#B3541E", b: 1, an: "start" });
+    }
+    if (K >= 3) {  // 分离点
+      const x = F.X(-0.4094), y = F.Y(0);
+      F.mk("circle", { cx: x, cy: y, r: 9, fill: RL.FOCUS, stroke: "#fff", "stroke-width": 2.5 }, F.gDyn);
+      F.tx(F.gDyn, x - 18, y + 48, "分离点 d", { fs: 22, fill: RL.FOCUS, b: 1, an: "end" });
+    }
+    if (K >= 4) {  // 虚轴交点（上限）+ 入射方向
+      F.crossSq.forEach(el => el.style.opacity = 1);
+      F.tx(F.gDyn, F.X(0) + 22, F.Y(1.25) + 28, "K₁=0.75 临界", { fs: 21, fill: "#B3541E", b: 1, an: "start" });
+      F.tx(F.gDyn, F.X(1) - 20, F.Y(2) - 26, "止于复零点", { fs: 21, fill: "#1B3B8B", b: 1, an: "end" });
+    } else F.crossSq.forEach(el => el.style.opacity = 0);
+    ["c1", "c2", "c3"].forEach((id, j) =>
+      document.getElementById(id).classList.toggle("hl", K === j + 2));
+  }
+  RL.wire(4, paint, {
+    figs: [F], FS, dur: 11000,
+    frame: (f, K) => frame(f),
+    segLabel: txt => { const c = document.getElementById("segChip"); if (!c) return; if (txt) { c.textContent = txt; c.style.display = ""; } else c.style.display = "none"; },
+    pick: hit => {
+      document.getElementById("kv").textContent = RL.fmtK(hit.K);
+      stabUI(hit.K);
+    },
+    segments: [
+      { label: "① 支从 −2 与 +0.5 沿实轴相向（s=0 处 K₁=0.2）", parts: [{ F, b: [0, 1], f0: 0, f1: fO }] },
+      { label: "② d=−0.41 分离（K₁=0.242），两支进入复平面", parts: [{ F, b: [0, 1], f0: fO, f1: fD }] },
+      { label: "③ 复数对绕向右侧，过虚轴 ±j1.25（K₁=0.75 临界）", parts: [{ F, b: [0, 1], f0: fD, f1: fC }] },
+      { label: "④ 抵达复零点 1±j2（入射角 ≈199°）", parts: [{ F, b: [0, 1], f0: fC, f1: 1 }] },
+    ], segDur: 3000
+  });
+});
+</script>
+</div></div>
+</body>
+</html>

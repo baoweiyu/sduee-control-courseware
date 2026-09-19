@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>法则六：出射角与入射角</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=505">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=505" defer></script>
+<script src="../fig.js?v=506"></script>
+<script src="../data/dep.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:1.04;display:flex;flex-direction:column;gap:10px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:5px;padding:9px 16px;font-size:19.5px;line-height:1.38}
+  .law{background:#FDF3EC;border-left:5px solid var(--orange);border-radius:0 12px 12px 0;padding:7px 14px;line-height:1.38}
+  .law b{color:var(--danger)}
+  .eq{background:var(--sky);border-radius:12px;padding:7px 12px;text-align:center;font-size:20px;line-height:1.5}
+  .tip{background:var(--sky);border-radius:12px;padding:8px 14px;line-height:1.42}
+  .figc{flex:1.08;display:flex;flex-direction:column;overflow:hidden;position:relative}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .cap{flex:none;font-size:19px;color:var(--navy);background:var(--sky);border-radius:12px;padding:8px 16px;margin:0 14px 10px;line-height:1.4}
+  .segfloat{position:absolute;top:58px;left:50%;transform:translateX(-50%);z-index:5;background:#fff;
+    border:2px solid var(--blue);border-radius:10px;padding:5px 16px;font-size:18px;font-weight:700;
+    color:var(--navy);white-space:nowrap;box-shadow:0 2px 10px rgba(20,40,90,.18)}
+  .ctl{display:flex;align-items:center;gap:10px;justify-content:center;padding:6px 0 8px}
+  .btn{background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:19px;font-weight:700;padding:8px 20px;cursor:pointer}
+  .btn.ghost{background:#fff;color:var(--blue);border:2px solid var(--blue)}
+  .kr{font-size:19px;color:var(--navy);font-weight:700;background:var(--sky);border-radius:10px;padding:7px 12px;white-space:nowrap}
+  .prog{font-size:18px;color:var(--muted);min-width:64px}
+</style>
+</head>
+<body data-title="法则六：出射角与入射角" data-page="24 / 60">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lft">
+        <div class="act-card" style="flex:1.6">
+          <div class="hd">法则内容</div>
+          <div class="bd">
+            <div class="law"><b>复极点 / 复零点附近，轨迹沿什么方向离开 / 进入？</b>——相角条件用在 <span class="tex">p_{k}</span>（或 <span class="tex">z_{k}</span>）邻域上，解出出射角 <span class="tex">\theta_{p_{k}}</span>（入射角 <span class="tex">\theta_{z_{k}}</span>）。</div>
+            <div class="eq">出射角：<span class="tex">\theta_{p_{k}}=(2q+1)\times180^{\circ}+\sum\limits_{j=1}^{m}\angle(p_{k}-z_{j})-\sum\limits_{i\neq k}\angle(p_{k}-p_{i})</span></div>
+            <div class="eq">入射角：<span class="tex">\theta_{z_{k}}=(2q+1)\times180^{\circ}-\sum\limits_{j\neq k}\angle(z_{k}-z_{j})+\sum\limits_{i=1}^{n}\angle(z_{k}-p_{i})</span></div>
+            <div class="tip">记忆：<span class="kw-r">零点"帮忙"（加），其余极点"捣乱"（减）</span>——与相角条件的正负号完全一致。</div>
+          </div>
+        </div>
+        <div class="act-card" style="flex:.8">
+          <div class="hd">怎么来的</div>
+          <div class="bd">
+            <div class="tip">在复极点 <span class="tex">p_{k}</span> 的极小邻域取试验点 <span class="tex">s=p_{k}+\varepsilon e^{j\theta}</span>：相角条件中唯有 <span class="tex">\angle(s-p_{k})=\theta</span> 未知，其余所有向量的相角都可用 <span class="tex">p_{k}</span> 处的值代入——<b>一个方程解一个未知数</b>，<span class="tex">\theta</span> 即出射角。入射角同理。</div>
+          </div>
+        </div>
+        <div class="act-card" style="flex:.8">
+          <div class="hd">示例（下一页完整演算）</div>
+          <div class="bd">
+            <div class="tip"><span class="tex">G(s)H(s)=\dfrac{K_{1}}{s(s+2)(s^{2}+2s+2)}</span>：<span class="tex">p_{3}=-1+j</span> 的出射角 <span class="tex">\theta_{p_{3}}=180^{\circ}-(135^{\circ}+45^{\circ}+90^{\circ})=-90^{\circ}</span>，<span class="tex">\theta_{p_{4}}=+90^{\circ}</span>（镜像）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd"><span style="flex:1">出射角原理演示：试验点 s 逼近 <span class="tex">p_{3}</span>，解出 <span class="tex">\theta</span></span></div>
+        <span class="segfloat" id="segChip" style="display:none"></span>
+        <div class="bd2"><svg id="fig"></svg></div>
+        <div class="cap">试验点 s 在 <span class="tex">p_{3}</span> 邻域：其余向量相角已定（135°、45°、90°），唯一未知 <span class="tex">\angle(s-p_{3})=\theta</span>；解得 <span class="tex">\theta=-90^{\circ}</span> 后分支沿 <span class="tex">\theta</span> 出射，<span class="tex">p_{4}</span> 镜像。</div>
+        <div class="ctl">
+          <button class="btn" id="play">▶ 播放</button>
+          <button class="btn ghost" id="step">⧉ 分步</button>
+          <button class="btn ghost" onclick="ACT.step.reset()">↺ 重置</button>
+          <span class="kr">K₁ = <b id="kv" style="color:var(--danger)">0</b></span>
+          <span class="prog" id="prog">0 / 4</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">用途</span><span>复数段轨迹从哪里"拐出去"，由<span class="kw-r">出射角</span>说了算——下一页用本系统逐角量取、完整演算。</span></div>
+
+<div data-step="1" style="display:none"></div><div data-step="2" style="display:none"></div>
+<div data-step="3" style="display:none"></div><div data-step="4" style="display:none"></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  /* 与 N25 同数据、同坐标范围：两页连翻图面连续 */
+  const F = RL.figure("fig", "dep", { vw: 960, vh: 600, asym: false, brkDots: false, crossSq: false,
+                                      xlim: [-3.6, 1.0], ylim: [-1.7, 2.3] });
+  const p3 = [-1, 1], p4 = [-1, -1];
+  const SU = F.X(1) - F.X(0);          // px / 单位
+  const SRC = [[0, 0, "135°", [-16, -16]], [-2, 0, "45°", [24, 4]], [-1, -1, "90°", [-56, 0]]];
+  const FS = [0, 0, 0, 0, 0.12];       // 末步分支只出射一小段
+  /* 试验点 s = p3 + ε·e^{jφ}（φ=−50° 任意未知方向） */
+  const testPt = eps => [p3[0] + eps * Math.cos(-50 * Math.PI / 180), p3[1] + eps * Math.sin(-50 * Math.PI / 180)];
+  function drawTestPt(g, eps) {
+    const s = testPt(eps), cx = F.X(p3[0]), cy = F.Y(p3[1]);
+    F.mk("circle", { cx, cy, r: eps * SU, fill: "none", stroke: "#8A97B5", "stroke-width": 1.8, "stroke-dasharray": "4 5", opacity: .8 }, g);
+    F.mk("line", { x1: cx, y1: cy, x2: F.X(s[0]), y2: F.Y(s[1]), stroke: RL.FOCUS, "stroke-width": 2.2 }, g);
+    F.mk("circle", { cx: F.X(s[0]), cy: F.Y(s[1]), r: 8, fill: RL.FOCUS, stroke: "#fff", "stroke-width": 2.5 }, g);
+    F.tx(g, F.X(s[0]) + 18, F.Y(s[1]) - 14, "s（试验点）", { fs: 23, fill: RL.FOCUS, b: 1, an: "start" });
+    F.tx(g, cx - 22, cy + 46, "∠(s−p_{3})=θ 未知", { fs: 22, fill: RL.FOCUS, an: "end" });
+  }
+  function drawVectors(g, cnt) {
+    const s = testPt(0.35);
+    SRC.slice(0, cnt).forEach(([qx, qy, lab, off]) => {
+      const a = [F.X(qx), F.Y(qy)], b = [F.X(s[0]), F.Y(s[1])];
+      const dx = b[0] - a[0], dy = b[1] - a[1], L = Math.hypot(dx, dy);
+      F.mk("line", { x1: a[0] + dx / L * 30, y1: a[1] + dy / L * 30, x2: b[0] - dx / L * 24, y2: b[1] - dy / L * 24,
+        stroke: RL.INK, "stroke-width": 2.4, "marker-end": "url(#rxfig)" }, g);
+      F.tx(g, (a[0] + b[0]) / 2 + off[0], (a[1] + b[1]) / 2 + off[1] + 8, lab, { fs: 24, fill: "#B3541E", b: 1 });
+    });
+  }
+  function drawDeparture(g) {
+    F.angleArc(p3[0], p3[1], 270, 360, g);   // p3：θ=−90°（正下方）
+    F.angleArc(p4[0], p4[1], 0, 90, g);      // p4：θ=+90°（镜像）
+    F.tx(g, F.X(p3[0]) + 34, F.Y(p3[1]) + 46, "θ_{p3}=−90°", { fs: 25, fill: "#B3541E", b: 1, an: "start" });
+    F.tx(g, F.X(p4[0]) + 34, F.Y(p4[1]) - 20, "θ_{p4}=+90°（镜像）", { fs: 25, fill: "#B3541E", b: 1, an: "start" });
+  }
+  function frame(f) {
+    /* 连贯播放也只让分支出射一小段（本页讲出射方向，不讲全程） */
+    if (f > 0.12) F.setAllF(0.12);
+    document.getElementById("kv").textContent = RL.fmtK(F.K_of_f(Math.min(f, 0.12)));
+  }
+  function paint(K) {
+    F.segEls.forEach(e => e.style.opacity = K >= 1 ? .32 : 0);
+    if (K === 2) drawTestPt(F.gDyn, 0.4);
+    if (K === 3) { drawTestPt(F.gDyn, 0.35); drawVectors(F.gDyn, 3); }
+    if (K >= 4) drawDeparture(F.gDyn);
+  }
+  RL.wire(4, paint, {
+    figs: [F], FS, dur: 11000,
+    frame: f => frame(f),
+    segLabel: txt => { const c = document.getElementById("segChip"); if (!c) return; if (txt) { c.textContent = txt; c.style.display = ""; } else c.style.display = "none"; },
+    pick: hit => { document.getElementById("kv").textContent = RL.fmtK(hit.K); },
+    segPaint: () => { F.setAllF(0); F.segEls.forEach(e => e.style.opacity = .32); F.gDyn.innerHTML = ""; },
+    segments: [
+      { label: "① 标出零极点：p₁=0、p₂=−2、p₃,₄=−1±j（共轭复极点）", parts: [{ F, b: [0, 1, 2, 3], f0: 0, f1: 0 }] },
+      { label: "② 在 p₃ 极小邻域取试验点 s（沿小圆缓慢逼近 p₃）", parts: [{ F, b: [0, 1, 2, 3], f0: 0, f1: 0 }],
+        draw(t, g) { drawTestPt(g, 0.55 - 0.2 * t); } },
+      { label: "③ 其余零极点向 s 引向量，逐个读出相角 135°、45°、90°", parts: [{ F, b: [0, 1, 2, 3], f0: 0, f1: 0 }],
+        draw(t, g) { drawTestPt(g, 0.35); drawVectors(g, t < 0.25 ? 0 : t < 0.5 ? 1 : t < 0.75 ? 2 : 3); } },
+      { label: "④ 解出 θ=−90°：s 收回，分支沿 θ 出射（p₄ 镜像 +90°）", parts: [{ F, b: [1, 2], f0: 0, f1: 0.12 }],
+        draw(t, g) { drawDeparture(g); } },
+    ], segDur: 3600
+  });
+});
+</script>
+</div></div>
+</body>
+</html>

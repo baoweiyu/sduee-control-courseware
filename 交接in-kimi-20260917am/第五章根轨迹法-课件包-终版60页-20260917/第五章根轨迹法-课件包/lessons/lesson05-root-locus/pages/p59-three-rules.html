@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>零极点配置的三大规律</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=505">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=505" defer></script>
+<script src="../fig.js?v=506"></script>
+<script src="../data/ex516a.js"></script>
+<script src="../data/ex516d.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:1.04;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:9px;padding:12px 18px;font-size:20px;line-height:1.45}
+  .eq{background:var(--sky);border-radius:12px;padding:8px 13px;text-align:center;font-size:20px;line-height:1.5}
+  .kv{background:var(--sky);border-radius:12px;padding:7px 13px;line-height:1.45}
+  .kv.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .rcol{flex:1.14;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .figc{display:flex;flex-direction:column;overflow:hidden}
+  .figc .bd2{flex:1;display:flex;gap:8px;background:#fff;padding:4px 8px;min-height:0}
+  .figc .bd2 .half{flex:1;display:flex;flex-direction:column;min-width:0}
+  .figc .bd2 svg{width:100%;flex:1;min-height:0}
+  .figc .bd2 .tag{text-align:center;font-size:18px;font-weight:700;color:var(--navy);background:var(--sky);border-radius:9px;padding:4px 8px}
+  .figc .bd2c{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
+  .figc .bd2c svg{width:100%;height:100%}
+</style>
+</head>
+<body data-title="零极点配置的三大规律" data-page="59 / 60">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lft">
+        <div class="act-card" style="flex:1.85">
+          <div class="hd">三大规律（①②对照见右上图，③见右下图）</div>
+          <div class="bd">
+            <div class="kv" data-step="1">① <b>增加开环零点</b> ⟹ 根轨迹左偏、稳定裕度提高；零点越靠近虚轴，作用越显著（证据：例5-16，b=0.5 时 σₐ 由 −0.67 左移至 −0.75 且渐近线减为两条）。</div>
+            <div class="kv" data-step="2">② <b>增加开环极点</b> ⟹ 根轨迹右偏、裕度下降。例：<span class="tex">K_{1}/[s(s+1)]</span>（σₐ=−0.5，±90°）加极点 −2 后 <span class="tex">\sigma_{a}=-1</span>、<span class="tex">\varphi_{a}=\pm60^{\circ},180^{\circ}</span>——渐近线更"挤"向右。</div>
+            <div class="kv" data-step="3">③ <b>开环偶极子（对消设计）</b>：紧贴的零极点不改变轨迹形状，但开环增益 <span class="tex">K_{c}=K\cdot z_{c}/p_{c}</span>——例：<span class="tex">z_{c}=-0.5</span>、<span class="tex">p_{c}=-0.05</span> ⟹ 开环增益提高 10 倍，改善稳态精度而不损动态。</div>
+          </div>
+        </div>
+        <div class="act-card" style="flex:1">
+          <div class="hd">设计视角（衔接第六章）</div>
+          <div class="bd">
+            <div class="kv hl" data-step="4">根轨迹不仅是分析工具，更是<span class="kw-r">校正设计工具</span>——用零极点把主导极点"推"到期望位置。<b>这三大规律就是第六章超前/滞后校正的根轨迹直觉</b>：超前 ≈ 规律①加零点，滞后 ≈ 规律③偶极子提增益。</div>
+          </div>
+        </div>
+      </div>
+      <div class="rcol">
+        <div class="act-card figc" style="flex:1.12">
+          <div class="hd"><span style="flex:1">规律①对照：无零点 vs 加零点 −0.5（例5-16 数据）</span></div>
+          <div class="bd2">
+            <div class="half"><svg id="figA"></svg><div class="tag">before：K₁/[s²(s+2)]，σₐ=−0.67</div></div>
+            <div class="half"><svg id="figB"></svg><div class="tag">after：加零点 b=0.5，σₐ=−0.75 左偏</div></div>
+          </div>
+        </div>
+        <div class="act-card figc" style="flex:.88">
+          <div class="hd"><span style="flex:1">规律③示意：开环偶极子紧贴原点（<span class="tex">z_{c}=-0.5</span>、<span class="tex">p_{c}=-0.05</span>）</span></div>
+          <div class="bd2c"><svg id="dp" viewBox="0 0 760 260" preserveAspectRatio="xMidYMid meet"></svg></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">要点</span><span>①②互为镜像；③表明<span class="kw-r">动态与稳态可分开设计</span>：偶极子只动增益、不动轨迹。</span></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  RL.figure("figA", "ex516a", { vw: 470, vh: 300, static: true });
+  RL.figure("figB", "ex516d", { vw: 470, vh: 300, static: true });
+  /* 规律③：偶极子示意（程序绘制） */
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("dp");
+  const mk = (tag, attrs) => { const n = document.createElementNS(NS, tag);
+    for (const k in attrs) n.setAttribute(k, attrs[k]); svg.appendChild(n); return n; };
+  const MF = '"Cambria Math","STIX Two Math",Georgia,"Times New Roman","Microsoft YaHei",serif';
+  const X0 = 60, X1 = 736, Yc = 132, S = 200;   /* 比例尺 px/单位（放大原点邻域） */
+  const X = x => 380 + x * S;
+  const defs = mk("defs", {});
+  const m = document.createElementNS(NS, "marker");
+  [["id", "ax59"], ["markerWidth", 10], ["markerHeight", 8], ["refX", 7], ["refY", 3], ["orient", "auto"]].forEach(([k, v]) => m.setAttribute(k, v));
+  defs.appendChild(m);
+  const mp = document.createElementNS(NS, "path"); mp.setAttribute("d", "M0,0 L7,3 L0,6 Z"); mp.setAttribute("fill", "#5B6B8C"); m.appendChild(mp);
+  mk("line", { x1: X0 - 10, y1: Yc, x2: X1, y2: Yc, stroke: "#5B6B8C", "stroke-width": 2.2, "marker-end": "url(#ax59)" });
+  mk("line", { x1: X(0), y1: 240, x2: X(0), y2: 20, stroke: "#5B6B8C", "stroke-width": 2.2, "marker-end": "url(#ax59)" });
+  const tx = (x, y, s, o) => { o = o || {};
+    const n = mk("text", { x, y, "font-size": o.fs || 19, "text-anchor": o.an || "middle",
+      fill: o.fill || "#5B6B8C", "font-weight": o.b ? 700 : 400, "font-family": MF });
+    n.textContent = s;
+    n.setAttribute("style", "paint-order:stroke;stroke:#FFF;stroke-width:5;stroke-linejoin:round"); return n; };
+  [-1.5, -1, -0.5].forEach(v => { mk("line", { x1: X(v), y1: Yc - 6, x2: X(v), y2: Yc + 6, stroke: "#5B6B8C", "stroke-width": 1.6 }); tx(X(v), Yc + 28, String(v), { fs: 18 }); });
+  tx(X1 - 4, Yc + 30, "Re", { fs: 19, b: 1, an: "end" }); tx(X(0) + 16, 36, "Im", { fs: 19, b: 1, an: "start" });
+  /* 偶极子：z_c=−0.5（○ 绿）、p_c=−0.05（× 红，紧贴原点） */
+  mk("circle", { cx: X(-0.5), cy: Yc, r: 10, fill: "none", stroke: "#0E7A36", "stroke-width": 4 });
+  const cross = (x, color, r) => {
+    mk("line", { x1: X(x) - r, y1: Yc - r, x2: X(x) + r, y2: Yc + r, stroke: color, "stroke-width": 4.5, "stroke-linecap": "round" });
+    mk("line", { x1: X(x) - r, y1: Yc + r, x2: X(x) + r, y2: Yc - r, stroke: color, "stroke-width": 4.5, "stroke-linecap": "round" });
+  };
+  cross(-0.05, "#D63A2F", 10);
+  tx(X(-0.5), Yc - 26, "○ z_c=−0.5", { fs: 19, fill: "#0E7A36", b: 1 });
+  tx(X(-0.05) + 16, Yc - 26, "× p_c=−0.05（紧贴原点）", { fs: 19, fill: "#D63A2F", b: 1, an: "start" });
+  tx(X(-0.75), Yc + 62, "两者相角/模值贡献近似互消 → 轨迹形状不变；增益 K_c=K·z_c/p_c = 10K", { fs: 19, fill: "#B3541E", b: 1 });
+});
+</script>
+</div></div>
+</body>
+</html>

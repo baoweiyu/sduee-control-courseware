@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>引例（2）：特征根随 K₁ 变化的数值表</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=218">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=218" defer></script>
+<script src="../fig.js?v=507"></script>
+<script src="../data/intro.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:1;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:14px 20px}
+  table{border-collapse:collapse;width:100%;font-size:20.5px;line-height:1.35}
+  th,td{border:2px solid var(--line);padding:8px 10px;text-align:center;color:var(--ink)}
+  th{background:var(--sky);color:var(--navy);font-weight:700}
+  tr.hl td{background:#FDF3EC}
+  tr.krow{cursor:pointer}
+  tr.krow:hover td{background:#E3ECFB}
+  tr.krow.sel td{background:#FAD9C2;font-weight:700}
+  .tip{background:var(--sky);border-radius:12px;padding:9px 14px;font-size:19.5px;line-height:1.4}
+  .tip.srow{cursor:pointer;transition:background .15s}
+  .tip.srow:hover{background:#E3ECFB}
+  .tip.srow.sel{background:#FAD9C2;box-shadow:inset 0 0 0 2.5px var(--orange)}
+  @keyframes rlPulse{0%,100%{opacity:1}50%{opacity:.1}}
+  .rl-flash{animation:rlPulse .85s ease-in-out infinite}
+  .figc{flex:1.16;display:flex;flex-direction:column;overflow:hidden}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
+  .figc svg{width:100%;height:100%}
+</style>
+</head>
+<body data-title="引例（2）：特征根随 K₁ 变化的数值表" data-page="6 / 61">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lft">
+        <div class="act-card" style="flex:1.6">
+          <div class="hd">代入 <span class="tex">s_{1,2}=-1\pm\sqrt{1-K_{1}}</span> 逐点计算</div>
+          <div class="bd">
+            <table>
+              <tr><th><span class="tex">K_{1}</span></th><th>闭环极点 <span class="tex">s_{1},s_{2}</span></th><th>根的性质</th></tr>
+              <tr class="krow" data-k="k0"><td>0</td><td>0，−2</td><td>从开环极点出发</td></tr>
+              <tr class="krow" data-k="k05"><td>0.5</td><td>−0.29，−1.71</td><td>两不等负实根（单调）</td></tr>
+              <tr class="krow hl" data-k="k1"><td>1</td><td>−1，−1</td><td>负实重根（临界阻尼）</td></tr>
+              <tr class="krow" data-k="k2"><td>2</td><td>−1 ± j</td><td>共轭复根（振荡）</td></tr>
+              <tr class="krow" data-k="kinf"><td>→ ∞</td><td>−1 ± j∞</td><td>沿 <span class="tex">\sigma=-1</span> 趋向无穷远</td></tr>
+            </table>
+          </div>
+        </div>
+        <div class="act-card" style="flex:1">
+          <div class="hd">读表</div>
+          <div class="bd" style="justify-content:space-evenly;gap:6px">
+            <div class="tip srow" data-step="1" data-k="lt1"><span class="tex">K_{1}&lt;1</span>：根号内为正，<b>两个负实根</b>——阶跃响应单调。</div>
+            <div class="tip srow" data-step="2" data-k="eq1"><span class="tex">K_{1}=1</span>：重根 <b>−1</b>——<b>临界阻尼</b>（二阶响应的分界，不是稳定性临界）；本例 K₁≥0 时极点始终在左半平面。</div>
+            <div class="tip srow" data-step="3" data-k="gt1"><span class="tex">K_{1}&gt;1</span>：根号内为负，<b>共轭复根</b>——响应出现振荡，且 <span class="tex">K_{1}</span> 越大虚部越大。</div>
+          </div>
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd"><span style="flex:1">把表里的每组根标到 s 平面上</span></div>
+        <div class="bd2"><svg id="fig"></svg></div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">预告</span><span>逐点试算只能看到<span class="kw-r">离散的几组根</span>；把所有 <span class="tex">K_{1}</span> 对应的点连起来，就是下一页的<span class="kw-r">根轨迹动画</span>。</span></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const F = RL.figure("fig", "intro", { vw: 960, vh: 600, ylim: [-2.2, 2.2], static: true, zoom: false,
+                                        segs: true, asym: false, brkDots: false,
+                                        extra: api => {
+    const F = RL.FOCUS, X = api.X, Y = api.Y;
+
+    /* ── 联动标注层：默认不显示任何 K 值标注；点击左侧表格行 / 条件行，
+       只显示该 K₁ 的标注并闪烁；换行旧标注消失，再点同一行全部隐藏 ── */
+    const HL = {};
+    const grp = key => { const g = api.mk("g", { "class": "hlg", opacity: 0, "pointer-events": "none" }, api.gTop);
+      HL[key] = g; return g; };
+    const ring = (g, p, r) => api.mk("circle", { cx: X(p[0]), cy: Y(p[1]), r: r || 17,
+      fill: "none", stroke: F, "stroke-width": 4.5 }, g);
+    const dot = (g, p) => api.mk("circle", { cx: X(p[0]), cy: Y(p[1]), r: 10,
+      fill: F, stroke: "#fff", "stroke-width": 2.5 }, g);
+    const segLine = (g, x1, x2) => api.mk("line", { x1: X(x1), y1: Y(0), x2: X(x2), y2: Y(0),
+      stroke: F, "stroke-width": 9, "stroke-linecap": "round", opacity: .5 }, g);
+    const brLine = (g, sg) => api.mk("line", { x1: X(-1), y1: Y(0), x2: X(-1), y2: Y(sg * 2.12),
+      stroke: F, "stroke-width": 9, "stroke-linecap": "round", opacity: .5 }, g);
+    let g;
+    g = grp("k0");   ring(g, [0, 0]); ring(g, [-2, 0]);
+      api.tx(g, X(-1), Y(0) - 34, "K₁=0", { fs: 25, fill: F, b: 1 });
+    /* K₁=0.5：两个闭环极点 −0.29、−1.71 —— 括线标在两点正上方 */
+    g = grp("k05");  ring(g, [-0.29, 0]); ring(g, [-1.71, 0]);
+      dot(g, [-0.29, 0]); dot(g, [-1.71, 0]);
+      const yB = Y(0) - 36;
+      api.mk("line", { x1: X(-1.71), y1: yB, x2: X(-0.29), y2: yB, stroke: F, "stroke-width": 3 }, g);
+      [-1.71, -0.29].forEach(v => api.mk("line", { x1: X(v), y1: yB, x2: X(v), y2: yB + 12, stroke: F, "stroke-width": 3 }, g));
+      api.tx(g, X(-1), yB - 18, "K₁=0.5", { fs: 25, fill: F, b: 1 });
+    /* K₁=1 重根：空心方框标记 */
+    g = grp("k1");   ring(g, [-1, 0]);
+      api.mk("rect", { x: X(-1) - 10, y: Y(0) - 10, width: 20, height: 20,
+        fill: "#fff", stroke: F, "stroke-width": 3 }, g);
+      api.tx(g, X(-1), Y(0) + 50, "K₁=1（重根）", { fs: 25, fill: F, b: 1 });
+    /* K₁=2：共轭复根 −1±j */
+    g = grp("k2");   ring(g, [-1, 1]); ring(g, [-1, -1]);
+      dot(g, [-1, 1]); dot(g, [-1, -1]);
+      api.tx(g, X(-1), Y(1) - 28, "K₁=2", { fs: 25, fill: F, b: 1 });
+    g = grp("kinf"); ring(g, [-1, 1.95], 15); ring(g, [-1, -1.95], 15);
+      api.tx(g, X(-1) + 30, Y(1.95) + 8, "∞", { fs: 26, fill: F, b: 1 });
+      api.tx(g, X(-1) + 30, Y(-1.95) + 8, "∞", { fs: 26, fill: F, b: 1 });
+    g = grp("lt1");  segLine(g, -2, 0);
+    g = grp("eq1");  ring(g, [-1, 0], 20);
+    g = grp("gt1");  brLine(g, 1); brLine(g, -1);
+    /* 行点击联动 */
+    const clear = () => {
+      document.querySelectorAll(".krow.sel,.srow.sel").forEach(e => e.classList.remove("sel"));
+      Object.values(HL).forEach(gr => gr.classList.remove("rl-flash"));
+    };
+    document.querySelectorAll(".krow,.srow").forEach(row => {
+      row.addEventListener("click", () => {
+        const key = row.dataset.k, was = row.classList.contains("sel");
+        clear();
+        if (!was && HL[key]) { row.classList.add("sel"); HL[key].classList.add("rl-flash"); }
+      });
+    });
+  } });
+});
+</script>
+</div></div>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>广义根轨迹：概念与黄金法则</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=505">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=505" defer></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:1.06;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:8px;padding:10px 18px;font-size:20px;line-height:1.42}
+  .eq{background:var(--sky);border-radius:12px;padding:9px 14px;text-align:center;font-size:22px;line-height:1.5}
+  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .kv{background:var(--sky);border-radius:12px;padding:8px 14px;line-height:1.45}
+  .kv.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .figc{flex:1;display:flex;flex-direction:column;overflow:hidden}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:6px 10px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .figc .cap{flex:none;font-size:20px;color:var(--navy);background:var(--sky);border-radius:10px;padding:7px 14px;margin:0 12px 10px;line-height:1.4}
+</style>
+</head>
+<body data-title="广义根轨迹：概念与黄金法则" data-page="35 / 60">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lft">
+        <div class="act-card" style="flex:.95">
+          <div class="hd">什么是广义根轨迹</div>
+          <div class="bd">
+            <div class="kv" data-step="1">闭环特征方程中变化的参数<b>不是</b>根轨迹增益 <span class="tex">K_{1}</span>，或反馈不是负反馈——这类根轨迹统称<b>广义根轨迹</b>。</div>
+            <div class="kv" data-step="2">两类典型：<b>① 参量根轨迹</b>、<b>② 零度根轨迹</b>（相角条件变 0°）。</div>
+          </div>
+        </div>
+        <div class="act-card" style="flex:1.42">
+          <div class="hd">黄金法则：整理成标准形</div>
+          <div class="bd" style="font-size:20.5px">
+            <div class="eq" data-step="3">特征方程 <span class="tex">aP(s)+Q(s)=0</span>　<span class="tex">\xrightarrow{\;\div Q(s)\;}</span>　<span class="tex">1+a\dfrac{P(s)}{Q(s)}=0</span></div>
+            <div class="eq hl" data-step="4">等效开环 <span class="tex">G^{*}(s)H^{*}(s)=a\dfrac{P(s)}{Q(s)}</span>，之后<span class="kw-r">七条法则照旧</span></div>
+            <div class="kv" data-step="5">"除以谁"的通法：<b>含参量 a 的项归分子、其余归分母</b>；若增益带负号（<span class="tex">1-G^{*}H^{*}=0</span>），相角条件改 0°。</div>
+          </div>
+        </div>
+        <div class="act-card" style="flex:.85">
+          <div class="hd">两个注意</div>
+          <div class="bd">
+            <div class="kv" data-step="6">等效前后<b>闭环极点完全相同</b>（特征方程没变，只是改写形式）。</div>
+            <div class="kv" data-step="7">等效零极点<b>不是</b>原系统的开环零极点——不能用等效零点判断原闭环零点。</div>
+          </div>
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd"><span style="flex:1">等效变换流程：原方程 → 标准形 → 根轨迹</span></div>
+        <div class="bd2"><svg id="flow" viewBox="0 0 640 640"></svg></div>
+        <div class="cap">换的只是"开环"与相角条件；从标准形出发，绘制法则一条不变。</div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">要点</span><span>广义根轨迹<span class="kw-r">不引入新法则</span>，只更换"开环传递函数"与"相角条件"。</span></div>
+<script>
+/* 等效变换流程图（程序绘制）：原特征方程 →[÷Q(s)]→ 标准形 →[法则一~七]→ 根轨迹 */
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("flow");
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag);
+    for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const NAVY = "#12266E", BLUE = "#1D3FA0", SKY = "#EEF3FD", LINE = "#C9D8F2", ORANGE = "#F5821F", RED = "#D63A2F";
+  const defs = mk("defs", {}, svg);
+  const m = mk("marker", { id: "arF", markerWidth: 12, markerHeight: 10, refX: 8.5, refY: 4, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L9,4 L0,8 Z", fill: ORANGE }, m);
+  const label = (x, y, s, o) => { o = o || {};
+    const n = mk("text", { x, y, "font-size": o.fs || 26, "text-anchor": "middle",
+      fill: o.fill || NAVY, "font-weight": o.b ? 700 : 400, "font-style": o.it ? "italic" : "normal",
+      "font-family": '"Cambria Math","STIX Two Math",Georgia,"Times New Roman","Microsoft YaHei",serif' });
+    n.textContent = s; return n; };
+  const block = (cx, cy, w, h, lines, hl) => {
+    mk("rect", { x: cx - w / 2, y: cy - h / 2, width: w, height: h, rx: 14,
+      fill: hl ? "#FDF3EC" : SKY, stroke: hl ? ORANGE : LINE, "stroke-width": hl ? 3.5 : 2.5 }, svg);
+    lines.forEach((t, i) => label(cx, cy + (i - (lines.length - 1) / 2) * 36 + 10, t.s || t,
+      { fs: t.fs || 26, fill: t.fill || NAVY, b: t.b, it: t.it !== false }));
+  };
+  const arrow = (x1, y1, x2, y2, tag) => {
+    mk("line", { x1, y1, x2, y2, stroke: ORANGE, "stroke-width": 4, "marker-end": "url(#arF)" }, svg);
+    if (tag) label((x1 + x2) / 2 + 108, (y1 + y2) / 2 + 8, tag, { fs: 22, fill: ORANGE, b: 1, it: 0 });
+  };
+  block(320, 74, 520, 96, [{ s: "闭环特征方程（参量 a / 正反馈）", fs: 23, it: 0, b: 1 },
+    { s: "a·P(s) + Q(s) = 0", fs: 30 }]);
+  arrow(320, 126, 320, 178, "同除 Q(s)");
+  block(320, 232, 520, 96, [{ s: "标准形：1 + a·P(s)/Q(s) = 0", fs: 27 },
+    { s: "等效开环  G*(s)H*(s) = a·P(s)/Q(s)", fs: 25 }], true);
+  arrow(320, 284, 320, 336, "法则一~七照旧");
+  /* 底部示意根轨迹：等效极点 ±j2、零点 0 → 圆（例5-8 预告） */
+  mk("rect", { x: 60, y: 340, width: 520, height: 268, rx: 14, fill: "#fff", stroke: LINE, "stroke-width": 2.5 }, svg);
+  const gx = 240, gy = 474, us = 52;
+  mk("line", { x1: 80, y1: gy, x2: 368, y2: gy, stroke: "#5B6B8C", "stroke-width": 2 }, svg);
+  mk("line", { x1: gx, y1: 356, x2: gx, y2: 592, stroke: "#5B6B8C", "stroke-width": 2 }, svg);
+  mk("circle", { cx: gx, cy: gy, r: 2 * us, fill: "none", stroke: BLUE, "stroke-width": 4 }, svg);
+  [[-1], [1]].forEach(([sg]) => {
+    mk("line", { x1: gx - 9, y1: gy + sg * 2 * us - 9, x2: gx + 9, y2: gy + sg * 2 * us + 9, stroke: BLUE, "stroke-width": 3.2 }, svg);
+    mk("line", { x1: gx - 9, y1: gy + sg * 2 * us + 9, x2: gx + 9, y2: gy + sg * 2 * us - 9, stroke: BLUE, "stroke-width": 3.2 }, svg);
+  });
+  mk("circle", { cx: gx, cy: gy, r: 8, fill: "none", stroke: BLUE, "stroke-width": 3.2 }, svg);
+  mk("circle", { cx: gx - 2 * us, cy: gy, r: 6.5, fill: RED, stroke: "#fff", "stroke-width": 2 }, svg);
+  label(gx - 44, gy - 2 * us + 6, "±j2", { fs: 22 });
+  label(gx + 24, gy + 28, "0", { fs: 22 });
+  label(gx - 2 * us, gy + 36, "−2 (a=4)", { fs: 21, fill: RED, b: 1 });
+  label(430, 400, "根轨迹（示意）", { fs: 24, b: 1, fill: BLUE, it: 0 });
+  label(430, 444, "例5-8：a 变化时", { fs: 22, fill: "#5B6B8C", it: 0 });
+  label(430, 482, "闭环极点沿圆", { fs: 22, fill: "#5B6B8C", it: 0 });
+  label(430, 520, "|s|=2 移动", { fs: 22, fill: "#5B6B8C", it: 0 });
+});
+</script>
+</div></div>
+</body>
+</html>

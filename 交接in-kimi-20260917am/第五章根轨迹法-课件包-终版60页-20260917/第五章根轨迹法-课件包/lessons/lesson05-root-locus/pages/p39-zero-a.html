@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>(2) 零度根轨迹：由来与相角条件</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=505">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=505" defer></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .col{display:flex;flex-direction:column;gap:14px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:10px;padding:12px 20px;font-size:21.5px;line-height:1.5}
+  .eq{background:var(--sky);border-radius:12px;padding:9px 14px;text-align:center;font-size:21.5px;line-height:1.5}
+  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .kv{background:var(--sky);border-radius:12px;padding:8px 14px;line-height:1.45}
+  .kv.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:6px 10px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .figc .cap{flex:none;font-size:20px;color:var(--navy);background:var(--sky);border-radius:10px;padding:7px 14px;margin:0 12px 10px;line-height:1.4}
+</style>
+</head>
+<body data-title="(2) 零度根轨迹：由来与相角条件" data-page="39 / 60">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="col" style="flex:1.05">
+        <div class="act-card" style="flex:1.15">
+          <div class="hd">什么时候会出现</div>
+          <div class="bd">
+            <div class="kv" data-step="1">① <b>正反馈内环</b>（某些自激/再生结构）：特征方程 <span class="tex">1-G(s)H(s)=0</span>；</div>
+            <div class="kv" data-step="2">② 特征方程整理成标准形后 <span class="tex">GH</span> 前<span class="kw-r">出现负号</span>——同样得到 <span class="tex">1-G(s)H(s)=0</span>，即 <span class="tex">G(s)H(s)=+1</span>。</div>
+          </div>
+        </div>
+        <div class="act-card" style="flex:1.3">
+          <div class="hd">条件对比：幅值不变，相角变 0°</div>
+          <div class="bd">
+            <div class="eq" data-step="3">幅值条件：<span class="tex">|G(s)H(s)|=1</span>　<b>不变</b></div>
+            <div data-step="4"><div class="eq hl">相角条件：<span class="tex">\angle G(s)H(s)=0^{\circ}+2q\times180^{\circ}</span>（偶数个 180°）——故名<span class="kw-r">零度根轨迹</span></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="act-card figc" style="flex:1">
+        <div class="hd"><span style="flex:1">负反馈（1+GH）与正反馈（1−GH）方框图对照</span></div>
+        <div class="bd2"><svg id="blk" viewBox="0 0 640 600"></svg></div>
+        <div class="cap">求和点的"−"变"+"，特征方程的"+"变"−"——相角条件随之整体平移 180°。</div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">要点</span><span>只改相角条件：七条法则中仅与相角相关的<span class="kw-r">三条</span>（实轴段、渐近线夹角、出射/入射角）需要修改——对照表见下一页。</span></div>
+<script>
+/* 负反馈 vs 正反馈方框图并排（复用 p05 模式：mkSum 求和点 / mkBlock 方框 / wire 信号线）。
+   求和点 ± 号红标：负反馈 (+,−) → 1+GH=0；正反馈 (+,+) → 1−GH=0。 */
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("blk");
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag);
+    for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const MF = '"Cambria Math","STIX Two Math",Georgia,"Times New Roman","Microsoft YaHei",serif';
+  const NAVY = "#12266E", BLUE = "#1D3FA0", RED = "#D63A2F";
+  const defs = mk("defs", {}, svg);
+  const m = mk("marker", { id: "arB", markerWidth: 12, markerHeight: 10, refX: 8.5, refY: 4, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L9,4 L0,8 Z", fill: BLUE }, m);
+  const label = (x, y, s, o) => { o = o || {};
+    const n = mk("text", { x, y, "font-size": o.fs || 24, "text-anchor": o.an || "middle",
+      fill: o.fill || NAVY, "font-weight": o.b ? 700 : 400, "font-style": "italic", "font-family": MF });
+    n.textContent = s; return n; };
+  const wire = pts => {
+    const d = pts.map((p, i) => (i ? "L" : "M") + p[0] + "," + p[1]).join("");
+    mk("path", { d, fill: "none", stroke: BLUE, "stroke-width": 3, "marker-end": "url(#arB)" }, svg);
+  };
+  /* 求和点：圆圈 + 叉丝 + 符号标注（fb 为反馈口符号，红标） */
+  const mkSum = (cx, cy, fb) => {
+    mk("circle", { cx, cy, r: 20, fill: "#fff", stroke: BLUE, "stroke-width": 3 }, svg);
+    mk("line", { x1: cx - 12, y1: cy, x2: cx + 12, y2: cy, stroke: BLUE, "stroke-width": 2 }, svg);
+    mk("line", { x1: cx, y1: cy - 12, x2: cx, y2: cy + 12, stroke: BLUE, "stroke-width": 2 }, svg);
+    label(cx - 34, cy - 14, "+", { fs: 26, fill: NAVY, b: 1 });
+    label(cx + 15, cy + 42, fb, { fs: 30, fill: RED, b: 1 });
+  };
+  const mkBlock = (x, y, w, h, t) => {
+    mk("rect", { x, y, width: w, height: h, rx: 10, fill: "#fff", stroke: BLUE, "stroke-width": 3 }, svg);
+    label(x + w / 2, y + h / 2 + 9, t, { fs: 26 });
+  };
+  function diagram(cy, fb, title, eq, eqRed) {
+    label(320, cy - 78, title, { fs: 27, b: 1, fill: NAVY });
+    label(56, cy + 8, "R(s)", { fs: 24 });
+    wire([[86, cy], [148, cy]]);
+    mkSum(170, cy, fb);
+    wire([[192, cy], [252, cy]]);
+    mkBlock(254, cy - 30, 120, 60, "G(s)");
+    wire([[376, cy], [470, cy]]);
+    mk("circle", { cx: 430, cy, r: 5, fill: BLUE }, svg);
+    label(512, cy + 8, "C(s)", { fs: 24 });
+    wire([[430, cy], [430, cy + 84], [170, cy + 84], [170, cy + 22]]);
+    label(300, cy + 108, "H(s)=1", { fs: 22 });
+    label(320, cy + 152, eq, { fs: 25, b: 1, fill: eqRed ? RED : NAVY });
+  }
+  diagram(170, "−", "负反馈（5.1~5.2 的默认情形）", "特征方程  1 + G(s)H(s) = 0  →  180° 根轨迹", false);
+  diagram(430, "+", "正反馈（本小节）", "特征方程  1 − G(s)H(s) = 0  →  0° 根轨迹", true);
+});
+</script>
+</div></div>
+</body>
+</html>

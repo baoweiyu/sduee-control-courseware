@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>⑦ 本章小结：从概念到设计</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=218">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=218" defer></script>
+<style>
+  .row{display:flex;gap:24px;height:100%;min-height:0}
+  .lft{flex:1.02;display:flex;flex-direction:column;gap:12px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:6px;padding:10px 18px;font-size:19.5px;line-height:1.42}
+  .kv{background:var(--sky);border-radius:12px;padding:6px 13px;line-height:1.42}
+  .kv.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .rcol{flex:1;display:flex;flex-direction:column;gap:12px;min-height:0}
+  .figc{display:flex;flex-direction:column;overflow:hidden}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:6px 10px;min-height:0}
+  .figc svg{width:100%;height:100%}
+</style>
+</head>
+<body data-title="⑦ 本章小结：从概念到设计" data-page="60 / 61">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="row">
+      <div class="lft">
+        <div class="act-card" style="flex:1">
+          <div class="hd">① 概念（5.1）</div>
+          <div class="bd">
+            <div class="kv">根轨迹 = 开环增益 <span class="tex">K_{1}:\,0\to\infty</span> 时，闭环特征根在 s 平面上描出的路径。</div>
+          </div>
+        </div>
+        <div class="act-card" style="flex:1">
+          <div class="hd">② 依据</div>
+          <div class="bd">
+            <div class="kv"><span class="tex">G(s)H(s)=-1</span>：<b>相角条件定位置</b>（充要判据），<b>幅值条件定增益</b>（求该点 K₁）。</div>
+          </div>
+        </div>
+        <div class="act-card" style="flex:1">
+          <div class="hd">③ 绘制（5.2）</div>
+          <div class="bd">
+            <div class="kv">法则一~七：起终点 → 实轴段 → 渐近线 → 分离点 → 出射角/入射角 → 虚轴交点。</div>
+          </div>
+        </div>
+        <div class="act-card" style="flex:1">
+          <div class="hd">④ 推广（5.3）</div>
+          <div class="bd">
+            <div class="kv">参量根轨迹 / 零度根轨迹 / 非最小相位 / 条件稳定——同一条件、换参数或换符号。</div>
+          </div>
+        </div>
+        <div class="act-card" style="flex:1.12">
+          <div class="hd">⑤ 分析与设计（5.4）</div>
+          <div class="bd">
+            <div class="kv">分析：ζ 射线选点定 K₁、主导极点与偶极子降阶读性能；设计：加零点左偏 / 加极点右偏 / 偶极子提增益（→ 第六章校正）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="rcol">
+        <div class="act-card figc" style="flex:1.85">
+          <div class="hd"><span style="flex:1">本章知识流程图（概念 → 条件 → 绘制 → 推广 → 分析 → 设计）</span></div>
+          <div class="bd2"><svg id="flow" viewBox="0 0 720 560" preserveAspectRatio="xMidYMid meet"></svg></div>
+        </div>
+        <div class="act-card" style="flex:.62">
+          <div class="hd">一图一句话</div>
+          <div class="bd">
+            <div class="kv hl">拿到系统：先数分支、定实轴段、画渐近线；再算分离点、出射角、虚轴交点；最后按指标在轨迹上选参数。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  /* 程序绘制的流程图：六节点纵向流 + 侧注 */
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("flow");
+  const mk = (tag, attrs) => { const n = document.createElementNS(NS, tag);
+    for (const k in attrs) n.setAttribute(k, attrs[k]); svg.appendChild(n); return n; };
+  const MF = '"Cambria Math","STIX Two Math",Georgia,"Times New Roman","Microsoft YaHei",serif';
+  const defs = mk("defs", {});
+  const m = document.createElementNS(NS, "marker");
+  [["id", "ar60"], ["markerWidth", 11], ["markerHeight", 9], ["refX", 7.5], ["refY", 3.5], ["orient", "auto"]].forEach(([k, v]) => m.setAttribute(k, v));
+  defs.appendChild(m);
+  const mp = document.createElementNS(NS, "path"); mp.setAttribute("d", "M0,0 L8,3.5 L0,7 Z"); mp.setAttribute("fill", "#F5821F"); m.appendChild(mp);
+  const NODES = [
+    ["概念", "根轨迹的定义（5.1）", "#1D3FA0"],
+    ["条件", "GH=−1：相角定位置，幅值定增益", "#1D3FA0"],
+    ["绘制", "法则一~七 徒手勾画（5.2）", "#1D3FA0"],
+    ["推广", "参量 / 零度 / 非最小相位 / 条件稳定", "#1D3FA0"],
+    ["分析", "选点定 K₁、主导极点降阶（5.4）", "#0E7A36"],
+    ["设计", "零极点配置做校正（→ 第六章）", "#B3541E"],
+  ];
+  const cx = 310, W = 440, H = 62, GAP = 24;
+  NODES.forEach(([t, s, col], i) => {
+    const y = 20 + i * (H + GAP);
+    mk("rect", { x: cx - W / 2, y, width: W, height: H, rx: 14, fill: i >= 4 ? "#FDF3EC" : "#EAF0FB", stroke: col, "stroke-width": 2.6 });
+    const n1 = mk("text", { x: cx - W / 2 + 22, y: y + H / 2 + 8, "font-size": 24, "font-weight": 700, fill: col, "font-family": MF });
+    n1.textContent = t;
+    const n2 = mk("text", { x: cx - W / 2 + 96, y: y + H / 2 + 7, "font-size": 19.5, fill: "#12266E", "font-family": MF });
+    n2.textContent = s;
+    if (i < NODES.length - 1)
+      mk("line", { x1: cx, y1: y + H + 2, x2: cx, y2: y + H + GAP - 4, stroke: "#F5821F", "stroke-width": 3, "marker-end": "url(#ar60)" });
+  });
+  const side = mk("text", { x: 700, y: 20, "font-size": 19, fill: "#5B6B8C", "font-family": MF, "text-anchor": "end" });
+  side.textContent = "一条主线：轨迹连";
+  const side2 = mk("text", { x: 700, y: 46, "font-size": 19, fill: "#5B6B8C", "font-family": MF, "text-anchor": "end" });
+  side2.textContent = "接分析与设计";
+});
+</script>
+</div></div>
+</body>
+</html>

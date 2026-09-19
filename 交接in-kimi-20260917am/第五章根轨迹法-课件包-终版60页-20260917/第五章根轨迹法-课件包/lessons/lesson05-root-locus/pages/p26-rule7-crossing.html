@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>法则七：根轨迹与虚轴的交点</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=505">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=505" defer></script>
+<script src="../fig.js?v=506"></script>
+<script src="../data/ex52.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:1.1;display:flex;flex-direction:column;gap:10px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:6px;padding:9px 16px;font-size:19.5px;line-height:1.4}
+  .law{background:#FDF3EC;border-left:5px solid var(--orange);border-radius:0 12px 12px 0;padding:8px 16px;line-height:1.42}
+  .law b{color:var(--danger)}
+  .eq{background:var(--sky);border-radius:12px;padding:8px 14px;text-align:center;font-size:20.5px;line-height:1.5}
+  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .tip{background:var(--sky);border-radius:12px;padding:8px 14px;line-height:1.42}
+  .figc{flex:1.02;display:flex;flex-direction:column;overflow:hidden;position:relative}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .cap{flex:none;font-size:19px;color:var(--navy);background:var(--sky);border-radius:12px;padding:8px 16px;margin:0 14px 10px;line-height:1.4}
+  .segfloat{position:absolute;top:58px;left:50%;transform:translateX(-50%);z-index:5;background:#fff;
+    border:2px solid var(--blue);border-radius:10px;padding:5px 16px;font-size:18px;font-weight:700;
+    color:var(--navy);white-space:nowrap;box-shadow:0 2px 10px rgba(20,40,90,.18)}
+  .ctl{display:flex;align-items:center;gap:10px;justify-content:center;padding:6px 0 8px}
+  .btn{background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:19px;font-weight:700;padding:8px 20px;cursor:pointer}
+  .btn.ghost{background:#fff;color:var(--blue);border:2px solid var(--blue)}
+  .kr{font-size:19px;color:var(--navy);font-weight:700;background:var(--sky);border-radius:10px;padding:7px 12px;white-space:nowrap}
+  .prog{font-size:18px;color:var(--muted);min-width:64px}
+</style>
+</head>
+<body data-title="法则七：根轨迹与虚轴的交点" data-page="26 / 60">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lft">
+        <div class="act-card" style="flex:1.15">
+          <div class="hd">法则内容（两种求法）</div>
+          <div class="bd">
+            <div class="law"><b>法① 劳斯判据</b>：当劳斯表 <span class="tex">s^{1}</span> 行<span class="kw-r">首元素变为零</span>时，特征方程出现一对虚轴根，对应 K₁ 即临界增益；再用上一行（<span class="tex">s^{2}</span> 行）构造<span class="kw-r">辅助方程</span>，解出交点 <span class="tex">\pm j\omega</span>。</div>
+            <div class="law"><b>法② 代入 <span class="tex">s=j\omega</span></b>：特征方程实部、虚部分别为零，联立解出 <span class="tex">\omega</span> 与 <span class="tex">K_{1}</span>。</div>
+          </div>
+        </div>
+        <div class="act-card" style="flex:.7">
+          <div class="hd">怎么来的</div>
+          <div class="bd">
+            <div class="tip">根轨迹穿过虚轴 ⟺ 闭环系统<b>临界稳定</b> ⟺ 特征方程有<b>纯虚根</b> <span class="tex">s=\pm j\omega</span>——两种求法都是"存在纯虚根"的代数表达。</div>
+          </div>
+        </div>
+        <div class="act-card" style="flex:1.4">
+          <div class="hd">示例（<span class="tex">G(s)=\dfrac{K_{1}}{s(s+1)(s+2)}</span>）</div>
+          <div class="bd">
+            <div class="eq">特征方程 <span class="tex">s^{3}+3s^{2}+2s+K_{1}=0</span>：劳斯 <span class="tex">s^{1}</span> 行 <span class="tex">\dfrac{6-K_{1}}{3}=0\Rightarrow K_{1}=6</span>；辅助方程 <span class="tex">3s^{2}+6=0\Rightarrow s=\pm j\sqrt{2}</span></div>
+            <div class="eq hl">法② 验证：<span class="tex">(K_{1}-3\omega^{2})+j\omega(2-\omega^{2})=0</span> → <span class="tex">\omega=\sqrt{2}</span>，<span class="tex">K_{1}=6</span>——两法互证 ✓</div>
+            <div class="eq">稳定性分界（本例）：<span class="tex">0&lt;K_{1}&lt;6</span> 稳定，<span class="tex">K_{1}&gt;6</span> 不稳定。</div>
+          </div>
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd"><span style="flex:1">K₁=6 时抵达 ±j√2（空心方块），越过即失稳</span></div>
+        <span class="segfloat" id="segChip" style="display:none"></span>
+        <div class="bd2"><svg id="fig"></svg></div>
+        <div class="cap">空心方块 = 虚轴交点 <span class="tex">\pm j\sqrt{2}</span>（<span class="tex">K_{1}=6</span>，临界）；淡红区 = 右半平面，轨迹进入则闭环不稳定（本例）。</div>
+        <div class="ctl">
+          <button class="btn" id="play">▶ 播放</button>
+          <button class="btn ghost" id="step">⧉ 分步</button>
+          <button class="btn ghost" onclick="ACT.step.reset()">↺ 重置</button>
+          <span class="kr">K₁ = <b id="kv" style="color:var(--danger)">0</b></span>
+          <span class="prog" id="prog">0 / 3</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">要点</span><span>两条方法各有适用场景：劳斯法顺手给出<span class="kw-r">稳定范围</span>，<span class="tex">s=j\omega</span> 法<span class="kw-r">直接联立</span>、不排表——结果必须一致。</span></div>
+
+<div data-step="1" style="display:none"></div><div data-step="2" style="display:none"></div>
+<div data-step="3" style="display:none"></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const F = RL.figure("fig", "ex52", { vw: 960, vh: 600, asym: false, brkDots: false });
+  const fC = F.f_of_K(6);              // 虚轴交点 ±j√2（K₁=6）
+  const FS = [0, 0, fC, 1];
+  function frame(f) {
+    document.getElementById("kv").textContent = f >= 0.999 ? "→ ∞" : RL.fmtK(F.K_of_f(f));
+  }
+  /* 抵达标注：空心方块显形 + K₁=6 / ±j√2 图上标注 */
+  function crossMarks(g) {
+    F.crossSq.forEach(el => el.style.opacity = 1);
+    F.tx(g, F.X(0) + 26, F.Y(1.4142) + 34, "K_{1}=6，+j√2", { fs: 24, fill: RL.FOCUS, b: 1, an: "start" });
+    F.tx(g, F.X(0) + 26, F.Y(-1.4142) - 10, "K_{1}=6，−j√2", { fs: 24, fill: RL.FOCUS, b: 1, an: "start" });
+  }
+  /* 右半平面淡红示意（不稳定区） */
+  function unstableFill(g) {
+    const x0 = Math.max(F.PLOT.x0, F.X(0));
+    F.mk("rect", { x: x0, y: F.PLOT.y0, width: F.PLOT.x1 - x0, height: F.PLOT.y1 - F.PLOT.y0,
+      fill: "#D63A2F", opacity: .07 }, g);
+    F.tx(g, Math.min(x0 + 130, F.PLOT.x1 - 60), F.PLOT.y0 + 34, "右半平面：不稳定", { fs: 23, fill: RL.FOCUS, b: 1 });
+  }
+  function paint(K) {
+    F.segEls.forEach(e => e.style.opacity = K >= 1 ? .32 : 0);
+    if (K >= 2) crossMarks(F.gDyn); else F.crossSq.forEach(el => el.style.opacity = 0);
+    if (K >= 3) unstableFill(F.gDyn);
+  }
+  RL.wire(3, paint, {
+    figs: [F], FS, dur: 10000,
+    frame: f => frame(f),
+    segLabel: txt => { const c = document.getElementById("segChip"); if (!c) return; if (txt) { c.textContent = txt; c.style.display = ""; } else c.style.display = "none"; },
+    pick: hit => { document.getElementById("kv").textContent = RL.fmtK(hit.K); },
+    segPaint: () => { F.setAllF(0); F.segEls.forEach(e => e.style.opacity = 0); F.crossSq.forEach(el => el.style.opacity = 0); F.gDyn.innerHTML = ""; },
+    segments: [
+      { label: "① 分支随 K₁ 增大，逼近虚轴", parts: [{ F, b: [1, 2], f0: 0, f1: fC }] },
+      { label: "② K₁=6：抵达虚轴 ±j√2（临界稳定）", parts: [{ F, b: [1, 2], f0: fC, f1: fC }],
+        draw(t, g) { crossMarks(g); } },
+      { label: "③ K₁>6：越过虚轴进入右半平面（本例失稳）", parts: [{ F, b: [1, 2], f0: fC, f1: 1 }],
+        draw(t, g) { crossMarks(g); unstableFill(g); } },
+    ], segDur: 3200
+  });
+});
+</script>
+</div></div>
+</body>
+</html>

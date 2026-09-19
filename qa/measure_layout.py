@@ -50,7 +50,7 @@ fr.onload = async () => {
       const r = el.getBoundingClientRect();
       if (r.width === 0 || r.height === 0) return;
       const ownText = Array.from(el.childNodes).filter(n=>n.nodeType===3).map(n=>n.textContent.trim()).join("");
-      if (ownText.length >= 2) {
+      if (ownText.length >= 2 && !el.closest("mjx-container") && !String(el.className).startsWith("mjx-")) {
         blocks++; chars += ownText.length;
         const fs = parseFloat(cs.fontSize);
         sizes.push(fs);

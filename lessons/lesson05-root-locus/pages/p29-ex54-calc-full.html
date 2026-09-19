@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>例5-4：关键要素完整计算</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=218">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=218" defer></script>
+<script src="../fig.js?v=507"></script>
+<script src="../data/ex54.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:1.02;display:flex;flex-direction:column;gap:12px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:5px;padding:8px 16px}
+  .eq{background:var(--sky);border-radius:12px;padding:4px 12px;text-align:center;font-size:19px;line-height:1.42}
+  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .kv{background:var(--sky);border-radius:12px;padding:5px 13px;font-size:18px;line-height:1.38}
+  .kv.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .kv.on{background:#FDF3EC;border-left:5px solid var(--danger);border-top-left-radius:0;border-bottom-left-radius:0;font-weight:700;box-shadow:0 0 0 2px rgba(214,58,47,.22)}
+  .hl{box-shadow:0 0 0 2px rgba(214,58,47,.18)}
+  table{border-collapse:collapse;margin:0 auto;font-size:16px;line-height:1.28}
+  th,td{border:2px solid var(--line);padding:1px 11px;text-align:center;color:var(--ink)}
+  th{background:var(--sky);color:var(--navy);font-weight:700}
+  td .tex{white-space:nowrap}
+  .figc{flex:1.1;display:flex;flex-direction:column;overflow:hidden;position:relative}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .segfloat{position:absolute;top:56px;right:14px;z-index:5;max-width:74%;background:#fff;
+    border:2px solid var(--blue);border-radius:10px;padding:5px 14px;font-size:18px;font-weight:700;
+    color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 2px 10px rgba(20,40,90,.18)}
+  .prog{position:absolute;top:60px;left:16px;z-index:5;font-size:17px;color:var(--muted);
+    background:rgba(255,255,255,.88);padding:2px 10px;border-radius:8px}
+  .ctl #prog{right:auto;left:16px;top:60px}  /* 覆盖 theme v0.5 的右上角定位：本页 prog 在左上、segfloat 在右上 */
+  .ctl{display:flex;flex-direction:column;gap:6px;padding:6px 0 8px}
+  .ctl-r{display:flex;align-items:center;gap:10px;justify-content:center}
+  .btn{background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:19px;font-weight:700;padding:8px 20px;cursor:pointer;min-width:112px;text-align:center}
+  .btn.ghost{background:#fff;color:var(--blue);border:2px solid var(--blue)}
+  .kr{font-size:19px;color:var(--navy);font-weight:700;background:var(--sky);border-radius:10px;padding:7px 14px;white-space:nowrap}
+  .kr b{display:inline-block;text-align:left;font-variant-numeric:tabular-nums;min-width:5.5ch}
+  .stab{border-radius:10px;padding:7px 14px;font-size:19px;font-weight:700;color:#fff;background:var(--blue);white-space:nowrap;min-width:16ch;text-align:center}
+  @keyframes rlPulse{0%,100%{opacity:1}50%{opacity:.25}}
+  .rl-flash{animation:rlPulse .9s ease-in-out infinite}
+</style>
+</head>
+<body data-title="例5-4：关键要素完整计算" data-page="29 / 61">
+<div class="act-stage"><div class="act-slide">
+
+<div class="act-body has-note">
+  <div class="row">
+    <div class="lft">
+      <div class="act-card" style="flex:1.7">
+        <div class="hd">题设与计算过程</div>
+        <div class="bd">
+          <div class="eq"><span class="tex">G(s)H(s)=\dfrac{K_{1}}{s(s+3)(s^{2}+2s+2)}</span></div>
+          <div class="kv" id="c1">极点 <span class="tex">p_{1}=0,\ p_{2}=-3,\ p_{3,4}=-1\pm j</span>（<span class="tex">n=4,m=0</span>）；实轴段 <span class="tex">[-3,\,0]</span>。</div>
+          <div class="kv" id="c2">渐近线 <span class="tex">n-m=4</span> 条：<span class="tex">\sigma_{a}=(0-3-1-1)/4=-1.25</span>，<span class="tex">\varphi_{a}=\pm45^{\circ},\,\pm135^{\circ}</span></div>
+          <div class="kv" id="c3">分离点：<span class="tex">K_{1}=-(s^{4}+5s^{3}+8s^{2}+6s)</span>，<span class="tex">\dfrac{dK_{1}}{ds}=0\Rightarrow4s^{3}+15s^{2}+16s+6=0</span>，实根 <span class="tex">d=-2.289</span>（复根舍），<span class="tex">K_{1}(d)\approx4.33&gt;0</span> ✓</div>
+          <div class="kv" id="c4">出射角：<span class="tex">p_{3}=-1+j</span>，<span class="tex">\theta_{p_{3}}=180^{\circ}-(135^{\circ}+26.6^{\circ}+90^{\circ})=-71.6^{\circ}</span>，共轭 <span class="tex">p_{4}</span> 为 <span class="tex">+71.6^{\circ}</span></div>
+          <div class="kv" id="c5" style="display:flex;gap:10px;align-items:center;padding:4px 10px">
+            <table style="flex:none">
+              <tr><td><span class="tex">s^{4}</span></td><td>1</td><td>8</td></tr>
+              <tr><td><span class="tex">s^{3}</span></td><td>5</td><td>6</td></tr>
+              <tr><td><span class="tex">s^{2}</span></td><td><span class="tex">6.8</span></td><td><span class="tex">K_{1}</span></td></tr>
+              <tr><td><span class="tex">s^{1}</span></td><td colspan="2"><span class="tex">(40.8-5K_{1})/6.8</span></td></tr>
+              <tr><td><span class="tex">s^{0}</span></td><td colspan="2"><span class="tex">K_{1}</span></td></tr>
+            </table>
+            <div style="flex:1;text-align:left">虚轴交点（劳斯）：<span class="tex">s^{1}</span> 行首为零 <span class="tex">\Rightarrow K_{1}=8.16</span>；辅助方程 <span class="tex">6.8s^{2}+8.16=0\Rightarrow s=\pm j1.095</span>；稳定 <span class="tex">0&lt;K_{1}&lt;8.16</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="act-card" style="flex:1">
+        <div class="hd">绘制步骤（与右图分步联动）</div>
+        <div class="bd" style="gap:4px">
+          <div class="kv" id="s1">① 标出四个开环极点与实轴段 [−3, 0]</div>
+          <div class="kv" id="s2">② 四条渐近线：σₐ=−1.25，±45°、±135°</div>
+          <div class="kv" id="s3">③ 分离点 d=−2.289（K₁=4.33）</div>
+          <div class="kv" id="s4">④ 出射角 <span class="tex">\theta_{p_{3}}=-71.6^{\circ}</span>（p₄ 镜像 +71.6°）</div>
+          <div class="kv" id="s5">⑤ 虚轴交点 ±j1.095（K₁=8.16），连成完整根轨迹</div>
+        </div>
+      </div>
+    </div>
+    <div class="act-card figc">
+      <div class="hd"><span style="flex:1">例5-4 关键要素分布（随左栏步骤逐项标注）</span></div>
+      <span class="segfloat" id="segChip" style="display:none"></span>
+      <span class="prog" id="prog">0 / 5</span>
+      <div class="bd2"><svg id="fig"></svg></div>
+      <div class="ctl">
+        <div class="ctl-r">
+          <button class="btn" id="play">▶ 播放</button>
+          <button class="btn ghost" id="step">⧉ 分步</button>
+          <button class="btn ghost" onclick="ACT.step.reset()">↺ 重置</button>
+        </div>
+        <div class="ctl-r">
+          <span class="kr">K₁ = <b id="kv" style="color:var(--danger)">0</b></span>
+          <span class="stab" id="stab">0&lt;K₁&lt;8.16 稳定</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">分工</span><span>本页把例5-4 的<span class="kw-r">全部关键计算一次走完</span>；下一页例5-4 绘制页只负责把这些要素连成完整根轨迹。</span></div>
+
+<div data-step="1" style="display:none"></div><div data-step="2" style="display:none"></div>
+<div data-step="3" style="display:none"></div><div data-step="4" style="display:none"></div>
+<div data-step="5" style="display:none"></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const F = RL.figure("fig", "ex54", { vw: 960, vh: 600, asym: false, brkDots: false, crossSq: false, sigA: false });
+  const FS = [0, .12, .24, .36, .48, 1];   // 播放节奏；轨迹分支仅第⑤步开始生长
+  function stabUI(K1, inf) {
+    const st = document.getElementById("stab");
+    if (inf || K1 > 8.21) { st.textContent = "K₁>8.16 不稳定"; st.style.background = "var(--danger)"; }
+    else if (Math.abs(K1 - 8.16) <= 0.05) { st.textContent = "K₁=8.16 临界"; st.style.background = "var(--orange)"; }
+    else { st.textContent = "0<K₁<8.16 稳定"; st.style.background = "var(--blue)"; }
+  }
+  function frame(f, K) {
+    if ((K || 0) < 5) F.setAllF(0);          // 要素算齐前轨迹不露头（播放逐帧兜底）
+    const inf = f >= 0.999, K1 = F.K_of_f(f);
+    document.getElementById("kv").textContent = (K || 0) >= 5 ? (inf ? "→ ∞" : RL.fmtK(K1)) : "0";
+    if ((K || 0) >= 5) stabUI(K1, inf);
+  }
+  function unflash() {
+    F.segEls.forEach(e => e.classList.remove("rl-flash"));
+    F.gAsym.classList.remove("rl-flash");
+    F.crossSq.forEach(e => e.classList.remove("rl-flash"));
+  }
+  /* 出射方向箭头（p₃、p₄ 沿 ∓71.6°，与出射角步同步出现） */
+  function departArrows(g) {
+    const TH = 71.6 * Math.PI / 180, L = 0.95 * F.s;
+    [[-1, 1, -1], [-1, -1, 1]].forEach(([sx, sy, sg]) => {
+      const x = F.X(sx), y = F.Y(sy);
+      F.mk("line", { x1: x, y1: y, x2: x + L * Math.cos(TH), y2: y - sg * L * Math.sin(TH),
+        stroke: RL.FOCUS, "stroke-width": 3, "marker-end": "url(#rxfig)" }, g);
+      F.tx(g, x + L * Math.cos(TH) + 14, y - sg * L * Math.sin(TH) + (sg > 0 ? 26 : -10),
+        (sg > 0 ? "+71.6°" : "−71.6°"), { fs: 22, fill: "#B3541E", b: 1, an: "start" });
+    });
+  }
+  function paint(K) {
+    unflash();
+    if (K < 5) F.setAllF(0);
+    for (let i = 1; i <= 5; i++)
+      document.getElementById("s" + i).classList.toggle("on", i === K);
+    ["c1", "c2", "c3", "c4", "c5"].forEach((id, j) =>
+      document.getElementById(id).classList.toggle("hl", K === j + 1));
+    if (K === 1) {  // ① 四个开环极点闪烁
+      const g = F.mk("g", { "class": "rl-flash" }, F.gDyn);
+      F.data.poles.forEach(p => F.mk("circle", { cx: F.X(p[0]), cy: F.Y(p[1]), r: 22,
+        fill: "none", stroke: RL.FOCUS, "stroke-width": 3.5 }, g));
+    }
+    F.segEls.forEach(e => { e.style.opacity = K >= 1 ? .9 : 0; if (K === 1) e.classList.add("rl-flash"); });
+    F.gAsym.style.opacity = K >= 2 ? 1 : 0;
+    if (K >= 2) {  // ② 渐近线中心 σₐ
+      if (K === 2) F.gAsym.classList.add("rl-flash");
+      F.mk("circle", { cx: F.X(-1.25), cy: F.Y(0), r: 16, fill: "none", stroke: RL.ASY, "stroke-width": 2.2, opacity: .8 }, F.gDyn);
+      F.tx(F.gDyn, F.X(-1.25) - 10, F.Y(0) - 34, "σ_{a}=−1.25", { fs: 25, fill: RL.ASY, b: 1, an: "end" });
+    }
+    if (K >= 3) {  // ③ 分离点
+      const g = F.mk("g", { "class": K === 3 ? "rl-flash" : "" }, F.gDyn);
+      F.mk("circle", { cx: F.X(-2.289), cy: F.Y(0), r: 9, fill: RL.FOCUS, stroke: "#fff", "stroke-width": 2.5 }, g);
+      F.tx(g, F.X(-2.289) - 18, F.Y(0) + 62, "d=−2.289", { fs: 24, fill: RL.FOCUS, b: 1, an: "end" });
+    }
+    if (K >= 4) {  // ④ 出射角箭头
+      const g = F.mk("g", { "class": K === 4 ? "rl-flash" : "" }, F.gDyn);
+      departArrows(g);
+    }
+    if (K >= 5) {  // ⑤ 虚轴交点 + 全图
+      F.crossSq.forEach(el => { el.style.opacity = 1; if (K === 5) el.classList.add("rl-flash"); });
+      F.tx(F.gDyn, F.X(0) + 24, F.Y(1.0954) - 16, "±j1.095", { fs: 23, fill: "#B3541E", b: 1, an: "start" });
+    } else F.crossSq.forEach(el => el.style.opacity = 0);
+  }
+  RL.wire(5, paint, {
+    figs: [F], FS, dur: 12000,
+    frame: (f, K) => frame(f, K),
+    pick: hit => {
+      document.getElementById("kv").textContent = RL.fmtK(hit.K);
+      stabUI(hit.K, false);
+    }
+  });
+  /* ---- ⧉分步：点一下推进一步；左栏步骤与右图元素 1:1 同步高亮 ---- */
+  const STEPS = ["① 四个开环极点与实轴段", "② 渐近线 σₐ=−1.25，±45°/±135°", "③ 分离点 d=−2.289（K₁=4.33）",
+                 "④ 出射角 ∓71.6°", "⑤ 虚轴交点 ±j1.095（K₁=8.16）· 全图"];
+  const chip = document.getElementById("segChip"), total = 5;
+  const wNext = ACT.step.next, wReset = ACT.step.reset;
+  let segRaf = null, segTok = 0;
+  function segStopUI() {
+    segTok++;
+    if (segRaf) { cancelAnimationFrame(segRaf); segRaf = null; }
+    if (chip) chip.style.display = "none";
+  }
+  ACT.step.next = function () { segStopUI(); return wNext(); };
+  ACT.step.reset = function () { segStopUI(); return wReset(); };
+  const playBtn = document.getElementById("play");
+  if (playBtn && playBtn.onclick) { const po = playBtn.onclick; playBtn.onclick = e => { segStopUI(); po(e); }; }
+  function segGo(instant) {
+    segStopUI();
+    if (ACT.step.cur >= total) wReset();
+    wNext();                                    // K→cur+1：applyK+paint（左栏高亮 + 图内当前步闪烁）
+    const k = ACT.step.cur, f0 = k >= 5 ? 0 : FS[k - 1], f1 = FS[k];   // 全图步轨迹自 0 生长
+    if (chip) { chip.textContent = "分步 " + k + " / " + total + "　" + STEPS[k - 1]; chip.style.display = ""; }
+    if (instant) { F.setAllF(k >= 5 ? f1 : 0); frame(k >= 5 ? f1 : 0, k); return; }
+    F.setAllF(f0); frame(f0, k);
+    const t0 = performance.now(), D = 2600, tok = segTok;
+    const tick = now => {
+      if (tok !== segTok) return;
+      const u = Math.min(1, (now - t0) / D), f = f0 + (f1 - f0) * u;
+      F.setAllF(f); frame(f, k);
+      if (u < 1) segRaf = requestAnimationFrame(tick); else segRaf = null;
+    };
+    segRaf = requestAnimationFrame(tick);
+  }
+  document.getElementById("step").onclick = () => segGo(false);
+  /* QA 钩子：?step=N 直达分步第 N 步（瞬时确定态） */
+  window.addEventListener("load", () => {
+    const n = +(new URLSearchParams(location.search).get("step") || 0);
+    for (let i = 0; i < Math.min(n, total); i++) segGo(true);
+  });
+});
+</script>
+</div></div>
+</body>
+</html>

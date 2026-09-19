@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>例5-3③：分离点与会合点</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=505">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=505" defer></script>
+<script src="../fig.js?v=506"></script>
+<script src="../data/ex53.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:1.04;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:8px;padding:12px 20px;font-size:21px;line-height:1.5}
+  .eq{background:var(--sky);border-radius:12px;padding:9px 14px;text-align:center;font-size:22px;line-height:1.5}
+  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .kv{background:var(--sky);border-radius:12px;padding:8px 14px;line-height:1.45}
+  .figc{flex:1.08;display:flex;flex-direction:column;overflow:hidden}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
+  .figc svg{width:100%;height:100%}
+</style>
+</head>
+<body data-title="例5-3③：分离点与会合点" data-page="22 / 60">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lft">
+        <div class="act-card" style="flex:1.35">
+          <div class="hd">求分离 / 会合点（<span class="tex">\frac{dK_{1}}{ds}=0</span>）</div>
+          <div class="bd">
+            <div class="kv" style="background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0">回到例5-3：<span class="tex">G(s)=\dfrac{K_{1}(s+2)}{s(s+1)}</span>（法则五的应用）</div>
+            <div data-step="1"><div class="eq">由特征方程解出 <span class="tex">K_{1}=-\dfrac{s(s+1)}{s+2}</span></div></div>
+            <div data-step="2"><div class="eq"><span class="tex">\dfrac{dK_{1}}{ds}=0\;\Rightarrow\;s^{2}+4s+2=0</span><br><span class="tex">d_{1}=-2+\sqrt{2}=-0.586,\quad d_{2}=-2-\sqrt{2}=-3.414</span></div></div>
+            <div data-step="3"><div class="eq hl">代回幅值条件：<span class="tex">K_{1}(d_{1})=3-2\sqrt{2}\approx0.172</span>，<span class="tex">K_{1}(d_{2})=3+2\sqrt{2}\approx5.828</span>（均 &gt; 0 ✓）</div></div>
+            <div data-step="4"><div class="eq">判别式互证：<span class="tex">K_{1}^{2}-6K_{1}+1=0\Rightarrow K_{1}=3\pm2\sqrt{2}</span></div></div>
+          </div>
+        </div>
+        <div class="act-card" data-step="5">
+          <div class="hd">定位与归宿</div>
+          <div class="bd" style="gap:7px">
+            <div class="kv"><span class="tex">d_{1}=-0.586</span> 在实轴段 <span class="tex">[-1,0]</span> 上 → <b>分离点</b>（<span class="tex">K_{1}=0.172</span>，两支由此进入圆）。</div>
+            <div class="kv"><span class="tex">d_{2}=-3.414</span> 在实轴段 <span class="tex">(-\infty,-2]</span> 上 → <b>会合点</b>（<span class="tex">K_{1}=5.828</span>，圆在此收拢回实轴）。</div>
+            <div class="kv">顺带一提：圆 <span class="tex">(\sigma+2)^{2}+\omega^{2}=2</span> 与实轴的交点恰为 <span class="tex">-2\pm\sqrt{2}</span>，正是 <span class="tex">d_{1},d_{2}</span>。</div>
+          </div>
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd"><span style="flex:1">圆轨迹上的分离点 <span class="tex">d_{1}</span> 与会合点 <span class="tex">d_{2}</span></span></div>
+        <div class="bd2"><svg id="fig"></svg></div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">校验习惯</span><span>解出的 d 必须<span class="kw-r">落在实轴段上且代回 K₁&gt;0</span> 才有效；本例两点全部通过，无一舍弃。</span></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const F = RL.figure("fig", "ex53", { vw: 960, vh: 600, ylim: [-3.1, 3.1], static: true,
+                                       asym: false, circle: true });
+  [[-0.5858, "d_{1}", 52], [-3.4142, "d_{2}", -46]].forEach(([d, lab, dy]) => {
+    const x = F.X(d), y = F.Y(0);
+    F.mk("circle", { cx: x, cy: y, r: 9, fill: RL.FOCUS, stroke: "#fff", "stroke-width": 2.5 }, F.gDyn);
+    F.tx(F.gDyn, x, y + dy + (dy > 0 ? 24 : -16), lab, { fs: 25, fill: RL.FOCUS, b: 1 });
+  });
+});
+</script>
+</div></div>
+</body>
+</html>

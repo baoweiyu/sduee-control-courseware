@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>5.4节封面：根轨迹分析方法</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=505">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=505" defer></script>
+<script src="../fig.js?v=506"></script>
+<script src="../data/ex54.js"></script>
+<style>
+  .cover { position:absolute; inset:0; display:flex; align-items:center; gap:56px; padding:64px 72px 84px; }
+  .left { flex:1.12; display:flex; flex-direction:column; align-items:flex-start; gap:20px; }
+  .left .part { display:inline-block; background:var(--navy); color:#fff; font-size:24px; font-weight:700; letter-spacing:6px; border-radius:12px; padding:10px 26px; }
+  .left h1 { font-size:58px; color:var(--navy); letter-spacing:3px; }
+  .left .deco { width:150px; height:10px; border-radius:5px; background:var(--orange); position:relative; }
+  .left .deco::after { content:""; position:absolute; right:-28px; top:0; width:12px; height:10px; border-radius:5px; background:var(--orange); }
+  .left .sub { font-size:38px; color:var(--blue); font-weight:700; letter-spacing:2px; }
+  .left .meta { font-size:24px; color:var(--muted); }
+  .toc { display:grid; grid-template-columns:1fr; gap:12px; margin-top:4px; width:100%; }
+  .toc .it { background:var(--sky); border:2px solid var(--line); border-radius:12px; padding:12px 22px; font-size:22px; color:var(--navy); font-weight:700; white-space:nowrap; }
+  .toc .it b { color:var(--orange); margin-right:8px; }
+  .goal { width:100%; background:#FDF3EC; border-left:6px solid var(--orange); border-radius:0 14px 14px 0; padding:12px 20px; font-size:21.5px; color:var(--navy); line-height:1.5; }
+  .goal b { color:var(--danger); }
+  .right { flex:1; height:100%; display:flex; align-items:stretch; }
+  .imgc { width:100%; border:2px solid var(--line); border-radius:20px; overflow:hidden; background:#fff; box-shadow:0 10px 34px rgba(18,38,110,.14); display:flex; flex-direction:column; justify-content:center; }
+  .imgc svg { flex:none; width:100%; height:auto !important; aspect-ratio:720/560; display:block; }
+  .imgc .cpt { flex:none; text-align:center; font-size:21px; font-weight:700; color:var(--navy); background:var(--sky); padding:12px 16px; }
+</style>
+</head>
+<body data-nochrome="1" data-title="5.4节封面：根轨迹分析方法" data-page="48 / 60">
+<div class="act-stage"><div class="act-slide">
+  <div class="cover">
+    <div class="left">
+      <span class="part">5.4</span>
+      <h1>根轨迹分析方法</h1>
+      <div class="deco"></div>
+      <div class="sub">用轨迹选极点 · 用零极点读性能</div>
+      <div class="meta">画好的轨迹怎么用：先确定闭环零极点，再读性能与降阶，最后到零极点配置直觉</div>
+      <div class="toc">
+        <div class="it"><b>①</b>闭环零点与闭环极点的确定（例5-13）</div>
+        <div class="it"><b>②</b>零极点分布与性能（偶极子、例5-14）</div>
+        <div class="it"><b>③</b>主导极点与高阶降阶（例5-15）</div>
+        <div class="it"><b>④</b>开环零极点对轨迹的影响（例5-16）与三大规律</div>
+      </div>
+      <div class="goal"><b>学习目标：</b>会在轨迹上按指标选点定 K₁、定全部闭环极点；会用主导极点/偶极子做降阶判断；会从零极点配置读出改造轨迹的方向。</div>
+    </div>
+    <div class="right">
+      <div class="imgc">
+        <svg id="fig"></svg>
+        <div class="cpt">ζ 射线选点示意（例5-13）——本节的核心动作：按指标在轨迹上选极点</div>
+      </div>
+    </div>
+  </div>
+  <div class="act-foot"></div><div class="act-footno">48</div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const F = RL.figure("fig", "ex54", { vw: 720, vh: 560, static: true, asym: false });
+  const T = 3.4, c = Math.cos(Math.PI / 3), sn = Math.sin(Math.PI / 3);
+  [1, -1].forEach(sg => F.mk("line", { x1: F.X(0), y1: F.Y(0), x2: F.X(-c * T), y2: F.Y(sg * sn * T),
+    stroke: RL.REF.color.zeta, "stroke-width": 2.4, "stroke-dasharray": RL.REF.dash.zeta, opacity: .85 }, F.gDyn));
+  F.tx(F.gDyn, F.X(-c * 2.9) - 8, F.Y(sn * 2.9) - 6, "ζ=0.5（β=60°）", { fs: 24, fill: RL.REF.color.zeta, b: 1, an: "end" });
+  [[-0.4093, 0.7089], [-0.4093, -0.7089]].forEach(p => F.mk("circle", { cx: F.X(p[0]), cy: F.Y(p[1]), r: 10,
+    fill: RL.REF.color.zeta, stroke: "#fff", "stroke-width": 2.5 }, F.gDyn));
+  F.tx(F.gDyn, F.X(-0.4093) - 4, F.Y(0.7089) - 40, "s_{1,2}=-0.41±j0.71", { fs: 23, fill: RL.REF.color.zeta, b: 1 });
+});
+</script>
+</div></div>
+</body>
+</html>

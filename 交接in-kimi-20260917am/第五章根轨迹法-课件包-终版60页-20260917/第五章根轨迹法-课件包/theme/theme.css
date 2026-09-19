@@ -1,0 +1,226 @@
+/* ==========================================================================
+   Control Visual Bible 落地样式 —《自动控制理论》三层 HTML 课件
+   版本 v0.1（2026-08-18） 设计分辨率 1448×1086（4:3）
+   ========================================================================== */
+:root {
+  --navy: #12266E;
+  --blue: #1D3FA0;
+  --blue2: #2B5CE6;
+  --sky: #EEF3FD;
+  --line: #C9D8F2;
+  --orange: #F5821F;
+  --ink: #22304A;
+  --muted: #5B6B8C;
+  --danger: #D63A2F;
+  --page-bg: #FFFFFF;
+  --stage-bg: #0B1440;
+  --radius: 20px;
+  --font: "Microsoft YaHei", "Segoe UI", "PingFang SC", sans-serif;
+  --font-math: "Cambria Math", "STIX Two Math", Georgia, serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  width: 100%; height: 100%;
+  background: var(--stage-bg);
+  font-family: var(--font);
+  color: var(--ink);
+  overflow: hidden;
+}
+
+/* 舞台：等比缩放容器（act-base.js 计算 translate+scale 居中） */
+.act-stage { position: absolute; inset: 0; }
+.act-slide {
+  width: 1448px; height: 1086px;
+  background: var(--page-bg);
+  position: relative;
+  overflow: hidden;
+  transform-origin: 0 0;
+}
+
+/* ---------- 页眉 ---------- */
+.act-badge {
+  position: absolute; top: 0; left: 0;
+  display: flex; align-items: center; gap: 14px;
+  background: var(--blue); color: #fff;
+  font-size: 26px; font-weight: 700; letter-spacing: 1px;
+  padding: 14px 34px 14px 22px;
+  clip-path: polygon(0 0, 100% 0, calc(100% - 28px) 100%, 0 100%);
+}
+.act-badge::after {
+  content: ""; position: absolute; right: -14px; top: 0; bottom: 0; width: 8px;
+  background: var(--orange); transform: skewX(-24deg); transform-origin: top;
+}
+.act-badge .cap { width: 34px; height: 34px; flex: none; }
+
+.act-title {
+  position: absolute; top: 34px; left: 0; right: 0;
+  text-align: center; font-size: 44px; font-weight: 700; color: var(--navy);
+  letter-spacing: 1px;
+}
+.act-title-deco {
+  position: absolute; top: 108px; left: 50%; transform: translateX(-64px);
+  width: 110px; height: 8px; border-radius: 4px; background: var(--orange);
+}
+.act-title-deco::after {
+  content: ""; position: absolute; right: -22px; top: 0;
+  width: 10px; height: 8px; border-radius: 4px; background: var(--orange);
+}
+.act-pageno {
+  position: absolute; top: 22px; right: 40px;
+  font-size: 24px; font-weight: 700; color: var(--navy);
+}
+
+/* ---------- 内容区 ---------- */
+.act-body {
+  position: absolute; left: 48px; right: 48px; top: 150px; bottom: 96px;
+}
+.act-body.center { display: flex; flex-direction: column; justify-content: center; }
+
+/* ---------- 卡片 ---------- */
+.act-card {
+  background: #fff; border: 2px solid var(--line); border-radius: var(--radius);
+  overflow: hidden;
+}
+.act-card > .hd {
+  background: var(--blue); color: #fff; font-size: 26px; font-weight: 700;
+  padding: 14px 24px; display: flex; align-items: center; gap: 12px;
+}
+.act-card > .bd { padding: 22px 24px; font-size: 24px; line-height: 1.6; }
+.act-card.fill { background: var(--sky); }
+
+/* 编号徽章 */
+.act-num {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: var(--blue); color: #fff; font-size: 26px; font-weight: 700;
+  display: grid; place-items: center; flex: none;
+}
+
+/* 橙色连接箭头 */
+.act-arrow { color: var(--orange); font-size: 40px; font-weight: 700; flex: none; }
+
+/* ---------- 结论 / 提示条 ---------- */
+.act-note {
+  position: absolute; left: 48px; right: 48px; bottom: 64px;
+  background: var(--sky); border-radius: 16px;
+  display: flex; align-items: center; gap: 18px;
+  padding: 14px 28px; font-size: 25px; color: var(--navy);
+}
+.act-note .ico { width: 46px; height: 46px; flex: none; }
+.act-note .lead { color: var(--orange); font-weight: 700; flex: none; }
+
+/* ---------- 页脚 ---------- */
+.act-foot {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 44px;
+  background: linear-gradient(90deg, var(--blue) 0 72%, transparent 72%);
+}
+.act-foot::before {
+  content: ""; position: absolute; right: 0; top: 0; bottom: 0; width: 22%;
+  background: var(--orange);
+  clip-path: polygon(38% 0, 100% 0, 100% 100%, 0 100%);
+}
+.act-footno {
+  position: absolute; right: 26px; bottom: 4px;
+  font-size: 24px; font-weight: 700; color: #fff; z-index: 2;
+}
+
+/* ---------- 表格 ---------- */
+.act-table { width: 100%; border-collapse: collapse; font-size: 22px; }
+.act-table th {
+  background: var(--blue); color: #fff; padding: 12px 16px; font-weight: 700;
+  border: 2px solid var(--line);
+}
+.act-table td { border: 2px solid var(--line); padding: 10px 16px; background: #fff; }
+.act-table tr:nth-child(even) td { background: var(--sky); }
+
+/* ---------- 公式 ---------- */
+.act-formula {
+  font-family: var(--font-math); font-style: italic;
+  font-size: 30px; color: var(--navy);
+  background: var(--sky); border-radius: 14px; padding: 18px 30px;
+  display: inline-block;
+}
+.act-var { color: var(--orange); font-weight: 700; } /* 变量强调 */
+
+/* ---------- 分步呈现 ---------- */
+[data-step] { opacity: 0; transform: translateY(12px); transition: opacity .22s ease-out, transform .22s ease-out; }
+[data-step].shown { opacity: 1; transform: none; }
+
+/* ---------- 交互控件 ---------- */
+.act-slider { display: flex; align-items: center; gap: 14px; font-size: 22px; }
+.act-slider input[type="range"] { width: 260px; accent-color: var(--orange); height: 32px; }
+.act-slider .val {
+  min-width: 86px; text-align: center; font-weight: 700; color: var(--navy);
+  background: var(--sky); border-radius: 10px; padding: 4px 10px;
+}
+.act-btn {
+  font-family: var(--font); font-size: 20px; font-weight: 700;
+  color: var(--blue); background: #fff; border: 2px solid var(--blue);
+  border-radius: 12px; padding: 8px 20px; cursor: pointer;
+}
+.act-btn:hover { background: var(--sky); }
+.act-btn:active { transform: translateY(1px); }
+
+/* 曲线图 */
+.act-plot .axis { stroke: var(--muted); stroke-width: 1.5; }
+.act-plot .grid { stroke: var(--line); stroke-width: 1; stroke-dasharray: 5 6; }
+.act-plot .curve { stroke: var(--blue2); stroke-width: 3; fill: none; }
+.act-plot .ref { stroke: var(--orange); stroke-width: 2; stroke-dasharray: 8 6; fill: none; }
+.act-plot text { font-family: var(--font); font-size: 17px; fill: var(--muted); }
+.act-plot .tag { fill: var(--navy); font-weight: 700; }
+
+/* ---------- 页面工具类（v0.2 增补） ---------- */
+.act-body.has-note { bottom: 190px; }            /* 有结论条时收紧内容区（两行结论条也不遮挡内容） */
+.act-body.fill {                                  /* 稀疏页面：内容垂直居中撑满 */
+  display: flex; flex-direction: column; justify-content: center;
+}
+.act-img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; }
+.legacy-frame {                                   /* 旧课件原始素材展示框 */
+  background: #fff; border: 2px solid var(--line); border-radius: 14px;
+  padding: 10px; display: grid; place-items: center; position: relative;
+}
+.legacy-frame::after {
+  content: "原课件素材"; position: absolute; top: -13px; right: 14px;
+  background: var(--muted); color: #fff; font-size: 14px; font-weight: 400;
+  padding: 2px 10px; border-radius: 10px;
+}
+/* 单一强调色规则（v0.3）：正文强调一律红 #D63A2F；
+   橙色仅用于结构性元素（箭头、图标、「结论/提示」前缀），不用于正文强调文字 */
+.kw-r { color: #D63A2F; font-weight: 700; }       /* 强调：红 */
+.kw   { color: #D63A2F; font-weight: 700; }       /* 兼容旧类名，统一为红 */
+.kw-b { color: #D63A2F; font-weight: 700; }       /* 兼容旧类名，统一为红 */
+.kw-g { color: #D63A2F; font-weight: 700; }       /* 兼容旧类名，统一为红 */
+.em   { color: var(--danger) !important; }        /* 页内 .em 强调统一为红 */
+.tagchip {                                         /* 小标签 */
+  display: inline-block; background: var(--sky); color: var(--navy);
+  border-radius: 10px; padding: 3px 14px; font-size: 19px; font-weight: 700;
+}
+
+/* ---------- 数学排版（v0.4 增补，第二章起用） ---------- */
+.math { font-family: var(--font-math); font-style: italic; color: var(--navy); }
+.math .mn { font-style: normal; }                 /* 正体（函数名、单位） */
+.math sub, .math sup { font-size: .62em; font-style: normal; }
+.fr {                                              /* 分式 */
+  display: inline-flex; flex-direction: column; align-items: center;
+  vertical-align: middle; margin: 0 .12em; font-style: italic;
+}
+.fr > .nu { padding: 0 .35em .08em; border-bottom: 2.2px solid currentColor; line-height: 1.25; }
+.fr > .de { padding: .08em .35em 0; line-height: 1.25; }
+.eqline { display: block; text-align: center; }           /* 公式行：块级居中，保持行内 sub/sup 有效 */
+.mathbox {                                         /* 公式卡片 */
+  font-family: var(--font-math); font-style: italic; font-size: 27px;
+  color: var(--navy); background: var(--sky); border-radius: 14px;
+  padding: 18px 28px; text-align: center; line-height: 1.5;
+}
+
+/* ===== 方框图统一规范（MathJax 公式 + 2px 线条 + 小圆角白底块） ===== */
+.svgname { font:600 15px "Microsoft YaHei","Segoe UI",sans-serif; fill:#1B3B8B; }
+.svgsub  { font:400 12px "Microsoft YaHei","Segoe UI",sans-serif; fill:#5B6B8C; }
+.svgblk  { fill:#fff; stroke:#1D3FA0; stroke-width:2; }
+.svgline { stroke:#1D3FA0; stroke-width:2; fill:none; }
+/* MathJax 容器在 SVG foreignObject / 文本行内的对齐微调 */
+.tex mjx-container { margin:0 !important; }
+.tex-d mjx-container { margin:0.2em 0 !important; }
+
+/* 中文正文使用中文字体栈；数学字体仅作用于 .tex/MathJax 公式（审计 3.6） */

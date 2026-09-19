@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>课堂互动①：方程与两个条件</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=505">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=505" defer></script>
+<script src="../fig.js?v=506"></script>
+<script src="../data/ex51.js"></script>
+<style>
+  .row{display:flex;gap:24px;height:100%;min-height:0}
+  .qcol{flex:1;display:flex;flex-direction:column;gap:18px}
+  .qtype{display:inline-block;background:var(--orange);color:#fff;font-size:21px;font-weight:700;border-radius:10px;padding:7px 20px;width:fit-content}
+  .qz{background:#fff;border:2px solid var(--line);border-radius:16px;padding:20px 26px;flex:1;display:flex;flex-direction:column;justify-content:center;min-height:0}
+  .qz .qt{font-size:23px;color:var(--navy);font-weight:700;margin-bottom:16px;line-height:1.5}
+  .stage-tip{display:inline-block;margin-bottom:14px;font-size:19.5px;color:#fff;background:var(--blue);border-radius:20px;padding:6px 20px;width:fit-content}
+  .opts{display:flex;flex-direction:column;gap:14px}
+  .opt{background:var(--sky);border:2px solid var(--line);border-radius:12px;padding:14px 18px;font-size:20px;color:var(--ink);font-weight:700;position:relative;line-height:1.45}
+  .opt.right{border-color:#1E9E57;background:#F0FAF4}
+  .opt.right::after{content:"✓";position:absolute;top:-13px;right:-10px;width:31px;height:31px;border-radius:50%;background:#1E9E57;color:#fff;font-weight:800;font-size:19px;display:grid;place-items:center}
+  .opt.wrong{border-color:#D63A2F;background:#FDF1EF}
+  .opt.wrong::after{content:"✗";position:absolute;top:-13px;right:-10px;width:31px;height:31px;border-radius:50%;background:#D63A2F;color:#fff;font-weight:800;font-size:19px;display:grid;place-items:center}
+  .ans{font-size:20.5px;color:var(--navy);background:var(--sky);border-radius:12px;padding:14px 22px;line-height:1.6}
+  .ans b{color:var(--danger)}
+  .figc{flex:.95;display:flex;flex-direction:column;overflow:hidden}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:6px 12px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .figc .cap{flex:none;font-size:19px;color:var(--navy);background:var(--sky);border-radius:12px;padding:10px 16px;margin:0 14px 14px;line-height:1.4}
+</style>
+</head>
+<body data-title="课堂互动①：方程与两个条件" data-page="12 / 60">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="row">
+      <div class="act-card figc">
+        <div class="hd">示例系统（供判断参考）</div>
+        <div class="bd2"><svg id="fig"></svg></div>
+        <div class="cap"><span class="tex">G(s)=\dfrac{K_{1}(s+4)}{(s+2)(s+6.6)}</span>　实轴候选段：<span class="tex">[-4,-2]</span>、<span class="tex">(-\infty,-6.6]</span></div>
+      </div>
+      <div class="qcol">
+        <span class="qtype">多选题　1 分</span>
+        <div class="qz">
+          <div class="qt">关于根轨迹方程与两个条件，你认为以下说法<span style="color:var(--danger)">正确的</span>是？</div>
+          <span class="stage-tip">请先作出判断</span>
+          <div class="opts">
+            <div class="opt" data-mark="1">A　根轨迹是 <span class="tex">K_{1}</span> 从 0 变到 ∞ 时，闭环特征根在 s 平面上走过的路径</div>
+            <div class="opt" data-mark="1">B　绘制根轨迹只需依据相角条件，它是在轨迹上的充要判据</div>
+            <div class="opt" data-mark="0">C　只要某点的幅值条件成立（可算出正的 <span class="tex">K_{1}</span>），该点就一定在根轨迹上</div>
+            <div class="opt" data-mark="1">D　根轨迹方程 <span class="tex">G(s)H(s)=-1</span> 中 "−1" 的含义：幅值为 1、相角为 <span class="tex">\pm180^{\circ}(2q+1)</span></div>
+          </div>
+        </div>
+        <div class="ans" data-step="1">
+          <b>答案：A、B、D。</b>根轨迹是<span class="kw-r">闭环特征根</span>的轨迹（A 对）；相角条件是点在轨迹上的充要判据，幅值条件只负责定 <span class="tex">K_{1}</span>（B 对、D 对）。任何非零极点处的 <span class="tex">s</span> 都能由幅值条件算出一个正的 <span class="tex">K_{1}</span>，但相角不一定满足——如上一页的试验点 <span class="tex">45.6^{\circ}-78.9^{\circ}-26.6^{\circ}=-59.9^{\circ}</span>，<span class="kw-r">不在</span>轨迹上（C 错）。
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const F = RL.figure("fig", "ex51", { vw: 900, vh: 560, ylim: [-1.8, 1.8], static: true, asym: false });
+  F.setAllF(0);
+  const S = ACT.step, _n = S.next.bind(S), _r = S.reset.bind(S);
+  function mark() {
+    const on = S.cur >= 1;
+    document.querySelectorAll(".opt").forEach(o => {
+      o.classList.toggle("right", on && o.dataset.mark === "1");
+      o.classList.toggle("wrong", on && o.dataset.mark === "0");
+    });
+  }
+  S.next = function () { const d = _n(); mark(); return d; };
+  S.reset = function () { _r(); mark(); };
+  window.prev = function () { const n = Math.max(0, S.cur - 1); S.reset(); for (let i = 0; i < n; i++) S.next(); };
+});
+</script>
+</body>
+</html>

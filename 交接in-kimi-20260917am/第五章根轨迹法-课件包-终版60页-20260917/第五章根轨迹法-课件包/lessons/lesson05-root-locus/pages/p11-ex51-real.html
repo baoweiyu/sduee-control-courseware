@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>两个条件的应用·示例二：实轴试验点与求 K₁</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=505">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=505" defer></script>
+<script src="../fig.js?v=506"></script>
+<script src="../data/ex51.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:1;display:flex;flex-direction:column;gap:10px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:6px;padding:10px 18px;font-size:21px;line-height:1.5}
+  .eq{background:var(--sky);border-radius:12px;padding:8px 12px;text-align:center;font-size:21px;line-height:1.5}
+  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .kv{background:var(--sky);border-radius:12px;padding:9px 14px;line-height:1.45}
+  .figc{flex:1.16;display:flex;flex-direction:column;overflow:hidden}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .cap{flex:none;font-size:20px;color:var(--navy);background:var(--sky);border-radius:12px;padding:8px 16px;margin:0 14px 12px;line-height:1.4}
+</style>
+</head>
+<body data-title="两个条件的应用·示例二：实轴试验点与求 K₁" data-page="11 / 60">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lft">
+        <div class="act-card">
+          <div class="hd">系统与试验点</div>
+          <div class="bd">
+            <div class="eq"><span class="tex">G(s)H(s)=\dfrac{K_{1}(s+4)}{(s+2)(s+6.6)}</span></div>
+            <div class="kv" data-step="1">由法则三（右侧实零极点数为奇数），实轴候选段：<span class="tex">[-4,-2]</span> 与 <span class="tex">(-\infty,-6.6]</span>。</div>
+            <div class="kv" data-step="2">在候选段上取试验点 <span class="tex">s_{1}=-3</span>——实轴段上的点必满足相角条件，此处仍完整验算一遍以示规范。</div>
+          </div>
+        </div>
+        <div class="act-card" style="flex:1.3">
+          <div class="hd">逐项验算（先相角、后幅值）</div>
+          <div class="bd">
+            <div class="eq" data-step="3">相角条件：<span class="tex">\angle(s_{1}+4)-\angle(s_{1}+2)-\angle(s_{1}+6.6)=0^{\circ}-180^{\circ}-0^{\circ}=-180^{\circ}</span>　✓</div>
+            <div class="eq hl" data-step="4" style="font-size:19.5px"><span class="tex">s_{1}</span> <span class="kw-r">在</span>根轨迹上；<span class="tex">K_{1}=\dfrac{|s_{1}+2|\cdot|s_{1}+6.6|}{|s_{1}+4|}=(1\times3.6)/1=3.6</span></div>
+          </div>
+        </div>
+        <div class="act-card" style="flex:.75" data-step="5">
+          <div class="hd">与示例一对照</div>
+          <div class="bd">
+            <div class="kv" style="font-size:19.5px">示例一的点被否决；本页 <span class="tex">s_{1}=-3</span> 通过判定并定出 <span class="tex">K_{1}=3.6</span>——一否一肯，流程互补。</div>
+          </div>
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd"><span style="flex:1">零极点指向试验点的向量与相角</span></div>
+        <div class="bd2"><svg id="fig"></svg></div>
+        <div class="cap">淡色底轨即本系统完整根轨迹——<span class="tex">s_{1}=-3</span> 正落在轨迹上；三条实轴向量的相角为 <span class="tex">0^{\circ}/180^{\circ}</span>。</div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">结论</span><span>先以<span class="kw-r">相角条件</span>判定，再以<span class="kw-r">幅值条件</span>求 <span class="tex">K_{1}</span>——这就是试探法的雏形（5.4 节细讲）。</span></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  /* 与 N10 同构图：同一系统、同一坐标范围；肯定例加淡色完整轨迹底轨 */
+  const F = RL.figure("fig", "ex51", { vw: 960, vh: 600, ylim: [-2.2, 3.0], static: true,
+                                       asym: false, brkDots: false, crossSq: false, segs: true,
+                                       extra: api => {
+    /* 淡色完整轨迹底轨（数据来自 data/ex51.js 分支点列） */
+    api.data.branches.forEach(b => {
+      const d = api.toPath(api.clipPoly(b.map(p => [api.X(p[0]), api.Y(p[1])]), api.PLOT));
+      api.mk("path", { d, fill: "none", stroke: "#C9D6F2", "stroke-width": 5, opacity: .9 }, api.gBase);
+    });
+    const s1 = -3;
+    /* 三个向量同在实轴上，按错层高度画平行箭头并标注相角（角度由方向现算） */
+    [[-6.6, -16], [-4, -58], [-2, -100]].forEach(([v, dy]) => {
+      const x1 = api.X(v), x2 = api.X(s1) - 16, y = api.Y(0) + dy;
+      const dir = Math.sign(s1 - v);            // −1: 向左（180°），+1: 向右（0°）
+      const ang = dir > 0 ? "0°" : "180°";
+      const sx = dir > 0 ? x1 + 16 : x1 - 16;   // 起点让开零极点标记
+      api.mk("line", { x1: sx, y1: y, x2, y2: y,
+        stroke: RL.INK, "stroke-width": 2.6, "marker-end": "url(#rxfig)" }, api.gDyn);
+      api.tx(api.gDyn, x2 + (dir > 0 ? -4 : 44), y - 14, ang, { fs: 23, fill: "#B3541E", b: 1 });
+    });
+    /* 试验点（落在轨迹上） */
+    api.mk("circle", { cx: api.X(s1), cy: api.Y(0), r: 10, fill: RL.FOCUS, stroke: "#fff", "stroke-width": 2.5 }, api.gDyn);
+    api.tx(api.gDyn, api.X(s1), api.Y(0) + 52, "s_{1}（试验点）", { fs: 26, fill: RL.FOCUS, b: 1 });
+  } });
+  F.setAllF(0);
+});
+</script>
+</div></div>
+</body>
+</html>

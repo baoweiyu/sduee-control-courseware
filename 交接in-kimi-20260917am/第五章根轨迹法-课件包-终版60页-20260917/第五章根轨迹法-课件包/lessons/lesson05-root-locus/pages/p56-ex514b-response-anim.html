@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>例5-14②：闭环零点的影响（对比动画）</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=505">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=505" defer></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:1.05;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:8px;padding:12px 20px;font-size:20.5px;line-height:1.5}
+  .tip{background:var(--sky);border-radius:12px;padding:9px 14px;line-height:1.5}
+  .tip b{color:var(--danger)}
+  .tipA{background:#FDF3EC;border-left:5px solid var(--orange);border-radius:0 12px 12px 0}
+  .figc{flex:1.25;display:flex;flex-direction:column;overflow:hidden}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .ctl{display:flex;align-items:center;gap:10px;justify-content:center;padding:8px 0 10px}
+  .btn{background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:19px;font-weight:700;padding:8px 20px;cursor:pointer}
+  .prog{font-size:18px;color:var(--muted);min-width:56px}
+</style>
+</head>
+<body data-title="例5-14②：闭环零点的影响（对比动画）" data-page="56 / 60">
+<div class="act-stage"><div class="act-slide">
+
+<div class="act-body has-note">
+  <div class="row">
+    <div class="lft">
+      <div class="act-card" style="flex:1.25">
+        <div class="hd">同一组闭环极点，只差一个闭环零点</div>
+        <div class="bd" style="gap:7px">
+          <div class="tip">主导极点对相同（−0.5±j0.866）：<span class="tex">\sigma\%=16.3\%</span>，<span class="tex">t_{p}=3.63s</span>——曲线 (b)（速度反馈，无闭环零点）。</div>
+          <div class="tip tipA">附加闭环零点 −1.25 使响应<b>提前</b>、超调<b>增大</b>：<span class="tex">\sigma\%=24.6\%</span>，<span class="tex">t_{p}=2.63s</span>——曲线 (a)（比例微分）。</div>
+          <div class="tip" data-step="2">速度反馈并没有改变这组闭环极点（两系统极点相同、阻尼比相同），而是通过改变闭环<b>分子</b>移除了附加零点——超调减小，峰值时间变长。</div>
+          <div class="tip tipA" data-step="3">结论：附加闭环零点<b>越靠近虚轴影响越显著</b>（本例同类结构下；实际影响还取决于极点位置与模态系数）。</div>
+        </div>
+      </div>
+    </div>
+    <div class="act-card figc">
+      <div class="hd"><span style="flex:1">单位阶跃响应对比（闭环主导极点 −0.5±j0.866，(a) 附带零点 −1.25）</span></div>
+      <div class="bd2"><svg id="fig" viewBox="0 0 960 600"></svg></div>
+      <div class="ctl">
+        <button class="btn" id="play">▶ 播放</button>
+        <button class="btn ghost" id="rst">↺ 重置</button>
+        <span class="prog" id="prog">t = 0.0 s</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">结论</span><span>前向通道的 PD 零点在闭环传函中留下<span class="kw-r">附加零点</span>，效果类似对响应叠加微分型分量——并非闭环极点或阻尼本身改变；速度反馈不引入闭环零点，两种手段都在根轨迹不变的前提下改变响应形态。</span></div>
+
+<div data-step="1" style="display:none"></div><div data-step="2" style="display:none"></div>
+<div data-step="3" style="display:none"></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("fig");
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const MF = '"Cambria Math","STIX Two Math",Georgia,"Microsoft YaHei",serif';
+  const tx = (x, y, s, o) => { o = o || {}; const n = mk("text", { x, y, "font-size": o.fs || 23, "text-anchor": o.an || "middle", fill: o.fill || "#16324F", "font-weight": o.b ? 700 : 400, "font-family": MF }); n.textContent = s; if (o.halo !== false) n.setAttribute("style", "paint-order:stroke;stroke:#FFF;stroke-width:6;stroke-linejoin:round"); svg.appendChild(n); return n; };
+  /* 1:1 无关的响应曲线坐标系：t∈[0,10]s，y∈[−0.1,1.5] */
+  const X0 = 74, X1 = 916, Y1 = 534, Y0 = 60, T = 10, YM = [-0.1, 1.5];
+  const X = t => X0 + (t / T) * (X1 - X0), Y = y => Y1 - (y - YM[0]) / (YM[1] - YM[0]) * (Y1 - Y0);
+  const wd = 0.8660254, al = 0.5;
+  const yb = t => 1 - Math.exp(-al * t) * (Math.cos(wd * t) + (al / wd) * Math.sin(wd * t));
+  const dyb = t => (1 / wd) * Math.exp(-al * t) * Math.sin(wd * t);
+  const ya = t => yb(t) + 0.8 * dyb(t);
+  /* 网格与坐标轴 */
+  mk("line", { x1: X0 - 8, y1: Y1 + 6, x2: X1 + 14, y2: Y1 + 6, stroke: "#5B6B8C", "stroke-width": 2.2 });
+  mk("line", { x1: X0, y1: Y1 + 6, x2: X0, y2: Y0 - 14, stroke: "#5B6B8C", "stroke-width": 2.2 });
+  tx(X1 + 2, Y1 + 52, "t/s", { fs: 22, fill: "#5B6B8C", b: 1 });
+  tx(X0 - 26, Y0 - 26, "h(t)", { fs: 22, fill: "#5B6B8C", b: 1 });
+  [0.5, 1.0, 1.5].forEach(v => { mk("line", { x1: X0 - 6, y1: Y(v), x2: X0 + 6, y2: Y(v), stroke: "#5B6B8C", "stroke-width": 1.6 }); tx(X0 - 14, Y(v) + 7, v.toFixed(1), { fs: 20, fill: "#5B6B8C", an: "end" }); });
+  [2, 4, 6, 8].forEach(v => { mk("line", { x1: X(v), y1: Y1, x2: X(v), y2: Y1 + 6, stroke: "#5B6B8C", "stroke-width": 1.6 }); tx(X(v), Y1 + 30, String(v), { fs: 20, fill: "#5B6B8C" }); });
+  mk("line", { x1: X0, y1: Y(1), x2: X1, y2: Y(1), stroke: "#C9D6F2", "stroke-width": 2, "stroke-dasharray": "6 5" });
+  /* 曲线（裁剪动画） */
+  const defs = mk("defs", {});
+  const clip = mk("clipPath", { id: "cc" }, defs);
+  const crect = mk("rect", { x: 0, y: 0, width: 0, height: 600 }, clip);
+  const pathOf = f => { let d = ""; for (let i = 0; i <= 560; i++) { const t = T * i / 560; d += (i ? "L" : "M") + X(t).toFixed(1) + "," + Y(f(t)).toFixed(1); } return d; };
+  const g = mk("g", { "clip-path": "url(#cc)" });
+  mk("path", { d: pathOf(ya), fill: "none", stroke: "#C02A20", "stroke-width": 4.5 }, g);
+  mk("path", { d: pathOf(yb), fill: "none", stroke: "#1D3FA0", "stroke-width": 4.5 }, g);
+  tx(446, 120, "(a) 比例微分：σ%=24.6%，tp=2.63s", { fs: 22, b: 1, fill: "#C02A20", an: "start" });
+  tx(446, 158, "(b) 速度反馈：σ%=16.3%，tp=3.63s", { fs: 22, b: 1, fill: "#1D3FA0", an: "start" });
+  /* 播放控制（rAF 连续推进裁剪宽度） */
+  let raf = null;
+  function setP(f) {
+    crect.setAttribute("width", (X0 + f * (X1 - X0)).toFixed(1));
+    document.getElementById("prog").textContent = "t = " + (f * T).toFixed(1) + " s";
+  }
+  function play() {
+    if (raf) { cancelAnimationFrame(raf); raf = null; document.getElementById("play").textContent = "▶ 播放"; return; }
+    const w0 = parseFloat(crect.getAttribute("width"));
+    let f0 = Math.max(0, (w0 - X0) / (X1 - X0));
+    if (f0 >= 1) { setP(0); f0 = 0; }
+    document.getElementById("play").textContent = "❚❚ 暂停";
+    const t0 = performance.now(), DUR = 7000;
+    const tick = now => {
+      const f = Math.min(1, f0 + (now - t0) / DUR);
+      setP(f);
+      if (f >= 1) { raf = null; document.getElementById("play").textContent = "▶ 播放"; return; }
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+  }
+  document.getElementById("play").onclick = play;
+  document.getElementById("rst").onclick = () => { if (raf) { cancelAnimationFrame(raf); raf = null; document.getElementById("play").textContent = "▶ 播放"; } setP(0); };
+  /* 接入 ACT.step：翻页笔/键盘可推进（末态）或重置曲线；页面播放按钮与步进共享同一状态 */
+  const S = ACT.step, _n = S.next.bind(S), _r = S.reset.bind(S);
+  S.next = function () {
+    const done = _n();
+    if (S.cur >= S.els.length) {
+      if (raf) { cancelAnimationFrame(raf); raf = null; }
+      setP(1);
+      document.getElementById("play").textContent = "▶ 播放";
+    }
+    return done;
+  };
+  S.reset = function () {
+    if (raf) { cancelAnimationFrame(raf); raf = null; }
+    _r(); setP(0);
+    document.getElementById("play").textContent = "▶ 播放";
+  };
+  window.prev = function () { const n = Math.max(0, S.cur - 1); S.reset(); for (let i = 0; i < n; i++) S.next(); };
+  setP(0);   /* 初始未展开，播放或步进至末态显示 */
+});
+</script>
+</div></div>
+</body>
+</html>

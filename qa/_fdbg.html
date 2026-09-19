@@ -1,0 +1,22 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>f</title></head><body>
+<iframe id="fr" style="width:1448px;height:1086px;border:0"></iframe>
+<pre id="out">R</pre>
+<script>
+const fr=document.getElementById("fr");
+fr.src=new URLSearchParams(location.search).get("page");
+fr.onload=()=>{ setTimeout(()=>{
+  const d=fr.contentDocument,w=fr.contentWindow,out=[];
+  const note=d.querySelector(".act-note").getBoundingClientRect();
+  d.querySelector(".act-body").querySelectorAll("*").forEach(el=>{
+    const cs=w.getComputedStyle(el);
+    if(cs.display==="none")return;
+    const r=el.getBoundingClientRect();
+    if(r.bottom>note.top){
+      const own=Array.from(el.childNodes).filter(n=>n.nodeType===3).map(n=>n.textContent.trim()).join("");
+      out.push({tag:el.tagName,cls:String(el.className.baseVal!==undefined?el.className.baseVal:el.className).slice(0,30),b:Math.round(r.bottom),t:own.slice(0,20)});
+    }
+  });
+  out.sort((a,b)=>b.b-a.b);
+  document.getElementById("out").textContent=JSON.stringify(out.slice(0,5));
+},2800); };
+</script></body></html>

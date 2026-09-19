@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>引例（4）：由根轨迹读取系统性能</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=218">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=218" defer></script>
+<script src="../fig.js?v=507"></script>
+<script src="../data/intro.js"></script>
+<style>
+  .col{display:flex;flex-direction:column;gap:14px;height:100%;min-height:0}
+  .row3{flex:1;display:flex;gap:20px;min-height:0}
+  .lft{flex:1.06;display:flex;flex-direction:column;min-height:0}
+  .lft>.act-card{flex:1}
+  .figc.mid{flex:1}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:12px 18px}
+  table{border-collapse:collapse;width:100%;font-size:20px;line-height:1.35}
+  th,td{border:2px solid var(--line);padding:6px 6px;text-align:center;color:var(--ink)}
+  th{background:var(--sky);color:var(--navy);font-weight:700}
+  td b{color:var(--danger)}
+  tr.krow{cursor:pointer}
+  tr.krow:hover td{background:#E3ECFB}
+  tr.krow.sel td{background:#FAD9C2;font-weight:700}
+  .chip{display:inline-block;width:14px;height:14px;border-radius:50%;margin-right:7px;vertical-align:-1px}
+  .figc{flex:1;display:flex;flex-direction:column;overflow:hidden}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .rules{flex:none}
+  .rules>.bd{flex-direction:row;gap:14px;padding:10px 16px;align-items:stretch}
+  .tip{flex:1;background:var(--sky);border-radius:12px;padding:9px 14px;font-size:19px;line-height:1.4;display:flex;flex-direction:column;justify-content:center;gap:5px}
+  .tip b{color:var(--danger)}
+  .tip .r2{color:#2B5CE6;font-size:17.5px}
+  @keyframes rlPulse{0%,100%{opacity:1}50%{opacity:.1}}
+  .rl-flash{animation:rlPulse .85s ease-in-out infinite}
+</style>
+</head>
+<body data-title="引例（4）：由根轨迹读取系统性能" data-page="8 / 61">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="col">
+      <div class="row3">
+        <div class="lft">
+          <div class="act-card">
+            <div class="hd">性能指标随 <span class="tex">K_{1}</span> 的变化</div>
+            <div class="bd">
+              <div class="tip" style="flex:none;text-align:center;margin-bottom:2px;font-size:19px"><span class="tex">\omega_{n}=\sqrt{K_{1}},\qquad \zeta=\dfrac{1}{\sqrt{K_{1}}}</span></div>
+              <table>
+                <tr><th><span class="tex">K_{1}</span></th><th><span class="tex">\zeta</span></th><th><span class="tex">\sigma\%</span></th><th><span class="tex">t_{s}/\mathrm{s}</span></th></tr>
+                <tr class="krow" data-k="0"><td><span class="chip" style="background:#1D3FA0"></span>0.25</td><td>2</td><td>0</td><td>—</td></tr>
+                <tr class="krow" data-k="1"><td><span class="chip" style="background:#0E7A36"></span>1</td><td>1</td><td>0</td><td>≈4</td></tr>
+                <tr class="krow" data-k="2"><td><span class="chip" style="background:#C02A20"></span>2</td><td>0.707</td><td>4.3%</td><td>≈4</td></tr>
+                <tr class="krow" data-k="3"><td><span class="chip" style="background:#7B21C8"></span>4</td><td>0.5</td><td>16.3%</td><td>≈4</td></tr>
+                <tr class="krow" data-k="4"><td><span class="chip" style="background:#C2410C"></span>10</td><td>0.316</td><td>35.1%</td><td>≈4</td></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="act-card figc mid">
+          <div class="hd"><span style="flex:1">闭环极点与 <span class="tex">\zeta=0.5</span> 阻尼射线</span></div>
+          <div class="bd2"><svg id="fig"></svg></div>
+        </div>
+        <div class="act-card figc">
+          <div class="hd"><span style="flex:1">对应的单位阶跃响应</span></div>
+          <div class="bd2"><svg id="rsp" viewBox="0 0 620 560" preserveAspectRatio="xMidYMid meet"></svg></div>
+        </div>
+      </div>
+      <div class="act-card rules">
+        <div class="hd">三条规律（本例，同类二阶结构比较条件下）</div>
+        <div class="bd">
+          <div class="tip" data-step="1"><span class="r1">极点沿轨迹上行，<b>振荡加剧</b>，超调变大。</span><span class="r2"><span class="tex">K_{1}\uparrow\;\Rightarrow\;\zeta\downarrow\;\Rightarrow\;\sigma\%\uparrow</span></span></div>
+          <div class="tip" data-step="2"><span class="r1">本例 <b>快速性不变</b>：ζωₙ=|σ|=1 恒定。</span><span class="r2"><span class="tex">t_{s}=\dfrac{4}{\zeta\omega_{n}}=4\ \mathrm{s}</span>（不变）</span></div>
+          <div class="tip" data-step="3"><span class="r1">增益加大，<b>稳态误差减小</b>，代价是超调变大。</span><span class="r2"><span class="tex">K_{v}=\dfrac{K_{1}}{2}\;\uparrow\;\Rightarrow\;e_{ss}\downarrow</span></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">要点</span><span>根轨迹是<span class="kw-r">参数与性能的对照图</span>：极点离虚轴越远越快，与负实轴夹角越小越平稳；选定性能指标，就是在轨迹上<span class="kw-r">选点</span>。</span></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  /* 五个工况：极点坐标为解析解 s=−1±√(1−K₁)；响应曲线由二阶解析式逐点计算 */
+  const CASES = [
+    { K: 0.25, color: "#1D3FA0", poles: [[-0.134, 0], [-1.866, 0]] },
+    { K: 1,    color: "#0E7A36", poles: [[-1, 0]] },
+    { K: 2,    color: "#C02A20", poles: [[-1, 1], [-1, -1]] },
+    { K: 4,    color: "#7B21C8", poles: [[-1, 1.732], [-1, -1.732]] },
+    { K: 10,   color: "#C2410C", poles: [[-1, 3], [-1, -3]] },
+  ];
+
+  /* ── 左：根轨迹 + 各工况闭环极点 ── */
+  const HL = {};
+  RL.figure("fig", "intro", { vw: 430, vh: 600, xlim: [-2.75, 0.85], ylim: [-3.4, 3.4], static: true, zoom: false,
+                                        segs: true, asym: false, brkDots: false,
+                                        extra: api => {
+    /* ζ=0.5 射线：s = t·(−cos60° ± j·sin60°)，与轨迹交于 K₁=4：−1±j1.73 */
+    const T = 3.6, c = Math.cos(Math.PI / 3), sn = Math.sin(Math.PI / 3);
+    [1, -1].forEach(sg => {
+      api.mk("line", { x1: api.X(0), y1: api.Y(0), x2: api.X(-c * T), y2: api.Y(sg * sn * T),
+        stroke: RL.REF.color.zeta, "stroke-width": 2.4, "stroke-dasharray": RL.REF.dash.zeta,
+        opacity: .85 }, api.gTop);
+    });
+    api.tx(api.gTop, api.X(-c * 3.1) - 6, api.Y(sn * 3.1) - 8, "ζ=0.5（β=60°）",
+      { fs: 24, fill: RL.REF.color.zeta, b: 1, an: "end" });
+    /* 各工况闭环极点（常显色点）+ 选中时闪烁的光环 */
+    CASES.forEach((cs, i) => {
+      cs.poles.forEach(p => api.mk("circle", { cx: api.X(p[0]), cy: api.Y(p[1]), r: 9.5,
+        fill: cs.color, stroke: "#fff", "stroke-width": 2.5 }, api.gTop));
+      const g = api.mk("g", { opacity: 0, "pointer-events": "none" }, api.gTop);
+      cs.poles.forEach(p => api.mk("circle", { cx: api.X(p[0]), cy: api.Y(p[1]), r: 17,
+        fill: "none", stroke: RL.FOCUS, "stroke-width": 4.5 }, g));
+      HL[i] = g;
+    });
+  } });
+
+  /* ── 右：单位阶跃响应（解析式逐点计算） ── */
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("rsp");
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag);
+    for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const MF = '"Cambria Math","STIX Two Math",Georgia,"Times New Roman","Microsoft YaHei",serif';
+  const ZH = '"Microsoft YaHei",sans-serif';
+  const NAVY = "#12266E", MUTED = "#5B6B8C", LINE = "#C9D8F2";
+  const tx = (x, y, s, o) => { o = o || {};
+    const n = mk("text", { x, y, "font-size": o.fs || 20, "text-anchor": o.an || "middle",
+      fill: o.fill || NAVY, "font-weight": o.b ? 700 : 400, "font-style": o.it ? "italic" : "normal",
+      "font-family": o.zh ? ZH : MF });
+    n.textContent = s;
+    n.setAttribute("style", "paint-order:stroke;stroke:#FFF;stroke-width:5;stroke-linejoin:round");
+    return n; };
+  const defs = mk("defs", {}, svg);
+  const mk1 = mk("marker", { id: "arR", markerWidth: 11, markerHeight: 9, refX: 7.5, refY: 3.5, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L8,3.5 L0,7 Z", fill: MUTED }, mk1);
+  const ox = 78, oy = 470, TX = 500, TY = 380, TMAX = 8, CMAX = 1.9;
+  mk("line", { x1: ox, y1: oy, x2: ox + TX + 24, y2: oy, stroke: MUTED, "stroke-width": 2, "marker-end": "url(#arR)" });
+  mk("line", { x1: ox, y1: oy, x2: ox, y2: oy - TY - 22, stroke: MUTED, "stroke-width": 2, "marker-end": "url(#arR)" });
+  tx(ox + TX + 22, oy + 30, "t", { fs: 23, it: 1, b: 1, fill: MUTED });
+  tx(ox - 14, oy - TY - 12, "c(t)", { fs: 23, it: 1, b: 1, fill: MUTED, an: "end" });
+  mk("line", { x1: ox, y1: oy - TY / CMAX, x2: ox + TX, y2: oy - TY / CMAX, stroke: LINE, "stroke-width": 2, "stroke-dasharray": "7 6" });
+  tx(ox - 12, oy - TY / CMAX + 7, "1", { fs: 20, fill: MUTED, an: "end" });
+  [2, 4, 6, 8].forEach(v => { const x = ox + v / TMAX * TX;
+    mk("line", { x1: x, y1: oy - 6, x2: x, y2: oy + 6, stroke: MUTED, "stroke-width": 2 });
+    tx(x, oy + 30, String(v), { fs: 20, fill: MUTED }); });
+  function stepResp(K1, t) {
+    const wn = Math.sqrt(K1), z = 1 / wn;
+    if (Math.abs(z - 1) < 1e-9) return 1 - Math.exp(-wn * t) * (1 + wn * t);
+    if (z > 1) { const wd = wn * Math.sqrt(z * z - 1);
+      return 1 - Math.exp(-z * wn * t) * (Math.cosh(wd * t) + z * wn / wd * Math.sinh(wd * t)); }
+    const wd = wn * Math.sqrt(1 - z * z);
+    return 1 - Math.exp(-z * wn * t) * (Math.cos(wd * t) + z * wn / wd * Math.sin(wd * t));
+  }
+  const curves = CASES.map(cs => {
+    let d = "";
+    for (let i = 0; i <= 220; i++) { const t = i / 220 * TMAX, v = stepResp(cs.K, t);
+      d += (i ? "L" : "M") + (ox + t / TMAX * TX).toFixed(1) + "," + (oy - v / CMAX * TY).toFixed(1); }
+    return mk("path", { d, fill: "none", stroke: cs.color, "stroke-width": 4, "stroke-linecap": "round" });
+  });
+  /* 曲线标注（贴近各自特征位置） */
+  tx(566, 300, "K₁=0.25", { fs: 19, b: 1, fill: CASES[0].color, an: "end" });
+  tx(420, 236, "K₁=1", { fs: 19, b: 1, fill: CASES[1].color });
+  tx(448, 160, "K₁=2", { fs: 19, b: 1, fill: CASES[2].color });
+  tx(220, 210, "K₁=4", { fs: 19, b: 1, fill: CASES[3].color });
+  tx(140, 130, "K₁=10", { fs: 19, b: 1, fill: CASES[4].color });
+
+  /* ── 联动：点击表格行 → 极点闪烁 + 对应曲线高亮（其余调暗） ── */
+  const clear = () => {
+    document.querySelectorAll(".krow.sel").forEach(e => e.classList.remove("sel"));
+    Object.values(HL).forEach(g => g.classList.remove("rl-flash"));
+    curves.forEach(c => { c.style.opacity = ""; c.setAttribute("stroke-width", 4); });
+  };
+  document.querySelectorAll(".krow").forEach(row => {
+    row.addEventListener("click", () => {
+      const i = +row.dataset.k, was = row.classList.contains("sel");
+      clear();
+      if (was) return;
+      row.classList.add("sel");
+      HL[i].classList.add("rl-flash");
+      curves.forEach((c, j) => {
+        if (j === i) { c.setAttribute("stroke-width", 6); }
+        else c.style.opacity = .14;
+      });
+    });
+  });
+});
+</script>
+</div></div>
+</body>
+</html>
