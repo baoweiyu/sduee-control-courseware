@@ -3,66 +3,53 @@
 <head>
 <meta charset="UTF-8">
 <title>互动实验：ζ、ωn 与二阶系统性能</title>
-<link rel="stylesheet" href="../../../theme/theme.css?v=218">
+<link rel="stylesheet" href="../../../theme/theme.css?v=220">
 <link rel="stylesheet" href="../lesson03-svg.css">
 <script src="../../../theme/mathjax/mathjax-render.js"></script>
 <script src="../../../theme/mathjax/tex-chtml.js"></script>
 <script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
-<script src="../../../theme/act-base.js?v=218" defer></script>
+<script src="../../../theme/act-base.js?v=220" defer></script>
 <style>
-  .row { display:flex; gap:22px; height:100%; }
-  .figc { flex:1.5; display:flex; flex-direction:column; overflow:hidden; }
-  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:6px 12px; }
-  .figc svg { width:100%; height:100%; }
-  .ctl { flex:1; display:flex; flex-direction:column; gap:13px; }
-  .panel { background:#fff; border:2px solid var(--line); border-radius:14px; padding:13px 20px; }
-  .panel .h { font-size:20px; font-weight:700; color:var(--blue); margin-bottom:10px; display:flex; justify-content:space-between; align-items:center; }
-  .reg { font-size:17.5px; font-weight:700; color:#fff; background:var(--orange); border-radius:14px; padding:3px 14px; }
-  .sliderow { display:flex; align-items:center; gap:12px; font-size:21px; margin:8px 0; }
+  .wrap { display:flex; flex-direction:column; gap:14px; height:100%; }
+  .ctl { background:#fff; border:2px solid var(--line); border-radius:14px; padding:10px 24px 12px;
+         display:flex; align-items:center; gap:34px; }
+  .ctl .h { font-size:21px; font-weight:700; color:var(--blue); flex:none; }
+  .reg { font-size:18px; font-weight:700; color:#fff; background:var(--orange); border-radius:14px; padding:3px 16px; margin-left:12px; }
+  .sliderow { display:flex; align-items:center; gap:12px; font-size:21px; flex:1; }
   .sliderow input[type=range] { flex:1; accent-color:var(--orange); height:30px; }
-  .sliderow .val { min-width:86px; text-align:center; font-weight:700; color:var(--navy); background:var(--sky); border-radius:10px; padding:4px 10px; font-size:21px; }
-  .sliderow .sy { font-style:italic; font-family:var(--font-math); font-size:23px; color:var(--navy); min-width:34px; }
-  .reads { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-  .rd { background:var(--sky); border-radius:11px; padding:9px 14px; font-size:18.5px; color:var(--ink); display:flex; justify-content:space-between; align-items:center; }
-  .rd b { color:var(--navy); font-size:20px; font-style:italic; font-family:var(--font-math); }
-  .planec { flex:1; display:flex; flex-direction:column; padding:10px 16px 12px; }
-  .planec svg { flex:1; width:100%; min-height:0; }
+  .sliderow .val { min-width:82px; text-align:center; font-weight:700; color:var(--navy); background:var(--sky); border-radius:10px; padding:4px 10px; font-size:21px; }
+  .sliderow .sy { font-style:italic; font-family:var(--font-math); font-size:24px; color:var(--navy); min-width:36px; }
+  .row { flex:1; display:flex; gap:20px; min-height:0; }
+  .figc { flex:1; display:flex; flex-direction:column; overflow:hidden; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:4px 10px; min-height:0; }
+  .figc svg { width:100%; height:100%; }
 </style>
 </head>
 <body data-title="互动实验 · ζ、ωn 与性能指标联动" data-page="36 / 85">
 <div class="act-stage"><div class="act-slide">
   <div class="act-body has-note">
-    <div class="row">
-      <div class="act-card figc">
-        <div class="hd">单位阶跃响应 h(t)</div>
-        <div class="bd2"><svg id="figR" viewBox="0 0 1000 620"></svg></div>
-      </div>
+    <div class="wrap">
       <div class="ctl">
-        <div class="panel">
-          <div class="h">拖动滑块<span class="reg" id="reg">欠阻尼</span></div>
-          <div class="sliderow">
-            <span class="sy">ζ</span>
-            <input id="sz" type="range" min="0.1" max="1.5" step="0.05" value="0.5">
-            <span class="val" id="vz">0.50</span>
-          </div>
-          <div class="sliderow">
-            <span class="sy">ωn</span>
-            <input id="sw" type="range" min="1" max="8" step="0.5" value="2">
-            <span class="val" id="vw">2.0</span>
-          </div>
+        <span class="h">拖动滑块<span class="reg" id="reg">欠阻尼</span></span>
+        <div class="sliderow">
+          <span class="sy">ζ</span>
+          <input id="sz" type="range" min="0.1" max="1.5" step="0.05" value="0.5">
+          <span class="val" id="vz">0.50</span>
         </div>
-        <div class="panel">
-          <div class="h">性能指标读数</div>
-          <div class="reads">
-            <div class="rd"><span>上升时间 t<sub>r</sub></span><b id="m-tr">—</b></div>
-            <div class="rd"><span>峰值时间 t<sub>p</sub></span><b id="m-tp">—</b></div>
-            <div class="rd"><span>调节时间 t<sub>s</sub>(2%)</span><b id="m-ts">—</b></div>
-            <div class="rd"><span>超调量 σ%</span><b id="m-po">—</b></div>
-          </div>
+        <div class="sliderow">
+          <span class="sy">ωn</span>
+          <input id="sw" type="range" min="1" max="8" step="0.5" value="2">
+          <span class="val" id="vw">2.0</span>
         </div>
-        <div class="panel planec">
-          <div class="h">闭环极点分布</div>
-          <svg id="figP" viewBox="0 0 460 300"></svg>
+      </div>
+      <div class="row">
+        <div class="act-card figc">
+          <div class="hd">单位阶跃响应 h(t)</div>
+          <div class="bd2"><svg id="figR" viewBox="0 0 1000 640"></svg></div>
+        </div>
+        <div class="act-card figc">
+          <div class="hd">闭环极点分布（s 平面）</div>
+          <div class="bd2"><svg id="figP" viewBox="0 0 1000 640"></svg></div>
         </div>
       </div>
     </div>
@@ -82,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const s1 = -wn * (z - Math.sqrt(z * z - 1)), s2 = -wn * (z + Math.sqrt(z * z - 1));
     return 1 + (s2 * Math.exp(s1 * t) - s1 * Math.exp(s2 * t)) / (s1 - s2);
   }
-  function settle2(z, wn) { // 数值求 2% 调节时间
+  function settle2(z, wn) {
     let last = 0;
     for (let t = 0.01; t <= 60; t += 0.01) if (Math.abs(yOf(z, wn, t) - 1) > 0.02) last = t;
     return last + 0.01;
@@ -94,20 +81,21 @@ document.addEventListener("DOMContentLoaded", () => {
   const defsR = mk(R, "defs", {});
   const mR = mk(R, "marker", { id: "a34r", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defsR);
   mk(R, "path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, mR);
-  const Y = v => 540 - v / YM * 480;
-  mk(R, "line", { x1: 96, y1: 540, x2: 960, y2: 540, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a34r)" });
-  mk(R, "line", { x1: 96, y1: 540, x2: 96, y2: 32, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a34r)" });
-  tx(R, R, 966, 546, "t", { fs: 27, an: "start", it: true, b: true });
-  tx(R, R, 58, 42, "h(t)", { fs: 27, it: true, b: true });
-  tx(R, R, 74, 546, "O", { fs: 24, fill: "#5B6B8C" });
-  mk(R, "line", { x1: 96, y1: Y(1), x2: 946, y2: Y(1), stroke: "#F5821F", "stroke-width": 2, "stroke-dasharray": "10 7" });
-  tx(R, R, 80, Y(1) + 7, "1", { an: "end", fs: 25, b: true });
-  tx(R, R, 80, Y(2) + 7, "2", { an: "end", fs: 22, fill: "#5B6B8C" });
+  const Y = v => 560 - v / YM * 490;
+  mk(R, "line", { x1: 92, y1: 560, x2: 962, y2: 560, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a34r)" });
+  mk(R, "line", { x1: 92, y1: 560, x2: 92, y2: 30, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a34r)" });
+  tx(R, R, 968, 566, "t", { fs: 27, an: "start", it: true, b: true });
+  tx(R, R, 54, 40, "h(t)", { fs: 27, it: true, b: true });
+  tx(R, R, 70, 566, "O", { fs: 24, fill: "#5B6B8C" });
+  mk(R, "line", { x1: 92, y1: Y(1), x2: 948, y2: Y(1), stroke: "#F5821F", "stroke-width": 2, "stroke-dasharray": "10 7" });
+  tx(R, R, 76, Y(1) + 7, "1", { an: "end", fs: 25, b: true });
+  tx(R, R, 76, Y(2) + 7, "2", { an: "end", fs: 22, fill: "#5B6B8C" });
   const dynR = mk(R, "g", {});
 
-  /* ---------- 右下：极点平面 ---------- */
+  /* ---------- 右：极点平面（固定比例尺！） ---------- */
   const P = document.getElementById("figP");
-  const PO = { x: 185, y: 158 };
+  const PO = { x: 430, y: 340 };          // 原点
+  const HALF = 300;                        // 半轴像素
 
   function renderPole(z, wn) {
     P.innerHTML = "";
@@ -115,43 +103,62 @@ document.addEventListener("DOMContentLoaded", () => {
     const mm = mk(P, "marker", { id: "a34p", markerWidth: 9, markerHeight: 9, refX: 6.5, refY: 2.7, orient: "auto" }, d2);
     mk(P, "path", { d: "M0,0 L6.5,2.7 L0,5.4 Z", fill: "#5B6B8C" }, mm);
     const under = z < 1;
-    const ext = under ? Math.max(2.2, wn * 1.3) : Math.max(4, wn * (z + Math.sqrt(z * z - 1)) * 1.15);
-    const sc = 132 / ext;
+    // 固定比例尺：欠/临界阻尼按 ωn 上限 8.5，过阻尼按最远实极点 ~21
+    const ext = under ? 8.5 : 21.5;
+    const sc = HALF / ext;
     const X = v => PO.x + v * sc, Yp = v => PO.y - v * sc;
-    mk(P, "line", { x1: 16, y1: PO.y, x2: 446, y2: PO.y, stroke: "#5B6B8C", "stroke-width": 1.3, "marker-end": "url(#a34p)" });
-    mk(P, "line", { x1: PO.x, y1: 288, x2: PO.x, y2: 8, stroke: "#5B6B8C", "stroke-width": 1.3, "marker-end": "url(#a34p)" });
-    tx(P, P, 442, PO.y + 24, "Re", { fs: 20, it: true, b: true, fill: "#5B6B8C", an: "end" });
-    tx(P, P, PO.x + 24, 20, "jω", { fs: 20, it: true, b: true, fill: "#5B6B8C", an: "start" });
-    tx(P, P, PO.x - 10, PO.y + 22, "O", { fs: 17, fill: "#5B6B8C", an: "end" });
-    const cross = (cx, cy, lb, an) => {
-      mk(P, "line", { x1: cx - 9, y1: cy - 9, x2: cx + 9, y2: cy + 9, stroke: "#D63A2F", "stroke-width": 3 });
-      mk(P, "line", { x1: cx - 9, y1: cy + 9, x2: cx + 9, y2: cy - 9, stroke: "#D63A2F", "stroke-width": 3 });
-      if (lb) tx(P, P, cx, cy - 15, lb, { fs: 20, it: true, b: true, fill: "#D63A2F", an: an || "middle" });
+    // 坐标轴
+    mk(P, "line", { x1: 40, y1: PO.y, x2: 962, y2: PO.y, stroke: "#5B6B8C", "stroke-width": 1.4, "marker-end": "url(#a34p)" });
+    mk(P, "line", { x1: PO.x, y1: 616, x2: PO.x, y2: 24, stroke: "#5B6B8C", "stroke-width": 1.4, "marker-end": "url(#a34p)" });
+    tx(P, P, 956, PO.y + 30, "Re", { fs: 24, it: true, b: true, fill: "#5B6B8C", an: "end" });
+    tx(P, P, PO.x + 28, 40, "jω", { fs: 24, it: true, b: true, fill: "#5B6B8C", an: "start" });
+    tx(P, P, PO.x - 12, PO.y + 28, "O", { fs: 20, fill: "#5B6B8C", an: "end" });
+    // 刻度（只标负实轴与虚轴，间隔随量程）
+    const step = under ? 2 : 5;
+    for (let v = step; v <= ext; v += step) {
+      const xv = X(-v);
+      if (xv > 44) { mk(P, "line", { x1: xv, y1: PO.y - 5, x2: xv, y2: PO.y + 5, stroke: "#5B6B8C", "stroke-width": 1.2 });
+        tx(P, P, xv, PO.y + 28, "−" + v, { fs: 18, fill: "#5B6B8C" }); }
+      const yv = Yp(v);
+      if (yv > 30) { mk(P, "line", { x1: PO.x - 5, y1: yv, x2: PO.x + 5, y2: yv, stroke: "#5B6B8C", "stroke-width": 1.2 });
+        tx(P, P, PO.x + 12, yv + 6, String(v), { fs: 18, fill: "#5B6B8C", an: "start" }); }
+    }
+    const cross = (cx, cy, lb, an, dy) => {
+      mk(P, "line", { x1: cx - 11, y1: cy - 11, x2: cx + 11, y2: cy + 11, stroke: "#D63A2F", "stroke-width": 3.4 });
+      mk(P, "line", { x1: cx - 11, y1: cy + 11, x2: cx + 11, y2: cy - 11, stroke: "#D63A2F", "stroke-width": 3.4 });
+      if (lb) tx(P, P, cx, cy + (dy || -18), lb, { fs: 22, it: true, b: true, fill: "#D63A2F", an: an || "middle" });
     };
     if (under) {
       const Rr = wn * sc, sg = z * wn, wd = wn * Math.sqrt(1 - z * z), beta = Math.acos(z);
-      mk(P, "path", { d: `M ${X(-wn)} ${PO.y} A ${Rr} ${Rr} 0 0 1 ${PO.x} ${Yp(wn)}`, fill: "none", stroke: "#C9D8F2", "stroke-width": 1.8, "stroke-dasharray": "6 5" });
-      mk(P, "path", { d: `M ${PO.x} ${Yp(-wn)} A ${Rr} ${Rr} 0 0 1 ${X(-wn)} ${PO.y}`, fill: "none", stroke: "#C9D8F2", "stroke-width": 1.8, "stroke-dasharray": "6 5" });
+      // 半径 ωn 的虚线圆（左半）
+      mk(P, "path", { d: `M ${X(-wn)} ${PO.y} A ${Rr} ${Rr} 0 0 1 ${PO.x} ${Yp(wn)}`, fill: "none", stroke: "#C9D8F2", "stroke-width": 2, "stroke-dasharray": "7 6" });
+      mk(P, "path", { d: `M ${PO.x} ${Yp(-wn)} A ${Rr} ${Rr} 0 0 1 ${X(-wn)} ${PO.y}`, fill: "none", stroke: "#C9D8F2", "stroke-width": 2, "stroke-dasharray": "7 6" });
       const p1 = { x: X(-sg), y: Yp(wd) };
-      mk(P, "line", { x1: PO.x, y1: PO.y, x2: p1.x, y2: p1.y, stroke: "#1B3B8B", "stroke-width": 1.8 });
-      cross(p1.x, p1.y, "s1"); cross(p1.x, Yp(-wd), "s2");
+      // 原点到 s1 的向量（长度 = ωn）
+      const defs3 = mk(P, "defs", {});
+      const m3 = mk(P, "marker", { id: "a34v", markerWidth: 9, markerHeight: 9, refX: 6.5, refY: 2.7, orient: "auto" }, defs3);
+      mk(P, "path", { d: "M0,0 L6.5,2.7 L0,5.4 Z", fill: "#1B3B8B" }, m3);
+      mk(P, "line", { x1: PO.x, y1: PO.y, x2: p1.x, y2: p1.y, stroke: "#1B3B8B", "stroke-width": 2, "marker-end": "url(#a34v)" });
+      cross(p1.x, p1.y, "s₁");
+      cross(p1.x, Yp(-wd), "s₂", "middle", 30);
       // β 角弧
-      const rB = 34, a1 = Math.PI - beta;
-      mk(P, "path", { d: `M ${PO.x - rB} ${PO.y} A ${rB} ${rB} 0 0 1 ${PO.x + rB * Math.cos(a1)} ${PO.y - rB * Math.sin(a1)}`, fill: "none", stroke: "#F5821F", "stroke-width": 2.4 });
-      tx(P, P, PO.x - rB - 18, PO.y - 12, "β", { fs: 25, it: true, b: true, fill: "#F5821F" });
-      // σ、ωd 投影（图内只放短符号，读数进图例，避免与 s2/向量重叠）
-      mk(P, "line", { x1: p1.x, y1: p1.y, x2: p1.x, y2: PO.y, stroke: "#5B6B8C", "stroke-width": 1.3, "stroke-dasharray": "5 4" });
-      if (PO.x - p1.x > 26) tx(P, P, (PO.x + p1.x) / 2, PO.y + 17, "σ", { fs: 18, b: true, it: true, fill: "#1B3B8B" });
-      if (PO.y - p1.y > 40) tx(P, P, p1.x - 12, (p1.y + PO.y) / 2 - 6, "ωd", { fs: 18, b: true, it: true, fill: "#1B3B8B", an: "end" });
-      tx(P, P, 440, 24, "β=" + (beta * 180 / Math.PI).toFixed(1) + "°", { fs: 20, b: true, it: true, fill: "#F5821F", an: "end" });
-      tx(P, P, 440, 48, "ωn=" + wn.toFixed(1), { fs: 20, b: true, it: true, fill: "#8AA6D8", an: "end" });
-      tx(P, P, 440, 72, "σ=ζωn=" + sg.toFixed(2), { fs: 18, b: true, it: true, fill: "#1B3B8B", an: "end" });
-      tx(P, P, 440, 96, "ωd=" + wd.toFixed(2), { fs: 18, b: true, it: true, fill: "#1B3B8B", an: "end" });
+      const rB = 52, a1 = Math.PI - beta;
+      mk(P, "path", { d: `M ${PO.x - rB} ${PO.y} A ${rB} ${rB} 0 0 1 ${PO.x + rB * Math.cos(a1)} ${PO.y - rB * Math.sin(a1)}`, fill: "none", stroke: "#F5821F", "stroke-width": 2.6 });
+      tx(P, P, PO.x - rB - 22, PO.y - 14, "β", { fs: 27, it: true, b: true, fill: "#F5821F" });
+      // σ、ωd 投影
+      mk(P, "line", { x1: p1.x, y1: p1.y, x2: p1.x, y2: PO.y, stroke: "#5B6B8C", "stroke-width": 1.4, "stroke-dasharray": "5 4" });
+      if (PO.x - p1.x > 34) tx(P, P, (PO.x + p1.x) / 2, PO.y - 10, "σ", { fs: 21, b: true, it: true, fill: "#1B3B8B" });
+      if (PO.y - p1.y > 52) tx(P, P, p1.x - 14, (p1.y + PO.y) / 2, "ωd", { fs: 21, b: true, it: true, fill: "#1B3B8B", an: "end" });
+      // 图例（右上角）
+      tx(P, P, 950, 60, "β = " + (beta * 180 / Math.PI).toFixed(1) + "°", { fs: 23, b: true, it: true, fill: "#F5821F", an: "end" });
+      tx(P, P, 950, 94, "ωn = " + wn.toFixed(1) + "（向量长）", { fs: 22, b: true, it: true, fill: "#8AA6D8", an: "end" });
+      tx(P, P, 950, 128, "σ = ζωn = " + sg.toFixed(2), { fs: 22, b: true, it: true, fill: "#1B3B8B", an: "end" });
+      tx(P, P, 950, 162, "ωd = " + wd.toFixed(2), { fs: 22, b: true, it: true, fill: "#1B3B8B", an: "end" });
     } else {
       const s1 = -wn * (z - Math.sqrt(Math.max(z * z - 1, 0))), s2 = -wn * (z + Math.sqrt(Math.max(z * z - 1, 0)));
-      cross(X(s1), PO.y, "s1=" + s1.toFixed(2));
-      cross(X(s2), PO.y, "s2=" + s2.toFixed(2));
-      tx(P, P, 440, 24, Math.abs(z - 1) < 1e-9 ? "临界阻尼（重根）" : "过阻尼（两实极点）", { fs: 20, b: true, fill: "#8AA6D8", an: "end" });
+      cross(X(s1), PO.y, "s₁ = " + s1.toFixed(2), "middle", -20);
+      cross(X(s2), PO.y, "s₂ = " + s2.toFixed(2), "middle", 34);
+      tx(P, P, 950, 60, Math.abs(z - 1) < 1e-9 ? "临界阻尼（重根）" : "过阻尼（两实极点）", { fs: 23, b: true, fill: "#8AA6D8", an: "end" });
     }
   }
 
@@ -166,12 +173,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const tr = under ? (Math.PI - beta) / wd : null;
     const ts = under ? 4 / (z * wn) : settle2(z, wn);
     const TM = Math.min(45, Math.max(4, ts * 1.18));
-    const X = t => 96 + t / TM * 850;
+    const X = t => 92 + t / TM * 852;
     // x 网格与刻度
     for (let i = 1; i <= 5; i++) {
       const tv = TM * i / 5;
-      mk(R, "line", { x1: X(tv), y1: 540, x2: X(tv), y2: 60, stroke: "#C9D8F2", "stroke-width": 1, "stroke-dasharray": "5 6" }, dynR);
-      tx(R, dynR, X(tv), 572, tv.toFixed(1), { fs: 20, fill: "#5B6B8C" });
+      mk(R, "line", { x1: X(tv), y1: 560, x2: X(tv), y2: 56, stroke: "#C9D8F2", "stroke-width": 1, "stroke-dasharray": "5 6" }, dynR);
+      tx(R, dynR, X(tv), 592, tv.toFixed(1), { fs: 20, fill: "#5B6B8C" });
     }
     // 包络线（欠阻尼）
     if (under) {
@@ -194,18 +201,20 @@ document.addEventListener("DOMContentLoaded", () => {
       const hp = 1 + po / 100;
       mk(R, "circle", { cx: X(tp), cy: Y(hp), r: 6, fill: "#D63A2F" }, dynR);
       mk(R, "line", { x1: X(tp), y1: Y(hp), x2: X(tp), y2: Y(1), stroke: "#D63A2F", "stroke-width": 2.2 }, dynR);
-      tx(R, dynR, X(tp) + 14, Y(hp) - 12, "σ%=" + po.toFixed(1) + "%", { fs: 24, b: true, fill: "#D63A2F", an: "start" });
+      if (X(tp) + 16 < 640) tx(R, dynR, X(tp) + 16, Y(hp) - 12, "σ%=" + po.toFixed(1) + "%", { fs: 24, b: true, fill: "#D63A2F", an: "start" });
     }
     // ts 标注
     if (ts <= TM) {
-      mk(R, "line", { x1: X(ts), y1: Y(under ? 1.02 : yOf(z, wn, ts)), x2: X(ts), y2: 540, stroke: "#1D3FA0", "stroke-width": 1.8, "stroke-dasharray": "4 5" }, dynR);
-      tx(R, dynR, X(ts) + 18, 520, "ts", { fs: 24, b: true, it: true, fill: "#1D3FA0", an: "start" });
+      mk(R, "line", { x1: X(ts), y1: Y(under ? 1.02 : yOf(z, wn, ts)), x2: X(ts), y2: 560, stroke: "#1D3FA0", "stroke-width": 1.8, "stroke-dasharray": "4 5" }, dynR);
+      if (X(ts) + 18 < 640) tx(R, dynR, X(ts) + 18, 540, "ts", { fs: 24, b: true, it: true, fill: "#1D3FA0", an: "start" });
     }
-    // 读数
-    document.getElementById("m-tr").textContent = under ? tr.toFixed(2) + " s" : "—";
-    document.getElementById("m-tp").textContent = under ? tp.toFixed(2) + " s" : "—";
-    document.getElementById("m-ts").textContent = ts.toFixed(2) + " s";
-    document.getElementById("m-po").textContent = under ? po.toFixed(1) + "%" : "0%";
+    // 指标读数：放进响应曲线图右上方空白处
+    const rx = 944;
+    tx(R, dynR, rx, 76, "实时指标读数", { fs: 21, b: true, fill: "#5B6B8C", an: "end" });
+    tx(R, dynR, rx, 112, under ? "tr = " + tr.toFixed(2) + " s" : "tr = —", { fs: 23, b: true, it: true, fill: "#1D3FA0", an: "end" });
+    tx(R, dynR, rx, 146, under ? "tp = " + tp.toFixed(2) + " s" : "tp = —", { fs: 23, b: true, it: true, fill: "#1D3FA0", an: "end" });
+    tx(R, dynR, rx, 180, "ts = " + ts.toFixed(2) + " s", { fs: 23, b: true, it: true, fill: "#1D3FA0", an: "end" });
+    tx(R, dynR, rx, 214, "σ% = " + (under ? po.toFixed(1) + "%" : "0%"), { fs: 23, b: true, it: true, fill: "#D63A2F", an: "end" });
     document.getElementById("reg").textContent = under ? "欠阻尼" : (Math.abs(z - 1) < 1e-9 ? "临界阻尼" : "过阻尼");
     renderPole(z, wn);
   }

@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <title>例 3-2 · 随动系统的分析与设计</title>
-<link rel="stylesheet" href="../../../theme/theme.css?v=218">
+<link rel="stylesheet" href="../../../theme/theme.css?v=220">
 <link rel="stylesheet" href="../lesson03-svg.css">
 <script src="../../../theme/mathjax/mathjax-render.js"></script>
 <script src="../../../theme/mathjax/tex-chtml.js"></script>
 <script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
-<script src="../../../theme/act-base.js?v=218" defer></script>
+<script src="../../../theme/act-base.js?v=220" defer></script>
 <style>
   .row { display:flex; gap:22px; height:100%; }
   .lcol { flex:1.2; display:flex; flex-direction:column; gap:14px; }
@@ -20,10 +20,10 @@
   .stp { display:flex; gap:13px; align-items:flex-start; margin-bottom:11px; }
   .stp .no { flex:none; width:32px; height:32px; border-radius:50%; background:var(--blue); color:#fff; display:grid; place-items:center; font-size:18px; font-weight:700; margin-top:2px; }
   .rcol { flex:1; display:flex; flex-direction:column; gap:14px; }
-  .imgc { flex:1.05; border-radius:14px; overflow:hidden; border:2px solid var(--line); position:relative; min-height:0; }
+  .imgc { flex:0.78; border-radius:14px; overflow:hidden; border:2px solid var(--line); position:relative; min-height:0; }
   .imgc img { width:100%; height:100%; object-fit:cover; display:block; }
   .imgc .cap { position:absolute; left:0; right:0; bottom:0; background:linear-gradient(transparent, rgba(13,27,62,.85)); color:#fff; font-size:18px; padding:22px 18px 10px; }
-  .bdg { flex:1; display:flex; flex-direction:column; overflow:hidden; }
+  .bdg { flex:1.22; display:flex; flex-direction:column; overflow:hidden; }
   .bdg .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:6px 12px; }
   .bdg svg { width:100%; height:100%; }
   .solv .bd { display:flex; flex-direction:column; }
@@ -64,7 +64,7 @@
         </div>
         <div class="act-card bdg">
           <div class="hd">系统结构图</div>
-          <div class="bd2"><svg id="fig" viewBox="0 0 900 260"></svg></div>
+          <div class="bd2"><svg id="fig" viewBox="10 62 790 258"></svg></div>
         </div>
       </div>
     </div>
@@ -79,31 +79,35 @@ document.addEventListener("DOMContentLoaded", () => {
   const defs = mk("defs", {});
   const m1 = mk("marker", { id: "a37", markerWidth: 11, markerHeight: 11, refX: 7.5, refY: 3.2, orient: "auto" }, defs);
   mk("path", { d: "M0,0 L7.5,3.2 L0,6.4 Z", fill: "#1B3B8B" }, m1);
-  const L = attrs => mk("line", Object.assign({ stroke: "#1B3B8B", "stroke-width": 2.2, "marker-end": "url(#a37)" }, attrs));
-  const y0 = 118;
+  const L = attrs => mk("line", Object.assign({ stroke: "#1B3B8B", "stroke-width": 2.4, "marker-end": "url(#a37)" }, attrs));
+  const mtx = (x, y, s, o) => { const n = tx(x, y, s, o); n.setAttribute("font-family", "var(--font-math)"); n.setAttribute("font-style", "italic"); return n; };
+  const y0 = 148;
   // 输入 R(s) → 相加点
   L({ x1: 30, y1: y0, x2: 116, y2: y0 });
-  tx(60, y0 - 18, "R(s)", { fs: 21, it: true, b: true });
+  mtx(62, y0 - 20, "R(s)", { fs: 25, b: true });
   // 相加点：圆圈+内×
-  mk("circle", { cx: 140, cy: y0, r: 18, fill: "#fff", stroke: "#1B3B8B", "stroke-width": 2.2 });
-  mk("line", { x1: 133, y1: y0 - 7, x2: 147, y2: y0 + 7, stroke: "#1B3B8B", "stroke-width": 2 });
-  mk("line", { x1: 133, y1: y0 + 7, x2: 147, y2: y0 - 7, stroke: "#1B3B8B", "stroke-width": 2 });
-  tx(106, y0 - 26, "+", { fs: 24, b: true, fill: "#1B3B8B" });
-  tx(164, 182, "−", { fs: 26, b: true, fill: "#D63A2F" });
+  mk("circle", { cx: 142, cy: y0, r: 20, fill: "#fff", stroke: "#1B3B8B", "stroke-width": 2.4 });
+  mk("line", { x1: 134, y1: y0 - 8, x2: 150, y2: y0 + 8, stroke: "#1B3B8B", "stroke-width": 2.2 });
+  mk("line", { x1: 134, y1: y0 + 8, x2: 150, y2: y0 - 8, stroke: "#1B3B8B", "stroke-width": 2.2 });
+  tx(106, y0 - 30, "+", { fs: 28, b: true, fill: "#1B3B8B" });
+  tx(172, y0 + 78, "−", { fs: 30, b: true, fill: "#D63A2F" });
   // 相加点 → 前向环节
-  L({ x1: 158, y1: y0, x2: 238, y2: y0 });
-  // 前向环节框
-  mk("rect", { x: 238, y: y0 - 34, width: 250, height: 68, rx: 10, fill: "#EAF1FD", stroke: "#1B3B8B", "stroke-width": 2.2 });
-  tx(363, y0 + 8, "G(s) = K / [ s(Ts+1) ]", { fs: 23, it: true, b: true });
+  L({ x1: 162, y1: y0, x2: 248, y2: y0 });
+  // 前向环节框（规范分式 G(s)=K/[s(Ts+1)]）
+  mk("rect", { x: 248, y: y0 - 56, width: 300, height: 112, rx: 12, fill: "#EAF1FD", stroke: "#1B3B8B", "stroke-width": 2.4 });
+  mtx(318, y0 + 11, "G(s) =", { fs: 30, b: true, an: "middle" });
+  mtx(468, y0 - 22, "K", { fs: 30, b: true });
+  mk("line", { x1: 404, y1: y0 - 4, x2: 530, y2: y0 - 4, stroke: "#1B3B8B", "stroke-width": 2.6 });
+  mtx(468, y0 + 38, "s(Ts+1)", { fs: 30, b: true });
   // 输出
-  L({ x1: 488, y1: y0, x2: 700, y2: y0 });
-  tx(660, y0 - 18, "C(s)", { fs: 21, it: true, b: true });
-  mk("circle", { cx: 620, cy: y0, r: 5, fill: "#1B3B8B" });
+  L({ x1: 548, y1: y0, x2: 740, y2: y0 });
+  mtx(700, y0 - 20, "C(s)", { fs: 25, b: true });
+  mk("circle", { cx: 656, cy: y0, r: 5.5, fill: "#1B3B8B" });
   // 反馈通路
-  mk("line", { x1: 620, y1: y0, x2: 620, y2: 216, stroke: "#1B3B8B", "stroke-width": 2.2 });
-  mk("line", { x1: 620, y1: 216, x2: 140, y2: 216, stroke: "#1B3B8B", "stroke-width": 2.2 });
-  L({ x1: 140, y1: 216, x2: 140, y2: y0 + 22 });
-  tx(380, 244, "单位负反馈", { fs: 19, fill: "#5B6B8C" });
+  mk("line", { x1: 656, y1: y0, x2: 656, y2: 272, stroke: "#1B3B8B", "stroke-width": 2.4 });
+  mk("line", { x1: 656, y1: 272, x2: 142, y2: 272, stroke: "#1B3B8B", "stroke-width": 2.4 });
+  L({ x1: 142, y1: 272, x2: 142, y2: y0 + 24 });
+  tx(400, 306, "单位负反馈", { fs: 22, fill: "#5B6B8C" });
 });
 </script>
 </body>

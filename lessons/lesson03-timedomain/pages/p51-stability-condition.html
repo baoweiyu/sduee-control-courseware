@@ -3,22 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <title>稳定的充分必要条件</title>
-<link rel="stylesheet" href="../../../theme/theme.css?v=218">
+<link rel="stylesheet" href="../../../theme/theme.css?v=220">
 <link rel="stylesheet" href="../lesson03-svg.css">
 <script src="../../../theme/mathjax/mathjax-render.js"></script>
 <script src="../../../theme/mathjax/tex-chtml.js"></script>
 <script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
-<script src="../../../theme/act-base.js?v=218" defer></script>
+<script src="../../../theme/act-base.js?v=220" defer></script>
 <style>
   .row { display:flex; gap:24px; height:100%; }
   .solc { flex:1.05; }
-  .solc .bd { font-size:22px; line-height:1.8; display:flex; flex-direction:column; justify-content:center; gap:15px; }
+  .solc .bd { font-size:24px; line-height:1.95; display:flex; flex-direction:column; justify-content:center; gap:30px; }
   .condc { flex:1; display:flex; flex-direction:column; overflow:hidden; }
-  .condc .bd { flex:1; display:flex; flex-direction:column; gap:14px; padding:18px 22px; min-height:0; }
-  .cond { background:#FDF3EC; border:2px solid var(--orange); border-radius:14px; padding:14px 22px; font-size:23px; color:var(--navy); line-height:1.65; text-align:center; flex:none; }
+  .condc .bd { flex:1; display:flex; flex-direction:column; gap:18px; padding:20px 24px; min-height:0; }
+  .cond { background:#FDF3EC; border:2px solid var(--orange); border-radius:14px; padding:18px 24px; font-size:24.5px; color:var(--navy); line-height:1.7; text-align:center; flex:none; }
   .planec { flex:1; display:grid; place-items:center; background:var(--sky); border-radius:14px; border:2px solid var(--line); min-height:0; padding:8px; }
   .planec svg { width:100%; height:100%; }
-  .ind { flex:none; font-size:21.5px; color:var(--ink); background:#fff; border:2px solid var(--line); border-radius:12px; padding:12px 20px; line-height:1.6; text-align:center; }
+  .ind { flex:none; font-size:23px; color:var(--ink); background:#fff; border:2px solid var(--line); border-radius:12px; padding:15px 22px; line-height:1.65; text-align:center; }
 </style>
 </head>
 <body data-title="稳定的充分必要条件" data-page="54 / 85">
@@ -29,16 +29,16 @@
         <div class="hd">暂态分量 c₁(t) 的一般结构</div>
         <div class="bd">
           <span><b>① 无重根时</b>（r 个实根 + q 对共轭复根），通解为</span>
-          <div class="mathbox math eqline tex tex-d" style="font-size:25px">c_{1}(t)=\sum_{i=1}^{r}A_{i}e^{s_{i}t}+\sum_{k=1}^{q}B_{k}e^{\sigma_{k}t}\sin(\omega_{k}t+\varphi_{k})</div>
+          <div class="mathbox math eqline tex tex-d" style="font-size:28px">c_{1}(t)=\sum_{i=1}^{r}A_{i}e^{s_{i}t}+\sum_{k=1}^{q}B_{k}e^{\sigma_{k}t}\sin(\omega_{k}t+\varphi_{k})</div>
           <span><b>② 有重根时</b>，如 l 重根 s<sub>j</sub>，则出现</span>
-          <div class="mathbox math eqline tex tex-d" style="font-size:25px">e^{s_{j}t},\;\; t\,e^{s_{j}t},\;\; \cdots,\;\; t^{\,l-1}e^{s_{j}t}</div>
+          <div class="mathbox math eqline tex tex-d" style="font-size:28px">e^{s_{j}t},\;\; t\,e^{s_{j}t},\;\; \cdots,\;\; t^{\,l-1}e^{s_{j}t}</div>
           <span>每一项都含有指数因子 <span class="tex" style="font-size:23px">e^{\mathrm{Re}(s_{i})\,t}</span> —— 只有<span class="kw-r">全部根的实部为负</span>，c₁(t) 才收敛到零；只要有一个根实部为正，对应项必然发散。</span>
         </div>
       </div>
       <div class="act-card condc">
         <div class="hd">充要条件与 s 平面图景</div>
         <div class="bd">
-          <div class="cond">线性定常系统稳定的<span class="kw-r">充要条件</span>：<br>全部特征根的实部均为负，即所有根位于 <span class="kw-r">s 左半平面</span></div>
+          <div class="cond">线性定常系统稳定的<span class="kw-r">充要条件</span>：<br>全部特征根的实部均为负，<br>即所有根位于 <span class="kw-r">s 左半平面</span></div>
           <div class="planec"><svg id="plane" viewBox="0 0 560 330"></svg></div>
           <div class="ind">不必求出根的具体值，只要能判断"实部是否全负"即可 —— 这就是<span class="kw-r">间接方法</span>（代数判据）的思想。</div>
         </div>

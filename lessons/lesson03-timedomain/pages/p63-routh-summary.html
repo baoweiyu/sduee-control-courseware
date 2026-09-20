@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <title>第五节小结</title>
-<link rel="stylesheet" href="../../../theme/theme.css?v=218">
+<link rel="stylesheet" href="../../../theme/theme.css?v=220">
 <link rel="stylesheet" href="../lesson03-svg.css">
 <script src="../../../theme/mathjax/mathjax-render.js"></script>
 <script src="../../../theme/mathjax/tex-chtml.js"></script>
 <script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
-<script src="../../../theme/act-base.js?v=218" defer></script>
+<script src="../../../theme/act-base.js?v=220" defer></script>
 <style>
   .col { display:flex; flex-direction:column; gap:20px; height:100%; }
   .flowc { flex:1.6; display:flex; flex-direction:column; overflow:hidden; }
@@ -24,7 +24,7 @@
     <div class="col">
       <div class="act-card flowc">
         <div class="hd">稳定性判稳流程总览（劳斯 / 赫尔维茨判据）</div>
-        <div class="bd2"><svg id="fig" viewBox="0 0 1340 500"></svg></div>
+        <div class="bd2"><svg id="fig" viewBox="30 20 1450 600"></svg></div>
       </div>
       <div class="act-card nextc">
         <div class="bd"><span>稳定是"<b>定</b>"的问题，误差是"<b>准</b>"的问题 —— 下一节预告：<span class="kw-r">第六节　控制系统的稳态误差</span>。</span></div>
@@ -49,28 +49,28 @@ document.addEventListener("DOMContentLoaded", () => {
     }[kind || "base"];
     mk("rect", { x, y, width: w, height: h, rx: 14, fill: style.fill, stroke: style.stroke, "stroke-width": 2.5 });
     lines.forEach((s, i) => {
-      const t = mk("text", { x: x + w / 2, y: y + h / 2 + (i - (lines.length - 1) / 2) * 27 + 8, "font-size": i === 0 ? 22 : 19, "text-anchor": "middle", "font-weight": i === 0 ? 700 : 400, fill: style.stroke });
+      const t = mk("text", { x: x + w / 2, y: y + h / 2 + (i - (lines.length - 1) / 2) * 34 + 9, "font-size": i === 0 ? 27 : 23, "text-anchor": "middle", "font-weight": i === 0 ? 700 : 400, fill: style.stroke });
       t.textContent = s;
     });
   }
   function arrow(x1, y1, x2, y2, via) {
-    if (via) mk("polyline", { points: `${x1},${y1} ${via[0]},${via[1]} ${x2},${y2}`, fill: "none", stroke: "#5B6B8C", "stroke-width": 2.5, "marker-end": "url(#a60)" });
-    else mk("line", { x1, y1, x2, y2, stroke: "#5B6B8C", "stroke-width": 2.5, "marker-end": "url(#a60)" });
+    if (via) mk("polyline", { points: `${x1},${y1} ${via[0]},${via[1]} ${x2},${y2}`, fill: "none", stroke: "#5B6B8C", "stroke-width": 3, "marker-end": "url(#a60)" });
+    else mk("line", { x1, y1, x2, y2, stroke: "#5B6B8C", "stroke-width": 3, "marker-end": "url(#a60)" });
   }
-  function alab(x, y, s) { const t = mk("text", { x, y, "font-size": 20, "font-weight": 700, fill: "#D63A2F", "text-anchor": "middle" }); t.textContent = s; }
-  box(50, 215, 190, 90, ["特征方程", "D(s) = 0"]);
-  box(300, 215, 200, 90, ["系数全为正？", "（必要条件）"], "judge");
-  box(560, 85, 230, 85, ["不稳定", "（不必列表）"], "bad");
-  box(560, 215, 230, 90, ["列劳斯表", "特例：ε 法 / 辅助方程"]);
-  box(850, 215, 200, 90, ["第一列全 > 0？", "（充要条件）"], "judge");
-  box(840, 395, 220, 85, ["稳定", "（第一列全正）"], "good");
-  box(1100, 215, 215, 90, ["不稳定", "变号次数 = 正实部根数"], "bad");
-  arrow(240, 260, 300, 260);
-  arrow(400, 215, 558, 128, [400, 128]); alab(384, 165, "否");
-  arrow(500, 260, 560, 260); alab(530, 246, "是");
-  arrow(790, 260, 850, 260);
-  arrow(950, 305, 950, 395); alab(975, 355, "是");
-  arrow(1050, 260, 1100, 260); alab(1075, 246, "否");
+  function alab(x, y, s) { const t = mk("text", { x, y, "font-size": 25, "font-weight": 700, fill: "#D63A2F", "text-anchor": "middle" }); t.textContent = s; }
+  box(40, 245, 210, 130, ["特征方程", "D(s) = 0"]);
+  box(310, 245, 230, 130, ["系数全为正？", "（必要条件）"], "judge");
+  box(620, 40, 260, 120, ["不稳定", "（不必列表）"], "bad");
+  box(620, 245, 260, 130, ["列劳斯表", "特例：ε 法 / 辅助方程"]);
+  box(940, 245, 230, 130, ["第一列全 > 0？", "（充要条件）"], "judge");
+  box(940, 460, 230, 120, ["稳定", "（第一列全正）"], "good");
+  box(1230, 245, 240, 130, ["不稳定", "变号次数 = 正实部根数"], "bad");
+  arrow(250, 310, 310, 310);
+  arrow(425, 245, 618, 100, [425, 100]); alab(408, 180, "否");
+  arrow(540, 310, 620, 310); alab(582, 296, "是");
+  arrow(880, 310, 940, 310);
+  arrow(1055, 375, 1055, 460); alab(1084, 424, "是");
+  arrow(1170, 310, 1230, 310); alab(1201, 296, "否");
 });
 </script>
 </body>

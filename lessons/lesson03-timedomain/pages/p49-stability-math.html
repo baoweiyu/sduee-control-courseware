@@ -3,23 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <title>稳定性的数学描述</title>
-<link rel="stylesheet" href="../../../theme/theme.css?v=218">
+<link rel="stylesheet" href="../../../theme/theme.css?v=220">
 <script src="../../../theme/mathjax/mathjax-render.js"></script>
 <script src="../../../theme/mathjax/tex-chtml.js"></script>
 <script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
-<script src="../../../theme/act-base.js?v=218" defer></script>
+<script src="../../../theme/act-base.js?v=220" defer></script>
 <style>
   .row { display:flex; gap:24px; height:100%; }
   .eqc { flex:1.1; }
-  .eqc .bd { font-size:24px; line-height:1.9; display:flex; flex-direction:column; justify-content:center; gap:24px; }
+  .eqc .bd { font-size:26px; line-height:2.0; display:flex; flex-direction:column; justify-content:center; gap:38px; }
   .decomp { flex:1; }
-  .decomp .bd { display:flex; flex-direction:column; justify-content:center; gap:26px; }
+  .decomp .bd { display:flex; flex-direction:column; justify-content:center; gap:40px; }
   .bigeq { text-align:center; }
-  .twobox { display:flex; gap:18px; }
-  .mini { flex:1; background:var(--sky); border:2px solid var(--line); border-radius:14px; padding:20px 20px; }
-  .mini .mt { font-size:24px; font-weight:700; color:var(--navy); margin-bottom:10px; text-align:center; }
-  .mini .md { font-size:22px; color:var(--ink); line-height:1.75; text-align:center; }
-  .concl { background:#FDF3EC; border:2px solid var(--orange); border-radius:14px; padding:17px 22px; font-size:24px; color:var(--navy); text-align:center; line-height:1.6; }
+  .twobox { display:flex; gap:20px; }
+  .mini { flex:1; background:var(--sky); border:2px solid var(--line); border-radius:14px; padding:30px 22px; }
+  .mini .mt { font-size:26px; font-weight:700; color:var(--navy); margin-bottom:14px; text-align:center; }
+  .mini .md { font-size:23.5px; color:var(--ink); line-height:1.85; text-align:center; }
+  .concl { background:#FDF3EC; border:2px solid var(--orange); border-radius:14px; padding:24px 24px; font-size:26px; color:var(--navy); text-align:center; line-height:1.65; }
 </style>
 </head>
 <body data-title="稳定性的数学描述" data-page="52 / 85">
@@ -29,16 +29,16 @@
       <div class="act-card eqc">
         <div class="hd">齐次微分方程与特征方程</div>
         <div class="bd">
-          <span>线性系统是否稳定，是系统<span class="kw-r">本身固有的特性</span>，仅取决于系统的结构参数，与初始条件和输入信号无关 —— 可按<br><span class="kw-r">齐次微分方程</span>分析：</span>
-          <div class="mathbox math eqline tex tex-d" style="font-size:28px">c^{(n)}(t)+a_{1}c^{(n-1)}(t)+\cdots+a_{n-1}\dot{c}(t)+a_{n}c(t)=0</div>
+          <span>线性系统是否稳定，是系统<span class="kw-r">本身固有的特性</span>，仅取决于系统的结构参数，与初始条件和输入信号无关 —— 可按<span class="kw-r">齐次微分方程</span>分析：</span>
+          <div class="mathbox math eqline tex tex-d" style="font-size:31px">c^{(n)}(t)+a_{1}c^{(n-1)}(t)+\cdots+a_{n-1}\dot{c}(t)+a_{n}c(t)=0</div>
           <span>其<span class="kw-r">特征方程</span>为</span>
-          <div class="mathbox math eqline tex tex-d" style="font-size:29px">D(s)=s^{n}+a_{1}s^{\,n-1}+\cdots+a_{n-1}s+a_{n}=0</div>
+          <div class="mathbox math eqline tex tex-d" style="font-size:32px">D(s)=s^{n}+a_{1}s^{\,n-1}+\cdots+a_{n-1}s+a_{n}=0</div>
         </div>
       </div>
       <div class="act-card decomp">
         <div class="hd">响应 c(t) 的两部分</div>
         <div class="bd">
-          <div class="bigeq mathbox math eqline tex tex-d" style="font-size:30px">c(t)=\underbrace{c_{\mathrm{ss}}(t)}_{\text{稳态分量}}+\underbrace{c_{1}(t)}_{\text{暂态分量}}</div>
+          <div class="bigeq mathbox math eqline tex tex-d" style="font-size:33px">c(t)=\underbrace{c_{\mathrm{ss}}(t)}_{\text{稳态分量}}+\underbrace{c_{1}(t)}_{\text{暂态分量}}</div>
           <div class="twobox">
             <div class="mini">
               <div class="mt">稳态分量</div>
