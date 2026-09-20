@@ -3,12 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <title>② 闭环极点的确定｜例5-13：求其余极点并写出 Φ(s)</title>
-<link rel="stylesheet" href="../../../theme/theme.css?v=218">
+<link rel="stylesheet" href="../../../theme/theme.css?v=219">
 <script src="../../../theme/mathjax/mathjax-render.js"></script>
 <script src="../../../theme/mathjax/tex-chtml.js"></script>
 <script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
-<script src="../../../theme/act-base.js?v=218" defer></script>
+<script src="../../../theme/act-base.js?v=219" defer></script>
 <style>
+  .act-title{left:200px;font-size:34px}  /* 长标题避开左上徽章（页级微调，不改 theme.css?v=219） */
   .row{display:flex;gap:22px;height:100%;min-height:0}
   .lft{flex:1.1;display:flex;flex-direction:column;gap:14px;min-height:0}
   .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
@@ -39,12 +40,12 @@
           <div class="bd">
             <div data-step="3"><div class="eq"><span class="tex">\dfrac{D(s)}{s^{2}+0.82s+0.67}=s^{2}+4.18s+3.91=(s+1.41)(s+2.77)</span></div></div>
             <div data-step="4"><div class="eq hl"><span class="tex">\varPhi(s)=\dfrac{2.62}{(s^{2}+0.82s+0.67)(s+1.41)(s+2.77)}</span></div></div>
-            <div class="st" data-step="5">校验：根之和 −5 ✓（= 开环极点之和 0−3−1−1）；根之积 2.62 ✓。其余两极点 −1.41、−2.77 距虚轴数倍于主导极点（见右图），主导极点近似成立。</div>
+            <div class="st" data-step="5">校验：根之和 −5 ✓（= 开环极点之和 0−3−1−1）、根之积 2.62 ✓；−1.41、−2.77 距虚轴数倍于主导极点（见右图），主导极点近似成立。</div>
           </div>
         </div>
       </div>
       <div class="act-card figc">
-        <div class="hd"><span style="flex:1">s 平面闭环极点分布：主导对贴近虚轴，其余极点更远</span></div>
+        <div class="hd"><span style="flex:1">闭环极点分布：主导对贴近虚轴，其余极点更远</span></div>
         <div class="bd2"><svg id="pz" viewBox="0 0 700 560" preserveAspectRatio="xMidYMid meet"></svg></div>
         <div class="cap">主导对 <span class="tex">-0.41\pm j0.71</span>（红）离虚轴最近；−1.41、−2.77 的实部约为其 3.4 倍、6.8 倍——为例5-15 的降阶判据埋伏笔。</div>
       </div>
@@ -59,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag);
     for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
   const MF = '"Cambria Math","STIX Two Math",Georgia,"Times New Roman","Microsoft YaHei",serif';
-  const X0 = 90, X1 = 664, Y0 = 40, Y1 = 500, XL = [-3.4, 0.7], YL = [-1.7, 1.7];
+  const X0 = 90, X1 = 664, Y0 = 40, Y1 = 500, XL = [-3.4, 1.55], YL = [-1.7, 1.7];  /* 右边界外扩，保证右侧主导极点标注完整显示 */
   const X = x => X0 + (x - XL[0]) / (XL[1] - XL[0]) * (X1 - X0);
   const Y = y => Y1 - (y - YL[0]) / (YL[1] - YL[0]) * (Y1 - Y0);
   const defs = mk("defs", {}, svg);
@@ -81,14 +82,53 @@ document.addEventListener("DOMContentLoaded", () => {
   };
   [[-0.409, 0.709], [-0.409, -0.709]].forEach(p => cross(p[0], p[1], "#D63A2F", 13));
   [[-1.41, 0], [-2.77, 0]].forEach(p => cross(p[0], p[1], "#1D3FA0", 13));
-  tx(X(-0.409) + 10, Y(0.709) - 24, "−0.41+j0.71（主导）", { fs: 22, fill: "#D63A2F", b: 1, an: "start" });
-  tx(X(-0.409) + 10, Y(-0.709) + 34, "−0.41−j0.71（主导）", { fs: 22, fill: "#D63A2F", b: 1, an: "start" });
+  tx(X(-0.409) - 14, Y(0.709) - 24, "−0.41+j0.71（主导）", { fs: 22, fill: "#D63A2F", b: 1, an: "end" });
+  tx(X(-0.409) - 14, Y(-0.709) + 34, "−0.41−j0.71（主导）", { fs: 22, fill: "#D63A2F", b: 1, an: "end" });
   tx(X(-1.41), Y(0) + 40, "−1.41", { fs: 22, fill: "#1D3FA0", b: 1 });
   tx(X(-2.77), Y(0) + 40, "−2.77", { fs: 22, fill: "#1D3FA0", b: 1 });
   /* 距虚轴距离对照虚线 */
   mk("line", { x1: X(-0.409), y1: Y(0) - 14, x2: X(-0.409), y2: Y(0.709) + 16, stroke: "#D63A2F", "stroke-width": 1.8, "stroke-dasharray": "4 5" }, svg);
   mk("line", { x1: X(-2.77), y1: Y(0) - 14, x2: X(-2.77), y2: Y(0) - 60, stroke: "#1D3FA0", "stroke-width": 1.8, "stroke-dasharray": "4 5" }, svg);
   tx(X(-1.9), Y(0) - 66, "离虚轴越远，衰减越快、影响越小", { fs: 21, fill: "#B3541E", b: 1 });
+  /* 缩放 / 拖拽平移 / 双击复位（与 RL.figure 默认交互一致：滚轮缩放、拖拽平移、双击复位） */
+  {
+    const VW = 700, VH = 560;
+    const vp = mk("g", {}, svg);
+    while (svg.firstChild && svg.firstChild !== vp) vp.appendChild(svg.firstChild);
+    let s = 1, vx = 0, vy = 0;
+    const apply = () => vp.setAttribute("transform", `translate(${vx},${vy}) scale(${s})`);
+    const vbPt = e => {
+      const r = svg.getBoundingClientRect();
+      const sc = Math.min(r.width / VW, r.height / VH);
+      return [(e.clientX - r.left - (r.width - VW * sc) / 2) / sc,
+              (e.clientY - r.top - (r.height - VH * sc) / 2) / sc, sc];
+    };
+    svg.style.cursor = "grab"; svg.style.touchAction = "none";
+    let drag = null;
+    svg.addEventListener("pointerdown", e => {
+      drag = { x: e.clientX, y: e.clientY, vx, vy };
+      if (svg.setPointerCapture) try { svg.setPointerCapture(e.pointerId); } catch (err) {}
+      svg.style.cursor = "grabbing";
+    });
+    svg.addEventListener("pointermove", e => {
+      if (!drag) return;
+      const k = vbPt(e)[2]; if (!k) return;
+      vx = drag.vx + (e.clientX - drag.x) / k; vy = drag.vy + (e.clientY - drag.y) / k;
+      apply();
+    });
+    const up = () => { if (drag) { drag = null; svg.style.cursor = "grab"; } };
+    svg.addEventListener("pointerup", up);
+    svg.addEventListener("pointercancel", up);
+    svg.addEventListener("wheel", e => {
+      e.preventDefault();
+      const [mx, my] = vbPt(e);
+      const ns = Math.max(.9, Math.min(40, s * Math.exp(-e.deltaY * .0013)));
+      if (ns === s) return;
+      vx = mx - (mx - vx) * ns / s; vy = my - (my - vy) * ns / s; s = ns;
+      apply();
+    }, { passive: false });
+    svg.addEventListener("dblclick", () => { s = 1; vx = vy = 0; apply(); });
+  }
 });
 </script>
 </div></div>

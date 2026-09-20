@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <title>③ 非最小相位系统：概念与判型</title>
-<link rel="stylesheet" href="../../../theme/theme.css?v=218">
+<link rel="stylesheet" href="../../../theme/theme.css?v=219">
 <script src="../../../theme/mathjax/mathjax-render.js"></script>
 <script src="../../../theme/mathjax/tex-chtml.js"></script>
 <script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
-<script src="../../../theme/act-base.js?v=218" defer></script>
+<script src="../../../theme/act-base.js?v=219" defer></script>
 <style>
   .row{display:flex;gap:22px;height:100%;min-height:0}
   .col{display:flex;flex-direction:column;gap:12px;min-height:0}
@@ -52,7 +52,7 @@
         </div>
       </div>
       <div class="act-card figc" style="flex:1">
-        <div class="hd"><span style="flex:1">例5-11 两系统零极点分布（RHP 元素红标）</span></div>
+        <div class="hd"><span style="flex:1">例5-11 两系统零极点分布（右半平面 元素红标）</span></div>
         <div class="bd2">
           <div class="pz">
             <div class="eq">系统(1)　<span class="tex">G_{1}(s)H_{1}(s)=\dfrac{K_{1}(s-1)}{s(s+1)(s+2)}</span>　→ 180° 法则</div>
@@ -67,9 +67,9 @@
       </div>
     </div>
   </div>
-  <div class="act-note"><span class="lead">要点</span><span>判型口诀只讲一遍：<span class="kw-r">先整理首一标准形、再看增益符号</span>——"有 RHP 极点 ⇒ 0°"之类的口诀是错的。</span></div>
+  <div class="act-note"><span class="lead">要点</span><span>判型口诀只讲一遍：<span class="kw-r">先整理首一标准形、再看增益符号</span>——"有 右半平面 极点 ⇒ 0°"之类的口诀是错的。</span></div>
 <script>
-/* 例5-11 两系统 s 平面零极点并排小图（纯示意，RHP 元素红标） */
+/* 例5-11 两系统 s 平面零极点并排小图（纯示意，右半平面 元素红标） */
 document.addEventListener("DOMContentLoaded", () => {
   const NS = "http://www.w3.org/2000/svg";
   const NAVY = "#12266E", BLUE = "#1D3FA0", AX = "#5B6B8C", RED = "#D63A2F";
@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const m = mk("marker", { id: "arZ" + svgId, markerWidth: 12, markerHeight: 10, refX: 8.5, refY: 4, orient: "auto" }, defs);
     mk("path", { d: "M0,0 L9,4 L0,8 Z", fill: AX }, m);
     const gx = 310, cy = 122, us = 100;
-    /* RHP 淡红底 */
+    /* 右半平面 淡红底 */
     mk("rect", { x: gx, y: cy - 62, width: 190, height: 124, fill: "#FDF1EF", opacity: .8 });
     label(gx + 95, cy - 34, "右半平面", { fs: 19, fill: RED });
     mk("line", { x1: 60, y1: cy, x2: 566, y2: cy, stroke: AX, "stroke-width": 2.2, "marker-end": "url(#arZ" + svgId + ")" });
@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
       mk("line", { x1: gx + p * us - 9, y1: cy + 9, x2: gx + p * us + 9, y2: cy - 9, stroke: BLUE, "stroke-width": 3.6 });
       label(gx + p * us, cy + 34, String(p).replace("-", "−"), { fs: 20 });
     });
-    /* RHP 零点 +1，红标 */
+    /* 右半平面 零点 +1，红标 */
     mk("circle", { cx: gx + us, cy, r: 10, fill: "none", stroke: RED, "stroke-width": 4 });
     label(gx + us, cy + 34, "+1", { fs: 20, fill: RED, b: 1 });
   }

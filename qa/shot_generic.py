@@ -19,7 +19,7 @@ def shot(fn):
     name = fn[:-5]
     pdf = os.path.join(OUT_PDF, name + ".pdf")
     png = os.path.join(OUT_PNG, name + ".png")
-    url = f"http://localhost:7100/qa/shot.html?page=/lessons/{LESSON}/pages/{fn}"
+    url = "http://localhost:%s/qa/shot.html?page=/lessons/%s/pages/%s" % (os.environ.get("SHOT_PORT", "7100"), LESSON, fn)
     r = subprocess.run([CHROME, "--headless=new", "--virtual-time-budget=14000",
                         "--window-size=1448,1086", f"--print-to-pdf={pdf}", url],
                        capture_output=True, timeout=90)

@@ -3,19 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <title>法则四：渐近线计算示例（双例对照）</title>
-<link rel="stylesheet" href="../../../theme/theme.css?v=218">
+<link rel="stylesheet" href="../../../theme/theme.css?v=219">
 <script src="../../../theme/mathjax/mathjax-render.js"></script>
 <script src="../../../theme/mathjax/tex-chtml.js"></script>
 <script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
-<script src="../../../theme/act-base.js?v=218" defer></script>
-<script src="../fig.js?v=507"></script>
+<script src="../../../theme/act-base.js?v=219" defer></script>
+<script src="../fig.js?v=219"></script>
 <script src="../data/asymA.js"></script>
 <script src="../data/asymB.js"></script>
 <style>
-  .col{display:flex;flex-direction:column;gap:14px;height:100%;min-height:0}
-  .act-body.has-note{bottom:150px}
+  .col{display:flex;flex-direction:column;gap:8px;height:100%;min-height:0}
+  .act-body.has-note{bottom:126px}
   .ctl .btn{min-width:7.6em}
-  .calc{display:flex;align-items:center;justify-content:center;padding:5px 10px 2px;font-size:20px;color:var(--navy);white-space:nowrap}
+  .calc{display:flex;align-items:center;justify-content:center;padding:2px 10px 0;font-size:20px;color:var(--navy);white-space:nowrap}
   .calc .tex{font-size:1.06em}
   .chip{background:var(--sky);border-radius:10px;padding:7px 12px;font-size:20px;color:var(--navy);font-weight:700;white-space:nowrap}
   .dual{flex:1;display:flex;gap:22px;min-height:0;position:relative}
@@ -25,7 +25,8 @@
   .figc{flex:1;display:flex;flex-direction:column;overflow:hidden;min-height:0}
   .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0;position:relative}
   .figc svg{width:100%;height:100%}
-  .ctl{display:flex;align-items:center;gap:10px;justify-content:center;padding:6px 0 8px}
+  .ctl{display:flex;align-items:center;gap:10px;justify-content:center;padding:3px 0 5px}
+  .mctl{flex:none;display:flex;align-items:center;justify-content:center;gap:16px;padding:2px 0 4px}
   .btn{background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:20px;font-weight:700;padding:7px 18px;cursor:pointer;white-space:nowrap}
   .btn.ghost{background:#fff;color:var(--blue);border:2px solid var(--blue)}
   .btn.master{background:var(--orange);font-size:19px;padding:8px 18px}
@@ -44,8 +45,7 @@
         <div class="bd2"><svg id="figA"></svg><span class="segfloat" id="segChipA" style="display:none"></span><div class="pick-readout" id="pickReadoutA">未选中轨迹点</div></div>
         <div class="calc">计算：<span class="tex">n-m=2</span>，<span class="tex">\sigma_a=\dfrac{0+(-2)}{2}=-1</span>，<span class="tex">\varphi_a=\pm90^\circ</span></div>
         <div class="ctl">
-          <button class="btn master" id="play">▶ 同步播放</button>
-          <button class="btn ghost" id="step">⧉ 分步</button>
+          <button class="btn ghost" id="stepA">⧉ 分步</button>
           <button class="btn" id="playA">▶ 播放</button>
           <button class="btn ghost" id="resetA">↺ 重置</button>
         </div>
@@ -55,10 +55,15 @@
         <div class="bd2"><svg id="figB"></svg><span class="segfloat" id="segChipB" style="display:none"></span><div class="pick-readout" id="pickReadoutB">未选中轨迹点</div></div>
         <div class="calc">计算：<span class="tex">n-m=3</span>，<span class="tex">\sigma_a=\dfrac{0-1-4}{3}=-\dfrac{5}{3}</span>，<span class="tex">\varphi_a=\pm60^\circ,\ 180^\circ</span></div>
         <div class="ctl">
+          <button class="btn ghost" id="stepB">⧉ 分步</button>
           <button class="btn" id="playB">▶ 播放</button>
           <button class="btn ghost" id="resetB">↺ 重置</button>
         </div>
       </div>
+    </div>
+    <div class="mctl">
+      <button class="btn master" id="play">▶ 同步播放</button>
+      <button class="btn ghost" id="stepSync">⧉ 同步分步</button>
     </div>
   </div>
 </div>
@@ -76,7 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
     F.mk("circle", { cx: F.X(sa), cy: F.Y(0), r: 15, fill: "none", stroke: RL.ASY, "stroke-width": 2.2, opacity: .85 }, parent || F.gDyn);
     F.tx(parent || F.gDyn, F.X(sa) + (dx || 0), F.Y(0) + 50, label, { fs: 25, fill: RL.ASY, b: 1, an: an || "middle" });
   }
-  /* 角弧统一委托 fig.js，避免页面各自实现坐标/方向导致重绘失步。 */
+  /* 角弧统一委托 fig.js?v=219，避免页面各自实现坐标/方向导致重绘失步。 */
   function angleArc(F, sx, sy, a0, a1, parent) {
     return F.angleArc(sx, sy, a0, a1, parent);
   }
@@ -92,17 +97,23 @@ document.addEventListener("DOMContentLoaded", () => {
     FB.tx(parent || FB.gDyn, FB.X(0.5), FB.Y(-2.9) + 8, "−60°", { fs: 25, fill: RL.ASY, b: 1, an: "end" });
     FB.tx(parent || FB.gDyn, FB.X(-5.9), FB.Y(0) - 22, "180°", { fs: 25, fill: RL.ASY, b: 1, an: "middle" });
   }
-    function paint(K) {
-    const f = K >= 3 ? 1 : 0;
-    FA.setProgress(f); FB.setProgress(f);
-    if (K >= 1) { sigmaMark(FA, -1, "σ_{a}=−1", 20, "start"); sigmaMark(FB, -5 / 3, "σ_{a}=−5/3", -64, "start"); }
+  /* 两图各自的确定态绘制（同步分步 paint = 两侧同时；单图分步只调一侧） */
+  function paintA(K) {
+    FA.setProgress(K >= 3 ? 1 : 0);
+    if (K >= 1) sigmaMark(FA, -1, "σ_{a}=−1", 20, "start");
     FA.gAsym.style.opacity = K >= 2 ? 1 : 0;
-    FB.gAsym.style.opacity = K >= 2 ? 1 : 0;
-    if (K >= 2) { anglesA(); anglesB(); }
+    if (K >= 2) anglesA();
   }
+  function paintB(K) {
+    FB.setProgress(K >= 3 ? 1 : 0);
+    if (K >= 1) sigmaMark(FB, -5 / 3, "σ_{a}=−5/3", -64, "start");
+    FB.gAsym.style.opacity = K >= 2 ? 1 : 0;
+    if (K >= 2) anglesB();
+  }
+  function paint(K) { paintA(K); paintB(K); }
     let lastPick = null;
     function pickText(hit) { return "K=" + RL.fmtK(hit.K) + "，s=" + RL.fmtC(hit.point); }
-    RL.wire(3, paint, {
+    const W = RL.wire(3, paint, {
     figs: [FA, FB], FS: [0, 0, 0, 1], dur: 12000, playLabel: "▶ 同步播放",
     pick: hit => {
       lastPick = hit;
@@ -119,25 +130,27 @@ document.addEventListener("DOMContentLoaded", () => {
         onReset: F => { F.gAsym.style.opacity = 0; } },
     ]
   });
-  /* ---- ⧉分步（金标准）：点一下推进一步；文字标注显示在图内上方空白处，不遮内容 ---- */
-  const STEPS = ["① 实轴段与 σₐ 交点（两例同步）", "② 渐近线：σₐ 定交点，φₐ 定方向", "③ 分支生长，贴渐近线远去"];
+  /* ---- ⧉同步分步（金标准）：点一下推进一步；文字标注显示在图内上方空白处，不遮内容 ---- */
+  const STEPS = ["① 实轴段与 σₐ 交点", "② 渐近线：σₐ 定交点，φₐ 定方向", "③ 分支生长，贴渐近线远去"];
   const chips = [document.getElementById("segChipA"), document.getElementById("segChipB")], total = 3;
-  const stepBtn = document.getElementById("step");
+  const stepBtn = document.getElementById("stepSync");
   const wNext = ACT.step.next, wReset = ACT.step.reset;
   let segRaf = null, segTok = 0;
   function segEnable() { stepBtn.disabled = false; stepBtn.style.opacity = ""; stepBtn.style.cursor = ""; }
-  function segStopUI() {
+  function segStopUI() {   // 仅停同步分步动画并恢复按钮；chip 与单图分步状态由调用方按需处理
     segTok++;
     if (segRaf) { cancelAnimationFrame(segRaf); segRaf = null; }
     segEnable();
-    chips.forEach(c => { if (c) c.style.display = "none"; });
   }
-  ACT.step.next = function () { segStopUI(); return wNext(); };
-  ACT.step.reset = function () { segStopUI(); return wReset(); };
+  function hideChips() { chips.forEach(c => { if (c) c.style.display = "none"; }); }
+  /* 同步控制（播放/同步分步/步进/重置）接管：停同步动画、藏两图 chip、清两侧单图分步状态 */
+  function syncTakeover() { segStopUI(); hideChips(); soloClear(sides.A); soloClear(sides.B); }
+  ACT.step.next = function () { syncTakeover(); return wNext(); };
+  ACT.step.reset = function () { syncTakeover(); return wReset(); };
   const playBtn = document.getElementById("play");
-  if (playBtn && playBtn.onclick) { const po = playBtn.onclick; playBtn.onclick = e => { segStopUI(); po(e); }; }
+  if (playBtn && playBtn.onclick) { const po = playBtn.onclick; playBtn.onclick = e => { syncTakeover(); po(e); }; }
   function segGo(instant) {
-    segStopUI();
+    segStopUI(); hideChips(); soloClear(sides.A); soloClear(sides.B);
     if (ACT.step.cur >= total) wReset();
     wNext();
     const k = ACT.step.cur, f0 = 0, f1 = k >= 3 ? 1 : 0;
@@ -156,10 +169,50 @@ document.addEventListener("DOMContentLoaded", () => {
     segRaf = requestAnimationFrame(tick);
   }
   stepBtn.onclick = () => segGo(false);
-  /* QA 钩子：?step=N 直达分步第 N 步（瞬时确定态） */
+  /* ---- 单图独立分步：点哪张图的「⧉ 分步」就只分步播哪张（与同步播放/分步、单图播放互斥） ---- */
+  const sides = {
+    A: { F: FA, paint: paintA, chip: chips[0], btn: document.getElementById("stepA"), k: 0, raf: null, tok: 0 },
+    B: { F: FB, paint: paintB, chip: chips[1], btn: document.getElementById("stepB"), k: 0, raf: null, tok: 0 }
+  };
+  function soloEnable(s) { s.btn.disabled = false; s.btn.style.opacity = ""; s.btn.style.cursor = ""; }
+  function soloStop(s) { s.tok++; if (s.raf) { cancelAnimationFrame(s.raf); s.raf = null; } soloEnable(s); }
+  function soloClear(s) { soloStop(s); s.k = 0; if (s.chip) s.chip.style.display = "none"; }
+  function soloGo(s, instant) {
+    segStopUI();                 // 停同步分步动画（另一侧图形的分步状态保持不动）
+    W.stopAll();                 // 停同步播放与两个单图播放（wire 统一仲裁，防双写）
+    soloStop(s);
+    s.k = s.k >= total ? 1 : s.k + 1;
+    s.F.gDyn.innerHTML = "";
+    s.paint(s.k);                // 只重画本侧确定态，另一侧不动
+    if (s.chip) { s.chip.textContent = "分步 " + s.k + " / " + total + "　" + STEPS[s.k - 1]; s.chip.style.display = ""; }
+    const f1 = s.k >= 3 ? 1 : 0;
+    if (instant || f1 <= 1e-9) { s.F.setAllF(f1); return; }
+    s.F.setAllF(0);
+    s.btn.disabled = true; s.btn.style.opacity = ".55"; s.btn.style.cursor = "default";  // 防连击：生长动画播完才恢复
+    const t0 = performance.now(), D = 2600, tok = s.tok;
+    const tick = now => {
+      if (tok !== s.tok) return;
+      const u = Math.min(1, (now - t0) / D);
+      s.F.setAllF(f1 * u);
+      if (u < 1) s.raf = requestAnimationFrame(tick); else { s.raf = null; soloEnable(s); }
+    };
+    s.raf = requestAnimationFrame(tick);
+  }
+  sides.A.btn.onclick = () => soloGo(sides.A, false);
+  sides.B.btn.onclick = () => soloGo(sides.B, false);
+  /* 单图播放/重置接管该侧时，清掉该侧的分步计数与 chip */
+  [["playA", "A"], ["resetA", "A"], ["playB", "B"], ["resetB", "B"]].forEach(([id, sd]) => {
+    const b = document.getElementById(id);
+    if (b && b.onclick) { const o = b.onclick; b.onclick = e => { soloClear(sides[sd]); o(e); }; }
+  });
+  /* QA 钩子：?step=N 直达同步分步第 N 步；?stepA=N / ?stepB=N 直达单图分步第 N 步（瞬时确定态） */
   window.addEventListener("load", () => {
-    const n = +(new URLSearchParams(location.search).get("step") || 0);
+    const q = new URLSearchParams(location.search);
+    const n = +(q.get("step") || 0);
     for (let i = 0; i < Math.min(n, total); i++) segGo(true);
+    const na = +(q.get("stepA") || 0), nb = +(q.get("stepB") || 0);
+    for (let i = 0; i < Math.min(na, total); i++) soloGo(sides.A, true);
+    for (let i = 0; i < Math.min(nb, total); i++) soloGo(sides.B, true);
   });
 });
 </script>

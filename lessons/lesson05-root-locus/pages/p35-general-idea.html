@@ -3,61 +3,65 @@
 <head>
 <meta charset="UTF-8">
 <title>引·概念与黄金法则：整理成标准形</title>
-<link rel="stylesheet" href="../../../theme/theme.css?v=218">
+<link rel="stylesheet" href="../../../theme/theme.css?v=219">
 <script src="../../../theme/mathjax/mathjax-render.js"></script>
 <script src="../../../theme/mathjax/tex-chtml.js"></script>
 <script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
-<script src="../../../theme/act-base.js?v=218" defer></script>
+<script src="../../../theme/act-base.js?v=219" defer></script>
 <style>
-  .row{display:flex;gap:22px;height:100%;min-height:0}
-  .lft{flex:.92;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .col{display:flex;flex-direction:column;gap:14px;height:100%;min-height:0}
   .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
-  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:8px;padding:10px 18px;font-size:20px;line-height:1.42}
-  .eq{background:var(--sky);border-radius:12px;padding:9px 14px;text-align:center;font-size:22px;line-height:1.5}
-  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
-  .kv{background:var(--sky);border-radius:12px;padding:8px 14px;line-height:1.45}
-  .kv.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
-  .drv{flex:1.28;display:flex;flex-direction:column;overflow:hidden}
-  .sub{font-size:21px;font-weight:700;color:var(--navy);border-top:2px solid var(--line);padding-top:9px;margin-top:2px}
-  .rule{display:flex;gap:10px;align-items:flex-start;background:var(--sky);border-radius:12px;padding:8px 14px;font-size:20px;line-height:1.45}
-  .rule b.no{flex:none;color:var(--orange);font-size:21px}
+  /* ① 顶部定义卡：低矮、只放一行定义 */
+  .def{flex:none}
+  .def>.hd{font-size:25px;padding:9px 24px}
+  .def>.bd{padding:9px 24px 13px}
+  .def .kv{background:var(--sky);border-radius:12px;padding:9px 18px;font-size:22px;line-height:1.48}
+  /* ② 中部黄金法则卡：本页视觉中心，放大醒目 */
+  .drv{flex:1;border:3px solid var(--orange)}
+  .drv>.hd{font-size:30px;padding:12px 28px;background:var(--orange)}
+  .drv>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:7px;padding:10px 28px;font-size:21px;line-height:1.48}
+  .eq{background:var(--sky);border-radius:12px;padding:7px 16px;text-align:center;font-size:23px;line-height:1.48}
+  .eq.hl{background:#FDF3EC;border-left:6px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0;font-size:24px}
+  .sub{font-size:21.5px;font-weight:700;color:var(--navy);border-top:2px solid var(--line);padding-top:7px}
+  .rule{display:flex;gap:11px;align-items:flex-start;background:var(--sky);border-radius:12px;padding:6px 15px;font-size:20px;line-height:1.42}
+  .rule b.no{flex:none;color:var(--orange);font-size:22px}
+  /* ③ 底部注意条：通栏长条框内两行文字 */
+  .caution{flex:none;background:#F4F6FB;border:2px solid var(--line);border-radius:14px;
+    padding:8px 24px;display:flex;flex-direction:column;gap:4px}
+  .caution .cl{display:flex;gap:10px;align-items:baseline;font-size:19.5px;line-height:1.42;color:#3A4665}
+  .caution .cl b.tag{flex:none;color:var(--orange);font-weight:700}
 </style>
 </head>
 <body data-title="引·概念与黄金法则：整理成标准形" data-page="35 / 61">
 <div class="act-stage"><div class="act-slide">
   <div class="act-body has-note">
-    <div class="row">
-      <div class="lft">
-        <div class="act-card" style="flex:1">
-          <div class="hd">什么是广义根轨迹</div>
-          <div class="bd">
-            <div class="kv" data-step="1">闭环特征方程中变化的参数<b>不是</b>根轨迹增益 <span class="tex">K_{1}</span>，或反馈不是负反馈——这类根轨迹统称<b>广义根轨迹</b>。</div>
-            <div class="kv" data-step="2">两类典型：<b>① 参量根轨迹</b>、<b>② 零度根轨迹</b>（相角条件变 0°）。</div>
-          </div>
-        </div>
-        <div class="act-card" style="flex:1.1">
-          <div class="hd">两个注意</div>
-          <div class="bd" style="font-size:19.5px">
-            <div class="kv" data-step="6">等效前后<b>闭环极点完全相同</b>——特征方程没变，只是改写形式。</div>
-            <div class="kv" data-step="7">等效零极点<b>不是</b>原系统的开环零极点，不能用来判断原闭环零点。</div>
-          </div>
+    <div class="col">
+      <div class="act-card def">
+        <div class="hd">什么是广义根轨迹</div>
+        <div class="bd">
+          <div class="kv" data-step="1">闭环特征方程中变化的参数<b>不是</b>根轨迹增益 <span class="tex">K_{1}</span>（或反馈不是负反馈）时，所画的根轨迹统称<b>广义根轨迹</b>。</div>
         </div>
       </div>
       <div class="act-card drv">
-        <div class="hd"><span style="flex:1">核心原理：等效变换（推导）</span></div>
+        <div class="hd"><span style="flex:1">黄金法则：等效变换，整理成标准形</span></div>
         <div class="bd">
-          <div class="eq" data-step="3">闭环特征方程　<span class="tex">1+G(s)H(s)=0</span></div>
-          <div class="eq" data-step="4">按参量 <span class="tex">A</span> 整理特征多项式　<span class="tex">A\,P(s)+Q(s)=0</span>　<span class="tex">\xrightarrow{\;\div\,Q(s)\;}</span>　<span class="tex">1+A\,\dfrac{P(s)}{Q(s)}=0</span></div>
-          <div class="eq hl" data-step="5">等效开环　<span class="tex">G^{*}(s)H^{*}(s)=A\,\dfrac{P(s)}{Q(s)}</span>　→　<span class="kw-r">七条法则照旧</span></div>
-          <div class="sub">黄金法则三条</div>
+          <div class="eq" data-step="2">闭环特征方程　<span class="tex">1+G(s)H(s)=0</span></div>
+          <div class="eq" data-step="3">按参量 <span class="tex">A</span> 整理特征多项式　<span class="tex">A\,P(s)+Q(s)=0</span>　<span class="tex">\xrightarrow{\;\div\,Q(s)\;}</span>　<span class="tex">1+A\,\dfrac{P(s)}{Q(s)}=0</span></div>
+          <div class="eq hl" data-step="4">等效开环　<span class="tex">G^{*}(s)H^{*}(s)=A\,\dfrac{P(s)}{Q(s)}</span>　→　<span class="kw-r">七条法则照旧</span></div>
+          <div class="sub" data-step="5">黄金法则三条</div>
           <div class="rule" data-step="6"><b class="no">①</b><span><b>同闭环特征方程</b>：等效只是改写形式，闭环极点完全相同；</span></div>
           <div class="rule" data-step="7"><b class="no">②</b><span><b>同根轨迹</b>：对 <span class="tex">G^{*}(s)H^{*}(s)</span> 套用 180°/0° 法则，所得轨迹即原系统的闭环根轨迹；</span></div>
           <div class="rule" data-step="8"><b class="no">③</b><span><b>不同开环零极点</b>：等效零极点 ≠ 原系统开环零极点，切勿混用。</span></div>
         </div>
       </div>
+      <div class="caution">
+        <div class="cl" data-step="9"><b class="tag">注意①</b><span>等效前后<b>闭环极点完全相同</b>——特征方程没变，只是改写形式。</span></div>
+        <div class="cl" data-step="10"><b class="tag">注意②</b><span>等效零极点<b>不是</b>原系统的开环零极点，不能用来判断原闭环零点。</span></div>
+      </div>
     </div>
   </div>
   <div class="act-note"><span class="lead">要点</span><span>广义根轨迹<span class="kw-r">不引入新法则</span>，只更换"开环传递函数"与"相角条件"。</span></div>
 </div></div>
+<script>/* qa-steps：截图自验钩子，?steps=N 自动前进 N 步（播放时不生效） */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
 </body>
 </html>

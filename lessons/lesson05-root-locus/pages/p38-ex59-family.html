@@ -3,21 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <title>① 参量根轨迹：双参数根轨迹族（例5-9）</title>
-<link rel="stylesheet" href="../../../theme/theme.css?v=218">
+<link rel="stylesheet" href="../../../theme/theme.css?v=219">
 <script src="../../../theme/mathjax/mathjax-render.js"></script>
 <script src="../../../theme/mathjax/tex-chtml.js"></script>
 <script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
-<script src="../../../theme/act-base.js?v=218" defer></script>
-<script src="../fig.js?v=507"></script>
-<script src="../data/fam59.js"></script>
+<script src="../../../theme/act-base.js?v=219" defer></script>
+<script src="../fig.js?v=219"></script>
+<script src="../data/fam59.js?v=219"></script>
 <style>
   .row{display:flex;gap:22px;height:100%;min-height:0}
-  .lft{flex:1;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .lft{flex:1;display:flex;flex-direction:column;min-height:0}
   .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
-  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:7px;padding:11px 18px;font-size:20px;line-height:1.42}
-  .eq{background:var(--sky);border-radius:12px;padding:8px 12px;text-align:center;font-size:21px;line-height:1.45}
-  .kv{background:var(--sky);border-radius:12px;padding:6px 13px;line-height:1.4}
-  .kv.on{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  /* 两步法主卡：橙色描边重点卡，独占左栏整高，行距拉开、分层排布 */
+  .act-card.big{border:2.5px solid var(--orange)}
+  .act-card.big>.hd{font-size:30px;padding:16px 26px}
+  .act-card.big>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:18px;padding:20px 26px;font-size:21.5px;line-height:1.6}
+  .eq{background:var(--sky);border-radius:12px;padding:12px 16px;text-align:center;font-size:24px;line-height:1.55}
+  .kv{background:var(--sky);border-radius:12px;padding:12px 17px;line-height:1.58}
   .figc{flex:1.2;display:flex;flex-direction:column;overflow:hidden;position:relative}
   .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
   .figc svg{width:100%;height:100%}
@@ -35,6 +37,12 @@
   .kr{font-size:19.5px;color:var(--navy);font-weight:700;background:var(--sky);border-radius:10px;padding:7px 14px;white-space:nowrap}
   #kr{min-width:13.6em;text-align:center}  /* 读数文字随步骤变化，钉死防按钮跳动（A1-G1） */
   .prog{font-size:18px;color:var(--muted);min-width:64px}
+  /* 两步法方法框：橙色描边重点框，两步各占一行，行距拉开 */
+  .mth{background:#FDF3EC;border:2.5px solid var(--orange);border-radius:14px;padding:16px 20px;display:flex;flex-direction:column;gap:14px}
+  .mth .mt{font-size:23px;font-weight:700;color:var(--orange)}
+  .mth .ml{display:flex;gap:12px;align-items:flex-start;font-size:21.5px;line-height:1.55;font-weight:700;color:var(--navy)}
+  .mth .ml b.no{flex:none;color:var(--orange);font-size:25px}
+  .legend .chip{cursor:pointer}
 </style>
 </head>
 <body data-title="① 参量根轨迹：双参数根轨迹族（例5-9）" data-page="38 / 61">
@@ -42,24 +50,17 @@
   <div class="act-body has-note">
     <div class="row">
       <div class="lft">
-        <div class="act-card" style="flex:1">
-          <div class="hd">双参数系统与两步法</div>
+        <div class="act-card big" style="flex:1">
+          <div class="hd">双参数系统两步法</div>
           <div class="bd">
-            <div class="eq"><span class="tex">G(s)H(s)=\dfrac{K_{1}}{s(s+1)(s+a)}</span></div>
+            <div class="eq">题目　<span class="tex">G(s)H(s)=\dfrac{K_{1}}{s(s+1)(s+a)}</span></div>
             <div class="kv" data-step="1">两个参数 K₁、a 都可调。特征方程：<span class="tex">s(s+1)(s+a)+K_{1}=0</span>。</div>
-            <div class="kv" data-step="2"><b>两步法</b>：① 固定 K₁，整理出 a 的等效开环，画 a: 0→∞ 的参量轨迹；② 取一系列 K₁ 重复，得到<b>根轨迹族</b>。每条曲线都从"母体"极点 0、−1 出发。</div>
-            <div class="kv" data-step="3">定量稳定边界（劳斯判据）：<span class="tex">a(a+1)&gt;K_{1}</span>，即 <span class="tex">a&gt;a^{*}=\dfrac{\sqrt{1+4K_{1}}-1}{2}</span>；临界时过虚轴 <span class="tex">\pm j\sqrt{a^{*}}</span>。</div>
-          </div>
-        </div>
-        <div class="act-card" style="flex:1.35">
-          <div class="hd">逐条观察（临界值经数值核算）</div>
-          <div class="bd" style="gap:5px;font-size:19.5px">
-            <div class="kv" id="f0" data-step="4">K₁=0.25：a&gt;0.21 稳定（临界 ±j0.46）</div>
-            <div class="kv" id="f1" data-step="5">K₁=0.5：a&gt;0.37 稳定（临界 ±j0.61）</div>
-            <div class="kv" id="f2" data-step="6">K₁=1：a&gt;0.62 稳定（临界 ±j0.79）</div>
-            <div class="kv" id="f3" data-step="7">K₁=2：a&gt;1.00 稳定（临界 ±j1）——分支右弯更明显</div>
-            <div class="kv" id="f4" data-step="8">K₁=4：a&gt;1.56 稳定（临界 ±j1.25）</div>
-            <div class="kv" id="f5" data-step="9">K₁=10：a&gt;2.70 稳定（临界 ±j1.64）</div>
+            <div class="mth">
+              <div class="mt">方法：两步法</div>
+              <div class="ml" data-step="2"><b class="no">①</b><span>固定 <span class="tex">K_{1}</span>，整理出 a 的等效开环，画 <span class="tex">a:0\to\infty</span> 的参量轨迹；</span></div>
+              <div class="ml" data-step="3"><b class="no">②</b><span>取一系列 <span class="tex">K_{1}</span> 重复，得<b>根轨迹族</b>——均从极点 0、−1 出发。</span></div>
+            </div>
+            <div class="kv" data-step="4">定量稳定边界（劳斯判据）：<span class="tex">a(a+1)&gt;K_{1}</span>，即 <span class="tex">a&gt;a^{*}=\dfrac{\sqrt{1+4K_{1}}-1}{2}</span>；临界时过虚轴 <span class="tex">\pm j\sqrt{a^{*}}</span>。</div>
           </div>
         </div>
       </div>
@@ -73,7 +74,7 @@
           <button class="btn ghost" id="step">⧉ 分步</button>
           <button class="btn ghost" onclick="ACT.step.reset()">↺ 重置</button>
           <span class="kr" id="kr">K₁ 越大，稳定所需 a 越大</span>
-          <span class="prog" id="prog">0 / 9</span>
+          <span class="prog" id="prog">0 / 4</span>
         </div>
       </div>
     </div>
@@ -88,22 +89,37 @@ document.addEventListener("DOMContentLoaded", () => {
   const KS = FAMS.map(f => f.k);
   const AC = KS.map(k => (Math.sqrt(1 + 4 * k) - 1) / 2);   // 临界 a*
   const NF = FAMS.length;
-  /* 图例 */
+  /* 图例（可点击：点某个 K₁ 即显示该值的根轨迹并着重标记） */
   const leg = document.getElementById("legend");
   KS.forEach((k, i) => {
     const c = document.createElement("span");
     c.className = "chip"; c.id = "chip" + i;
     c.innerHTML = `<i style="background:${SHADE[i]}"></i>K₁=${k}`;
+    c.onclick = () => pickFam(i);
     leg.appendChild(c);
   });
   /* 家族底图层：插在 gDyn 之下，随视窗重绘 */
   const gFam = document.createElementNS("http://www.w3.org/2000/svg", "g");
   F.svg.insertBefore(gFam, F.gDyn);
   function famPath(b) { return F.toPath(F.clipPoly(b.map(p => [F.X(p[0]), F.Y(p[1])]), F.PLOT)); }
+  /* 方向箭头：沿分支 a 增大方向，取已画出部分中段的稳定方向（相邻点有重复坐标，回看 8 个点） */
+  function addArrow(b, frac, color, into, op) {
+    const n = b.length; if (n < 3) return;
+    const m = Math.max(2, Math.round(n * frac));
+    const j = Math.min(m - 1, Math.max(1, Math.floor((m - 1) * .55)));
+    const p0 = b[Math.max(0, j - 8)], p1 = b[j];
+    const x0 = F.X(p0[0]), y0 = F.Y(p0[1]), x1 = F.X(p1[0]), y1 = F.Y(p1[1]);
+    if (x1 < F.PLOT.x0 || x1 > F.PLOT.x1 || y1 < F.PLOT.y0 || y1 > F.PLOT.y1) return;
+    if (Math.hypot(x1 - x0, y1 - y0) < 1) return;
+    const ang = Math.atan2(y1 - y0, x1 - x0) * 180 / Math.PI;
+    const g = F.mk("g", { transform: `translate(${x1},${y1}) rotate(${ang})`, opacity: op == null ? 1 : op }, into);
+    F.mk("path", { d: "M11,0 L-9,7 L-9,-7 Z", fill: color, stroke: "#fff", "stroke-width": 1.1 }, g);
+  }
   function drawBase() {
     gFam.innerHTML = "";
     FAMS.forEach((fam, fi) => fam.branches.forEach(b => {
       F.mk("path", { d: famPath(b), fill: "none", stroke: SHADE[fi], "stroke-width": 2.6, opacity: .3 }, gFam);
+      addArrow(b, 1, SHADE[fi], gFam, .3);
     }));
   }
   const _render = F.render;
@@ -116,11 +132,13 @@ document.addEventListener("DOMContentLoaded", () => {
       const pts = b.slice(0, n).map(p => [F.X(p[0]), F.Y(p[1])]);
       F.mk("path", { d: F.toPath(F.clipPoly(pts, F.PLOT)), fill: "none",
         stroke: bold ? RL.FOCUS : SHADE[i], "stroke-width": bold ? 6 : 4, opacity: 1 }, into);
+      if (frac > 0.55) addArrow(b, frac, bold ? RL.FOCUS : SHADE[i], into, 1);
     });
   }
-  /* state: mode idle | p (连续进度 0..NF) | {hi: 高亮索引} */
-  let mode = "idle", prog = 0, hi = -1, raf = null;
+  /* state: mode idle | play | seg（seg 仅当前一条的生长动画，播完即停，不连播）；segJ 下一条序号 */
+  let mode = "idle", prog = 0, hi = -1, raf = null, segJ = 0;
   const chip = document.getElementById("segChip");
+  const TOT = () => ACT.step.els.length;   // ACT 分步总数（两步法 4 步）；init 晚于本脚本，惰性取值
   function paint() {
     F.gDyn.innerHTML = "";
     for (let i = 0; i < NF; i++) document.getElementById("chip" + i).classList.remove("cur");
@@ -140,35 +158,51 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("kr").textContent =
       "K₁=" + KS[i] + "：a>" + (AC[i] >= 1 ? AC[i].toFixed(2) : AC[i].toFixed(2)) + " 稳定";
   }
+  function stopRaf() { if (raf) { cancelAnimationFrame(raf); raf = null; } }
+  function clearFig() { stopRaf(); mode = "idle"; hi = -1; chip.style.display = "none";
+    gFam.style.opacity = 1; F.gDyn.innerHTML = "";
+    for (let i = 0; i < NF; i++) document.getElementById("chip" + i).classList.remove("cur"); }
+  /* 选中第 i 条（图例点击共用）：底图弱化 + 当前条粗线亮显 + 读数/图例标记 */
+  function showFam(i, frac) {
+    hi = idxOfK(KS[i]);
+    gFam.style.opacity = .55;
+    F.gDyn.innerHTML = "";
+    for (let k = 0; k < NF; k++) document.getElementById("chip" + k).classList.remove("cur");
+    drawFam(hi, frac, true, F.gDyn);
+    setCur(hi);
+  }
+  function pickFam(i) {   // 图例点击：直接定格显示该 K₁ 的轨迹
+    stopRaf(); mode = "idle";
+    document.getElementById("play").textContent = "▶ 播放";
+    segJ = i + 1;
+    showFam(i, 1);
+    chip.textContent = "K₁=" + KS[i] + " 的参量轨迹（临界 a*=" + AC[i].toFixed(2) + "）";
+    chip.style.display = "";
+    document.getElementById("prog").textContent = "分步 " + (i + 1) + " / " + NF;
+  }
   const S = ACT.step, _n = S.next.bind(S), _r = S.reset.bind(S);
-  /* ACT 步进：步 4~9 依次高亮 K₁=0.25…10（按值匹配） */
+  /* ACT 步进：仅驱动左卡 4 步文字；图保持底图，逐条观察走图例点击/分步按钮 */
   function syncFromStep() {
     mode = "idle"; stopRaf();
-    const j = S.cur - 4;   // data-step 4 起对应 fam0
-    if (S.cur >= 4 && j < NF) { hi = idxOfK(KS[j]); }
-    else hi = -1;
-    for (let k = 0; k < NF; k++)
-      document.getElementById("f" + k).classList.toggle("on", S.cur >= 4 && j === k);
-    if (S.cur >= 10) { gFam.style.opacity = 1; }
+    document.getElementById("play").textContent = "▶ 播放";
+    hi = -1; segJ = 0;
+    gFam.style.opacity = 1;
     chip.style.display = "none";
     paint();
-    document.getElementById("prog").textContent = S.cur + " / 9";
+    document.getElementById("prog").textContent = S.cur + " / " + TOT();
   }
   S.next = function () { const d = _n(); syncFromStep(); return d; };
-  S.reset = function () { _r(); stopRaf(); mode = "idle"; hi = -1; chip.style.display = "none";
-    gFam.style.opacity = 1; F.gDyn.innerHTML = "";
-    for (let k = 0; k < NF; k++) document.getElementById("f" + k).classList.remove("on");
+  S.reset = function () { _r(); clearFig(); segJ = 0;
     document.getElementById("kr").textContent = "K₁ 越大，稳定所需 a 越大";
-    document.getElementById("prog").textContent = "0 / 9";
+    document.getElementById("prog").textContent = "0 / " + TOT();
     document.getElementById("play").textContent = "▶ 播放";
     document.getElementById("step").textContent = "⧉ 分步";
     paint(); };
   window.prev = function () { if (S.cur <= 0) return; const t = S.cur - 1; S.reset(); for (let i = 0; i < t; i++) S.next(); };
-  function stopRaf() { if (raf) { cancelAnimationFrame(raf); raf = null; } }
   /* ▶ 播放：K₁ 从 0.25 到 10 六条参量轨迹连续逐条扫出 */
   document.getElementById("play").onclick = function () {
     if (mode === "play") { stopRaf(); mode = "idle"; this.textContent = "▶ 播放"; return; }
-    S.reset(); mode = "play"; this.textContent = "❚❚ 暂停";
+    clearFig(); mode = "play"; this.textContent = "❚❚ 暂停";
     chip.textContent = "K₁ 连续增大：六条参量轨迹逐条扫出"; chip.style.display = "";
     const DUR = 13000, t0 = performance.now(), p0 = 0;
     const tick = now => {
@@ -184,47 +218,41 @@ document.addEventListener("DOMContentLoaded", () => {
     };
     raf = requestAnimationFrame(tick);
   };
-  /* ⧉ 分步：逐条 K₁ 高亮（自动连播，条间停顿） */
+  /* ⧉ 分步：点一下只扫出当前 K₁ 的一条轨迹，播完停住；再点一下才出现下一个 K₁ */
   document.getElementById("step").onclick = function () {
-    if (mode === "seg") { stopRaf(); mode = "idle"; this.textContent = "⧉ 分步"; chip.style.display = "none"; return; }
-    S.reset(); mode = "seg"; this.textContent = "❚❚ 暂停";
-    let j = 0;
-    const runOne = () => {
+    if (segJ >= NF) {   // 六条全部播完：清图后从头再来
+      S.reset();
+    }
+    stopRaf(); mode = "seg";
+    document.getElementById("play").textContent = "▶ 播放";
+    const j = segJ;
+    chip.textContent = "分步 " + (j + 1) + " / " + NF + "：K₁=" + KS[j] + " 的参量轨迹（临界 a*=" + AC[j].toFixed(2) + "）";
+    chip.style.display = "";
+    document.getElementById("prog").textContent = "分步 " + (j + 1) + " / " + NF;
+    hi = idxOfK(KS[j]);
+    gFam.style.opacity = .55;
+    const t0 = performance.now(), SEG = 1500;
+    const tk = now => {
       if (mode !== "seg") return;
-      if (j >= NF) {
-        mode = "idle"; this.textContent = "⧉ 分步"; chip.style.display = "none";
-        gFam.style.opacity = 1; F.gDyn.innerHTML = ""; hi = -1;
-        document.getElementById("kr").textContent = "K₁ 越大，稳定所需 a 越大";
-        return;
-      }
-      hi = idxOfK(KS[j]);
-      chip.textContent = "分步 " + (j + 1) + " / " + NF + "：K₁=" + KS[j] + " 的参量轨迹（临界 a*=" + AC[j].toFixed(2) + "）";
-      chip.style.display = "";
-      document.getElementById("prog").textContent = "分步 " + (j + 1) + " / " + NF;
-      const t0 = performance.now(), SEG = 1700;
-      const tk = now => {
-        if (mode !== "seg") return;
-        const t = Math.min(1, (now - t0) / SEG);
-        F.gDyn.innerHTML = ""; drawFam(hi, t, true, F.gDyn); setCur(hi);
-        if (t < 1) raf = requestAnimationFrame(tk);
-        else { j++; setTimeout(() => { if (mode === "seg") runOne(); }, 550); }
-      };
-      gFam.style.opacity = .55;
-      raf = requestAnimationFrame(tk);
+      const t = Math.min(1, (now - t0) / SEG);
+      showFam(hi, t);
+      if (t < 1) raf = requestAnimationFrame(tk);
+      else { mode = "idle"; segJ = j + 1; }   // 播完停住，等待下一次点击
     };
-    runOne();
+    raf = requestAnimationFrame(tk);
   };
   /* QA 钩子：?case=N（1..6）直达第 N 条 K₁ 曲线的高亮态 */
   const qp = new URLSearchParams(location.search);
   if (qp.has("case")) {
     const j = Math.max(1, Math.min(NF, parseInt(qp.get("case"), 10) || 1)) - 1;
-    hi = idxOfK(KS[j]); gFam.style.opacity = .55; setCur(hi);
-    document.getElementById("f" + j).classList.add("on");
+    segJ = j + 1;
+    showFam(j, 1);
     document.getElementById("prog").textContent = "分步 " + (j + 1) + " / " + NF;
   }
   drawBase(); paint();
 });
 </script>
 </div></div>
+<script>/* qa-steps：截图自验钩子，?steps=N 自动前进 N 步（播放时不生效） */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
 </body>
 </html>

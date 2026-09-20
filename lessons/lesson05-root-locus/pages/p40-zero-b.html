@@ -3,84 +3,209 @@
 <head>
 <meta charset="UTF-8">
 <title>② 零度根轨迹：规则对照表</title>
-<link rel="stylesheet" href="../../../theme/theme.css?v=218">
+<link rel="stylesheet" href="../../../theme/theme.css?v=219">
 <script src="../../../theme/mathjax/mathjax-render.js"></script>
 <script src="../../../theme/mathjax/tex-chtml.js"></script>
 <script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
-<script src="../../../theme/act-base.js?v=218" defer></script>
+<script src="../../../theme/act-base.js?v=219" defer></script>
 <style>
   .row{display:flex;gap:22px;height:100%;min-height:0}
-  .col{display:flex;flex-direction:column;gap:14px;min-height:0}
   .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
   .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:10px;padding:12px 18px;font-size:21px;line-height:1.5}
-  .kv{background:var(--sky);border-radius:12px;padding:8px 14px;line-height:1.45}
-  .kv.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
-  table.act-table{font-size:19.5px}
-  .act-table th,.act-table td{padding:8px 10px;text-align:center;vertical-align:middle}
+  /* 左表：高度填满卡片 */
+  .tblc .bd{padding:10px 12px;gap:0}
+  .tblc table.act-table{height:100%;font-size:17.8px}
+  .act-table th,.act-table td{padding:4px 8px;text-align:center;vertical-align:middle}
   .act-table td .tex{white-space:nowrap}
-  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:6px 10px;min-height:0}
+  /* 底色：法则1/2/5/7（无变化）白底；法则3/4/6（有变化）浅橙黄底 */
+  .tblc .act-table tr td{background:#fff}
+  .act-table tr.diff td{background:#FFF3D6}
+  .act-table tr.lk{cursor:pointer}
+  .act-table tr.lk:hover td{background:#FFEAC0}
+  /* 选中高亮：用 box-shadow 逐边画线，拼成整行连续外框（避开 border-collapse 断框） */
+  .act-table tr.lk.sel.shown td{background:#FFE3AC;
+    box-shadow:inset 0 3px 0 0 var(--orange),inset 0 -3px 0 0 var(--orange)}
+  .act-table tr.lk.sel.shown td:first-child{
+    box-shadow:inset 3px 0 0 0 var(--orange),inset 0 3px 0 0 var(--orange),inset 0 -3px 0 0 var(--orange)}
+  .act-table tr.lk.sel.shown td:last-child{
+    box-shadow:inset -3px 0 0 0 var(--orange),inset 0 3px 0 0 var(--orange),inset 0 -3px 0 0 var(--orange)}
+  /* 法则六跨两行视为一体：相接处不画横线，第二行左缘不画竖线，合成一个规整矩形外框 */
+  .act-table tr.lk.sel.shown:has(+tr.lk.sel.shown) td:not([rowspan]){
+    box-shadow:inset 0 3px 0 0 var(--orange)}
+  .act-table tr.lk.sel.shown:has(+tr.lk.sel.shown) td:not([rowspan]):last-child{
+    box-shadow:inset -3px 0 0 0 var(--orange),inset 0 3px 0 0 var(--orange)}
+  .act-table tr.lk.sel.shown+tr.lk.sel.shown td,
+  .act-table tr.lk.sel.shown+tr.lk.sel.shown td:first-child{
+    box-shadow:inset 0 -3px 0 0 var(--orange)}
+  .act-table tr.lk.sel.shown+tr.lk.sel.shown td:last-child{
+    box-shadow:inset -3px 0 0 0 var(--orange),inset 0 -3px 0 0 var(--orange)}
+  .act-table td.rl{font-weight:700;color:var(--navy)}
+  /* 右侧：公式条 + 上下两个对照图（间距拉开） */
+  .figc .fx{flex:none;background:var(--sky);border-radius:10px;margin:8px 12px 2px;padding:7px 12px;
+    font-size:19px;color:var(--navy);text-align:center;line-height:1.5}
+  .figc .fx .tex{white-space:nowrap}
+  .figc .panel{flex:1;display:flex;flex-direction:column;min-height:0;margin:8px 12px 0;
+    border:2px solid var(--line);border-radius:12px;overflow:hidden}
+  .figc .panel+.panel{margin-top:20px}   /* 两个对照图拉开距离 */
+  .figc .ptag{flex:none;font-size:18.5px;font-weight:700;color:#fff;background:var(--blue);padding:3px 12px;text-align:center}
+  .figc .panel.p0 .ptag{background:var(--danger)}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:2px 6px;min-height:0}
   .figc svg{width:100%;height:100%}
-  .figc .cap{flex:none;font-size:20px;color:var(--navy);background:var(--sky);border-radius:10px;padding:7px 14px;margin:0 12px 10px;line-height:1.4}
+  .figc .cap{flex:none;font-size:19px;color:var(--navy);background:var(--sky);border-radius:10px;padding:6px 14px;margin:10px 12px 10px;line-height:1.4}
 </style>
 </head>
 <body data-title="② 零度根轨迹：规则对照表" data-page="40 / 61">
 <div class="act-stage"><div class="act-slide">
   <div class="act-body has-note">
     <div class="row">
-      <div class="act-card" style="flex:1.5">
-        <div class="hd">三处差异，其余照旧</div>
+      <div class="act-card tblc" style="flex:1.52">
+        <div class="hd">七条法则对照：三条不同，四条照旧</div>
         <div class="bd">
-          <table class="act-table">
-            <tr><th style="width:23%">法则</th><th>180° 根轨迹</th><th>0° 根轨迹</th></tr>
-            <tr data-step="1"><td>实轴段<br>（法则三）</td><td>右侧实零极点数为<b>奇数</b></td><td>为<span class="kw-r">偶数</span></td></tr>
-            <tr data-step="2"><td>渐近线夹角<br>（法则四）</td><td><span class="tex">\dfrac{(2q+1)\times180^{\circ}}{n-m}</span></td><td><span class="tex">\dfrac{2q\times180^{\circ}}{n-m}</span></td></tr>
-            <tr data-step="3"><td>出射角<br>（法则六）</td><td><span class="tex">\theta_{p_{k}}=(2q+1)180^{\circ}+\Sigma_z-\Sigma_p</span></td><td><span class="tex">\theta_{p_{k}}=2q\times180^{\circ}+\Sigma_z-\Sigma_p</span></td></tr>
-            <tr data-step="4"><td>入射角<br>（法则六）</td><td><span class="tex">\theta_{z_{k}}=(2q+1)180^{\circ}-\Sigma_{j\ne k}\angle(z_{k}-z_{j})+\Sigma_i\angle(z_{k}-p_{i})</span></td><td><span class="tex">\theta_{z_{k}}=2q\times180^{\circ}-\Sigma_{j\ne k}\angle(z_{k}-z_{j})+\Sigma_i\angle(z_{k}-p_{i})</span></td></tr>
-            <tr data-step="5"><td>法则一/二/五/七</td><td colspan="2">照旧（起终点、渐近线中心 σₐ、分离点、虚轴交点）</td></tr>
+          <table class="act-table" id="ruleTbl">
+            <tr><th style="width:22%">法则</th><th>180° 根轨迹</th><th>0° 根轨迹</th></tr>
+            <tr data-step="1"><td class="rl">法则一<br>起点与终点</td><td colspan="2">起于开环极点，止于开环零点（含无穷远零点）——相同</td></tr>
+            <tr data-step="2"><td class="rl">法则二<br>分支数与对称性</td><td colspan="2"><span class="tex">n</span> 条分支，关于实轴对称——相同</td></tr>
+            <tr data-step="3" class="diff lk" data-rule="3"><td class="rl">法则三<br>实轴上的分布</td><td>右侧实零极点数为 <b class="kw-r">奇数</b></td><td>右侧实零极点数为 <b class="kw-r">偶数</b></td></tr>
+            <tr data-step="4" class="diff lk" data-rule="4"><td class="rl">法则四<br>渐近线</td><td>夹角 <span class="tex">\varphi_{a}=\dfrac{\color{#D63A2F}{(2k+1)}\times180^{\circ}}{n-m}</span></td><td>夹角 <span class="tex">\varphi_{a}=\dfrac{\color{#D63A2F}{2k}\times180^{\circ}}{n-m}</span><br><span style="font-size:15.5px;color:var(--muted)">中心 σₐ 相同</span></td></tr>
+            <tr data-step="5"><td class="rl">法则五<br>分离点</td><td colspan="2">由 <span class="tex">\mathrm{d}K_{1}/\mathrm{d}s=0</span>（重根条件）求解——相同</td></tr>
+            <tr data-step="6" class="diff lk" data-rule="6"><td class="rl" rowspan="2">法则六<br>出射角 / 入射角</td><td><span class="tex">\theta_{p_{i}}=\color{#D63A2F}{(2k+1)\times180^{\circ}}+\sum_j\angle(p_{i}-z_{j})-\sum_{j\ne i}\angle(p_{i}-p_{j})</span></td><td><span class="tex">\theta_{p_{i}}=\color{#D63A2F}{2k\times180^{\circ}}+\sum_j\angle(p_{i}-z_{j})-\sum_{j\ne i}\angle(p_{i}-p_{j})</span></td></tr>
+            <tr data-step="7" class="diff lk" data-rule="6"><td><span class="tex">\theta_{z_{i}}=\color{#D63A2F}{(2k+1)\times180^{\circ}}-\sum_{j\ne i}\angle(z_{i}-z_{j})+\sum_j\angle(z_{i}-p_{j})</span></td><td><span class="tex">\theta_{z_{i}}=\color{#D63A2F}{2k\times180^{\circ}}-\sum_{j\ne i}\angle(z_{i}-z_{j})+\sum_j\angle(z_{i}-p_{j})</span></td></tr>
+            <tr data-step="8"><td class="rl">法则七<br>与虚轴交点</td><td colspan="2">令 <span class="tex">s=\mathrm{j}\omega</span> 代入特征方程（或劳斯判据）——相同</td></tr>
           </table>
         </div>
       </div>
       <div class="act-card figc" style="flex:1">
-        <div class="hd"><span style="flex:1">同一开环 K₁/[s(s+1)(s+2)]：实轴段对照</span></div>
-        <div class="bd2"><svg id="cmp" viewBox="0 0 620 480"></svg></div>
-        <div class="cap">三个极点 0、−1、−2 不动，"奇/偶"一字之差 → 实轴段完全错开（例5-10 预告）。</div>
+        <div class="hd"><span style="flex:1">对照图：<span id="figTitle">法则三 · 实轴上的分布</span></span></div>
+        <div class="fx">同一开环 <span class="tex">G(s)H(s)=\dfrac{K_{1}}{s(s+2)(s^{2}+2s+2)}</span><br>相角条件 <span class="tex">(2k+1)\times180^{\circ}</span> ↔ <span class="tex">2k\times180^{\circ}</span>（<span class="tex">k=0,\pm1,\cdots</span>）</div>
+        <div class="panel">
+          <div class="ptag">180° 根轨迹（负反馈）</div>
+          <div class="bd2"><svg id="figA" viewBox="0 0 620 300"></svg></div>
+        </div>
+        <div class="panel p0">
+          <div class="ptag">0° 根轨迹（正反馈）</div>
+          <div class="bd2"><svg id="figB" viewBox="0 0 620 300"></svg></div>
+        </div>
+        <div class="cap" id="figCap">四个极点不动，"奇/偶"一字之差 → 实轴上的段完全错开（例5-10 预告）。</div>
       </div>
     </div>
   </div>
-  <div class="act-note"><span class="lead">要点</span><span>0° 版只把法则三/四/六中的 <span class="tex">(2q+1)\times180^{\circ}</span> 换成 <span class="tex">2q\times180^{\circ}</span>——入射角同理，<span class="kw-r">求和式本身不变</span>。</span></div>
+  <div class="act-note"><span class="lead">要点</span><span>0° 版只把法则三/四/六中的 <span class="tex">(2k+1)\times180^{\circ}</span> 换成 <span class="tex">2k\times180^{\circ}</span>——<span class="kw-r">求和式本身不变</span>，其余四条法则完全照旧。</span></div>
 <script>
-/* 同一系统 180° vs 0° 实轴段对照小图（程序绘制） */
+/* 同一系统（极点 0、−2、−1±j，与例5-3/p25 一致）的 180° vs 0° 对照小图：
+   法则三 实轴段 / 法则四 渐近线 / 法则六 出射角。点表行切换，数值均由该系统算得。 */
 document.addEventListener("DOMContentLoaded", () => {
   const NS = "http://www.w3.org/2000/svg";
-  const svg = document.getElementById("cmp");
-  const mk = (tag, attrs) => { const n = document.createElementNS(NS, tag);
-    for (const k in attrs) n.setAttribute(k, attrs[k]); svg.appendChild(n); return n; };
-  const NAVY = "#12266E", BLUE = "#1D3FA0", AX = "#5B6B8C", RED = "#D63A2F";
+  const NAVY = "#12266E", BLUE = "#1D3FA0", AX = "#5B6B8C", RED = "#D63A2F", GRID = "#C9D8F2";
   const MF = '"Cambria Math","STIX Two Math",Georgia,"Times New Roman","Microsoft YaHei",serif';
-  const label = (x, y, s, o) => { o = o || {};
-    const n = mk("text", { x, y, "font-size": o.fs || 24, "text-anchor": "middle",
-      fill: o.fill || NAVY, "font-weight": o.b ? 700 : 400, "font-style": "italic", "font-family": MF });
+  const POLES = [[0, 0], [-2, 0], [-1, 1], [-1, -1]];
+  const X = v => 262 + 95 * v, Y = v => 150 - 70 * v;   // x∈[-2.7,3.5]，y∈[-2.05,2.05]
+  const mk = (tag, attrs, svg) => { const n = document.createElementNS(NS, tag);
+    for (const k in attrs) n.setAttribute(k, attrs[k]); svg.appendChild(n); return n; };
+  const label = (svg, x, y, s, o) => { o = o || {};
+    const n = mk("text", { x, y, "font-size": o.fs || 22, "text-anchor": o.an || "middle",
+      fill: o.fill || NAVY, "font-weight": o.b ? 700 : 400, "font-style": "italic", "font-family": MF }, svg);
     n.textContent = s; return n; };
-  const X = v => 300 + v * 90;   // 数学 → 像素
-  function numberLine(cy, title, segs) {
-    label(310, cy - 66, title, { fs: 25, b: 1, fill: NAVY });
-    mk("line", { x1: 46, y1: cy, x2: 596, y2: cy, stroke: AX, "stroke-width": 2.4 });
-    segs.forEach(([a, b]) => {
-      mk("line", { x1: a <= -4 ? 50 : X(a), y1: cy, x2: b >= 2 ? 592 : X(b), y2: cy,
-        stroke: BLUE, "stroke-width": 9, "stroke-linecap": "round", opacity: .9 }, svg);
-    });
-    [0, -1, -2].forEach(p => {
-      mk("line", { x1: X(p) - 9, y1: cy - 9, x2: X(p) + 9, y2: cy + 9, stroke: RED, "stroke-width": 3.6 });
-      mk("line", { x1: X(p) - 9, y1: cy + 9, x2: X(p) + 9, y2: cy - 9, stroke: RED, "stroke-width": 3.6 });
-      label(X(p), cy + 38, String(p).replace("-", "−"), { fs: 22 });
-    });
+  function axes(svg) {
+    mk("line", { x1: 14, y1: Y(0), x2: 606, y2: Y(0), stroke: AX, "stroke-width": 2 }, svg);
+    mk("line", { x1: X(0), y1: 288, x2: X(0), y2: 12, stroke: AX, "stroke-width": 2 }, svg);
   }
-  numberLine(150, "180° 根轨迹（负反馈）：右侧奇数", [[-4, -2], [-1, 0]]);
-  label(310, 210, "段：(−∞,−2]、[-1,0]", { fs: 22, fill: BLUE, b: 1 });
-  numberLine(360, "0° 根轨迹（正反馈）：右侧偶数", [[-2, -1], [0, 2]]);
-  label(310, 420, "段：[−2,−1]、[0,+∞)——正实轴整段都在轨迹上", { fs: 22, fill: RED, b: 1 });
+  function poles(svg) {
+    POLES.forEach(([px, py]) => {
+      const cx = X(px), cy = Y(py);
+      mk("line", { x1: cx - 9, y1: cy - 9, x2: cx + 9, y2: cy + 9, stroke: RED, "stroke-width": 3.6 }, svg);
+      mk("line", { x1: cx - 9, y1: cy + 9, x2: cx + 9, y2: cy - 9, stroke: RED, "stroke-width": 3.6 }, svg);
+    });
+    label(svg, X(0) + 16, Y(0) + 26, "0", { fs: 20 });
+    label(svg, X(-2), Y(0) + 28, "−2", { fs: 20 });
+    label(svg, X(-1) - 34, Y(1) + 4, "−1+j", { fs: 19 });
+    label(svg, X(-1) - 34, Y(-1) + 4, "−1−j", { fs: 19 });
+  }
+  /* 从 (cx,cy) 沿数学角 deg 画射线，裁到图框内，末端带小箭头 */
+  function ray(svg, cx, cy, deg, color, dash) {
+    const dx = Math.cos(deg * Math.PI / 180), dy = -Math.sin(deg * Math.PI / 180);
+    let t = 1e9;
+    if (dx > 1e-9) t = Math.min(t, (600 - cx) / dx); if (dx < -1e-9) t = Math.min(t, (24 - cx) / dx);
+    if (dy > 1e-9) t = Math.min(t, (282 - cy) / dy); if (dy < -1e-9) t = Math.min(t, (18 - cy) / dy);
+    const ex = cx + dx * t, ey = cy + dy * t;
+    const o = { x1: cx, y1: cy, x2: ex, y2: ey, stroke: color, "stroke-width": 2.6 };
+    if (dash) o["stroke-dasharray"] = "10 7";
+    mk("line", o, svg);
+    const s = 8, ux = dx, uy = dy, px = -uy, py = ux;
+    mk("path", { d: `M${ex},${ey} L${ex - s * 1.9 * ux + s * px},${ey - s * 1.9 * uy + s * py} L${ex - s * 1.9 * ux - s * px},${ey - s * 1.9 * uy - s * py} Z`,
+      fill: color }, svg);
+  }
+  /* 法则三：实轴段 */
+  function drawRule3(svg, zero) {
+    axes(svg); poles(svg);
+    const segs = zero ? [[-2.68, -2], [0, 3.48]] : [[-2, 0]];
+    segs.forEach(([a, b]) => {
+      mk("line", { x1: X(a), y1: Y(0), x2: X(b), y2: Y(0), stroke: BLUE,
+        "stroke-width": 9, "stroke-linecap": "round", opacity: .92 }, svg);
+    });
+    label(svg, 310, 292, zero ? "段：(−∞,−2]、[0,+∞)（右侧偶数）" : "段：[−2, 0]（右侧奇数）",
+      { fs: 21, fill: zero ? RED : BLUE, b: 1 });
+  }
+  /* 法则四：渐近线（σa=−1，n−m=4） */
+  function drawRule4(svg, zero) {
+    axes(svg);
+    const cx = X(-1), cy = Y(0);
+    const angs = zero ? [0, 90, 180, 270] : [45, 135, 225, 315];
+    angs.forEach(a => ray(svg, cx, cy, a, BLUE, true));
+    poles(svg);
+    mk("circle", { cx, cy, r: 7, fill: "#fff", stroke: BLUE, "stroke-width": 3 }, svg);
+    label(svg, cx + 30, cy + 30, "σa=−1", { fs: 20, fill: BLUE, b: 1, an: "start" });
+    label(svg, 310, 292, zero ? "夹角 0°、90°、180°、270°（2k×180°/4）" : "夹角 45°、135°、225°、315°（(2k+1)×180°/4）",
+      { fs: 21, fill: zero ? RED : BLUE, b: 1 });
+  }
+  /* 法则六：p3=−1+j 的出射角（180°: −90°；0°: +90°，由 0−270° 化简） */
+  function drawRule6(svg, zero) {
+    axes(svg);
+    const p3 = [X(-1), Y(1)];
+    /* 其余极点指向 p3 的向量（相角 135°、45°、90° 均已算得） */
+    [[0, 0, "135°"], [-2, 0, "45°"], [-1, -1, "90°"]].forEach(([px, py, t]) => {
+      mk("line", { x1: X(px), y1: Y(py), x2: p3[0], y2: p3[1], stroke: "#9AA8C8",
+        "stroke-width": 2, "stroke-dasharray": "6 5" }, svg);
+      label(svg, (X(px) + p3[0]) / 2 + 10, (Y(py) + p3[1]) / 2 - 6, t, { fs: 17, fill: "#5B6B8C" });
+    });
+    poles(svg);
+    /* 出射射线与圆弧 */
+    const deg = zero ? 90 : -90;
+    ray(svg, p3[0], p3[1], deg, RED, false);
+    const r = 40, a0 = zero ? 0 : -90, a1 = zero ? 90 : 0;
+    const sgn = v => [p3[0] + r * Math.cos(v * Math.PI / 180), p3[1] - r * Math.sin(v * Math.PI / 180)];
+    const [sx, sy] = sgn(a0), [ex, ey] = sgn(a1);
+    mk("path", { d: `M${sx},${sy} A${r},${r} 0 0 ${zero ? 0 : 1} ${ex},${ey}`,
+      fill: "none", stroke: RED, "stroke-width": 3 }, svg);
+    label(svg, p3[0] + 96, p3[1] + (zero ? 34 : -6), zero ? "θp₃=+90°" : "θp₃=−90°", { fs: 23, fill: RED, b: 1 });
+    label(svg, 310, 292, zero ? "θ=2k×180°−(135°+45°+90°)=−270°≡+90°" : "θ=(2k+1)×180°−(135°+45°+90°)=−90°",
+      { fs: 20, fill: zero ? RED : BLUE, b: 1 });
+  }
+  const RULES = {
+    3: { title: "法则三 · 实轴上的分布", draw: drawRule3,
+         cap: "四个极点不动，\"奇/偶\"一字之差 → 实轴上的段完全错开（例5-10 预告）。" },
+    4: { title: "法则四 · 渐近线", draw: drawRule4,
+         cap: "渐近线中心 σa=−1 不变，四条渐近线整体转过 45°：奇数倍 ↔ 偶数倍。" },
+    6: { title: "法则六 · 出射角", draw: drawRule6,
+         cap: "求和项 135°+45°+90° 不变，仅基准项 (2k+1)×180° ↔ 2k×180°：出射方向由 −90° 变 +90°。" }
+  };
+  const svgA = document.getElementById("figA"), svgB = document.getElementById("figB");
+  function selectRule(r) {
+    const R = RULES[r]; if (!R) return;
+    document.querySelectorAll("#ruleTbl tr.lk").forEach(tr =>
+      tr.classList.toggle("sel", +tr.dataset.rule === r));
+    document.getElementById("figTitle").textContent = R.title;
+    document.getElementById("figCap").textContent = R.cap;
+    svgA.innerHTML = ""; svgB.innerHTML = "";
+    R.draw(svgA, false); R.draw(svgB, true);
+  }
+  document.querySelectorAll("#ruleTbl tr.lk").forEach(tr =>
+    tr.addEventListener("click", () => selectRule(+tr.dataset.rule)));
+  /* QA 钩子：?rule=3|4|6 直达该法则对照图 */
+  const qp = new URLSearchParams(location.search);
+  selectRule(qp.has("rule") ? +qp.get("rule") : 3);
 });
 </script>
 </div></div>
+<script>/* qa-steps：截图自验钩子，?steps=N 自动前进 N 步（播放时不生效） */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
 </body>
 </html>

@@ -3,21 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <title>例5-4：完整根轨迹绘制</title>
-<link rel="stylesheet" href="../../../theme/theme.css?v=218">
+<link rel="stylesheet" href="../../../theme/theme.css?v=219">
 <script src="../../../theme/mathjax/mathjax-render.js"></script>
 <script src="../../../theme/mathjax/tex-chtml.js"></script>
 <script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
-<script src="../../../theme/act-base.js?v=218" defer></script>
-<script src="../fig.js?v=507"></script>
-<script src="../data/ex54.js"></script>
+<script src="../../../theme/act-base.js?v=219" defer></script>
+<script src="../fig.js?v=219"></script>
+<script src="../data/ex54.js?v=219"></script>
 <style>
   .row{display:flex;gap:22px;height:100%;min-height:0}
   .lft{flex:.9;display:flex;flex-direction:column;gap:14px;min-height:0}
   .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
-  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:6px;padding:10px 16px}
-  .kv{background:var(--sky);border-radius:12px;padding:6px 13px;font-size:18.5px;line-height:1.38}
-  .kv.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
-  .kv.on{background:#FDF3EC;border-left:5px solid var(--danger);border-top-left-radius:0;border-bottom-left-radius:0;font-weight:700;box-shadow:0 0 0 2px rgba(214,58,47,.22)}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:5px;padding:8px 16px}
+  .eq{background:var(--sky);border-radius:12px;padding:6px 12px;text-align:center;font-size:19px;line-height:1.42}
+  .task{background:var(--sky);border-radius:12px;padding:6px 13px;font-size:17px;line-height:1.38;color:var(--ink)}
+  .stp{display:flex;gap:10px;align-items:flex-start;background:var(--sky);border-radius:12px;
+    padding:5px 12px 5px 9px;font-size:17.5px;line-height:1.36;border-left:5px solid transparent}
+  .stp .num{flex:none;width:28px;height:28px;margin-top:2px;border-radius:50%;background:var(--blue);
+    color:#fff;font-weight:700;font-size:17px;display:grid;place-items:center}
+  .stp .stx{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+  .stp .got{font-weight:700;color:var(--navy)}
+  .stp .got::before{content:"▸";color:var(--orange);margin-right:7px}
+  .stp .got b{color:var(--danger)}
+  .stp.on{background:#FDF3EC;border-left-color:var(--danger);box-shadow:0 0 0 2px rgba(214,58,47,.22)}
+  .stp.on .num{background:var(--danger)}
   .figc{flex:1.2;display:flex;flex-direction:column;overflow:hidden;position:relative}
   .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
   .figc svg{width:100%;height:100%}
@@ -44,25 +53,40 @@
 <div class="act-body has-note">
   <div class="row">
     <div class="lft">
-      <div class="act-card" style="flex:1.32">
-        <div class="hd">题设与计算过程</div>
-        <div class="bd" style="font-size:19px;line-height:1.42">
-          <div style="text-align:center"><span class="tex">G(s)H(s)=\dfrac{K_{1}}{s(s+3)(s^{2}+2s+2)}</span></div>
-          <div class="kv" id="c1">渐近线：<span class="tex">\sigma_{a}=-1.25</span>，<span class="tex">\varphi_{a}=\pm45^{\circ}</span>、<span class="tex">\pm135^{\circ}</span></div>
-          <div class="kv" id="c2">分离点：<span class="tex">4s^{3}+15s^{2}+16s+6=0\Rightarrow d=-2.289</span>（<span class="tex">K_{1}=4.33</span>）；出射角 <span class="tex">\theta_{p_{3}}=-71.6^{\circ}</span></div>
-          <div class="kv" id="c3">虚轴交点：劳斯判据（演算见例5-4 计算页）<span class="tex">K_{1}=8.16</span>，<span class="tex">s=\pm j1.095</span></div>
-          <div class="kv">ζ=0.5 选点 <span class="tex">K_{1}\approx2.62</span>：闭环极点 <span class="tex">-0.409\pm j0.709</span>、<span class="tex">-1.41</span>、<span class="tex">-2.77</span>（自洽口径，见例5-13）</div>
+      <div class="act-card">
+        <div class="hd">题设</div>
+        <div class="bd" style="justify-content:center;gap:10px">
+          <div class="eq"><span class="tex">G(s)H(s)=\dfrac{K_{1}}{s(s+3)(s^{2}+2s+2)}</span></div>
+          <div class="task">ζ=0.5 选点 <span class="tex">K_{1}\approx2.62</span>：闭环极点 <span class="tex">-0.409\pm j0.709</span>、<span class="tex">-1.41</span>、<span class="tex">-2.77</span>（自洽口径，见例5-13）</div>
         </div>
       </div>
-      <div class="act-card" style="flex:1.08">
-        <div class="hd">绘制步骤（与右图分步联动）</div>
-        <div class="bd" style="gap:4px">
-          <div class="kv" id="s1">① 计算四个开环极点（含复极点 −1±j）</div>
-          <div class="kv" id="s2">② 确定实轴段根轨迹：[−3, 0]</div>
-          <div class="kv" id="s3">③ 四条渐近线：σₐ=−1.25，±45°、±135°</div>
-          <div class="kv" id="s4">④ d=−2.289 分离（K₁=4.33）；p₃、p₄ 沿 ∓71.6° 出射</div>
-          <div class="kv" id="s5">⑤ 过虚轴 ±j1.095（K₁=8.16，临界）</div>
-          <div class="kv" id="s6">⑥ 沿渐近线趋向无穷远（K₁→∞）</div>
+      <div class="act-card" style="flex:1">
+        <div class="hd">计算与绘制步骤（与右图分步联动）</div>
+        <div class="bd">
+          <div class="stp" id="s1"><span class="num">1</span><div class="stx">
+            <div class="cl">开环极点 0、−3、−1±j（含一对复极点）</div>
+            <div class="got">在 s 平面标出 <b>4 个极点</b></div>
+          </div></div>
+          <div class="stp" id="s2"><span class="num">2</span><div class="stx">
+            <div class="cl">实轴上 <span class="tex">[-3,\,0]</span> 段右侧零、极点总数为奇数</div>
+            <div class="got">得实轴段根轨迹 <b>[−3, 0]</b></div>
+          </div></div>
+          <div class="stp" id="s3"><span class="num">3</span><div class="stx">
+            <div class="cl" id="c1">渐近线：<span class="tex">\sigma_{a}=-1.25</span>，<span class="tex">\varphi_{a}=\pm45^{\circ}</span>、<span class="tex">\pm135^{\circ}</span></div>
+            <div class="got">得 <b>4 条渐近线</b>，定分支去向</div>
+          </div></div>
+          <div class="stp" id="s4"><span class="num">4</span><div class="stx">
+            <div class="cl" id="c2">分离点 <span class="tex">4s^{3}+15s^{2}+16s+6=0</span> ⇒ <span class="tex">d=-2.289</span>（<span class="tex">K_{1}=4.33</span>）；出射角 <span class="tex">\theta_{p_{3}}=-71.6^{\circ}</span></div>
+            <div class="got"><b>d=−2.289 分离</b>，p₃、p₄ 沿 ∓71.6° 出射</div>
+          </div></div>
+          <div class="stp" id="s5"><span class="num">5</span><div class="stx">
+            <div class="cl" id="c3">虚轴交点：劳斯判据（演算见例5-4 计算页）<br><span class="tex">K_{1}=8.16</span>，<span class="tex">s=\pm j1.095</span></div>
+            <div class="got">过虚轴 <b>±j1.095</b>（K₁=8.16，临界）</div>
+          </div></div>
+          <div class="stp" id="s6"><span class="num">6</span><div class="stx">
+            <div class="cl"><span class="tex">K_{1}\to\infty</span>：4 条分支沿渐近线向外延伸</div>
+            <div class="got"><b>趋向无穷远</b>，全图完成</div>
+          </div></div>
         </div>
       </div>
     </div>

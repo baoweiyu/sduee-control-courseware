@@ -3,34 +3,45 @@
 <head>
 <meta charset="UTF-8">
 <title>⑥ 开环零极点配置｜例5-16：开环零点位置的影响</title>
-<link rel="stylesheet" href="../../../theme/theme.css?v=218">
+<link rel="stylesheet" href="../../../theme/theme.css?v=219">
 <script src="../../../theme/mathjax/mathjax-render.js"></script>
 <script src="../../../theme/mathjax/tex-chtml.js"></script>
 <script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
-<script src="../../../theme/act-base.js?v=218" defer></script>
-<script src="../fig.js?v=507"></script>
-<script src="../data/ex516a.js"></script>
-<script src="../data/ex516b.js"></script>
-<script src="../data/ex516c.js"></script>
-<script src="../data/ex516d.js"></script>
-<script src="../data/ex516e.js"></script>
+<script src="../../../theme/act-base.js?v=219" defer></script>
+<script src="../fig.js?v=219"></script>
+<script src="../data/ex516a.js?v=219"></script>
+<script src="../data/ex516b.js?v=219"></script>
+<script src="../data/ex516c.js?v=219"></script>
+<script src="../data/ex516d.js?v=219"></script>
+<script src="../data/ex516e.js?v=219"></script>
 <style>
   .row{display:flex;gap:22px;height:100%;min-height:0}
   .lft{flex:.95;display:flex;flex-direction:column;gap:14px;min-height:0}
   .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
   .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:6px;padding:12px 18px;font-size:19.5px;line-height:1.42}
-  .kv{background:var(--sky);border-radius:12px;padding:7px 13px;line-height:1.42}
-  .kv.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
   .eq{background:var(--sky);border-radius:12px;padding:8px 13px;text-align:center;font-size:21px;line-height:1.45}
+  .kv{background:var(--sky);border-radius:12px;padding:7px 13px;line-height:1.42}
+  .zr{display:flex;align-items:center;gap:10px;background:var(--sky);border-radius:12px;
+    padding:7px 13px;line-height:1.4;cursor:pointer;border-left:5px solid transparent}
+  .zr:hover{box-shadow:0 0 0 2px rgba(29,63,160,.45)}
+  .zr.hl{background:#FDF3EC;border-left-color:var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .zr .no{flex:none;width:28px;height:28px;border-radius:50%;background:var(--blue);color:#fff;
+    font-weight:700;font-size:17px;display:grid;place-items:center}
+  .zr.hl .no{background:var(--orange)}
   .figc{flex:1.25;display:flex;flex-direction:column;overflow:hidden;position:relative}
-  .ctl #prog{top:98px}  /* 本页 hd 两行，prog 避开标题栏（A1-G2） */
   .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
   .figc svg{width:100%;height:100%;grid-area:1/1}
   .bd2{display:grid}
-  .ctl{display:flex;align-items:center;gap:10px;justify-content:center;padding:8px 0 10px}
-  .btn{background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:19px;font-weight:700;padding:8px 20px;cursor:pointer}
+  .ctl{display:flex;flex-direction:column;gap:6px;padding:6px 0 8px}
+  .ctl-r{display:flex;align-items:center;gap:10px;justify-content:center}
+  .btn{background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:19px;font-weight:700;padding:7px 20px;cursor:pointer}
   .btn.ghost{background:#fff;color:var(--blue);border:2px solid var(--blue)}
+  .bbtn{background:#fff;color:var(--blue);border:2px solid var(--blue);border-radius:10px;
+    font-size:18px;font-weight:700;padding:6px 13px;cursor:pointer}
+  .bbtn:hover{box-shadow:0 0 0 2px rgba(29,63,160,.35)}
+  .bbtn.on{background:var(--blue);color:#fff}
   .prog{font-size:19.5px;color:var(--muted);min-width:74px}
+  .ctl .ctl-r #prog{position:static}  /* 覆盖 theme 的绝对定位 */
 </style>
 </head>
 <body data-title="⑥ 开环零极点配置｜例5-16：开环零点位置的影响" data-page="58 / 61">
@@ -39,26 +50,27 @@
 <div class="act-body has-note">
   <div class="row">
     <div class="lft">
-      <div class="act-card" style="flex:1.5">
-        <div class="hd">五种零点位置（a=2 固定）</div>
+      <div class="act-card" style="flex:1.6">
+        <div class="hd">五种零点位置（极点 0、0、−2 固定）</div>
         <div class="bd" style="gap:5px">
           <div class="eq"><span class="tex">G(s)H(s)=\dfrac{K_{1}(s+b)}{s^{2}(s+2)}</span></div>
-          <div class="kv" id="r1">① 参照情形（另一系统，无有限零点 K₁/[s²(s+2)]）：σₐ=−0.67，±60°、180°</div>
-          <div class="kv" id="r2">② b=5（零点很远）：σₐ=+1.5，±90°——零点太远，"拉力"不足，两支仍趋向右半平面</div>
-          <div class="kv" id="r3">③ b=a=2（零极点对消 → G=K₁/s²）：轨迹沿 jω 轴（临界）</div>
-          <div class="kv" id="r4">④ b=0.5（零点靠近虚轴）：σₐ=−0.75，±90°——两支被拉回左半平面，作用最显著</div>
-          <div class="kv" id="r5">⑤ b=0（分子分母约去一个 s → K₁/[s(s+2)]）：σₐ=−1，±90°，退回二阶形态（分离点 −1）</div>
+          <div class="zr" id="r1" data-i="0"><span class="no">①</span><span>无有限零点（参照系统）：三条分支沿渐近线伸向无穷，两支进入右半平面</span></div>
+          <div class="zr" id="r2" data-i="1"><span class="no">②</span><span>零点离虚轴很远：拉力不足，两支仍向右半平面伸展</span></div>
+          <div class="zr" id="r3" data-i="2"><span class="no">③</span><span>零点与极点 −2 重合相消：轨迹贴着虚轴，临界稳定</span></div>
+          <div class="zr" id="r4" data-i="3"><span class="no">④</span><span>零点靠近虚轴：分支被拉回左半平面，改善最显著</span></div>
+          <div class="zr" id="r5" data-i="4"><span class="no">⑤</span><span>零点落在原点：与积分环节相消，退回二阶形态</span></div>
         </div>
       </div>
-      <div class="act-card" style="flex:.62">
+      <div class="act-card" style="flex:.72">
         <div class="hd">结论</div>
         <div class="bd">
-          <div class="kv hl">有限 b 时 σₐ=(b−2)/2：本例结构下，零点越靠近虚轴，轨迹左偏越明显、稳定改善（④ vs ②）——这是本例比较条件下的结构性观察，<b>非无条件定理</b>；①为无零点的参照系统，⑤为约去后的二阶形态。</div>
+          <div class="kv">▸ 增加开环零点使根轨迹向左偏；本例结构下，零点越靠近虚轴，左偏与稳定改善越明显。</div>
+          <div class="kv">▸ 零点太远则作用不足；零点与极点对消时，系统退化为临界或低阶形态。</div>
         </div>
       </div>
     </div>
     <div class="act-card figc">
-      <div class="hd"><span style="flex:1">五情形对照演示（预计算图切换+生长，非连续形变）：σₐ=(b−2)/2 随 b 减小而左移</span></div>
+      <div class="hd"><span style="flex:1">五种零点位置的根轨迹对照</span></div>
       <div class="bd2">
         <svg id="figA" viewBox="0 0 960 600" style="display:none"></svg>
         <svg id="figB" viewBox="0 0 960 600" style="display:none"></svg>
@@ -67,14 +79,23 @@
         <svg id="figE" viewBox="0 0 960 600"></svg>
       </div>
       <div class="ctl">
-        <button class="btn" id="play">▶ 播放</button>
-        <button class="btn ghost" onclick="ACT.step.reset()">↺ 重置</button>
-        <span class="prog" id="prog">① / ⑤</span>
+        <div class="ctl-r">
+          <button class="bbtn" data-i="0">① 无零点</button>
+          <button class="bbtn" data-i="1">② b=5</button>
+          <button class="bbtn" data-i="2">③ b=2</button>
+          <button class="bbtn" data-i="3">④ b=0.5</button>
+          <button class="bbtn" data-i="4">⑤ b=0</button>
+        </div>
+        <div class="ctl-r">
+          <button class="btn" id="play">▶ 播放</button>
+          <button class="btn ghost" onclick="ACT.step.reset()">↺ 重置</button>
+          <span class="prog" id="prog">① / ⑤</span>
+        </div>
       </div>
     </div>
   </div>
 </div>
-<div class="act-note"><span class="lead">要点</span><span>增补开环零点是校正的常用手段：<span class="kw-r">零点左移 → 轨迹左偏 → 稳定裕度提高</span>；本页五种预计算情形由分步切换演示（例5-16）。</span></div>
+<div class="act-note"><span class="lead">要点</span><span>增补开环零点是校正的常用手段：<span class="kw-r">零点左移 → 轨迹左偏 → 稳定裕度提高</span>（例5-16，五种零点位置对照）。</span></div>
 
 <div data-step="1" style="display:none"></div><div data-step="2" style="display:none"></div>
 <div data-step="3" style="display:none"></div><div data-step="4" style="display:none"></div>
@@ -100,12 +121,14 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("prog").textContent = ["①", "②", "③", "④", "⑤"][i] + " / ⑤";
     for (let k = 1; k <= 5; k++)
       document.getElementById("r" + k).classList.toggle("hl", k === i + 1);
+    document.querySelectorAll(".bbtn").forEach(b =>
+      b.classList.toggle("on", +b.dataset.i === i));
     if (animate) {
-      const t0 = performance.now(), DUR = 1300;
+      const t0 = performance.now(), DUR = 1600;
       const tick = now => {
         const f = Math.min(1, (now - t0) / DUR);
         c.F.setAllF(f);
-        if (f < 1) raf = requestAnimationFrame(tick); else raf = null;
+        if (f < 1) raf = requestAnimationFrame(tick); else raf = null;  // 播完停在该 b 值的完整根轨迹
       };
       c.F.setAllF(0);
       raf = requestAnimationFrame(tick);
@@ -116,6 +139,14 @@ document.addEventListener("DOMContentLoaded", () => {
   S.reset = function () { _r(); show(0, false); };
   window.prev = function () { const n = Math.max(0, S.cur - 1); S.reset(); for (let i = 0; i < n; i++) S.next(); };
   show(0, false);
+  /* 左侧描述条目 / 右侧 b 值按钮：单击即自动播放对应情形的根轨迹 */
+  const stopCycle = () => { cycling = false; playToken++; const pb = document.getElementById("play"); pb.textContent = "▶ 播放"; };
+  document.querySelectorAll(".zr").forEach(el => el.addEventListener("click", () => {
+    stopCycle(); show(+el.dataset.i, true);
+  }));
+  document.querySelectorAll(".bbtn").forEach(el => el.addEventListener("click", () => {
+    stopCycle(); show(+el.dataset.i, true);
+  }));
   /* QA 钩子：?case=N 直达第 N 种情形的确定态（截图管线用），并同步步进状态 */
   const qp = new URLSearchParams(location.search);
   if (qp.has("case")) {
@@ -128,9 +159,9 @@ document.addEventListener("DOMContentLoaded", () => {
   let cycling = false;
   document.getElementById("play").onclick = async function () {
     if (cycling) {
-      cycling = false; playToken++;
+      stopCycle();
       if (raf) { cancelAnimationFrame(raf); raf = null; }
-      this.textContent = "▶ 播放"; return;
+      return;
     }
     cycling = true; const token = ++playToken;
     this.textContent = "❚❚ 暂停";
@@ -138,7 +169,7 @@ document.addEventListener("DOMContentLoaded", () => {
     for (let i = 0; i < 5; i++) {
       if (!cycling || token !== playToken) return;
       show(i, true);
-      await new Promise(res => { const t0 = performance.now(); const wk = now => { if (!cycling || token !== playToken || now - t0 >= 2300) res(); else requestAnimationFrame(wk); }; requestAnimationFrame(wk); });
+      await new Promise(res => { const t0 = performance.now(); const wk = now => { if (!cycling || token !== playToken || now - t0 >= 2500) res(); else requestAnimationFrame(wk); }; requestAnimationFrame(wk); });
     }
     if (token === playToken) { cycling = false; this.textContent = "▶ 播放"; }
   };

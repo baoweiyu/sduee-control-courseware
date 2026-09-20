@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <title>法则二：起点与终点</title>
-<link rel="stylesheet" href="../../../theme/theme.css?v=218">
+<link rel="stylesheet" href="../../../theme/theme.css?v=219">
 <script src="../../../theme/mathjax/mathjax-render.js"></script>
 <script src="../../../theme/mathjax/tex-chtml.js"></script>
 <script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
-<script src="../../../theme/act-base.js?v=218" defer></script>
-<script src="../fig.js?v=507"></script>
-<script src="../data/rule2.js"></script>
+<script src="../../../theme/act-base.js?v=219" defer></script>
+<script src="../fig.js?v=219"></script>
+<script src="../data/rule2.js?v=219"></script>
 <style>
   .row{display:flex;gap:22px;height:100%;min-height:0}
   .act-body.has-note{bottom:148px}  /* 要点单行后回收垂直空间（本页定制） */
@@ -46,11 +46,11 @@
           </div>
         </div>
         <div class="act-card" style="flex:1.28">
-          <div class="hd">怎么来的（极限过程）</div>
+          <div class="hd">法则由来</div>
           <div class="bd" style="gap:10px">
             <div class="eq"><span class="tex">K_{1}\to0:\;D(s)+K_{1}N(s)=D(s)=0</span>，根 → 开环极点 <span class="tex">p_{i}</span></div>
             <div class="eq"><span class="tex">K_{1}\to\infty:\;\dfrac{D(s)}{K_{1}}+N(s)=N(s)=0</span>，根 → 开环零点 <span class="tex">z_{j}</span></div>
-            <div class="tip">其余 <span class="tex">n-m</span> 个根：<span class="tex">|s|\to\infty</span> 时 <span class="tex">GH\approx K_{1}/s^{\,n-m}\to0</span> 才能维持 <span class="tex">GH=-1</span>——渐近线的伏笔。</div>
+            <div class="tip">其余 <span class="tex">n-m</span> 个根：需 <span class="tex">|s|\to\infty</span> 使 <span class="tex">GH\approx K_{1}/s^{\,n-m}\to0</span>，方能维持 <span class="tex">GH=-1</span>，故趋向无穷远。</div>
           </div>
         </div>
         <div class="act-card" style="flex:.8">
@@ -72,7 +72,7 @@
       </div>
     </div>
   </div>
-  <div class="act-note"><span class="lead">要点</span><span>起点数 = n，止于零点数 = m，<span class="kw-r">差值 n−m 条趋向无穷远</span>——它决定渐近线的条数。</span></div>
+  <div class="act-note"><span class="lead">要点</span><span>起点数 = n，止于零点数 = m，<span class="kw-r">差值 n−m 条趋向无穷远</span>。</span></div>
 
 <div data-step="1" style="display:none"></div><div data-step="2" style="display:none"></div>
 <div data-step="3" style="display:none"></div>

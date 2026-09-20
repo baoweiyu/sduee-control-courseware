@@ -7,7 +7,7 @@ components/ + 实际引用的 assets + DEPLOY-部署说明.md + 可选 server.js
 import os, re, json, zipfile
 
 ROOT = r"H:\D_tools\courseware-system-kimi"
-OUT = os.path.join(ROOT, "act-courseware-web-deploy-v2.18.zip")
+OUT = os.path.join(ROOT, "act-courseware-web-deploy-v2.19.zip")
 
 COMMON_DIRS = ["player", "components", "theme"]
 LESSON_IDS = ["lesson01-intro", "lesson02-math-model", "lesson03-timedomain", "lesson04-freq", "lesson05-root-locus"]
@@ -61,9 +61,10 @@ https://github.com/baoweiyu/sduee-control-courseware/releases
 - 第四章 频率响应法（87 页，含外部精修终审全部修复）
 - 第五章 根轨迹法（61 页，数值严谨绘制 + 连贯/分步动画 + 图面缩放）
 
-整体版本 V2.18（2026-09-19）。本地播放版与网页部署版使用同一版本号。
-V2.18 更新：第五章《根轨迹法》首次发布（61 页）；
-前四章内容未变，随第五章主题更新统一版本号。
+整体版本 V2.19（2026-09-20）。本地播放版与网页部署版使用同一版本号。
+V2.19 更新：第五章四轮细调版（13 页精修，四个部分封面补全主题配图）；
+前四章内容未变，随第五章更新统一版本号。
+V2.18 更新：第五章《根轨迹法》首次发布（61 页）。
 V2.17 更新（第三章 6 页修复）：P6 抛物线按解析式精确绘制、特征点落在线上、
 图内公式改 MathJax；P14 稳态误差定义换行修复、指标徽章补峰值时间 tp；
 P25 求根公式补 ζ≥1 适用条件；P27-30 四种阻尼响应页左上卡统一为

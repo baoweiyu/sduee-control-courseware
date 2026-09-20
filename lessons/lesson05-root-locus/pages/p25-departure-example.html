@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <title>出射角计算示例</title>
-<link rel="stylesheet" href="../../../theme/theme.css?v=218">
+<link rel="stylesheet" href="../../../theme/theme.css?v=219">
 <script src="../../../theme/mathjax/mathjax-render.js"></script>
 <script src="../../../theme/mathjax/tex-chtml.js"></script>
 <script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
-<script src="../../../theme/act-base.js?v=218" defer></script>
-<script src="../fig.js?v=507"></script>
-<script src="../data/dep.js"></script>
+<script src="../../../theme/act-base.js?v=219" defer></script>
+<script src="../fig.js?v=219"></script>
+<script src="../data/dep.js?v=219"></script>
 <style>
   .row{display:flex;gap:22px;height:100%;min-height:0}
   .lft{flex:1.04;display:flex;flex-direction:column;gap:10px;min-height:0}
@@ -50,17 +50,16 @@
             <div>四个开环极点：<span class="tex">p_{1}=0</span>、<span class="tex">p_{2}=-2</span>、<span class="tex">p_{3,4}=-1\pm j</span>（无开环零点）。</div>
           </div>
         </div>
-        <div class="act-card" style="flex:1.38">
+        <div class="act-card" style="flex:1.16">
           <div class="hd">计算过程：求 <span class="tex">p_{3}=-1+j</span> 的出射角</div>
           <div class="bd">
             <div class="kv" id="c1">其余极点指向 <span class="tex">p_{3}</span> 的向量相角：<span class="tex">\angle(p_{3}-p_{1})=135^{\circ}</span>，<span class="tex">\angle(p_{3}-p_{2})=45^{\circ}</span>，<span class="tex">\angle(p_{3}-p_{4})=90^{\circ}</span>（见右图）。</div>
             <div class="eq" id="c2"><span class="tex">\theta_{p_{3}}=180^{\circ}-(135^{\circ}+45^{\circ}+90^{\circ})=-90^{\circ}</span></div>
             <div class="eq hl" id="c3"><span class="tex">\theta_{p_{3}}=-90^{\circ},\;\theta_{p_{4}}=+90^{\circ}</span>：两条复分支<span class="kw-r">垂直离开</span>复极点。</div>
-            <div class="kv" id="c4">印证（本例可严格求解）：特征方程即 <span class="tex">(s+1)^{4}=1-K_{1}</span>，复分支先竖直进入 <span class="tex">s=-1</span>（四重根点，<span class="tex">K_{1}=1</span>），再沿 <span class="tex">\pm45^{\circ}</span>、<span class="tex">\pm135^{\circ}</span> 渐近线射出。</div>
           </div>
         </div>
-        <div class="act-card" style="flex:1.06">
-          <div class="hd">量取步骤（与右图分步一一对应）</div>
+        <div class="act-card" style="flex:1.28">
+          <div class="hd">演示步骤（与右图分步一一对应）</div>
           <div class="bd" style="gap:6px">
             <div class="kv" id="s1">① 标出四个开环极点与实轴段 [−2, 0]</div>
             <div class="kv" id="s2">② 由 p₁ 向 p₃ 引向量：∠(p₃−p₁)=135°</div>
@@ -130,7 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (K < 4) F.setAllF(0);
     for (let i = 1; i <= 4; i++) document.getElementById("s" + i).classList.toggle("on", i === K);
     document.getElementById("c1").classList.toggle("hl", K === 2 || K === 3);
-    ["c2", "c3", "c4"].forEach(id => document.getElementById(id).classList.toggle("hl", K === 4));
+    ["c2", "c3"].forEach(id => document.getElementById(id).classList.toggle("hl", K === 4));
     F.segEls.forEach(e => { e.style.opacity = K >= 1 ? .9 : 0; e.classList.toggle("rl-flash", K === 1); });
     F.gAsym.style.opacity = K >= 4 ? 1 : 0;      // 渐近线只在印证全图时出现
     if (K === 1) {  // ① 四个开环极点闪烁

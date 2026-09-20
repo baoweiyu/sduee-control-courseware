@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <title>② 零度根轨迹：由来与相角条件</title>
-<link rel="stylesheet" href="../../../theme/theme.css?v=218">
+<link rel="stylesheet" href="../../../theme/theme.css?v=219">
 <script src="../../../theme/mathjax/mathjax-render.js"></script>
 <script src="../../../theme/mathjax/tex-chtml.js"></script>
 <script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
-<script src="../../../theme/act-base.js?v=218" defer></script>
+<script src="../../../theme/act-base.js?v=219" defer></script>
 <style>
   .row{display:flex;gap:22px;height:100%;min-height:0}
   .col{display:flex;flex-direction:column;gap:14px;min-height:0}
@@ -38,13 +38,13 @@
           <div class="hd">条件对比：幅值不变，相角变 0°</div>
           <div class="bd">
             <div class="eq" data-step="3">幅值条件：<span class="tex">|G(s)H(s)|=1</span>　<b>不变</b></div>
-            <div data-step="4"><div class="eq hl">相角条件：<span class="tex">\angle G(s)H(s)=0^{\circ}+2q\times180^{\circ}</span>（偶数个 180°）——故名<span class="kw-r">零度根轨迹</span></div></div>
+            <div data-step="4"><div class="eq hl">相角条件：<span class="tex">\angle G(s)H(s)=0^{\circ}+2k\times180^{\circ}</span>（偶数个 180°）——故名<span class="kw-r">零度根轨迹</span></div></div>
           </div>
         </div>
       </div>
       <div class="act-card figc" style="flex:1">
         <div class="hd"><span style="flex:1">负反馈（1+GH）与正反馈（1−GH）方框图对照</span></div>
-        <div class="bd2"><svg id="blk" viewBox="0 0 640 600"></svg></div>
+        <div class="bd2"><svg id="blk" viewBox="0 0 640 668"></svg></div>
         <div class="cap">求和点的"−"变"+"，特征方程的"+"变"−"——相角条件随之整体平移 180°。</div>
       </div>
     </div>
@@ -83,8 +83,11 @@ document.addEventListener("DOMContentLoaded", () => {
     mk("rect", { x, y, width: w, height: h, rx: 10, fill: "#fff", stroke: BLUE, "stroke-width": 3 }, svg);
     label(x + w / 2, y + h / 2 + 9, t, { fs: 26 });
   };
-  function diagram(cy, fb, title, eq, eqRed) {
-    label(320, cy - 78, title, { fs: 27, b: 1, fill: NAVY });
+  function diagram(cy, fb, title, eq, eqRed, boxFill, boxStroke) {
+    /* 浅色分区框：上下两部分各自隔开 */
+    mk("rect", { x: 26, y: cy - 106, width: 588, height: 276, rx: 16,
+      fill: boxFill, stroke: boxStroke, "stroke-width": 2 }, svg);
+    label(320, cy - 72, title, { fs: 27, b: 1, fill: NAVY });
     label(56, cy + 8, "R(s)", { fs: 24 });
     wire([[86, cy], [148, cy]]);
     mkSum(170, cy, fb);
@@ -95,12 +98,13 @@ document.addEventListener("DOMContentLoaded", () => {
     label(512, cy + 8, "C(s)", { fs: 24 });
     wire([[430, cy], [430, cy + 84], [170, cy + 84], [170, cy + 22]]);
     label(300, cy + 108, "H(s)=1", { fs: 22 });
-    label(320, cy + 152, eq, { fs: 25, b: 1, fill: eqRed ? RED : NAVY });
+    label(320, cy + 146, eq, { fs: 25, b: 1, fill: eqRed ? RED : NAVY });
   }
-  diagram(170, "−", "负反馈（5.1~5.2 的默认情形）", "特征方程  1 + G(s)H(s) = 0  →  180° 根轨迹", false);
-  diagram(430, "+", "正反馈（本小节）", "特征方程  1 − G(s)H(s) = 0  →  0° 根轨迹", true);
+  diagram(168, "−", "负反馈（5.1~5.2 的默认情形）", "特征方程  1 + G(s)H(s) = 0  →  180° 根轨迹", false, "#F2F6FE", "#C9D8F2");
+  diagram(490, "+", "正反馈（本小节）", "特征方程  1 − G(s)H(s) = 0  →  0° 根轨迹", true, "#FDF3EC", "#F0C9A8");
 });
 </script>
 </div></div>
+<script>/* qa-steps：截图自验钩子，?steps=N 自动前进 N 步（播放时不生效） */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
 </body>
 </html>

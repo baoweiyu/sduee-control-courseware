@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <title>③ 非最小相位系统：判型与等效整理（例5-11）</title>
-<link rel="stylesheet" href="../../../theme/theme.css?v=218">
+<link rel="stylesheet" href="../../../theme/theme.css?v=219">
 <script src="../../../theme/mathjax/mathjax-render.js"></script>
 <script src="../../../theme/mathjax/tex-chtml.js"></script>
 <script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
-<script src="../../../theme/act-base.js?v=218" defer></script>
-<script src="../fig.js?v=507"></script>
-<script src="../data/ex511a.js"></script>
-<script src="../data/ex511b.js"></script>
+<script src="../../../theme/act-base.js?v=219" defer></script>
+<script src="../fig.js?v=219"></script>
+<script src="../data/ex511a.js?v=219"></script>
+<script src="../data/ex511b.js?v=219"></script>
 <style>
   .row{display:flex;gap:20px;height:100%;min-height:0}
   .lft{flex:.94;display:flex;flex-direction:column;gap:12px;min-height:0}
@@ -25,6 +25,7 @@
   .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:2px 3px;min-height:0}
   .figc svg{width:100%;height:100%}
   .figc .cap{flex:none;font-size:17.5px;color:var(--navy);background:var(--sky);border-radius:10px;padding:5px 10px;margin:0 8px 8px;line-height:1.35}
+  .kv mjx-container,.eq mjx-container{display:inline-block;white-space:nowrap}  /* 公式成整体不断行，防标点/符号落行首 */
 </style>
 </head>
 <body data-title="③ 非最小相位系统：判型与等效整理（例5-11）" data-page="44 / 61">
@@ -44,14 +45,14 @@
           <div class="hd">等效整理与判型</div>
           <div class="bd" style="font-size:18.5px">
             <div class="kv" data-step="3">系统(1)：特征方程 <span class="tex">1+\dfrac{K_{1}(s-1)}{s(s+1)(s+2)}=0</span>——<span class="tex">(s-1)</span> 已首一、增益为正 ⇒ <b>180° 根轨迹</b>。</div>
-            <div class="kv" data-step="4">系统(2)：<span class="tex">(1-s)=-(s-1)</span> 首一化 → <span class="tex">1-\dfrac{K_{1}(s-1)}{s(s+1)(s+2)}=0</span>，等效增益<span class="kw-r">提出负号</span> ⇒ <b>0° 根轨迹</b>。</div>
+            <div class="kv" data-step="4">系统(2)：<span class="tex">(1-s)=-(s-1)</span> 首一化 → <span class="tex">1-\dfrac{K_{1}(s-1)}{s(s+1)(s+2)}=0</span>，增益<span class="kw-r">提出负号</span> ⇒ 按 <b>0° 根轨迹</b> 绘制。</div>
           </div>
         </div>
         <div class="act-card" style="flex:1.05">
           <div class="hd">法则速查（预判实轴段）</div>
           <div class="bd" style="font-size:18.5px">
-            <div class="kv" data-step="5">系统(1) 用原版法则：右侧实零极点数<b>奇数</b> ⇒ 段 <span class="tex">[-2,-1]</span>、<span class="tex">[0,1]</span>；渐近线 ±90°。</div>
-            <div class="kv" data-step="6">系统(2) 用 0° 列：<b>偶数</b> ⇒ 段 <span class="tex">(-\infty,-2]</span>、<span class="tex">[-1,0]</span>、<span class="tex">[1,+\infty)</span>；渐近线 0°、180°。</div>
+            <div class="kv" data-step="5">系统(1) 用原版法则：右侧实零极点数<b>奇数</b> ⇒ 实轴段 <span class="tex">[-2,-1]</span>、<span class="tex">[0,1]</span>，渐近线 ±90°。</div>
+            <div class="kv" data-step="6">系统(2) 用 0° 列：<b>偶数</b> ⇒ 实轴段 <span class="tex">(-\infty,-2]</span>、<span class="tex">[-1,0]</span>、<span class="tex">[1,+\infty)</span>，渐近线 0°、180°。</div>
           </div>
         </div>
       </div>
@@ -59,7 +60,7 @@
         <div class="act-card figc">
           <div class="hd"><span style="flex:1">系统(1)：180°</span></div>
           <div class="bd2"><svg id="figA"></svg></div>
-          <div class="cap">段 [−2,−1]、[0,1]；一支直达 RHP 零点 +1 → 本例 K₁&gt;0 恒不稳定</div>
+          <div class="cap">段 [−2,−1]、[0,1]；一支沿实轴进入右半平面，止于零点 +1 → 本例 K₁&gt;0 恒不稳定</div>
         </div>
         <div class="act-card figc">
           <div class="hd"><span style="flex:1">系统(2)：0°</span></div>
@@ -69,7 +70,7 @@
       </div>
     </div>
   </div>
-  <div class="act-note"><span class="lead">要点</span><span>预判与数据一致：实轴段<span class="kw-r">逐段核对</span>通过（gen 脚本断言）；首一化与负号提取是本例易错点，务必逐步写清。</span></div>
+  <div class="act-note"><span class="lead">要点</span><span>判型先把开环传递函数整理为首一标准形：<span class="kw-r">增益为正按 180°、提出负号按 0°</span>——首一化与负号提取是本例易错点，务必逐步写清。</span></div>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   /* 静态零极点分布双图（含实轴段预判底纹），下一页动画绘制 */

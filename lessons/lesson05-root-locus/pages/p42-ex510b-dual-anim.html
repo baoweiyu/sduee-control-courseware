@@ -3,35 +3,35 @@
 <head>
 <meta charset="UTF-8">
 <title>② 零度根轨迹：180°/0° 对照动画（例5-10）</title>
-<link rel="stylesheet" href="../../../theme/theme.css?v=218">
+<link rel="stylesheet" href="../../../theme/theme.css?v=219">
 <script src="../../../theme/mathjax/mathjax-render.js"></script>
 <script src="../../../theme/mathjax/tex-chtml.js"></script>
 <script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
-<script src="../../../theme/act-base.js?v=218" defer></script>
-<script src="../fig.js?v=507"></script>
-<script src="../data/ex52.js"></script>
-<script src="../data/zex52.js"></script>
+<script src="../../../theme/act-base.js?v=219" defer></script>
+<script src="../fig.js?v=219"></script>
+<script src="../data/ex52.js?v=219"></script>
+<script src="../data/zex52.js?v=219"></script>
 <style>
-  .wrap{display:flex;flex-direction:column;gap:10px;height:100%;min-height:0}
-  .row{display:flex;gap:18px;flex:1;min-height:0}
+  .wrap{display:flex;flex-direction:column;gap:8px;height:100%;min-height:0}
+  .row{display:flex;gap:16px;flex:1;min-height:0}
   .figc{flex:1;display:flex;flex-direction:column;overflow:hidden;position:relative}
-  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:2px 6px;min-height:0}
   .figc svg{width:100%;height:100%}
-  .figc .cap{flex:none;font-size:19px;color:var(--navy);background:var(--sky);border-radius:10px;padding:6px 14px;margin:0 12px 8px;line-height:1.35}
-  .segfloat{position:absolute;top:52px;left:50%;transform:translateX(-50%);z-index:5;background:#fff;
-    border:2px solid var(--blue);border-radius:10px;padding:5px 16px;font-size:18px;font-weight:700;
-    color:var(--navy);white-space:nowrap;box-shadow:0 2px 10px rgba(20,40,90,.18)}
+  .figc .cap{flex:none;font-size:17.5px;color:var(--navy);background:var(--sky);border-radius:10px;padding:5px 12px;margin:0 10px 6px;line-height:1.32}
+  .stepline{flex:none;min-height:2.5em;display:flex;align-items:center;justify-content:center;text-align:center;
+    font-size:17.5px;font-weight:700;color:var(--navy);line-height:1.28;padding:3px 16px 1px}
   .concl{flex:none;background:#FDF3EC;border-left:6px solid var(--orange);border-radius:0 14px 14px 0;
-    padding:8px 18px;font-size:21px;color:var(--navy);line-height:1.4}
+    padding:6px 18px;font-size:20px;color:var(--navy);line-height:1.38}
   .concl b{color:var(--danger)}
-  .masterbar{flex:none;display:flex;align-items:center;gap:10px;justify-content:center;white-space:nowrap;padding:2px 0 0}
-  .ctl{flex:none;display:flex;align-items:center;gap:10px;justify-content:center;white-space:nowrap;padding:0 0 8px}
-  .btn{background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:18px;font-weight:700;padding:7px 18px;cursor:pointer;white-space:nowrap}
-  .ctl .btn,.masterbar .btn{min-width:7.6em}  /* 钉死宽度，防「播放/暂停」标签切换跳动（覆盖 theme 6.5em） */
+  .masterbar{flex:none;display:flex;align-items:center;gap:10px;justify-content:center;white-space:nowrap;padding:2px 0}
+  .ctl{flex:none;display:flex;align-items:center;gap:10px;justify-content:center;white-space:nowrap;padding:0 0 6px}
+  .btn{background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:18px;font-weight:700;padding:6px 18px;cursor:pointer;white-space:nowrap}
+  .ctl .btn,.masterbar .btn{min-width:7.6em}  /* 钉死宽度，防标签切换跳动（覆盖 theme 6.5em） */
   .btn.ghost{background:#fff;color:var(--blue);border:2px solid var(--blue)}
   .btn.master{background:var(--orange)}
   .lab{font-size:18px;color:var(--muted);font-weight:700}
   .prog{font-size:18px;color:var(--muted);min-width:64px}
+  .act-note{font-size:23px;padding:11px 26px}   /* 收紧结论条，把高度让给图 */
 </style>
 </head>
 <body data-title="② 零度根轨迹：180°/0° 对照动画（例5-10）" data-page="42 / 61">
@@ -39,33 +39,34 @@
 
 <div class="act-body has-note">
   <div class="wrap">
+    <div class="row">
+      <div class="act-card figc">
+        <div class="hd"><span style="flex:1">负反馈：180° 根轨迹</span></div>
+        <div class="stepline" id="slA"></div>
+        <div class="bd2"><svg id="figA"></svg></div>
+        <div class="cap">实轴段 [−1,0]、(−∞,−2]；分离点 −0.42；K₁&gt;6 过虚轴才失稳</div>
+        <div class="ctl">
+          <button class="btn" id="stepA">⧉ 分步</button>
+          <button class="btn ghost" id="rstA">↺ 重置</button>
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd"><span style="flex:1">正反馈：0° 根轨迹</span></div>
+        <div class="stepline" id="slB"></div>
+        <div class="bd2"><svg id="figB"></svg></div>
+        <div class="cap">实轴段 [−2,−1]、[0,+∞)；分离点 −1.58；正实轴一支常驻</div>
+        <div class="ctl">
+          <button class="btn" id="stepB">⧉ 分步</button>
+          <button class="btn ghost" id="rstB">↺ 重置</button>
+        </div>
+      </div>
+    </div>
     <div class="masterbar">
       <button class="btn master" id="play">▶ 同步播放</button>
       <button class="btn ghost" id="step">⧉ 分步</button>
       <button class="btn ghost" onclick="ACT.step.reset()">↺ 重置</button>
       <span class="prog" id="prog">0 / 4</span>
       <span class="lab">同一开环，反馈极性不同 → 两条轨迹</span>
-    </div>
-    <div class="row">
-      <div class="act-card figc">
-        <div class="hd"><span style="flex:1">负反馈：180° 根轨迹</span></div>
-        <div class="bd2"><svg id="figA"></svg></div>
-        <div class="cap">实轴段 [−1,0]、(−∞,−2]；分离点 −0.42；K₁&gt;6 过虚轴才失稳</div>
-        <div class="ctl">
-          <button class="btn" id="playA">▶ 播放</button>
-          <button class="btn ghost" id="rstA">↺ 重置</button>
-        </div>
-      </div>
-      <div class="act-card figc">
-        <div class="hd"><span style="flex:1">正反馈：0° 根轨迹</span></div>
-        <div class="bd2"><svg id="figB"></svg></div>
-        <div class="cap">实轴段 [−2,−1]、[0,+∞)；分离点 −1.58；正实轴一支常驻</div>
-        <div class="ctl">
-          <button class="btn" id="playB">▶ 播放</button>
-          <button class="btn ghost" id="rstB">↺ 重置</button>
-        </div>
-      </div>
-      <span class="segfloat" id="segChip" style="display:none"></span>
     </div>
     <div class="concl" data-step="4"><b>本例结论：</b>0° 根轨迹恒有一支位于正实轴 [0,+∞) → <b>本例正反馈系统不可能稳定</b>；对照：180°（负反馈）情形 K₁&gt;6 才过虚轴失稳，存在稳定范围 0&lt;K₁&lt;6。</div>
   </div>
@@ -76,24 +77,128 @@
 <div data-step="3" style="display:none"></div>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  const FA = RL.figure("figA", "ex52", { vw: 900, vh: 540 });
-  const FB = RL.figure("figB", "zex52", { vw: 900, vh: 540 });
+  const stepNext = ACT.step.next.bind(ACT.step), stepReset = ACT.step.reset.bind(ACT.step);
+  const FA = RL.figure("figA", "ex52", { vw: 860, vh: 545 });
+  const FB = RL.figure("figB", "zex52", { vw: 860, vh: 545 });
   function paint(K) {}
-  RL.wire(4, paint, {
+  /* 同步分步的段定义（双图）；每张图另有独立的两段定义 */
+  const SEGS = [
+    { label: "① 起步：三条分支各自从开环极点 0、−1、−2 出发", parts: [
+      { F: FA, b: [0, 1, 2], f0: 0, f1: 0.3 }, { F: FB, b: [0, 1, 2], f0: 0, f1: 0.3 }] },
+    { label: "② 负反馈(180°)：d=−0.42 分离进入复平面，K₁>6 过虚轴失稳", parts: [
+      { F: FA, b: [0, 1, 2], f0: 0.3, f1: 1 }] },
+    { label: "③ 正反馈(0°)：d=−1.58 分离，正实轴 [0,+∞) 一支常驻 → 恒不稳定", parts: [
+      { F: FB, b: [0, 1, 2], f0: 0.3, f1: 1 }] },
+  ];
+  const SEGA = [
+    { label: "① 起步：三条分支从开环极点 0、−1、−2 出发", parts: [{ F: FA, b: [0, 1, 2], f0: 0, f1: 0.3 }] },
+    { label: "② d=−0.42 分离进入复平面，K₁>6 过虚轴失稳", parts: [{ F: FA, b: [0, 1, 2], f0: 0.3, f1: 1 }] },
+  ];
+  const SEGB = [
+    { label: "① 起步：三条分支从开环极点 0、−1、−2 出发", parts: [{ F: FB, b: [0, 1, 2], f0: 0, f1: 0.3 }] },
+    { label: "② d=−1.58 分离，正实轴 [0,+∞) 一支常驻 → 恒不稳定", parts: [{ F: FB, b: [0, 1, 2], f0: 0.3, f1: 1 }] },
+  ];
+  const FIGS = [[FA, "slA"], [FB, "slB"]];
+  function clearLabels() { FIGS.forEach(([F, id]) => document.getElementById(id).textContent = ""); }
+  function showSegLabels(segs, si) {
+    const involved = new Set();
+    segs[si].parts.forEach(p => involved.add(p.F));
+    FIGS.forEach(([F, id]) => document.getElementById(id).textContent = involved.has(F) ? segs[si].label : "");
+  }
+  const W = RL.wire(4, paint, {
     figs: [FA, FB], FS: [0, 0.3, 0.3, 1, 1], dur: 12000, playLabel: "▶ 同步播放",
-    segLabel: txt => { const c = document.getElementById("segChip"); if (!c) return; if (txt) { c.textContent = txt; c.style.display = ""; } else c.style.display = "none"; },
-    segments: [
-      { label: "① 起步：三条分支各自从开环极点 0、−1、−2 出发", parts: [
-        { F: FA, b: [0, 1, 2], f0: 0, f1: 0.3 }, { F: FB, b: [0, 1, 2], f0: 0, f1: 0.3 }] },
-      { label: "② 负反馈(180°)：d=−0.42 分离进入复平面，K₁>6 过虚轴失稳", parts: [
-        { F: FA, b: [0, 1, 2], f0: 0.3, f1: 1 }] },
-      { label: "③ 正反馈(0°)：d=−1.58 分离，正实轴 [0,+∞) 一支常驻 → 恒不稳定", parts: [
-        { F: FB, b: [0, 1, 2], f0: 0.3, f1: 1 }] },
-    ], segDur: 3800,
-    solos: [
-      { F: FA, btn: "playA", rst: "rstA", dur: 7000 },
-      { F: FB, btn: "playB", rst: "rstB", dur: 7000 },
-    ]
+    segLabel: (txt, i) => { if (txt == null) clearLabels(); else showSegLabels(SEGS, i); },
+    segments: SEGS, segDur: 3800
+  });
+
+  /* ---- 分步接管：点一下只播一段，绝不自动连播、按钮无暂停态 ---- */
+  const progEl = document.getElementById("prog");
+  let curSeg = null;   // {segs, si, t} 供缩放重挂
+  function segState(segs, si, t) {   // 与绘图库同规则：当前段亮并生长，已演示段压暗定格，未演示段弱化预览
+    const st = new Map();
+    segs.forEach((sg, j) => sg.parts.forEach(p => {
+      const f1 = p.f1 != null ? p.f1 : 1, f0 = p.f0 != null ? p.f0 : 0;
+      p.b.forEach(bi => {
+        const key = p.F.svg.id + ":" + bi;
+        const e = st.get(key) || { F: p.F, bi, cur: false, done: false, doneMax: 0, futMax: 0, cF0: 0, cF1: 1 };
+        if (j < si) { e.done = true; e.doneMax = Math.max(e.doneMax, f1); }
+        else if (j === si) { e.cur = true; e.cF0 = f0; e.cF1 = f1; }
+        else e.futMax = Math.max(e.futMax, f1);
+        st.set(key, e);
+      });
+    }));
+    st.forEach(e => {
+      if (e.cur) { e.F.setF(e.bi, e.cF0 + (e.cF1 - e.cF0) * t); e.F.setOp(e.bi, 1); }
+      else { e.F.setF(e.bi, e.done ? e.doneMax : e.futMax); e.F.setOp(e.bi, .15); }
+    });
+  }
+  const steppers = [];
+  function killSteppers() {
+    steppers.forEach(S => { if (S.raf) cancelAnimationFrame(S.raf); S.raf = null; S.busy = false; S.active = false; S.si = -1; });
+    curSeg = null;
+  }
+  function makeStepper(btnId, segs, dur, master) {
+    const S = { segs, dur, master, si: -1, raf: null, busy: false, active: false };
+    const btn = document.getElementById(btnId);
+    function next() {
+      S.si++;
+      if (S.si >= segs.length) {              // 全部播完后再点：回到未播状态
+        S.active = false; S.si = -1; curSeg = null;
+        clearLabels();
+        const own = new Set();
+        segs.forEach(sg => sg.parts.forEach(p => own.add(p.F)));
+        own.forEach(F => { F.setAllF(0); F.gDyn.innerHTML = ""; });
+        if (master) progEl.textContent = "0 / 4";
+        return;
+      }
+      showSegLabels(segs, S.si);
+      if (master) progEl.textContent = "分步 " + (S.si + 1) + " / " + segs.length;
+      S.busy = true;
+      const t0 = performance.now();
+      const tick = now => {
+        const t = Math.min(1, (now - t0) / dur);
+        segState(segs, S.si, t);
+        curSeg = { segs, si: S.si, t };
+        if (t < 1) S.raf = requestAnimationFrame(tick);
+        else { S.raf = null; S.busy = false; }
+      };
+      S.raf = requestAnimationFrame(tick);
+    }
+    btn.onclick = () => {
+      if (S.busy) return;                     // 一段未播完不响应，杜绝连播
+      if (!S.active) {
+        W.stopAll(); killSteppers();
+        stepReset(); ACT.step.els.forEach(() => stepNext());   // 展开结论条（stopAll 会把分步呈现收回 0）
+        if (!master) progEl.textContent = "0 / 4";             // 单图分步时清掉总控的旧进度读数
+        const own = new Set();
+        segs.forEach(sg => sg.parts.forEach(p => own.add(p.F)));
+        own.forEach(F => { F.setAllF(0); F.gDyn.innerHTML = ""; });   // 只清本分步涉及的图
+        S.active = true;
+      }
+      next();
+    };
+    steppers.push(S);
+    return S;
+  }
+  makeStepper("step", SEGS, 3800, true);
+  makeStepper("stepA", SEGA, 3200, false);
+  makeStepper("stepB", SEGB, 3200, false);
+
+  /* 总控播放/重置/播放器步进：先撤出分步状态再走原逻辑 */
+  const pb = document.getElementById("play");
+  if (pb) { const oc = pb.onclick; pb.onclick = () => { killSteppers(); clearLabels(); oc(); }; }
+  const wNext = ACT.step.next, wReset = ACT.step.reset;
+  ACT.step.next = function () { killSteppers(); clearLabels(); return wNext(); };
+  ACT.step.reset = function () { killSteppers(); clearLabels(); progEl.textContent = "0 / 4"; return wReset(); };
+  [["rstA", FA], ["rstB", FB]].forEach(([id, F]) => {
+    document.getElementById(id).onclick = () => {
+      W.stopAll(); killSteppers(); clearLabels();
+      F.setAllF(0); F.gDyn.innerHTML = "";
+    };
+  });
+  [FA, FB].forEach(F => {   // 缩放/平移后重挂当前分步画面
+    const ov = F.onView;
+    F.onView = () => { if (curSeg) { F.gDyn.innerHTML = ""; paint(4); segState(curSeg.segs, curSeg.si, curSeg.t); } else ov(); };
   });
 });
 </script>

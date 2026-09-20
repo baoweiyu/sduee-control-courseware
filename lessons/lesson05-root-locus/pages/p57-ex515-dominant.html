@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <title>⑤ 主导极点与高阶降阶｜例5-15：三阶系统的二阶近似</title>
-<link rel="stylesheet" href="../../../theme/theme.css?v=218">
+<link rel="stylesheet" href="../../../theme/theme.css?v=219">
 <script src="../../../theme/mathjax/mathjax-render.js"></script>
 <script src="../../../theme/mathjax/tex-chtml.js"></script>
 <script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
-<script src="../../../theme/act-base.js?v=218" defer></script>
+<script src="../../../theme/act-base.js?v=219" defer></script>
 <style>
-  .act-title{left:200px;font-size:34px}  /* 长标题避开左上徽章（页级微调，不改 theme.css） */
+  .act-title{left:200px;font-size:34px}  /* 长标题避开左上徽章（页级微调，不改 theme.css?v=219） */
   .row{display:flex;gap:22px;height:100%;min-height:0}
   .lft{flex:1.02;display:flex;flex-direction:column;gap:14px;min-height:0}
   .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
@@ -31,26 +31,26 @@
           <div class="hd">系统与极点</div>
           <div class="bd">
             <div class="eq"><span class="tex">\varPhi(s)=\dfrac{2.7}{s^{3}+5s^{2}+4s+2.7}</span></div>
-            <div data-step="1">闭环极点（数值求根）：<span class="tex">-4.201</span>、<span class="tex">-0.400\pm j0.695</span>（右上图）。</div>
+            <div>闭环极点（数值求根）：<span class="tex">-4.201</span>、<span class="tex">-0.400\pm j0.695</span>（右上图）。</div>
           </div>
         </div>
         <div class="act-card" style="flex:.9">
           <div class="hd">主导性判断</div>
           <div class="bd">
-            <div data-step="2">远极点与主导对实部之比 <span class="tex">4.201/0.400\approx10.5>5</span> ⟹ <b><span class="tex">-0.400\pm j0.695</span> 为主导极点对</b>，远极点模态衰减快、可略。</div>
+            <div>远极点与主导对实部之比 <span class="tex">4.201/0.400\approx10.5>5</span> ⟹ <b><span class="tex">-0.400\pm j0.695</span> 为主导极点对</b>，远极点模态衰减快、可略。</div>
           </div>
         </div>
         <div class="act-card" style="flex:1.12">
           <div class="hd">二阶近似</div>
           <div class="bd">
-            <div class="eq hl" data-step="3"><span class="tex">\varPhi_{2}(s)\approx\dfrac{0.64}{s^{2}+0.8s+0.64},\quad \omega_{n}=0.8,\ \zeta=0.5</span></div>
+            <div class="eq hl"><span class="tex">\varPhi_{2}(s)\approx\dfrac{0.64}{s^{2}+0.8s+0.64},\quad \omega_{n}=0.8,\ \zeta=0.5</span></div>
             <div>分子取 0.64 保持 <span class="tex">\varPhi_{2}(0)=1</span>（稳态增益不变），并非截取原分子 2.7。</div>
           </div>
         </div>
         <div class="act-card" style="flex:.98">
           <div class="hd">指标验证（右下图）</div>
           <div class="bd">
-            <div data-step="4">三阶：<span class="tex">\sigma\%\approx16\%</span>、<span class="tex">t_{p}\approx4.6\,\mathrm{s}</span>、<span class="tex">t_{s}\approx10\,\mathrm{s}</span>；二阶近似：<span class="tex">16.3\%/4.55\,\mathrm{s}/10\,\mathrm{s}</span>——几乎重合，<b>降阶有效</b>。</div>
+            <div>三阶：<span class="tex">\sigma\%\approx16\%</span>、<span class="tex">t_{p}\approx4.6\,\mathrm{s}</span>、<span class="tex">t_{s}\approx10\,\mathrm{s}</span>；二阶近似：<span class="tex">16.3\%/4.55\,\mathrm{s}/10\,\mathrm{s}</span>——几乎重合，<b>降阶有效</b>。</div>
           </div>
         </div>
       </div>
@@ -101,13 +101,19 @@ document.addEventListener("DOMContentLoaded", () => {
       mk("line", { x1: X(x) - r, y1: Y(y) + r, x2: X(x) + r, y2: Y(y) - r, stroke: color, "stroke-width": 5, "stroke-linecap": "round" });
     };
     cross(-0.4, 0.695, "#D63A2F", 13); cross(-0.4, -0.695, "#D63A2F", 13); cross(-4.201, 0, "#8A97B5", 12);
-    txt(mk, X(-0.4) + 14, Y(0.695) - 16, "主导对 −0.40±j0.70", { fs: 19, fill: "#D63A2F", b: 1, an: "start" });
+    txt(mk, X(-0.4) - 18, Y(0.695) - 16, "主导极点对 −0.40±j0.70", { fs: 19, fill: "#D63A2F", b: 1, an: "end" });
     txt(mk, X(-4.201), Y(0) - 26, "远极点 −4.20", { fs: 19, fill: "#8A97B5", b: 1 });
-    /* 距离比可视化：两段双向虚线 */
-    mk("line", { x1: X(0), y1: Yc + 52, x2: X(-0.4), y2: Yc + 52, stroke: "#D63A2F", "stroke-width": 2.4 });
-    mk("line", { x1: X(0), y1: Yc + 78, x2: X(-4.201), y2: Yc + 78, stroke: "#8A97B5", "stroke-width": 2.4 });
-    txt(mk, X(-0.2), Yc + 44, "×1", { fs: 18, fill: "#D63A2F", b: 1 });
-    txt(mk, X(-2.1), Yc + 70, "×10.5", { fs: 18, fill: "#8A97B5", b: 1 });
+    /* 到虚轴距离的尺寸标注（主导性判据：实部之比） */
+    const dim = (x2, y, color) => {
+      mk("line", { x1: X(0), y1: y, x2: X(x2), y2: y, stroke: color, "stroke-width": 2.2 });
+      mk("line", { x1: X(0), y1: y - 6, x2: X(0), y2: y + 6, stroke: color, "stroke-width": 2.2 });
+      mk("line", { x1: X(x2), y1: y - 6, x2: X(x2), y2: y + 6, stroke: color, "stroke-width": 2.2 });
+    };
+    dim(-0.4, Yc + 84, "#D63A2F");
+    txt(mk, X(0) + 10, Yc + 90, "0.40", { fs: 18, fill: "#D63A2F", b: 1, an: "start" });
+    dim(-4.201, Yc + 120, "#8A97B5");
+    txt(mk, (X(0) + X(-4.201)) / 2, Yc + 142, "4.20", { fs: 18, fill: "#8A97B5", b: 1 });
+    txt(mk, 64, 40, "实部之比 4.20 / 0.40 ≈ 10.5 > 5", { fs: 19, fill: "#B3541E", b: 1, an: "start" });
   }
   /* ---- 下：阶跃响应对比（部分分式解析式，非手画） ----
      三阶：y3(t)=1−0.0430e^{−4.201t}−e^{−0.3996t}(0.9570cos0.695t+0.8104sin0.695t)

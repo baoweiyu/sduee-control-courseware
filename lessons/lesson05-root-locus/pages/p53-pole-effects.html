@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <title>③ 零极点分布与性能：四条对应关系</title>
-<link rel="stylesheet" href="../../../theme/theme.css?v=218">
+<link rel="stylesheet" href="../../../theme/theme.css?v=219">
 <script src="../../../theme/mathjax/mathjax-render.js"></script>
 <script src="../../../theme/mathjax/tex-chtml.js"></script>
 <script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
-<script src="../../../theme/act-base.js?v=218" defer></script>
+<script src="../../../theme/act-base.js?v=219" defer></script>
 <style>
   .row{display:flex;gap:22px;height:100%;min-height:0}
   .lft{flex:1.08;display:flex;flex-direction:column;gap:14px;min-height:0}
@@ -15,6 +15,9 @@
   .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:6px;padding:8px 20px;font-size:19.5px;line-height:1.42}
   .kv{background:var(--sky);border-radius:12px;padding:8px 14px;line-height:1.45}
   .kv.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .grp{display:flex;flex-direction:column;gap:7px}
+  .li{position:relative;padding-left:22px;line-height:1.42}
+  .li::before{content:"";position:absolute;left:2px;top:.42em;width:9px;height:9px;border-radius:2px;background:var(--orange)}
   .figc{flex:1;display:flex;flex-direction:column;overflow:hidden}
   .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:6px 10px;min-height:0}
   .figc svg{width:100%;height:100%}
@@ -29,31 +32,43 @@
         <div class="act-card" style="flex:1">
           <div class="hd">① 稳定性</div>
           <div class="bd">
-            <div data-step="1">全部闭环极点在 <span class="tex">s</span> 左半平面 ⟺ 渐近稳定——每个模态 <span class="tex">e^{p_{i}t}</span> 都衰减；零点不改稳定性，只改响应形状与峰值。</div>
+            <div class="grp" data-step="1">
+              <div class="li">全部闭环极点位于 <span class="tex">s</span> 左半平面 ⟺ <span class="kw">渐近稳定</span>（各模态 <span class="tex">e^{p_{i}t}</span> 均衰减）</div>
+              <div class="li">零点<span class="kw">不改稳定性</span>，只改响应形状与峰值</div>
+            </div>
           </div>
         </div>
         <div class="act-card" style="flex:1">
           <div class="hd">② 运动形态</div>
           <div class="bd">
-            <div data-step="2">实极点 → 单调分量 <span class="tex">e^{pt}</span>；共轭复极点 → 振荡分量 <span class="tex">e^{\sigma t}\sin(\omega t+\varphi)</span>。</div>
+            <div class="grp" data-step="2">
+              <div class="li">实极点 → <span class="kw">单调分量</span> <span class="tex">e^{pt}</span></div>
+              <div class="li">共轭复极点 → <span class="kw">振荡分量</span> <span class="tex">e^{\sigma t}\sin(\omega t+\varphi)</span></div>
+            </div>
           </div>
         </div>
         <div class="act-card" style="flex:1">
           <div class="hd">③ 平稳性</div>
           <div class="bd">
-            <div data-step="3">阻尼角 <span class="tex">\beta</span> 越小（<span class="tex">\zeta</span> 越大）振荡越弱越平稳——<span class="tex">\beta</span> 直接定超调量；常取 <span class="tex">\zeta=0.5\sim0.707</span>（<span class="tex">\beta\approx60^{\circ}\sim45^{\circ}</span>）。</div>
+            <div class="grp" data-step="3">
+              <div class="li">阻尼角 <span class="tex">\beta</span> 越小（<span class="tex">\zeta</span> 越大）→ 振荡越弱、<span class="kw">超调越小越平稳</span></div>
+              <div class="li">常取 <span class="tex">\zeta=0.5\sim0.707</span>（<span class="tex">\beta\approx60^{\circ}\sim45^{\circ}</span>）</div>
+            </div>
           </div>
         </div>
         <div class="act-card" style="flex:1">
           <div class="hd">④ 快速性</div>
           <div class="bd">
-            <div data-step="4">主导极点离虚轴越远，<span class="tex">e^{\sigma t}</span> 衰减越快，调节时间 <span class="tex">t_{s}\approx3\sim4\,/\,|\sigma|</span> 越短。</div>
+            <div class="grp" data-step="4">
+              <div class="li">主导极点<span class="kw">离虚轴越远</span>，<span class="tex">e^{\sigma t}</span> 衰减越快</div>
+              <div class="li">调节时间 <span class="tex">t_{s}\approx3\sim4\,/\,|\sigma|</span> 越短</div>
+            </div>
           </div>
         </div>
         <div class="act-card" style="flex:.98">
           <div class="hd">结论：主导极点</div>
           <div class="bd">
-            <div class="kv hl" data-step="5">高阶系统中<b>离虚轴最近且附近无零点</b>的极点对衰减最慢、主导整个响应（降阶见例5-15）。</div>
+            <div class="kv hl" data-step="5">高阶系统中<span class="kw">离虚轴最近且附近无零点</span>的极点对衰减最慢、<span class="kw">主导整个响应</span>（降阶见例5-15）。</div>
           </div>
         </div>
       </div>

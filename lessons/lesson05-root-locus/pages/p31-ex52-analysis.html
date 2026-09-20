@@ -3,24 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <title>例5-2：分析与计算</title>
-<link rel="stylesheet" href="../../../theme/theme.css?v=218">
+<link rel="stylesheet" href="../../../theme/theme.css?v=219">
 <script src="../../../theme/mathjax/mathjax-render.js"></script>
 <script src="../../../theme/mathjax/tex-chtml.js"></script>
 <script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
-<script src="../../../theme/act-base.js?v=218" defer></script>
-<script src="../fig.js?v=507"></script>
-<script src="../data/ex52.js"></script>
+<script src="../../../theme/act-base.js?v=219" defer></script>
+<script src="../fig.js?v=219"></script>
+<script src="../data/ex52.js?v=219"></script>
 <style>
   .row{display:flex;gap:22px;height:100%;min-height:0}
   .lft{flex:1.02;display:flex;flex-direction:column;gap:12px;min-height:0}
   .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
-  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:5px;padding:8px 16px}
-  .eq{background:var(--sky);border-radius:12px;padding:4px 12px;text-align:center;font-size:18.5px;line-height:1.4}
-  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
-  .kv{background:var(--sky);border-radius:12px;padding:5px 13px;font-size:17.5px;line-height:1.36}
-  .kv.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
-  .kv.on{background:#FDF3EC;border-left:5px solid var(--danger);border-top-left-radius:0;border-bottom-left-radius:0;font-weight:700;box-shadow:0 0 0 2px rgba(214,58,47,.22)}
-  .hl{box-shadow:0 0 0 2px rgba(214,58,47,.18)}
+  .act-body.has-note{bottom:148px}  /* 单行结论条：回收底部留白，左右框加高 */
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:6px;padding:9px 16px}
+  .eq{background:var(--sky);border-radius:12px;padding:6px 12px;text-align:center;font-size:18.5px;line-height:1.4}
+  .task{text-align:center;font-size:17px;color:var(--navy);font-weight:700}
+  .stp{display:flex;gap:11px;align-items:flex-start;background:var(--sky);border-radius:12px;
+    padding:7px 13px 7px 10px;font-size:17.5px;line-height:1.36;border-left:5px solid transparent}
+  .stp .num{flex:none;width:28px;height:28px;margin-top:2px;border-radius:50%;background:var(--blue);
+    color:#fff;font-weight:700;font-size:17px;display:grid;place-items:center}
+  .stp .stx{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+  .stp .got{font-weight:700;color:var(--navy)}
+  .stp .got::before{content:"▸";color:var(--orange);margin-right:7px}
+  .stp .got b{color:var(--danger)}
+  .stp.on{background:#FDF3EC;border-left-color:var(--danger);box-shadow:0 0 0 2px rgba(214,58,47,.22)}
+  .stp.on .num{background:var(--danger)}
   table{border-collapse:collapse;margin:0 auto;font-size:16px;line-height:1.26}
   th,td{border:2px solid var(--line);padding:1px 11px;text-align:center;color:var(--ink)}
   th{background:var(--sky);color:var(--navy);font-weight:700}
@@ -51,33 +58,44 @@
 <div class="act-body has-note">
   <div class="row">
     <div class="lft">
-      <div class="act-card" style="flex:1.7">
-        <div class="hd">题设与计算过程</div>
-        <div class="bd">
+      <div class="act-card">
+        <div class="hd">题设</div>
+        <div class="bd" style="justify-content:center;gap:9px">
           <div class="eq"><span class="tex">G(s)H(s)=\dfrac{K_{1}}{s(s+1)(s+2)}</span></div>
-          <div class="kv" id="c1">极点 <span class="tex">0,\,-1,\,-2</span>（<span class="tex">n=3,m=0</span>）；实轴段 <span class="tex">[-1,\,0]</span> 与 <span class="tex">(-\infty,\,-2]</span>。</div>
-          <div class="kv" id="c2">渐近线 <span class="tex">n-m=3</span> 条：<span class="tex">\sigma_{a}=(0-1-2)/3=-1</span>，<span class="tex">\varphi_{a}=\pm60^{\circ},\,180^{\circ}</span></div>
-          <div class="kv" id="c3">分离点：<span class="tex">\dfrac{dK_{1}}{ds}=0\Rightarrow3s^{2}+6s+2=0\Rightarrow d=-0.423</span>（<span class="tex">K_{1}\approx0.385</span>）；<span class="tex">-1.577</span> 不在实轴段，舍（本系统即法则五示例，此处快速过）。</div>
-          <div class="kv" id="c4" style="display:flex;gap:10px;align-items:center;padding:4px 10px">
-            <table style="flex:none">
-              <tr><td><span class="tex">s^{3}</span></td><td>1</td><td>2</td></tr>
-              <tr><td><span class="tex">s^{2}</span></td><td>3</td><td><span class="tex">K_{1}</span></td></tr>
-              <tr><td><span class="tex">s^{1}</span></td><td><span class="tex">(6-K_{1})/3</span></td><td>0</td></tr>
-              <tr><td><span class="tex">s^{0}</span></td><td><span class="tex">K_{1}</span></td><td>—</td></tr>
-            </table>
-            <div style="flex:1;text-align:left">虚轴交点（劳斯）：<span class="tex">s^{1}</span> 行首为零 <span class="tex">\Rightarrow K_{1}=6</span>；辅助方程 <span class="tex">3s^{2}+6=0\Rightarrow s=\pm j\sqrt{2}</span>；稳定 <span class="tex">0&lt;K_{1}&lt;6</span></div>
-          </div>
-          <div class="kv" id="c5"><span class="tex">s=j\omega</span> 法互证：<span class="tex">D(j\omega)=(K_{1}-3\omega^{2})+j\omega(2-\omega^{2})=0\Rightarrow\omega=\sqrt{2},\ K_{1}=6</span> ✓（劳斯法顺手给出稳定范围，<span class="tex">s=j\omega</span> 法直接联立、不排表）。</div>
+          <div class="task">绘制 K₁ 从 0 → ∞ 变化时的闭环根轨迹</div>
         </div>
       </div>
       <div class="act-card" style="flex:1">
-        <div class="hd">绘制步骤（与右图分步联动）</div>
-        <div class="bd" style="gap:4px">
-          <div class="kv" id="s1">① 标出三个开环极点与实轴段</div>
-          <div class="kv" id="s2">② 三条渐近线：σₐ=−1，±60°、180°</div>
-          <div class="kv" id="s3">③ 分离点 d=−0.423（K₁=0.385）</div>
-          <div class="kv" id="s4">④ 虚轴交点 ±j√2（K₁=6，劳斯判据）</div>
-          <div class="kv" id="s5">⑤ s=jω 法互证 ✓，连成完整根轨迹</div>
+        <div class="hd">计算与绘制步骤（与右图分步联动）</div>
+        <div class="bd">
+          <div class="stp" id="s1"><span class="num">1</span><div class="stx">
+            <div class="cl" id="c1">极点 <span class="tex">0,\,-1,\,-2</span>（<span class="tex">n=3,\ m=0</span>）</div>
+            <div class="got">标出 3 个极点，得实轴段 <b>[−1, 0]</b> 与 <b>(−∞, −2]</b></div>
+          </div></div>
+          <div class="stp" id="s2"><span class="num">2</span><div class="stx">
+            <div class="cl" id="c2">渐近线 <span class="tex">n-m=3</span> 条：<span class="tex">\sigma_{a}=(0-1-2)/3=-1</span>，<span class="tex">\varphi_{a}=\pm60^{\circ},\,180^{\circ}</span></div>
+            <div class="got">得 <b>3 条渐近线</b>，中心 σₐ=−1</div>
+          </div></div>
+          <div class="stp" id="s3"><span class="num">3</span><div class="stx">
+            <div class="cl" id="c3">分离点：<span class="tex">\dfrac{dK_{1}}{ds}=0\Rightarrow3s^{2}+6s+2=0\Rightarrow d=-0.423</span>（<span class="tex">K_{1}\approx0.385</span>）；<span class="tex">-1.577</span> 不在实轴段，舍</div>
+            <div class="got">得分离点 <b>d=−0.423</b>（K₁=0.385）</div>
+          </div></div>
+          <div class="stp" id="s4"><span class="num">4</span><div class="stx">
+            <div class="cl" id="c4" style="display:flex;gap:10px;align-items:center;padding:2px 0">
+              <table style="flex:none">
+                <tr><td><span class="tex">s^{3}</span></td><td>1</td><td>2</td></tr>
+                <tr><td><span class="tex">s^{2}</span></td><td>3</td><td><span class="tex">K_{1}</span></td></tr>
+                <tr><td><span class="tex">s^{1}</span></td><td><span class="tex">(6-K_{1})/3</span></td><td>0</td></tr>
+                <tr><td><span class="tex">s^{0}</span></td><td><span class="tex">K_{1}</span></td><td>—</td></tr>
+              </table>
+              <div style="flex:1;text-align:left">虚轴交点（劳斯）：<span class="tex">s^{1}</span> 行首为零 <span class="tex">\Rightarrow K_{1}=6</span>；辅助方程 <span class="tex">3s^{2}+6=0\Rightarrow s=\pm j\sqrt{2}</span></div>
+            </div>
+            <div class="got">得虚轴交点 <b>±j√2</b>（K₁=6），稳定范围 0&lt;K₁&lt;6</div>
+          </div></div>
+          <div class="stp" id="s5"><span class="num">5</span><div class="stx">
+            <div class="cl" id="c5"><span class="tex">s=j\omega</span> 法互证：<br><span class="tex">D(j\omega)=(K_{1}-3\omega^{2})+j\omega(2-\omega^{2})=0\Rightarrow\omega=\sqrt{2},\ K_{1}=6</span> ✓</div>
+            <div class="got"><b>两法一致</b>，连成完整根轨迹</div>
+          </div></div>
         </div>
       </div>
     </div>

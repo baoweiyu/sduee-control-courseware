@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <title>例5-3：圆根轨迹完整绘制</title>
-<link rel="stylesheet" href="../../../theme/theme.css?v=218">
+<link rel="stylesheet" href="../../../theme/theme.css?v=219">
 <script src="../../../theme/mathjax/mathjax-render.js"></script>
 <script src="../../../theme/mathjax/tex-chtml.js"></script>
 <script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
-<script src="../../../theme/act-base.js?v=218" defer></script>
-<script src="../fig.js?v=507"></script>
-<script src="../data/ex53.js"></script>
+<script src="../../../theme/act-base.js?v=219" defer></script>
+<script src="../fig.js?v=219"></script>
+<script src="../data/ex53.js?v=219"></script>
 <style>
   .row{display:flex;gap:22px;height:100%;min-height:0}
   .lft{flex:.86;display:flex;flex-direction:column;gap:10px;min-height:0}
@@ -18,6 +18,7 @@
   .kv{background:var(--sky);border-radius:12px;padding:5px 14px;font-size:19px;line-height:1.38}
   .kv.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
   .kv.on{background:#FDF3EC;border-left:5px solid var(--danger);border-top-left-radius:0;border-bottom-left-radius:0;font-weight:700;box-shadow:0 0 0 2px rgba(214,58,47,.22)}
+  .kv.stp{cursor:pointer}
   .figc{flex:1.14;display:flex;flex-direction:column;overflow:hidden;position:relative}
   .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
   .figc svg{width:100%;height:100%}
@@ -30,7 +31,7 @@
   .ctl{display:flex;align-items:center;gap:8px 12px;justify-content:center;padding:6px 0 8px;flex-wrap:wrap}
   .btn{background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:19px;font-weight:700;padding:8px 20px;cursor:pointer;min-width:112px;text-align:center}
   .btn.ghost{background:#fff;color:var(--blue);border:2px solid var(--blue)}
-  .kr{font-size:19px;color:var(--navy);font-weight:700;background:var(--sky);border-radius:10px;padding:5px 12px;white-space:nowrap;flex:1 1 100%;text-align:center}
+  .kr{display:block;font-size:19px;color:var(--navy);font-weight:700;background:var(--sky);border-radius:10px;padding:6px 12px;white-space:nowrap;text-align:center;margin:0 16px 8px}
   .kr b{display:inline-block;text-align:left;font-variant-numeric:tabular-nums}
   #kv{min-width:5.5ch}
   #kp{min-width:16ch}
@@ -62,11 +63,11 @@
       <div class="act-card" style="flex:1.12">
         <div class="hd">绘制步骤（与右图分步联动）</div>
         <div class="bd" style="gap:5px">
-          <div class="kv" id="s1">① 计算零极点，确定实轴段根轨迹</div>
-          <div class="kv" id="s2">② 靠拢至 d₁=−0.586 分离（K₁=0.172）</div>
-          <div class="kv" id="s3">③ 沿圆绕行（圆心 −2，半径 √2）</div>
-          <div class="kv" id="s4">④ d₂=−3.414 会合（K₁=5.828）</div>
-          <div class="kv" id="s5">⑤ 一支入零点 −2，一支趋向 −∞</div>
+          <div class="kv stp" id="s1">① 计算零极点，确定实轴段根轨迹</div>
+          <div class="kv stp" id="s2">② 靠拢至 d₁=−0.586 分离（K₁=0.172）</div>
+          <div class="kv stp" id="s3">③ 沿圆绕行（圆心 −2，半径 √2）</div>
+          <div class="kv stp" id="s4">④ d₂=−3.414 会合（K₁=5.828）</div>
+          <div class="kv stp" id="s5">⑤ 一支入零点 −2，一支趋向 −∞</div>
         </div>
       </div>
     </div>
@@ -75,11 +76,11 @@
       <span class="segfloat" id="segChip" style="display:none"></span>
       <span class="prog" id="prog">0 / 5</span>
       <div class="bd2"><svg id="fig"></svg></div>
+      <span class="kr">K₁ = <b id="kv" style="color:var(--danger)">0</b>　s₁,₂ = <b id="kp" style="color:var(--navy)">0，−1</b></span>
       <div class="ctl">
         <button class="btn" id="play">▶ 播放</button>
         <button class="btn ghost" id="step">⧉ 分步</button>
         <button class="btn ghost" onclick="ACT.step.reset()">↺ 重置</button>
-        <span class="kr">K₁ = <b id="kv" style="color:var(--danger)">0</b>　s₁,₂ = <b id="kp" style="color:var(--navy)">0，−1</b></span>
       </div>
     </div>
   </div>
@@ -176,6 +177,15 @@ document.addEventListener("DOMContentLoaded", () => {
     segRaf = requestAnimationFrame(tick);
   }
   document.getElementById("step").onclick = () => segGo(false);
+  /* 左栏步骤可点击：点第 k 项直接跳到第 k 步 */
+  function segJump(k) {
+    segStopUI();
+    wReset();
+    for (let i = 0; i < k; i++) wNext();
+    if (chip) { chip.textContent = "分步 " + k + " / " + total + "　" + STEPS[k - 1]; chip.style.display = ""; }
+  }
+  for (let i = 1; i <= total; i++)
+    document.getElementById("s" + i).onclick = () => segJump(i);
   /* QA 钩子：?step=N 直达分步第 N 步（瞬时确定态） */
   window.addEventListener("load", () => {
     const n = +(new URLSearchParams(location.search).get("step") || 0);

@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <title>两个条件的应用·示例二：实轴试验点与求 K₁</title>
-<link rel="stylesheet" href="../../../theme/theme.css?v=218">
+<link rel="stylesheet" href="../../../theme/theme.css?v=219">
 <script src="../../../theme/mathjax/mathjax-render.js"></script>
 <script src="../../../theme/mathjax/tex-chtml.js"></script>
 <script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
-<script src="../../../theme/act-base.js?v=218" defer></script>
-<script src="../fig.js?v=507"></script>
-<script src="../data/ex51.js"></script>
+<script src="../../../theme/act-base.js?v=219" defer></script>
+<script src="../fig.js?v=219"></script>
+<script src="../data/ex51.js?v=219"></script>
 <style>
   .row{display:flex;gap:22px;height:100%;min-height:0}
   .lft{flex:1;display:flex;flex-direction:column;gap:18px;min-height:0}
@@ -21,7 +21,7 @@
   .figc{flex:1.16;display:flex;flex-direction:column;overflow:hidden}
   .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
   .figc svg{width:100%;height:100%}
-  .cap{flex:none;font-size:20px;color:var(--navy);background:var(--sky);border-radius:12px;padding:8px 16px;margin:0 14px 12px;line-height:1.4}
+  .capnote{flex:none;font-size:20px;color:var(--navy);background:var(--sky);border-radius:12px;padding:8px 16px;margin:0 14px 12px;line-height:1.4}
 </style>
 </head>
 <body data-title="两个条件的应用·示例二：实轴试验点与求 K₁" data-page="11 / 61">
@@ -33,22 +33,22 @@
           <div class="hd">系统与试验点</div>
           <div class="bd">
             <div class="eq"><span class="tex">G(s)H(s)=\dfrac{K_{1}(s+4)}{(s+2)(s+6.6)}</span></div>
-            <div class="kv" data-step="1">由法则三（右侧实零极点数为奇数），实轴候选段：<span class="tex">[-4,-2]</span> 与 <span class="tex">(-\infty,-6.6]</span>。</div>
-            <div class="kv" data-step="2">在候选段上取试验点 <span class="tex">s_{1}=-3</span>——实轴段上的点必满足相角条件，此处仍完整验算一遍以示规范。</div>
+            <div class="kv" data-step="1">开环零点 <span class="tex">z_{1}=-4</span>；开环极点 <span class="tex">p_{1}=-2</span>、<span class="tex">p_{2}=-6.6</span>。</div>
+            <div class="kv" data-step="2">取实轴试验点 <span class="tex">s_{1}=-3</span>，问：它在根轨迹上吗？若在，对应的 <span class="tex">K_{1}</span> 是多少？</div>
           </div>
         </div>
         <div class="act-card" style="flex:1.3">
           <div class="hd">逐项验算（先相角、后幅值）</div>
           <div class="bd">
-            <div class="eq" data-step="3">相角条件：<span class="tex">\angle(s_{1}+4)-\angle(s_{1}+2)-\angle(s_{1}+6.6)=0^{\circ}-180^{\circ}-0^{\circ}=-180^{\circ}</span>　✓</div>
-            <div class="eq hl" data-step="4" style="font-size:21.5px"><span class="tex">s_{1}</span> <span class="kw-r">在</span>根轨迹上；<span class="tex">K_{1}=\dfrac{|s_{1}+2|\cdot|s_{1}+6.6|}{|s_{1}+4|}=(1\times3.6)/1=3.6</span></div>
+            <div class="eq" data-step="3">相角条件：<span class="tex">\angle(s_{1}+4)-\angle(s_{1}+2)-\angle(s_{1}+6.6)=0^{\circ}-180^{\circ}-0^{\circ}=-180^{\circ}</span>　✓　<span class="tex">s_{1}</span> <span class="kw-r">在</span>根轨迹上</div>
+            <div class="eq hl" data-step="4" style="font-size:21.5px">幅值条件：<span class="tex">K_{1}=\dfrac{|s_{1}+2|\cdot|s_{1}+6.6|}{|s_{1}+4|}=(1\times3.6)/1=3.6</span></div>
           </div>
         </div>
       </div>
       <div class="act-card figc">
         <div class="hd"><span style="flex:1">零极点指向试验点的向量与相角</span></div>
         <div class="bd2"><svg id="fig"></svg></div>
-        <div class="cap">淡色底轨即本系统完整根轨迹——<span class="tex">s_{1}=-3</span> 正落在轨迹上；三条实轴向量的相角为 <span class="tex">0^{\circ}/180^{\circ}</span>。</div>
+        <div class="capnote">淡色底轨即本系统完整根轨迹——<span class="tex">s_{1}=-3</span> 正落在轨迹上；三条实轴向量的相角为 <span class="tex">0^{\circ}/180^{\circ}</span>。</div>
       </div>
     </div>
   </div>
@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const F = RL.figure("fig", "ex51", { vw: 960, vh: 600, ylim: [-2.2, 3.0], static: true,
                                        asym: false, brkDots: false, crossSq: false, segs: true,
                                        extra: api => {
-    /* 淡色完整轨迹底轨（数据来自 data/ex51.js 分支点列） */
+    /* 淡色完整轨迹底轨（数据来自 data/ex51.js?v=219 分支点列） */
     api.data.branches.forEach(b => {
       const d = api.toPath(api.clipPoly(b.map(p => [api.X(p[0]), api.Y(p[1])]), api.PLOT));
       api.mk("path", { d, fill: "none", stroke: "#C9D6F2", "stroke-width": 5, opacity: .9 }, api.gBase);

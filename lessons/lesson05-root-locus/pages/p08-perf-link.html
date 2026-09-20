@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <title>引例（4）：由根轨迹读取系统性能</title>
-<link rel="stylesheet" href="../../../theme/theme.css?v=218">
+<link rel="stylesheet" href="../../../theme/theme.css?v=219">
 <script src="../../../theme/mathjax/mathjax-render.js"></script>
 <script src="../../../theme/mathjax/tex-chtml.js"></script>
 <script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
-<script src="../../../theme/act-base.js?v=218" defer></script>
-<script src="../fig.js?v=507"></script>
-<script src="../data/intro.js"></script>
+<script src="../../../theme/act-base.js?v=219" defer></script>
+<script src="../fig.js?v=219"></script>
+<script src="../data/intro.js?v=219"></script>
 <style>
   .col{display:flex;flex-direction:column;gap:14px;height:100%;min-height:0}
   .row3{flex:1;display:flex;gap:20px;min-height:0}
@@ -25,7 +25,9 @@
   tr.krow{cursor:pointer}
   tr.krow:hover td{background:#E3ECFB}
   tr.krow.sel td{background:#FAD9C2;font-weight:700}
-  .chip{display:inline-block;width:14px;height:14px;border-radius:50%;margin-right:7px;vertical-align:-1px}
+  .chip{display:inline-block;flex:none;width:14px;height:14px;border-radius:50%;margin-right:7px}
+  .kwrap{display:inline-flex;align-items:center}
+  .knum{display:inline-block;min-width:54px;text-align:left}
   .figc{flex:1;display:flex;flex-direction:column;overflow:hidden}
   .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
   .figc svg{width:100%;height:100%}
@@ -50,11 +52,11 @@
               <div class="tip" style="flex:none;text-align:center;margin-bottom:2px;font-size:19px"><span class="tex">\omega_{n}=\sqrt{K_{1}},\qquad \zeta=\dfrac{1}{\sqrt{K_{1}}}</span></div>
               <table>
                 <tr><th><span class="tex">K_{1}</span></th><th><span class="tex">\zeta</span></th><th><span class="tex">\sigma\%</span></th><th><span class="tex">t_{s}/\mathrm{s}</span></th></tr>
-                <tr class="krow" data-k="0"><td><span class="chip" style="background:#1D3FA0"></span>0.25</td><td>2</td><td>0</td><td>—</td></tr>
-                <tr class="krow" data-k="1"><td><span class="chip" style="background:#0E7A36"></span>1</td><td>1</td><td>0</td><td>≈4</td></tr>
-                <tr class="krow" data-k="2"><td><span class="chip" style="background:#C02A20"></span>2</td><td>0.707</td><td>4.3%</td><td>≈4</td></tr>
-                <tr class="krow" data-k="3"><td><span class="chip" style="background:#7B21C8"></span>4</td><td>0.5</td><td>16.3%</td><td>≈4</td></tr>
-                <tr class="krow" data-k="4"><td><span class="chip" style="background:#C2410C"></span>10</td><td>0.316</td><td>35.1%</td><td>≈4</td></tr>
+                <tr class="krow" data-k="0"><td><span class="kwrap"><span class="chip" style="background:#1D3FA0"></span><span class="knum">0.25</span></span></td><td>2</td><td>0</td><td>—</td></tr>
+                <tr class="krow" data-k="1"><td><span class="kwrap"><span class="chip" style="background:#0E7A36"></span><span class="knum">1</span></span></td><td>1</td><td>0</td><td>≈4</td></tr>
+                <tr class="krow" data-k="2"><td><span class="kwrap"><span class="chip" style="background:#C02A20"></span><span class="knum">2</span></span></td><td>0.707</td><td>4.3%</td><td>≈4</td></tr>
+                <tr class="krow" data-k="3"><td><span class="kwrap"><span class="chip" style="background:#7B21C8"></span><span class="knum">4</span></span></td><td>0.5</td><td>16.3%</td><td>≈4</td></tr>
+                <tr class="krow" data-k="4"><td><span class="kwrap"><span class="chip" style="background:#C2410C"></span><span class="knum">10</span></span></td><td>0.316</td><td>35.1%</td><td>≈4</td></tr>
               </table>
             </div>
           </div>
