@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>6.5 按扰动补偿的复合校正</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=221">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=221" defer></script>
+<script src="../fig.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .figc{flex:1.16;display:flex;flex-direction:column;overflow:hidden;position:relative}
+  .figc .stext{margin:10px 16px 0;background:var(--sky);border-radius:10px;padding:8px 16px;
+    font-size:21px;line-height:1.45;color:var(--navy);min-height:68px;display:flex;align-items:center}
+  .figc .stext>div{flex:1;min-width:0}
+  .figc .stext mjx-break{display:none!important}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .ctl{display:flex;align-items:center;gap:12px;justify-content:center;padding:8px 0 10px}
+  .btn{background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:19px;font-weight:700;
+    padding:8px 20px;cursor:pointer;min-width:6.5em;text-align:center}
+  .btn.ghost{background:#fff;color:var(--blue);border:2px solid var(--blue)}
+  .btn:disabled{opacity:.5;cursor:default}
+  .prog{position:absolute;top:auto;bottom:66px;right:16px;z-index:5;font-size:17px;color:var(--muted);
+    background:rgba(255,255,255,.92);border:1.5px solid var(--line);border-radius:8px;padding:2px 10px;
+    font-variant-numeric:tabular-nums}
+  .rt{flex:.94;display:flex;flex-direction:column;min-height:0}
+  .rt .act-card{flex:1;display:flex;flex-direction:column;overflow:hidden}
+  .rt .bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:10px;padding:14px 16px}
+  .stp{display:flex;gap:12px;align-items:flex-start;background:var(--sky);border-radius:12px;
+    padding:12px 14px 12px 11px;font-size:21px;line-height:1.6;border-left:5px solid transparent;cursor:pointer}
+  .stp .num{flex:none;width:34px;height:34px;margin-top:2px;border-radius:50%;background:var(--blue);
+    color:#fff;font-weight:700;font-size:19px;display:grid;place-items:center}
+  .stp .stx{flex:1;min-width:0}
+  .stp .frm{text-align:center;font-size:23px}
+  .stp .got{font-weight:700;color:var(--navy)}
+  .stp .got b{color:var(--danger)}
+  .stp.on{background:#FDF3EC;border-left-color:var(--danger);box-shadow:0 0 0 2px rgba(214,58,47,.22)}
+  .stp.on .num{background:var(--danger)}
+  @keyframes bdPulse{0%,100%{opacity:1}50%{opacity:.25}}
+  .flash{animation:bdPulse .85s ease-in-out infinite}
+</style>
+</head>
+<body data-title="6.5 按扰动补偿的复合校正" data-page="45 / 48">
+<div class="act-stage"><div class="act-slide">
+
+<div class="act-body has-note">
+  <div class="row">
+    <div class="act-card figc">
+      <div class="hd"><span style="flex:1">按扰动补偿：扰动两条通路的对消演示</span></div>
+      <div class="stext" id="stext"></div>
+      <span class="prog" id="prog">0 / 3</span>
+      <div class="bd2"><svg id="fig"></svg></div>
+      <div class="ctl">
+        <button class="btn" id="step">⧉ 分步</button>
+        <button class="btn ghost" id="rst">↺ 重置</button>
+      </div>
+    </div>
+    <div class="rt">
+      <div class="act-card">
+        <div class="hd">推导（令 R(s)=0）</div>
+        <div class="bd">
+          <div class="stp" data-step="1" id="s1"><span class="num">1</span><div class="stx">
+            <div>扰动 <span class="tex">N(s)</span> 从 <span class="tex">G_{1}</span>、<span class="tex">G_{2}</span> 之间注入，沿<span class="kw-r">直接通路</span> <span class="tex">N\to G_{2}\to C</span> 影响输出。</div>
+          </div></div>
+          <div class="stp" data-step="2" id="s2"><span class="num">2</span><div class="stx">
+            <div><span class="tex">n(t)</span> 可测量：从测点引出前馈 <span class="tex">F_{n}(s)</span>，<b>负号</b>接入 <span class="tex">G_{1}</span> 前，形成第二条通路 <span class="tex">N\to F_{n}\to G_{1}\to G_{2}\to C</span>。</div>
+            <div class="frm"><span class="tex tex-d">C(s)=\frac{G_{2}\left(1-G_{1}F_{n}\right)}{1+G_{1}G_{2}}\,N(s)</span></div>
+          </div></div>
+          <div class="stp" data-step="3" id="s3"><span class="num">3</span><div class="stx">
+            <div>全补偿条件（不变性原理）：</div>
+            <div class="got"><span class="tex">F_{n}(s)=\dfrac{1}{G_{1}(s)}\;\Rightarrow\;1-G_{1}F_{n}=0\;\Rightarrow\;C(s)\equiv0</span></div>
+            <div>两条通路等值反号，<b>对扰动完全补偿</b>。</div>
+          </div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">要点</span><span>前馈抵消扰动的前提：<span class="kw-r">扰动可测、<span class="tex">F_{n}</span> 物理可实现</span>——详见下页"几点说明"。</span></div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const total = 3;
+  const ORF = "#FDF3EC", ORC = "#F5821F", RED = "#D63A2F";
+  /* 纵向拉高布局（vh 600）：图面充分填充图卡；所有信号线横平竖直，折线直角转弯 */
+  const B = BD.block("fig", [
+    { type: "line", pts: [[24, 240], [70, 240]], label: "R(s)", labelDx: -6, labelDy: -16 },
+    { type: "sum", x: 85, y: 240, r: 15 },
+    { type: "line", pts: [[100, 240], [138, 240]] },
+    { type: "box", x: 138, y: 210, w: 110, h: 60, label: "G_{1}(s)", name: "g1" },
+    { type: "line", pts: [[248, 240], [292, 240]] },
+    { type: "sum", x: 307, y: 240, r: 15 },
+    { type: "line", pts: [[322, 240], [352, 240]] },
+    { type: "box", x: 352, y: 210, w: 110, h: 60, label: "G_{2}(s)", name: "g2" },
+    { type: "line", pts: [[462, 240], [656, 240]], label: "C(s)", labelDx: 96, labelDy: -16 },
+    { type: "dot", x: 598, y: 240 },
+    { type: "line", pts: [[598, 240], [598, 560], [85, 560], [85, 255]], flow: true, name: "fb" },
+    { type: "line", pts: [[307, 60], [307, 223]], name: "nin" },
+    { type: "dot", x: 307, y: 140 },
+    { type: "line", pts: [[307, 140], [218, 140]], flow: true, name: "fn1" },
+    { type: "box", x: 108, y: 110, w: 110, h: 60, label: "F_{n}(s)", fill: ORF, color: ORC, name: "fn" },
+    { type: "line", pts: [[108, 140], [85, 140], [85, 223]], flow: true, name: "fn2" }
+  ], { vw: 680, vh: 600 });
+  B.tx(B.g, 337, 82, "N(s)", { fs: 24, it: 1, an: "start" });
+  B.tx(B.g, 102, 270, "−", { fs: 26, b: 1, an: "start" });
+  B.tx(B.g, 102, 216, "−", { fs: 26, b: 1, an: "start" });
+  B.tx(B.g, 323, 216, "+", { fs: 26, b: 1, an: "start" });
+  B.tx(B.g, 341, 594, "主反馈回路", { fs: 21, fill: "#16324F", b: 1 });
+  const dyn = B.mk("g", {}, B.svg);
+
+  function trace(pts, color, g) {
+    const d = "M" + pts.map(p => p[0] + "," + p[1]).join("L");
+    const el = B.mk("path", { d, fill: "none", stroke: color, "stroke-width": 5.5,
+      "stroke-linejoin": "round", "stroke-dasharray": "10 8", opacity: .95 }, g || dyn);
+    B.mk("animate", { attributeName: "stroke-dashoffset", from: "36", to: "0", dur: "1.2s",
+      repeatCount: "indefinite" }, el);
+  }
+  function directPath(g) {
+    trace([[307, 64], [307, 220]], RED, g);
+    trace([[322, 240], [352, 240]], RED, g);
+    trace([[462, 240], [652, 240]], RED, g);
+    B.mk("rect", { x: 346, y: 204, width: 122, height: 72, rx: 10, fill: "none",
+      stroke: RED, "stroke-width": 3.5, "stroke-dasharray": "9 7" }, g || dyn);
+  }
+  function ffPath(g) {
+    trace([[307, 140], [218, 140]], ORC, g);
+    trace([[108, 140], [85, 140], [85, 220]], ORC, g);
+    trace([[100, 240], [138, 240]], ORC, g);
+    trace([[248, 240], [292, 240]], ORC, g);
+    trace([[322, 240], [352, 240]], ORC, g);
+    trace([[462, 240], [652, 240]], ORC, g);
+    B.mk("rect", { x: 102, y: 104, width: 122, height: 72, rx: 10, fill: "none",
+      stroke: ORC, "stroke-width": 3.5, "stroke-dasharray": "9 7" }, g || dyn);
+  }
+  /* 步骤说明条：公式一律走 MathJax（.tex），与页面/图内字体口径统一 */
+  const ST = [
+    '结构：扰动 <span class="tex">N(s)</span> 从 <span class="tex">G_{1}</span>、<span class="tex">G_{2}</span> 之间注入；前馈 <span class="tex">F_{n}(s)</span> 从 <span class="tex">N</span> 的测点引出，负号接入 <span class="tex">G_{1}</span> 前。',
+    '① 扰动直接通路（红）：<span class="tex">N\\to G_{2}\\to C</span>，扰动直达输出。',
+    '② 前馈通路（橙）：<span class="tex">N\\to F_{n}\\to G_{1}\\to G_{2}\\to C</span>，与直接通路在输出端叠加。',
+    '③ 选 <span class="tex">F_{n}=1/G_{1}</span>：两路等值反号 → 输出端对消，<span class="tex">C(s)\\equiv0</span>。'
+  ];
+  const stext = document.getElementById("stext"), prog = document.getElementById("prog"),
+        btn = document.getElementById("step");
+  function setStext(k) {
+    stext.innerHTML = "<div>" + ST[k] + "</div>";
+    stext.querySelectorAll(".tex").forEach(el => {
+      if (window.mjxTypeset) mjxTypeset(el, el.textContent);
+    });
+  }
+  function paint(k) {
+    dyn.innerHTML = ""; dyn.removeAttribute("class");
+    if (k === 1) {
+      const g = B.mk("g", { "class": "flash" }, dyn);
+      directPath(g);
+      B.tx(dyn, 560, 196, "扰动直接通路", { fs: 21, fill: RED, b: 1 });
+    } else if (k === 2) {
+      const g = B.mk("g", { "class": "flash" }, dyn);
+      ffPath(g);
+      B.tx(dyn, 163, 88, "前馈通路（负号接入）", { fs: 21, fill: ORC, b: 1 });
+    } else if (k === 3) {
+      directPath(dyn); ffPath(dyn);
+      B.tx(dyn, 480, 192, "输出端对消：C(s) ≡ 0", { fs: 21, fill: RED, b: 1 });
+      B.mk("circle", { cx: 656, cy: 172, r: 18, fill: "#FDF1EF", stroke: RED, "stroke-width": 3.5 }, dyn);
+      B.mk("line", { x1: 643, y1: 185, x2: 669, y2: 159, stroke: RED, "stroke-width": 3.5 }, dyn);
+    }
+    for (let i = 1; i <= total; i++)
+      document.getElementById("s" + i).classList.toggle("on", i === k);
+    setStext(k);
+    prog.textContent = k + " / " + total;
+    btn.disabled = k >= total;
+  }
+  const S = ACT.step, _n = S.next.bind(S), _r = S.reset.bind(S);
+  S.next = function () { const d = _n(); paint(S.cur); return d; };
+  S.reset = function () { _r(); paint(0); };
+  window.prev = function () { const n = Math.max(0, S.cur - 1); S.reset(); for (let i = 0; i < n; i++) S.next(); };
+  btn.onclick = () => S.next();
+  document.getElementById("rst").onclick = () => S.reset();
+  for (let i = 1; i <= total; i++)
+    document.getElementById("s" + i).onclick = () => { S.reset(); for (let j = 0; j < i; j++) S.next(); };
+  window.addEventListener("load", () => {
+    const qp = new URLSearchParams(location.search);
+    let k = 0;
+    if (qp.has("ff")) k = total;
+    else if (qp.has("seg")) k = Math.max(0, Math.min(total, parseInt(qp.get("seg"), 10) || 0));
+    for (let i = 0; i < k; i++) S.next();
+  });
+  paint(0);
+});
+</script>
+</div></div>
+</body>
+</html>

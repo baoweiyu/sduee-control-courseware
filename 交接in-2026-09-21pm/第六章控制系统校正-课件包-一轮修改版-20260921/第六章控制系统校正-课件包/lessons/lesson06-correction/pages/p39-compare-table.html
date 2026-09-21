@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>④ 三种串联校正方法比较</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=600">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=600" defer></script>
+<style>
+  .wrap{display:flex;gap:18px;height:100%;min-height:0}
+  .tbl{flex:1.32;display:flex;flex-direction:column;background:#fff;border:2px solid var(--line);
+    border-radius:16px;overflow:hidden;min-height:0}
+  .th{display:grid;grid-template-columns:1.05fr 1.35fr 1.6fr 1.5fr;gap:10px;background:var(--blue);
+    color:#fff;font-size:19.5px;font-weight:700;padding:14px 16px;align-items:center}
+  .rows{flex:1;display:flex;flex-direction:column;min-height:0}
+  .tr{flex:1;display:grid;grid-template-columns:1.05fr 1.35fr 1.6fr 1.5fr;gap:10px;padding:6px 16px;
+    font-size:19px;line-height:1.45;border-top:1.5px solid var(--line);cursor:pointer;align-items:center}
+  .tr .c{display:flex;flex-direction:column;gap:3px;justify-content:center;min-width:0}
+  .tr .m{font-size:21px;font-weight:700;color:var(--navy)}
+  /* 行悬停/选中：与 p19 一致的橙色外框联动 */
+  .tr:hover{background:#FFEAC0}
+  .tr.on{background:#FFE3AC;box-shadow:inset 0 0 0 3px var(--orange)}
+  .figc{flex:1;display:flex;flex-direction:column;overflow:hidden}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:2px 6px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .figc .capnote{flex:none;font-size:19px;color:var(--navy);background:var(--sky);border-radius:10px;
+    padding:8px 16px;margin:8px 8px 10px;line-height:1.5;text-align:center}
+</style>
+</head>
+<body data-title="④ 三种串联校正方法比较" data-page="39 / 48">
+<div class="act-stage"><div class="act-slide">
+
+<div class="act-body">
+  <div class="wrap">
+    <div class="tbl">
+      <div class="th"><div>校正方法</div><div>装置特性</div><div>适用条件</div><div>校正效果</div></div>
+      <div class="rows">
+        <div class="tr on" data-row="0">
+          <div class="c"><span class="m">超前校正</span></div>
+          <div class="c"><span>幅值增加、相角超前</span></div>
+          <div class="c"><span><span class="tex">\omega_{c0}<\omega_{c}^{*}</span>、<span class="tex">\gamma_{0}<\gamma^{*}</span>；<span class="tex">\omega_{c}</span> 附近相角滞后增加缓慢</span></div>
+          <div class="c"><span><span class="tex">\omega_{c}\uparrow</span>、<span class="tex">\gamma\uparrow</span>、高频段↑（抗噪变差）</span></div>
+        </div>
+        <div class="tr" data-row="1">
+          <div class="c"><span class="m">滞后校正</span></div>
+          <div class="c"><span>幅值衰减、相角滞后</span></div>
+          <div class="c"><span>响应速度要求不高、抗噪要求高；<span class="tex">\omega_{c}</span> 附近相角滞后急剧增加</span></div>
+          <div class="c"><span><span class="tex">\omega_{c}\downarrow</span>、<span class="tex">\gamma\uparrow</span>、高频段↓（抗噪变好）</span></div>
+        </div>
+        <div class="tr" data-row="2">
+          <div class="c"><span class="m">滞后—超前</span></div>
+          <div class="c"><span>低频段滞后衰减、高频段超前补相角</span></div>
+          <div class="c"><span>单独超前或单独滞后均不奏效，稳态与暂态都要大幅改善</span></div>
+          <div class="c"><span><span class="tex">\omega_{c}\approx</span>、<span class="tex">\gamma\uparrow</span>、高频段≈</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="act-card figc">
+      <div class="hd" id="figTitle">超前装置的 Bode 图（α=0.1）</div>
+      <div class="bd2"><svg id="fig"></svg></div>
+      <div class="capnote" id="figNote"></div>
+    </div>
+  </div>
+</div>
+
+<script src="../fig.js"></script>
+<script src="../data/lead08.js"></script>
+<script src="../data/lag12.js"></script>
+<script src="../data/pid.js"></script>
+<script>
+/* 三种校正装置的 Bode 对比：曲线逐点来自 BD.data.lead08 / lag12 / pid_ll */
+document.addEventListener("DOMContentLoaded", () => {
+  const L8 = BD.data.lead08, G12 = BD.data.lag12, LL = BD.data.pid_ll;
+  const a1 = L8.meta.alphas.find(a => a.alpha === 0.1);
+  const b1 = G12.meta.betas.find(b => b.beta === 10);
+  const only = (src, name) => ({ xlim: src.xlim,
+    mag: { ylim: src.mag.ylim, curves: src.mag.curves.filter(c => c.name === name) },
+    phase: { ylim: src.phase.ylim, curves: src.phase.curves.filter(c => c.name === name) } });
+  BD.data["t39_lead"] = only(L8, "α=0.1");
+  BD.data["t39_lead"].marks = [
+    { type: "vline", w: a1.w1, label: "1/T", color: "#5B6B8C", dy: 20 },
+    { type: "vline", w: a1.w2, label: "1/(αT)", color: "#5B6B8C", dy: 44 },
+    { type: "vline", w: a1.wm, label: "ω_{m}", color: "#D63A2F" },
+    { type: "hlevel", y: a1.level_hi_db, w0: 1, w1: 100, label: "+20dB", color: "#F5821F", dy: -8 }
+  ];
+  BD.data["t39_lag"] = only(G12, "β=10");
+  BD.data["t39_lag"].marks = [
+    { type: "vline", w: b1.w1, label: "1/T", color: "#5B6B8C", dy: 20 },
+    { type: "vline", w: b1.w2, label: "1/(βT)", color: "#5B6B8C", dy: 44 },
+    { type: "hlevel", y: b1.level_hi_db, w0: 1, w1: 10, label: "−20dB", color: "#F5821F", dy: -8 }
+  ];
+  BD.data["t39_ll"] = only(LL, "滞后-超前");
+  BD.data["t39_ll"].marks = [
+    { type: "vline", w: 0.1, label: "1/(βT)", color: "#5B6B8C", dy: 20 },
+    { type: "vline", w: 1, label: "1/T", color: "#5B6B8C", dy: 44 },
+    { type: "vline", w: 10, label: "1/(αT)", color: "#5B6B8C", dy: 20 }
+  ];
+  const CFG = [
+    { key: "t39_lead", title: "超前装置的 Bode 图（α=0.1）",
+      note: "ωm 处相角最大超前 +55°；高频段抬高 +20dB —— ωc 右移、γ 增大、抗噪变差。" },
+    { key: "t39_lag", title: "滞后装置的 Bode 图（β=10）",
+      note: "高频段衰减 −20dB，相角滞后集中在低频段 —— ωc 左移、γ 增大、抗噪变好。" },
+    { key: "t39_ll", title: "滞后—超前装置的 Bode 图（β=10）",
+      note: "低频段滞后衰减、高频段超前补相角，相角先滞后后超前 —— ωc 基本不变、γ 增大。" }
+  ];
+  let F = null, cur = -1;
+  /* 图填满右栏：按容器实际宽高比动态设定 viewBox 高度，杜绝上下留白 */
+  function render(i) {
+    if (i === cur) return; cur = i;
+    const c = CFG[i];
+    document.getElementById("figTitle").textContent = c.title;
+    document.getElementById("figNote").textContent = c.note;
+    const box = document.querySelector(".figc .bd2");
+    const r = box.getBoundingClientRect();
+    const vh = Math.round(960 * Math.max(.55, Math.min(1.25, r.height / Math.max(r.width, 1))));
+    F = BD.figure("fig", c.key, { mag: true, phase: true, vh, static: true, zoom: false });
+    document.querySelectorAll(".tr").forEach(r2 => r2.classList.toggle("on", +r2.dataset.row === i));
+  }
+  document.querySelectorAll(".tr").forEach(r => {
+    r.onclick = () => render(+r.dataset.row);
+    r.onmouseenter = () => render(+r.dataset.row);
+  });
+  render(0);
+  /* QA 钩子：?row=N 直达第 N 行对应图（截图管线用） */
+  window.addEventListener("load", () => {
+    const n = new URLSearchParams(location.search).get("row");
+    if (n !== null) render(Math.max(0, Math.min(2, +n)));
+  });
+});
+</script>
+</div></div>
+</body>
+</html>

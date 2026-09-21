@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>6.4 局部反馈校正的特点</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=600">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=600" defer></script>
+<style>
+  .col{display:flex;flex-direction:column;gap:18px;height:100%;min-height:0}
+  .tr{flex:1;display:flex;gap:20px;align-items:stretch;background:#fff;border:2px solid var(--line);
+      border-radius:16px;overflow:hidden;min-height:0}
+  .tr .no{flex:none;width:120px;display:grid;place-items:center;background:var(--blue);color:#fff;
+      font-size:28px;font-weight:700}
+  .tr .bd{flex:1;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:14px 24px;font-size:23px;line-height:1.5}
+  .tr .hd2{font-size:25px;font-weight:700;color:var(--navy)}
+  .tr .sub{font-size:20px;color:var(--muted);line-height:1.45}
+  .tr .eqs{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .chip{font-size:20px;background:var(--sky);border-radius:10px;padding:4px 14px;color:var(--navy)}
+  .tr.cmp .no{background:var(--orange)}
+</style>
+</head>
+<body data-title="6.4 局部反馈校正的特点" data-page="41 / 48">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="col">
+      <div class="tr">
+        <div class="no">原理 1</div>
+        <div class="bd">
+          <div class="hd2">用反馈装置<span class="kw-r">包围"要害环节"</span>，形成局部反馈回路</div>
+          <div class="sub">包围对象：未校正系统中<b>对动态性能改善有重大妨碍作用</b>的环节 <span class="tex">G_{2}(s)</span>。</div>
+        </div>
+      </div>
+      <div class="tr">
+        <div class="no">原理 2</div>
+        <div class="bd">
+          <div class="hd2">局部回路开环幅值远大于 1 的频段，特性<span class="kw-r">只取决于反馈装置</span></div>
+          <div class="eqs">
+            <span class="chip"><span class="tex">|G_{2}(j\omega)G_{c}(j\omega)|\gg1\;\Rightarrow\;G_{2c}\approx\dfrac{1}{G_{c}}</span></span>
+            <span class="chip"><span class="tex">|G_{2}G_{c}|\ll1\;\Rightarrow\;G_{2c}\approx G_{2}</span></span>
+          </div>
+          <div class="sub">与被包围环节 <span class="tex">G_{2}</span> 无关——适当选择 <span class="tex">G_{c}</span> 的形式与参数，可使已校系统性能满足给定指标。</div>
+        </div>
+      </div>
+      <div class="tr cmp">
+        <div class="no">对比</div>
+        <div class="bd">
+          <div class="hd2">与串联校正相比：效果相同，另有<span class="kw-r">特殊功能</span></div>
+          <div class="sub">除可获得与串联校正相同的校正效果外，反馈校正还可<b>削弱被包围环节参数摄动与非线性的影响</b>。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">要点</span><span>局部反馈校正 = 用 <span class="tex">G_{c}</span> 包围要害环节：<span class="kw-r">强反馈频段按 <span class="tex">1/G_{c}</span> 重塑特性</span>，弱反馈频段保持原样。</span></div>
+</div></div>
+</body>
+</html>

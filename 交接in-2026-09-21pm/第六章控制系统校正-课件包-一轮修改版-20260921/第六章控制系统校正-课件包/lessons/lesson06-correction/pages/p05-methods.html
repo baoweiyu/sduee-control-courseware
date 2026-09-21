@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>常用校正方法</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=600">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=600" defer></script>
+<script src="../fig.js"></script>
+<style>
+  .grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:26px;height:100%;min-height:0}
+  .mcard{display:flex;flex-direction:column;overflow:hidden;background:#fff;border:2px solid var(--line);
+    border-radius:var(--radius);min-height:0}
+  .mcard.main{border-color:var(--orange);box-shadow:0 10px 30px rgba(245,130,31,.16)}
+  .mcard>.hd{background:var(--blue);color:#fff;font-size:26px;font-weight:700;padding:13px 24px;
+    display:flex;align-items:center;gap:12px}
+  .mcard.main>.hd{background:var(--navy)}
+  .mcard>.hd .tag{background:var(--orange);border-radius:8px;font-size:19px;padding:3px 12px;letter-spacing:1px}
+  .mcard>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:12px;
+    padding:18px 24px;min-height:0}
+  .mcard .ico{align-self:stretch;background:var(--sky);border:2px solid var(--line);border-radius:14px;
+    padding:10px 12px;display:grid;place-items:center}
+  .mcard .ico svg{display:block;width:100%;height:196px}
+  .ico text.mf{font-family:"Cambria Math","STIX Two Math",Georgia,"Times New Roman",serif}
+  .pt{padding-left:28px;text-indent:-28px;font-size:23px;line-height:1.62;color:var(--ink)}
+  .pt::before{content:"";display:inline-block;vertical-align:2px;width:12px;height:12px;border-radius:3px;
+    background:var(--orange);transform:rotate(45deg);margin-right:16px}
+  .pt b{color:var(--navy)}
+  .use{background:var(--sky);border-radius:12px;padding:12px 18px;font-size:21px;
+    color:var(--navy);font-weight:700;line-height:1.5}
+</style>
+</head>
+<body data-title="常用校正方法" data-page="5 / 48">
+<div class="act-stage"><div class="act-slide">
+
+<div class="act-body has-note">
+  <div class="grid">
+    <div class="mcard main">
+      <div class="hd"><span class="tag">本章主线</span>频率特性法</div>
+      <div class="bd">
+        <div class="ico">
+          <!-- Bode 图示意：坐标轴 + 校正前/后渐近线（定性示意，深色规范绘制） -->
+          <svg viewBox="0 0 320 190">
+            <defs>
+              <marker id="m5a" markerWidth="10" markerHeight="8" refX="7" refY="3" orient="auto">
+                <path d="M0,0 L7,3 L0,6 Z" fill="#16324F"/>
+              </marker>
+            </defs>
+            <line x1="34" y1="158" x2="308" y2="158" stroke="#16324F" stroke-width="2.6" marker-end="url(#m5a)"/>
+            <line x1="34" y1="158" x2="34" y2="14" stroke="#16324F" stroke-width="2.6" marker-end="url(#m5a)"/>
+            <text class="mf" x="44" y="30" font-size="19" font-weight="700" fill="#16324F">L(ω)/dB</text>
+            <text class="mf" x="296" y="182" font-size="20" font-style="italic" font-weight="700" fill="#16324F">ω</text>
+            <text class="mf" x="26" y="164" font-size="17" fill="#16324F" text-anchor="end">0</text>
+            <polyline points="44,140 128,140 196,84 300,84" fill="none" stroke="#1D3FA0" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round"/>
+            <polyline points="44,112 118,112 176,48 300,48" fill="none" stroke="#F5821F" stroke-width="4" stroke-dasharray="10 6" stroke-linejoin="round"/>
+            <text x="222" y="106" font-size="19" font-weight="700" fill="#1D3FA0">校正前</text>
+            <text x="222" y="40" font-size="19" font-weight="700" fill="#B3541E">校正后</text>
+          </svg>
+        </div>
+        <div class="pt">在 Bode 图上按<b>低频、中频、高频三频段</b>的要求，重塑开环频率特性。</div>
+        <div class="pt">几何意义直观，校正装置的作用<b>一目了然</b>，适合工程设计。</div>
+        <div class="pt">以 <span class="tex">\omega_{c}</span>、<span class="tex">\gamma</span> 等<b>频域指标</b>为设计目标，逐条校验。</div>
+        <div class="use">本章重点：例6-1（超前）、例6-3（滞后）全程演练</div>
+      </div>
+    </div>
+    <div class="mcard">
+      <div class="hd">根轨迹法</div>
+      <div class="bd">
+        <div class="ico">
+          <!-- s 平面示意：坐标轴 + 开环极点 + 根轨迹分支进入期望区域（定性示意） -->
+          <svg viewBox="0 0 320 190">
+            <defs>
+              <marker id="m5b" markerWidth="10" markerHeight="8" refX="7" refY="3" orient="auto">
+                <path d="M0,0 L7,3 L0,6 Z" fill="#16324F"/>
+              </marker>
+              <marker id="m5c" markerWidth="9" markerHeight="7" refX="6" refY="2.5" orient="auto">
+                <path d="M0,0 L6,2.5 L0,5 Z" fill="#1D3FA0"/>
+              </marker>
+            </defs>
+            <line x1="14" y1="104" x2="308" y2="104" stroke="#16324F" stroke-width="2.6" marker-end="url(#m5b)"/>
+            <line x1="164" y1="176" x2="164" y2="12" stroke="#16324F" stroke-width="2.6" marker-end="url(#m5b)"/>
+            <text class="mf" x="296" y="130" font-size="20" font-style="italic" font-weight="700" fill="#16324F">σ</text>
+            <text class="mf" x="176" y="28" font-size="19" font-style="italic" font-weight="700" fill="#16324F">jω</text>
+            <path d="M72,104 C118,104 128,52 196,42" fill="none" stroke="#1D3FA0" stroke-width="4" marker-end="url(#m5c)"/>
+            <path d="M72,104 C118,104 128,156 196,166" fill="none" stroke="#1D3FA0" stroke-width="4" marker-end="url(#m5c)"/>
+            <line x1="64" y1="96" x2="80" y2="112" stroke="#16324F" stroke-width="4.5" stroke-linecap="round"/>
+            <line x1="64" y1="112" x2="80" y2="96" stroke="#16324F" stroke-width="4.5" stroke-linecap="round"/>
+            <line x1="236" y1="96" x2="252" y2="112" stroke="#16324F" stroke-width="4.5" stroke-linecap="round"/>
+            <line x1="236" y1="112" x2="252" y2="96" stroke="#16324F" stroke-width="4.5" stroke-linecap="round"/>
+            <text x="48" y="136" font-size="18" font-weight="700" fill="#16324F">开环极点</text>
+            <circle cx="204" cy="41" r="5" fill="#D63A2F"/>
+            <circle cx="204" cy="167" r="5" fill="#D63A2F"/>
+            <text x="216" y="36" font-size="18" font-weight="700" fill="#B3541E">期望闭环极点</text>
+          </svg>
+        </div>
+        <div class="pt">在 s 平面上<b>配置闭环零、极点</b>，直接对应时域响应形态。</div>
+        <div class="pt">适合以<b>时域指标</b>为主导的设计，与第五章前后呼应。</div>
+        <div class="pt">校正装置改变根轨迹走向，使闭环极点<b>进入期望区域</b>。</div>
+        <div class="use">同一系统、两种视角：频域 ↔ 复域</div>
+      </div>
+    </div>
+    <div class="mcard">
+      <div class="hd">复合校正法</div>
+      <div class="bd">
+        <div class="ico">
+          <svg id="mfg3"></svg>
+        </div>
+        <div class="pt">反馈控制之外增设<b>前馈补偿通道</b>，两者共同作用。</div>
+        <div class="pt"><b>按输入补偿</b>提高稳态精度，<b>按扰动补偿</b>抵消扰动影响。</div>
+        <div class="pt">前馈通道<b>不改变闭环特征方程</b>，可在保证稳定性的前提下提高精度。</div>
+        <div class="use">见 6.5 节：按输入 / 按扰动补偿，例6-8</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">结论</span><span>三种方法各有适用场合；<span style="color:var(--danger);font-weight:700">本章以频率特性法为主</span>，串联超前、串联滞后校正的设计均围绕 Bode 图展开。</span></div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  /* 复合校正 mini 方框图（与 p04 同款 BD.block，横平竖直、直角折线、实心分支点） */
+  const B = BD.block("mfg3", [
+    { type: "line", pts: [[12, 116], [52, 116]] },
+    { type: "dot", x: 40, y: 116 },
+    { type: "sum", x: 70, y: 116, r: 11 },
+    { type: "line", pts: [[81, 116], [128, 116]] },
+    { type: "sum", x: 146, y: 116, r: 11 },
+    { type: "line", pts: [[157, 116], [182, 116]] },
+    { type: "box", x: 184, y: 94, w: 74, h: 44, label: "G(s)", fs: 21 },
+    { type: "line", pts: [[258, 116], [334, 116]] },
+    { type: "dot", x: 302, y: 116 },
+    { type: "line", pts: [[302, 116], [302, 172], [70, 172], [70, 127]] },
+    { type: "line", pts: [[40, 116], [40, 48], [52, 48]] },
+    { type: "box", x: 52, y: 26, w: 76, h: 44, label: "G_{c}(s)", fill: "#FDF3EC", color: "#F5821F", fs: 21 },
+    { type: "line", pts: [[128, 48], [146, 48], [146, 105]] }
+  ], { vw: 348, vh: 192 });
+  B.tx(B.g, 20, 98, "R(s)", { fs: 20, it: 1, fill: "#16324F" });
+  B.tx(B.g, 322, 98, "C(s)", { fs: 20, it: 1, fill: "#16324F" });
+  B.tx(B.g, 84, 158, "−", { fs: 21, b: 1, an: "start" });
+  B.tx(B.g, 158, 78, "+", { fs: 21, b: 1, an: "start" });
+});
+</script>
+</div></div>
+</body>
+</html>

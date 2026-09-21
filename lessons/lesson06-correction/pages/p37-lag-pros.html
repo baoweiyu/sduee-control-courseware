@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>③ 滞后校正的优缺点与适用范围</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=221">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=221" defer></script>
+<style>
+  .wrap{display:flex;flex-direction:column;gap:16px;height:100%;min-height:0}
+  .tr{flex:1;display:flex;gap:22px;align-items:stretch;background:#fff;border:2px solid var(--line);
+    border-radius:16px;padding:14px 24px;min-height:0}
+  .tr .lab{flex:none;width:150px;display:flex;flex-direction:column;justify-content:center;gap:8px;
+    border-right:2px solid var(--line);padding-right:18px}
+  .tr .lab .ic{font-size:36px;font-weight:700;width:56px;height:56px;border-radius:50%;
+    display:grid;place-items:center;color:#fff}
+  .tr .lab .nm{font-size:24px;font-weight:700;color:var(--navy)}
+  .tr .cnt{flex:1;display:flex;flex-direction:column;justify-content:center;gap:10px;font-size:21px;line-height:1.6;min-width:0}
+  .tr .cnt .sub{font-size:19px;color:var(--ink);opacity:.85}
+  .good .ic{background:#0E7A36}.bad .ic{background:#C02A20}.fit .ic{background:var(--blue)}
+</style>
+</head>
+<body data-title="③ 滞后校正的优缺点与适用范围" data-page="37 / 48">
+<div class="act-stage"><div class="act-slide">
+
+<div class="act-body has-note">
+  <div class="wrap">
+    <div class="tr good" data-step="1">
+      <div class="lab"><span class="ic">✓</span><span class="nm">优点</span></div>
+      <div class="cnt">
+        <div>幅值衰减换裕度：<span class="tex">\omega_{c2}</span> 左移 → <span class="tex">\gamma\uparrow</span>、<span class="tex">\sigma\%\downarrow</span>，稳定性显著改善；</div>
+        <div>低频增益不受影响 → 可提高开环增益使 <span class="tex">e_{ss}\downarrow</span>，<b>暂态保持而稳态精度改善</b>。</div>
+        <div class="sub">例6-3：γ 由 −23° 提升到 +40.2°，同时 Kg≥10dB 达标。</div>
+      </div>
+    </div>
+    <div class="tr bad" data-step="2">
+      <div class="lab"><span class="ic">✗</span><span class="nm">缺点</span></div>
+      <div class="cnt">
+        <div><span class="tex">\omega_{c2}\downarrow</span> → 带宽变窄 → <span class="tex">t_{s}\uparrow</span>，<b>响应变慢</b>；</div>
+        <div>βT 往往很大（例6-3 中 βT=143），<b>需要较大的 RC 元件</b>才能实现。</div>
+      </div>
+    </div>
+    <div class="tr fit" data-step="3">
+      <div class="lab"><span class="ic">◎</span><span class="nm">适用范围</span></div>
+      <div class="cnt">
+        <div>对<b>响应速度要求不高</b>、<b>抑制高频噪声要求高</b>的场合（高频段被压低，抗噪好）；</div>
+        <div><span class="tex">\omega_{c}</span> 附近<b>相角滞后随 ω 增大急剧增加</b>的系统（如例6-3）——超前补不动，滞后正好压。</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">小结</span><span>滞后校正 = <span class="kw-r">用带宽换裕度与抗噪</span>：响应速度下降，但稳定裕度增大、抗高频噪声能力增强、稳态精度可提高。</span></div>
+
+<script>
+/* QA 钩子：?ff=1 直接呈现全部步骤（截图管线用，不影响播放器分步呈现） */
+if (new URLSearchParams(location.search).has("ff"))
+  window.addEventListener("load", () =>
+    document.querySelectorAll("[data-step]").forEach(e => e.classList.add("shown")));
+</script>
+</div></div>
+</body>
+</html>

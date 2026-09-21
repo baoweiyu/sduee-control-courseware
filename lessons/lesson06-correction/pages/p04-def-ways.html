@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>校正的定义与三种校正方式</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=221">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=221" defer></script>
+<script src="../fig.js"></script>
+<style>
+  .col{display:flex;flex-direction:column;gap:20px;height:100%;min-height:0}
+  .defc{flex:none}
+  .defc .bd{padding:18px 26px;display:flex;flex-direction:column;gap:14px}
+  .dtx{font-size:24px;line-height:1.6;color:var(--ink)}
+  .dtx b{color:var(--navy)}
+  .dkw{background:var(--sky);border-radius:12px;padding:12px 20px;font-size:22px;line-height:1.5;color:#16324F}
+  .dkw b{color:var(--danger)}
+  .ways{flex:1;display:flex;gap:22px;min-height:0}
+  .way{flex:1;display:flex;flex-direction:column;overflow:hidden;background:#fff;border:2px solid var(--line);
+    border-radius:var(--radius);min-width:0;min-height:0}
+  .way>.hd{background:var(--blue);color:#fff;font-size:24px;font-weight:700;padding:9px 20px;
+    display:flex;align-items:center;gap:12px}
+  .way>.hd .tag{background:var(--orange);border-radius:8px;font-size:19px;padding:3px 12px;letter-spacing:1px}
+  .way>.bd{flex:1;display:flex;flex-direction:column;gap:8px;padding:14px 18px 10px;min-height:0}
+  .way .l1{font-size:21px;line-height:1.5;color:var(--ink);min-height:64px}
+  .way .l1 b{color:var(--navy)}
+  .way .l2{font-size:21px;line-height:1.45;color:#16324F;min-height:62px}
+  .way .fg{flex:1;min-height:0;border-top:2px solid var(--sky);padding-top:6px}
+  .way .fg svg{width:100%;height:100%}
+</style>
+</head>
+<body data-title="校正的定义与三种校正方式" data-page="4 / 48">
+<div class="act-stage"><div class="act-slide">
+
+<div class="act-body has-note">
+  <div class="col">
+    <div class="act-card defc">
+      <div class="hd">校正的定义</div>
+      <div class="bd">
+        <div class="dtx">利用<b>增加辅助装置</b>来改善系统性能的方法，称为系统的<b>校正</b>。所增加的辅助装置称为<b>校正装置</b> <span class="tex">G_{c}(s)</span>；系统中原有的不可变部分称为<b>固有部分</b> <span class="tex">G_{0}(s)</span>。</div>
+        <div class="dkw">校正装置按在系统中<b>接入位置</b>的不同，分为以下三种校正方式：</div>
+      </div>
+    </div>
+    <div class="ways">
+      <div class="way" data-step="1">
+        <div class="hd"><span class="tag">方式①</span>串联校正</div>
+        <div class="bd">
+          <div class="l1"><span class="tex">G_{c}(s)</span> <b>串接在前向通道</b>中，与 <span class="tex">G_{0}(s)</span> 串联。</div>
+          <div class="l2">结构简单、易于实现，是应用最广泛的校正方式。</div>
+          <div class="fg"><svg id="fg1"></svg></div>
+        </div>
+      </div>
+      <div class="way" data-step="2">
+        <div class="hd"><span class="tag">方式②</span>反馈校正</div>
+        <div class="bd">
+          <div class="l1"><span class="tex">H_{c}(s)</span> 接在<b>局部反馈通道</b>中，包围部分固有环节。</div>
+          <div class="l2">可削弱被包围环节参数波动与非线性的影响。</div>
+          <div class="fg"><svg id="fg2"></svg></div>
+        </div>
+      </div>
+      <div class="way" data-step="3">
+        <div class="hd"><span class="tag">方式③</span>复合校正</div>
+        <div class="bd">
+          <div class="l1">在主反馈回路之外，沿输入（或扰动）增设<b>前馈补偿通道</b> <span class="tex">G_{c}(s)</span>。</div>
+          <div class="l2">反馈与前馈共同作用，兼顾稳定性与稳态精度。</div>
+          <div class="fg"><svg id="fg3"></svg></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">要点</span><span>三种方式的区别在于<span style="color:var(--danger);font-weight:700">校正装置的接入位置</span>：串联在前向通道、反馈在局部反馈通道、复合在反馈之外加前馈（图中橙色框）。</span></div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const ORF = "#FDF3EC", ORC = "#F5821F", SIG = "#16324F";
+  /* 三张图共用画布：vw=452, vh=320，主信号线统一在 y=170（三列同基线对齐） */
+  /* ① 串联校正：R →⊖→ Gc → G0 → C，单位负反馈 */
+  const B1 = BD.block("fg1", [
+    { type: "line", pts: [[16, 170], [70, 170]] },
+    { type: "sum", x: 88, y: 170, r: 14 },
+    { type: "line", pts: [[102, 170], [126, 170]] },
+    { type: "box", x: 128, y: 142, w: 92, h: 56, label: "G_{c}(s)", fill: ORF, color: ORC, fs: 26 },
+    { type: "line", pts: [[220, 170], [244, 170]] },
+    { type: "box", x: 248, y: 142, w: 92, h: 56, label: "G_{0}(s)", fs: 26 },
+    { type: "line", pts: [[340, 170], [430, 170]] },
+    { type: "dot", x: 386, y: 170 },
+    { type: "line", pts: [[386, 170], [386, 252], [88, 252], [88, 184]] }
+  ], { vw: 452, vh: 320 });
+  B1.tx(B1.g, 42, 152, "R(s)", { fs: 26, it: 1, fill: SIG });
+  B1.tx(B1.g, 410, 152, "C(s)", { fs: 26, it: 1, fill: SIG });
+  B1.tx(B1.g, 106, 226, "−", { fs: 26, b: 1, an: "start" });
+
+  /* ② 反馈校正：内环 Hc 包围 G2，外环单位负反馈 */
+  const B2 = BD.block("fg2", [
+    { type: "line", pts: [[16, 170], [56, 170]] },
+    { type: "sum", x: 72, y: 170, r: 14 },
+    { type: "line", pts: [[86, 170], [110, 170]] },
+    { type: "box", x: 112, y: 142, w: 82, h: 56, label: "G_{1}(s)", fs: 26 },
+    { type: "line", pts: [[194, 170], [208, 170]] },
+    { type: "sum", x: 224, y: 170, r: 14 },
+    { type: "line", pts: [[238, 170], [262, 170]] },
+    { type: "box", x: 264, y: 142, w: 82, h: 56, label: "G_{2}(s)", fs: 26 },
+    { type: "line", pts: [[346, 170], [430, 170]] },
+    { type: "dot", x: 362, y: 170 },
+    { type: "line", pts: [[362, 170], [362, 220], [334, 220]] },
+    { type: "box", x: 242, y: 192, w: 92, h: 56, label: "H_{c}(s)", fill: ORF, color: ORC, fs: 26 },
+    { type: "line", pts: [[242, 220], [224, 220], [224, 184]] },
+    { type: "dot", x: 404, y: 170 },
+    { type: "line", pts: [[404, 170], [404, 286], [72, 286], [72, 184]] }
+  ], { vw: 452, vh: 320 });
+  B2.tx(B2.g, 40, 152, "R(s)", { fs: 26, it: 1, fill: SIG });
+  B2.tx(B2.g, 410, 152, "C(s)", { fs: 26, it: 1, fill: SIG });
+  B2.tx(B2.g, 90, 246, "−", { fs: 26, b: 1, an: "start" });
+  B2.tx(B2.g, 214, 212, "−", { fs: 26, b: 1, an: "end" });
+
+  /* ③ 复合校正（按输入补偿）：反馈主回路 + 输入前馈 Gc（Gc 出口直角折线引入相加点） */
+  const B3 = BD.block("fg3", [
+    { type: "line", pts: [[16, 170], [76, 170]] },
+    { type: "dot", x: 56, y: 170 },
+    { type: "sum", x: 94, y: 170, r: 14 },
+    { type: "line", pts: [[108, 170], [176, 170]] },
+    { type: "sum", x: 194, y: 170, r: 14 },
+    { type: "line", pts: [[208, 170], [232, 170]] },
+    { type: "box", x: 236, y: 142, w: 88, h: 56, label: "G(s)", fs: 26 },
+    { type: "line", pts: [[324, 170], [430, 170]] },
+    { type: "dot", x: 384, y: 170 },
+    { type: "line", pts: [[384, 170], [384, 262], [94, 262], [94, 184]] },
+    { type: "line", pts: [[56, 170], [56, 64], [82, 64]] },
+    { type: "box", x: 84, y: 36, w: 82, h: 56, label: "G_{c}(s)", fill: ORF, color: ORC, fs: 26 },
+    { type: "line", pts: [[166, 64], [194, 64], [194, 156]] }
+  ], { vw: 452, vh: 320 });
+  B3.tx(B3.g, 30, 152, "R(s)", { fs: 26, it: 1, fill: SIG });
+  B3.tx(B3.g, 410, 152, "C(s)", { fs: 26, it: 1, fill: SIG });
+  B3.tx(B3.g, 112, 240, "−", { fs: 26, b: 1, an: "start" });
+  B3.tx(B3.g, 212, 120, "+", { fs: 26, b: 1, an: "start" });
+
+  /* QA 钩子：?seg=k 亮前 k 步；?ff=1 全部亮出（截图管线用） */
+  window.addEventListener("load", () => {
+    const qp = new URLSearchParams(location.search);
+    let k = 0;
+    if (qp.has("ff")) k = 3;
+    else if (qp.has("seg")) k = Math.max(0, Math.min(3, parseInt(qp.get("seg"), 10) || 0));
+    for (let i = 0; i < k; i++) ACT.step.next();
+  });
+});
+</script>
+</div></div>
+</body>
+</html>

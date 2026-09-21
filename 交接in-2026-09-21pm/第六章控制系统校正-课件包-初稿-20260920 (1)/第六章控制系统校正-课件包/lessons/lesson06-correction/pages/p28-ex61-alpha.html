@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>例6-1：求 α 与 ωc2</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=600">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=600" defer></script>
+<script src="../fig.js"></script>
+<script src="../data/ex61.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:.92;display:flex;flex-direction:column;gap:12px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:8px;padding:10px 18px}
+  .fml{background:var(--sky);border-radius:12px;padding:8px 12px;text-align:center;font-size:19.5px;line-height:1.5}
+  .cmt{font-size:18.5px;line-height:1.45;color:var(--ink)}
+  .cmt b{color:var(--danger)}
+  .figc{flex:1.14;display:flex;flex-direction:column;overflow:hidden;position:relative}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
+  .figc svg{width:100%;height:100%}
+</style>
+</head>
+<body data-title="例6-1：求 α 与 ωc2" data-page="28 / 48">
+<div class="act-stage"><div class="act-slide">
+
+<div class="act-body has-note">
+  <div class="row">
+    <div class="lft">
+      <div class="act-card" data-step="1" style="flex:1.05">
+        <div class="hd">② 需要多少超前角 → α</div>
+        <div class="bd">
+          <div class="cmt"><span class="tex">\varphi_{m}=\gamma^{*}-\gamma_{0}+\varepsilon=40^{\circ}-16^{\circ}+\varepsilon</span>；按教材口径取 <span class="tex">\omega_{c2}=4.6</span> 试算（相当于 ε≈4.6°）：</div>
+          <div class="fml"><span class="tex tex-d">\alpha=\frac{1-\sin\varphi_{m}}{1+\sin\varphi_{m}}=0.3158</span></div>
+        </div>
+      </div>
+      <div class="act-card" data-step="2" style="flex:.95">
+        <div class="hd">② 在未校幅频上找 ωc2</div>
+        <div class="bd">
+          <div class="cmt">网络在 <span class="tex">\omega_{m}</span> 处抬高 <span class="tex">-10\lg\alpha=5.0\ \mathrm{dB}</span>，故令 <span class="tex">\omega_{c2}</span> 为未校 <span class="tex">L_{0}(\omega)=-5.0\ \mathrm{dB}</span> 处的频率（右图）：</div>
+          <div class="fml"><span class="tex tex-d">\omega_{c2}=\omega_{m}=4.6</span></div>
+        </div>
+      </div>
+      <div class="act-card" data-step="3" style="flex:1.1">
+        <div class="hd">② 定 T，写出 Gc(s)</div>
+        <div class="bd">
+          <div class="fml"><span class="tex tex-d">T=\frac{1}{\omega_{m}\sqrt{\alpha}}=0.38</span></div>
+          <div class="fml"><span class="tex tex-d">G_{c}(s)=\frac{0.38s+1}{0.12s+1},\quad \frac{1}{T}=2.6,\ \frac{1}{\alpha T}=8</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="act-card figc">
+      <div class="hd"><span style="flex:1">在未校 L₀(ω) 上：L₀=−10lgα=−5.0 dB 处定 ωc2</span></div>
+      <div class="bd2"><svg id="fig"></svg></div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">口径</span><span>页面文字按教材口径：α=0.3158、T=0.38、<span class="tex">\omega_{c2}=4.6</span>；图内曲线与标注为精确计算值（<span class="tex">\omega_{c2}=4.53</span>），二者并存。</span></div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const D = BD.data.ex61;
+  D.mag.asym = [D.mag.asym[0]];
+  D.marks = D.marks.filter(m => (m.type === "vline") || (m.type === "wc" && m.w > 4));
+  D.marks.push({ type: "hlevel", y: 10 * Math.log10(D.meta.alpha), w0: 0.1, w1: D.meta.wc2.val,
+    label: "−10lgα=−5.0 dB", color: "#F5821F", dy: -10 });
+  const F = BD.figure("fig", "ex61", { mag: true, phase: false, static: true, zoom: false,
+    extra(api) {
+      const PM = api.panelOf("mag"), x = api.X(D.meta.wc2.val), y = api.Y(PM, 10 * Math.log10(D.meta.alpha));
+      api.mk("circle", { cx: x, cy: y, r: 9, fill: "#F5821F", stroke: "#fff", "stroke-width": 2.5 }, api.gDyn);
+    } });
+  F.setOp(1, 0); F.setOp(2, 0);   /* 本页只看未校 G0 */
+});
+</script>
+<script>
+window.addEventListener("load", () => {
+  if (new URLSearchParams(location.search).has("all"))
+    document.querySelectorAll("[data-step]").forEach(e => e.classList.add("shown"));
+});
+</script>
+</div></div>
+</body>
+</html>

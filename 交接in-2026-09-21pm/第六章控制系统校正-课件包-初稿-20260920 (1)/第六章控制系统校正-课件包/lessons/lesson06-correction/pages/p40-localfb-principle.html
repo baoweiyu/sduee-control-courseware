@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>6.4 局部反馈校正：原理</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=600">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=600" defer></script>
+<script src="../fig.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .figc{flex:1.14;display:flex;flex-direction:column;overflow:hidden;position:relative}
+  .figc .stext{margin:10px 16px 0;background:var(--sky);border-radius:10px;padding:7px 14px;
+    font-size:20px;line-height:1.4;color:var(--navy);min-height:66px;display:flex;align-items:center}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .ctl{display:flex;align-items:center;gap:12px;justify-content:center;padding:8px 0 10px}
+  .btn{background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:19px;font-weight:700;
+    padding:8px 20px;cursor:pointer;min-width:6.5em;text-align:center}
+  .btn.ghost{background:#fff;color:var(--blue);border:2px solid var(--blue)}
+  .btn:disabled{opacity:.5;cursor:default}
+  .prog{position:absolute;top:auto;bottom:66px;right:16px;z-index:5;font-size:17px;color:var(--muted);
+    background:rgba(255,255,255,.92);border:1.5px solid var(--line);border-radius:8px;padding:2px 10px;
+    font-variant-numeric:tabular-nums}
+  .rt{flex:1;display:flex;flex-direction:column;min-height:0}
+  .rt .act-card{flex:1;display:flex;flex-direction:column;overflow:hidden}
+  .rt .bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:8px;padding:10px 14px}
+  .stp{display:flex;gap:10px;align-items:flex-start;background:var(--sky);border-radius:12px;
+    padding:8px 12px 8px 9px;font-size:19px;line-height:1.42;border-left:5px solid transparent;cursor:pointer}
+  .stp .num{flex:none;width:30px;height:30px;margin-top:2px;border-radius:50%;background:var(--blue);
+    color:#fff;font-weight:700;font-size:17px;display:grid;place-items:center}
+  .stp .stx{flex:1;min-width:0}
+  .stp .got{font-weight:700;color:var(--navy)}
+  .stp .got b{color:var(--danger)}
+  .stp.on{background:#FDF3EC;border-left-color:var(--danger);box-shadow:0 0 0 2px rgba(214,58,47,.22)}
+  .stp.on .num{background:var(--danger)}
+  @keyframes bdPulse{0%,100%{opacity:1}50%{opacity:.25}}
+  .flash{animation:bdPulse .85s ease-in-out infinite}
+</style>
+</head>
+<body data-title="6.4 局部反馈校正：原理" data-page="40 / 48">
+<div class="act-stage"><div class="act-slide">
+
+<div class="act-body has-note">
+  <div class="row">
+    <div class="act-card figc">
+      <div class="hd"><span style="flex:1">局部反馈校正方框图：Gc 包围 G₂ 形成内回路</span></div>
+      <div class="stext" id="stext"></div>
+      <span class="prog" id="prog">0 / 4</span>
+      <div class="bd2"><svg id="fig"></svg></div>
+      <div class="ctl">
+        <button class="btn" id="step">⧉ 分步</button>
+        <button class="btn ghost" id="rst">↺ 重置</button>
+      </div>
+    </div>
+    <div class="rt">
+      <div class="act-card">
+        <div class="hd">推导分步（与左图联动）</div>
+        <div class="bd">
+          <div class="stp" data-step="1" id="s1"><span class="num">1</span><div class="stx">
+            <div>内回环的等效传递函数</div>
+            <div class="got"><span class="tex tex-d">G_{2c}(s)=\frac{G_{2}(s)}{1+G_{2}(s)G_{c}(s)}</span></div>
+          </div></div>
+          <div class="stp" data-step="2" id="s2"><span class="num">2</span><div class="stx">
+            <div>与 <span class="tex">G_{1}(s)</span> 串联后，开环传递函数</div>
+            <div class="got"><span class="tex tex-d">G(s)=\frac{G_{1}(s)G_{2}(s)}{1+G_{2}(s)G_{c}(s)}</span></div>
+          </div></div>
+          <div class="stp" data-step="3" id="s3"><span class="num">3</span><div class="stx">
+            <div>当 <span class="tex">|G_{2}(j\omega)G_{c}(j\omega)|\gg1</span> 的频段：</div>
+            <div class="got"><span class="tex">G_{2c}(s)\approx\dfrac{1}{G_{c}(s)}</span> —— 特性<b>只与反馈环节有关</b>，与被包围的 <span class="tex">G_{2}</span> 无关</div>
+          </div></div>
+          <div class="stp" data-step="4" id="s4"><span class="num">4</span><div class="stx">
+            <div>当 <span class="tex">|G_{2}(j\omega)G_{c}(j\omega)|\ll1</span> 的频段：</div>
+            <div class="got"><span class="tex">G_{2c}(s)\approx G_{2}(s)</span> —— 与<b>未校正</b>系统特性一致</div>
+          </div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">要点</span><span>适当选取 <span class="tex">G_{c}</span> 的形式与参数，即可把 <span class="tex">|G_{2}G_{c}|\gg1</span> 频段的特性<span class="kw-r">重塑为 <span class="tex">1/G_{c}</span></span>，使已校系统满足指标。</span></div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const total = 4;
+  const ORF = "#FDF3EC", ORC = "#F5821F";
+  const B = BD.block("fig", [
+    { type: "line", pts: [[24, 150], [72, 150]], label: "R(s)", labelDx: -6, labelDy: -16 },
+    { type: "sum", x: 90, y: 150, r: 15 },
+    { type: "line", pts: [[105, 150], [148, 150]] },
+    { type: "box", x: 148, y: 120, w: 110, h: 60, label: "G_{1}(s)", name: "g1" },
+    { type: "line", pts: [[258, 150], [292, 150]] },
+    { type: "sum", x: 310, y: 150, r: 15 },
+    { type: "line", pts: [[325, 150], [348, 150]] },
+    { type: "box", x: 348, y: 120, w: 110, h: 60, label: "G_{2}(s)", name: "g2" },
+    { type: "line", pts: [[458, 150], [624, 150]], label: "C(s)", labelDx: 44, labelDy: -16 },
+    { type: "dot", x: 520, y: 150 },
+    { type: "dot", x: 578, y: 150 },
+    { type: "line", pts: [[520, 150], [520, 255], [458, 255]], flow: true, name: "fl1" },
+    { type: "box", x: 348, y: 225, w: 110, h: 60, label: "G_{c}(s)", fill: ORF, color: ORC, name: "gc" },
+    { type: "line", pts: [[348, 255], [310, 255], [310, 165]], flow: true, name: "fl2" },
+    { type: "line", pts: [[578, 150], [578, 392], [90, 392], [90, 165]], flow: true, name: "fb" }
+  ], { vw: 640, vh: 440 });
+  B.tx(B.g, 104, 190, "−", { fs: 26, b: 1, an: "start" });
+  B.tx(B.g, 324, 190, "−", { fs: 26, b: 1, an: "start" });
+  B.tx(B.g, 414, 316, "局部反馈回路", { fs: 20, fill: ORC, b: 1 });
+  B.tx(B.g, 334, 426, "主反馈回路", { fs: 20, fill: "#5B6B8C" });
+  const dyn = B.mk("g", {}, B.svg);
+
+  const ST = [
+    "结构：校正装置 Gc 接在局部反馈通道，包围 G₂ 形成内回路，再与 G₁ 串联。",
+    "① 内回环等效：G₂c(s) = G₂(s) / [ 1 + G₂(s)Gc(s) ]",
+    "② 与 G₁ 串联：开环 G(s) = G₁G₂ / ( 1 + G₂Gc )",
+    "③ |G₂(jω)Gc(jω)| ≫ 1：G₂c ≈ 1/Gc —— 特性只由反馈装置决定（左图替换演示）",
+    "④ |G₂(jω)Gc(jω)| ≪ 1：G₂c ≈ G₂ —— 该频段与未校正一致"
+  ];
+  const stext = document.getElementById("stext"), prog = document.getElementById("prog"),
+        btn = document.getElementById("step");
+  function rect(x, y, w, h, color, dash, fill, op) {
+    return B.mk("rect", { x, y, width: w, height: h, rx: 12, fill: fill || "none",
+      stroke: color, "stroke-width": 4, "stroke-dasharray": dash || "none",
+      opacity: op == null ? 1 : op }, dyn);
+  }
+  function paint(k) {
+    dyn.innerHTML = "";
+    dyn.removeAttribute("class");
+    if (k === 1) {
+      dyn.setAttribute("class", "flash");
+      rect(294, 106, 248, 192, ORC, "12 9");
+      B.tx(dyn, 418, 100, "内回环 G_{2c}", { fs: 21, fill: ORC, b: 1 });
+    } else if (k === 2) {
+      dyn.setAttribute("class", "flash");
+      rect(136, 108, 334, 84, "#1D3FA0", "12 9");
+      B.tx(dyn, 303, 100, "G_{1} 与内回环串联", { fs: 21, fill: "#1D3FA0", b: 1 });
+    } else if (k === 3) {
+      B.mk("rect", { x: 292, y: 104, width: 252, height: 198, fill: "#fff", opacity: .8 }, dyn);
+      B.mk("rect", { x: 344, y: 116, width: 118, height: 68, fill: "#fff", opacity: .85 }, dyn);
+      const g3 = B.mk("g", { "class": "flash" }, dyn);
+      B.mk("rect", { x: 336, y: 110, width: 134, height: 80, rx: 12, fill: "#FDF1EF",
+        stroke: "#D63A2F", "stroke-width": 4 }, g3);
+      B.tx(g3, 403, 159, "≈ 1/G_{c}(s)", { fs: 25, fill: "#D63A2F", b: 1 });
+      B.tx(dyn, 418, 316, "该频段特性被 1/G_{c} 替换", { fs: 20, fill: "#D63A2F", b: 1 });
+    } else if (k === 4) {
+      const g4 = B.mk("g", { "class": "flash" }, dyn);
+      B.mk("rect", { x: 340, y: 112, width: 126, height: 76, rx: 12, fill: "none",
+        stroke: "#0E7A36", "stroke-width": 4, "stroke-dasharray": "12 9" }, g4);
+      B.tx(dyn, 403, 100, "G_{2c} ≈ G_{2}", { fs: 21, fill: "#0E7A36", b: 1 });
+    }
+    for (let i = 1; i <= total; i++)
+      document.getElementById("s" + i).classList.toggle("on", i === k);
+    stext.textContent = ST[k];
+    prog.textContent = k + " / " + total;
+    btn.disabled = k >= total;
+  }
+  const S = ACT.step, _n = S.next.bind(S), _r = S.reset.bind(S);
+  S.next = function () { const d = _n(); paint(S.cur); return d; };
+  S.reset = function () { _r(); paint(0); };
+  window.prev = function () { const n = Math.max(0, S.cur - 1); S.reset(); for (let i = 0; i < n; i++) S.next(); };
+  btn.onclick = () => S.next();
+  document.getElementById("rst").onclick = () => S.reset();
+  for (let i = 1; i <= total; i++)
+    document.getElementById("s" + i).onclick = () => { S.reset(); for (let j = 0; j < i; j++) S.next(); };
+  window.addEventListener("load", () => {
+    const qp = new URLSearchParams(location.search);
+    let k = 0;
+    if (qp.has("ff")) k = total;
+    else if (qp.has("seg")) k = Math.max(0, Math.min(total, parseInt(qp.get("seg"), 10) || 0));
+    for (let i = 0; i < k; i++) S.next();
+  });
+  paint(0);
+});
+</script>
+</div></div>
+</body>
+</html>

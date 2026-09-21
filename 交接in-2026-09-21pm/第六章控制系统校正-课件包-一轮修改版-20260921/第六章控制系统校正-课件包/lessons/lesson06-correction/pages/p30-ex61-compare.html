@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>例6-1：校正前后对比</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=600">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=600" defer></script>
+<script src="../fig.js"></script>
+<script src="../data/ex61.js"></script>
+<style>
+  .col{display:flex;flex-direction:column;gap:14px;height:100%;min-height:0}
+  .rowtop{flex:1;display:flex;gap:20px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .figc{display:flex;flex-direction:column;overflow:hidden;position:relative}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .fb{flex:1.12}
+  .fs{flex:.88}
+  .cmp{flex:none;display:flex;gap:16px;min-height:0}
+  .cell{flex:1;background:#fff;border:2px solid var(--line);border-radius:14px;
+    padding:10px 20px;display:flex;flex-direction:column;justify-content:center;gap:5px;min-width:0}
+  .cell .ct{font-size:21.5px;font-weight:700}
+  .cell .cv{display:flex;flex-wrap:wrap;gap:3px 14px;align-items:baseline;font-size:21px;line-height:1.5;color:var(--ink)}
+  .cell .cv>span{white-space:nowrap}
+  .cell .cv b{color:var(--danger)}
+  .cell .cd{font-size:20px;line-height:1.45;color:var(--navy)}
+  .cell.b4{border-left:6px solid #1D3FA0}.cell.b4 .ct{color:#1D3FA0}
+  .cell.af{border-left:6px solid #C02A20}.cell.af .ct{color:#C02A20}
+  .cell.sm{border-left:6px solid #0E7A36}.cell.sm .ct{color:#0E7A36}
+  .segfloat{position:absolute;top:104px;right:14px;z-index:5;max-width:72%;background:#fff;
+    border:2px solid var(--blue);border-radius:10px;padding:5px 14px;font-size:18px;font-weight:700;
+    color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 2px 10px rgba(20,40,90,.18)}
+  .ctl{display:flex;align-items:center;gap:10px;justify-content:center;padding:8px 0 10px}
+  .btn{background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:19px;font-weight:700;padding:8px 20px;cursor:pointer}
+  .btn.ghost{background:#fff;color:var(--blue);border:2px solid var(--blue)}
+  @keyframes bdPulse{0%,100%{opacity:1}50%{opacity:.2}}
+  .flash{animation:bdPulse .85s ease-in-out infinite}
+</style>
+</head>
+<body data-title="例6-1：校正前后对比" data-page="30 / 48">
+<div class="act-stage"><div class="act-slide">
+
+<div class="act-body has-note">
+  <div class="col">
+    <div class="rowtop">
+      <div class="act-card figc fb">
+        <div class="hd"><span style="flex:1">Bode 对比：校前（蓝） vs 校后（红）</span></div>
+        <span class="segfloat" id="segChip" style="display:none"></span>
+        <div class="bd2"><svg id="fig"></svg></div>
+        <div class="ctl">
+          <span class="prog" id="prog">0 / 3</span>
+          <button class="btn" id="play">▶ 连贯生长</button>
+          <button class="btn ghost" id="step">⧉ 分步</button>
+          <button class="btn ghost" onclick="ACT.step.reset()">↺ 重置</button>
+        </div>
+      </div>
+      <div class="act-card figc fs">
+        <div class="hd"><span style="flex:1">单位阶跃响应对比（数值仿真）</span></div>
+        <div class="bd2"><svg id="stfig" viewBox="0 0 640 600" preserveAspectRatio="xMidYMid meet"></svg></div>
+      </div>
+    </div>
+    <div class="cmp">
+      <div class="cell b4" data-step="1">
+        <div class="ct">校正前</div>
+        <div class="cv"><span><span class="tex">\omega_{c1}=3.5</span>，<span class="tex">\gamma_{0}=16^{\circ}</span></span><span><b>σ%=61.6%</b>，<span class="tex">t_{s}=5.77\ \mathrm{s}</span></span></div>
+        <div class="cd">超调大、调节慢，振荡剧烈</div>
+      </div>
+      <div class="cell af" data-step="2">
+        <div class="ct">校正后</div>
+        <div class="cv"><span><span class="tex">\omega_{c2}=4.6</span>，<span class="tex">\gamma=42.6^{\circ}</span></span><span><b>σ%=29.2%</b>，<span class="tex">t_{s}=1.08\ \mathrm{s}</span></span></div>
+        <div class="cd">超调与调节时间同步大幅下降</div>
+      </div>
+      <div class="cell sm" data-step="3">
+        <div class="ct">时域表现</div>
+        <div class="cv"><span class="tex">\omega_{c}</span> 右移 → <span class="tex">t_{s}</span> 缩短；<span class="tex">\gamma</span> 增大 → σ% 下降</div>
+        <div class="cd">频域指标的改善直接兑现为时域响应的改善</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">结论</span><span><span class="kw-r">超前校正以 <span class="tex">\omega_{c}</span> 右移换速度、以 γ 增大换平稳</span>——例6-1 的时域仿真验证了频域设计的有效性。</span></div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const D = BD.data.ex61;
+  D.mag.asym = [D.mag.asym[0]];
+  const F = BD.figure("fig", "ex61", { mag: true, phase: true, marks: false });
+  const PM = F.panelOf("mag"), PP = F.panelOf("phase");
+  /* ---- 右侧阶跃响应小图（ex61.step 数值仿真数据，SVG polyline 映射） ---- */
+  const ST = D.step, NS = "http://www.w3.org/2000/svg";
+  const svg2 = document.getElementById("stfig");
+  const mk2 = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag);
+    for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg2).appendChild(n); return n; };
+  const X2 = t => 76 + t / 8 * 520, Y2 = v => 560 - v / 1.7 * 520;
+  mk2("line", { x1: 66, y1: 560, x2: 612, y2: 560, stroke: "#5B6B8C", "stroke-width": 2.4 });
+  mk2("line", { x1: 76, y1: 576, x2: 76, y2: 28, stroke: "#5B6B8C", "stroke-width": 2.4 });
+  [0, 2, 4, 6, 8].forEach(t => { mk2("line", { x1: X2(t), y1: 560, x2: X2(t), y2: 567, stroke: "#5B6B8C", "stroke-width": 1.6 });
+    const n = mk2("text", { x: X2(t), y: 590, "font-size": 19, "text-anchor": "middle", fill: "#5B6B8C", "font-family": '"Cambria Math","STIX Two Math",Georgia,serif' }); n.textContent = t; });
+  const tt = mk2("text", { x: 608, y: 592, "font-size": 21, "text-anchor": "end", fill: "#5B6B8C", "font-style": "italic", "font-family": '"Cambria Math","STIX Two Math",Georgia,serif' }); tt.textContent = "t/s";
+  [0.5, 1, 1.5].forEach(v => { mk2("line", { x1: 70, y1: Y2(v), x2: 76, y2: Y2(v), stroke: "#5B6B8C", "stroke-width": 1.6 });
+    const n = mk2("text", { x: 66, y: Y2(v) + 6, "font-size": 19, "text-anchor": "end", fill: "#5B6B8C", "font-family": '"Cambria Math","STIX Two Math",Georgia,serif' }); n.textContent = v; });
+  mk2("line", { x1: 76, y1: Y2(1), x2: 600, y2: Y2(1), stroke: "#8A97B5", "stroke-width": 2, "stroke-dasharray": "8 6" });
+  const gSt = mk2("g", {}, svg2), gStTxt = mk2("g", {}, svg2);
+  const pB = mk2("path", { fill: "none", stroke: "#1D3FA0", "stroke-width": 4, "stroke-linecap": "round" }, gSt);
+  const pA = mk2("path", { fill: "none", stroke: "#C02A20", "stroke-width": 4, "stroke-linecap": "round" }, gSt);
+  function setStepPath(el, ys, f) {
+    f = Math.max(0, Math.min(1, f));
+    if (f <= 0) { el.setAttribute("d", ""); return; }
+    const n = ys.length, k = Math.max(1, Math.min(n, Math.floor(f * (n - 1)) + 1));
+    let d = "M" + X2(ST.t[0]).toFixed(1) + "," + Y2(ys[0]).toFixed(1);
+    for (let j = 1; j < k; j++) d += "L" + X2(ST.t[j]).toFixed(1) + "," + Y2(ys[j]).toFixed(1);
+    el.setAttribute("d", d);
+  }
+  /* 图例（随分步逐条出现，避免与曲线相交） */
+  function stepTxt(K) {
+    gStTxt.innerHTML = "";
+    const FM = '"Cambria Math","STIX Two Math",Georgia,"Microsoft YaHei",serif';
+    if (K >= 1) {
+      mk2("line", { x1: 384, y1: 56, x2: 428, y2: 56, stroke: "#1D3FA0", "stroke-width": 5, "stroke-linecap": "round" }, gStTxt);
+      const n = mk2("text", { x: 440, y: 63, "font-size": 23, "text-anchor": "start", fill: "#1D3FA0", "font-weight": 700, "font-family": FM }, gStTxt);
+      n.textContent = "校前";
+    }
+    if (K >= 2) {
+      mk2("line", { x1: 384, y1: 100, x2: 428, y2: 100, stroke: "#C02A20", "stroke-width": 5, "stroke-linecap": "round" }, gStTxt);
+      const n = mk2("text", { x: 440, y: 107, "font-size": 23, "text-anchor": "start", fill: "#C02A20", "font-weight": 700, "font-family": FM }, gStTxt);
+      n.textContent = "校后";
+    }
+  }
+  /* ---- Bode 手动标注（错层不压线） ---- */
+  function markWc(w, label, below, side, g) {
+    const x = F.X(w);
+    F.mk("line", { x1: x, y1: PM.y0, x2: x, y2: PM.y1, stroke: "#D63A2F", "stroke-width": 2.2,
+      "stroke-dasharray": "7 5", opacity: .85, "clip-path": `url(#${PM.clip})` }, g);
+    F.mk("circle", { cx: x, cy: F.Y(PM, 0), r: 9, fill: "#D63A2F", stroke: "#fff", "stroke-width": 2.5 }, g);
+    F.tx(g, x + (side === "end" ? -12 : 12), F.Y(PM, 0) + (below ? 38 : -32), label,
+      { fs: 22, fill: "#D63A2F", b: 1, an: side || "start", halo: 1 });
+  }
+  function markMargin(w, phi, label, side, g) {
+    const x = F.X(w), y1 = F.Y(PP, phi), y2 = F.Y(PP, -180);
+    F.mk("line", { x1: x, y1: PP.y0, x2: x, y2: PP.y1, stroke: "#D63A2F", "stroke-width": 2.2,
+      "stroke-dasharray": "7 5", opacity: .55, "clip-path": `url(#${PP.clip})` }, g);
+    F.mk("line", { x1: x, y1: y1, x2: x, y2: y2, stroke: "#D63A2F", "stroke-width": 3.4 }, g);
+    F.mk("circle", { cx: x, cy: y1, r: 9, fill: "#D63A2F", stroke: "#fff", "stroke-width": 2.5 }, g);
+    F.tx(g, x + (side === "end" ? -12 : 12), (y1 + y2) / 2 + 6, label,
+      { fs: 22, fill: "#D63A2F", b: 1, an: side || "start", halo: 1 });
+  }
+  /* 编排：[0,.4] 校前；[.4,.8] 校后（校前淡化）；[.8,1] 仅结论标注 */
+  function chor(f) {
+    const u1 = Math.min(f / .4, 1), u2 = Math.max(0, Math.min((f - .4) / .4, 1));
+    F.setF(0, u1); F.setF(3, u1); F.setOp(0, f > .4 ? .3 : 1); F.setOp(3, f > .4 ? .3 : 1);
+    F.setF(2, u2); F.setF(5, u2); F.setOp(2, 1); F.setOp(5, 1);
+    F.setF(1, 0); F.setF(4, 0); F.setOp(1, 0); F.setOp(4, 0);
+    setStepPath(pB, ST.before, u1); setStepPath(pA, ST.after, u2);
+  }
+  function paint(K) {
+    chor(FS[K]);
+    if (K >= 1) {
+      const g = F.mk("g", { "class": K === 1 ? "flash" : "" }, F.gDyn);
+      F.tx(g, F.X(30), F.Y(PM, -42), "G_{0}", { fs: 24, fill: "#1D3FA0", b: 1, halo: 1 });
+      markWc(3.3927, "ω_{c1}=3.39", true, "end", g);
+      markMargin(3.3927, -163.58, "γ_{0}=16.4°", "end", g);
+    }
+    if (K >= 2) {
+      const g = F.mk("g", { "class": K === 2 ? "flash" : "" }, F.gDyn);
+      F.tx(g, F.X(30), F.Y(PM, -20), "G_{c}G_{0}", { fs: 24, fill: "#C02A20", b: 1, halo: 1 });
+      markWc(4.5261, "ω_{c2}=4.53", false, "start", g);
+      markMargin(4.5261, -136.22, "γ=43.8°", "start", g);
+    }
+    stepTxt(K);
+  }
+  const FS = [0, .4, .8, 1];
+  BD.wire(3, paint, { figs: [F], FS, dur: 11000, playLabel: "▶ 连贯生长", frame: f => chor(f) });
+
+  /* ---- ⧉分步（金标准）：点一下推进一步；图与结论条逐部分亮相 ---- */
+  const STEPS = ["① 校前：σ%=61.6%，ts=5.77 s", "② 校后：σ%=29.2%，ts=1.08 s", "③ 时域表现：ωc↑→ts↓，γ↑→σ%↓"];
+  const chip = document.getElementById("segChip"), total = 3, stepBtn = document.getElementById("step");
+  const wNext = ACT.step.next, wReset = ACT.step.reset;
+  let segRaf = null, segTok = 0;
+  function segEnable() { stepBtn.disabled = false; stepBtn.style.opacity = ""; stepBtn.style.cursor = ""; }
+  function segStopUI() {
+    segTok++;
+    if (segRaf) { cancelAnimationFrame(segRaf); segRaf = null; }
+    segEnable(); chip.style.display = "none";
+  }
+  ACT.step.next = function () { segStopUI(); return wNext(); };
+  ACT.step.reset = function () { segStopUI(); return wReset(); };
+  const playBtn = document.getElementById("play");
+  if (playBtn && playBtn.onclick) {
+    const po = playBtn.onclick;
+    playBtn.onclick = e => { segStopUI(); po(e); };
+  }
+  function segGo(instant) {
+    segStopUI();
+    if (ACT.step.cur >= total) wReset();
+    wNext();
+    const k = ACT.step.cur, f0 = FS[k - 1], f1 = FS[k];
+    chip.textContent = "分步 " + k + " / " + total + "　" + STEPS[k - 1]; chip.style.display = "";
+    if (instant || f1 <= f0 + 1e-9) { chor(f1); return; }
+    chor(f0);
+    stepBtn.disabled = true; stepBtn.style.opacity = ".55"; stepBtn.style.cursor = "default";
+    const t0 = performance.now(), D = 1700, tok = segTok;
+    const tick = now => {
+      if (tok !== segTok) return;
+      const u = Math.min(1, (now - t0) / D), f = f0 + (f1 - f0) * u;
+      chor(f);
+      if (u < 1) segRaf = requestAnimationFrame(tick); else { segRaf = null; segEnable(); }
+    };
+    segRaf = requestAnimationFrame(tick);
+  }
+  stepBtn.onclick = () => segGo(false);
+  /* QA 钩子：?seg=N 直达分步第 N 步（瞬时确定态）；?ff 终态时结论格一并亮相 */
+  window.addEventListener("load", () => {
+    const q = new URLSearchParams(location.search);
+    const n = +(q.get("seg") || 0);
+    for (let i = 0; i < Math.min(n, total); i++) segGo(true);
+    if (q.has("ff"))
+      document.querySelectorAll("[data-step]").forEach(e => e.classList.add("shown"));
+  });
+});
+</script>
+</div></div>
+</body>
+</html>

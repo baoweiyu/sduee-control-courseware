@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>② 超前校正设计步骤</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=600">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=600" defer></script>
+<style>
+  .grid{display:grid;grid-template-columns:1fr 1fr 1fr;grid-template-rows:1fr 1fr;gap:16px;height:100%;min-height:0}
+  .stepc{background:#fff;border:2px solid var(--line);border-radius:18px;display:flex;flex-direction:column;
+    padding:16px 18px;gap:9px;min-height:0;overflow:hidden;position:relative}
+  .stepc .top{display:flex;align-items:center;gap:12px}
+  .stepc .act-num{width:44px;height:44px;font-size:22px}
+  .stepc .tt{font-size:21.5px;font-weight:700;color:var(--navy)}
+  .stepc .bd{flex:1;display:flex;flex-direction:column;justify-content:center;gap:7px;font-size:18px;line-height:1.42}
+  .stepc .fml{background:var(--sky);border-radius:10px;padding:6px 10px;text-align:center;font-size:18.5px;line-height:1.45}
+  .stepc .key{color:var(--danger);font-weight:700}
+  .stepc::after{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--blue);
+    border-top-left-radius:18px;border-bottom-left-radius:18px}
+</style>
+</head>
+<body data-title="② 超前校正设计步骤" data-page="26 / 48">
+<div class="act-stage"><div class="act-slide">
+
+<div class="act-body has-note">
+  <div class="grid">
+    <div class="stepc" data-step="1">
+      <div class="top"><span class="act-num">1</span><span class="tt">据 e<sub>ss</sub> 定 K</span></div>
+      <div class="bd">
+        <div>由稳态误差要求确定开环增益——<span class="key">先满足稳态精度</span>。</div>
+        <div class="fml"><span class="tex">e_{ss}\;\Rightarrow\;K</span>（型别 ν 已知）</div>
+      </div>
+    </div>
+    <div class="stepc" data-step="2">
+      <div class="top"><span class="act-num">2</span><span class="tt">画未校 Bode 图</span></div>
+      <div class="bd">
+        <div>求未校系统的裕度，判断是否需校正。</div>
+        <div class="fml"><span class="tex">\gamma_{0}</span>、<span class="tex">K_{g0}</span>（读图或计算）</div>
+      </div>
+    </div>
+    <div class="stepc" data-step="3">
+      <div class="top"><span class="act-num">3</span><span class="tt">算 φ<sub>m</sub> 与 α</span></div>
+      <div class="bd">
+        <div>需补偿的超前角（ε 留 5°~10° 余量）：</div>
+        <div class="fml"><span class="tex">\varphi_{m}=\gamma^{*}-\gamma_{0}+\varepsilon,\quad \alpha=\frac{1-\sin\varphi_{m}}{1+\sin\varphi_{m}}</span></div>
+      </div>
+    </div>
+    <div class="stepc" data-step="4">
+      <div class="top"><span class="act-num">4</span><span class="tt">定 ω<sub>c2</sub>=ω<sub>m</sub> 与 T</span></div>
+      <div class="bd">
+        <div>在未校 <span class="tex">L(\omega)</span> 上找 <span class="tex">-10\lg\alpha</span> 处的频率，令其为新穿越频率：</div>
+        <div class="fml"><span class="tex">L_{0}(\omega_{c2})=-10\lg\alpha,\quad T=\frac{1}{\omega_{m}\sqrt{\alpha}}</span></div>
+      </div>
+    </div>
+    <div class="stepc" data-step="5">
+      <div class="top"><span class="act-num">5</span><span class="tt">写出 G<sub>c</sub>(s)</span></div>
+      <div class="bd">
+        <div>校正装置与总开环传递函数：</div>
+        <div class="fml"><span class="tex">G_{c}(s)=\frac{Ts+1}{\alpha Ts+1},\quad G(s)=G_{c}(s)G_{0}(s)</span></div>
+      </div>
+    </div>
+    <div class="stepc" data-step="6">
+      <div class="top"><span class="act-num">6</span><span class="tt">检验 γ(ω<sub>c2</sub>)</span></div>
+      <div class="bd">
+        <div>校核校后裕度是否达标：</div>
+        <div class="fml"><span class="tex">\gamma(\omega_{c2})\geq\gamma^{*}\;?</span>　不满足则加大 ε 回到 ③</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">主线</span><span>稳态定 K → 未校读 γ0 → 需要多少超前角 → 把 φ<sub>m</sub> 放在新 ω<sub>c</sub> 处 → 写 G<sub>c</sub> → <span class="kw-r">检验闭环裕度</span>。</span></div>
+
+<script>
+window.addEventListener("load", () => {
+  if (new URLSearchParams(location.search).has("all"))
+    document.querySelectorAll("[data-step]").forEach(e => e.classList.add("shown"));
+});
+</script>
+</div></div>
+</body>
+</html>

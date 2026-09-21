@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>① 时域指标与频域指标的转换</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=221">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=221" defer></script>
+<style>
+  .col{display:flex;flex-direction:column;gap:16px;height:100%;min-height:0}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;flex:1.55;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .grid .bd{flex:1;display:flex;flex-direction:column;justify-content:center;gap:10px;padding:10px 20px}
+  .fml{background:var(--sky);border-radius:12px;padding:10px 14px;text-align:center;font-size:21px;line-height:1.5}
+  .cmt{font-size:18.5px;line-height:1.4;color:var(--ink)}
+  .cmt b{color:var(--danger)}
+  .wide{flex:.85}
+  .wide .bd{flex:1;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:10px 22px}
+</style>
+</head>
+<body data-title="① 时域指标与频域指标的转换" data-page="24 / 48">
+<div class="act-stage"><div class="act-slide">
+
+<div class="act-body has-note">
+  <div class="col">
+    <div class="grid">
+      <div class="act-card" data-step="1">
+        <div class="hd">相角裕度 γ ↔ 阻尼比 ζ</div>
+        <div class="bd">
+          <div class="fml"><span class="tex tex-d">\gamma=\operatorname{arctg}\frac{2\zeta}{\sqrt{\sqrt{1+4\zeta^{4}}-2\zeta^{2}}}</span></div>
+          <div class="cmt">γ 只由 ζ 决定：γ 越大 → ζ 越大 → <b>σ% 越小</b>（<span class="tex">\sigma\%=e^{-\pi\zeta/\sqrt{1-\zeta^{2}}}\times100\%</span>）。</div>
+        </div>
+      </div>
+      <div class="act-card" data-step="2">
+        <div class="hd">谐振峰值 M<sub>r</sub> ↔ 阻尼比 ζ</div>
+        <div class="bd">
+          <div class="fml"><span class="tex tex-d">M_{r}=\frac{1}{2\zeta\sqrt{1-\zeta^{2}}}\quad(0\leq\zeta\leq0.707)</span></div>
+          <div class="cmt">M<sub>r</sub> 与 σ% 同向：<b>M<sub>r</sub> 越小，振荡越弱</b>，相对稳定性越好。</div>
+        </div>
+      </div>
+      <div class="act-card" data-step="3">
+        <div class="hd">带宽频率 ω<sub>b</sub> ↔ 速度</div>
+        <div class="bd">
+          <div class="fml"><span class="tex tex-d">\omega_{b}=\omega_{n}\sqrt{1-2\zeta^{2}+\sqrt{2-4\zeta^{2}+4\zeta^{4}}}</span></div>
+          <div class="cmt">ζ 一定时 ω<sub>b</sub> ∝ ω<sub>n</sub>：<b>频带越宽，响应越快</b>——ω<sub>c</sub> 常作为 ω<sub>b</sub> 的近似度量。</div>
+        </div>
+      </div>
+      <div class="act-card" data-step="4">
+        <div class="hd">调节时间 t<sub>s</sub> ↔ ζ、ω<sub>n</sub></div>
+        <div class="bd">
+          <div class="fml"><span class="tex tex-d">t_{s}=\frac{3.5}{\zeta\omega_{n}}\quad(\Delta=5\%)</span></div>
+          <div class="cmt">t<sub>s</sub> 与 ζω<sub>n</sub> 成反比：<b>ω<sub>c</sub> 越大 → t<sub>s</sub> 越小</b>，这就是"提高 ω<sub>c</sub> 加快响应"的依据。</div>
+        </div>
+      </div>
+    </div>
+    <div class="act-card wide" data-step="5">
+      <div class="hd">高阶系统的经验公式（1≤M<sub>r</sub>≤1.8 时适用）</div>
+      <div class="bd">
+        <div class="fml"><span class="tex tex-d">\sigma=0.16+0.4(M_{r}-1),\qquad t_{s}=\frac{K\pi}{\omega_{c}},\qquad K=2+1.5(M_{r}-1)+2.5(M_{r}-1)^{2}</span></div>
+        <div class="cmt">高阶系统没有解析关系，先用二阶公式估算、再由仿真校核——<b>M<sub>r</sub> 成为频域与时域之间的桥梁量</b>。</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">桥梁</span><span>指标从时域提出（σ%、t<sub>s</sub>），设计在频域进行（γ、ω<sub>c</sub>、M<sub>r</sub>）——<span class="kw-r">转换公式把两个域连接起来</span>。</span></div>
+
+<script>
+window.addEventListener("load", () => {
+  if (new URLSearchParams(location.search).has("all"))
+    document.querySelectorAll("[data-step]").forEach(e => e.classList.add("shown"));
+});
+</script>
+</div></div>
+</body>
+</html>

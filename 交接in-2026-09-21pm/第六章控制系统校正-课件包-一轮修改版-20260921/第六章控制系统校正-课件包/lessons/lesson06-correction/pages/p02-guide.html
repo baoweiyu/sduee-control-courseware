@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>本章导学</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=600">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=600" defer></script>
+<style>
+  .row{display:flex;gap:26px;height:100%;min-height:0}
+  .lft{flex:1;display:flex;flex-direction:column;min-height:0}
+  .act-card{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;gap:18px;padding:20px 26px;min-height:0}
+  .goal{flex:1;display:flex;gap:16px;align-items:center;background:var(--sky);border-radius:14px;padding:14px 22px}
+  .goal .no{flex:none;width:46px;height:46px;border-radius:50%;background:var(--blue);color:#fff;
+    font-size:23px;font-weight:700;display:grid;place-items:center}
+  .goal .tx{flex:1;font-size:24px;line-height:1.55;color:var(--ink)}
+  .goal .tx b{color:var(--navy)}
+  .rgt{flex:1.15;display:flex;flex-direction:column;min-height:0}
+  .rgt .act-card>.bd{padding:16px 22px;display:flex;flex-direction:column;min-height:0}
+  /* 知识地图：顶部问题条 + 三层通栏（左侧竖向贯通带）+ 底部主线条 */
+  .map{flex:1;display:flex;flex-direction:column;gap:16px;min-height:0}
+  .mhead{flex:none;background:var(--navy);color:#fff;border-radius:14px;text-align:center;
+    font-size:26px;font-weight:700;letter-spacing:1px;padding:15px 16px}
+  .tiers{flex:1;display:flex;flex-direction:column;gap:14px;position:relative;min-height:0}
+  .tiers::before{content:"";position:absolute;left:0;top:0;bottom:0;width:184px;border-radius:16px;
+    background:linear-gradient(180deg,var(--blue) 0%,var(--navy) 100%)}
+  .tier{flex:1;display:flex;align-items:stretch;position:relative;min-height:0}
+  .tlab{width:184px;flex:none;display:flex;flex-direction:column;justify-content:center;align-items:center;
+    gap:7px;color:#fff;text-align:center;padding:6px 8px}
+  .tlab .kwd{font-size:31px;font-weight:800;letter-spacing:3px;color:#fff}
+  .tlab .an{font-size:18px;color:#D8E4FB;letter-spacing:.5px}
+  .titems{flex:1;margin-left:14px;background:var(--sky);border:2px solid var(--line);border-radius:16px;
+    display:flex;align-items:center;gap:14px;padding:10px 16px;min-width:0}
+  .titems span{flex:1;background:#fff;border:2px solid var(--line);border-radius:12px;text-align:center;
+    font-size:23px;font-weight:700;color:var(--navy);padding:12px 4px;white-space:nowrap}
+  .titems span.hl{background:#FDF3EC;border-color:var(--orange);color:#B3541E}
+  .mfoot{flex:none;background:var(--sky);border:2px solid var(--line);border-radius:14px;text-align:center;
+    font-size:23px;color:var(--navy);font-weight:700;line-height:1.5;padding:13px 18px}
+</style>
+</head>
+<body data-title="本章导学" data-page="2 / 48">
+<div class="act-stage"><div class="act-slide">
+
+<div class="act-body has-note">
+  <div class="row">
+    <div class="lft">
+      <div class="act-card">
+        <div class="hd">学习目标</div>
+        <div class="bd">
+          <div class="goal"><span class="no">1</span><div class="tx">会根据性能问题<b>选择校正方式</b>：串联校正、反馈校正、复合校正。</div></div>
+          <div class="goal"><span class="no">2</span><div class="tx">掌握超前、滞后、滞后—超前与 PID 等<b>常用校正装置的特性</b>。</div></div>
+          <div class="goal"><span class="no">3</span><div class="tx">会用<b>频率特性法</b>设计串联超前、串联滞后校正装置。</div></div>
+          <div class="goal"><span class="no">4</span><div class="tx">理解<b>局部反馈校正</b>与<b>复合校正</b>的基本原理。</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="rgt">
+      <div class="act-card">
+        <div class="hd">本章知识地图</div>
+        <div class="bd">
+          <div class="map">
+            <div class="mhead">性能指标不满足要求 → 需要校正</div>
+            <div class="tiers">
+              <div class="tier">
+                <div class="tlab"><span class="kwd">校正方式</span><span class="an">按接入位置划分</span></div>
+                <div class="titems"><span>串联校正</span><span>反馈校正</span><span>复合校正</span></div>
+              </div>
+              <div class="tier">
+                <div class="tlab"><span class="kwd">校正装置</span><span class="an">常用装置的特性</span></div>
+                <div class="titems"><span>超前</span><span>滞后</span><span>滞后—超前</span><span>PID</span></div>
+              </div>
+              <div class="tier">
+                <div class="tlab"><span class="kwd">设计方法</span><span class="an">以频率特性为主线</span></div>
+                <div class="titems"><span class="hl">频率特性法 ★</span><span>根轨迹法</span><span>复合校正法</span></div>
+              </div>
+            </div>
+            <div class="mfoot">主线：增加装置 → 重塑频率特性，ωc 与稳定裕度达到指标要求</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">导学</span><span>本章回答一个问题：当系统性能不满足要求时，如何<span style="color:var(--danger);font-weight:700">增加校正装置</span>，使频率特性满足稳态精度与稳定裕度指标。</span></div>
+
+</div></div>
+</body>
+</html>

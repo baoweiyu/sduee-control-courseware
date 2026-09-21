@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>① 校正的作用：三条曲线</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=221">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=221" defer></script>
+<script src="../fig.js"></script>
+<script src="../data/ex61.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:.9;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:9px;padding:12px 20px}
+  .stp{display:flex;gap:12px;align-items:flex-start;background:var(--sky);border-radius:12px;
+    padding:10px 14px 10px 11px;font-size:21px;line-height:1.55;border-left:5px solid transparent;cursor:pointer}
+  .stp .num{flex:none;width:36px;height:36px;margin-top:3px;border-radius:50%;background:var(--blue);
+    color:#fff;font-weight:700;font-size:20px;display:grid;place-items:center}
+  .stp .stx{flex:1;min-width:0}
+  .stp .got{font-weight:700;color:var(--navy)}
+  .stp .got b{color:var(--danger)}
+  .stp.on{background:#FDF3EC;border-left-color:var(--danger);box-shadow:0 0 0 2px rgba(214,58,47,.22)}
+  .stp.on .num{background:var(--danger)}
+  .figc{flex:1.24;display:flex;flex-direction:column;overflow:hidden;position:relative}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .segfloat{position:absolute;top:56px;right:14px;z-index:5;max-width:72%;background:#fff;
+    border:2px solid var(--blue);border-radius:10px;padding:5px 14px;font-size:18px;font-weight:700;
+    color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 2px 10px rgba(20,40,90,.18)}
+  .prog{position:absolute;top:60px;left:16px;z-index:5;font-size:17px;color:var(--muted);
+    background:rgba(255,255,255,.88);padding:2px 10px;border-radius:8px}
+  .ctl #prog{right:auto;left:16px;top:60px}
+  .ctl{display:flex;align-items:center;gap:10px;justify-content:center;padding:8px 0 10px}
+  .btn{background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:19px;font-weight:700;padding:8px 20px;cursor:pointer}
+  .btn.ghost{background:#fff;color:var(--blue);border:2px solid var(--blue)}
+  @keyframes bdPulse{0%,100%{opacity:1}50%{opacity:.2}}
+  .flash{animation:bdPulse .85s ease-in-out infinite}
+</style>
+</head>
+<body data-title="① 校正的作用：三条曲线" data-page="22 / 48">
+<div class="act-stage"><div class="act-slide">
+
+<div class="act-body has-note">
+  <div class="row">
+    <div class="lft">
+      <div class="act-card" style="flex:.95">
+        <div class="hd">矛盾：一个 K 调不出三全其美</div>
+        <div class="bd" style="font-size:21.5px;line-height:1.62">
+          <div>以 <span class="tex">G_{0}(s)=\dfrac{K}{s(s+1)}</span> 为例：增益 K 一动，稳态精度、稳定裕度、暂态品质跟着一起变，往往顾此失彼。</div>
+        </div>
+      </div>
+      <div class="act-card" style="flex:1.75">
+        <div class="hd">三条曲线的启示（与右图分步联动）</div>
+        <div class="bd">
+          <div class="stp" id="s1"><span class="num">Ⅰ</span><div class="stx">
+            <div>K 取小（K=3）：稳定裕度大、闭环平稳</div>
+            <div class="got">但低频增益低，<b>稳态精度不满足</b></div>
+          </div></div>
+          <div class="stp" id="s2"><span class="num">Ⅱ</span><div class="stx">
+            <div>K 提到 12：低频段抬高，稳态精度达标</div>
+            <div class="got"><span class="tex">\omega_{c1}=3.5</span> 处 <span class="tex">\gamma_{0}=16^{\circ}</span>，<b>裕度太小、暂态差</b></div>
+          </div></div>
+          <div class="stp" id="s3"><span class="num">Ⅲ</span><div class="stx">
+            <div>保持 K=12，串联超前校正环节</div>
+            <div class="got"><span class="tex">\omega_{c2}=4.6</span>、<span class="tex">\gamma=42.6^{\circ}</span>，<b>稳态·稳定·暂态兼顾</b></div>
+          </div></div>
+        </div>
+      </div>
+    </div>
+    <div class="act-card figc">
+      <div class="hd"><span style="flex:1">同一系统的三条开环 Bode 曲线（例6-1 数据）</span></div>
+      <span class="segfloat" id="segChip" style="display:none"></span>
+      <span class="prog" id="prog">0 / 3</span>
+      <div class="bd2"><svg id="fig"></svg></div>
+      <div class="ctl">
+        <button class="btn" id="play">▶ 连贯生长</button>
+        <button class="btn ghost" id="step">⧉ 分步</button>
+        <button class="btn ghost" onclick="ACT.step.reset()">↺ 重置</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">指标</span><span>频率法校正的指标：开环 <span class="tex">\gamma</span>、<span class="tex">\omega_{c}</span>、<span class="tex">K_{g}</span>；闭环 <span class="tex">M_{r}</span>、<span class="tex">\omega_{r}</span>、<span class="tex">\omega_{b}</span>——校正就是<span class="kw-r">不动 K、改形状</span>。</span></div>
+
+<div data-step="1" style="display:none"></div><div data-step="2" style="display:none"></div>
+<div data-step="3" style="display:none"></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  BD.data.ex61.mag.asym = [BD.data.ex61.mag.asym[0]];   /* 本页只保留 G0 渐近线 */
+  const F = BD.figure("fig", "ex61", { mag: true, phase: true, marks: false });
+  const D = BD.data.ex61, MK = D.marks;
+  const M_WC1 = MK.find(m => m.type === "wc" && m.w < 4),  M_G0 = MK.find(m => m.type === "margin" && m.w < 4);
+  const M_WC2 = MK.find(m => m.type === "wc" && m.w > 4),  M_G  = MK.find(m => m.type === "margin" && m.w > 4);
+  const PM = F.panelOf("mag"), PP = F.panelOf("phase");
+  /* 曲线Ⅰ：K=3，即 G0 幅频精确下移 20lg(12/3)=12.04dB（相频与 K 无关，不变） */
+  const dK = -20 * Math.log10(4);
+  const ptsIm = D.mag.curves[0].pts.map(p => [p[0], p[1] + dK]);
+  const ptsIp = D.phase.curves[0].pts;
+  const gI = F.mk("g", {}, F.svg);
+  const pIm = F.mk("path", { fill: "none", stroke: "#7B21C8", "stroke-width": 4.5, "stroke-linecap": "round", "clip-path": `url(#${PM.clip})` }, gI);
+  const pIp = F.mk("path", { fill: "none", stroke: "#7B21C8", "stroke-width": 4.5, "stroke-linecap": "round", "clip-path": `url(#${PP.clip})` }, gI);
+  function growPath(el, panel, pts, f) {
+    f = Math.max(0, Math.min(1, f));
+    if (f <= 0) { el.setAttribute("d", ""); return; }
+    const n = pts.length, kk = Math.max(1, Math.min(n, Math.floor(f * (n - 1)) + 1));
+    const P = [];
+    for (let j = 0; j < Math.min(kk, n); j++) P.push([F.X(pts[j][0]), F.Y(panel, pts[j][1])]);
+    if (kk < n) {
+      const t = Math.max(0, Math.min(1, f * (n - 1) - (kk - 1)));
+      P.push([F.X(pts[kk - 1][0] + (pts[kk][0] - pts[kk - 1][0]) * t),
+              F.Y(panel, pts[kk - 1][1] + (pts[kk][1] - pts[kk - 1][1]) * t)]);
+    }
+    el.setAttribute("d", F.toPath(F.clipPoly(P, panel)));
+  }
+  function markWc(m, g, below, side) {
+    const x = F.X(m.w);
+    F.mk("line", { x1: x, y1: PM.y0, x2: x, y2: PM.y1, stroke: "#D63A2F", "stroke-width": 2.2,
+      "stroke-dasharray": "7 5", opacity: .85, "clip-path": `url(#${PM.clip})` }, g);
+    F.mk("circle", { cx: x, cy: F.Y(PM, 0), r: 9, fill: "#D63A2F", stroke: "#fff", "stroke-width": 2.5 }, g);
+    F.tx(g, x + (side === "end" ? -12 : 12), F.Y(PM, 0) + (below ? 38 : -34), m.label,
+      { fs: 22, fill: "#D63A2F", b: 1, an: side || "start", halo: 1 });
+  }
+  function markMargin(m, g, withLabel) {
+    const x = F.X(m.w), y1 = F.Y(PP, m.phi), y2 = F.Y(PP, -180);
+    F.mk("line", { x1: x, y1: PP.y0, x2: x, y2: PP.y1, stroke: "#D63A2F", "stroke-width": 2.2,
+      "stroke-dasharray": "7 5", opacity: .55, "clip-path": `url(#${PP.clip})` }, g);
+    F.mk("line", { x1: x, y1: y1, x2: x, y2: y2, stroke: "#D63A2F", "stroke-width": 3.4 }, g);
+    F.mk("circle", { cx: x, cy: y1, r: 9, fill: "#D63A2F", stroke: "#fff", "stroke-width": 2.5 }, g);
+    if (withLabel)
+      F.tx(g, x - 14, (y1 + y2) / 2 + 6, m.label, { fs: 22, fill: "#D63A2F", b: 1, an: "end", halo: 1 });
+  }
+  /* 编排：f∈[0,1/3] 曲线Ⅰ生长；[1/3,2/3] Ⅰ淡化、Ⅱ(=G0)生长；[2/3,1] Ⅱ淡化、Ⅲ(=GcG0)生长 */
+  function chor(f) {
+    const u1 = Math.min(f * 3, 1), u2 = Math.max(0, Math.min((f - 1 / 3) * 3, 1)),
+          u3 = Math.max(0, Math.min((f - 2 / 3) * 3, 1));
+    growPath(pIm, PM, ptsIm, u1); growPath(pIp, PP, ptsIp, u1);
+    gI.setAttribute("opacity", f <= 1 / 3 ? 1 : 1 - .85 * u2);
+    F.setF(0, u2); F.setF(3, u2); F.setOp(0, f > 2 / 3 ? .15 : 1); F.setOp(3, f > 2 / 3 ? .15 : 1);
+    F.setF(2, u3); F.setF(5, u3); F.setOp(2, 1); F.setOp(5, 1);
+    F.setF(1, 0); F.setF(4, 0); F.setOp(1, 0); F.setOp(4, 0);   /* Gc 单独曲线本页不展开 */
+    F.gAsym.style.opacity = u2 > 0.02 ? 1 : 0;                  /* G0 渐近线随曲线Ⅱ出现 */
+  }
+  /* 每步只显示当步曲线的名字标签与核心标注；终态=3 条曲线名+ωc1/ωc2/γ0→γ 三个标注 */
+  function paint(K) {
+    chor(K / 3);
+    if (K >= 1) {
+      const g = F.mk("g", { "class": K === 1 ? "flash" : "" }, F.gDyn);
+      F.tx(g, F.X(0.22), F.Y(PM, 24), "Ⅰ K=3", { fs: 24, fill: "#7B21C8", b: 1, halo: 1 });
+    }
+    if (K >= 2) {
+      const g = F.mk("g", { "class": K === 2 ? "flash" : "" }, F.gDyn);
+      F.tx(g, F.X(0.55), F.Y(PM, 12) - 8, "Ⅱ K=12", { fs: 24, fill: "#1D3FA0", b: 1, halo: 1 });
+      markWc(M_WC1, g, true, "end");
+      if (K === 2) markMargin(M_G0, g, true);
+    }
+    if (K >= 3) {
+      const g = F.mk("g", { "class": K === 3 ? "flash" : "" }, F.gDyn);
+      F.tx(g, F.X(30), F.Y(PM, -36), "Ⅲ K=12 + 超前校正", { fs: 24, fill: "#C02A20", b: 1, halo: 1 });
+      markWc(M_WC2, g, false, "start");
+      markMargin(M_G0, g, false); markMargin(M_G, g, false);
+      const xm = (F.X(M_WC1.w) + F.X(M_WC2.w)) / 2;
+      F.tx(g, xm, F.Y(PP, -191), "γ_{0}=16.4° → γ=43.8°", { fs: 23, fill: "#D63A2F", b: 1, halo: 1 });
+    }
+    for (let i = 1; i <= 3; i++)
+      document.getElementById("s" + i).classList.toggle("on", i === K);
+  }
+  const FS = [0, 1 / 3, 2 / 3, 1];
+  BD.wire(3, paint, { figs: [F], FS, dur: 12000, playLabel: "▶ 连贯生长", frame: f => chor(f) });
+
+  /* ---- ⧉分步（金标准）：点一下推进一步；左栏步骤与图内元素同步高亮 ---- */
+  const STEPS = ["Ⅰ K 小：稳定裕度大，稳态精度不满足", "Ⅱ K=12：稳态达标，γ0=16° 太小", "Ⅲ 加超前校正：三者兼顾"];
+  const chip = document.getElementById("segChip"), total = 3, stepBtn = document.getElementById("step");
+  const wNext = ACT.step.next, wReset = ACT.step.reset;
+  let segRaf = null, segTok = 0;
+  function segEnable() { stepBtn.disabled = false; stepBtn.style.opacity = ""; stepBtn.style.cursor = ""; }
+  function segStopUI() {
+    segTok++;
+    if (segRaf) { cancelAnimationFrame(segRaf); segRaf = null; }
+    segEnable(); chip.style.display = "none";
+  }
+  ACT.step.next = function () { segStopUI(); return wNext(); };
+  ACT.step.reset = function () { segStopUI(); return wReset(); };
+  const playBtn = document.getElementById("play");
+  if (playBtn && playBtn.onclick) {
+    const po = playBtn.onclick;
+    playBtn.onclick = e => { segStopUI(); po(e); };
+  }
+  function segGo(instant) {
+    segStopUI();
+    if (ACT.step.cur >= total) wReset();
+    wNext();
+    const k = ACT.step.cur, f0 = FS[k - 1], f1 = FS[k];
+    chip.textContent = "分步 " + k + " / " + total + "　" + STEPS[k - 1]; chip.style.display = "";
+    if (instant || f1 <= f0 + 1e-9) { chor(f1); return; }
+    chor(f0);
+    stepBtn.disabled = true; stepBtn.style.opacity = ".55"; stepBtn.style.cursor = "default";
+    const t0 = performance.now(), D = 1700, tok = segTok;
+    const tick = now => {
+      if (tok !== segTok) return;
+      const u = Math.min(1, (now - t0) / D), f = f0 + (f1 - f0) * u;
+      chor(f);
+      if (u < 1) segRaf = requestAnimationFrame(tick); else { segRaf = null; segEnable(); }
+    };
+    segRaf = requestAnimationFrame(tick);
+  }
+  stepBtn.onclick = () => segGo(false);
+  for (let i = 1; i <= total; i++)
+    document.getElementById("s" + i).onclick = () => {
+      segStopUI(); wReset();
+      for (let j = 0; j < i; j++) wNext();
+      chip.textContent = "分步 " + i + " / " + total + "　" + STEPS[i - 1]; chip.style.display = "";
+    };
+  /* QA 钩子：?seg=N 直达分步第 N 步（瞬时确定态） */
+  window.addEventListener("load", () => {
+    const n = +(new URLSearchParams(location.search).get("seg") || 0);
+    for (let i = 0; i < Math.min(n, total); i++) segGo(true);
+  });
+});
+</script>
+</div></div>
+</body>
+</html>

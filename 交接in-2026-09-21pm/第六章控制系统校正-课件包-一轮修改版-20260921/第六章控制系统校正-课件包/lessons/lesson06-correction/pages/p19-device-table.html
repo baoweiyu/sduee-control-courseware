@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>⑤ 校正装置一览表</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=600">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=600" defer></script>
+<style>
+  .row{display:flex;gap:24px;height:100%;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  /* 左表：高度填满卡片，投影可读字号 */
+  .tblc .bd{flex:1;display:flex;min-height:0;padding:12px 14px}
+  .tblc table.act-table{height:100%;font-size:18.5px}
+  .act-table th,.act-table td{padding:6px 10px;text-align:center;vertical-align:middle;line-height:1.42}
+  .act-table td .tex{white-space:nowrap}
+  .act-table td.dev{font-weight:700;color:var(--navy);font-size:19.5px;white-space:nowrap}
+  .act-table td.role{text-align:left}
+  .act-table tr.lk{cursor:pointer}
+  .act-table tr.lk:hover td{background:#FFEAC0}
+  /* 选中高亮：box-shadow 逐边画线，拼成整行连续外框（避开 border-collapse 断框） */
+  .act-table tr.lk.sel td{background:#FFE3AC;
+    box-shadow:inset 0 3px 0 0 var(--orange),inset 0 -3px 0 0 var(--orange)}
+  .act-table tr.lk.sel td:first-child{
+    box-shadow:inset 3px 0 0 0 var(--orange),inset 0 3px 0 0 var(--orange),inset 0 -3px 0 0 var(--orange)}
+  .act-table tr.lk.sel td:last-child{
+    box-shadow:inset -3px 0 0 0 var(--orange),inset 0 3px 0 0 var(--orange),inset 0 -3px 0 0 var(--orange)}
+  /* 右图：标题随表行联动 */
+  .figc .bd{flex:1;display:flex;flex-direction:column;min-height:0;padding:8px 12px}
+  .figc .fbox{flex:1;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .figc .capnote{flex:none;font-size:19px;color:var(--navy);background:var(--sky);border-radius:10px;padding:8px 16px;margin:8px 6px 6px;line-height:1.5;text-align:center}
+</style>
+</head>
+<body data-title="⑤ 校正装置一览表" data-page="19 / 48">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="row">
+      <div class="act-card tblc" style="flex:1.62">
+        <div class="hd">表6-1　常用校正装置及其特性</div>
+        <div class="bd">
+          <table class="act-table" id="devTbl">
+            <tr><th style="width:13%">装置</th><th style="width:30%">传递函数</th><th style="width:26%">Bode 特性</th><th>主要作用</th></tr>
+            <tr class="lk" data-row="0">
+              <td class="dev">超前<br>装置</td>
+              <td><span class="tex">G_{c}=\dfrac{Ts+1}{\alpha Ts+1}</span><br><span class="tex">\alpha<1</span></td>
+              <td>相位超前（<span class="tex">\varphi_{m}\le65^{\circ}</span>）；高频增益抬升 <span class="tex">-20\lg\alpha</span></td>
+              <td class="role"><span class="tex">\omega_{c}\uparrow</span>、<span class="tex">\gamma\uparrow</span>，改善暂态（<span class="tex">\sigma\%\!\downarrow</span>、<span class="tex">t_{s}\!\downarrow</span>）</td>
+            </tr>
+            <tr class="lk" data-row="1">
+              <td class="dev">滞后<br>装置</td>
+              <td><span class="tex">G_{c}=\dfrac{Ts+1}{\beta Ts+1}</span><br><span class="tex">\beta>1</span></td>
+              <td>相位滞后；高频幅值衰减 <span class="tex">-20\lg\beta</span></td>
+              <td class="role">利用高频衰减使 <span class="tex">\omega_{c}</span> 左移、<span class="tex">\gamma\uparrow</span>，改善稳态与抗噪</td>
+            </tr>
+            <tr class="lk" data-row="2">
+              <td class="dev">滞后-<br>超前</td>
+              <td><span class="tex">G_{c}=\dfrac{T_{1}s+1}{\beta T_{1}s+1}\cdot\dfrac{T_{2}s+1}{\frac{T_{2}}{\beta}s+1}</span></td>
+              <td>低频段滞后衰减，高频段超前补偿</td>
+              <td class="role">滞后部分改善稳态，超前部分改善暂态</td>
+            </tr>
+            <tr class="lk" data-row="3">
+              <td class="dev">PD</td>
+              <td><span class="tex">G_{c}=K_{p}(1+T_{d}s)</span></td>
+              <td>相位 <span class="tex">0^{\circ}\to+90^{\circ}</span>，+20dB/dec</td>
+              <td class="role">增加开环零点 <span class="tex">-1/T_{d}</span>，改善稳定与暂态</td>
+            </tr>
+            <tr class="lk" data-row="4">
+              <td class="dev">PI</td>
+              <td><span class="tex">G_{c}=K_{p}\,\dfrac{T_{i}s+1}{T_{i}s}</span></td>
+              <td>相位 <span class="tex">-90^{\circ}\to0^{\circ}</span>，低频增益大</td>
+              <td class="role">原点极点提高型别，改善稳态性能</td>
+            </tr>
+            <tr class="lk" data-row="5">
+              <td class="dev">PID</td>
+              <td><span class="tex">G_{c}=K_{p}\dfrac{T_{d}T_{i}s^{2}+T_{i}s+1}{T_{i}s}</span></td>
+              <td>相位 <span class="tex">-90^{\circ}\to+90^{\circ}</span>，中段下凹</td>
+              <td class="role">极点改善稳态，两零点改善稳定与暂态</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="act-card figc" style="flex:1">
+        <div class="hd"><span style="flex:1" id="figTitle">Bode 特性：超前装置</span></div>
+        <div class="bd">
+          <div class="fbox"><svg id="figDev"></svg></div>
+          <div class="capnote" id="figCap"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+<script src="../fig.js"></script>
+<script src="../data/lead08.js"></script>
+<script src="../data/lag12.js"></script>
+<script src="../data/pid.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  /* 各装置小图数据集：一律取自 BD.data 精确曲线（图不撒谎），按曲线名筛选 + 精简标注 */
+  const la = BD.data.lead08, lg = BD.data.lag12, pd = BD.data.pid;
+  const a1 = la.meta.alphas.find(a => a.alpha === 0.1);     // α=0.1：ωm、φm、−10lgα
+  const b1 = lg.meta.betas.find(b => b.beta === 10);        // β=10
+  function only(src, cname, marks) {
+    return { xlim: src.xlim,
+      mag:   { ylim: src.mag.ylim,   curves: src.mag.curves.filter(c => c.name === cname) },
+      phase: { ylim: src.phase.ylim, curves: src.phase.curves.filter(c => c.name === cname) },
+      marks: marks || [] };
+  }
+  function pidOnly(tag) {
+    return { xlim: pd.xlim,
+      mag:   { ylim: pd.mag.ylim,   curves: pd.mag.curves.filter(c => c.name === tag) },
+      phase: { ylim: pd.phase.ylim, curves: pd.phase.curves.filter(c => c.name === tag) },
+      marks: pd.marks.filter(m => m.curve === tag) };
+  }
+  BD.data["t19_lead"] = only(la, "α=0.1",
+    [{ type: "vline", w: a1.wm, label: "ω_{m}=" + (+a1.wm).toFixed(2), color: "#C02A20", dy: 20 },
+     { type: "hlevel", y: a1.level_wm_db, w0: a1.wm, w1: 100, label: "−10lgα=" + a1.level_wm_db + "dB", color: "#C02A20", dy: -10 }]);
+  BD.data["t19_lag"] = only(lg, "β=10",
+    [{ type: "vline", w: b1.wm, label: "ω_{m}=" + (+b1.wm).toFixed(2), color: "#C02A20", dy: 20 },
+     { type: "hlevel", y: b1.level_hi_db, w0: 1, w1: 10, label: "−20lgβ=" + b1.level_hi_db + "dB", color: "#C02A20", dy: -8 }]);
+  BD.data["t19_pd"]  = pidOnly("PD");
+  BD.data["t19_pi"]  = pidOnly("PI");
+  BD.data["t19_pid"] = pidOnly("PID");
+
+  const CFG = [
+    { data: "t19_lead", title: "Bode 特性：超前装置（α=0.1，T=1）",
+      cap: "相位先升后降，最大超前角 φ_{m}≈54.9°（ω_{m} 处增益 −10lgα=10dB）" },
+    { data: "t19_lag", title: "Bode 特性：滞后装置（β=10，T=1）",
+      cap: "相位先降后升（最大滞后约 −54.9°）；高频幅值衰减 −20lgβ=−20dB" },
+    { data: "pid_ll", title: "Bode 特性：滞后-超前装置（β=10）",
+      cap: "低频段滞后衰减、高频段超前补偿，两端增益回到 0dB" },
+    { data: "t19_pd", title: "Bode 特性：PD 装置（T_{d}=1）",
+      cap: "相位 0°→+90° 超前；过零点频率 1/T_{d} 后幅频 +20dB/dec" },
+    { data: "t19_pi", title: "Bode 特性：PI 装置（T_{i}=1）",
+      cap: "相位 −90°→0°；低频增益大，高频幅频趋于 0dB" },
+    { data: "t19_pid", title: "Bode 特性：PID 装置（T_{i}=1，T_{d}=0.2）",
+      cap: "相位 −90°→+90°：低频 I、高频 D，幅频中段下凹、两端抬起" }
+  ];
+  /* capnote 内联公式走 tx 语法不行，直接用 Unicode（与表格 MathJax 口径一致的数值） */
+  function show(i) {
+    const c = CFG[i]; if (!c) return;
+    document.querySelectorAll("#devTbl tr.lk").forEach(tr =>
+      tr.classList.toggle("sel", +tr.dataset.row === i));
+    document.getElementById("figTitle").textContent = c.title.replace(/_\{([^}]*)\}/g, "$1");
+    document.getElementById("figCap").textContent = c.cap.replace(/_\{([^}]*)\}/g, "$1");
+    /* 窄面板用加高 viewBox：宽度不变、高度拉高，图面充分填充右栏且刻度/标注等效字号达标 */
+    BD.figure("figDev", c.data, { static: true, zoom: false, vw: 640, vh: 860 });
+  }
+  document.querySelectorAll("#devTbl tr.lk").forEach(tr =>
+    tr.addEventListener("click", () => show(+tr.dataset.row)));
+  /* QA 钩子：?row=0..5 直达该行联动图 */
+  const qp = new URLSearchParams(location.search);
+  show(qp.has("row") ? Math.max(0, Math.min(5, +qp.get("row"))) : 0);
+});
+</script>
+</body>
+</html>

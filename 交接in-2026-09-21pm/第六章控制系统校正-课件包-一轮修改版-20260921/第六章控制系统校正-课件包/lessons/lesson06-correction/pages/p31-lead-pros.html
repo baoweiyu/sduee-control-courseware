@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>② 超前校正的优缺点与适用范围</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=600">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=600" defer></script>
+<style>
+  .wrap{display:flex;flex-direction:column;gap:16px;height:100%;min-height:0}
+  .tr{flex:1;display:flex;gap:20px;align-items:stretch;background:#fff;border:2px solid var(--line);
+    border-radius:16px;padding:14px 24px;min-height:0;overflow:hidden}
+  .tr .lab{flex:none;width:150px;display:flex;flex-direction:column;justify-content:center;gap:8px;
+    border-right:2px solid var(--line);padding-right:18px}
+  .tr .lab .ic{font-size:34px;font-weight:700;width:56px;height:56px;border-radius:50%;
+    display:grid;place-items:center;color:#fff}
+  .tr .lab .nm{font-size:24px;font-weight:700;color:var(--navy)}
+  .tr .cnt{flex:1;display:flex;flex-direction:column;justify-content:center;gap:10px;
+    font-size:21px;line-height:1.6;color:var(--ink);min-width:0}
+  .tr .cnt b{color:var(--danger)}
+  .good .ic{background:#0E7A36}.bad .ic{background:#C02A20}.fit .ic{background:var(--blue)}
+</style>
+</head>
+<body data-title="② 超前校正的优缺点与适用范围" data-page="31 / 48">
+<div class="act-stage"><div class="act-slide">
+
+<div class="act-body has-note">
+  <div class="wrap">
+    <div class="tr good" data-step="1">
+      <div class="lab"><span class="ic">✓</span><span class="nm">优点</span></div>
+      <div class="cnt">
+        <div><span class="tex">\omega_{c}</span> 增大 → <span class="tex">t_{s}</span> 缩短，<b>响应加快</b>（例6-1：5.77 s → 1.08 s）；</div>
+        <div><span class="tex">\gamma</span> 增大 → σ% 下降，<b>平稳性改善</b>（例6-1：61.6% → 29.2%）；</div>
+        <div>低频段形状不变，<b>稳态精度不受影响</b>。</div>
+      </div>
+    </div>
+    <div class="tr bad" data-step="2">
+      <div class="lab"><span class="ic">✗</span><span class="nm">缺点</span></div>
+      <div class="cnt">
+        <div><span class="tex">\omega_{c2}</span> 上移、高频增益抬高，<b>抗高频干扰能力下降</b>；</div>
+        <div>α 过小则网络负担过重，单级超前角一般<b>不超过 60°</b>；需求更大时需多级串联或改用滞后-超前校正。</div>
+      </div>
+    </div>
+    <div class="tr fit" data-step="3">
+      <div class="lab"><span class="ic">◎</span><span class="nm">适用范围</span></div>
+      <div class="cnt">
+        <div>稳态精度已满足、要求 <b>σ% 减小、t<sub>s</sub> 缩短</b>以改善暂态的场合；</div>
+        <div><b>高频干扰不是主要问题</b>的系统；</div>
+        <div><span class="tex">\omega_{c1}</span> 附近相角滞后<b>随 ω 增大缓慢增加</b>的系统——否则 ε 将消耗过多超前角，单级超前难以奏效。</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">小结</span><span>超前校正<span class="kw-r">以相角超前换 γ、以 <span class="tex">\omega_{c}</span> 右移换速度</span>，代价是高频抗扰能力下降；稳态已满足而裕度不足、且 <span class="tex">\omega_{c1}</span> 附近相角变化平缓时优先选用，相角下降过快则宜改用滞后校正（6.3 ③）。</span></div>
+
+<script>
+/* QA 钩子：?all / ?ff=1 直接呈现全部步骤（截图管线用，不影响播放器分步呈现） */
+window.addEventListener("load", () => {
+  const q = new URLSearchParams(location.search);
+  if (q.has("all") || q.has("ff"))
+    document.querySelectorAll("[data-step]").forEach(e => e.classList.add("shown"));
+});
+</script>
+</div></div>
+</body>
+</html>

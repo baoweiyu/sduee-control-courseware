@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>6.5 复合校正几点说明</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=600">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=600" defer></script>
+<style>
+  /* 4 条通栏横条：前置色块序号 + 标题 + 说明，自上而下撑满内容区 */
+  .col{display:flex;flex-direction:column;gap:16px;height:100%;min-height:0}
+  .nc{flex:1;display:flex;align-items:stretch;background:#fff;border:2px solid var(--line);
+    border-radius:16px;overflow:hidden;min-height:0;border-left:6px solid var(--blue)}
+  .nc .no{flex:none;width:148px;display:grid;place-items:center;background:var(--blue);color:#fff;
+    font-size:24px;font-weight:700}
+  .nc .bd{flex:1;display:flex;flex-direction:column;justify-content:center;gap:9px;padding:12px 28px;
+    font-size:22.5px;line-height:1.55}
+  .nc .hd2{font-size:25px;font-weight:700;color:var(--navy)}
+  .nc .bd b{color:var(--navy)}
+  .nc .sub{font-size:20.5px;color:#3A4E78;line-height:1.5}
+</style>
+</head>
+<body data-title="6.5 复合校正几点说明" data-page="46 / 48">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="col">
+      <div class="nc">
+        <div class="no">说明 ①</div>
+        <div class="bd">
+          <div class="hd2">前馈不影响稳定性与暂态</div>
+          <div>前馈部分接在<b>反馈回路之外</b>，闭环特征方程不变——原系统的稳定性与暂态性能不受前馈影响，暂态与稳态可以分开设计。</div>
+        </div>
+      </div>
+      <div class="nc">
+        <div class="no">说明 ②</div>
+        <div class="bd">
+          <div class="hd2">扰动必须可测量</div>
+          <div>按扰动补偿要求 <span class="tex">n(t)</span> <b>可测量</b>，才能引出前馈通路；不可测量的扰动无法用前馈抵消，只能靠反馈回路抑制。</div>
+        </div>
+      </div>
+      <div class="nc">
+        <div class="no">说明 ③</div>
+        <div class="bd">
+          <div class="hd2">前馈装置须物理可实现</div>
+          <div><span class="tex">F_{n}(s)</span>（或 <span class="tex">F_{r}(s)</span>）<b>必须物理可实现</b>：全补偿结构往往阶次不满足可实现性，可采用<b>近似全补偿</b>或<b>稳态全补偿</b>（如例6-8 的微分型前馈）。</div>
+        </div>
+      </div>
+      <div class="nc">
+        <div class="no">说明 ④</div>
+        <div class="bd">
+          <div class="hd2">前馈与反馈的分工配合</div>
+          <div><b>主要扰动</b>的误差由前馈全部或部分补偿，<b>次要扰动</b>的误差由反馈抑制——不提高开环增益即可兼顾各种扰动；反馈回路常设计为<b>过阻尼</b>（利于稳态、不利快速），加入微分型前馈后<span class="kw-r">频带展宽</span>，既保证稳定性又提高快速性。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">设计哲学</span><span>反馈保证暂态性能，前馈保证稳态精度——<span class="kw-r">两个问题分开设计</span>，互相制约化为互相配合。</span></div>
+</div></div>
+</body>
+</html>

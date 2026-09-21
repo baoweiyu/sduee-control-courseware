@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>① 无源超前网络：从电路到传递函数</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=600">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=600" defer></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:1;display:flex;flex-direction:column;min-height:0}
+  .rgt{flex:1.15;display:flex;flex-direction:column;gap:16px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:10px;padding:14px 24px;font-size:22px;line-height:1.5}
+  .eq{background:var(--sky);border-radius:12px;padding:10px 16px;text-align:center;font-size:23px}
+  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .st{font-size:19.5px;color:var(--muted);line-height:1.42}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:10px 16px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .figc .capnote{flex:none;font-size:19px;color:var(--navy);background:var(--sky);border-radius:12px;padding:9px 16px;margin:0 14px 12px;line-height:1.45}
+</style>
+</head>
+<body data-title="① 无源超前网络：从电路到传递函数" data-page="7 / 48">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lft">
+        <div class="act-card figc">
+          <div class="hd"><span style="flex:1">无源超前网络（RC 电路）</span></div>
+          <div class="bd2"><svg id="ckt" viewBox="0 0 640 430" preserveAspectRatio="xMidYMid meet"></svg></div>
+          <div class="capnote">电阻 <span class="tex">R_{1}</span> 与电容 <span class="tex">C</span> 并联后，与 <span class="tex">R_{2}</span> 串联分压；输出 <span class="tex">u_{c}</span> 取自 <span class="tex">R_{2}</span> 两端。</div>
+        </div>
+      </div>
+      <div class="rgt">
+        <div class="act-card" style="flex:1.35">
+          <div class="hd"><span style="flex:1">由阻抗分压求传递函数</span></div>
+          <div class="bd">
+            <div data-step="1"><div class="st">① 复阻抗：<span class="tex">R_{1}</span> 与 <span class="tex">C</span> 并联得 <span class="tex">Z_{1}=\dfrac{R_{1}}{R_{1}Cs+1}</span>，输出臂 <span class="tex">Z_{2}=R_{2}</span></div></div>
+            <div data-step="2"><div class="eq">分压 <span class="tex">G_{c}(s)=\dfrac{U_{c}(s)}{U_{r}(s)}=\dfrac{Z_{2}}{Z_{1}+Z_{2}}=\dfrac{1}{\alpha}\cdot\dfrac{Ts+1}{\alpha Ts+1}</span></div></div>
+            <div data-step="3"><div class="eq hl">其中 <span class="tex">\alpha=\dfrac{R_{2}}{R_{1}+R_{2}}&lt;1,\qquad T=R_{1}C</span></div></div>
+          </div>
+        </div>
+        <div class="act-card" style="flex:1">
+          <div class="hd"><span style="flex:1">衰减补偿与标准形</span></div>
+          <div class="bd">
+            <div class="st">因子 <span class="tex">\dfrac{1}{\alpha}&gt;1</span> 意味着网络使开环增益<span class="kw-r">衰减为原来的 α 倍</span>，该衰减已由提高放大器放大系数所补偿。</div>
+            <div class="eq hl">无源超前网络标准形 <span class="tex">G_{c}(s)=\dfrac{Ts+1}{\alpha Ts+1},\quad \alpha&lt;1</span></div>
+            <div class="st">零点 <span class="tex">\dfrac{1}{T}</span> 在前、极点 <span class="tex">\dfrac{1}{\alpha T}</span> 在后 —— 相位<span class="kw-r">超前</span>。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">要点</span><span>超前网络 <span class="tex">G_{c}(s)=\dfrac{Ts+1}{\alpha Ts+1}</span>（<span class="tex">\alpha&lt;1</span>）：一串零点 <span class="tex">1/T</span> 加一更远极点 <span class="tex">1/(\alpha T)</span>，在两者之间提供超前相角。</span></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("ckt");
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag);
+    for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const MF = '"Cambria Math","STIX Two Math",Georgia,"Times New Roman","Microsoft YaHei",serif';
+  const INK = "#16324F", BLUE = "#1D3FA0", NAVY = "#12266E";
+  const W = (x1, y1, x2, y2) => mk("line", { x1, y1, x2, y2, stroke: INK, "stroke-width": 3.5 });
+  const label = (x, y, s, o) => { o = o || {};
+    const n = mk("text", { x, y, "font-size": o.fs || 26, "text-anchor": o.an || "middle",
+      fill: o.fill || NAVY, "font-style": "italic", "font-family": MF });
+    n.textContent = s; return n; };
+  const res = (x, y, w, h) =>   // 电阻（矩形）
+    mk("rect", { x, y, width: w, height: h, rx: 4, fill: "#fff", stroke: BLUE, "stroke-width": 3.5 });
+  const sub = (x, y, base, idx, o) => {  // 带下标元件名，如 R₁
+    o = o || {}; label(x, y, base, o); label(x + (o.fs || 26) * .62, y + 7, idx, { fs: (o.fs || 26) * .68, an: o.an || "middle" });
+  };
+  const YT = 150, YB = 330, YC = 70;   // 上/下轨与电容支路高度
+  /* 外圈：输入口（左）、输出口（右）与底轨 */
+  W(60, YT, 60, YB); W(60, YB, 580, YB); W(580, YT, 580, YB);
+  label(30, 250, "u", { fs: 30 }); label(45, 258, "r", { fs: 19 });
+  label(48, YT - 16, "+", { fs: 26 }); label(48, YB - 6, "−", { fs: 26 });
+  label(618, 250, "u", { fs: 30 }); label(634, 258, "c", { fs: 19 });
+  label(592, YT - 16, "+", { fs: 26 }); label(592, YB - 6, "−", { fs: 26 });
+  /* 上轨：R1（x 170~290），其上方并联电容 C */
+  W(60, YT, 170, YT); res(170, YT - 18, 120, 36); sub(230, YT - 30, "R", "1", { fs: 27 });
+  W(290, YT, 580, YT);
+  W(170, YT, 170, YC); W(170, YC, 222, YC); W(238, YC, 290, YC); W(290, YC, 290, YT);
+  W(222, YC - 22, 222, YC + 22); W(238, YC - 22, 238, YC + 22);   // 电容极板
+  label(230, YC - 32, "C", { fs: 27 });
+  mk("circle", { cx: 170, cy: YT, r: 5, fill: INK }); mk("circle", { cx: 290, cy: YT, r: 5, fill: INK });
+  /* 输出臂：R2 竖直跨接两轨 */
+  mk("circle", { cx: 430, cy: YT, r: 5, fill: INK });
+  W(430, YT, 430, 190); res(412, 190, 36, 96); sub(482, 243, "R", "2", { fs: 27 });
+  W(430, 286, 430, YB);
+});
+</script>
+</div></div>
+</body>
+</html>

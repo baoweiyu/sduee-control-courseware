@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>例6-3：题设与未校分析</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=221">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=221" defer></script>
+<script src="../fig.js"></script>
+<script src="../data/ex63.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:.88;display:flex;flex-direction:column;gap:12px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:7px;padding:10px 18px}
+  .eq{background:var(--sky);border-radius:12px;padding:8px 12px;text-align:center;font-size:20.5px;line-height:1.55}
+  .stp{display:flex;gap:12px;align-items:flex-start;background:var(--sky);border-radius:12px;
+    padding:10px 14px 10px 10px;font-size:20px;line-height:1.5;border-left:5px solid transparent;cursor:pointer}
+  .stp .num{flex:none;width:34px;height:34px;margin-top:2px;border-radius:50%;background:var(--blue);
+    color:#fff;font-weight:700;font-size:19px;display:grid;place-items:center}
+  .stp .stx{flex:1;min-width:0}
+  .stp .got{font-weight:700;color:var(--navy)}
+  .stp .got b{color:var(--danger)}
+  .stp.on{background:#FDF3EC;border-left-color:var(--danger);box-shadow:0 0 0 2px rgba(214,58,47,.22)}
+  .stp.on .num{background:var(--danger)}
+  .dualnote{flex:none;font-size:17.5px;color:var(--ink);background:#F6F8FC;border:1.5px dashed var(--line);
+    border-radius:10px;padding:8px 14px;line-height:1.5}
+  .figc{flex:1.22;display:flex;flex-direction:column;overflow:hidden;position:relative}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .segfloat{position:absolute;top:56px;right:14px;z-index:5;max-width:72%;background:#fff;
+    border:2px solid var(--blue);border-radius:10px;padding:5px 14px;font-size:18px;font-weight:700;
+    color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 2px 10px rgba(20,40,90,.18)}
+  .prog{position:absolute;top:60px;left:16px;z-index:5;font-size:17px;color:var(--muted);
+    background:rgba(255,255,255,.88);padding:2px 10px;border-radius:8px}
+  .ctl{display:flex;align-items:center;gap:10px;justify-content:center;padding:8px 0 10px}
+  .btn{background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:19px;font-weight:700;padding:8px 20px;cursor:pointer}
+  .btn.ghost{background:#fff;color:var(--blue);border:2px solid var(--blue)}
+  @keyframes bdPulse{0%,100%{opacity:1}50%{opacity:.2}}
+  .flash{animation:bdPulse .85s ease-in-out infinite}
+</style>
+</head>
+<body data-title="例6-3：题设与未校分析" data-page="34 / 48">
+<div class="act-stage"><div class="act-slide">
+
+<div class="act-body has-note">
+  <div class="row">
+    <div class="lft">
+      <div class="act-card" style="flex:.9">
+        <div class="hd">题设</div>
+        <div class="bd">
+          <div class="eq"><span class="tex">G_{0}(s)=\dfrac{k}{s(s+1)(0.5s+1)}</span>（单位负反馈）</div>
+          <div style="font-size:20px;line-height:1.5">
+            要求：<span class="tex">r(t)=t</span> 时 <span class="tex">e_{ss}\leq0.2</span>；<span class="tex">\gamma\geq40^{\circ}</span>；<span class="tex">K_{g}\geq10\,\mathrm{dB}</span>。设计串联校正装置 <span class="tex">G_{c}(s)</span>。
+          </div>
+        </div>
+      </div>
+      <div class="act-card" style="flex:1.72">
+        <div class="hd">第①步：定 K，画未校 Bode（与右图分步联动）</div>
+        <div class="bd">
+          <div class="stp" id="s1"><span class="num">1</span><div class="stx">
+            <div><span class="tex">e_{ss}=\dfrac{1}{k_{v}}\leq0.2</span>，本系统 <span class="tex">k_{v}=k</span></div>
+            <div class="got">k≥5，取 <b>k=5</b>（20lg5=14 dB）</div>
+          </div></div>
+          <div class="stp" id="s2"><span class="num">2</span><div class="stx">
+            <div>画未校 Bode 图：转折频率 <span class="tex">\omega_{1}=1</span>、<span class="tex">\omega_{2}=2</span>，幅频穿 0dB</div>
+            <div class="got">读 <b><span class="tex">\omega_{c1}=2.2</span></b>（渐近线读数）</div>
+          </div></div>
+          <div class="stp" id="s3"><span class="num">3</span><div class="stx">
+            <div><span class="tex">\gamma_{0}=180^{\circ}+\varphi(\omega_{c1})=-23^{\circ}</span></div>
+            <div class="got"><b>γ0＜0，系统不稳定</b>——必须校正</div>
+          </div></div>
+        </div>
+      </div>
+      <div class="dualnote">口径备注：ωc1=2.2、γ0=−23° 为渐近线读数；精确曲线穿越 ωc1=1.80，该处 γ0=−13.0°（图内标注为精确值）。</div>
+    </div>
+    <div class="act-card figc">
+      <div class="hd"><span style="flex:1">未校系统 G₀=5/[s(s+1)(0.5s+1)] 的 Bode 图</span></div>
+      <span class="segfloat" id="segChip" style="display:none"></span>
+      <span class="prog" id="prog">0 / 3</span>
+      <div class="bd2"><svg id="fig"></svg></div>
+      <div class="ctl">
+        <button class="btn" id="play">▶ 连贯生长</button>
+        <button class="btn ghost" id="step">⧉ 分步</button>
+        <button class="btn ghost" onclick="ACT.step.reset()">↺ 重置</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">诊断</span><span>K 够了、系统却<span class="kw-r">不稳定</span>：ωc1 附近相角滞后随 ω 增大急剧增加，硬压增益没有出路——正是滞后校正的用武之地。</span></div>
+
+<div data-step="1" style="display:none"></div><div data-step="2" style="display:none"></div>
+<div data-step="3" style="display:none"></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const E = BD.data.ex63, M = E.meta;
+  /* 相频数据在 −180° 处折回（wrap）到 +180°，折回段全部落在图框（ylim 上限 −60°）之外，
+     在折回跳变处截断后可见曲线与 BD 数据完全一致，仅消除竖直连线 */
+  function cutWrap(c) {
+    const pts = c.pts.slice();
+    for (let i = 1; i < pts.length; i++)
+      if (pts[i][1] - pts[i - 1][1] > 180) { pts.length = i; break; }
+    return Object.assign({}, c, { pts });
+  }
+  /* 只留未校 G0（曲线逐点取自 BD.data.ex63）+ G0 渐近线 + 转折频率标注 */
+  BD.data["t34"] = { xlim: E.xlim,
+    mag: { ylim: E.mag.ylim, curves: [E.mag.curves[0]], asym: [E.mag.asym[0]] },
+    phase: { ylim: E.phase.ylim, curves: [cutWrap(E.phase.curves[0])], asym: [] },
+    marks: [
+      { type: "vline", w: 1, label: "ω_{1}=1", color: "#5B6B8C", dy: 20 },
+      { type: "vline", w: 2, label: "ω_{2}=2", color: "#5B6B8C", dy: 42 }
+    ] };
+  const F = BD.figure("fig", "t34", { mag: true, phase: true });
+  const PM = F.panelOf("mag"), PP = F.panelOf("phase");
+  F.gMark.style.opacity = 0;
+  /* 编排：f∈[0,.45] 幅频生长；[.45,.9] 相频生长；[.9,1] 仅标注 */
+  function chor(f) {
+    const um = Math.min(f / .45, 1), up = Math.max(0, Math.min((f - .45) / .45, 1));
+    F.setF(0, um); F.setOp(0, 1);
+    F.setF(1, up); F.setOp(1, 1);
+  }
+  function paint(K) {
+    chor(FS[K]);
+    F.gMark.style.opacity = K >= 2 ? 1 : 0;
+    if (K === 2) F.gMark.setAttribute("class", "flash"); else F.gMark.removeAttribute("class");
+    if (K >= 2) {  /* ② ωc1：精确穿越 + 渐近线读数（双口径上下错开，互不重叠） */
+      const g = F.mk("g", { "class": K === 2 ? "flash" : "" }, F.gDyn);
+      const x = F.X(M.wc1.val), y = F.Y(PM, 0);
+      F.mk("line", { x1: x, y1: PM.y0, x2: x, y2: PM.y1, stroke: "#D63A2F", "stroke-width": 2.2,
+        "stroke-dasharray": "7 5", opacity: .85, "clip-path": `url(#${PM.clip})` }, g);
+      F.mk("circle", { cx: x, cy: y, r: 9, fill: "#D63A2F", stroke: "#fff", "stroke-width": 2.5 }, g);
+      F.tx(g, x - 18, y + 36, "ω_{c1}=1.80（精确）", { fs: 21, fill: "#D63A2F", b: 1, an: "end" });
+      const xa = F.X(M.wc1_asym);
+      F.mk("circle", { cx: xa, cy: y, r: 8, fill: "#fff", stroke: "#F5821F", "stroke-width": 3 }, g);
+      F.tx(g, xa + 20, y - 24, "ω_{c1}≈2.2", { fs: 21, fill: "#F5821F", b: 1, an: "start" });
+      F.tx(g, xa + 20, y - 50, "（渐近线读数）", { fs: 19, fill: "#F5821F", an: "start" });
+    }
+    if (K >= 3) {  /* ③ γ0 读数（两口径）+ 不稳定判定 */
+      const g = F.mk("g", { "class": K === 3 ? "flash" : "" }, F.gDyn);
+      const x = F.X(M.wc1.val), y1 = F.Y(PP, -193), y2 = F.Y(PP, -180);
+      F.mk("line", { x1: x, y1: PP.y0, x2: x, y2: PP.y1, stroke: "#D63A2F", "stroke-width": 2.2,
+        "stroke-dasharray": "7 5", opacity: .55, "clip-path": `url(#${PP.clip})` }, g);
+      F.mk("line", { x1: x, y1: y1, x2: x, y2: y2, stroke: "#D63A2F", "stroke-width": 3.4 }, g);
+      F.mk("circle", { cx: x, cy: y1, r: 9, fill: "#D63A2F", stroke: "#fff", "stroke-width": 2.5 }, g);
+      F.tx(g, x - 14, (y1 + y2) / 2 + 6, "γ_{0}=−13.0°", { fs: 22, fill: "#D63A2F", b: 1, an: "end" });
+      const xa = F.X(M.wc1_asym), ya = F.Y(PP, -180 + M["gamma0_at_2.2"]);
+      F.mk("line", { x1: xa, y1: y2, x2: xa, y2: ya, stroke: "#F5821F", "stroke-width": 3,
+        "stroke-dasharray": "5 4" }, g);
+      F.tx(g, xa + 16, ya + 22, "γ_{0}(2.2)=−23°", { fs: 21, fill: "#F5821F", b: 1, an: "start" });
+      F.tx(g, PP.x1 - 18, PP.y0 + 30, "γ_{0}＜0，不稳定", { fs: 24, fill: "#D63A2F", b: 1, an: "end" });
+    }
+    for (let i = 1; i <= 3; i++)
+      document.getElementById("s" + i).classList.toggle("on", i === K);
+  }
+  const FS = [0, .45, .9, 1];
+  BD.wire(3, paint, { figs: [F], FS, dur: 9000, playLabel: "▶ 连贯生长", frame: f => chor(f) });
+
+  /* ---- ⧉分步（金标准）：点一下推进一步；左栏步骤与图内元素同步高亮 ---- */
+  const STEPS = ["① ess 定 K=5", "② 未校 Bode：ωc1=2.2", "③ γ0=−23°＜0 不稳定"];
+  const chip = document.getElementById("segChip"), total = 3, stepBtn = document.getElementById("step");
+  const wNext = ACT.step.next, wReset = ACT.step.reset;
+  let segRaf = null, segTok = 0;
+  function segEnable() { stepBtn.disabled = false; stepBtn.style.opacity = ""; stepBtn.style.cursor = ""; }
+  function segStopUI() {
+    segTok++;
+    if (segRaf) { cancelAnimationFrame(segRaf); segRaf = null; }
+    segEnable(); chip.style.display = "none";
+  }
+  ACT.step.next = function () { segStopUI(); return wNext(); };
+  ACT.step.reset = function () { segStopUI(); return wReset(); };
+  const playBtn = document.getElementById("play");
+  if (playBtn && playBtn.onclick) {
+    const po = playBtn.onclick;
+    playBtn.onclick = e => { segStopUI(); po(e); };
+  }
+  function segGo(instant) {
+    segStopUI();
+    if (ACT.step.cur >= total) wReset();
+    wNext();
+    const k = ACT.step.cur, f0 = FS[k - 1], f1 = FS[k];
+    chip.textContent = "分步 " + k + " / " + total + "　" + STEPS[k - 1]; chip.style.display = "";
+    if (instant || f1 <= f0 + 1e-9) { chor(f1); return; }
+    chor(f0);
+    stepBtn.disabled = true; stepBtn.style.opacity = ".55"; stepBtn.style.cursor = "default";
+    const t0 = performance.now(), D = 1700, tok = segTok;
+    const tick = now => {
+      if (tok !== segTok) return;
+      const u = Math.min(1, (now - t0) / D), f = f0 + (f1 - f0) * u;
+      chor(f);
+      if (u < 1) segRaf = requestAnimationFrame(tick); else { segRaf = null; segEnable(); }
+    };
+    segRaf = requestAnimationFrame(tick);
+  }
+  stepBtn.onclick = () => segGo(false);
+  for (let i = 1; i <= total; i++)
+    document.getElementById("s" + i).onclick = () => {
+      segStopUI(); wReset();
+      for (let j = 0; j < i; j++) wNext();
+      chip.textContent = "分步 " + i + " / " + total + "　" + STEPS[i - 1]; chip.style.display = "";
+    };
+  /* QA 钩子：?seg=N 直达分步第 N 步（瞬时确定态） */
+  window.addEventListener("load", () => {
+    const n = +(new URLSearchParams(location.search).get("seg") || 0);
+    for (let i = 0; i < Math.min(n, total); i++) segGo(true);
+  });
+});
+</script>
+</div></div>
+</body>
+</html>

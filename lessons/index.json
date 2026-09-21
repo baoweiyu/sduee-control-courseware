@@ -23,5 +23,10 @@
     "lesson_id": "lesson05-root-locus",
     "path": "lesson05-root-locus/lesson.json",
     "title": "第五章 根轨迹法"
+  },
+  {
+    "lesson_id": "lesson06-correction",
+    "path": "lesson06-correction/lesson.json",
+    "title": "第六章 控制系统的校正"
   }
 ]

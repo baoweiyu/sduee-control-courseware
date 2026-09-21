@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>常用校正方法</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=600">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=600" defer></script>
+<style>
+  .grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:26px;height:100%;min-height:0}
+  .mcard{display:flex;flex-direction:column;overflow:hidden;background:#fff;border:2px solid var(--line);
+    border-radius:var(--radius);min-height:0}
+  .mcard.main{border-color:var(--orange);box-shadow:0 10px 30px rgba(245,130,31,.16)}
+  .mcard>.hd{background:var(--blue);color:#fff;font-size:26px;font-weight:700;padding:14px 24px;
+    display:flex;align-items:center;gap:12px}
+  .mcard.main>.hd{background:var(--navy)}
+  .mcard>.hd .tag{background:var(--orange);border-radius:8px;font-size:19px;padding:3px 12px;letter-spacing:1px}
+  .mcard>.bd{flex:1;display:flex;flex-direction:column;gap:14px;padding:20px 24px;min-height:0}
+  .mcard .ico{align-self:center;background:var(--sky);border-radius:14px;padding:10px 14px}
+  .mcard .ico svg{display:block;width:300px;height:120px}
+  .pt{padding-left:28px;text-indent:-28px;font-size:21.5px;line-height:1.5;color:var(--ink)}
+  .pt::before{content:"";display:inline-block;vertical-align:2px;width:12px;height:12px;border-radius:3px;
+    background:var(--orange);transform:rotate(45deg);margin-right:16px}
+  .pt b{color:var(--navy)}
+  .use{margin-top:auto;background:var(--sky);border-radius:12px;padding:10px 16px;font-size:20px;
+    color:var(--navy);font-weight:700;line-height:1.45}
+</style>
+</head>
+<body data-title="常用校正方法" data-page="5 / 48">
+<div class="act-stage"><div class="act-slide">
+
+<div class="act-body has-note">
+  <div class="grid">
+    <div class="mcard main">
+      <div class="hd"><span class="tag">本章主线</span>频率特性法</div>
+      <div class="bd">
+        <div class="ico">
+          <svg viewBox="0 0 300 120">
+            <line x1="16" y1="60" x2="290" y2="60" stroke="#8A97B5" stroke-width="2"/>
+            <line x1="16" y1="60" x2="16" y2="8" stroke="#8A97B5" stroke-width="2"/>
+            <polyline points="22,54 110,54 170,14 286,14" fill="none" stroke="#F5821F" stroke-width="4" stroke-dasharray="8 5"/>
+            <polyline points="22,58 114,54 178,10 286,8" fill="none" stroke="#1D3FA0" stroke-width="4" stroke-linecap="round"/>
+            <text x="238" y="102" font-size="17" fill="#5B6B8C">Bode 图</text>
+          </svg>
+        </div>
+        <div class="pt">在 Bode 图上按<b>低频、中频、高频三频段</b>的要求，重塑开环频率特性。</div>
+        <div class="pt">几何意义直观，校正装置的作用<b>一目了然</b>，适合工程设计。</div>
+        <div class="pt">以 <span class="tex">\omega_{c}</span>、<span class="tex">\gamma</span> 等<b>频域指标</b>为设计目标，逐条校验。</div>
+        <div class="use">本章重点：例6-1（超前）、例6-3（滞后）全程演练</div>
+      </div>
+    </div>
+    <div class="mcard">
+      <div class="hd">根轨迹法</div>
+      <div class="bd">
+        <div class="ico">
+          <svg viewBox="0 0 300 120">
+            <line x1="16" y1="60" x2="290" y2="60" stroke="#8A97B5" stroke-width="2"/>
+            <line x1="150" y1="112" x2="150" y2="8" stroke="#8A97B5" stroke-width="2"/>
+            <path d="M60,60 C110,60 120,24 150,20 M60,60 C110,60 120,96 150,100" fill="none" stroke="#1D3FA0" stroke-width="4"/>
+            <line x1="52" y1="52" x2="68" y2="68" stroke="#16324F" stroke-width="4" stroke-linecap="round"/>
+            <line x1="52" y1="68" x2="68" y2="52" stroke="#16324F" stroke-width="4" stroke-linecap="round"/>
+            <line x1="232" y1="52" x2="248" y2="68" stroke="#16324F" stroke-width="4" stroke-linecap="round"/>
+            <line x1="232" y1="68" x2="248" y2="52" stroke="#16324F" stroke-width="4" stroke-linecap="round"/>
+            <text x="206" y="102" font-size="17" fill="#5B6B8C">s 平面</text>
+          </svg>
+        </div>
+        <div class="pt">在 s 平面上<b>配置闭环零、极点</b>，直接对应时域响应形态。</div>
+        <div class="pt">适合以<b>时域指标</b>为主导的设计，与第五章前后呼应。</div>
+        <div class="pt">校正装置改变根轨迹走向，使闭环极点<b>进入期望区域</b>。</div>
+        <div class="use">同一系统、两种视角：频域 ↔ 复域</div>
+      </div>
+    </div>
+    <div class="mcard">
+      <div class="hd">复合校正法</div>
+      <div class="bd">
+        <div class="ico">
+          <svg viewBox="0 0 300 120">
+            <rect x="30" y="20" width="70" height="34" rx="8" fill="none" stroke="#F5821F" stroke-width="4"/>
+            <rect x="120" y="68" width="70" height="34" rx="8" fill="none" stroke="#1D3FA0" stroke-width="4"/>
+            <line x1="14" y1="85" x2="120" y2="85" stroke="#8A97B5" stroke-width="3"/>
+            <line x1="14" y1="85" x2="14" y2="37" stroke="#8A97B5" stroke-width="3"/>
+            <line x1="14" y1="37" x2="30" y2="37" stroke="#8A97B5" stroke-width="3"/>
+            <line x1="100" y1="37" x2="155" y2="37" stroke="#8A97B5" stroke-width="3"/>
+            <line x1="155" y1="37" x2="155" y2="68" stroke="#8A97B5" stroke-width="3"/>
+            <line x1="190" y1="85" x2="286" y2="85" stroke="#8A97B5" stroke-width="3"/>
+            <text x="226" y="44" font-size="17" fill="#5B6B8C">前馈补偿</text>
+          </svg>
+        </div>
+        <div class="pt">反馈控制之外增设<b>前馈补偿通道</b>，两者共同作用。</div>
+        <div class="pt"><b>按输入补偿</b>提高稳态精度，<b>按扰动补偿</b>抵消扰动影响。</div>
+        <div class="pt">前馈通道<b>不改变闭环特征方程</b>，可在保证稳定性的前提下提高精度。</div>
+        <div class="use">见 6.5 节：按输入 / 按扰动补偿，例6-8</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">结论</span><span>三种方法各有适用场合；<span style="color:var(--danger);font-weight:700">本章以频率特性法为主</span>，串联超前、串联滞后校正的设计均围绕 Bode 图展开。</span></div>
+
+</div></div>
+</body>
+</html>

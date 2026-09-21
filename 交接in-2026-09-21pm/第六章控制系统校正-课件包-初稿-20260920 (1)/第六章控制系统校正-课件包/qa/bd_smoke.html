@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>BD 库冒烟测试（QA）</title>
+<script src="../lessons/lesson06-correction/fig.js"></script>
+<script src="../lessons/lesson06-correction/data/lead08.js"></script>
+<script src="../lessons/lesson06-correction/data/lag12.js"></script>
+<script src="../lessons/lesson06-correction/data/ex61.js"></script>
+<script src="../lessons/lesson06-correction/data/ex63.js"></script>
+<script src="../lessons/lesson06-correction/data/phi_alpha.js"></script>
+<style>
+  body { margin:0; background:#fff; font-family:"Microsoft YaHei",sans-serif; }
+  .row { display:flex; gap:10px; padding:10px; }
+  .cell { flex:1; border:1px solid #ccc; }
+  svg { width:100%; height:430px; display:block; }
+  h3 { margin:4px 10px; font-size:15px; color:#333; }
+</style>
+</head>
+<body>
+<div class="row">
+  <div class="cell"><h3>lead08 超前（双图+渐近线+标注，static）</h3><svg id="s1"></svg></div>
+  <div class="cell"><h3>ex61 例6-1（双图+ωc/γ标注，static）</h3><svg id="s2"></svg></div>
+</div>
+<div class="row">
+  <div class="cell"><h3>ex63 例6-3（双图，static）</h3><svg id="s3"></svg></div>
+  <div class="cell"><h3>phi_alpha + block 方框图</h3><svg id="s4" style="height:200px"></svg><svg id="s5" style="height:210px"></svg></div>
+</div>
+<script>
+  BD.figure("s1", "lead08", { mag: true, phase: true, static: true, zoom: false });
+  BD.figure("s2", "ex61",   { mag: true, phase: true, static: true, zoom: false });
+  BD.figure("s3", "ex63",   { mag: true, phase: true, static: true, zoom: false });
+  BD.figure("s4", "phi_alpha", { mag: true, phase: false, static: true, zoom: false, vh: 260 });
+  BD.block("s5", [
+    { type: "line", pts: [[30, 80], [90, 80]], label: "R(s)" },
+    { type: "sum", x: 110, y: 80, signs: { left: "+", bottom: "−" } },
+    { type: "line", pts: [[126, 80], [170, 80]], label: "E(s)" },
+    { type: "box", x: 170, y: 55, w: 120, h: 50, label: "G_{c}(s)" },
+    { type: "line", pts: [[290, 80], [330, 80]] },
+    { type: "box", x: 330, y: 55, w: 120, h: 50, label: "G_{0}(s)" },
+    { type: "line", pts: [[450, 80], [540, 80]], label: "C(s)", labelDx: -6 },
+    { type: "dot", x: 490, y: 80 },
+    { type: "line", pts: [[490, 80], [490, 150], [110, 150], [110, 96]], color: "#1D3FA0", flow: true, label: "反馈", labelDy: 18 }
+  ], { vh: 200, static: true });
+  document.title = "BD-SMOKE-OK";
+</script>
+</body>
+</html>

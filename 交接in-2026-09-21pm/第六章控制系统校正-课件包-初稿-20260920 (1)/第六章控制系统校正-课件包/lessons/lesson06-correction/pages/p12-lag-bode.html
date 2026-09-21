@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>② 滞后网络频率特性</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=600">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=600" defer></script>
+<style>
+  .row{display:flex;gap:20px;height:100%;min-height:0}
+  .figc{flex:1.62;display:flex;flex-direction:column;overflow:hidden;position:relative}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:2px 6px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .segfloat{position:absolute;top:52px;right:12px;z-index:5;max-width:78%;background:#fff;
+    border:2px solid var(--blue);border-radius:10px;padding:4px 13px;font-size:17.5px;font-weight:700;
+    color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 2px 10px rgba(20,40,90,.18)}
+  .prog{position:absolute;top:56px;left:14px;z-index:5;font-size:17px;color:var(--muted);
+    background:rgba(255,255,255,.88);padding:2px 10px;border-radius:8px}
+  .ctl{display:flex;align-items:center;gap:10px;justify-content:center;padding:6px 0 8px}
+  .btn{background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:19px;font-weight:700;padding:8px 20px;cursor:pointer;min-width:112px;text-align:center}
+  .btn.ghost{background:#fff;color:var(--blue);border:2px solid var(--blue)}
+  .btn:disabled{opacity:.42;cursor:not-allowed}
+  .rgt{flex:.82;display:flex;flex-direction:column;gap:12px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:5px;padding:6px 14px}
+  .chips{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+  .achip{display:flex;align-items:center;gap:8px;background:var(--sky);border:2px solid transparent;border-radius:10px;
+    padding:6px 11px;font-size:18px;font-weight:700;color:var(--navy);cursor:pointer}
+  .achip .dot{width:14px;height:14px;border-radius:50%;flex:none}
+  .achip.on{border-color:var(--danger);background:#FDF3EC}
+  .achip:disabled{opacity:.42;cursor:not-allowed}
+  .kvrow{display:flex;justify-content:space-between;align-items:baseline;background:var(--sky);border-radius:9px;
+    padding:4px 12px;font-size:17px;color:var(--navy);line-height:1.28}
+  .kvrow b{font-size:18.5px;color:var(--danger);font-variant-numeric:tabular-nums}
+  .stp2{display:flex;gap:8px;align-items:flex-start;background:var(--sky);border-radius:9px;
+    padding:4px 10px;font-size:15.5px;line-height:1.28;color:var(--ink);border-left:5px solid transparent}
+  .stp2 .num{flex:none;width:21px;height:21px;border-radius:50%;background:var(--blue);color:#fff;
+    font-weight:700;font-size:13.5px;display:grid;place-items:center}
+  .stp2.on{background:#FDF3EC;border-left-color:var(--danger);box-shadow:0 0 0 2px rgba(214,58,47,.22)}
+  .stp2.on .num{background:var(--danger)}
+</style>
+</head>
+<body data-title="② 滞后网络频率特性" data-page="12 / 48">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="act-card figc">
+        <div class="hd"><span style="flex:1">滞后网络 Bode 图（T=1 归一化，四条 β 曲线）</span></div>
+        <span class="segfloat" id="segChip" style="display:none"></span>
+        <span class="prog" id="prog">0 / 4</span>
+        <div class="bd2"><svg id="fig"></svg></div>
+        <div class="ctl">
+          <button class="btn" id="play">▶ 播放</button>
+          <button class="btn ghost" id="step">⧉ 分步</button>
+          <button class="btn ghost" id="rst">↺ 重置</button>
+        </div>
+      </div>
+      <div class="rgt">
+        <div class="act-card" style="flex:.9">
+          <div class="hd" style="font-size:23px"><span style="flex:1">β 取值（联动曲线与读数）</span></div>
+          <div class="bd">
+            <div class="chips" id="chips"></div>
+          </div>
+        </div>
+        <div class="act-card" style="flex:1.15">
+          <div class="hd" style="font-size:23px"><span style="flex:1">当前 β 的特征读数</span></div>
+          <div class="bd">
+            <div class="kvrow"><span>转折频率 <span class="tex">1/(\beta T)</span></span><b id="r_w2">0.1</b></div>
+            <div class="kvrow"><span>转折频率 <span class="tex">1/T</span></span><b id="r_w1">1</b></div>
+            <div class="kvrow"><span>几何中心 <span class="tex">\omega_{m}</span></span><b id="r_wm">0.32</b></div>
+            <div class="kvrow"><span>最大滞后相角 <span class="tex">\varphi_{m}</span></span><b id="r_pm">−54.90°</b></div>
+            <div class="kvrow"><span>高频衰减 <span class="tex">-20\lg\beta</span></span><b id="r_lv">−20.0 dB</b></div>
+          </div>
+        </div>
+        <div class="act-card" style="flex:1">
+          <div class="hd" style="font-size:23px"><span style="flex:1">分步演示</span></div>
+          <div class="bd">
+            <div class="stp2" id="st1"><span class="num">1</span><span>幅频：0dB → −20 → 平台 −20lgβ</span></div>
+            <div class="stp2" id="st2"><span class="num">2</span><span>相频：两转折频率之间下凹</span></div>
+            <div class="stp2" id="st3"><span class="num">3</span><span>标注 ωm 与 φm</span></div>
+            <div class="stp2" id="st4"><span class="num">4</span><span>标注电平 −20lgβ</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">要点</span><span>相角滞后是缺点，但<span class="kw-r">高频幅值衰减可被利用</span>：设计时把 <span class="tex">1/T</span> 放到远低于 <span class="tex">\omega_{c}</span> 处，即可避开相角损失、只取衰减。</span></div>
+<div data-step="1" style="display:none"></div><div data-step="2" style="display:none"></div>
+<div data-step="3" style="display:none"></div><div data-step="4" style="display:none"></div>
+<script src="../fig.js"></script>
+<script src="../data/lag12.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const TOTAL = 4;
+  const BE = BD.data.lag12.meta.betas;            // β=2/5/10/20
+  const MARKS_ALL = BD.data.lag12.marks.slice();
+  let sel = 2;                                     // 默认 β=10
+  function applyMarks() {
+    const b = BE[sel];
+    BD.data.lag12.marks = MARKS_ALL.filter(m =>
+      m.type === "vline" && (Math.abs(m.w - 1) < 1e-9 || Math.abs(m.w - b.w2) < 1e-9));
+  }
+  applyMarks();
+  const F = BD.figure("fig", "lag12", { asym: false });
+  const PAL = BD.PAL, FOCUS = "#D63A2F";
+  const fmtW = v => (Math.round(v * 100) / 100).toString();
+
+  function grow(fm, fp) { for (let i = 0; i < 4; i++) { F.setF(i, fm); F.setF(i + 4, fp); } }
+  function paint(K, f) {
+    let fm, fp;
+    if (typeof f === "number") { fm = Math.min(1, f * 2); fp = Math.max(0, f * 2 - 1); }
+    else { fm = K >= 1 ? 1 : 0; fp = K >= 2 ? 1 : 0; }
+    grow(fm, fp);
+    F.gAsym.style.opacity = K >= 1 ? 1 : 0;
+    const b = BE[sel], pm = F.panels[0], pp = F.panels[1];
+    if (K >= 3) {  // ωm 竖虚线 + 相频谷底 φm（负）
+      const x = F.X(b.wm);
+      [pm, pp].forEach(p => F.mk("line", { x1: x, y1: p.y0, x2: x, y2: p.y1, stroke: FOCUS,
+        "stroke-width": 2.2, "stroke-dasharray": "7 5", "clip-path": `url(#${p.clip})`, opacity: .85 }, F.gDyn));
+      const yp = F.Y(pp, b.phim);
+      F.mk("circle", { cx: x, cy: yp, r: 8.5, fill: FOCUS, stroke: "#fff", "stroke-width": 2.5 }, F.gDyn);
+      F.tx(F.gDyn, x + 16, yp + 4, "φ_{m}=−" + Math.abs(b.phim).toFixed(2) + "°", { fs: 22, fill: FOCUS, b: 1, an: "start" });
+      F.tx(F.gDyn, x, pm.y0 + 24, "ω_{m}=" + fmtW(b.wm), { fs: 21, fill: FOCUS, b: 1 });
+    }
+    if (K >= 4) {  // 高频衰减电平 −20lgβ（红标，本页重点）
+      const y = F.Y(pm, b.level_hi_db), x0 = F.X(b.w1), x1 = pm.x1 - 6;
+      F.mk("line", { x1: x0, y1: y, x2: x1, y2: y, stroke: FOCUS, "stroke-width": 2.6, "stroke-dasharray": "6 5" }, F.gDyn);
+      F.mk("circle", { cx: x0, cy: y, r: 8.5, fill: FOCUS, stroke: "#fff", "stroke-width": 2.5 }, F.gDyn);
+      F.tx(F.gDyn, x1, y - 12, "−20lgβ=" + b.level_hi_db.toFixed(1) + " dB", { fs: 22, fill: FOCUS, b: 1, an: "end" });
+    }
+    for (let i = 1; i <= TOTAL; i++)
+      document.getElementById("st" + i).classList.toggle("on", i === K);
+  }
+
+  const chipsEl = document.getElementById("chips");
+  BE.forEach((b, i) => {
+    const c = document.createElement("button");
+    c.className = "achip" + (i === sel ? " on" : "");
+    c.innerHTML = `<span class="dot" style="background:${PAL[i]}"></span>β=${b.beta}`;
+    c.onclick = () => select(i);
+    chipsEl.appendChild(c);
+  });
+  function updatePanel() {
+    const b = BE[sel];
+    document.getElementById("r_w2").textContent = fmtW(b.w2);
+    document.getElementById("r_w1").textContent = fmtW(b.w1);
+    document.getElementById("r_wm").textContent = fmtW(b.wm);
+    document.getElementById("r_pm").textContent = "−" + Math.abs(b.phim).toFixed(2) + "°";
+    document.getElementById("r_lv").textContent = b.level_hi_db.toFixed(1) + " dB";
+  }
+  function select(i) {
+    sel = i;
+    chipsEl.querySelectorAll(".achip").forEach((c, j) => c.classList.toggle("on", j === i));
+    for (let j = 0; j < 4; j++) { F.setOp(j, j === i ? 1 : .22); F.setOp(j + 4, j === i ? 1 : .22); }
+    applyMarks(); updatePanel(); F.render();
+  }
+  select(sel);
+
+  BD.wire(TOTAL, paint, { figs: [F], FS: [0, .25, .5, .8, 1], dur: 10000 });
+
+  /* ---- ⧉分步：点一下走一步 ---- */
+  const STEPS = ["① 幅频特性：低频 0dB → −20 斜率 → 高频平台 −20lgβ",
+                 "② 相频特性：在两个转折频率之间下凹",
+                 "③ 标注 ωm=1/(T√β) 与最大滞后相角 φm",
+                 "④ 标注高频衰减电平 −20lgβ（校正利用的就是它）"];
+  const SEG = { 1: [0, 1, 2, 3], 2: [4, 5, 6, 7], 3: [], 4: [] };
+  const chip = document.getElementById("segChip");
+  const pb = document.getElementById("play"), sb = document.getElementById("step"), rb = document.getElementById("rst");
+  const wNext = ACT.step.next, wReset = ACT.step.reset;
+  let segRaf = null, segTok = 0;
+  function segStopUI() {
+    segTok++;
+    if (segRaf) { cancelAnimationFrame(segRaf); segRaf = null; }
+    chip.style.display = "none";
+    pb.disabled = false; sb.disabled = false; rb.disabled = false;
+    chipsEl.querySelectorAll(".achip").forEach(c => c.disabled = false);
+  }
+  ACT.step.next = function () { segStopUI(); return wNext(); };
+  ACT.step.reset = function () { segStopUI(); return wReset(); };
+  pb.onclick = (fn => e => { segStopUI(); fn(e); })(pb.onclick);
+  function segGo(instant) {
+    segStopUI();
+    if (ACT.step.cur >= TOTAL) wReset();
+    wNext();
+    const k = ACT.step.cur;
+    chip.textContent = "分步 " + k + " / " + TOTAL + "　" + STEPS[k - 1];
+    chip.style.display = "";
+    const brs = SEG[k];
+    if (instant || !brs.length) return;
+    pb.disabled = true; sb.disabled = true; rb.disabled = true;
+    chipsEl.querySelectorAll(".achip").forEach(c => c.disabled = true);
+    brs.forEach(b => F.setF(b, 0));
+    const t0 = performance.now(), D = 1800, tok = segTok;
+    const tick = now => {
+      if (tok !== segTok) return;
+      const u = Math.min(1, (now - t0) / D);
+      brs.forEach(b => F.setF(b, u));
+      if (u < 1) segRaf = requestAnimationFrame(tick);
+      else { segRaf = null; segStopEnable(); }
+    };
+    segRaf = requestAnimationFrame(tick);
+  }
+  function segStopEnable() {
+    pb.disabled = false; sb.disabled = false; rb.disabled = false;
+    chipsEl.querySelectorAll(".achip").forEach(c => c.disabled = false);
+  }
+  sb.onclick = () => segGo(false);
+  rb.onclick = () => ACT.step.reset();
+  window.addEventListener("load", () => {
+    const n = +(new URLSearchParams(location.search).get("seg") || 0);
+    for (let i = 0; i < Math.min(n, TOTAL); i++) segGo(true);
+  });
+});
+</script>
+</div></div>
+</body>
+</html>

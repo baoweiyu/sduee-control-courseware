@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>本章小结</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=600">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=600" defer></script>
+<style>
+  .wrap{width:100%;height:100%;display:flex;flex-direction:column;gap:15px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden;flex:1}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:center;gap:7px;padding:10px 26px;font-size:23px;line-height:1.5}
+  .kv{background:var(--sky);border-radius:12px;padding:9px 20px;line-height:1.55}
+  .kv b{color:var(--navy)}
+</style>
+</head>
+<body data-title="本章小结" data-page="47 / 48">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="wrap">
+      <div class="act-card">
+        <div class="hd">① 校正概念（6.1）</div>
+        <div class="bd">
+          <div class="kv">校正 = 增加辅助装置改善性能；三种方式：<b>串联 / 反馈 / 复合</b>；常用方法：频率特性法、根轨迹法、复合校正法。</div>
+        </div>
+      </div>
+      <div class="act-card">
+        <div class="hd">② 校正装置（6.2）</div>
+        <div class="bd">
+          <div class="kv">超前（<span class="tex">\varphi_{m}=\arcsin\frac{1-\alpha}{1+\alpha}</span>，相角超前）/ 滞后（高频衰减 <span class="tex">-20\lg\beta</span>）/ 滞后—超前 / PID。</div>
+        </div>
+      </div>
+      <div class="act-card">
+        <div class="hd">③ 频率法设计（6.3）</div>
+        <div class="bd">
+          <div class="kv">超前 6 步：利用相角超前，例6-1 <span class="tex">\gamma:\,16^{\circ}\to42.6^{\circ}</span>；滞后 6 步：利用高频幅值衰减使 <span class="tex">\omega_{c}</span> 左移，例6-3 <span class="tex">\gamma:\,-23^{\circ}\to40.2^{\circ}</span>。</div>
+        </div>
+      </div>
+      <div class="act-card">
+        <div class="hd">④ 局部反馈校正（6.4）</div>
+        <div class="bd">
+          <div class="kv"><span class="tex">G_{c}</span> 包围要害环节 <span class="tex">G_{2}</span>：<span class="tex">|G_{2}G_{c}|\gg1</span> 的频段 <span class="tex">G_{2c}\approx\dfrac{1}{G_{c}}</span>——特性只取决于反馈装置，还可削弱参数摄动影响。</div>
+        </div>
+      </div>
+      <div class="act-card">
+        <div class="hd">⑤ 复合校正（6.5）</div>
+        <div class="bd">
+          <div class="kv">反馈之外加前馈，按<b>不变性原理</b>设计：按输入补偿（<span class="tex">F_{r}=1/G_{2}</span>）/ 按扰动补偿（<span class="tex">F_{n}=1/G_{1}</span>）；例6-8 部分补偿使系统 <b>1 型 → 2 型</b>。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+</body>
+</html>

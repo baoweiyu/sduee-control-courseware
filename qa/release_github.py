@@ -25,7 +25,7 @@ ROOT = r"H:\D_tools\courseware-system-kimi"
 GH = r"C:\Program Files\GitHub CLI\gh.exe"
 LOCAL_DIR = os.path.join(ROOT, "版本迭代-本地播放用")
 WEB_DIR = os.path.join(ROOT, "版本迭代-服务器部署用")
-CHAPTERS = ["Ch1", "Ch2", "Ch3", "Ch4", "Ch5"]
+CHAPTERS = ["Ch1", "Ch2", "Ch3", "Ch4", "Ch5", "Ch6"]
 
 REDLINE_PATTERNS = ["image2_config.json", "assets/image2/generate.py", "assets/image2/prompts/"]
 
@@ -71,7 +71,7 @@ def main():
         if not z:
             sys.exit("缺本地播放包: %s V%s" % (ch, vernum))
         zips.append(z)
-    web = find_zip(WEB_DIR, "-Ch1-Ch5-V%s" % vernum)
+    web = find_zip(WEB_DIR, "-Ch1-Ch6-V%s" % vernum)
     if not web:
         sys.exit("缺网页部署包: Ch1-Ch5 V%s" % vernum)
     zips.append(web)

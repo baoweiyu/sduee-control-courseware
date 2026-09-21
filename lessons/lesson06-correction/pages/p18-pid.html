@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>④ PID 控制</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=221">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=221" defer></script>
+<style>
+  .row{display:flex;gap:24px;height:100%;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .law .bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:16px;padding:16px 26px;font-size:22.5px;line-height:1.6}
+  .law .fm{background:var(--sky);border-radius:14px;padding:16px 22px;text-align:center;font-size:24px;color:var(--navy)}
+  .law ul{list-style:none;display:flex;flex-direction:column;gap:14px}
+  .law li{display:flex;gap:12px;align-items:flex-start}
+  .law li::before{content:"";flex:none;width:12px;height:12px;border-radius:50%;background:var(--orange);margin-top:10px}
+  .figc .bd{flex:1;display:flex;flex-direction:column;min-height:0;padding:8px 12px}
+  .figc .fbox{flex:1;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .figc .capnote{flex:none;font-size:19.5px;color:var(--navy);background:var(--sky);border-radius:10px;padding:8px 16px;margin:8px 6px 6px;line-height:1.5;text-align:center}
+</style>
+</head>
+<body data-title="④ PID 控制" data-page="18 / 48">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="act-card law" style="flex:1.02">
+        <div class="hd">比例-积分-微分（PID）控制规律</div>
+        <div class="bd">
+          <div class="fm">
+            <span class="tex">G_{c}(s)=K_{p}+\dfrac{K_{I}}{s}+K_{D}s=K_{p}\,\dfrac{T_{d}T_{i}s^{2}+T_{i}s+1}{T_{i}s}</span>
+          </div>
+          <ul>
+            <li><span>PID 控制相当于给系统增加<span class="kw-r">一个极点（原点处）与两个零点</span>。</span></li>
+            <li><span>原点处的极点可<span class="kw-r">改善稳态性能</span>；两个零点可<span class="kw-r">改善稳定性和暂态性能</span>。</span></li>
+            <li><span>低频段呈积分（I）特性、高频段呈微分（D）特性——I 稳态、D 暂态，各管一段。</span></li>
+            <li><span>右图（取 <span class="tex">T_{i}=1,\ T_{d}=0.2</span>）：相频 <span class="tex">-90^{\circ}\!\to\!+90^{\circ}</span>，两零点 <span class="tex">s=-1.38,\,-3.62</span> 均为负实数。</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="act-card figc" style="flex:1.1">
+        <div class="hd">PID 装置的 Bode 特性</div>
+        <div class="bd">
+          <div class="fbox"><svg id="figPID"></svg></div>
+          <div class="capnote">相位 <span class="tex">-90^{\circ}\to+90^{\circ}</span>：低频滞后（I）、高频超前（D），幅频中段下凹、两端抬起</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">结论</span><span>PID 兼顾稳态、稳定与暂态三方面性能，是<span class="kw-r">工业中应用最广</span>的校正装置。</span></div>
+</div></div>
+<script src="../fig.js"></script>
+<script src="../data/pid.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  /* 从 BD.data.pid 中按曲线名筛出 PID 单曲线（含专属标注），注册为独立数据集 */
+  const d = BD.data.pid, tag = "PID";
+  BD.data["pid_pid"] = {
+    xlim: d.xlim,
+    mag:   { ylim: d.mag.ylim,   curves: d.mag.curves.filter(c => c.name === tag) },
+    phase: { ylim: d.phase.ylim, curves: d.phase.curves.filter(c => c.name === tag) },
+    marks: d.marks.filter(m => m.curve === tag)
+  };
+  BD.figure("figPID", "pid_pid", { static: true, zoom: false });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>④ PID 有源校正装置：P / I / D</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=221">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=221" defer></script>
+<style>
+  .row{display:flex;gap:24px;height:100%;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  /* 左：运放有源网络示意 */
+  .netc .bd{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:16px 20px}
+  .netc svg{width:100%;max-width:560px;height:auto}
+  .netc .fx{background:var(--sky);border-radius:12px;padding:14px 22px;font-size:23px;color:var(--navy);text-align:center;line-height:1.65}
+  /* 右：P / D / I 三行卡 */
+  .pidc .bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:18px;padding:14px 22px}
+  .pcard{display:flex;align-items:center;gap:22px;border:2px solid var(--line);border-radius:16px;
+    background:#fff;padding:18px 24px;font-size:23px;line-height:1.55;flex:1}
+  .pcard .badge{width:74px;height:74px;border-radius:50%;background:var(--blue);color:#fff;
+    font-size:34px;font-weight:700;display:grid;place-items:center;flex:none}
+  .pcard .tx{flex:1;color:var(--ink)}
+  .pcard .tx .fm{color:var(--navy);font-weight:700;font-size:24px;white-space:nowrap}
+  .pcard .tx .ds{color:var(--ink);font-size:21.5px}
+</style>
+</head>
+<body data-title="④ PID 有源校正装置：P / I / D" data-page="15 / 48">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="row">
+      <div class="act-card netc" style="flex:1.02">
+        <div class="hd">运放有源校正网络</div>
+        <div class="bd">
+          <svg viewBox="0 0 520 330" aria-label="运放有源网络示意图">
+            <!-- 输入支路 Z1 -->
+            <line x1="36" y1="130" x2="82" y2="130" stroke="#16324F" stroke-width="3"/>
+            <rect x="82" y="108" width="86" height="44" rx="8" fill="#F4F7FE" stroke="#1D3FA0" stroke-width="2.6"/>
+            <text x="125" y="138" font-size="24" font-style="italic" text-anchor="middle" fill="#16324F" font-family="Cambria Math,STIX Two Math,Georgia,serif">Z₁</text>
+            <line x1="168" y1="130" x2="196" y2="130" stroke="#16324F" stroke-width="3"/>
+            <!-- 运放 -->
+            <polygon points="216,74 216,236 330,155" fill="#fff" stroke="#1D3FA0" stroke-width="3.2"/>
+            <line x1="196" y1="130" x2="216" y2="130" stroke="#16324F" stroke-width="3"/>
+            <text x="226" y="126" font-size="22" font-weight="700" fill="#16324F">−</text>
+            <text x="226" y="196" font-size="22" font-weight="700" fill="#16324F">+</text>
+            <!-- 正端接地 -->
+            <line x1="196" y1="190" x2="216" y2="190" stroke="#16324F" stroke-width="3"/>
+            <line x1="196" y1="190" x2="196" y2="252" stroke="#16324F" stroke-width="3"/>
+            <line x1="180" y1="252" x2="212" y2="252" stroke="#16324F" stroke-width="3.4"/>
+            <line x1="186" y1="260" x2="206" y2="260" stroke="#16324F" stroke-width="3"/>
+            <line x1="191" y1="268" x2="201" y2="268" stroke="#16324F" stroke-width="2.6"/>
+            <!-- 反馈支路 Z2 -->
+            <circle cx="206" cy="130" r="4.5" fill="#16324F"/>
+            <line x1="206" y1="130" x2="206" y2="48" stroke="#16324F" stroke-width="3"/>
+            <line x1="206" y1="48" x2="248" y2="48" stroke="#16324F" stroke-width="3"/>
+            <rect x="248" y="26" width="86" height="44" rx="8" fill="#F4F7FE" stroke="#1D3FA0" stroke-width="2.6"/>
+            <text x="291" y="56" font-size="24" font-style="italic" text-anchor="middle" fill="#16324F" font-family="Cambria Math,STIX Two Math,Georgia,serif">Z₂</text>
+            <line x1="334" y1="48" x2="372" y2="48" stroke="#16324F" stroke-width="3"/>
+            <line x1="372" y1="48" x2="372" y2="155" stroke="#16324F" stroke-width="3"/>
+            <!-- 输出 -->
+            <line x1="330" y1="155" x2="420" y2="155" stroke="#16324F" stroke-width="3"/>
+            <circle cx="372" cy="155" r="4.5" fill="#16324F"/>
+            <text x="34" y="120" font-size="24" font-style="italic" fill="#16324F" font-family="Cambria Math,STIX Two Math,Georgia,serif">u₁</text>
+            <text x="428" y="148" font-size="24" font-style="italic" fill="#16324F" font-family="Cambria Math,STIX Two Math,Georgia,serif">u₂</text>
+            <text x="260" y="305" font-size="21" text-anchor="middle" fill="#22304A">反相输入：Z₁ 为输入阻抗，Z₂ 为反馈阻抗</text>
+          </svg>
+          <div class="fx">传递函数由阻抗比决定　<span class="tex">G_{c}(s)=\dfrac{U_{2}(s)}{U_{1}(s)}=-\dfrac{Z_{2}(s)}{Z_{1}(s)}</span><br>
+          <span style="font-size:20.5px;color:var(--ink)">选取不同的 Z₁、Z₂（R、C 组合），即可实现 P、I、D 及其组合控制规律</span></div>
+        </div>
+      </div>
+      <div class="act-card pidc" style="flex:1.15">
+        <div class="hd">三种基本控制规律</div>
+        <div class="bd">
+          <div class="pcard" data-step="1">
+            <div class="badge">P</div>
+            <div class="tx">
+              <span class="fm">比例　<span class="tex">G_{c}(s)=\dfrac{R_{2}}{R_{1}}=K_{p}</span></span><br>
+              <span class="ds">增益可调的放大器：增大 <span class="tex">K_{p}</span> 可提高开环增益、<span class="kw-r">减小稳态误差</span>，但<span class="kw-r">对稳定性不利</span></span>
+            </div>
+          </div>
+          <div class="pcard" data-step="2">
+            <div class="badge">D</div>
+            <div class="tx">
+              <span class="fm">微分　<span class="tex">G_{c}(s)=RCs=T_{d}s</span></span><br>
+              <span class="ds">输出 <span class="tex">u_{2}=T_{d}\,\mathrm{d}u_{1}/\mathrm{d}t</span> 反映输入的<span class="kw-r">变化率</span>，对变化趋势提前作出修正</span>
+            </div>
+          </div>
+          <div class="pcard" data-step="3">
+            <div class="badge">I</div>
+            <div class="tx">
+              <span class="fm">积分　<span class="tex">G_{c}(s)=\dfrac{1}{RCs}=\dfrac{1}{T_{i}s}</span></span><br>
+              <span class="ds">输出为输入对时间的积分，可<span class="kw-r">提高系统型别</span>、改善稳态性能</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+<script>/* qa-steps：截图自验钩子，?steps=N 自动前进 N 步（播放时不生效） */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</body>
+</html>

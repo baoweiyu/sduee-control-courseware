@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>② 滞后校正装置的特点</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=600">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=600" defer></script>
+<style>
+  .col{display:flex;flex-direction:column;gap:18px;height:100%;min-height:0}
+  .tr{flex:1;display:flex;gap:20px;align-items:stretch;background:#fff;border:2px solid var(--line);
+      border-radius:16px;overflow:hidden;min-height:0}
+  .tr .no{flex:none;width:120px;display:grid;place-items:center;background:var(--blue);color:#fff;
+      font-size:30px;font-weight:700}
+  .tr .bd{flex:1;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:14px 24px;font-size:23px;line-height:1.5}
+  .tr .hd2{font-size:26px;font-weight:700;color:var(--navy)}
+  .tr .sub{font-size:20px;color:var(--muted);line-height:1.42}
+  .tr .eqs{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .chip{font-size:20px;background:var(--sky);border-radius:10px;padding:4px 14px;color:var(--navy)}
+</style>
+</head>
+<body data-title="② 滞后校正装置的特点" data-page="13 / 48">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="col">
+      <div class="tr">
+        <div class="no">特点 1</div>
+        <div class="bd">
+          <div class="hd2">属<span class="kw-r">低通滤波器</span>：高频段被压低 <span class="tex">-20\lg\beta</span></div>
+          <div class="sub">β 越大，高频衰减越深，<b>抗高频噪声的能力越强</b>。</div>
+        </div>
+      </div>
+      <div class="tr">
+        <div class="no">特点 2</div>
+        <div class="bd">
+          <div class="hd2">校正时利用的是<span class="kw-r">高频幅值衰减</span>，而不是相角滞后</div>
+          <div class="eqs">
+            <span class="chip"><span class="tex">L(\omega\to\infty)=-20\lg\beta</span></span>
+            <span class="chip"><span class="tex">\beta=10\Rightarrow-20\,\mathrm{dB}</span></span>
+          </div>
+          <div class="sub">让未校系统的中高频段被压低，使 <span class="tex">\omega_{c}</span> 左移到相角更宽裕的位置（6.3 节）。</div>
+        </div>
+      </div>
+      <div class="tr">
+        <div class="no">特点 3</div>
+        <div class="bd">
+          <div class="hd2">滞后相角是副作用，须<span class="kw-r">避开截止频率附近</span></div>
+          <div class="sub">为避免最大滞后相角发生在校正后系统的 <span class="tex">\omega_{c}</span> 附近而损失裕度，一般取 <span class="tex">\dfrac{1}{T}=0.1\,\omega_{c}</span>，把滞后相角甩到远低于 <span class="tex">\omega_{c}</span> 的频段。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">要点</span><span>滞后装置 = <span class="kw-r">低通 + 高频衰减可利用 + 相角滞后须避开 ωc</span>；用幅值衰减换稳定裕度。</span></div>
+</div></div>
+</body>
+</html>

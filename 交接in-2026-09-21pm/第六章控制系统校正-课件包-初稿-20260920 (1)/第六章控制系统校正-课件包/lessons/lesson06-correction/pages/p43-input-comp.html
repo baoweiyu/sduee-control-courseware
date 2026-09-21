@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>6.5 按输入补偿的复合校正</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=600">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=600" defer></script>
+<script src="../fig.js"></script>
+<style>
+  .col{display:flex;flex-direction:column;gap:16px;height:100%;min-height:0}
+  .figc{flex:1.06;display:flex;flex-direction:column;overflow:hidden}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:2px 8px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .steps{flex:1;display:flex;gap:16px;min-height:0}
+  .act-card.st{display:flex;flex-direction:column;overflow:hidden;flex:1;min-height:0}
+  .st .hd{font-size:23px;padding:10px 20px}
+  .st .bd{flex:1;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:10px 18px;
+    font-size:19.5px;line-height:1.48}
+  .st .bd .frm{text-align:center;font-size:21px}
+</style>
+</head>
+<body data-title="6.5 按输入补偿的复合校正" data-page="43 / 48">
+<div class="act-stage"><div class="act-slide">
+
+<div class="act-body has-note">
+  <div class="col">
+    <div class="act-card figc">
+      <div class="hd"><span style="flex:1">按输入补偿的复合校正方框图：前馈 Fr(s) 从输入端引出</span></div>
+      <div class="bd2"><svg id="fig"></svg></div>
+    </div>
+    <div class="steps">
+      <div class="act-card st" data-step="1">
+        <div class="hd">① 输出表达式：两条前向通路相加</div>
+        <div class="bd">
+          <div>反馈通路 <span class="tex">G_{1}G_{2}</span> 与前馈通路 <span class="tex">F_{r}G_{2}</span> 并联：</div>
+          <div class="frm"><span class="tex tex-d">C(s)=\frac{\left(F_{r}+G_{1}\right)G_{2}}{1+G_{1}G_{2}}\,R(s)</span></div>
+        </div>
+      </div>
+      <div class="act-card st" data-step="2">
+        <div class="hd">② 全补偿条件（不变性原理）</div>
+        <div class="bd">
+          <div>令 <span class="tex">C(s)\equiv R(s)</span>：<span class="tex">F_{r}G_{2}+G_{1}G_{2}=1+G_{1}G_{2}</span>，得</div>
+          <div class="frm"><span class="tex tex-d">F_{r}(s)=\frac{1}{G_{2}(s)}</span></div>
+          <div>对给定输入实现<span class="kw-r">误差全补偿</span>。</div>
+        </div>
+      </div>
+      <div class="act-card st" data-step="3">
+        <div class="hd">③ 实现难点 → 部分补偿</div>
+        <div class="bd">
+          <div><span class="tex">F_{r}=1/G_{2}</span> 的<b>分子阶次高于分母</b>，结构形式难以物理实现。</div>
+          <div>工程中采用<span class="kw-r">部分补偿</span>（微分型前馈）→ <span style="white-space:nowrap">例6-8</span>。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">要点</span><span>全补偿 <span class="tex">F_{r}=1/G_{2}</span> 让输出复现输入；物理可实现性迫使工程上采用<span class="kw-r">部分补偿</span>。</span></div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const ORF = "#FDF3EC", ORC = "#F5821F";
+  const B = BD.block("fig", [
+    { type: "line", pts: [[18, 170], [36, 170]], label: "R(s)", labelDx: -4, labelDy: -16 },
+    { type: "dot", x: 52, y: 170 },
+    { type: "line", pts: [[52, 170], [65, 170]] },
+    { type: "sum", x: 80, y: 170, r: 15 },
+    { type: "line", pts: [[95, 170], [140, 170]] },
+    { type: "box", x: 140, y: 140, w: 110, h: 60, label: "G_{1}(s)" },
+    { type: "line", pts: [[250, 170], [285, 170]] },
+    { type: "sum", x: 300, y: 170, r: 15 },
+    { type: "line", pts: [[315, 170], [345, 170]] },
+    { type: "box", x: 345, y: 140, w: 110, h: 60, label: "G_{2}(s)" },
+    { type: "line", pts: [[455, 170], [645, 170]], label: "C(s)", labelDx: 44, labelDy: -16 },
+    { type: "dot", x: 590, y: 170 },
+    { type: "line", pts: [[590, 170], [590, 320], [80, 320], [80, 185]], flow: true },
+    { type: "line", pts: [[52, 170], [52, 60], [138, 60]], flow: true },
+    { type: "box", x: 138, y: 30, w: 120, h: 60, label: "F_{r}(s)", fill: ORF, color: ORC },
+    { type: "line", pts: [[258, 60], [300, 60], [300, 153]], flow: true }
+  ], { vw: 660, vh: 350 });
+  B.tx(B.g, 96, 198, "−", { fs: 26, b: 1, an: "start" });
+  B.tx(B.g, 316, 146, "+", { fs: 26, b: 1, an: "start" });
+  B.tx(B.g, 198, 20, "前馈（按输入补偿）", { fs: 20, fill: ORC, b: 1 });
+});
+</script>
+<script>/* qa-steps：截图自验钩子，?steps=N 自动前进 N 步 */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

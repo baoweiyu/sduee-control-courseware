@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>本章导学</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=600">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=600" defer></script>
+<style>
+  .row{display:flex;gap:26px;height:100%;min-height:0}
+  .lft{flex:1;display:flex;flex-direction:column;min-height:0}
+  .act-card{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;padding:14px 26px}
+  .goal{display:flex;gap:16px;align-items:flex-start;background:var(--sky);border-radius:14px;padding:16px 20px}
+  .goal .no{flex:none;width:44px;height:44px;border-radius:50%;background:var(--blue);color:#fff;
+    font-size:22px;font-weight:700;display:grid;place-items:center}
+  .goal .tx{flex:1;font-size:23px;line-height:1.5;color:var(--ink)}
+  .goal .tx b{color:var(--navy)}
+  .rgt{flex:1.15;display:flex;flex-direction:column;min-height:0}
+  .rgt .act-card>.bd{padding:12px 18px;display:grid;place-items:center}
+  .rgt svg{width:100%;height:100%;display:block}
+</style>
+</head>
+<body data-title="本章导学" data-page="2 / 48">
+<div class="act-stage"><div class="act-slide">
+
+<div class="act-body has-note">
+  <div class="row">
+    <div class="lft">
+      <div class="act-card">
+        <div class="hd">学习目标</div>
+        <div class="bd">
+          <div class="goal"><span class="no">1</span><div class="tx">会根据性能问题<b>选择校正方式</b>：串联校正、反馈校正、复合校正。</div></div>
+          <div class="goal"><span class="no">2</span><div class="tx">掌握超前、滞后、滞后—超前与 PID 等<b>常用校正装置的特性</b>。</div></div>
+          <div class="goal"><span class="no">3</span><div class="tx">会用<b>频率特性法</b>设计串联超前、串联滞后校正装置。</div></div>
+          <div class="goal"><span class="no">4</span><div class="tx">理解<b>局部反馈校正</b>与<b>复合校正</b>的基本原理。</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="rgt">
+      <div class="act-card">
+        <div class="hd">本章知识地图</div>
+        <div class="bd">
+          <svg viewBox="0 0 640 700" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              <marker id="gd-ar" markerWidth="11" markerHeight="9" refX="7" refY="3.5" orient="auto">
+                <path d="M0,0 L8,3.5 L0,7 Z" fill="#F5821F"/>
+              </marker>
+            </defs>
+            <!-- 行0：校正问题 -->
+            <rect x="90" y="10" width="460" height="64" rx="16" fill="#12266E"/>
+            <text x="320" y="52" text-anchor="middle" font-size="27" font-weight="700" fill="#fff">性能指标不满足要求 → 需要校正</text>
+            <line x1="320" y1="76" x2="320" y2="104" stroke="#F5821F" stroke-width="4" marker-end="url(#gd-ar)"/>
+            <!-- 行1：三种校正方式 -->
+            <text x="26" y="152" font-size="23" font-weight="700" fill="#5B6B8C">校正方式</text>
+            <g font-size="25" font-weight="700" fill="#12266E">
+              <rect x="130" y="112" width="150" height="62" rx="14" fill="#EEF3FD" stroke="#C9D8F2" stroke-width="2.5"/>
+              <text x="205" y="152" text-anchor="middle">串联校正</text>
+              <rect x="300" y="112" width="150" height="62" rx="14" fill="#EEF3FD" stroke="#C9D8F2" stroke-width="2.5"/>
+              <text x="375" y="152" text-anchor="middle">反馈校正</text>
+              <rect x="470" y="112" width="150" height="62" rx="14" fill="#EEF3FD" stroke="#C9D8F2" stroke-width="2.5"/>
+              <text x="545" y="152" text-anchor="middle">复合校正</text>
+            </g>
+            <line x1="320" y1="176" x2="320" y2="204" stroke="#F5821F" stroke-width="4" marker-end="url(#gd-ar)"/>
+            <!-- 行2：校正装置 -->
+            <text x="26" y="258" font-size="23" font-weight="700" fill="#5B6B8C">校正装置</text>
+            <g font-size="24" font-weight="700" fill="#12266E">
+              <rect x="130" y="218" width="112" height="62" rx="14" fill="#EEF3FD" stroke="#C9D8F2" stroke-width="2.5"/>
+              <text x="186" y="257" text-anchor="middle">超前</text>
+              <rect x="252" y="218" width="112" height="62" rx="14" fill="#EEF3FD" stroke="#C9D8F2" stroke-width="2.5"/>
+              <text x="308" y="257" text-anchor="middle">滞后</text>
+              <rect x="374" y="218" width="128" height="62" rx="14" fill="#EEF3FD" stroke="#C9D8F2" stroke-width="2.5"/>
+              <text x="438" y="257" text-anchor="middle">滞后—超前</text>
+              <rect x="512" y="218" width="108" height="62" rx="14" fill="#EEF3FD" stroke="#C9D8F2" stroke-width="2.5"/>
+              <text x="566" y="257" text-anchor="middle">PID</text>
+            </g>
+            <line x1="320" y1="282" x2="320" y2="310" stroke="#F5821F" stroke-width="4" marker-end="url(#gd-ar)"/>
+            <!-- 行3：设计方法 -->
+            <text x="26" y="364" font-size="23" font-weight="700" fill="#5B6B8C">设计方法</text>
+            <g font-size="24" font-weight="700">
+              <rect x="130" y="324" width="200" height="62" rx="14" fill="#FDF3EC" stroke="#F5821F" stroke-width="3"/>
+              <text x="230" y="363" text-anchor="middle" fill="#B3541E">频率特性法★</text>
+              <rect x="350" y="324" width="130" height="62" rx="14" fill="#EEF3FD" stroke="#C9D8F2" stroke-width="2.5"/>
+              <text x="415" y="363" text-anchor="middle" fill="#12266E">根轨迹法</text>
+              <rect x="490" y="324" width="130" height="62" rx="14" fill="#EEF3FD" stroke="#C9D8F2" stroke-width="2.5"/>
+              <text x="555" y="363" text-anchor="middle" fill="#12266E">复合校正</text>
+            </g>
+            <line x1="320" y1="388" x2="320" y2="416" stroke="#F5821F" stroke-width="4" marker-end="url(#gd-ar)"/>
+            <!-- 行4：综合例题 -->
+            <text x="26" y="470" font-size="23" font-weight="700" fill="#5B6B8C">综合例题</text>
+            <g font-size="24" font-weight="700" fill="#12266E">
+              <rect x="130" y="430" width="150" height="62" rx="14" fill="#EEF3FD" stroke="#C9D8F2" stroke-width="2.5"/>
+              <text x="205" y="469" text-anchor="middle">例6-1 超前</text>
+              <rect x="300" y="430" width="150" height="62" rx="14" fill="#EEF3FD" stroke="#C9D8F2" stroke-width="2.5"/>
+              <text x="375" y="469" text-anchor="middle">例6-3 滞后</text>
+              <rect x="470" y="430" width="150" height="62" rx="14" fill="#EEF3FD" stroke="#C9D8F2" stroke-width="2.5"/>
+              <text x="545" y="469" text-anchor="middle">例6-8 复合</text>
+            </g>
+            <!-- 底部主线 -->
+            <rect x="90" y="540" width="460" height="120" rx="18" fill="#EEF3FD" stroke="#C9D8F2" stroke-width="2.5"/>
+            <text x="320" y="586" text-anchor="middle" font-size="24" font-weight="700" fill="#1D3FA0">主线：加装置 → 重塑频率特性</text>
+            <text x="320" y="628" text-anchor="middle" font-size="23" fill="#16324F">ωc 与稳定裕度达到指标要求</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">导学</span><span>本章回答一个问题：当系统性能不满足要求时，如何<span style="color:var(--danger);font-weight:700">增加校正装置</span>，使频率特性满足稳态精度与稳定裕度指标。</span></div>
+
+</div></div>
+</body>
+</html>

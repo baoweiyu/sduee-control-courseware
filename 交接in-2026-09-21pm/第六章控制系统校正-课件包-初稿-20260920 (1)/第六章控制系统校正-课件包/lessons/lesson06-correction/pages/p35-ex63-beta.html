@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>例6-3：选 ωc2 与 β</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=600">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=600" defer></script>
+<script src="../fig.js"></script>
+<script src="../data/ex63.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:.9;display:flex;flex-direction:column;gap:12px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:7px;padding:10px 18px}
+  .calc{display:flex;gap:10px;align-items:flex-start}
+  .calc .num{flex:none;width:30px;height:30px;margin-top:2px;border-radius:50%;background:var(--blue);
+    color:#fff;font-weight:700;font-size:17px;display:grid;place-items:center}
+  .calc .cx{flex:1;min-width:0;font-size:18px;line-height:1.42}
+  .calc .got{font-weight:700;color:var(--navy)}
+  .calc .got b{color:var(--danger)}
+  .eq{background:var(--sky);border-radius:12px;padding:6px 12px;text-align:center;font-size:19px;line-height:1.5}
+  .dualnote{flex:none;font-size:16.5px;color:var(--muted);background:#F6F8FC;border:1.5px dashed var(--line);
+    border-radius:10px;padding:7px 14px;line-height:1.45}
+  .figc{flex:1.2;display:flex;flex-direction:column;overflow:hidden;position:relative}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
+  .figc svg{width:100%;height:100%}
+</style>
+</head>
+<body data-title="例6-3：选 ωc2 与 β" data-page="35 / 48">
+<div class="act-stage"><div class="act-slide">
+
+<div class="act-body has-note">
+  <div class="row">
+    <div class="lft">
+      <div class="act-card" style="flex:1">
+        <div class="hd">② 选 <span class="tex">\omega_{c2}</span>：相频上找 <span class="tex">\gamma^{*}+\varepsilon</span></div>
+        <div class="bd">
+          <div class="calc"><span class="num">1</span><div class="cx">
+            <div>取 <span class="tex">\varepsilon=5^{\circ}</span>（预补滞后网络附加相角），在未校相频上找</div>
+            <div class="eq"><span class="tex">\gamma_{0}(\omega)=40^{\circ}+5^{\circ}=45^{\circ}</span>，即 <span class="tex">\varphi_{0}(\omega)=-135^{\circ}</span></div>
+            <div class="got">读得 <b><span class="tex">\omega_{c2}=0.56</span></b>（图：相频蓝点）</div>
+          </div></div>
+        </div>
+      </div>
+      <div class="act-card" style="flex:1">
+        <div class="hd">③ 定 <span class="tex">\beta</span>：量未校在 <span class="tex">\omega_{c2}</span> 处的幅值</div>
+        <div class="bd">
+          <div class="calc"><span class="num">2</span><div class="cx">
+            <div>要在此处穿过 0dB，须压下的分贝数 = 未校此处幅值（图：幅频蓝段）</div>
+            <div class="eq"><span class="tex">L_{0}(0.56)\approx18\,\mathrm{dB}=20\lg\beta</span></div>
+            <div class="got"><b>β=8</b>——滞后网络高频衰减 −20lgβ=−18dB（绿线）</div>
+          </div></div>
+        </div>
+      </div>
+      <div class="act-card" style="flex:1.05">
+        <div class="hd">④ 定 T，写出 G_c(s)</div>
+        <div class="bd">
+          <div class="calc"><span class="num">3</span><div class="cx">
+            <div>把滞后相角甩到低频：<span class="tex">\dfrac{1}{T}=0.1\omega_{c2}=0.056</span>，<span class="tex">\dfrac{1}{\beta T}=0.007</span></div>
+            <div class="eq"><span class="tex">G_{c}(s)=\dfrac{Ts+1}{\beta Ts+1}=\dfrac{17.86s+1}{143s+1}</span></div>
+          </div></div>
+        </div>
+      </div>
+      <div class="dualnote">口径备注：图上蓝点读数（φ0(0.56)=−134.9°、L0(0.56)=17.5dB）为精确曲线值；教学取整 −135°、18dB。</div>
+    </div>
+    <div class="act-card figc">
+      <div class="hd"><span style="flex:1">在未校 Bode 图上选 ωc2 与 β（G₀ 蓝、Gc 绿）</span></div>
+      <div class="bd2"><svg id="fig"></svg></div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">一条链</span><span>相频上找 <span class="tex">45^{\circ}</span> 定 <span class="tex">\omega_{c2}</span> → 幅频上量 <span class="tex">18\,\mathrm{dB}</span> 定 β → <span class="tex">0.1\omega_{c2}</span> 定 T——<span class="kw-r">三个读数一条链</span>。</span></div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const E = BD.data.ex63, M = E.meta;
+  /* 相频折回段（wrap 到 +180°）全部在图框外，截断后可见曲线与 BD 数据一致，仅消除竖直连线 */
+  function cutWrap(c) {
+    const pts = c.pts.slice();
+    for (let i = 1; i < pts.length; i++)
+      if (pts[i][1] - pts[i - 1][1] > 180) { pts.length = i; break; }
+    return Object.assign({}, c, { pts });
+  }
+  /* 未校 G0 + 滞后 Gc（曲线逐点取自 BD.data.ex63），转折频率标注沿用数据自带 marks */
+  BD.data["t35"] = { xlim: E.xlim,
+    mag: { ylim: E.mag.ylim, curves: [E.mag.curves[0], E.mag.curves[1]], asym: [E.mag.asym[1]] },
+    phase: { ylim: E.phase.ylim, curves: [cutWrap(E.phase.curves[0]), E.phase.curves[1]], asym: [] },
+    marks: E.marks.filter(m => m.type === "vline") };
+  const WC2 = 0.56, PHI = -134.89, L0 = 17.5;
+  const F = BD.figure("fig", "t35", { mag: true, phase: true, static: true, zoom: false, extra(api) {
+    const PM = api.panelOf("mag"), PP = api.panelOf("phase"), g = api.gDyn;
+    const x = api.X(WC2);
+    /* 选定的 ωc2：贯穿双图的红虚线 */
+    [PM, PP].forEach(p => api.mk("line", { x1: x, y1: p.y0, x2: x, y2: p.y1, stroke: "#D63A2F",
+      "stroke-width": 2.2, "stroke-dasharray": "7 5", opacity: .8, "clip-path": `url(#${p.clip})` }, g));
+    api.tx(g, x + 12, PM.y0 + 20, "ω_{c2}=0.56（选定）", { fs: 22, fill: "#D63A2F", b: 1, an: "start" });
+    /* 相频：φ0(0.56)=−135°，距 −180° 正好 45° */
+    const yP = api.Y(PP, PHI), y180 = api.Y(PP, -180);
+    api.mk("circle", { cx: x, cy: yP, r: 9, fill: "#1D3FA0", stroke: "#fff", "stroke-width": 2.5 }, g);
+    api.mk("line", { x1: x, y1: yP, x2: x, y2: y180, stroke: "#1D3FA0", "stroke-width": 3.4 }, g);
+    api.tx(g, x + 14, yP - 18, "φ_{0}(0.56)=−135°", { fs: 22, fill: "#1D3FA0", b: 1, an: "start" });
+    api.tx(g, x - 14, yP + 34, "γ+ε=45°", { fs: 22, fill: "#1D3FA0", b: 1, an: "end" });
+    /* 幅频：L0(0.56)≈18dB 即 20lgβ；Gc 在此频率恰给 −18dB */
+    const yL = api.Y(PM, L0), y0 = api.Y(PM, 0), yC = api.Y(PM, -18.03);
+    api.mk("circle", { cx: x, cy: yL, r: 9, fill: "#1D3FA0", stroke: "#fff", "stroke-width": 2.5 }, g);
+    api.mk("line", { x1: x, y1: yL, x2: x, y2: y0, stroke: "#1D3FA0", "stroke-width": 3.4 }, g);
+    api.tx(g, x + 14, (yL + y0) / 2 - 12, "L_{0}(0.56)≈18dB", { fs: 22, fill: "#1D3FA0", b: 1, an: "start" });
+    api.tx(g, x + 14, (yL + y0) / 2 - 42, "=20lgβ → β=8", { fs: 22, fill: "#D63A2F", b: 1, an: "start" });
+    api.mk("circle", { cx: x, cy: yC, r: 8, fill: "#0E7A36", stroke: "#fff", "stroke-width": 2.5 }, g);
+    api.tx(g, x + 14, yC + 24, "G_{c}(0.56)=−18dB", { fs: 21, fill: "#0E7A36", b: 1, an: "start" });
+  } });
+});
+</script>
+</div></div>
+</body>
+</html>

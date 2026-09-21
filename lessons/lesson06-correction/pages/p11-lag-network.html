@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>② 无源滞后网络</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=221">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=221" defer></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:1.12;display:flex;flex-direction:column;min-height:0}
+  .rgt{flex:1;display:flex;flex-direction:column;gap:16px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:12px;padding:16px 26px;font-size:23px;line-height:1.6}
+  .eq{background:var(--sky);border-radius:12px;padding:12px 16px;text-align:center;font-size:24px}
+  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .st{font-size:21.5px;color:var(--ink);line-height:1.58}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:8px 14px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .figc .capnote{flex:none;font-size:20.5px;color:var(--navy);background:var(--sky);border-radius:12px;padding:10px 18px;margin:0 14px 12px;line-height:1.5}
+  .cmp{display:flex;gap:14px}
+  .cmp>div{flex:1;background:var(--sky);border-radius:12px;padding:11px 15px;font-size:20.5px;line-height:1.52;color:var(--navy)}
+  .cmp b{display:block;font-size:21.5px;margin-bottom:6px}
+</style>
+</head>
+<body data-title="② 无源滞后网络" data-page="11 / 48">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lft">
+        <div class="act-card figc">
+          <div class="hd"><span style="flex:1">无源滞后网络（RC 电路）</span></div>
+          <div class="bd2"><svg id="ckt" viewBox="0 0 640 500" preserveAspectRatio="xMidYMid meet"></svg></div>
+          <div class="capnote"><span class="tex">R_{1}</span> 串联在上臂，<span class="tex">R_{2}</span> 与 <span class="tex">C</span> 串联作输出臂；输出 <span class="tex">u_{c}</span> 取自 <span class="tex">R_{2}+C</span> 两端。</div>
+        </div>
+      </div>
+      <div class="rgt">
+        <div class="act-card" style="flex:1.15">
+          <div class="hd"><span style="flex:1">由阻抗分压求传递函数</span></div>
+          <div class="bd">
+            <div data-step="1"><div class="st">① 输出臂复阻抗 <span class="tex">Z_{2}=R_{2}+\dfrac{1}{Cs}=\dfrac{R_{2}Cs+1}{Cs}</span>，串联臂 <span class="tex">Z_{1}=R_{1}</span></div></div>
+            <div data-step="2"><div class="eq">分压 <span class="tex">G_{c}(s)=\dfrac{U_{c}(s)}{U_{r}(s)}=\dfrac{Z_{2}}{Z_{1}+Z_{2}}=\dfrac{R_{2}Cs+1}{(R_{1}+R_{2})Cs+1}=\dfrac{Ts+1}{\beta Ts+1}</span></div></div>
+            <div data-step="3"><div class="eq hl">其中 <span class="tex">\beta=\dfrac{R_{1}+R_{2}}{R_{2}}&gt;1,\qquad T=R_{2}C</span></div></div>
+          </div>
+        </div>
+        <div class="act-card" style="flex:1.25">
+          <div class="hd"><span style="flex:1">与超前网络对照</span></div>
+          <div class="bd">
+            <div class="cmp">
+              <div><b>超前（α&lt;1）</b>零点 <span class="tex">\frac{1}{T}</span> 在前、极点 <span class="tex">\frac{1}{\alpha T}</span> 在后 → 相位<span class="kw-r">超前</span>；低频增益衰减，需放大器补偿。</div>
+              <div><b>滞后（β&gt;1）</b>极点 <span class="tex">\frac{1}{\beta T}</span> 在前、零点 <span class="tex">\frac{1}{T}</span> 在后 → 相位<span class="kw-r">滞后</span>；低频增益为 1，无需补偿。</div>
+            </div>
+            <div class="st">滞后网络的价值不在相角，而在<span class="kw-r">高频段幅值衰减 −20lgβ</span>（下一页）。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">要点</span><span>滞后网络 <span class="tex">G_{c}(s)=\dfrac{Ts+1}{\beta Ts+1}</span>（<span class="tex">\beta&gt;1</span>，<span class="tex">T=R_{2}C</span>）：低频 0 dB 不衰减，高频被压到 <span class="tex">-20\lg\beta</span>。</span></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("ckt");
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag);
+    for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const MF = '"Cambria Math","STIX Two Math",Georgia,"Times New Roman","Microsoft YaHei",serif';
+  const INK = "#16324F", BLUE = "#1D3FA0", NAVY = "#12266E";
+  const W = (x1, y1, x2, y2) => mk("line", { x1, y1, x2, y2, stroke: INK, "stroke-width": 3.5 });
+  const label = (x, y, s, o) => { o = o || {};
+    const n = mk("text", { x, y, "font-size": o.fs || 26, "text-anchor": o.an || "middle",
+      fill: o.fill || NAVY, "font-style": "italic", "font-family": MF });
+    n.textContent = s; return n; };
+  const res = (x, y, w, h) =>
+    mk("rect", { x, y, width: w, height: h, rx: 4, fill: "#fff", stroke: BLUE, "stroke-width": 3.5 });
+  const sub = (x, y, base, idx, o) => {
+    o = o || {}; label(x, y, base, o); label(x + (o.fs || 26) * .62, y + 7, idx, { fs: (o.fs || 26) * .68 });
+  };
+  const dot = (x, y) => mk("circle", { cx: x, cy: y, r: 5.5, fill: INK });
+  const term = (x, y) => mk("circle", { cx: x, cy: y, r: 7, fill: "#fff", stroke: INK, "stroke-width": 3 });
+  const YT = 160, YB = 420, XL = 54, XR = 586;
+  /* 底轨 */
+  W(XL, YB, XR, YB);
+  /* 输入端口（左）：端子开路 + 极性标注 + u_r */
+  term(XL, YT); term(XL, YB);
+  label(26, 300, "u", { fs: 32 }); label(44, 309, "r", { fs: 20 });
+  label(84, YT - 16, "+", { fs: 27 }); label(84, YB + 32, "−", { fs: 27 });
+  /* 输出端口（右）：端子开路，u_c 取自 R2+C 两端，极性与输入一致 */
+  term(XR, YT); term(XR, YB);
+  label(608, 300, "u", { fs: 32 }); label(627, 309, "c", { fs: 20 });
+  label(546, YT - 16, "+", { fs: 27 }); label(546, YB + 32, "−", { fs: 27 });
+  /* 上臂：R1 串联（两端短引线接干线） */
+  W(XL, YT, 168, YT); res(168, YT - 19, 130, 38); W(298, YT, XR, YT);
+  sub(233, YT - 34, "R", "1", { fs: 29 });
+  /* 输出臂：R2（上）与 C（下）串联，竖直跨接两轨，节点画实心圆点 */
+  dot(440, YT); W(440, YT, 440, 200); res(421, 200, 38, 112); sub(502, 262, "R", "2", { fs: 29 });
+  W(440, 312, 440, 348);
+  W(402, 348, 478, 348); W(402, 368, 478, 368);   // 电容极板（水平）
+  W(440, 368, 440, YB); dot(440, YB);
+  label(498, 366, "C", { fs: 29 });
+});
+</script>
+<script>/* qa-steps：截图自验钩子，?steps=N 自动前进 N 步（播放时不生效） */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

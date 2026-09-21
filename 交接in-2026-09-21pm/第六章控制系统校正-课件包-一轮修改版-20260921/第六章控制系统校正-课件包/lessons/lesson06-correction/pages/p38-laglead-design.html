@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>④ 滞后—超前校正</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=600">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=600" defer></script>
+<script src="../fig.js"></script>
+<script src="../data/laglead.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:.92;display:flex;flex-direction:column;gap:12px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:12px;padding:12px 20px}
+  .when{display:flex;gap:12px;align-items:flex-start;background:var(--sky);border-radius:12px;padding:10px 14px;
+    font-size:20.5px;line-height:1.5}
+  .when .tag{flex:none;background:var(--blue);color:#fff;font-weight:700;font-size:18px;
+    border-radius:8px;padding:3px 12px;margin-top:3px}
+  .when.no .tag{background:#C02A20}
+  .when.yes .tag{background:#0E7A36}
+  .eq{background:var(--sky);border-radius:12px;padding:9px 12px;text-align:center;font-size:21px;line-height:1.6}
+  .split{display:flex;gap:12px;align-items:stretch}
+  .split .half{flex:1;background:var(--sky);border-radius:12px;padding:10px 14px;font-size:20px;line-height:1.5}
+  .split .half .h{font-weight:700;color:var(--navy);font-size:20.5px}
+  .figc{flex:1.18;display:flex;flex-direction:column;overflow:hidden;position:relative}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
+  .figc svg{width:100%;height:100%}
+</style>
+</head>
+<body data-title="④ 滞后—超前校正" data-page="38 / 48">
+<div class="act-stage"><div class="act-slide">
+
+<div class="act-body has-note">
+  <div class="row">
+    <div class="lft">
+      <div class="act-card" style="flex:1.08">
+        <div class="hd">何时用？——单打一不奏效时</div>
+        <div class="bd">
+          <div class="when no"><span class="tag">单独超前</span><div>要求 <span class="tex">\omega_{c0}<\omega_{c}^{*}</span> 且幅值允许增加；<span class="tex">\omega_{c}</span> 附近相角滞后急剧增加时，超前角补不上。</div></div>
+          <div class="when no"><span class="tag">单独滞后</span><div>要求 <span class="tex">\omega_{c0}>\omega_{c}^{*}</span> 且带宽允许压缩；带宽不能再压、又要大幅抬增益时则不奏效。</div></div>
+          <div class="when yes"><span class="tag">滞后—超前</span><div><b>稳态精度与暂态指标都要大幅度改善</b>时，两者结合使用。</div></div>
+        </div>
+      </div>
+      <div class="act-card" style="flex:1.12">
+        <div class="hd">策略：两段分工</div>
+        <div class="bd">
+          <div class="split">
+            <div class="half"><div class="h">滞后部分 → 稳态</div><div>低频衰减段压中频、换取增益裕量，改善稳态精度。</div></div>
+            <div class="half"><div class="h">超前部分 → 暂态</div><div>在新 <span class="tex">\omega_{c}</span> 附近补相角，保证 γ 与响应速度。</div></div>
+          </div>
+          <div style="font-size:20.5px;line-height:1.5">先滞后压高频，再超前补相角：</div>
+          <div class="eq"><span class="tex">G_{c}(s)=\frac{T_{1}s+1}{\beta T_{1}s+1}\cdot\frac{T_{2}s+1}{\dfrac{T_{2}}{\beta}s+1}\quad(\beta>1)</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="act-card figc">
+      <div class="hd"><span style="flex:1">滞后—超前装置的 Bode 图（T=1，β=10）</span></div>
+      <div class="bd2"><svg id="fig"></svg></div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">分工</span><span>低频段像<span class="kw-r">滞后</span>（衰减、抬稳态），高频段像<span class="kw-r">超前</span>（补相角、保带宽）——一副装置，两段分工。</span></div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  BD.figure("fig", "laglead", { mag: true, phase: true, static: true });
+});
+</script>
+</div></div>
+</body>
+</html>

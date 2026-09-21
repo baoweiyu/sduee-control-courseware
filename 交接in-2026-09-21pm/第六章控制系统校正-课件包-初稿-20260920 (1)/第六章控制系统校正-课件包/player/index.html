@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>自动控制理论 · Course Player</title>
+<style>
+  :root { --navy:#12266E; --blue:#1D3FA0; --orange:#F5821F; --bg:#0B1440; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html,body { width:100%; height:100%; background:var(--bg); overflow:hidden;
+    font-family:"Microsoft YaHei","Segoe UI",sans-serif; }
+  #frame { position:absolute; inset:0; border:none; width:100%; height:100%; background:var(--bg); }
+  /* 控制条：自动隐藏，鼠标移到底部出现 */
+  #bar {
+    position:fixed; left:50%; bottom:14px; transform:translateX(-50%);
+    display:flex; align-items:center; gap:12px; flex-wrap:nowrap; white-space:nowrap;
+    max-width:96vw;
+    background:rgba(10,18,52,.88); border:1px solid rgba(120,150,255,.25);
+    border-radius:14px; padding:8px 16px; color:#DCE6FF; font-size:14px;
+    transition:opacity .25s; z-index:10; backdrop-filter:blur(4px);
+  }
+  #bar.hidden { opacity:0; pointer-events:none; }
+  #bar button {
+    font:inherit; font-weight:700; color:#fff; background:var(--blue);
+    border:none; border-radius:9px; padding:7px 14px; cursor:pointer; white-space:nowrap;
+  }
+  #bar button:hover { background:#2B5CE6; }
+  #bar .pg { min-width:76px; text-align:center; font-weight:700; }
+  #bar .meta { color:#8FA3E8; max-width:260px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  #bar select { font:inherit; background:#101C4E; color:#DCE6FF; border:1px solid rgba(120,150,255,.3); border-radius:8px; padding:5px 8px; }
+  #hint {
+    position:fixed; right:16px; top:14px; color:#8FA3E8; font-size:12.5px; z-index:10;
+    background:rgba(10,18,52,.7); padding:6px 12px; border-radius:8px;
+  }
+  /* ===== 页面导航模式（缩略图总览） ===== */
+  #navov {
+    position:fixed; inset:0; z-index:30; display:flex; flex-direction:column;
+    background:rgba(7,12,38,.97); color:#DCE6FF;
+  }
+  #navov.hidden { display:none; }
+  #navhead {
+    display:flex; align-items:center; gap:16px; padding:14px 26px;
+    border-bottom:1px solid rgba(120,150,255,.22); flex:none;
+  }
+  #navhead .t { font-size:19px; font-weight:800; }
+  #navhead .s { color:#8FA3E8; font-size:13px; }
+  #navhead button {
+    margin-left:auto; font:inherit; font-weight:700; font-size:14px; color:#fff;
+    background:var(--blue); border:none; border-radius:9px; padding:8px 18px; cursor:pointer;
+  }
+  #navhead button:hover { background:#2B5CE6; }
+  #navgrid {
+    flex:1; overflow-y:auto; padding:20px 26px 30px;
+    display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
+    grid-auto-rows:198px; gap:18px;
+    align-content:start;
+  }
+  .navcard {
+    background:#101C4E; border:2px solid rgba(120,150,255,.25); border-radius:12px;
+    overflow:hidden; cursor:pointer; transition:border-color .15s, transform .15s;
+  }
+  .navcard:hover { border-color:var(--orange); transform:translateY(-2px); }
+  .navcard.cur { border-color:var(--orange); box-shadow:0 0 0 3px rgba(245,130,31,.35); }
+  .nthumb { width:100%; height:168px; position:relative; overflow:hidden;
+    background:linear-gradient(135deg,#16235C 0%,#0E183F 100%);
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; }
+  .nthumb .no { font-size:52px; font-weight:800; color:var(--orange); line-height:1;
+    font-family:Consolas,"Segoe UI",sans-serif; }
+  .nthumb .kw { font-size:14px; color:#C9D6FF; text-align:center; padding:0 14px; line-height:1.5;
+    display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .nthumb .cur-badge { position:absolute; top:8px; right:8px; background:var(--orange); color:#fff;
+    font-size:12px; font-weight:700; padding:2px 9px; border-radius:20px; }
+  .ninfo { padding:8px 12px; font-size:13px; line-height:1.45; color:#C9D6FF;
+    display:flex; gap:8px; align-items:baseline; }
+  .ninfo b { color:var(--orange); font-size:14px; flex:none; }
+  .ninfo .cur-tag { margin-left:auto; color:var(--orange); font-size:12px; font-weight:700; flex:none; }
+</style>
+</head>
+<body>
+<iframe id="frame" title="课件页面"></iframe>
+<div id="hint">翻页笔/方向键/PgUp/PgDn/Space = 上一步/下一步（步尽自动翻页）· 底栏「上一页/下一页」直翻 · N 导航 · F 全屏 · R 重置</div>
+<div id="bar">
+  <select id="lessonSel"></select>
+  <button id="prev">‹ 上一页</button>
+  <button id="stepBack">‹ 上一步</button>
+  <span class="pg" id="pg">– / –</span>
+  <button id="stepFwd">下一步 ›</button>
+  <button id="next">下一页 ›</button>
+  <button id="reset">重置本页</button>
+  <button id="navBtn">🗂 页面导航</button>
+  <button id="fs">全屏</button>
+  <span class="meta" id="meta"></span>
+</div>
+<div id="navov" class="hidden">
+  <div id="navhead">
+    <span class="t" id="navtitle">页面导航</span>
+    <span class="s">点击卡片跳转到对应页面 · 按 Esc 或右侧按钮返回当前页</span>
+    <button id="navback">返回当前页 ›</button>
+  </div>
+  <div id="navgrid"></div>
+</div>
+<script>
+(function () {
+  const frame = document.getElementById("frame");
+  const pgEl = document.getElementById("pg"), metaEl = document.getElementById("meta");
+  const bar = document.getElementById("bar");
+  const navov = document.getElementById("navov"), navgrid = document.getElementById("navgrid");
+  let lessons = [], lesson = null, idx = 0, steps = { current: 0, total: 0 };
+  let navOpen = false;
+
+  const lsKey = "act-player-state";
+  function save() { try { localStorage.setItem(lsKey, JSON.stringify({ lesson: lesson && lesson.lesson_id, idx })); } catch (e) {} }
+  function load() { try { return JSON.parse(localStorage.getItem(lsKey)) || {}; } catch (e) { return {}; } }
+
+  async function boot() {
+    lessons = await (await fetch("../lessons/index.json")).json();
+    const sel = document.getElementById("lessonSel");
+    lessons.forEach(l => {
+      const o = document.createElement("option");
+      o.value = l.lesson_id; o.textContent = l.title; sel.appendChild(o);
+    });
+    sel.onchange = () => openLesson(sel.value, 0);
+    const st = load();
+    // URL 参数直达：?lesson=lesson04-freq&p=12（p 为页码，从 1 开始）
+    const q = new URLSearchParams(location.search);
+    const urlLesson = q.get("lesson");
+    const urlPage = parseInt(q.get("p") || "", 10);
+    const valid = urlLesson && lessons.some(l => l.lesson_id === urlLesson);
+    openLesson(valid ? urlLesson : (st.lesson || lessons[0].lesson_id),
+               valid && urlPage >= 1 ? urlPage - 1 : (st.idx || 0));
+  }
+
+  async function openLesson(id, pageIdx) {
+    const meta = lessons.find(l => l.lesson_id === id) || lessons[0];
+    lesson = await (await fetch("../lessons/" + meta.path)).json();
+    lesson._base = meta.path.replace(/lesson\.json$/, "");
+    document.getElementById("lessonSel").value = lesson.lesson_id;
+    if (navOpen) closeNav();
+    go(Math.min(pageIdx, lesson.pages.length - 1));
+  }
+
+  function go(i) {
+    idx = Math.max(0, Math.min(i, lesson.pages.length - 1));
+    steps = { current: 0, total: 0 };
+    const p = lesson.pages[idx];
+    frame.src = "../lessons/" + lesson._base + p.file;
+    paint(); save();
+  }
+  function paint() {
+    const p = lesson.pages[idx];
+    pgEl.textContent = (idx + 1) + " / " + lesson.pages.length;
+    metaEl.textContent = p.id + " · " + p.title + " · " + p.complexity + " · " + p.status +
+      (steps.total ? ` · 分步 ${steps.current}/${steps.total}` : "");
+    document.title = "ACT Player — " + p.title;
+  }
+
+  function step() {
+    if (steps.current < steps.total) post({ type: "act-step" });
+    else go(idx + 1);
+  }
+  function stepBack() {
+    if (steps.current > 0) post({ type: "act-step-back" });
+    else go(idx - 1);
+  }
+  function post(m) { frame.contentWindow && frame.contentWindow.postMessage(m, "*"); }
+
+  window.addEventListener("message", ev => {
+    const m = ev.data || {};
+    if (m.type === "act-ready") { steps = { current: 0, total: m.steps || 0 }; paint(); }
+    if (m.type === "act-step-state") { steps = { current: m.current, total: m.total }; paint(); }
+    if (m.type === "act-key") handleKey({ code: m.code, key: m.key, target: { tagName: "" }, preventDefault: () => {} });
+    if (m.type === "act-poke") poke();
+  });
+
+  document.getElementById("prev").onclick = () => go(idx - 1);
+  document.getElementById("next").onclick = () => go(idx + 1);
+  document.getElementById("stepBack").onclick = () => stepBack();
+  document.getElementById("stepFwd").onclick = () => step();
+  document.getElementById("reset").onclick = () => post({ type: "act-reset" });
+  document.getElementById("fs").onclick = toggleFs;
+  document.getElementById("navBtn").onclick = () => (navOpen ? closeNav() : openNav());
+  document.getElementById("navback").onclick = closeNav;
+
+  function handleKey(e) {
+    if (e.target.tagName === "SELECT" || e.target.tagName === "INPUT") return;
+    if (navOpen) {
+      if (e.code === "Escape" || e.code === "KeyN") { closeNav(); e.preventDefault(); }
+      return;
+    }
+    switch (e.code) {
+      // 全部方向键/PgUp/PgDn/Space = 上一步/下一步（步尽自动翻页）；
+      // 翻页笔两种常见映射（PgUp/PgDn 或 ↑/↓）都走分步，课堂按一下=进一步。
+      case "ArrowRight": case "ArrowDown": case "PageDown": step(); e.preventDefault(); break;
+      case "ArrowLeft": case "ArrowUp": case "PageUp": stepBack(); e.preventDefault(); break;
+      case "Space": step(); e.preventDefault(); break;
+      case "Home": go(0); break;
+      case "End": go(lesson.pages.length - 1); break;
+      case "KeyF": toggleFs(); break;
+      case "KeyR": post({ type: "act-reset" }); break;
+      case "KeyN": openNav(); break;
+    }
+    poke();
+  }
+  window.addEventListener("keydown", handleKey);
+
+  function toggleFs() {
+    if (document.fullscreenElement) document.exitFullscreen();
+    else document.documentElement.requestFullscreen().catch(() => {});
+  }
+
+  /* ===== 页面导航模式 ===== */
+  // 缩略图采用「大页码 + 关键词」卡片：轻量、可靠，不加载 50 个 iframe 页面
+  function openNav() {
+    if (!lesson) return;
+    navOpen = true;
+    document.getElementById("navtitle").textContent =
+      "页面导航 · " + lesson.title + "（共 " + lesson.pages.length + " 页）";
+    navgrid.innerHTML = "";
+    lesson.pages.forEach((p, i) => {
+      const card = document.createElement("div");
+      card.className = "navcard" + (i === idx ? " cur" : "");
+      const thumb = document.createElement("div");
+      thumb.className = "nthumb";
+      const no = document.createElement("div");
+      no.className = "no"; no.textContent = String(i + 1).padStart(2, "0");
+      const kw = document.createElement("div");
+      kw.className = "kw"; kw.textContent = p.title;
+      thumb.appendChild(no); thumb.appendChild(kw);
+      if (i === idx) {
+        const badge = document.createElement("span");
+        badge.className = "cur-badge"; badge.textContent = "当前页";
+        thumb.appendChild(badge);
+      }
+      card.appendChild(thumb);
+      card.onclick = () => { closeNav(); go(i); };
+      navgrid.appendChild(card);
+    });
+    navov.classList.remove("hidden");
+    const cur = navgrid.querySelector(".navcard.cur");
+    if (cur) setTimeout(() => cur.scrollIntoView({ block: "center" }), 60);
+  }
+  function closeNav() {
+    navOpen = false;
+    navov.classList.add("hidden");
+    navgrid.innerHTML = "";
+  }
+
+  // 控制条：任何鼠标活动都会唤出；悬停在条上时保持显示
+  let hideT = null, barHover = false;
+  function poke() {
+    bar.classList.remove("hidden");
+    clearTimeout(hideT);
+    hideT = setTimeout(() => { if (!barHover) bar.classList.add("hidden"); }, 3000);
+  }
+  bar.addEventListener("mouseenter", () => { barHover = true; clearTimeout(hideT); });
+  bar.addEventListener("mouseleave", () => { barHover = false; poke(); });
+  window.addEventListener("mousemove", poke);
+  poke();
+
+  boot();
+})();
+</script>
+</body>
+</html>

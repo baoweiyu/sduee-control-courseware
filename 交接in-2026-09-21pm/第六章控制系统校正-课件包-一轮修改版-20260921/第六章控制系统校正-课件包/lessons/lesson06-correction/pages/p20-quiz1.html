@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>⑤ 课堂互动：校正装置判断</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=600">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=600" defer></script>
+<style>
+  .qrow{display:flex;gap:24px;height:100%;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card .bd{flex:1;display:flex;flex-direction:column;justify-content:center;gap:16px;padding:16px 26px;min-height:0}
+  .stage-tip{display:inline-block;font-size:20px;color:#fff;background:var(--blue);border-radius:20px;padding:6px 22px;width:fit-content}
+  /* 填空题 */
+  .fill{font-size:26.5px;color:var(--ink);line-height:2.15}
+  .fill .hd2{font-weight:700;color:var(--navy)}
+  .bl{display:inline-block;min-width:150px;padding:0 8px;text-align:center;vertical-align:bottom;
+    border-bottom:3px solid var(--blue);line-height:1.35}
+  .bl .aw{display:block;font-weight:700;color:var(--danger);opacity:0;transition:opacity .25s}
+  .seg.on .bl .aw{opacity:1}
+  /* 多选题 */
+  .qz .qt{font-size:25px;color:var(--navy);font-weight:700;line-height:1.45}
+  .opts{display:flex;flex-direction:column;gap:11px}
+  .opt{background:var(--sky);border:2.5px solid var(--line);border-radius:12px;padding:10px 18px;
+    font-size:20.5px;color:var(--ink);font-weight:700;position:relative;line-height:1.45}
+  .opt .ab{color:var(--blue);margin-right:10px}
+  .opt.right{border-color:#1E9E57;background:#F0FAF4}
+  .opt.right::after{content:"✓";position:absolute;top:-14px;right:-10px;width:34px;height:34px;border-radius:50%;
+    background:#1E9E57;color:#fff;font-weight:800;font-size:21px;display:grid;place-items:center}
+  .opt.wrong{border-color:#D63A2F;background:#FDF1EF}
+  .opt.wrong::after{content:"✗";position:absolute;top:-14px;right:-10px;width:34px;height:34px;border-radius:50%;
+    background:#D63A2F;color:#fff;font-weight:800;font-size:21px;display:grid;place-items:center}
+  .ans{flex:none;font-size:21.5px;color:var(--navy);background:var(--sky);border-radius:12px;padding:10px 20px;line-height:1.55}
+  .ans b{color:var(--danger)}
+  .fx{flex:none;font-size:18.5px;color:var(--muted);background:#fff;border:2px dashed var(--line);
+    border-radius:12px;padding:8px 18px;line-height:1.55}
+  .fx b{color:var(--navy)}
+</style>
+</head>
+<body data-title="⑤ 课堂互动：校正装置判断" data-page="20 / 48">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="qrow">
+      <div class="act-card" style="flex:0.98">
+        <div class="hd">填空题　6 分</div>
+        <div class="bd">
+          <span class="stage-tip">请先填空（每空 1 分）</span>
+          <div class="fill seg" id="fill1">
+            <span class="hd2">校正方式：</span><br>
+            <span class="bl"><span class="aw">串联校正</span></span>、<span class="bl"><span class="aw">反馈校正</span></span>、<span class="bl"><span class="aw">复合校正</span></span> 等。
+          </div>
+          <div class="fill seg" id="fill2">
+            <span class="hd2">常用的校正方法：</span><br>
+            <span class="bl" style="min-width:170px"><span class="aw">频率特性法</span></span>、<span class="bl" style="min-width:160px"><span class="aw">根轨迹法</span></span>、<span class="bl"><span class="aw">复合校正</span></span>。
+          </div>
+          <div style="font-size:19.5px;color:var(--muted)">校正的实质：在系统中加入参数可调的<span style="color:var(--navy);font-weight:700">校正装置</span>，改变零极点分布，从而改善性能。</div>
+        </div>
+      </div>
+      <div class="act-card qz" style="flex:1.12">
+        <div class="hd">多选题　1 分</div>
+        <div class="bd">
+          <div class="qt">关于校正装置，以下说法<span style="color:var(--danger)">正确的</span>是？</div>
+          <span class="stage-tip">请先作出判断</span>
+          <div class="opts">
+            <div class="opt" data-mark="1"><span class="ab">A</span>超前校正装置适用于 <span class="tex">\omega_{c}</span> 与 <span class="tex">\gamma</span> 都不足的情况</div>
+            <div class="opt" data-mark="1"><span class="ab">B</span>超前校正装置最大超前相角一般不超过 <span class="tex">60^{\circ}</span>，且 <span class="tex">\omega_{m}</span> 处幅值增益为 <span class="tex">-10\lg\alpha</span></div>
+            <div class="opt" data-mark="0"><span class="ab">C</span>滞后校正装置利用的也是其相频特性</div>
+            <div class="opt" data-mark="1"><span class="ab">D</span>滞后校正装置可以增强系统抗噪声能力</div>
+            <div class="opt" data-mark="1"><span class="ab">E</span>PID 控制可以提升系统的型别，并改善稳定性和动态性能指标</div>
+          </div>
+          <div class="ans" data-step="3"><b>答案：A、B、D、E。</b></div>
+          <div class="fx" data-step="4">
+            <b>解析：</b>A 对：超前提供相角超前，<span class="tex">\omega_{c}</span>、<span class="tex">\gamma</span> 同时提高；
+            B 对：<span class="tex">\varphi_{m}=\arcsin\frac{1-\alpha}{1+\alpha}</span> 一般不超过 <span class="tex">60^{\circ}</span>；
+            <span style="color:var(--danger);font-weight:700">C 错：滞后利用的是高频幅值衰减（使 <span class="tex">\omega_{c}</span> 左移），并非相频特性</span>；
+            D 对：高频段被压低 <span class="tex">-20\lg\beta</span>，抗噪声能力增强；
+            E 对：原点极点提型别，两个零点改善稳定与动态。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 分步计数标记（隐藏）：1=填空前句答案，2=填空后句答案，3=多选答案，4=解析 -->
+  <div data-step="1" style="display:none"></div>
+  <div data-step="2" style="display:none"></div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const S = ACT.step, _n = S.next.bind(S), _r = S.reset.bind(S);
+  function paint() {
+    const c = S.cur;
+    document.getElementById("fill1").classList.toggle("on", c >= 1);
+    document.getElementById("fill2").classList.toggle("on", c >= 2);
+    const on = c >= 3;
+    document.querySelectorAll(".opt").forEach(o => {
+      o.classList.toggle("right", on && o.dataset.mark === "1");
+      o.classList.toggle("wrong", on && o.dataset.mark === "0");
+    });
+  }
+  S.next = function () { const d = _n(); paint(); return d; };
+  S.reset = function () { _r(); paint(); };
+  window.prev = function () { const n = Math.max(0, S.cur - 1); S.reset(); for (let i = 0; i < n; i++) S.next(); };
+});
+</script>
+<script>/* qa-steps：截图自验钩子，?steps=N 自动前进 N 步（播放时不生效） */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</body>
+</html>

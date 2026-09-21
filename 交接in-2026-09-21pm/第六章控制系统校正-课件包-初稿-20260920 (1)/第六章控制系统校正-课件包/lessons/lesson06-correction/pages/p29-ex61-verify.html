@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>例6-1：校正后 Bode 与检验</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=600">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=600" defer></script>
+<script src="../fig.js"></script>
+<script src="../data/ex61.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:.86;display:flex;flex-direction:column;gap:12px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:7px;padding:10px 18px}
+  .eq{background:var(--sky);border-radius:12px;padding:7px 12px;text-align:center;font-size:19px;line-height:1.5}
+  .stp{display:flex;gap:10px;align-items:flex-start;background:var(--sky);border-radius:12px;
+    padding:6px 12px 6px 9px;font-size:17.5px;line-height:1.4;border-left:5px solid transparent;cursor:pointer}
+  .stp .num{flex:none;width:29px;height:29px;margin-top:2px;border-radius:50%;background:var(--blue);
+    color:#fff;font-weight:700;font-size:17px;display:grid;place-items:center}
+  .stp .stx{flex:1;min-width:0}
+  .stp .got{font-weight:700;color:var(--navy)}
+  .stp .got b{color:var(--danger)}
+  .stp.on{background:#FDF3EC;border-left-color:var(--danger);box-shadow:0 0 0 2px rgba(214,58,47,.22)}
+  .stp.on .num{background:var(--danger)}
+  .figc{flex:1.26;display:flex;flex-direction:column;overflow:hidden;position:relative}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .segfloat{position:absolute;top:56px;right:14px;z-index:5;max-width:72%;background:#fff;
+    border:2px solid var(--blue);border-radius:10px;padding:5px 14px;font-size:18px;font-weight:700;
+    color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 2px 10px rgba(20,40,90,.18)}
+  .prog{position:absolute;top:60px;left:16px;z-index:5;font-size:17px;color:var(--muted);
+    background:rgba(255,255,255,.88);padding:2px 10px;border-radius:8px}
+  .ctl #prog{right:auto;left:16px;top:60px}
+  .ctl{display:flex;align-items:center;gap:10px;justify-content:center;padding:8px 0 10px}
+  .btn{background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:19px;font-weight:700;padding:8px 20px;cursor:pointer}
+  .btn.ghost{background:#fff;color:var(--blue);border:2px solid var(--blue)}
+  @keyframes bdPulse{0%,100%{opacity:1}50%{opacity:.2}}
+  .flash{animation:bdPulse .85s ease-in-out infinite}
+</style>
+</head>
+<body data-title="例6-1：校正后 Bode 与检验" data-page="29 / 48">
+<div class="act-stage"><div class="act-slide">
+
+<div class="act-body has-note">
+  <div class="row">
+    <div class="lft">
+      <div class="act-card" style="flex:.8">
+        <div class="hd">校正装置与总开环</div>
+        <div class="bd">
+          <div class="eq"><span class="tex">G_{c}(s)=\dfrac{0.38s+1}{0.12s+1}</span>，<span class="tex">G(s)=G_{c}(s)G_{0}(s)</span></div>
+        </div>
+      </div>
+      <div class="act-card" style="flex:1.7">
+        <div class="hd">第③步：叠加与检验（与右图分步联动）</div>
+        <div class="bd">
+          <div class="stp" id="s1"><span class="num">1</span><div class="stx">
+            <div>未校 G₀ 与校正装置 G<sub>c</sub> 的 Bode 曲线</div>
+            <div class="got">G<sub>c</sub>：1/T=2.6 起抬，1/(αT)=8 转平，<b>+5.0 dB 平台</b></div>
+          </div></div>
+          <div class="stp" id="s2"><span class="num">2</span><div class="stx">
+            <div>逐点相加：<span class="tex">L=L_{0}+L_{c}</span>，<span class="tex">\varphi=\varphi_{0}+\varphi_{c}</span></div>
+            <div class="got">两曲线淡化，<b>准备合成</b></div>
+          </div></div>
+          <div class="stp" id="s3"><span class="num">3</span><div class="stx">
+            <div>校后曲线 G<sub>c</sub>G₀ 生长</div>
+            <div class="got">中频段被顶起，<b>新的 0 dB 穿越 <span class="tex">\omega_{c2}=4.6</span></b></div>
+          </div></div>
+          <div class="stp" id="s4"><span class="num">4</span><div class="stx">
+            <div>检验稳定裕度</div>
+            <div class="got"><b><span class="tex">\gamma=42.6^{\circ}\geq40^{\circ}</span>，满足</b></div>
+          </div></div>
+        </div>
+      </div>
+    </div>
+    <div class="act-card figc">
+      <div class="hd"><span style="flex:1">G₀ ＋ G<sub>c</sub> → G<sub>c</sub>G₀：Bode 图逐段相加</span></div>
+      <span class="segfloat" id="segChip" style="display:none"></span>
+      <span class="prog" id="prog">0 / 4</span>
+      <div class="bd2"><svg id="fig"></svg></div>
+      <div class="ctl">
+        <button class="btn" id="play">▶ 连贯生长</button>
+        <button class="btn ghost" id="step">⧉ 分步</button>
+        <button class="btn ghost" onclick="ACT.step.reset()">↺ 重置</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">读图</span><span>超前网络把<span class="kw-r">中频段顶起</span>：<span class="tex">\omega_{c}</span> 右移（3.5→4.6）、γ 增大（16°→42.6°），低频段不动、<span class="tex">e_{ss}</span> 保持。</span></div>
+
+<div data-step="1" style="display:none"></div><div data-step="2" style="display:none"></div>
+<div data-step="3" style="display:none"></div><div data-step="4" style="display:none"></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const F = BD.figure("fig", "ex61", { mag: true, phase: true });
+  const PM = F.panelOf("mag"), PP = F.panelOf("phase");
+  F.gMark.style.opacity = 0;
+  /* 编排：[0,.35] G0+Gc 生长；[.35,.5] 二者淡化至 .15；[.5,.85] GcG0 生长；[.85,1] 仅标注 */
+  function chor(f) {
+    const u1 = Math.min(f / .35, 1), fade = Math.max(0, Math.min((f - .35) / .15, 1)),
+          u3 = Math.max(0, Math.min((f - .5) / .35, 1));
+    const op = 1 - .85 * fade;
+    F.setF(0, u1); F.setF(3, u1); F.setOp(0, op); F.setOp(3, op);
+    F.setF(1, u1); F.setF(4, u1); F.setOp(1, op); F.setOp(4, op);
+    F.setF(2, u3); F.setF(5, u3); F.setOp(2, 1); F.setOp(5, 1);
+  }
+  function paint(K) {
+    chor(FS[K]);
+    if (K >= 1) {
+      const g = F.mk("g", { "class": K === 1 ? "flash" : "" }, F.gDyn);
+      F.tx(g, F.X(40), F.Y(PM, -38), "G_{0}", { fs: 24, fill: "#1D3FA0", b: 1 });
+      F.tx(g, F.X(40), F.Y(PM, 17), "G_{c}", { fs: 24, fill: "#0E7A36", b: 1 });
+      F.tx(g, F.X(40), F.Y(PP, -185), "G_{c}", { fs: 22, fill: "#0E7A36", b: 1 });
+    }
+    if (K >= 2)
+      F.tx(F.gDyn, F.X(0.6), F.Y(PM, 40), "L=L_{0}+L_{c}，φ=φ_{0}+φ_{c}", { fs: 23, fill: "#16324F", b: 1 });
+    if (K >= 3) {
+      const g = F.mk("g", { "class": K === 3 ? "flash" : "" }, F.gDyn);
+      F.tx(g, F.X(40), F.Y(PM, -25), "G_{c}G_{0}", { fs: 24, fill: "#C02A20", b: 1 });
+    }
+    F.gMark.style.opacity = K >= 4 ? 1 : 0;
+    if (K === 4) F.gMark.setAttribute("class", "flash"); else F.gMark.removeAttribute("class");
+    if (K >= 4) {
+      const g = F.mk("g", {}, F.gDyn);
+      F.tx(g, F.X(1.6), F.Y(PP, -78), "γ=42.6° ≥ 40°，满足", { fs: 25, fill: "#0E7A36", b: 1 });
+    }
+    for (let i = 1; i <= 4; i++)
+      document.getElementById("s" + i).classList.toggle("on", i === K);
+  }
+  const FS = [0, .35, .5, .85, 1];
+  BD.wire(4, paint, { figs: [F], FS, dur: 14000, playLabel: "▶ 连贯生长", frame: f => chor(f) });
+
+  /* ---- ⧉分步（金标准）：点一下推进一步 ---- */
+  const STEPS = ["① G₀ 与 G<sub>c</sub> 曲线", "② 逐点相加（淡化）", "③ 校后 G<sub>c</sub>G₀ 生长", "④ γ=42.6°≥40° 满足"];
+  const chip = document.getElementById("segChip"), total = 4, stepBtn = document.getElementById("step");
+  const wNext = ACT.step.next, wReset = ACT.step.reset;
+  let segRaf = null, segTok = 0;
+  function segEnable() { stepBtn.disabled = false; stepBtn.style.opacity = ""; stepBtn.style.cursor = ""; }
+  function segStopUI() {
+    segTok++;
+    if (segRaf) { cancelAnimationFrame(segRaf); segRaf = null; }
+    segEnable(); chip.style.display = "none";
+  }
+  ACT.step.next = function () { segStopUI(); return wNext(); };
+  ACT.step.reset = function () { segStopUI(); return wReset(); };
+  const playBtn = document.getElementById("play");
+  if (playBtn && playBtn.onclick) {
+    const po = playBtn.onclick;
+    playBtn.onclick = e => { segStopUI(); po(e); };
+  }
+  function segGo(instant) {
+    segStopUI();
+    if (ACT.step.cur >= total) wReset();
+    wNext();
+    const k = ACT.step.cur, f0 = FS[k - 1], f1 = FS[k];
+    chip.textContent = "分步 " + k + " / " + total + "　" + STEPS[k - 1]; chip.style.display = "";
+    if (instant || f1 <= f0 + 1e-9) { chor(f1); return; }
+    chor(f0);
+    stepBtn.disabled = true; stepBtn.style.opacity = ".55"; stepBtn.style.cursor = "default";
+    const t0 = performance.now(), D = 1800, tok = segTok;
+    const tick = now => {
+      if (tok !== segTok) return;
+      const u = Math.min(1, (now - t0) / D), f = f0 + (f1 - f0) * u;
+      chor(f);
+      if (u < 1) segRaf = requestAnimationFrame(tick); else { segRaf = null; segEnable(); }
+    };
+    segRaf = requestAnimationFrame(tick);
+  }
+  stepBtn.onclick = () => segGo(false);
+  for (let i = 1; i <= total; i++)
+    document.getElementById("s" + i).onclick = () => {
+      segStopUI(); wReset();
+      for (let j = 0; j < i; j++) wNext();
+      chip.textContent = "分步 " + i + " / " + total + "　" + STEPS[i - 1]; chip.style.display = "";
+    };
+  window.addEventListener("load", () => {
+    const n = +(new URLSearchParams(location.search).get("seg") || 0);
+    for (let i = 0; i < Math.min(n, total); i++) segGo(true);
+  });
+});
+</script>
+</div></div>
+</body>
+</html>

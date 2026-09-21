@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>例6-1：校正前后对比</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=600">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=600" defer></script>
+<script src="../fig.js"></script>
+<script src="../data/ex61.js"></script>
+<style>
+  .row{display:flex;gap:20px;height:100%;min-height:0}
+  .lft{flex:.58;display:flex;flex-direction:column;gap:12px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:7px;padding:10px 16px}
+  .stp{display:flex;gap:10px;align-items:flex-start;background:var(--sky);border-radius:12px;
+    padding:7px 12px 7px 9px;font-size:17.5px;line-height:1.42;border-left:5px solid transparent;cursor:pointer}
+  .stp .num{flex:none;width:29px;height:29px;margin-top:2px;border-radius:50%;background:var(--blue);
+    color:#fff;font-weight:700;font-size:17px;display:grid;place-items:center}
+  .stp .stx{flex:1;min-width:0}
+  .stp .got{font-weight:700;color:var(--navy)}
+  .stp .got b{color:var(--danger)}
+  .stp.on{background:#FDF3EC;border-left-color:var(--danger);box-shadow:0 0 0 2px rgba(214,58,47,.22)}
+  .stp.on .num{background:var(--danger)}
+  .figc{display:flex;flex-direction:column;overflow:hidden;position:relative}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .fb{flex:1.14}
+  .fs{flex:.78}
+  .segfloat{position:absolute;top:56px;right:14px;z-index:5;max-width:72%;background:#fff;
+    border:2px solid var(--blue);border-radius:10px;padding:5px 14px;font-size:18px;font-weight:700;
+    color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 2px 10px rgba(20,40,90,.18)}
+  .prog{position:absolute;top:60px;left:16px;z-index:5;font-size:17px;color:var(--muted);
+    background:rgba(255,255,255,.88);padding:2px 10px;border-radius:8px}
+  .ctl #prog{right:auto;left:16px;top:66px}
+  .prog{top:66px}
+  .ctl{display:flex;align-items:center;gap:10px;justify-content:center;padding:8px 0 10px}
+  .btn{background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:19px;font-weight:700;padding:8px 20px;cursor:pointer}
+  .btn.ghost{background:#fff;color:var(--blue);border:2px solid var(--blue)}
+  @keyframes bdPulse{0%,100%{opacity:1}50%{opacity:.2}}
+  .flash{animation:bdPulse .85s ease-in-out infinite}
+</style>
+</head>
+<body data-title="例6-1：校正前后对比" data-page="30 / 48">
+<div class="act-stage"><div class="act-slide">
+
+<div class="act-body has-note">
+  <div class="row">
+    <div class="lft">
+      <div class="act-card" style="flex:1">
+        <div class="hd">第④步：前后对比（与右图分步联动）</div>
+        <div class="bd">
+          <div class="stp" id="s1"><span class="num">1</span><div class="stx">
+            <div>校前：<span class="tex">\omega_{c1}=3.5</span>，<span class="tex">\gamma_{0}=16^{\circ}</span></div>
+            <div class="got"><b>σ%=61.6%，<span class="tex">t_{s}=5.77\ \mathrm{s}</span></b>，振荡剧烈</div>
+          </div></div>
+          <div class="stp" id="s2"><span class="num">2</span><div class="stx">
+            <div>校后：<span class="tex">\omega_{c2}=4.6</span>，<span class="tex">\gamma=42.6^{\circ}</span></div>
+            <div class="got"><b>σ%=29.2%，<span class="tex">t_{s}=1.08\ \mathrm{s}</span></b>，明显改观</div>
+          </div></div>
+          <div class="stp" id="s3"><span class="num">3</span><div class="stx">
+            <div>频域指标的变化如何影响时域表现</div>
+            <div class="got"><b><span class="tex">\omega_{c}\uparrow\Rightarrow t_{s}\downarrow</span>；<span class="tex">\gamma\uparrow\Rightarrow\sigma\%\downarrow</span></b></div>
+          </div></div>
+        </div>
+      </div>
+    </div>
+    <div class="act-card figc fb">
+      <div class="hd"><span style="flex:1">Bode 对比：校前（蓝） vs 校后（红）</span></div>
+      <span class="segfloat" id="segChip" style="display:none"></span>
+      <span class="prog" id="prog">0 / 3</span>
+      <div class="bd2"><svg id="fig"></svg></div>
+      <div class="ctl">
+        <button class="btn" id="play">▶ 连贯生长</button>
+        <button class="btn ghost" id="step">⧉ 分步</button>
+        <button class="btn ghost" onclick="ACT.step.reset()">↺ 重置</button>
+      </div>
+    </div>
+    <div class="act-card figc fs">
+      <div class="hd"><span style="flex:1">单位阶跃响应对比（数值仿真）</span></div>
+      <div class="bd2"><svg id="stfig" viewBox="0 0 460 600" preserveAspectRatio="xMidYMid meet"></svg></div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">结论</span><span><span class="kw-r"><span class="tex">\omega_{c}</span> 提高 → <span class="tex">t_{s}</span> 缩短；γ 增大 → σ% 下降</span>——频域指标的改善直接兑现为时域响应的改善。</span></div>
+
+<div data-step="1" style="display:none"></div><div data-step="2" style="display:none"></div>
+<div data-step="3" style="display:none"></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const D = BD.data.ex61;
+  D.mag.asym = [D.mag.asym[0]];
+  const F = BD.figure("fig", "ex61", { mag: true, phase: true, marks: false });
+  const PM = F.panelOf("mag"), PP = F.panelOf("phase");
+  /* ---- 右侧阶跃响应小图（ex61.step 数值仿真数据，SVG polyline 映射） ---- */
+  const ST = D.step, NS = "http://www.w3.org/2000/svg";
+  const svg2 = document.getElementById("stfig");
+  const mk2 = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag);
+    for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg2).appendChild(n); return n; };
+  const X2 = t => 56 + t / 8 * 384, Y2 = v => 560 - v / 1.7 * 520;
+  mk2("line", { x1: 46, y1: 560, x2: 452, y2: 560, stroke: "#5B6B8C", "stroke-width": 2.4 });
+  mk2("line", { x1: 56, y1: 576, x2: 56, y2: 28, stroke: "#5B6B8C", "stroke-width": 2.4 });
+  [0, 2, 4, 6, 8].forEach(t => { mk2("line", { x1: X2(t), y1: 560, x2: X2(t), y2: 567, stroke: "#5B6B8C", "stroke-width": 1.6 });
+    const n = mk2("text", { x: X2(t), y: 590, "font-size": 19, "text-anchor": "middle", fill: "#5B6B8C", "font-family": '"Cambria Math","STIX Two Math",Georgia,serif' }); n.textContent = t; });
+  const tt = mk2("text", { x: 448, y: 592, "font-size": 21, "text-anchor": "end", fill: "#5B6B8C", "font-style": "italic", "font-family": '"Cambria Math","STIX Two Math",Georgia,serif' }); tt.textContent = "t/s";
+  [0.5, 1, 1.5].forEach(v => { mk2("line", { x1: 50, y1: Y2(v), x2: 56, y2: Y2(v), stroke: "#5B6B8C", "stroke-width": 1.6 });
+    const n = mk2("text", { x: 46, y: Y2(v) + 6, "font-size": 19, "text-anchor": "end", fill: "#5B6B8C", "font-family": '"Cambria Math","STIX Two Math",Georgia,serif' }); n.textContent = v; });
+  mk2("line", { x1: 56, y1: Y2(1), x2: 440, y2: Y2(1), stroke: "#8A97B5", "stroke-width": 2, "stroke-dasharray": "8 6" });
+  const gSt = mk2("g", {}, svg2), gStTxt = mk2("g", {}, svg2);
+  const pB = mk2("path", { fill: "none", stroke: "#1D3FA0", "stroke-width": 4, "stroke-linecap": "round" }, gSt);
+  const pA = mk2("path", { fill: "none", stroke: "#C02A20", "stroke-width": 4, "stroke-linecap": "round" }, gSt);
+  function setStepPath(el, ys, f) {
+    f = Math.max(0, Math.min(1, f));
+    if (f <= 0) { el.setAttribute("d", ""); return; }
+    const n = ys.length, k = Math.max(1, Math.min(n, Math.floor(f * (n - 1)) + 1));
+    let d = "M" + X2(ST.t[0]).toFixed(1) + "," + Y2(ys[0]).toFixed(1);
+    for (let j = 1; j < k; j++) d += "L" + X2(ST.t[j]).toFixed(1) + "," + Y2(ys[j]).toFixed(1);
+    el.setAttribute("d", d);
+  }
+  function stepTxt() {
+    gStTxt.innerHTML = "";
+    const K = arguments[0];
+    if (K >= 1) { const n = mk2("text", { x: 300, y: 52, "font-size": 22, "text-anchor": "middle", fill: "#1D3FA0", "font-weight": 700, "font-family": '"Cambria Math","STIX Two Math",Georgia,"Microsoft YaHei",serif' }, gStTxt);
+      n.textContent = "校前：σ%=61.6%，ts=5.77 s";
+      n.setAttribute("style", "paint-order:stroke;stroke:#FFF;stroke-width:5"); }
+    if (K >= 2) { const n = mk2("text", { x: 300, y: 84, "font-size": 22, "text-anchor": "middle", fill: "#C02A20", "font-weight": 700, "font-family": '"Cambria Math","STIX Two Math",Georgia,"Microsoft YaHei",serif' }, gStTxt);
+      n.textContent = "校后：σ%=29.2%，ts=1.08 s";
+      n.setAttribute("style", "paint-order:stroke;stroke:#FFF;stroke-width:5"); }
+  }
+  /* ---- Bode 手动标注 ---- */
+  function markWc(w, label, dy, g) {
+    const x = F.X(w);
+    F.mk("line", { x1: x, y1: PM.y0, x2: x, y2: PM.y1, stroke: "#D63A2F", "stroke-width": 2.2,
+      "stroke-dasharray": "7 5", opacity: .85, "clip-path": `url(#${PM.clip})` }, g);
+    F.mk("circle", { cx: x, cy: F.Y(PM, 0), r: 9, fill: "#D63A2F", stroke: "#fff", "stroke-width": 2.5 }, g);
+    F.tx(g, x + 14, F.Y(PM, 0) + dy, label, { fs: 22, fill: "#D63A2F", b: 1, an: "start", halo: 1 });
+  }
+  function markMargin(w, phi, label, g) {
+    const x = F.X(w), y1 = F.Y(PP, phi), y2 = F.Y(PP, -180);
+    F.mk("line", { x1: x, y1: PP.y0, x2: x, y2: PP.y1, stroke: "#D63A2F", "stroke-width": 2.2,
+      "stroke-dasharray": "7 5", opacity: .55, "clip-path": `url(#${PP.clip})` }, g);
+    F.mk("line", { x1: x, y1: y1, x2: x, y2: y2, stroke: "#D63A2F", "stroke-width": 3.4 }, g);
+    F.mk("circle", { cx: x, cy: y1, r: 9, fill: "#D63A2F", stroke: "#fff", "stroke-width": 2.5 }, g);
+    F.tx(g, x + 12, (y1 + y2) / 2 + 6, label, { fs: 22, fill: "#D63A2F", b: 1, an: "start", halo: 1 });
+  }
+  /* 编排：[0,.4] 校前；[.4,.8] 校后（校前淡化）；[.8,1] 仅结论标注 */
+  function chor(f) {
+    const u1 = Math.min(f / .4, 1), u2 = Math.max(0, Math.min((f - .4) / .4, 1));
+    F.setF(0, u1); F.setF(3, u1); F.setOp(0, f > .4 ? .3 : 1); F.setOp(3, f > .4 ? .3 : 1);
+    F.setF(2, u2); F.setF(5, u2); F.setOp(2, 1); F.setOp(5, 1);
+    F.setF(1, 0); F.setF(4, 0); F.setOp(1, 0); F.setOp(4, 0);
+    setStepPath(pB, ST.before, u1); setStepPath(pA, ST.after, u2);
+  }
+  function paint(K) {
+    chor(FS[K]);
+    if (K >= 1) {
+      const g = F.mk("g", { "class": K === 1 ? "flash" : "" }, F.gDyn);
+      markWc(3.3927, "ω_{c1}=3.39", -16, g); markMargin(3.3927, -163.58, "γ_{0}=16.4°", g);
+      F.tx(g, F.X(30), F.Y(PM, -42), "G_{0}", { fs: 24, fill: "#1D3FA0", b: 1 });
+    }
+    if (K >= 2) {
+      const g = F.mk("g", { "class": K === 2 ? "flash" : "" }, F.gDyn);
+      markWc(4.5261, "ω_{c2}=4.53", -40, g); markMargin(4.5261, -136.22, "γ=43.8°", g);
+      F.tx(g, F.X(30), F.Y(PM, -22), "G_{c}G_{0}", { fs: 24, fill: "#C02A20", b: 1 });
+    }
+    if (K >= 3) {
+      const x1 = F.X(3.3927), x2 = F.X(4.5261), y = F.Y(PM, 38);
+      F.mk("line", { x1: x1 + 8, y1: y, x2: x2 - 8, y2: y, stroke: "#D63A2F", "stroke-width": 3, "marker-end": "url(#rxfig)" }, F.gDyn);
+      F.tx(F.gDyn, (x1 + x2) / 2 + 30, y - 12, "ω_{c} 右移", { fs: 22, fill: "#D63A2F", b: 1, an: "start" });
+    }
+    stepTxt(K);
+    for (let i = 1; i <= 3; i++)
+      document.getElementById("s" + i).classList.toggle("on", i === K);
+  }
+  const FS = [0, .4, .8, 1];
+  BD.wire(3, paint, { figs: [F], FS, dur: 11000, playLabel: "▶ 连贯生长", frame: f => chor(f) });
+
+  /* ---- ⧉分步（金标准）：点一下推进一步 ---- */
+  const STEPS = ["① 校前：σ%=61.6%，ts=5.77 s", "② 校后：σ%=29.2%，ts=1.08 s", "③ ωc↑→ts↓，γ↑→σ%↓"];
+  const chip = document.getElementById("segChip"), total = 3, stepBtn = document.getElementById("step");
+  const wNext = ACT.step.next, wReset = ACT.step.reset;
+  let segRaf = null, segTok = 0;
+  function segEnable() { stepBtn.disabled = false; stepBtn.style.opacity = ""; stepBtn.style.cursor = ""; }
+  function segStopUI() {
+    segTok++;
+    if (segRaf) { cancelAnimationFrame(segRaf); segRaf = null; }
+    segEnable(); chip.style.display = "none";
+  }
+  ACT.step.next = function () { segStopUI(); return wNext(); };
+  ACT.step.reset = function () { segStopUI(); return wReset(); };
+  const playBtn = document.getElementById("play");
+  if (playBtn && playBtn.onclick) {
+    const po = playBtn.onclick;
+    playBtn.onclick = e => { segStopUI(); po(e); };
+  }
+  function segGo(instant) {
+    segStopUI();
+    if (ACT.step.cur >= total) wReset();
+    wNext();
+    const k = ACT.step.cur, f0 = FS[k - 1], f1 = FS[k];
+    chip.textContent = "分步 " + k + " / " + total + "　" + STEPS[k - 1]; chip.style.display = "";
+    if (instant || f1 <= f0 + 1e-9) { chor(f1); return; }
+    chor(f0);
+    stepBtn.disabled = true; stepBtn.style.opacity = ".55"; stepBtn.style.cursor = "default";
+    const t0 = performance.now(), D = 1700, tok = segTok;
+    const tick = now => {
+      if (tok !== segTok) return;
+      const u = Math.min(1, (now - t0) / D), f = f0 + (f1 - f0) * u;
+      chor(f);
+      if (u < 1) segRaf = requestAnimationFrame(tick); else { segRaf = null; segEnable(); }
+    };
+    segRaf = requestAnimationFrame(tick);
+  }
+  stepBtn.onclick = () => segGo(false);
+  for (let i = 1; i <= total; i++)
+    document.getElementById("s" + i).onclick = () => {
+      segStopUI(); wReset();
+      for (let j = 0; j < i; j++) wNext();
+      chip.textContent = "分步 " + i + " / " + total + "　" + STEPS[i - 1]; chip.style.display = "";
+    };
+  window.addEventListener("load", () => {
+    const n = +(new URLSearchParams(location.search).get("seg") || 0);
+    for (let i = 0; i < Math.min(n, total); i++) segGo(true);
+  });
+});
+</script>
+</div></div>
+</body>
+</html>

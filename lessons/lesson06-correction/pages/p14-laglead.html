@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>③ 滞后—超前校正装置</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=221">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=221" defer></script>
+<style>
+  .row{display:flex;gap:20px;height:100%;min-height:0}
+  .lft{flex:.92;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:8px;padding:10px 18px;font-size:21px;line-height:1.5}
+  .eq{background:var(--sky);border-radius:12px;padding:8px 14px;text-align:center;font-size:21.5px}
+  .st{font-size:20px;color:var(--ink);line-height:1.5}
+  .figc{flex:1.35;display:flex;flex-direction:column;overflow:hidden;position:relative}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:2px 6px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .capnote{flex:none;font-size:19.5px;color:var(--navy);background:var(--sky);border-radius:10px;padding:8px 16px;margin:0 12px 10px;line-height:1.5}
+  .segfloat{position:absolute;top:52px;right:12px;z-index:5;max-width:80%;background:#fff;
+    border:2px solid var(--blue);border-radius:10px;padding:4px 13px;font-size:18px;font-weight:700;
+    color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 2px 10px rgba(20,40,90,.18)}
+  .prog{position:absolute;top:56px;left:14px;z-index:5;font-size:18px;font-weight:700;color:var(--navy);
+    background:rgba(255,255,255,.88);padding:2px 10px;border-radius:8px}
+  .ctl{display:flex;align-items:center;gap:10px;justify-content:center;padding:6px 0 8px}
+  .btn{background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:19px;font-weight:700;padding:8px 20px;cursor:pointer;min-width:112px;text-align:center}
+  .btn.ghost{background:#fff;color:var(--blue);border:2px solid var(--blue)}
+  .btn:disabled{opacity:.42;cursor:not-allowed}
+</style>
+</head>
+<body data-title="③ 滞后—超前校正装置" data-page="14 / 48">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lft">
+        <div class="act-card" style="flex:1.25">
+          <div class="hd" style="font-size:23px"><span style="flex:1">滞后—超前网络（RC 电路）</span></div>
+          <div class="bd2" style="flex:1;display:grid;place-items:center;background:#fff;padding:6px 10px;min-height:0">
+            <svg id="ckt" viewBox="0 0 640 400" preserveAspectRatio="xMidYMid meet" style="width:100%;height:100%"></svg>
+          </div>
+          <div class="capnote">串联臂 <span class="tex">Z_{1}=R_{1}\parallel\dfrac{1}{C_{1}s}</span>（超前结构），输出臂 <span class="tex">Z_{2}=R_{2}+\dfrac{1}{C_{2}s}</span>（滞后结构）。</div>
+        </div>
+        <div class="act-card" style="flex:1">
+          <div class="hd" style="font-size:23px"><span style="flex:1">传递函数：两段相乘</span></div>
+          <div class="bd">
+            <div class="eq"><span class="tex">G_{c}(s)=\dfrac{Z_{2}}{Z_{1}+Z_{2}}=\dfrac{(T_{1}s+1)(T_{2}s+1)}{(\beta T_{1}s+1)\left(\frac{T_{2}}{\beta}s+1\right)}</span></div>
+            <div class="st">其中 <span class="tex">\beta&gt;1</span>，<span class="tex">T_{1}=R_{1}C_{1}</span>，<span class="tex">T_{2}=R_{2}C_{2}</span>。</div>
+            <div class="st">滞后部分 <span class="tex">\frac{T_{1}s+1}{\beta T_{1}s+1}</span>：低频段工作，衰减 <span class="tex">-20\lg\beta</span> → <span class="kw-r">改善稳态</span>；超前部分 <span class="tex">\frac{T_{2}s+1}{\frac{T_{2}}{\beta}s+1}</span>：高频段工作，提供超前相角 → <span class="kw-r">改善暂态</span>。</div>
+          </div>
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd"><span style="flex:1">滞后—超前网络 Bode 图（T=1，β=10，α=1/β=0.1）</span></div>
+        <span class="segfloat" id="segChip" style="display:none"></span>
+        <span class="prog" id="prog">0 / 3</span>
+        <div class="bd2"><svg id="fig"></svg></div>
+        <div class="ctl">
+          <button class="btn" id="play">▶ 播放</button>
+          <button class="btn ghost" id="step">⧉ 分步</button>
+          <button class="btn ghost" id="rst">↺ 重置</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">要点</span><span>低频段由<span class="kw-r">滞后部分</span>压低（改善稳态），高频段由<span class="kw-r">超前部分</span>抬起并补相角（改善暂态）——一种装置、两段分工。</span></div>
+<div data-step="1" style="display:none"></div><div data-step="2" style="display:none"></div>
+<div data-step="3" style="display:none"></div>
+<script src="../fig.js"></script>
+<script src="../data/laglead.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const TOTAL = 3;
+  /* 网络结构图（定性手绘：上臂 R1∥C1，输出臂 R2 串 C2） */
+  (function drawCircuit() {
+    const NS = "http://www.w3.org/2000/svg";
+    const svg = document.getElementById("ckt");
+    const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag);
+      for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+    const MF = '"Cambria Math","STIX Two Math",Georgia,"Times New Roman","Microsoft YaHei",serif';
+    const INK = "#16324F", BLUE = "#1D3FA0", NAVY = "#12266E";
+    const W = (x1, y1, x2, y2) => mk("line", { x1, y1, x2, y2, stroke: INK, "stroke-width": 3.5 });
+    const label = (x, y, s, o) => { o = o || {};
+      const n = mk("text", { x, y, "font-size": o.fs || 26, "text-anchor": o.an || "middle",
+        fill: o.fill || NAVY, "font-style": "italic", "font-family": MF });
+      n.textContent = s; return n; };
+    const res = (x, y, w, h) =>
+      mk("rect", { x, y, width: w, height: h, rx: 4, fill: "#fff", stroke: BLUE, "stroke-width": 3.5 });
+    const sub = (x, y, base, idx, o) => {
+      o = o || {}; label(x, y, base, o); label(x + (o.fs || 26) * .62, y + 7, idx, { fs: (o.fs || 26) * .68 });
+    };
+    const dot = (x, y) => mk("circle", { cx: x, cy: y, r: 5, fill: INK });
+    const term = (x, y) => mk("circle", { cx: x, cy: y, r: 6.5, fill: "#fff", stroke: INK, "stroke-width": 3 });
+    const YT = 140, YB = 340, YC = 62, XL = 54, XR = 586;
+    /* 底轨 */
+    W(XL, YB, XR, YB);
+    /* 输入端口（左）：端子开路 + 极性标注 + u_1 */
+    term(XL, YT); term(XL, YB);
+    label(26, 246, "u", { fs: 30 }); label(43, 254, "1", { fs: 19 });
+    label(84, YT - 14, "+", { fs: 26 }); label(84, YB + 30, "−", { fs: 26 });
+    /* 输出端口（右）：端子开路，u_2 取自输出臂两端，极性与输入一致 */
+    term(XR, YT); term(XR, YB);
+    label(608, 246, "u", { fs: 30 }); label(626, 254, "2", { fs: 19 });
+    label(546, YT - 14, "+", { fs: 26 }); label(546, YB + 30, "−", { fs: 26 });
+    /* 串联臂：节点 A —（短引线）R1（短引线）— 节点 B，C1 并联跨接 A、B */
+    W(XL, YT, 118, YT); dot(118, YT);
+    W(118, YT, 158, YT); res(158, YT - 17, 116, 34); W(274, YT, 326, YT); dot(326, YT);
+    sub(216, YT - 28, "R", "1", { fs: 26 });
+    W(326, YT, XR, YT);
+    W(118, YT, 118, YC); W(118, YC, 208, YC); W(224, YC, 326, YC); W(326, YC, 326, YT);
+    W(208, YC - 20, 208, YC + 20); W(224, YC - 20, 224, YC + 20);   // C1 极板
+    sub(216, YC - 26, "C", "1", { fs: 26 });
+    /* 输出臂：R2 与 C2 串联，竖直跨接两轨，节点画实心圆点 */
+    dot(448, YT); W(448, YT, 448, 168); res(430, 168, 36, 84); sub(500, 214, "R", "2", { fs: 26 });
+    W(448, 252, 448, 282);
+    W(414, 282, 482, 282); W(414, 298, 482, 298);   // C2 极板（水平）
+    W(448, 298, 448, YB); dot(448, YB);
+    sub(502, 296, "C", "2", { fs: 26 });
+  })();
+
+  /* Bode 图：branch 序 = [滞后mag, 合成mag, 滞后phase, 合成phase]（精简：渐近折线整组删减；
+     合成相角出现后隐藏滞后相角，每个分步只留当步所需曲线与标注） */
+  const F = BD.figure("fig", "laglead", { asym: false, marks: false });
+  function paint(K, f) {
+    let fl, fc;
+    if (typeof f === "number") { fl = Math.min(1, f * 2); fc = Math.max(0, f * 2 - 1); }
+    else { fl = K >= 1 ? 1 : 0; fc = K >= 2 ? 1 : 0; }
+    F.setF(0, fl); F.setF(2, fl); F.setF(1, fc); F.setF(3, fc);
+    F.setOp(2, fc > 0 ? 0 : 1);              // 相频面板只留一条曲线
+    F.gAsym.style.opacity = 0;               // 渐近折线不再出现
+    F.gMark.style.opacity = K >= 3 ? 1 : 0;  // 转折频率与 −20lgβ 电平仅第③步标注
+  }
+  BD.wire(TOTAL, paint, { figs: [F], FS: [0, .4, .8, 1], dur: 9000 });
+
+  /* ---- ⧉分步：点一下走一步，双段生长 ---- */
+  const STEPS = ["① 滞后部分：低频 0dB，中频段压向 −20lgβ",
+                 "② 超前部分接入：高频段抬回 0dB，相角回正",
+                 "③ 标注转折频率与 −20lgβ 电平"];
+  const SEG = { 1: [0, 2], 2: [1, 3], 3: [] };
+  const chip = document.getElementById("segChip");
+  const pb = document.getElementById("play"), sb = document.getElementById("step"), rb = document.getElementById("rst");
+  const wNext = ACT.step.next, wReset = ACT.step.reset;
+  let segRaf = null, segTok = 0;
+  function segStopUI() {
+    segTok++;
+    if (segRaf) { cancelAnimationFrame(segRaf); segRaf = null; }
+    chip.style.display = "none";
+    pb.disabled = false; sb.disabled = false; rb.disabled = false;
+  }
+  ACT.step.next = function () { segStopUI(); return wNext(); };
+  ACT.step.reset = function () { segStopUI(); return wReset(); };
+  pb.onclick = (fn => e => { segStopUI(); fn(e); })(pb.onclick);
+  function segGo(instant) {
+    segStopUI();
+    if (ACT.step.cur >= TOTAL) wReset();
+    wNext();
+    const k = ACT.step.cur;
+    chip.textContent = "分步 " + k + " / " + TOTAL + "　" + STEPS[k - 1];
+    chip.style.display = "";
+    const brs = SEG[k];
+    if (instant || !brs.length) return;
+    pb.disabled = true; sb.disabled = true; rb.disabled = true;
+    brs.forEach(b => F.setF(b, 0));
+    const t0 = performance.now(), D = 2000, tok = segTok;
+    const tick = now => {
+      if (tok !== segTok) return;
+      const u = Math.min(1, (now - t0) / D);
+      brs.forEach(b => F.setF(b, u));
+      if (u < 1) segRaf = requestAnimationFrame(tick);
+      else { segRaf = null; segStopEnable(); }
+    };
+    segRaf = requestAnimationFrame(tick);
+  }
+  function segStopEnable() { pb.disabled = false; sb.disabled = false; rb.disabled = false; }
+  sb.onclick = () => segGo(false);
+  rb.onclick = () => ACT.step.reset();
+  window.addEventListener("load", () => {
+    const n = +(new URLSearchParams(location.search).get("seg") || 0);
+    for (let i = 0; i < Math.min(n, TOTAL); i++) segGo(true);
+  });
+});
+</script>
+</div></div>
+</body>
+</html>

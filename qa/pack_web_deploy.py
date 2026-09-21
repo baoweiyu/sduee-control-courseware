@@ -7,10 +7,10 @@ components/ + 实际引用的 assets + DEPLOY-部署说明.md + 可选 server.js
 import os, re, json, zipfile
 
 ROOT = r"H:\D_tools\courseware-system-kimi"
-OUT = os.path.join(ROOT, "act-courseware-web-deploy-v2.20.zip")
+OUT = os.path.join(ROOT, "act-courseware-web-deploy-v2.21.zip")
 
 COMMON_DIRS = ["player", "components", "theme"]
-LESSON_IDS = ["lesson01-intro", "lesson02-math-model", "lesson03-timedomain", "lesson04-freq", "lesson05-root-locus"]
+LESSON_IDS = ["lesson01-intro", "lesson02-math-model", "lesson03-timedomain", "lesson04-freq", "lesson05-root-locus", "lesson06-correction"]
 ASSET_RE = re.compile(r"assets/(?:image2|legacy)/[^\"'\)\s>]+")
 
 def arc(rel):
@@ -54,14 +54,16 @@ https://github.com/baoweiyu/sduee-control-courseware
 https://github.com/baoweiyu/sduee-control-courseware/releases
 
 ## 这是什么
-纯静态 HTML 课件站点（无后端、无数据库、无构建步骤），内含第一~五章共 319 页：
+纯静态 HTML 课件站点（无后端、无数据库、无构建步骤），内含第一~六章共 367 页：
 - 第一章 绪论（35 页）
 - 第二章 控制系统的数学模型（51 页）
 - 第三章 时域分析法（85 页）
 - 第四章 频率响应法（87 页，含外部精修终审全部修复）
 - 第五章 根轨迹法（61 页，数值严谨绘制 + 连贯/分步动画 + 图面缩放）
+- 第六章 控制系统的校正（48 页，Bode 图数值绘制 + 设计步骤分步演示）
 
-整体版本 V2.20（2026-09-20）。本地播放版与网页部署版使用同一版本号。
+整体版本 V2.21（2026-09-21）。本地播放版与网页部署版使用同一版本号。
+V2.21 更新：第六章《控制系统的校正》首次发布（48 页，一轮修改版）。
 V2.20 更新：第三章 10 页修改——P36 互动实验左右等大双图版式并重做极点平面
 （固定比例尺，修复 ωn 滑块极点不动缺陷）；P39 结构图放大改规范分式；
 P51/52/54/60/66/72/77/79 八页留白填充与字号放大。其余章节内容未变。
@@ -99,7 +101,7 @@ V2.16 更新：①全部页面 theme.css/act-base.js 引用加版本号缓存破
 ```
 index.html          根入口（自动转 player/，透传查询参数）
 player/             播放器（index.html）
-lessons/            五章页面与数据（index.json + <章节>/lesson.json + pages/*.html）
+lessons/            六章页面与数据（index.json + <章节>/lesson.json + pages/*.html）
 theme/              主题 CSS + act-base.js + 本地 MathJax 库（theme/mathjax/ 必须完整保留）
 components/         公共组件
 assets/             页面实际引用的图片（image2 生成图 + 原始素材提取图）

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>④ PI 控制</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=600">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=600" defer></script>
+<style>
+  .row{display:flex;gap:24px;height:100%;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .law .bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:16px;padding:16px 26px;font-size:22.5px;line-height:1.6}
+  .law .fm{background:var(--sky);border-radius:14px;padding:16px 22px;text-align:center;font-size:24px;color:var(--navy)}
+  .law ul{list-style:none;display:flex;flex-direction:column;gap:14px}
+  .law li{display:flex;gap:12px;align-items:flex-start}
+  .law li::before{content:"";flex:none;width:12px;height:12px;border-radius:50%;background:var(--orange);margin-top:10px}
+  .figc .bd{flex:1;display:flex;flex-direction:column;min-height:0;padding:8px 12px}
+  .figc .fbox{flex:1;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .figc .capnote{flex:none;font-size:19.5px;color:var(--navy);background:var(--sky);border-radius:10px;padding:8px 16px;margin:8px 6px 6px;line-height:1.5;text-align:center}
+</style>
+</head>
+<body data-title="④ PI 控制" data-page="17 / 48">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="row">
+      <div class="act-card law" style="flex:1.02">
+        <div class="hd">比例-积分（PI）控制规律</div>
+        <div class="bd">
+          <div class="fm">
+            <span class="tex">u_{2}(t)=K_{p}\,u_{1}(t)+\dfrac{K_{p}}{T_{i}}\!\int_{0}^{t}\!u_{1}(t)\,\mathrm{d}t</span><br>
+            <span class="tex">G_{c}(s)=K_{p}\!\left(1+\dfrac{1}{T_{i}s}\right)=K_{p}\,\dfrac{T_{i}s+1}{T_{i}s}</span>
+          </div>
+          <ul>
+            <li><span>PI 控制相当于给系统增加<span class="kw-r">一个极点（原点处）与一个零点</span> <span class="tex">s=-1/T_{i}</span>。</span></li>
+            <li><span>原点处的极点可<span class="kw-r">提高系统型别</span>、改善稳态性能（消除稳态误差）。</span></li>
+            <li><span>零点 <span class="tex">-1/T_{i}</span> 可使原点极点对<span class="kw-r">稳定性、暂态性能的不利影响减弱</span>。</span></li>
+            <li><span>右图（取 <span class="tex">T_{i}=1</span>）：相频 <span class="tex">-90^{\circ}\!\to\!0^{\circ}</span>，高频增益趋于 <span class="tex">K_{p}</span>（不衰减）。</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="act-card figc" style="flex:1.1">
+        <div class="hd">PI 装置的 Bode 特性</div>
+        <div class="bd">
+          <div class="fbox"><svg id="figPI"></svg></div>
+          <div class="capnote">相位 <span class="tex">-90^{\circ}\to0^{\circ}</span>；低频增益大（积分作用），过 <span class="tex">1/T_{i}</span> 后幅频趋于 0dB</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+<script src="../fig.js"></script>
+<script src="../data/pid.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  /* 从 BD.data.pid 中按曲线名筛出 PI 单曲线（含专属标注），注册为独立数据集 */
+  const d = BD.data.pid, tag = "PI";
+  BD.data["pid_pi"] = {
+    xlim: d.xlim,
+    mag:   { ylim: d.mag.ylim,   curves: d.mag.curves.filter(c => c.name === tag) },
+    phase: { ylim: d.phase.ylim, curves: d.phase.curves.filter(c => c.name === tag) },
+    marks: d.marks.filter(m => m.curve === tag)
+  };
+  BD.figure("figPI", "pid_pi", { static: true, zoom: false });
+});
+</script>
+</body>
+</html>

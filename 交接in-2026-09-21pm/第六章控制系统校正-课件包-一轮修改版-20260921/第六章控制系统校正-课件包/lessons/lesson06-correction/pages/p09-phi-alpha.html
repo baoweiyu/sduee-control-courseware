@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>① φm–α 设计关系</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=600">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=600" defer></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:.92;display:flex;flex-direction:column;gap:16px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:10px;padding:14px 24px;font-size:22px;line-height:1.5}
+  .eq{background:var(--sky);border-radius:12px;padding:10px 16px;text-align:center;font-size:23px}
+  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .st{font-size:20.5px;color:var(--ink);line-height:1.5}
+  .figc{flex:1.15;display:flex;flex-direction:column;overflow:hidden}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:6px 10px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .figc .capnote{flex:none;font-size:19px;color:var(--navy);background:var(--sky);border-radius:12px;padding:9px 16px;margin:0 14px 12px;line-height:1.45}
+</style>
+</head>
+<body data-title="① φm–α 设计关系" data-page="9 / 48">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lft">
+        <div class="act-card" style="flex:1.5">
+          <div class="hd"><span style="flex:1">最大超前相角公式的推导</span></div>
+          <div class="bd">
+            <div data-step="1"><div class="st">① 超前网络相角 <span class="tex">\varphi_{c}(\omega)=\operatorname{arctg}\omega T-\operatorname{arctg}\alpha\omega T</span>，令 <span class="tex">\dfrac{d\varphi_{c}}{d\omega}=0</span>，得极值点 <span class="tex">\omega_{m}=\dfrac{1}{T\sqrt{\alpha}}</span>（两个转折频率的<span class="kw-r">几何中心</span>）</div></div>
+            <div data-step="2"><div class="eq">② 回代得 <span class="tex">\varphi_{m}=\arcsin\dfrac{1-\alpha}{1+\alpha}</span></div></div>
+            <div data-step="3"><div class="eq hl">③ 设计时反查 <span class="tex">\alpha=\dfrac{1-\sin\varphi_{m}}{1+\sin\varphi_{m}}</span></div></div>
+          </div>
+        </div>
+        <div class="act-card" style="flex:1">
+          <div class="hd"><span style="flex:1">怎么用</span></div>
+          <div class="bd">
+            <div class="st">由所需相角裕度算出 <span class="tex">\varphi_{m}</span> → 由右图或反查公式定 <span class="tex">\alpha</span> → 令 <span class="tex">\omega_{c}=\omega_{m}</span> 定 <span class="tex">T</span>。</div>
+            <div class="st">常用 <span class="tex">\alpha=0.1</span>（<span class="tex">\varphi_{m}\approx55^{\circ}</span>）；<span class="tex">\varphi_{m}</span> 一般不超过 <span class="kw-r">60°</span>（α≈0.07）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd"><span style="flex:1">φm–α 关系曲线（数值计算）</span></div>
+        <div class="bd2"><svg id="fig"></svg></div>
+        <div class="capnote">α 越小，最大超前相角 <span class="tex">\varphi_{m}</span> 越大，但高频增益与噪声放大也越明显——四个采样点与上一页 α 取值一一对应。</div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">要点</span><span><span class="tex">\varphi_{m}=\arcsin\dfrac{1-\alpha}{1+\alpha}</span> 与 <span class="tex">\alpha=\dfrac{1-\sin\varphi_{m}}{1+\sin\varphi_{m}}</span> 互为反查；<span class="kw-r">φm≤60°</span> 是单级超前网络的工程上限。</span></div>
+<script src="../fig.js"></script>
+<script src="../data/phi_alpha.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  /* 4 个采样点改为页面自绘（值取自 meta，均为精确计算值），替代数据文件中的单一标注 */
+  const SAMPLES = [["0.5", 19.47], ["0.2", 41.81], ["0.1", 54.90], ["0.05", 64.79]];
+  BD.data.phi_alpha.marks = [];
+  const F = BD.figure("fig", "phi_alpha", { mag: true, phase: false, static: true, vh: 560,
+    extra: api => {
+      const p = api.panels[0], FOCUS = "#D63A2F";
+      SAMPLES.forEach(([a, v]) => {
+        const x = api.X(+a), y = api.Y(p, v);
+        api.mk("circle", { cx: x, cy: y, r: 8.5, fill: FOCUS, stroke: "#fff", "stroke-width": 2.5 }, api.gTop);
+        api.tx(api.gTop, x, y - 44, "α=" + a, { fs: 20, fill: FOCUS, b: 1 });
+        api.tx(api.gTop, x, y - 20, "φ_{m}=" + v.toFixed(2) + "°", { fs: 20, fill: FOCUS, b: 1 });
+      });
+    }});
+});
+</script>
+<script>/* qa-steps：截图自验钩子，?steps=N 自动前进 N 步（播放时不生效） */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

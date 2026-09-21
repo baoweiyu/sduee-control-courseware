@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>① 超前校正装置的特点</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=600">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=600" defer></script>
+<style>
+  .col{display:flex;flex-direction:column;gap:18px;height:100%;min-height:0}
+  .tr{flex:1;display:flex;gap:20px;align-items:stretch;background:#fff;border:2px solid var(--line);
+      border-radius:16px;overflow:hidden;min-height:0}
+  .tr .no{flex:none;width:120px;display:grid;place-items:center;background:var(--blue);color:#fff;
+      font-size:30px;font-weight:700;writing-mode:horizontal-tb}
+  .tr .bd{flex:1;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:14px 24px;font-size:23px;line-height:1.5}
+  .tr .hd2{font-size:26px;font-weight:700;color:var(--navy)}
+  .tr .sub{font-size:20px;color:var(--muted);line-height:1.42}
+  .tr .eqs{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .chip{font-size:20px;background:var(--sky);border-radius:10px;padding:4px 14px;color:var(--navy)}
+</style>
+</head>
+<body data-title="① 超前校正装置的特点" data-page="10 / 48">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="col">
+      <div class="tr">
+        <div class="no">特点 1</div>
+        <div class="bd">
+          <div class="hd2">属<span class="kw-r">高通滤波器</span>：高频段增益被抬高 <span class="tex">-20\lg\alpha</span></div>
+          <div class="sub">α 太小则高频增益过高，<b>对抑制噪声不利</b> —— 一般常选 <span class="tex">\alpha&gt;0.07</span>。</div>
+        </div>
+      </div>
+      <div class="tr">
+        <div class="no">特点 2</div>
+        <div class="bd">
+          <div class="hd2">提供<span class="kw-r">超前相角</span>：α 越小，<span class="tex">\varphi_{m}</span> 越大</div>
+          <div class="eqs">
+            <span class="chip"><span class="tex">\varphi_{m}=\arcsin\dfrac{1-\alpha}{1+\alpha}</span></span>
+            <span class="chip"><span class="tex">\alpha=0.1\Rightarrow\varphi_{m}\approx55^{\circ}</span></span>
+          </div>
+          <div class="sub">单级超前网络的 <span class="tex">\varphi_{m}</span> 一般<b>不超过 60°</b>（α 过小则噪声与实现都成问题）。</div>
+        </div>
+      </div>
+      <div class="tr">
+        <div class="no">特点 3</div>
+        <div class="bd">
+          <div class="hd2">在 <span class="tex">\omega_{m}</span> 处有幅值增益 <span class="tex">L(\omega_{m})=-10\lg\alpha</span></div>
+          <div class="sub">设计时利用这一增益：把 <span class="tex">\omega_{m}</span> 对准未校系统 <span class="tex">L(\omega)=-10\lg\alpha</span> 的频率，即可把它抬为新的截止频率 <span class="tex">\omega_{c}</span>（6.3 节）。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">要点</span><span>超前装置 = <span class="kw-r">高通 + 超前相角 + ωm 处增益</span>；α 的选择是"相角收益"与"抗噪能力"之间的折中。</span></div>
+</div></div>
+</body>
+</html>

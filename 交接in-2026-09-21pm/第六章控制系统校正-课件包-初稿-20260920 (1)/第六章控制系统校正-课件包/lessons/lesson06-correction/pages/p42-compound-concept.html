@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>6.5 复合控制校正：概念</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=600">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=600" defer></script>
+<script src="../fig.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:1;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .lft .act-card{display:flex;flex-direction:column;overflow:hidden;min-height:0}
+  .lft .bd{flex:1;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:10px 20px;
+    font-size:20.5px;line-height:1.5}
+  .lft .bd b{color:var(--navy)}
+  .chips{display:flex;gap:14px}
+  .chip2{flex:1;background:var(--sky);border:2px solid var(--line);border-radius:12px;padding:8px 14px;
+    font-size:20px;color:var(--navy);text-align:center;font-weight:700}
+  .chip2 b{color:var(--danger)}
+  .figc{flex:1.08;display:flex;flex-direction:column;overflow:hidden;position:relative}
+  .figc .stext{margin:10px 16px 0;background:var(--sky);border-radius:10px;padding:7px 14px;
+    font-size:20px;line-height:1.4;color:var(--navy);min-height:66px;display:flex;align-items:center}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .ctl{display:flex;align-items:center;gap:12px;justify-content:center;padding:8px 0 10px}
+  .btn{background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:19px;font-weight:700;
+    padding:8px 20px;cursor:pointer;min-width:6.5em;text-align:center}
+  .btn.ghost{background:#fff;color:var(--blue);border:2px solid var(--blue)}
+  .btn:disabled{opacity:.5;cursor:default}
+  .prog{position:absolute;top:auto;bottom:66px;right:16px;z-index:5;font-size:17px;color:var(--muted);
+    background:rgba(255,255,255,.92);border:1.5px solid var(--line);border-radius:8px;padding:2px 10px;
+    font-variant-numeric:tabular-nums}
+  .lft .act-card{transition:box-shadow .2s,border-color .2s}
+  .lft .act-card.on{border-color:var(--danger);box-shadow:0 0 0 3px rgba(214,58,47,.28)}
+  @keyframes bdPulse{0%,100%{opacity:1}50%{opacity:.25}}
+  .flash{animation:bdPulse .85s ease-in-out infinite}
+</style>
+</head>
+<body data-title="6.5 复合控制校正：概念" data-page="42 / 48">
+<div class="act-stage"><div class="act-slide">
+
+<div class="act-body has-note">
+  <div class="row">
+    <div class="lft">
+      <div class="act-card" id="c1" style="flex:.78">
+        <div class="hd">问题引入</div>
+        <div class="bd">
+          <div>串联校正和反馈校正是两种常用的校正方法。但控制系统若存在<b>强扰动</b>（特别是<span class="kw-r">低频扰动</span>），反馈校正难以满足要求。</div>
+        </div>
+      </div>
+      <div class="act-card" id="c2" style="flex:1.22">
+        <div class="hd">复合控制的概念</div>
+        <div class="bd">
+          <div>在反馈控制回路中加入<b>前馈通路</b>：参数选择得当，不但可保持系统稳定、减小或消除 <span class="tex">e_{ss}</span>，还可控制几乎所有<b>可测扰动</b>（包括低频强扰动）。</div>
+          <div>这样的系统称为<b>复合控制系统</b>；把复合控制的思想用于系统设计，就是<span class="kw-r">复合校正</span>。</div>
+        </div>
+      </div>
+      <div class="act-card" id="c3" style="flex:1">
+        <div class="hd">设计思想：按不变性原理设计前馈装置</div>
+        <div class="bd">
+          <div class="chips">
+            <div class="chip2">按<b>输入</b>补偿<br>（下一页）</div>
+            <div class="chip2">按<b>扰动</b>补偿<br>（6.5 后文）</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="act-card figc">
+      <div class="hd"><span style="flex:1">方框图演示：前馈通路"接入"</span></div>
+      <div class="stext" id="stext"></div>
+      <span class="prog" id="prog">0 / 3</span>
+      <div class="bd2"><svg id="fig"></svg></div>
+      <div class="ctl">
+        <button class="btn" id="step">⧉ 分步</button>
+        <button class="btn ghost" id="rst">↺ 重置</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">要点</span><span>复合 = <span class="kw-r">反馈 + 前馈</span>：反馈回路保证稳定与暂态，前馈通路按不变性原理补足精度与抗扰。</span></div>
+
+<div data-step="1" style="display:none"></div><div data-step="2" style="display:none"></div><div data-step="3" style="display:none"></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const total = 3;
+  const ORF = "#FDF3EC", ORC = "#F5821F";
+  const B = BD.block("fig", [
+    { type: "line", pts: [[24, 190], [40, 190]], label: "R(s)", labelDx: -4, labelDy: -16 },
+    { type: "dot", x: 55, y: 190 },
+    { type: "line", pts: [[55, 190], [70, 190]] },
+    { type: "sum", x: 85, y: 190, r: 15 },
+    { type: "line", pts: [[100, 190], [235, 190]] },
+    { type: "sum", x: 250, y: 190, r: 15 },
+    { type: "line", pts: [[265, 190], [295, 190]] },
+    { type: "box", x: 295, y: 160, w: 120, h: 60, label: "G(s)", name: "g" },
+    { type: "line", pts: [[415, 190], [620, 190]], label: "C(s)", labelDx: 34, labelDy: -16 },
+    { type: "dot", x: 560, y: 190 },
+    { type: "line", pts: [[560, 190], [560, 350], [85, 350], [85, 205]], flow: true, name: "fb" }
+  ], { vw: 640, vh: 400 });
+  B.tx(B.g, 99, 216, "−", { fs: 26, b: 1, an: "start" });
+  B.tx(B.g, 264, 166, "+", { fs: 26, b: 1, an: "start" });
+  B.tx(B.g, 322, 382, "主反馈回路", { fs: 20, fill: "#5B6B8C" });
+
+  /* 前馈通路（手动绘制为一组，便于整体显隐） */
+  const ffG = B.mk("g", { opacity: 0 }, B.svg);
+  function flowLine(pts, color) {
+    const d = "M" + pts.map(p => p[0] + "," + p[1]).join("L");
+    const el = B.mk("path", { d, fill: "none", stroke: color || "#16324F", "stroke-width": 3,
+      "stroke-linejoin": "round", "stroke-dasharray": "10 8", "marker-end": "url(#bxfig)" }, ffG);
+    B.mk("animate", { attributeName: "stroke-dashoffset", from: "36", to: "0", dur: "1.2s",
+      repeatCount: "indefinite" }, el);
+  }
+  flowLine([[55, 190], [55, 80], [128, 80]]);
+  B.mk("rect", { x: 128, y: 50, width: 120, height: 60, rx: 8, fill: ORF, stroke: ORC, "stroke-width": 3 }, ffG);
+  B.tx(ffG, 188, 88, "F_{r}(s)", { fs: 24, fill: "#16324F", b: 1, halo: false });
+  flowLine([[248, 80], [250, 80], [250, 173]]);
+  B.tx(ffG, 188, 34, "前馈通路", { fs: 20, fill: ORC, b: 1 });
+
+  const dyn = B.mk("g", {}, B.svg);
+  const ST = [
+    "主反馈回路：R(s) → ⊖ → G(s) → C(s)，单位负反馈。",
+    "① 问题：存在强扰动（特别是低频扰动）时，单靠反馈回路难以满足要求。",
+    "② 对策：在反馈回路之外接入前馈通路 Fr(s)（橙色）→ 复合控制系统。",
+    "③ 前馈装置按不变性原理设计：分按输入补偿与按扰动补偿两种。"
+  ];
+  const stext = document.getElementById("stext"), prog = document.getElementById("prog"),
+        btn = document.getElementById("step");
+  function paint(k) {
+    dyn.innerHTML = ""; dyn.removeAttribute("class");
+    ffG.setAttribute("opacity", k >= 2 ? 1 : 0);
+    ffG.setAttribute("class", k === 2 ? "flash" : "");
+    if (k === 1) {
+      dyn.setAttribute("class", "flash");
+      B.mk("rect", { x: 62, y: 148, width: 376, height: 216, rx: 14, fill: "none",
+        stroke: "#1D3FA0", "stroke-width": 4, "stroke-dasharray": "12 9" }, dyn);
+      B.tx(dyn, 250, 140, "仅靠反馈回路", { fs: 21, fill: "#1D3FA0", b: 1 });
+    }
+    for (let i = 1; i <= total; i++)
+      document.getElementById("c" + i).classList.toggle("on", i === k);
+    stext.textContent = ST[k];
+    prog.textContent = k + " / " + total;
+    btn.disabled = k >= total;
+  }
+  const S = ACT.step, _n = S.next.bind(S), _r = S.reset.bind(S);
+  S.next = function () { const d = _n(); paint(S.cur); return d; };
+  S.reset = function () { _r(); paint(0); };
+  window.prev = function () { const n = Math.max(0, S.cur - 1); S.reset(); for (let i = 0; i < n; i++) S.next(); };
+  btn.onclick = () => S.next();
+  document.getElementById("rst").onclick = () => S.reset();
+  window.addEventListener("load", () => {
+    const qp = new URLSearchParams(location.search);
+    let k = 0;
+    if (qp.has("ff")) k = total;
+    else if (qp.has("seg")) k = Math.max(0, Math.min(total, parseInt(qp.get("seg"), 10) || 0));
+    for (let i = 0; i < k; i++) S.next();
+  });
+  paint(0);
+});
+</script>
+</div></div>
+</body>
+</html>

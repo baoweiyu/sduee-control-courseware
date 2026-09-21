@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>④ PD 控制</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=600">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=600" defer></script>
+<style>
+  .row{display:flex;gap:24px;height:100%;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .law .bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:16px;padding:16px 26px;font-size:22.5px;line-height:1.6}
+  .law .fm{background:var(--sky);border-radius:14px;padding:16px 22px;text-align:center;font-size:24px;color:var(--navy)}
+  .law ul{list-style:none;display:flex;flex-direction:column;gap:14px}
+  .law li{display:flex;gap:12px;align-items:flex-start}
+  .law li::before{content:"";flex:none;width:12px;height:12px;border-radius:50%;background:var(--orange);margin-top:10px}
+  .figc .bd{flex:1;display:flex;flex-direction:column;min-height:0;padding:8px 12px}
+  .figc .fbox{flex:1;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .figc .capnote{flex:none;font-size:19.5px;color:var(--navy);background:var(--sky);border-radius:10px;padding:8px 16px;margin:8px 6px 6px;line-height:1.5;text-align:center}
+</style>
+</head>
+<body data-title="④ PD 控制" data-page="16 / 48">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="row">
+      <div class="act-card law" style="flex:1.02">
+        <div class="hd">比例-微分（PD）控制规律</div>
+        <div class="bd">
+          <div class="fm">
+            <span class="tex">u_{2}(t)=K_{p}\,u_{1}(t)+K_{p}T_{d}\,\dfrac{\mathrm{d}u_{1}(t)}{\mathrm{d}t}</span><br>
+            <span class="tex">G_{c}(s)=K_{p}(1+T_{d}s)=K_{p}+K_{D}s</span>　<span style="font-size:19px;color:var(--muted)">（<span class="tex">K_{D}=K_{p}T_{d}</span>）</span>
+          </div>
+          <ul>
+            <li><span>微分项与误差的<span class="kw-r">变化率</span>成正比——误差尚未变大，修正作用已经到来，具有“预见”性。</span></li>
+            <li><span>PD 控制相当于给系统<span class="kw-r">增加一个开环负实零点</span> <span class="tex">s=-1/T_{d}</span>，对系统的<span class="kw-r">稳定性、暂态性能有利</span>。</span></li>
+            <li><span>右图（取 <span class="tex">T_{d}=1</span>）：相频全程为正（<span class="tex">0^{\circ}\!\to\!+90^{\circ}</span>），故 PD 属于<span class="kw-r">相位超前</span>校正。</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="act-card figc" style="flex:1.1">
+        <div class="hd">PD 装置的 Bode 特性</div>
+        <div class="bd">
+          <div class="fbox"><svg id="figPD"></svg></div>
+          <div class="capnote">相位 <span class="tex">0^{\circ}\to+90^{\circ}</span> 超前；幅频过零点频率 <span class="tex">1/T_{d}</span> 后以 +20dB/dec 上升</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+<script src="../fig.js"></script>
+<script src="../data/pid.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  /* 从 BD.data.pid 中按曲线名筛出 PD 单曲线（含专属标注），注册为独立数据集 */
+  const d = BD.data.pid, tag = "PD";
+  BD.data["pid_pd"] = {
+    xlim: d.xlim,
+    mag:   { ylim: d.mag.ylim,   curves: d.mag.curves.filter(c => c.name === tag) },
+    phase: { ylim: d.phase.ylim, curves: d.phase.curves.filter(c => c.name === tag) },
+    marks: d.marks.filter(m => m.curve === tag)
+  };
+  BD.figure("figPD", "pid_pd", { static: true, zoom: false });
+});
+</script>
+</body>
+</html>

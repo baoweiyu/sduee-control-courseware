@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><style>html,body{margin:0;height:100%;overflow:hidden}iframe{border:0;width:100%;height:100%;display:block}</style></head>
+<body><iframe id="f"></iframe>
+<script>
+const q = new URLSearchParams(location.search);
+const f = document.getElementById('f');
+f.src = 'lessons/lesson06-correction/pages/' + q.get('p');
+f.onload = () => {
+  if (q.get('play')) { setTimeout(() => { try { f.contentDocument.getElementById(q.get('play')).click(); } catch(e){} }, 1200); return; }
+  const n = parseInt(q.get('s') || '0');
+  let i = 0;
+  const tick = () => {
+    if (i < n) { i++; try { f.contentWindow.ACT.step.next(); } catch(e){} setTimeout(tick, 250); }
+    else document.title = 'DONE';
+  };
+  setTimeout(tick, 600);
+};
+</script></body></html>
