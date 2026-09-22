@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <title>扰动误差传递函数</title>
-<link rel="stylesheet" href="../../../theme/theme.css?v=220">
+<link rel="stylesheet" href="../../../theme/theme.css?v=222">
 <link rel="stylesheet" href="../lesson03-svg.css">
 <script src="../../../theme/mathjax/mathjax-render.js"></script>
 <script src="../../../theme/mathjax/tex-chtml.js"></script>
 <script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
-<script src="../../../theme/act-base.js?v=220" defer></script>
+<script src="../../../theme/act-base.js?v=222" defer></script>
 <style>
   .row { display:flex; gap:24px; height:100%; }
   .dtc { flex:1.12; display:flex; flex-direction:column; }
@@ -39,22 +39,22 @@
               <line x1="108" y1="102" x2="92" y2="118" stroke="#1B3B8B" stroke-width="2"/>
               <text x="68" y="142" font-size="18" fill="#1B3B8B">+</text>
               <text x="120" y="160" font-size="18" fill="#1B3B8B">−</text>
-              <line x1="115" y1="110" x2="146" y2="110" stroke="#1B3B8B" stroke-width="2.2" marker-end="url(#ar67)"/>
-              <text x="120" y="96" font-size="19" fill="#1B3B8B" font-style="italic">E(s)</text>
-              <rect x="150" y="78" width="120" height="64" rx="8" fill="#EAF0FE" stroke="#1B3B8B" stroke-width="2.2"/>
-              <foreignObject x="160" y="90" width="100" height="42"><div xmlns="http://www.w3.org/1999/xhtml" class="tex" style="font-size:21px;text-align:center">G_{1}(s)</div></foreignObject>
-              <line x1="270" y1="110" x2="300" y2="110" stroke="#1B3B8B" stroke-width="2.2" marker-end="url(#ar67)"/>
-              <circle cx="320" cy="110" r="15" fill="#fff" stroke="#1B3B8B" stroke-width="2.2"/>
-              <line x1="312" y1="102" x2="328" y2="118" stroke="#1B3B8B" stroke-width="2"/>
-              <line x1="328" y1="102" x2="312" y2="118" stroke="#1B3B8B" stroke-width="2"/>
-              <text x="292" y="142" font-size="18" fill="#1B3B8B">+</text>
-              <text x="336" y="80" font-size="18" fill="#D63A2F">+</text>
-              <line x1="320" y1="52" x2="320" y2="92" stroke="#D63A2F" stroke-width="2.2" marker-end="url(#ar67r)"/>
-              <text x="330" y="42" font-size="19" fill="#D63A2F" font-style="italic">N(s)（扰动）</text>
-              <line x1="335" y1="110" x2="366" y2="110" stroke="#1B3B8B" stroke-width="2.2" marker-end="url(#ar67)"/>
-              <rect x="370" y="78" width="120" height="64" rx="8" fill="#EAF0FE" stroke="#1B3B8B" stroke-width="2.2"/>
-              <foreignObject x="380" y="90" width="100" height="42"><div xmlns="http://www.w3.org/1999/xhtml" class="tex" style="font-size:21px;text-align:center">G_{2}(s)</div></foreignObject>
-              <line x1="490" y1="110" x2="630" y2="110" stroke="#1B3B8B" stroke-width="2.2" marker-end="url(#ar67)"/>
+              <line x1="115" y1="110" x2="181" y2="110" stroke="#1B3B8B" stroke-width="2.2" marker-end="url(#ar67)"/>
+              <text x="146" y="96" font-size="19" fill="#1B3B8B" font-style="italic">E(s)</text>
+              <rect x="185" y="78" width="120" height="64" rx="8" fill="#EAF0FE" stroke="#1B3B8B" stroke-width="2.2"/>
+              <foreignObject x="195" y="90" width="100" height="42"><div xmlns="http://www.w3.org/1999/xhtml" class="tex" style="font-size:21px;text-align:center">G_{1}(s)</div></foreignObject>
+              <line x1="305" y1="110" x2="335" y2="110" stroke="#1B3B8B" stroke-width="2.2" marker-end="url(#ar67)"/>
+              <circle cx="355" cy="110" r="15" fill="#fff" stroke="#1B3B8B" stroke-width="2.2"/>
+              <line x1="347" y1="102" x2="363" y2="118" stroke="#1B3B8B" stroke-width="2"/>
+              <line x1="363" y1="102" x2="347" y2="118" stroke="#1B3B8B" stroke-width="2"/>
+              <text x="327" y="142" font-size="18" fill="#1B3B8B">+</text>
+              <text x="371" y="80" font-size="18" fill="#D63A2F">+</text>
+              <line x1="355" y1="52" x2="355" y2="92" stroke="#D63A2F" stroke-width="2.2" marker-end="url(#ar67r)"/>
+              <text x="365" y="42" font-size="19" fill="#D63A2F" font-style="italic">N(s)（扰动）</text>
+              <line x1="370" y1="110" x2="401" y2="110" stroke="#1B3B8B" stroke-width="2.2" marker-end="url(#ar67)"/>
+              <rect x="405" y="78" width="120" height="64" rx="8" fill="#EAF0FE" stroke="#1B3B8B" stroke-width="2.2"/>
+              <foreignObject x="415" y="90" width="100" height="42"><div xmlns="http://www.w3.org/1999/xhtml" class="tex" style="font-size:21px;text-align:center">G_{2}(s)</div></foreignObject>
+              <line x1="525" y1="110" x2="630" y2="110" stroke="#1B3B8B" stroke-width="2.2" marker-end="url(#ar67)"/>
               <circle cx="570" cy="110" r="4" fill="#1B3B8B"/>
               <text x="640" y="116" font-size="20" fill="#1B3B8B" font-style="italic">C(s)</text>
               <line x1="570" y1="110" x2="570" y2="248" stroke="#1B3B8B" stroke-width="2.2"/>

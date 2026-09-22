@@ -7,7 +7,7 @@ components/ + 实际引用的 assets + DEPLOY-部署说明.md + 可选 server.js
 import os, re, json, zipfile
 
 ROOT = r"H:\D_tools\courseware-system-kimi"
-OUT = os.path.join(ROOT, "act-courseware-web-deploy-v2.21.zip")
+OUT = os.path.join(ROOT, "act-courseware-web-deploy-v2.22.zip")
 
 COMMON_DIRS = ["player", "components", "theme"]
 LESSON_IDS = ["lesson01-intro", "lesson02-math-model", "lesson03-timedomain", "lesson04-freq", "lesson05-root-locus", "lesson06-correction"]
@@ -62,8 +62,9 @@ https://github.com/baoweiyu/sduee-control-courseware/releases
 - 第五章 根轨迹法（61 页，数值严谨绘制 + 连贯/分步动画 + 图面缩放）
 - 第六章 控制系统的校正（48 页，Bode 图数值绘制 + 设计步骤分步演示）
 
-整体版本 V2.21（2026-09-21）。本地播放版与网页部署版使用同一版本号。
+整体版本 V2.22（2026-09-23）。本地播放版与网页部署版使用同一版本号。
 V2.21 更新：第六章《控制系统的校正》首次发布（48 页，一轮修改版）。
+V2.22 更新：第三章 8 页排版与框图精修（P51/52/54/69/71/77/78/85），含 E(s) 标注完整显示、60° 角弧方向修正等。
 V2.20 更新：第三章 10 页修改——P36 互动实验左右等大双图版式并重做极点平面
 （固定比例尺，修复 ωn 滑块极点不动缺陷）；P39 结构图放大改规范分式；
 P51/52/54/60/66/72/77/79 八页留白填充与字号放大。其余章节内容未变。

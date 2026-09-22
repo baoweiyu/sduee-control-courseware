@@ -100,8 +100,8 @@ def main():
     # ---- 4. release ----
     print("== 4. 创建 Release ==")
     notes = "自动控制理论三层 HTML 课件 %s\r\n\r\n" % ver
-    notes += "- 5 个章节 zip：本地播放版（解压后双击 start.bat / start.command 即可离线播放）\r\n"
-    notes += "- act-courseware-web-deploy：网页部署版（静态站点，含全部五章）\r\n"
+    notes += "- 6 个章节 zip：本地播放版（解压后双击 start.bat / start.command 即可离线播放）\r\n"
+    notes += "- act-courseware-web-deploy：网页部署版（静态站点，含全部六章）\r\n"
     run([GH, "release", "create", ver, "--title", "课件 %s" % ver, "--notes", notes] + zips)
     print("完成:", out([GH, "release", "view", ver, "--json", "url", "-q", ".url"]))
 
