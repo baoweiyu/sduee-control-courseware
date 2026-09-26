@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>2.2 惯性环节：误差修正与相频对称性</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=223">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=223" defer></script>
+<style>
+  .row { display:flex; gap:24px; height:100%; min-height:0; }
+  .cc { flex:1; display:flex; flex-direction:column; overflow:hidden; }
+  .cc .bd { flex:1; display:flex; flex-direction:column; padding:8px 18px 10px; min-height:0; gap:8px; }
+  .fig { flex:1; display:grid; place-items:center; min-height:0; }
+  .fig svg { width:100%; height:100%; }
+  .sliderow { display:flex; align-items:center; gap:12px; font-size:19px; padding:0 8px; }
+  .sliderow input[type=range] { flex:1; accent-color:var(--orange); height:26px; }
+  .sliderow .val { min-width:130px; text-align:center; font-weight:700; color:var(--navy); background:var(--sky); border-radius:10px; padding:3px 10px; font-size:19px; }
+  .ds { font-size:18.5px; color:var(--ink); line-height:1.5; padding:2px 10px; }
+  .ds b { color:var(--navy); }
+</style>
+</head>
+<body data-title="2.2 惯性环节：误差修正与相频对称性" data-page="37 / 88">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="act-card cc">
+        <div class="hd">误差修正：渐近线 vs 精确曲线</div>
+        <div class="bd">
+          <div class="fig"><svg id="figC" viewBox="0 0 560 430"></svg></div>
+          <div class="sliderow">
+            <span style="font-family:var(--font-math); font-style:italic">ωT</span>
+            <input id="sw" type="range" min="-1" max="1" step="0.01" value="-0.3">
+            <span class="val" id="vw">ωT=0.50</span>
+            <span class="val" id="dlt">ΔL=−0.97dB</span>
+          </div>
+        </div>
+      </div>
+      <div class="act-card cc">
+        <div class="hd">相频特性：关于 (1/T, −45°) 对称</div>
+        <div class="bd">
+          <div class="fig"><svg id="figP" viewBox="0 0 560 430"></svg></div>
+          <div class="ds">设 <span class="tex">\alpha=\operatorname{arctg}\tfrac{1}{k}</span>、<span class="tex">\beta=\operatorname{arctg} k</span>，则 <span class="kw-r">α+β=90°</span>——两相角关于 <b>−45° 对称</b>；渐近线三段：<b>0.2/T</b> 前取 0°，<b>5/T</b> 后取 −90°。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">工程习惯</span><span>精确曲线 = 渐近线 + 修正。修正只在交接频率<span class="kw-r">左右一倍频程内</span>进行即可，记一个 <span class="kw-r">−3.01dB</span> 就够用了。</span></div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  function mkp(id, mid) {
+    const svg = document.getElementById(id);
+    const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+    const tx = (x, y, s, o, parent) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 15, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal" }, parent); if (o && o.halo) { n.setAttribute("paint-order", "stroke"); n.setAttribute("stroke", "#FFFFFF"); n.setAttribute("stroke-width", 5); n.setAttribute("stroke-linejoin", "round"); } n.textContent = s; return n; };
+    const defs = mk("defs", {});
+    const m1 = mk("marker", { id: mid, markerWidth: 9, markerHeight: 9, refX: 6.5, refY: 2.7, orient: "auto" }, defs);
+    mk("path", { d: "M0,0 L6.5,2.7 L0,5.4 Z", fill: "#5B6B8C" }, m1);
+    const x0 = 66, W = 420, DEC = W / 2; // 0.1→10 两个 dec
+    const X = u => x0 + (Math.log10(u) + 1) * DEC;
+    return { svg, mk, tx, X, x0, W };
+  }
+  // ---- 左：修正 ----
+  {
+    const { mk, tx, X, x0 } = mkp("figC", "a33a");
+    const Y = v => 60 + (0 - v) / 21 * 300; // L∈[-21,0]dB，量程包住 ωT=10 处的 −20.1dB
+    mk("line", { x1: x0, y1: 380, x2: 536, y2: 380, stroke: "#5B6B8C", "stroke-width": 1.4, "marker-end": "url(#a33a)" });
+    mk("line", { x1: x0, y1: 380, x2: x0, y2: 40, stroke: "#5B6B8C", "stroke-width": 1.4, "marker-end": "url(#a33a)" });
+    [0.1, 1, 10].forEach(u => { const x = X(u); mk("line", { x1: x, y1: 380, x2: x, y2: 40, stroke: "#E4EAF7", "stroke-width": 1 }); tx(x, 404, "ωT=" + (u >= 1 ? u : "0.1"), { fs: 15, fill: "#5B6B8C" }); });
+    [0, -3, -6, -9, -12].forEach(v => { const y = Y(v); mk("line", { x1: x0, y1: y, x2: 536, y2: y, stroke: "#F0F4FC", "stroke-width": 1 }); tx(x0 - 8, y + 5, v + "", { fs: 13.5, fill: "#5B6B8C", an: "end" }); });
+    tx(542, 386, "ω", { fs: 16, it: true, b: true, fill: "#5B6B8C", an: "start" });
+    tx(x0 - 8, 36, "L/dB", { fs: 15, b: true, fill: "#1B3B8B", an: "end" });
+    // 渐近线
+    mk("line", { x1: X(0.1), y1: Y(0), x2: X(1), y2: Y(0), stroke: "#F5821F", "stroke-width": 2.6, "stroke-dasharray": "9 6" });
+    mk("line", { x1: X(1), y1: Y(0), x2: X(10), y2: Y(-20), stroke: "#F5821F", "stroke-width": 2.6, "stroke-dasharray": "9 6" });
+    tx(X(0.4), Y(0) - 12, "渐近线", { fs: 16.5, b: true, fill: "#F5821F" });
+    // 精确曲线
+    let d = "";
+    for (let i = 0; i <= 300; i++) { const u = 0.1 * Math.pow(100, i / 300); const L = -10 * Math.log10(1 + u * u); d += (i ? "L" : "M") + X(u).toFixed(1) + "," + Y(L).toFixed(1); }
+    mk("path", { d, stroke: "#2B5CE6", "stroke-width": 3.4, fill: "none" });
+    tx(X(4.6), Y(-8) + 4, "精确曲线", { fs: 16.5, b: true, fill: "#2B5CE6", an: "start" });
+    // −3.01 标注
+    mk("circle", { cx: X(1), cy: Y(-3.01), r: 6, fill: "#D63A2F" });
+    tx(X(1) + 12, Y(-3.01) + 22, "−3.01dB", { fs: 16.5, b: true, fill: "#D63A2F", an: "start" });
+    // 动态标记
+    const dyn = mk("g", {});
+    const sw = document.getElementById("sw"), vw = document.getElementById("vw"), dlt = document.getElementById("dlt");
+    function upd() {
+      const lg = +sw.value, u = Math.pow(10, lg);
+      vw.textContent = "ωT=" + u.toFixed(2);
+      const Lex = -10 * Math.log10(1 + u * u), Lasy = u < 1 ? 0 : -20 * Math.log10(u);
+      const dd = Lex - Lasy;
+      dlt.textContent = "ΔL=" + dd.toFixed(2) + "dB";
+      dyn.innerHTML = "";
+      const x = X(u);
+      mk("line", { x1: x, y1: Y(Lasy), x2: x, y2: Y(Lex), stroke: "#D63A2F", "stroke-width": 3 }, dyn);
+      mk("circle", { cx: x, cy: Y(Lasy), r: 5.5, fill: "#F5821F" }, dyn);
+      mk("circle", { cx: x, cy: Y(Lex), r: 6.5, fill: "#D63A2F" }, dyn);
+      mk("line", { x1: x, y1: 380, x2: x, y2: 44, stroke: "#C9D8F2", "stroke-width": 1.2, "stroke-dasharray": "4 4" }, dyn);
+    }
+    sw.addEventListener("input", upd); upd();
+  }
+  // ---- 右：相频对称 ----
+  {
+    const { mk, tx, X, x0 } = mkp("figP", "a33b");
+    const Y = v => 60 + (0 - v) / 100 * 300; // φ∈[-100,0]
+    mk("line", { x1: x0, y1: 380, x2: 536, y2: 380, stroke: "#5B6B8C", "stroke-width": 1.4, "marker-end": "url(#a33b)" });
+    mk("line", { x1: x0, y1: 380, x2: x0, y2: 40, stroke: "#5B6B8C", "stroke-width": 1.4, "marker-end": "url(#a33b)" });
+    [0.1, 1, 10].forEach(u => { const x = X(u); mk("line", { x1: x, y1: 380, x2: x, y2: 40, stroke: "#E4EAF7", "stroke-width": 1 }); tx(x, 404, "ωT=" + (u >= 1 ? u : "0.1"), { fs: 15, fill: "#5B6B8C" }); });
+    [0, -45, -90].forEach(v => { const y = Y(v); mk("line", { x1: x0, y1: y, x2: 536, y2: y, stroke: v === -45 ? "#8AA6D8" : "#F0F4FC", "stroke-width": v === -45 ? 1.6 : 1, "stroke-dasharray": v === -45 ? "8 5" : "0" }); tx(x0 - 8, y + 5, v + "°", { fs: 13.5, fill: "#5B6B8C", an: "end" }); });
+    tx(542, 386, "ω", { fs: 16, it: true, b: true, fill: "#5B6B8C", an: "start" });
+    tx(x0 - 8, 36, "φ", { fs: 15, b: true, fill: "#1B3B8B", an: "end" });
+    // 精确 φ
+    let d = "";
+    for (let i = 0; i <= 300; i++) { const u = 0.1 * Math.pow(100, i / 300); const ph = -Math.atan(u) * 180 / Math.PI; d += (i ? "L" : "M") + X(u).toFixed(1) + "," + Y(ph).toFixed(1); }
+    mk("path", { d, stroke: "#2B5CE6", "stroke-width": 3.4, fill: "none" });
+    // 渐近线三段
+    mk("line", { x1: X(0.1), y1: Y(0), x2: X(0.2), y2: Y(0), stroke: "#F5821F", "stroke-width": 2.4, "stroke-dasharray": "8 6" });
+    mk("line", { x1: X(0.2), y1: Y(0), x2: X(5), y2: Y(-90), stroke: "#F5821F", "stroke-width": 2.4, "stroke-dasharray": "8 6" });
+    mk("line", { x1: X(5), y1: Y(-90), x2: X(10), y2: Y(-90), stroke: "#F5821F", "stroke-width": 2.4, "stroke-dasharray": "8 6" });
+    // 对称点：k=2 → 1/(kT)=0.5/T 与 k/T=2/T
+    const k = 2, a = Math.atan(1 / k) * 180 / Math.PI, b = Math.atan(k) * 180 / Math.PI;
+    const x1 = X(1 / k), x2 = X(k);
+    mk("circle", { cx: x1, cy: Y(-a), r: 6, fill: "#D63A2F" });
+    mk("circle", { cx: x2, cy: Y(-b), r: 6, fill: "#D63A2F" });
+    mk("circle", { cx: X(1), cy: Y(-45), r: 6, fill: "#1D3FA0" });
+    mk("line", { x1: x1, y1: Y(-a), x2: x2, y2: Y(-b), stroke: "#1E9E57", "stroke-width": 1.8, "stroke-dasharray": "6 5" });
+    tx(x1 - 10, Y(-a) - 16, "−α=−26.6°", { fs: 16.5, b: true, fill: "#D63A2F", an: "end", halo: 1 });
+    tx(x2 + 10, Y(-b) + 24, "−β=−63.4°", { fs: 16.5, b: true, fill: "#D63A2F", an: "start", halo: 1 });
+    tx(X(1), Y(-45) + 26, "(1/T, −45°)", { fs: 16.5, b: true, fill: "#1D3FA0", halo: 1 });
+  }
+});
+</script>
+</body>
+</html>

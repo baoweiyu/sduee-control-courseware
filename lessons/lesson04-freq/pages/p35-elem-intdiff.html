@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>2.2 积分与微分环节的 Bode 图</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=223">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=223" defer></script>
+<style>
+  .row { display:flex; gap:26px; height:100%; min-height:0; }
+  .cc { flex:1; display:flex; flex-direction:column; overflow:hidden; }
+  .cc .bd { flex:1; display:flex; flex-direction:column; padding:8px 18px 12px; min-height:0; gap:6px; }
+  .fx { display:flex; justify-content:center; gap:26px; font-size:21px; }
+  .fx .mathbox { font-size:21px; padding:8px 16px; margin:0; }
+  .fig { flex:1; display:grid; place-items:center; min-height:0; }
+  .fig svg { width:100%; height:100%; }
+  .ds { font-size:19.5px; color:var(--ink); line-height:1.55; text-align:center; }
+  .hd{display:flex;align-items:center;justify-content:space-between}
+  .hdbtns{flex:none;display:flex;gap:8px;flex-wrap:nowrap}
+  .pbtn{font-size:15px;padding:3px 12px;border-radius:8px;border:none;background:#fff;color:var(--blue);font-weight:700;white-space:nowrap;cursor:pointer}
+  .pbtn.ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.75)}
+</style>
+</head>
+<body data-title="2.2 积分与微分环节的 Bode 图" data-page="35 / 88">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="act-card cc">
+        <div class="hd"><span>积分环节　1/s</span></div>
+        <div class="bd">
+          <div class="fx">
+            <div class="mathbox math eqline tex tex-d">L(\omega)=-20\lg\omega</div>
+            <div class="mathbox math eqline tex tex-d">\varphi(\omega)=-90^{\circ}</div>
+          </div>
+          <div class="fig"><svg id="figI" viewBox="0 0 560 520"></svg></div>
+          <div class="ds">斜率 <span class="kw-r">−20dB/dec</span>，过 <span class="kw-r">(ω=1, 0dB)</span> 的直线。</div>
+        </div>
+      </div>
+      <div class="act-card cc">
+        <div class="hd"><span>微分环节　s</span></div>
+        <div class="bd">
+          <div class="fx">
+            <div class="mathbox math eqline tex tex-d">L(\omega)=+20\lg\omega</div>
+            <div class="mathbox math eqline tex tex-d">\varphi(\omega)=+90^{\circ}</div>
+          </div>
+          <div class="fig"><svg id="figD" viewBox="0 0 560 520"></svg></div>
+          <div class="ds">斜率 <span class="kw-r">+20dB/dec</span>，同样过 (1, 0dB)；相角恒 +90°——与积分<span class="kw-r">关于 ω 轴镜像</span>。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">记忆</span><span>"每十倍频程 ±20dB"：ω 从 1→10，积分掉 20dB、微分涨 20dB；<span class="tex">\omega=1</span> 处两者都过 0dB。</span></div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  function plot(id, sgn, mid) {
+    const svg = document.getElementById(id);
+    const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+    const MF = "Cambria Math,STIX Two Math,Georgia,Microsoft YaHei,sans-serif";
+  const SUB = (n, s) => { const esc = t => t.replace(/&/g, "&amp;").replace(/</g, "&lt;"); let html = "", sub = false; for (const p of String(s).split(/(_\{[^}]*\})/)) { if (!p) continue; if (p.startsWith("_{")) { html += '<tspan' + (sub ? '' : ' dy="6"') + ' font-size="72%">' + esc(p.slice(2, -1)) + '</tspan>'; sub = true; } else { html += sub ? '<tspan dy="-6">' + esc(p) + '</tspan>' : esc(p); sub = false; } } n.innerHTML = html; };
+  const tx = (x, y, s, o, parent) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 15, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal" , "font-family": MF }, parent); SUB(n, s); if (o && o.halo) n.setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:6;stroke-linejoin:round"); return n; };
+    const defs = mk("defs", {});
+    const m1 = mk("marker", { id: mid, markerWidth: 9, markerHeight: 9, refX: 6.5, refY: 2.7, orient: "auto" }, defs);
+    mk("path", { d: "M0,0 L6.5,2.7 L0,5.4 Z", fill: "#5B6B8C" }, m1);
+    const x0 = 70, W = 430, DEC = W / 3;
+    const X = w => x0 + (Math.log10(w) + 1) * DEC;
+    function axes(y0, h, yl) {
+      mk("line", { x1: x0, y1: y0, x2: 540, y2: y0, stroke: "#5B6B8C", "stroke-width": 1.4, "marker-end": `url(#${mid})` });
+      mk("line", { x1: x0, y1: y0, x2: x0, y2: y0 - h, stroke: "#5B6B8C", "stroke-width": 1.4, "marker-end": `url(#${mid})` });
+      [0.1, 1, 10, 100].forEach(w => { const x = X(w); mk("line", { x1: x, y1: y0, x2: x, y2: y0 - h, stroke: "#E4EAF7", "stroke-width": 1 }); tx(x, y0 + 22, String(w >= 1 ? w : "0.1"), { fs: 15, fill: "#5B6B8C" }); });
+      tx(546, y0 + 5, "ω", { fs: 17, it: true, b: true, fill: "#5B6B8C", an: "start" });
+      tx(x0 + 8, y0 - h + 4, yl, { fs: 16, b: true, fill: "#1B3B8B", an: "start" });
+    }
+    // 幅频坐标（静态）
+    axes(250, 210, "L/dB");
+    const YL = v => 250 - v / 40 * 105;
+    [-40, -20, 0, 20, 40].forEach(v => { mk("line", { x1: x0, y1: YL(v), x2: 540, y2: YL(v), stroke: v === 0 ? "#8AA6D8" : "#F0F4FC", "stroke-width": v === 0 ? 1.8 : 1, "stroke-dasharray": v === 0 ? "9 6" : "0" }); tx(x0 - 10, YL(v) + 5, String(v), { fs: 14, fill: "#5B6B8C", an: "end" }); });
+    // 相频坐标（静态）
+    axes(460, 90, "φ");
+    const yp = 460 - 45;
+    tx(x0 - 10, yp + 5, (sgn > 0 ? "+90°" : "−90°"), { fs: 14, fill: "#5B6B8C", an: "end" });
+    // ===== 动态组 =====
+    const gD = mk("g", {});
+    const xa = X(0.1), ya = YL(-sgn * 20), xb = X(100), yb = YL(sgn * 40);
+    const lnL = mk("line", { x1: xa, y1: ya, x2: xa, y2: ya, stroke: "#2B5CE6", "stroke-width": 3.6 }, gD);
+    const dot = mk("circle", { cx: X(1), cy: YL(0), r: 6.5, fill: "#D63A2F", opacity: 0 }, gD);
+    const tDot = tx(X(1) + 6, YL(0) - 14, "(1, 0dB)", { fs: 15, b: true, fill: "#D63A2F", an: "start" }, gD); tDot.setAttribute("opacity", 0);
+    const tSl = tx(X(10) + 10, YL(sgn * 20) + sgn * 16, (sgn > 0 ? "[+20]" : "[−20]"), { fs: 17, b: true, fill: "#2B5CE6", an: "start" }, gD); tSl.setAttribute("opacity", 0);
+    const lnP = mk("line", { x1: x0, y1: yp, x2: x0, y2: yp, stroke: "#D63A2F", "stroke-width": 3.4 }, gD);
+    const tP = tx(120, yp - 8, "φ = " + (sgn > 0 ? "+90°" : "−90°"), { fs: 16, b: true, fill: "#D63A2F", an: "start" }, gD); tP.setAttribute("opacity", 0);
+    function draw(f) {
+      const f1 = Math.min(1, f / 0.58);
+      lnL.setAttribute("x2", xa + (xb - xa) * f1);
+      lnL.setAttribute("y2", ya + (yb - ya) * f1);
+      const f2 = Math.min(1, Math.max(0, (f - 0.58) / 0.14));
+      dot.setAttribute("opacity", f2); tDot.setAttribute("opacity", f2); tSl.setAttribute("opacity", f2);
+      const f3 = Math.min(1, Math.max(0, (f - 0.72) / 0.28));
+      lnP.setAttribute("x2", x0 + (540 - x0) * f3);
+      tP.setAttribute("opacity", Math.min(1, f3 * 2));
+    }
+    draw(1);
+    return draw;
+  }
+  const draws = [plot("figI", -1, "a31a"), plot("figD", +1, "a31b")];
+  const playToken = [0, 0];
+  function playOne(k, btn) {
+    if (btn.dataset.busy) return; btn.dataset.busy = "1";
+    const tk = ++playToken[k];
+    const t0 = performance.now(), DUR = 2400;
+    (function fr(t) {
+      if (playToken[k] !== tk) { delete btn.dataset.busy; return; }
+      const f = Math.min(1, (t - t0) / DUR); draws[k](f);
+      if (f < 1) requestAnimationFrame(fr); else delete btn.dataset.busy;
+    })(t0);
+  }
+  document.querySelectorAll(".pbtn").forEach(b => b.addEventListener("click", () => {
+    const k = +b.dataset.k;
+    if (b.textContent.includes("重画")) {
+      playToken[k]++; draws[k](0);
+      document.querySelectorAll(`.pbtn[data-k="${k}"]`).forEach(x => delete x.dataset.busy);
+    } else playOne(k, b);
+  }));
+});
+</script>
+</body>
+</html>

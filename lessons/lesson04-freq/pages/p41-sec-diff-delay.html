@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>2.2 二阶微分环节与延迟环节的 Bode 图</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=223">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=223" defer></script>
+<style>
+  .row { display:flex; gap:24px; height:100%; min-height:0; }
+  .col { flex:1; display:flex; flex-direction:column; min-height:0; }
+  .col .bd { flex:1; display:flex; flex-direction:column; gap:10px; padding:10px 18px; min-height:0; }
+  .col .mathbox { font-size:20px; padding:8px 14px; }
+  .fig2 { flex:1; display:grid; place-items:center; background:#fff; border-radius:10px; min-height:0; }
+  .fig2 svg { width:100%; height:100%; }
+  .kp { background:var(--sky); border-radius:11px; padding:9px 16px; font-size:18.5px; line-height:1.55; }
+</style>
+</head>
+<body data-title="2.2 二阶微分环节与延迟环节的 Bode 图" data-page="41 / 88">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="act-card col">
+        <div class="hd"><span style="flex:1">二阶微分环节 <span class="tex" style="font-size:19px">G(s)=T^{2}s^{2}+2\zeta Ts+1</span></span></div>
+        <div class="bd">
+          <div class="mathbox math eqline tex tex-d">L(\omega)=20\lg\sqrt{(1-T^{2}\omega^{2})^{2}+(2\zeta T\omega)^{2}},\quad \varphi(\omega)=+\operatorname{arctg}\dfrac{2\zeta T\omega}{1-T^{2}\omega^{2}}</div>
+          <div class="fig2"><svg id="figA" viewBox="0 0 640 430"></svg></div>
+          <div class="kp">高频渐近线 <span class="kw-r">+40dB/dec</span>；0&lt;ζ&lt;0.707 时在 ωn 附近出现<span class="kw-r">凹陷</span>。</div>
+        </div>
+      </div>
+      <div class="act-card col">
+        <div class="hd"><span style="flex:1">延迟环节 <span class="tex" style="font-size:19px">G(s)=e^{-T_D s}</span> —— 只滞后、不衰减</span></div>
+        <div class="bd">
+          <div class="mathbox math eqline tex tex-d">L(\omega)=20\lg 1=0\ \mathrm{dB},\qquad \varphi(\omega)=-\omega T_{D}\ \mathrm{(rad)}=-57.3^{\circ}\,\omega T_{D}</div>
+          <div class="fig2"><svg id="figB" viewBox="0 0 640 430"></svg></div>
+          <div class="kp">幅频恒为 <span class="kw-r">0dB 水平线</span>；相角与 ω 成<b>正比</b>（ω 越大滞后越严重）。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">对比</span><span>二阶微分把振荡环节的曲线<span class="kw-r">翻到 0 轴上方</span>；延迟环节幅值不变、相位随 ω <span class="kw-r">线性无界滞后</span>——它是典型的非最小相位因素。</span></div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  function setup(id, markerId) {
+    const svg = document.getElementById(id);
+    const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+    const MF = "Cambria Math,STIX Two Math,Georgia,Microsoft YaHei,sans-serif";
+  const SUB = (n, s) => { const esc = t => t.replace(/&/g, "&amp;").replace(/</g, "&lt;"); let html = "", sub = false; for (const p of String(s).split(/(_\{[^}]*\})/)) { if (!p) continue; if (p.startsWith("_{")) { html += '<tspan' + (sub ? '' : ' dy="6"') + ' font-size="72%">' + esc(p.slice(2, -1)) + '</tspan>'; sub = true; } else { html += sub ? '<tspan dy="-6">' + esc(p) + '</tspan>' : esc(p); sub = false; } } n.innerHTML = html; };
+  const tx = (x, y, s, o) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 17.5, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal" , "font-family": MF }); SUB(n, s); if (o && o.halo) n.setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:6;stroke-linejoin:round"); return n; };
+    const defs = mk("defs", {});
+    const m1 = mk("marker", { id: markerId, markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+    mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, m1);
+    return { mk, tx, markerId };
+  }
+  const x0 = 56, x1 = 600, DEC = (x1 - x0) / 2;    // ω: 0.1..10
+  const X = w => x0 + (Math.log10(w) + 1) * DEC;
+
+  // ===== 左：二阶微分（幅频+相频合一，幅频为主） =====
+  {
+    const { mk, tx, markerId } = setup("figA", "a37a");
+    const y0 = 226, yT = 30, H = y0 - yT;          // L ∈ [-24, 24]
+    const YL = v => y0 - v / 24 * H;
+    mk("line", { x1: x0, y1: y0, x2: x1, y2: y0, stroke: "#5B6B8C", "stroke-width": 1.4, "marker-end": "url(#a37a)" });
+    mk("line", { x1: x0, y1: 400, x2: x0, y2: 20, stroke: "#5B6B8C", "stroke-width": 1.4, "marker-end": "url(#a37a)" });
+    [0.1, 1, 10].forEach(w => { const x = X(w); mk("line", { x1: x, y1: 400, x2: x, y2: 20, stroke: "#F0F4FC", "stroke-width": 1 }); tx(x, 420, String(w), { fs: 17, fill: "#5B6B8C" }); });
+    [-20, 0, 20].forEach(v => { const y = YL(v); mk("line", { x1: x0, y1: y, x2: x1, y2: y, stroke: v === 0 ? "#8AA6D8" : "#F0F4FC", "stroke-width": v === 0 ? 1.6 : 1, "stroke-dasharray": v === 0 ? "8 5" : "0" }); tx(x0 - 8, y + 6, v + "", { fs: 17, fill: "#5B6B8C", an: "end" }); });
+    tx(x1 + 8, y0 + 5, "ω", { fs: 19, it: true, b: true, fill: "#5B6B8C", an: "start" });
+    tx(x0 - 8, 16, "L/dB", { fs: 17, b: true, an: "end" });
+    // 渐近线
+    mk("line", { x1: X(0.1), y1: YL(0), x2: X(1), y2: YL(0), stroke: "#F5821F", "stroke-width": 2.4, "stroke-dasharray": "8 5" });
+    mk("line", { x1: X(1), y1: YL(0), x2: X(10), y2: YL(40 > 24 ? 24 : 40), stroke: "#F5821F", "stroke-width": 2.4, "stroke-dasharray": "8 5" });
+    tx(X(1.6), YL(0) - 12, "+40dB/dec", { fs: 17, b: true, fill: "#F5821F", an: "start", halo: 1 });
+    // 三个 ζ 的精确曲线
+    const curves = [ [0.1, "#D63A2F", "ζ=0.1"], [0.4, "#2B5CE6", "ζ=0.4"], [0.9, "#1E9E57", "ζ=0.9"] ];
+    curves.forEach(([z, c, lab], idx) => {
+      const L = w => 10 * Math.log10((1 - w * w) ** 2 + (2 * z * w) ** 2);
+      let d = "";
+      for (let i = 0; i <= 300; i++) { const w = 0.1 * Math.pow(100, i / 300); d += (i ? "L" : "M") + X(w).toFixed(1) + "," + YL(Math.min(23, L(w))).toFixed(1); }
+      mk("path", { d, stroke: c, "stroke-width": 3, fill: "none" });
+    });
+    // ζ 图例（左下空旷区，避免与曲线相交）
+    [["#D63A2F", "ζ=0.1（凹陷）"], ["#2B5CE6", "ζ=0.4"], ["#1E9E57", "ζ=0.9"]].forEach(([c, s], i) => {
+      const y = 344 + i * 24;
+      mk("line", { x1: x0 + 16, y1: y - 5, x2: x0 + 46, y2: y - 5, stroke: c, "stroke-width": 3 });
+      tx(x0 + 54, y, s, { fs: 17, b: true, fill: c, an: "start", halo: 1 });
+    });
+    mk("line", { x1: X(1), y1: 400, x2: X(1), y2: 20, stroke: "#B9C6E4", "stroke-width": 1.2, "stroke-dasharray": "5 4" });
+    tx(X(1), 400 + 0, "", {});
+    tx(X(1) + 8, 34, "ω_{n}=1/T", { fs: 17, b: true, fill: "#5B6B8C", an: "start", halo: 1 });
+  }
+  // ===== 右：延迟环节 =====
+  {
+    const { mk, tx, markerId } = setup("figB", "a37b");
+    const TD = 0.5;
+    const y0 = 40, yB = 396;                        // φ ∈ [0, -360]
+    const YP = v => y0 + (-v) / 360 * (yB - y0);
+    mk("line", { x1: x0, y1: y0, x2: x1, y2: y0, stroke: "#5B6B8C", "stroke-width": 1.4, "marker-end": "url(#a37b)" });
+    mk("line", { x1: x0, y1: yB, x2: x0, y2: 22, stroke: "#5B6B8C", "stroke-width": 1.4, "marker-end": "url(#a37b)" });
+    [0.1, 1, 10].forEach(w => { const x = X(w); mk("line", { x1: x, y1: yB, x2: x, y2: 24, stroke: "#F0F4FC", "stroke-width": 1 }); tx(x, yB + 18, String(w), { fs: 17.5, fill: "#5B6B8C" }); });
+    [0, -90, -180, -270, -360].forEach(v => { const y = YP(v); mk("line", { x1: x0, y1: y, x2: x1, y2: y, stroke: "#F0F4FC", "stroke-width": 1 }); tx(x0 - 8, y + 5, v + "°", { fs: 17.5, fill: "#5B6B8C", an: "end" }); });
+    tx(x1 + 8, y0 + 5, "ω", { fs: 19, it: true, b: true, fill: "#5B6B8C", an: "start" });
+    tx(x0 - 8, 18, "φ", { fs: 17.5, b: true, an: "end" });
+    // L=0dB 幅频线（画在 0° 线位置上，加标签）
+    mk("line", { x1: X(0.1), y1: y0, x2: X(10), y2: y0, stroke: "#2B5CE6", "stroke-width": 3.4 });
+    tx(X(2.2), y0 - 14, "L(ω) ≡ 0 dB", { fs: 18, b: true, fill: "#2B5CE6", halo: 1 });
+    // 相频曲线 φ=-57.3*ω*TD
+    let d = "";
+    for (let i = 0; i <= 300; i++) { const w = 0.1 * Math.pow(100, i / 300); const ph = -57.3 * w * TD; d += (i ? "L" : "M") + X(w).toFixed(1) + "," + YP(Math.max(-360, ph)).toFixed(1); }
+    mk("path", { d, stroke: "#D63A2F", "stroke-width": 3.4, fill: "none" });
+    tx(x0 + 14, yB - 14, "φ(ω)=−57.3°·ωT_{D}（T_{D}=0.5）", { fs: 18, b: true, fill: "#D63A2F", an: "start", halo: 1 });
+    // 标注两点（ω=4 的点曲线右侧上方空旷，标签右置避免压线）
+    [[1, -28.6, "middle", 0], [4, -114.6, "start", 14]].forEach(([w, ph, an, dx]) => {
+      mk("circle", { cx: X(w), cy: YP(ph), r: 6, fill: "#1D3FA0" });
+      tx(X(w) + dx, YP(ph) - 18, "ω=" + w + "：" + ph.toFixed(0) + "°", { fs: 17, b: true, fill: "#1D3FA0", an, halo: 1 });
+    });
+  }
+});
+</script>
+</body>
+</html>

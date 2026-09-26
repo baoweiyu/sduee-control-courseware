@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>3.4 相对稳定性：离临界还有多远</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=223">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=223" defer></script>
+<style>
+  .row { display:flex; gap:22px; height:100%; min-height:0; }
+  .lst { flex:1; display:flex; flex-direction:column; justify-content:space-evenly; gap:14px; min-height:0; }
+  .seg { background:#fff; border:2px solid var(--line); border-radius:13px; padding:10px 16px; font-size:18.5px; line-height:1.55; }
+  .seg b { color:var(--navy); }
+  .seg .mathbox { font-size:19.5px; padding:6px 12px; }
+  .pv { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .pv .p { background:var(--sky); border-radius:11px; padding:9px 14px; font-size:17px; line-height:1.5; }
+  .figc { flex:1.25; display:flex; flex-direction:column; overflow:hidden; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:6px 12px; min-height:0; }
+  .figc svg { width:100%; height:100%; }
+</style>
+</head>
+<body data-title="3.4 相对稳定性：离临界还有多远" data-page="71 / 88">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lst">
+        <div class="seg" data-step="1"><b>只判"稳不稳"还不够</b>：参数漂移可能让曲线包进 (−1, j0)。需要回答：<span class="kw-r">离临界还有多远？</span></div>
+        <div class="seg" data-step="2"><b>几何直观</b>：曲线<span class="kw-r">接近 (−1, j0) 的程度</span>反映<b>相对稳定程度（裕度）</b>——裕度要<b>合适</b>。</div>
+        <div class="seg" data-step="3"><b>两把"尺子"</b>：
+          <div class="pv">
+            <div class="p"><b>相角裕量 γ</b><br>在 |G(jω)|=1 的频率 ωc 处，相角距 −180° 还差多少度</div>
+            <div class="p"><b>幅值裕量 K<sub>g</sub></b><br>在 ∠G(jω)=−180° 的频率 ωg 处，幅值距 1 还差多少倍</div>
+          </div>
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd">三条曲线：裕度大 / 裕度小 / 已不稳定</div>
+        <div class="bd2"><svg id="fig" viewBox="0 0 960 640"></svg></div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">预告</span><span>γ 与 K<sub>g</sub> 在 <span class="kw-r">Nyquist 图</span>上看“点离 (−1, j0) 多远”、在 <span class="kw-r">Bode 图</span>上看“线离 0dB/−180° 多远”——同一个裕度、两种读法。</span></div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("fig");
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const MF = "Cambria Math,STIX Two Math,Georgia,Microsoft YaHei,sans-serif";
+  const SUB = (n, s) => { const esc = t => t.replace(/&/g, "&amp;").replace(/</g, "&lt;"); let html = "", sub = false; for (const p of String(s).split(/(_\{[^}]*\})/)) { if (!p) continue; if (p.startsWith("_{")) { html += '<tspan' + (sub ? '' : ' dy="6"') + ' font-size="72%">' + esc(p.slice(2, -1)) + '</tspan>'; sub = true; } else { html += sub ? '<tspan dy="-6">' + esc(p) + '</tspan>' : esc(p); sub = false; } } n.innerHTML = html; };
+  const tx = (x, y, s, o) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 19, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal" , "font-family": MF }); SUB(n, s); if (o && o.halo) n.setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:6;stroke-linejoin:round"); return n; };
+  const defs = mk("defs", {});
+  const m1 = mk("marker", { id: "a65", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, m1);
+  const SC = 165, O = { x: 560, y: 400 };
+  const X = v => O.x + v * SC, Y = v => O.y - v * SC;
+  mk("line", { x1: 50, y1: O.y, x2: 920, y2: O.y, stroke: "#5B6B8C", "stroke-width": 1.6, "marker-end": "url(#a65)" });
+  mk("line", { x1: O.x, y1: 590, x2: O.x, y2: 50, stroke: "#5B6B8C", "stroke-width": 1.6, "marker-end": "url(#a65)" });
+  tx(914, O.y - 14, "Re", { fs: 20, it: true, b: true, fill: "#5B6B8C", an: "end" });
+  tx(O.x + 20, 66, "jIm", { fs: 20, it: true, b: true, fill: "#5B6B8C", an: "start" });
+  tx(O.x - 14, O.y + 28, "O", { fs: 19, fill: "#5B6B8C", an: "end" });
+  // (−1,j0) 焦点
+  mk("circle", { cx: X(-1), cy: Y(0), r: 10, fill: "#fff", stroke: "#2B5CE6", "stroke-width": 3.6 });
+  tx(X(-1), Y(0) + 36, "(−1, j0)", { fs: 19, b: true, fill: "#2B5CE6" });
+  // 三条曲线：同一系统 G=K/[s(1+0.5s)(1+0.125s)] 不同 K 的真实 Nyquist 轨迹（ω:0+→∞，自 −j∞ 上来）
+  const S1 = 0.625, P1 = 0.0625;
+  function curve(K, col, lab, ly) {
+    const pt = w => { const D = S1 * S1 * w ** 4 + w * w * (1 - P1 * w * w) ** 2;
+      return [-K * S1 * w * w / D, -K * w * (1 - P1 * w * w) / D]; };
+    const pts = [];
+    for (let i = 0; i <= 420; i++) {
+      const w = 0.03 * Math.pow(400, i / 420);
+      const [re, im] = pt(w);
+      if (im < -1.2) { if (pts.length) break; continue; }
+      pts.push([X(re), Y(im)]);
+    }
+    let d = "M" + pts[0][0].toFixed(1) + "," + pts[0][1].toFixed(1);
+    for (let i = 1; i < pts.length; i++) d += "L" + pts[i][0].toFixed(1) + "," + pts[i][1].toFixed(1);
+    mk("path", { d, fill: "none", stroke: col, "stroke-width": 4 });
+    const iA = Math.floor(pts.length * 0.45), a1 = pts[iA - 2], a2 = pts[iA + 2];
+    const ang = Math.atan2(a2[1] - a1[1], a2[0] - a1[0]) * 180 / Math.PI;
+    mk("path", { d: "M -9,-6 L 10,0 L -9,6 Z", fill: col, transform: `translate(${pts[iA][0].toFixed(1)},${pts[iA][1].toFixed(1)}) rotate(${ang.toFixed(1)})` });
+    let best = 0; for (let i = 1; i < pts.length; i++) if (Math.abs(pts[i][1] - O.y) < Math.abs(pts[best][1] - O.y)) best = i;
+    mk("circle", { cx: pts[best][0], cy: O.y, r: 6.5, fill: col });
+    tx(pts[best][0] - 6, O.y + ly, lab, { fs: 19, b: true, fill: col, halo: 1 });
+  }
+  curve(1.0, "#2B5CE6", "裕度大", 34);
+  curve(8, "#2B5CE6", "裕度小", 66);
+  curve(20, "#2B5CE6", "包围 → 不稳定", -24);
+});
+</script>
+</body>
+</html>

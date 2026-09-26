@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>第一部分小结</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=223">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=223" defer></script>
+<style>
+  .col { display:flex; flex-direction:column; gap:22px; height:100%; min-height:0; }
+  .chain { flex:0.85; display:flex; flex-direction:column; min-height:0; }
+  .chain .bd { flex:1; display:flex; align-items:center; gap:14px; padding:12px 24px; }
+  .nd { flex:1; background:var(--sky); border:2px solid var(--line); border-radius:14px; padding:13px 10px; text-align:center; }
+  .nd b { font-size:21px; color:var(--navy); display:block; }
+  .nd span { font-size:17.5px; color:var(--muted); line-height:1.35; display:block; margin-top:4px; }
+  .arr { color:var(--orange); font-size:30px; font-weight:700; flex:none; }
+  .sum { flex:1.5; display:flex; flex-direction:column; min-height:0; }
+  .sum .bd { flex:1; display:flex; flex-direction:column; justify-content:center; gap:20px; padding:18px 30px; }
+  .sr { display:flex; align-items:center; gap:18px; background:var(--sky); border:2px solid var(--line); border-radius:16px; padding:16px 24px; }
+  .sr .no { flex:none; width:46px; height:46px; border-radius:50%; background:var(--blue); color:#fff; font-size:24px; font-weight:800; display:grid; place-items:center; }
+  .sr .tt { font-size:21.5px; line-height:1.55; color:var(--ink); }
+  .sr .tt b { color:var(--navy); }
+</style>
+</head>
+<body data-title="第一部分小结" data-page="30 / 88">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="col">
+      <div class="act-card chain">
+        <div class="hd">概念链</div>
+        <div class="bd">
+          <div class="nd"><b>频率响应</b><span>正弦输入下<br>输出的稳态值</span></div>
+          <div class="arr">→</div>
+          <div class="nd"><b>频率特性 Φ(jω)</b><span>输出/输入复数比<br>=Φ(s)|<sub>s=jω</sub></span></div>
+          <div class="arr">→</div>
+          <div class="nd"><b>幅频 + 相频</b><span>A(ω) 幅值比<br>φ(ω) 相角差</span></div>
+          <div class="arr">→</div>
+          <div class="nd"><b>图形工具</b><span>Nyquist 图（已学）<br>Bode 图（下一部分）</span></div>
+        </div>
+      </div>
+      <div class="act-card sum">
+        <div class="hd">本部分三句话</div>
+        <div class="bd">
+          <div class="sr">
+            <span class="no">1</span>
+            <span class="tt"><b>频率响应与频率特性：</b>正弦输入的稳态输出与输入同频，只是幅值、相角改变；其复数比 <span class="tex">\Phi(j\omega)=A(\omega)\angle\varphi(\omega)</span> 有四种等价写法，并可用 <b>Nyquist 图 / Bode 图</b>两种图形表示。</span>
+          </div>
+          <div class="sr">
+            <span class="no">2</span>
+            <span class="tt"><b>典型环节的 Nyquist 图：</b>抓住<b>起点、终点、所在象限</b>三件事即可画出；振荡环节在 <span class="tex">\zeta\le 0.707</span> 时出现<span class="kw-r">谐振</span>，<span class="tex">\omega_r=\omega_n\sqrt{1-2\zeta^{2}}</span>、<span class="tex">M_r=\dfrac{1}{2\zeta\sqrt{1-\zeta^{2}}}</span>。</span>
+          </div>
+          <div class="sr">
+            <span class="no">3</span>
+            <span class="tt"><b>一般系统极坐标图三步走：</b>分解典型环节 → 由 <span class="tex">\nu</span> 定起点、由 <span class="tex">n-m</span> 定终点 → 补<b>实轴/虚轴交点</b>，按 ω 增大方向光滑连接成大致曲线。</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+</body>
+</html>

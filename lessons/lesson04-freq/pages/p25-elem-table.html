@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <title>1.5 典型环节极坐标图一览</title>
-<link rel="stylesheet" href="../../../theme/theme.css?v=218">
+<link rel="stylesheet" href="../../../theme/theme.css?v=223">
 <script src="../../../theme/mathjax/mathjax-render.js"></script>
 <script src="../../../theme/mathjax/tex-chtml.js"></script>
 <script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
-<script src="../../../theme/act-base.js?v=218" defer></script>
+<script src="../../../theme/act-base.js?v=223" defer></script>
 <style>
   .wrap { height:100%; display:flex; flex-direction:column; }
   .grpbar { flex:none; display:flex; gap:12px; padding:12px 18px 0; }
@@ -24,7 +24,7 @@
   .card .ft b { color:var(--navy); }
 </style>
 </head>
-<body data-title="1.5 典型环节极坐标图一览" data-page="25 / 87">
+<body data-title="1.5 典型环节极坐标图一览" data-page="25 / 88">
 <div class="act-stage"><div class="act-slide">
   <div class="act-body has-note">
     <div class="act-card wrap">
@@ -43,7 +43,7 @@
         <div class="grid4" id="grp2" style="display:none">
           <div class="card"><div class="nm">一阶微分</div><div class="mathbox math mf eqline tex tex-d">G(s)=Ts+1</div><svg class="miniplot" id="g5" viewBox="0 0 128 96"></svg><div class="ft">自 (1, j0) 沿<b>正虚轴</b>向上，相角 0 → +90°</div></div>
           <div class="card"><div class="nm">振荡</div><div class="mathbox math mf eqline tex tex-d">G(s)=\dfrac{1}{T^{2}s^{2}+2\zeta Ts+1}</div><svg class="miniplot" id="g6" viewBox="0 0 128 96"></svg><div class="ft">起于 (1, j0)，ζ&lt;1/√2 时<b>类圆回卷</b>，相角 0 → −180°</div></div>
-          <div class="card"><div class="nm">二阶微分</div><div class="mathbox math mf eqline tex tex-d">G(s)=T^{2}s^{2}+2\zeta Ts+1</div><svg class="miniplot" id="g7" viewBox="0 0 128 96"></svg><div class="ft">振荡的<b>上半平面镜像</b>，相角 0 → +180°</div></div>
+          <div class="card"><div class="nm">二阶微分</div><div class="mathbox math mf eqline tex tex-d">G(s)=T^{2}s^{2}+2\zeta Ts+1</div><svg class="miniplot" id="g7" viewBox="0 0 128 96"></svg><div class="ft">起于 (1, j0) 的<b>左开口抛物线</b>，ω→∞ 时趋于 ∞∠+180°</div></div>
           <div class="card"><div class="nm">延迟</div><div class="mathbox math mf eqline tex tex-d">G(s)=e^{-T_{D}s}</div><svg class="miniplot" id="g8" viewBox="0 0 128 96"></svg><div class="ft"><b>单位圆</b>顺时针无限绕行，相角 −ωT<sub>D</sub> 无界</div></div>
         </div>
       </div>
@@ -106,12 +106,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const k = 545; tangentArrow(mk, sp[k - 3], sp[k], sp[k + 3], "#2B5CE6");
   });
   draw("g7", mk => {
-    const z = 0.3, pts = [];
-    for (let i = 0; i <= 600; i++) { const w = 2 * i / 600; const dd = (1 - w * w) ** 2 + (2 * z * w) ** 2; const A = 1 / Math.sqrt(dd), ph = Math.atan2(-2 * z * w, 1 - w * w); pts.push([A * Math.cos(ph), -A * Math.sin(ph)]); }
-    for (let i = 1; i <= 80; i++) { const w = 2 + 5 * i / 80; const dd = (1 - w * w) ** 2 + (2 * z * w) ** 2; const A = 1 / Math.sqrt(dd), ph = Math.atan2(-2 * z * w, 1 - w * w); pts.push([A * Math.cos(ph), -A * Math.sin(ph)]); }
+    const z = 0.5, pts = [];
+    for (let i = 0; i <= 400; i++) { const u = 1.9 * i / 400; pts.push([1 - u * u, 2 * z * u]); }
     const { pts: sp } = fitted(mk, pts, "#2B5CE6");
     dot(mk, sp[0][0], sp[0][1]);
-    const k = 545; tangentArrow(mk, sp[k - 3], sp[k], sp[k + 3], "#2B5CE6");
+    const k = 200; tangentArrow(mk, sp[k - 3], sp[k], sp[k + 3], "#2B5CE6");
   });
   draw("g8", mk => {
     axes(mk, 64, 50);

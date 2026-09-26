@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>4.1 等 N 圆（等相角轨迹）</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=223">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=223" defer></script>
+<style>
+  .row { display:flex; gap:22px; height:100%; min-height:0; }
+  .lst { flex:1.08; display:flex; flex-direction:column; justify-content:space-evenly; gap:12px; min-height:0; }
+  .seg { background:#fff; border:2px solid var(--line); border-radius:13px; padding:9px 15px; font-size:17.5px; line-height:1.5; }
+  .seg b { color:var(--navy); }
+  .seg .mathbox { font-size:18.5px; padding:5px 11px; }
+  .seg .no { display:inline-grid; place-items:center; width:26px; height:26px; border-radius:50%; background:var(--blue); color:#fff; font-weight:800; font-size:15px; margin-right:6px; }
+  .res { background:#FFF3E8; border-left:5px solid var(--orange); }
+  .figc { flex:1; display:flex; flex-direction:column; overflow:hidden; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:6px 12px; min-height:0; }
+  .figc svg { width:100%; height:100%; }
+</style>
+</head>
+<body data-title="4.1 等 N 圆（等相角轨迹）" data-page="79 / 88">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lst">
+        <div class="seg" data-step="1"><span class="no">1</span><b>设定</b>：闭环相角 α=∠(X+jY)−∠(1+X+jY)，取正切并用正切差公式
+          <div class="mathbox math eqline tex tex-d">N=\operatorname{tg}\alpha=\operatorname{tg}\!\left(\angle\varPhi\right)=\dfrac{Y}{X^{2}+X+Y^{2}}</div>
+        </div>
+        <div class="seg" data-step="2"><span class="no">2</span><b>两边乘分母、配方</b>：
+          <div class="mathbox math eqline tex tex-d">\left(X+\dfrac{1}{2}\right)^{2}+\left(Y-\dfrac{1}{2N}\right)^{2}=\dfrac{1}{4}+\dfrac{1}{4N^{2}}</div>
+        </div>
+        <div class="seg" data-step="3"><span class="no">3</span><b>结论——等 N 圆</b>：圆心 <span class="tex">\left(-\dfrac{1}{2},\,\dfrac{1}{2N}\right)</span>，半径 <span class="tex">\sqrt{\dfrac{1}{4}+\dfrac{1}{4N^{2}}}</span>。
+          <br>① 无论 N 取何值，圆心横坐标恒为 −1/2；代入原点与 (−1, j0) 均满足方程 → <b>所有等 N 圆都经过原点和 (−1, j0)</b>。</div>
+        <div class="seg res" data-step="4"><span class="no">4</span><b>性质</b>：α&gt;0 的弧在<b>实轴上方</b>，α&lt;0 的弧在实轴下方；给定 α，圆上<b>相差 ±180° 的两段弧</b>才拼成一个完整的圆（α 与 α±180° 正切相同）；等 N 圆图与开环 Nyquist 曲线配合，可读出闭环相频特性 α(ω)。
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd">等 N 圆簇：所有圆都过原点与 (−1, j0)</div>
+        <div class="bd2"><svg id="fig" viewBox="0 0 760 640"></svg></div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">对照</span><span>等 M 圆读<span class="kw-r">幅值比</span>，等 N 圆读<span class="kw-r">相角差</span>；两图叠用，即可由开环 Nyquist 曲线逐点读出闭环频率特性 Φ(jω)。</span></div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("fig");
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const MF = "Cambria Math,STIX Two Math,Georgia,Microsoft YaHei,sans-serif";
+  const SUB = (n, s) => { const esc = t => t.replace(/&/g, "&amp;").replace(/</g, "&lt;"); let html = "", sub = false; for (const p of String(s).split(/(_\{[^}]*\})/)) { if (!p) continue; if (p.startsWith("_{")) { html += '<tspan' + (sub ? '' : ' dy="6"') + ' font-size="72%">' + esc(p.slice(2, -1)) + '</tspan>'; sub = true; } else { html += sub ? '<tspan dy="-6">' + esc(p) + '</tspan>' : esc(p); sub = false; } } n.innerHTML = html; };
+  const tx = (x, y, s, o) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 17.5, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal" , "font-family": MF }); SUB(n, s); if (o && o.halo) n.setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:6;stroke-linejoin:round"); return n; };
+  const defs = mk("defs", {});
+  const m1 = mk("marker", { id: "a73", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, m1);
+  const SC = 165, O = { x: 460, y: 330 };
+  const X = v => O.x + v * SC, Y = v => O.y - v * SC;
+  mk("line", { x1: 30, y1: O.y, x2: 730, y2: O.y, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a73)" });
+  mk("line", { x1: O.x, y1: 600, x2: O.x, y2: 40, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a73)" });
+  tx(724, O.y - 12, "Re", { fs: 18, it: true, b: true, fill: "#5B6B8C", an: "end" });
+  tx(O.x + 16, 54, "jIm", { fs: 18, it: true, b: true, fill: "#5B6B8C", an: "start" });
+  // 等 N 圆：圆心(−1/2, 1/(2N))，半径 √(1/4+1/(4N²))；N=tgα
+  [[45, "#2B5CE6"], [60, "#2B5CE6"], [75, "#2B5CE6"], [-45, "#F5821F"], [-60, "#F5821F"]].forEach(([deg, c]) => {
+    const N = Math.tan(deg * Math.PI / 180);
+    const cx = -0.5, cy = 1 / (2 * N), r = Math.sqrt(0.25 + 1 / (4 * N * N));
+    // 只画过原点与(−1,j0)之间一侧的弧太复杂，直接画整圆（浅）+ 标注 α
+    mk("circle", { cx: X(cx), cy: Y(cy), r: r * SC, fill: "none", stroke: c, "stroke-width": 2.6, opacity: 0.85 });
+    // 标注点：圆与 y 轴右侧交点附近放标签
+    const ly = cy + (N > 0 ? r : -r);
+    tx(X(cx), Y(ly) + (N > 0 ? -10 : 18), "α=" + deg + "°", { fs: 17.5, b: true, fill: c });
+  });
+  tx(X(-0.5), 70, "圆心都在直线 Re=−1/2 上", { fs: 17.5, b: true, fill: "#5B6B8C" });
+  mk("line", { x1: X(-0.5), y1: 84, x2: X(-0.5), y2: 590, stroke: "#C9D6F2", "stroke-width": 1.6, "stroke-dasharray": "8 6" });
+  // 两个关键点与标签最后画，避免被圆簇线条穿过
+  mk("circle", { cx: X(-1), cy: Y(0), r: 8, fill: "#fff", stroke: "#D63A2F", "stroke-width": 3.2 });
+  tx(X(-1) - 24, Y(0) - 16, "(−1, j0)", { fs: 17.5, b: true, fill: "#D63A2F", an: "end" }).setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:5");
+  mk("circle", { cx: O.x, cy: O.y, r: 6, fill: "#fff", stroke: "#1D3FA0", "stroke-width": 3 });
+  tx(O.x + 10, O.y + 58, "O", { fs: 17.5, b: true, fill: "#1D3FA0", an: "start" }).setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:5");
+});
+</script>
+</body>
+</html>

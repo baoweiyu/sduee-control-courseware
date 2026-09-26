@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>第四章小结：频率响应法</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=223">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=223" defer></script>
+<style>
+  .grid { display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:16px; height:100%; min-height:0; }
+  .qb { background:#fff; border:2px solid var(--line); border-radius:15px; padding:14px 22px; display:flex; flex-direction:column; gap:10px; min-height:0; }
+  .qb .h { display:flex; align-items:center; gap:12px; }
+  .qb .no { flex:none; width:42px; height:42px; border-radius:50%; background:var(--blue); color:#fff; font-size:24px; font-weight:800; display:grid; place-items:center; }
+  .qb .t { font-size:30px; font-weight:800; color:var(--navy); }
+  .qb .body { font-size:25px; line-height:1.6; color:var(--ink); }
+  .qb .body b { color:var(--navy); }
+  .qb .fx { align-self:flex-start; font-size:27px; padding:7px 16px; margin-top:auto; }
+</style>
+</head>
+<body data-title="第四章小结：频率响应法" data-page="88 / 88">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="grid">
+        <div class="qb">
+          <div class="h"><span class="no">1</span><span class="t">怎样描述？</span></div>
+          <div class="body">正弦稳态的<b>幅值比</b>与<b>相位差</b>，记成一个复数——<b>频率特性</b>；不解微分方程，试验可测。</div>
+          <div class="mathbox math fx eqline tex tex-d">G(j\omega)=A(\omega)\angle\varphi(\omega)</div>
+        </div>
+        <div class="qb">
+          <div class="h"><span class="no">2</span><span class="t">怎样画？</span></div>
+          <div class="body"><b>极坐标图</b>看整体轨迹，<b>Bode 图</b>看分段结构；八种典型环节为积木，组合系统在<b>转角频率</b>处改斜率。</div>
+          <div class="mathbox math fx eqline tex tex-d">L=20\lg|G|,\quad \varphi=\angle G</div>
+        </div>
+        <div class="qb">
+          <div class="h"><span class="no">3</span><span class="t">怎样判稳？</span></div>
+          <div class="body">先查 <b>P</b>、补全围线、数 <b>N</b>，求 <b>Z</b>；无闭环虚轴根时 Z=0 渐近稳定，再读裕度 γ、K<sub>g</sub>。</div>
+          <div class="mathbox math fx eqline tex tex-d">Z=P-N</div>
+        </div>
+        <div class="qb">
+          <div class="h"><span class="no">4</span><span class="t">怎样评性能？</span></div>
+          <div class="body">开环 <b>γ、ω<sub>c</sub></b> ↔ 闭环 <b>M<sub>r</sub>、ω<sub>b</sub></b>：标准二阶精确、调节时间近似、高阶经验估算、三频段认识——各带适用条件。</div>
+          <div class="mathbox math fx eqline tex tex-d">\varPhi=\dfrac{G}{1+G}</div>
+        </div>
+      </div>
+  </div>
+  <div class="act-note"><span class="lead">收官</span><span>至此，三大经典分析方法已学其二：<b>时域法</b>（第三章）与<b>频域法</b>（第四章）。下一章介绍第三种——<span class="kw-r">根轨迹法</span>：看闭环极点随参数变化的轨迹。</span></div>
+</div></div>
+</body>
+</html>

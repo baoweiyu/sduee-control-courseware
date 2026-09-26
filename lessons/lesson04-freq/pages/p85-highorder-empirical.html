@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>4.2 高阶系统：频域与时域指标的经验公式</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=223">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=223" defer></script>
+<style>
+  .grid { display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr auto; gap:18px; height:100%; }
+  .card { background:#fff; border:2px solid var(--line); border-radius:15px; padding:16px 22px; display:flex; flex-direction:column; gap:12px; justify-content:space-evenly; }
+  .card .h { font-size:22px; font-weight:700; color:var(--blue); display:flex; align-items:center; gap:10px; }
+  .card .h .tag { font-size:15px; font-weight:700; color:#fff; background:var(--blue); border-radius:9px; padding:3px 11px; }
+  .card .mathbox { font-size:22px; padding:13px 14px; }
+  .card .cond { font-size:19px; color:var(--ink); line-height:1.6; }
+  .card .cond b { color:var(--navy); }
+  .bridge { grid-column:1 / 3; background:#FFF3E8; border:2.5px solid var(--orange); flex-direction:row; align-items:center; gap:22px; }
+  .bridge .mathbox { font-size:21px; }
+  .bridge .cond { flex:1; }
+</style>
+</head>
+<body data-title="4.2 高阶系统：频域与时域指标的经验公式" data-page="85 / 88">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="grid">
+      <div class="card">
+        <div class="h"><span class="tag">由 γ、ωc 估算</span>（条件：35°≤γ≤90°，系数待核验）</div>
+        <div class="mathbox math tex tex-d">\sigma\approx0.16+0.4\left(\dfrac{1}{\sin\gamma}-1\right)\;\;\Rightarrow\;\text{超调量}\approx100\sigma\%</div>
+        <div class="mathbox math tex tex-d">t_s\approx\dfrac{\pi}{\omega_c}\left[2+1.5\left(\dfrac{1}{\sin\gamma}-1\right)+2.5\left(\dfrac{1}{\sin\gamma}-1\right)^{2}\right]</div>
+        <div class="cond"><b>读法</b>：γ 越小 → 1/sinγ−1 越大 → <b>σ%、ts 都增大</b>，与二阶系统的定性结论一致（sinγ 按弧度计算；两组系数与适用范围待教材核验）。</div>
+      </div>
+      <div class="card">
+        <div class="h"><span class="tag">由 Mr、ωc 估算</span>（条件：1≤Mr≤1.8，系数待核验）</div>
+        <div class="mathbox math tex tex-d">\sigma\approx0.14+0.4\left(M_r-1\right)\;\;\Rightarrow\;\text{超调量}\approx100\sigma\%</div>
+        <div class="mathbox math tex tex-d">t_s\approx\dfrac{\pi}{\omega_c}\left[2+1.5\left(M_r-1\right)+2.5\left(M_r-1\right)^{2}\right]</div>
+        <div class="cond"><b>读法</b>：Mr 越大 → 超调越大、调节时间越长；故工程上常要求 <b>1.1≤Mr≤1.5</b>（同一组待核验系数）。</div>
+      </div>
+      <div class="card bridge">
+        <div class="h" style="white-space:nowrap"><span class="tag" style="background:var(--orange)">桥 梁</span></div>
+        <div class="mathbox math tex tex-d">M_r\approx\dfrac{1}{\sin\gamma}</div>
+        <div class="cond"><b>意义</b>：可用于同类适用条件下的粗略换算——开环图上量出 γ，即可估计闭环 Mr，反之亦然。γ 与 Mr 都是「阻尼程度」的频域度量；两组经验式各自独立拟合，并非精确等价。</div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">用法</span><span>高阶系统没有解析关系式时，<span class="kw-r">先按经验公式估算</span>，再由仿真/实验修正。⚠ 本页经验系数与适用范围尚待教材出处核验，确认前仅作演示参考。</span></div>
+</div></div>
+</body>
+</html>

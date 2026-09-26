@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>1.5 一般系统极坐标图的绘制方法</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=223">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=223" defer></script>
+<style>
+  .row { display:flex; gap:26px; height:100%; min-height:0; }
+  .steps { flex:1; display:flex; flex-direction:column; min-height:0; }
+  .steps .bd { flex:1; display:flex; flex-direction:column; justify-content:space-evenly; gap:14px; padding:16px 24px; }
+  .stp { display:flex; gap:16px; align-items:center; background:var(--sky); border-radius:14px; padding:18px 22px; font-size:23px; line-height:1.55; }
+  .stp .no { flex:none; width:44px; height:44px; border-radius:50%; background:var(--orange); color:#fff; font-weight:800; display:grid; place-items:center; font-size:23px; }
+  .vec { flex:1; display:flex; flex-direction:column; min-height:0; }
+  .vec .bd { flex:1; display:flex; flex-direction:column; justify-content:space-evenly; gap:12px; font-size:22px; line-height:1.65; padding:16px 24px; }
+  .vec .mathbox { font-size:23px; padding:12px 18px; }
+</style>
+</head>
+<body data-title="1.5 一般系统极坐标图的绘制方法" data-page="27 / 88">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="row">
+      <div class="act-card steps">
+        <div class="hd">绘制三步法（"大致"曲线，不逐点描）</div>
+        <div class="bd">
+          <div class="stp"><span class="no">1</span><span>把 <span class="tex">G(j\omega)H(j\omega)</span> <span class="kw-r">分解为典型环节的乘积</span>；</span></div>
+          <div class="stp"><span class="no">2</span><span>确定<span class="kw-r">起点与终点</span>（ω→0⁺ 与 ω→∞ 时的位置）；</span></div>
+          <div class="stp"><span class="no">3</span><span>求<span class="kw-r">与实轴、虚轴的交点</span>，按 ω 增大方向描出大致曲线。</span></div>
+        </div>
+      </div>
+      <div class="act-card vec">
+        <div class="hd">相量的几何含义：为什么起点终点能"看出来"</div>
+        <div class="bd">
+          <div class="mathbox math eqline tex tex-d">G(j\omega)=K\cdot\dfrac{\prod_i (j\omega-z_i)}{\prod_j (j\omega-p_j)}</div>
+          <div>每个因子都是 s 平面上<span class="kw-r">从零点/极点指向 jω 点的相量</span>：</div>
+          <div style="text-align:center;"><span class="tex">|G|=\dfrac{K\prod_i|j\omega-z_i|}{\prod_j|j\omega-p_j|},\qquad \angle G=\sum_i\angle(j\omega-z_i)-\sum_j\angle(j\omega-p_j)</span></div>
+          <div>ω 沿虚轴上行，各相量的<span class="kw-r">长度与转角</span>连续变化。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+</body>
+</html>

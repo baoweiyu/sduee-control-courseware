@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>3.3 例 4-12：3 型系统的 Nyquist 判稳</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=223">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=223" defer></script>
+<style>
+  .row { display:flex; gap:22px; height:100%; min-height:0; }
+  .lst { flex:1.02; display:flex; flex-direction:column; justify-content:space-evenly; gap:12px; min-height:0; }
+  .seg { background:#fff; border:2px solid var(--line); border-radius:13px; padding:12px 15px; font-size:19px; line-height:1.52; }
+  .seg b { color:var(--navy); }
+  .seg .mathbox { font-size:19.5px; padding:6px 10px; }
+  .two { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .two .t { border-radius:10px; padding:10px 12px; font-size:18px; line-height:1.5; }
+  .tok { background:#F0FAF4; color:#166B3B; }
+  .tno { background:#FDF1EF; color:#B02E24; }
+  .figc { flex:1.25; display:flex; flex-direction:column; overflow:hidden; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:6px 12px; min-height:0; }
+  .figc svg { width:100%; height:100%; }
+</style>
+</head>
+<body data-title="3.3 例 4-12：3 型系统的 Nyquist 判稳" data-page="68 / 88">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lst">
+        <div class="seg"><b>开环传递函数（ν=3，含两个一阶微分）</b>
+          <div class="mathbox math eqline tex tex-d">G(s)H(s)=\dfrac{K(T_{1}s+1)(T_{2}s+1)}{s^{3}}</div>
+        </div>
+        <div class="seg" data-step="1"><b>① 四段映射</b>（同例 4-10 取轨线）：关键是 ε 小半圆这一段——
+          <div class="mathbox math eqline tex tex-d">s=\varepsilon e^{j\theta}\;\Rightarrow\;G(s)H(s)=\infty\,e^{-j3\theta}</div>
+          θ：−90°→+90° ⇒ 相角 <b>270°→−270°</b>，∞ 处顺时针转 <span class="kw-r">一圈半（540°）</span>。</div>
+        <div class="seg" data-step="2"><b>② 求实轴交点</b>：展开后令虚部为零——
+          <div class="mathbox math eqline tex tex-d">\omega^{*}=\dfrac{1}{\sqrt{T_{1}T_{2}}},\qquad \operatorname{Re}[G(j\omega^{*})H(j\omega^{*})]=-K(T_{1}+T_{2})\,T_{1}T_{2}</div>
+        </div>
+        <div class="seg" data-step="3"><b>③ 判稳（P=0）</b>：交点位置随 K 变化——
+          <div class="two">
+            <div class="t tok"><b>K(T₁+T₂)T₁T₂ &gt; 1</b>：交点在 (−1,j0) <b>左侧</b>，N=0 ⇒ Z=0，<b>稳定</b></div>
+            <div class="t tno"><b>&lt; 1</b>：交点在 (−1,j0) <b>右侧</b>，N=−2 ⇒ Z=2，<b>不稳定</b></div>
+          </div>
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd">Nyquist 曲线示意（T₁=1，T₂=0.5，K=2：交点 −1.5，稳定）</div>
+        <div class="bd2"><svg id="fig" viewBox="0 0 1000 640"></svg></div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">新现象</span><span>同一个系统，K 大稳定、K 小反而<span class="kw-r">不稳定</span>——稳定性随参数取值而改变，这就是"条件稳定系统"。</span></div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("fig");
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const MF = "Cambria Math,STIX Two Math,Georgia,Microsoft YaHei,sans-serif";
+  const SUB = (n, s) => { const esc = t => t.replace(/&/g, "&amp;").replace(/</g, "&lt;"); let html = "", sub = false; for (const p of String(s).split(/(_\{[^}]*\})/)) { if (!p) continue; if (p.startsWith("_{")) { html += '<tspan' + (sub ? '' : ' dy="6"') + ' font-size="72%">' + esc(p.slice(2, -1)) + '</tspan>'; sub = true; } else { html += sub ? '<tspan dy="-6">' + esc(p) + '</tspan>' : esc(p); sub = false; } } n.innerHTML = html; };
+  const tx = (x, y, s, o, parent) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 20, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal" , "font-family": MF }, parent); SUB(n, s); if (o && o.halo) n.setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:6;stroke-linejoin:round"); return n; };
+  const defs = mk("defs", {});
+  const m1 = mk("marker", { id: "a62", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, m1);
+  const SC = 170, O = { x: 620, y: 320 };   // x∈[-3,1.5]
+  const X = v => O.x + v * SC, Y = v => O.y - v * SC;
+  mk("line", { x1: 50, y1: O.y, x2: 960, y2: O.y, stroke: "#5B6B8C", "stroke-width": 1.6, "marker-end": "url(#a62)" });
+  mk("line", { x1: O.x, y1: 600, x2: O.x, y2: 40, stroke: "#5B6B8C", "stroke-width": 1.6, "marker-end": "url(#a62)" });
+  tx(954, O.y - 14, "Re", { fs: 20, it: true, b: true, fill: "#5B6B8C", an: "end" });
+  tx(O.x + 20, 56, "jIm", { fs: 20, it: true, b: true, fill: "#5B6B8C", an: "start" });
+  tx(O.x - 14, O.y + 28, "O", { fs: 20, fill: "#5B6B8C", an: "end" });
+  mk("circle", { cx: X(-1), cy: Y(0), r: 9, fill: "#fff", stroke: "#D63A2F", "stroke-width": 3.4 });
+  // G(jw) = K(1+jwT1)(1+jwT2)/(jw)^3, K=2,T1=1,T2=0.5
+  const K = 2, T1 = 1, T2 = 0.5;
+  const Gp = w => { const re = -K * (T1 + T2) / (w * w), im = K * (1 - w * w * T1 * T2) / (w * w * w); return [re, im]; };
+  let d = "";
+  for (let i = 0; i <= 400; i++) { const w = 0.12 * Math.pow(300, i / 400); const [a, b] = Gp(w); if (a < -3.2 || a > 1.6 || b < -2 || b > 2) continue; d += (d.endsWith("M") || d === "" ? "M" : "L") + X(a).toFixed(1) + "," + Y(b).toFixed(1); }
+  // 上面的 continue 会断线，分段重画：简单起见换用连续采样
+  d = "";
+  let started = false;
+  for (let i = 0; i <= 600; i++) {
+    const w = 0.5 * Math.pow(160, i / 600); const [a, b] = Gp(w);
+    if (a < -3.1 || b < -2 || b > 2) { started = false; continue; }
+    d += (started ? "L" : "M") + X(a).toFixed(1) + "," + Y(b).toFixed(1); started = true;
+  }
+  mk("path", { d, fill: "none", stroke: "#D63A2F", "stroke-width": 4.2 });
+  // 镜像负频段
+  d = ""; started = false;
+  for (let i = 0; i <= 600; i++) {
+    const w = 0.5 * Math.pow(160, i / 600); const [a, b] = Gp(w);
+    if (a < -3.1 || b < -2 || b > 2) { started = false; continue; }
+    d += (started ? "L" : "M") + X(a).toFixed(1) + "," + Y(-b).toFixed(1); started = true;
+  }
+  mk("path", { d, fill: "none", stroke: "#2B5CE6", "stroke-width": 3.4, "stroke-dasharray": "9 6" });
+  // 交点标注
+  const wi = 1 / Math.sqrt(T1 * T2), re = -K * (T1 + T2) * T1 * T2;
+  mk("circle", { cx: X(re), cy: Y(0), r: 8, fill: "#D63A2F" });
+  tx(X(re) - 12, Y(0) + 84, "交点 −1.50", { fs: 20, b: true, fill: "#D63A2F", an: "end" });
+  // (−1,j0) 文字最后画，确保在曲线之上（halo 才真正有效）
+  tx(X(-1), Y(0) + 34, "(−1, j0)", { fs: 20, b: true, fill: "#D63A2F" })
+    .setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:6");
+  tx(X(-2.4), Y(1.5), "正频段：从 +j∞ 下来，穿实轴后回到原点", { fs: 20, fill: "#D63A2F", an: "start" });
+  tx(X(-2.4), Y(-1.5), "镜像负频段（虚线）+ ∞ 处顺时针一圈半补闭合", { fs: 20, fill: "#2B5CE6", an: "start" });
+});
+</script>
+</body>
+</html>

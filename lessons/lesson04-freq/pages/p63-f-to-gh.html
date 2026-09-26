@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>3.3 从 F(s) 平面到 G(s)H(s) 平面</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=223">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=223" defer></script>
+<style>
+  .row { display:flex; gap:22px; height:100%; min-height:0; }
+  .lst { flex:0.95; display:flex; flex-direction:column; justify-content:space-evenly; gap:10px; min-height:0; }
+  .seg { background:#fff; border:2px solid var(--line); border-radius:13px; padding:13px 16px; font-size:19.5px; line-height:1.58; }
+  .seg b { color:var(--navy); }
+  .seg .mathbox { font-size:19.5px; padding:6px 12px; }
+  .kk { display:grid; grid-template-columns:1fr 1fr; gap:9px; }
+  .kk .k { background:var(--sky); border-radius:10px; padding:8px 13px; font-size:17px; line-height:1.45; }
+  .figc { flex:1.35; display:flex; flex-direction:column; overflow:hidden; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:6px 12px; min-height:0; }
+  .figc svg { width:100%; height:100%; }
+  .hd{display:flex;align-items:center;justify-content:space-between}
+  .hdbtns{flex:none;display:flex;gap:8px;flex-wrap:nowrap}
+  .pbtn{font-size:15px;padding:3px 12px;border-radius:8px;border:none;background:#fff;color:var(--blue);font-weight:700;white-space:nowrap;cursor:pointer}
+  .pbtn.ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.75)}
+</style>
+</head>
+<body data-title="3.3 从 F(s) 平面到 G(s)H(s) 平面" data-page="63 / 88">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lst">
+        <div class="seg" data-step="1"><b>闭环与开环的桥梁——特征函数</b>
+          <div class="mathbox math eqline tex tex-d">\varPhi(s)=\dfrac{G(s)}{1+G(s)H(s)},\qquad F(s)=1+G(s)H(s)</div>
+        </div>
+        <div class="seg" data-step="2"><b>F(s) 的零极点身份</b>
+          <div class="kk">
+            <div class="k">F(s) 的<b>极点</b><br>= <span class="kw-r">开环</span>传递函数的极点（已知）</div>
+            <div class="k">F(s) 的<b>零点</b><br>= <span class="kw-r">闭环</span>传递函数的极点（待查）</div>
+          </div>
+        </div>
+        <div class="seg" data-step="3"><b>平面平移</b>：G(s)H(s)=F(s)−1，把 F(s) 平面的曲线<span class="kw-r">整体左移 1</span> 就是 GH 平面的曲线——
+          <div class="mathbox math eqline tex tex-d">F\text{ 平面的原点}\;\;\longleftrightarrow\;\;GH\text{ 平面的 }(-1,\,j0)\text{ 点}</div>
+        </div>
+        <div class="seg" data-step="4"><b>结论</b>：数"Г 包围 F 平面原点 N 圈" ＝ 数"<span class="kw-r">GH 曲线包围 (−1, j0) 点 N 圈</span>"。稳定性问题从此只看开环频率特性曲线！</div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd"><span>动画：曲线左移 1 个单位 ⇔ 原点变成 (−1, j0)</span><span class="hdbtns"><button class="pbtn" id="bPlay">▶ 左移</button><button class="pbtn ghost" id="bRe">⟲ 复位</button></span></div>
+        <div class="bd2"><svg id="fig" viewBox="0 0 1000 640"></svg></div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">一句话</span><span>在 GH 平面看开环 Nyquist 曲线<span class="kw-r">是否包围 (−1, j0)、包围几圈</span>，就等价于在 F 平面数原点包围次数——(−1, j0) 是全章最重要的点。</span></div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("fig");
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const MF = "Cambria Math,STIX Two Math,Georgia,Microsoft YaHei,sans-serif";
+  const SUB = (n, s) => { const esc = t => t.replace(/&/g, "&amp;").replace(/</g, "&lt;"); let html = "", sub = false; for (const p of String(s).split(/(_\{[^}]*\})/)) { if (!p) continue; if (p.startsWith("_{")) { html += '<tspan' + (sub ? '' : ' dy="6"') + ' font-size="72%">' + esc(p.slice(2, -1)) + '</tspan>'; sub = true; } else { html += sub ? '<tspan dy="-6">' + esc(p) + '</tspan>' : esc(p); sub = false; } } n.innerHTML = html; };
+  const tx = (x, y, s, o, parent) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 19, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal" , "font-family": MF }, parent); SUB(n, s); if (o && o.halo) n.setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:6;stroke-linejoin:round"); return n; };
+  const defs = mk("defs", {});
+  const m1 = mk("marker", { id: "a57", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, m1);
+  const SC = 130, O = { x: 560, y: 320 };   // x∈[-3.5,2.5]
+  const X = v => O.x + v * SC, Y = v => O.y - v * SC;
+  mk("line", { x1: 60, y1: O.y, x2: 940, y2: O.y, stroke: "#5B6B8C", "stroke-width": 1.6, "marker-end": "url(#a57)" });
+  mk("line", { x1: O.x, y1: 590, x2: O.x, y2: 50, stroke: "#5B6B8C", "stroke-width": 1.6, "marker-end": "url(#a57)" });
+  tx(934, O.y - 14, "Re", { fs: 20, it: true, b: true, fill: "#5B6B8C", an: "end" });
+  tx(O.x + 20, 64, "jIm", { fs: 20, it: true, b: true, fill: "#5B6B8C", an: "start" });
+  // 关键点
+  mk("circle", { cx: X(0), cy: Y(0), r: 8, fill: "#D63A2F" });
+  tx(X(0) + 16, Y(0) - 14, "原点", { fs: 19, b: true, fill: "#D63A2F", an: "start" });
+  mk("circle", { cx: X(-1), cy: Y(0), r: 9, fill: "#1D3FA0" });
+  // 示例闭合曲线（F 平面位置：套住原点）
+  const cx0 = 0.35, rx = 1.25, ry = 0.95;
+  function loopPath(off) {
+    let d = "";
+    for (let i = 0; i <= 120; i++) {
+      const th = 2 * Math.PI * i / 120;
+      const a = cx0 + off + rx * Math.cos(th), b = ry * Math.sin(th);
+      d += (i ? "L" : "M") + X(a).toFixed(1) + "," + Y(b).toFixed(1);
+    }
+    return d + "Z";
+  }
+  // 原始位置（虚影）与滑动曲线
+  mk("path", { d: loopPath(0), fill: "none", stroke: "#C6D2EA", "stroke-width": 2.4, "stroke-dasharray": "8 6" });
+  const dyn = mk("g", {});
+  // 顶部状态标签（位置固定，文字随状态更新，避免跟随曲线压线）
+  const lab = tx(X(0) - 24, Y(1.55), "Γ：F(s) 的像轨迹 —— 包围原点", { fs: 19, b: true, fill: "#D63A2F", an: "end" });
+  // (−1,j0) 文字放在 dyn 之后，始终在最上层（曲线左移后不被遮盖）
+  tx(X(-1), Y(0) + 34, "(−1, j0)", { fs: 19, b: true, fill: "#1D3FA0" })
+    .setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:6");
+  function drawAt(off) {
+    dyn.innerHTML = "";
+    mk("path", { d: loopPath(off), fill: "rgba(43,92,230,0.07)", stroke: "#2B5CE6", "stroke-width": 4 }, dyn);
+    const left = off < -0.5;
+    lab.textContent = left ? "Γ 左移 1 个单位 —— 包围 (−1, j0)" : "Γ：F(s) 的像轨迹 —— 包围原点";
+    lab.setAttribute("fill", left ? "#1D3FA0" : "#D63A2F");
+  }
+  drawAt(0);
+  let busy = false;
+  document.getElementById("bPlay").addEventListener("click", function () {
+    if (busy) return; busy = true;
+    const t0 = performance.now(), DUR = 2400;
+    (function fr(t) {
+      const f = Math.min(1, (t - t0) / DUR);
+      drawAt(-f);
+      if (f < 1) requestAnimationFrame(fr); else { drawAt(-1); busy = false; }
+    })(t0);
+  });
+  document.getElementById("bRe").addEventListener("click", () => { busy = false; drawAt(0); });
+});
+</script>
+</body>
+</html>

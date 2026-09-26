@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>4.2 闭环频率特性与闭环频域指标</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=223">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=223" defer></script>
+<style>
+  .row { display:flex; flex-direction:row-reverse; gap:22px; height:100%; min-height:0; }
+  .figc { flex:1.5; display:flex; flex-direction:column; overflow:hidden; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:6px 12px; min-height:0; }
+  .figc svg { width:100%; height:100%; }
+  .lst { flex:1; display:flex; flex-direction:column; justify-content:space-evenly; gap:12px; min-height:0; }
+  .seg { background:#fff; border:2px solid var(--line); border-radius:13px; padding:11px 16px; font-size:18.5px; line-height:1.55; }
+  .seg b { color:var(--navy); }
+  .seg .no { display:inline-grid; place-items:center; width:26px; height:26px; border-radius:50%; background:var(--blue); color:#fff; font-weight:800; font-size:15px; margin-right:6px; }
+  .res { background:#FFF3E8; border-left:5px solid var(--orange); }
+</style>
+</head>
+<body data-title="4.2 闭环频率特性与闭环频域指标" data-page="83 / 88">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="act-card figc">
+        <div class="hd">典型闭环幅频特性 M(ω)：四个关键量逐步标注</div>
+        <div class="bd2"><svg id="fig" viewBox="0 0 900 660"></svg></div>
+      </div>
+      <div class="lst">
+        <div class="seg" data-step="1"><span class="no">1</span><b>零频值 M(0)</b>：ω=0 时的闭环幅值。单位反馈无差系统 M(0)=1；<b>M(0) 与 1 的偏差反映稳态精度</b>。</div>
+        <div class="seg" data-step="2"><span class="no">2</span><b>谐振峰值 Mr 与谐振频率 ωr</b>：幅频曲线最大值 <span class="tex">M_r=M_m/M(0)</span>。<span class="kw-r">Mr 大 → ζ 小 → 超调大</span>；工程上一般要求 <b>1.1≤Mr≤1.5</b>。</div>
+        <div class="seg" data-step="3"><span class="no">3</span><b>截止频率 ωb</b>：M(ω) 由 M(0) 下降到 <span class="tex">0.707\,M(0)</span>（−3dB）时的频率。</div>
+        <div class="seg res" data-step="4"><span class="no">4</span><b>频带宽度 0~ωb</b>：ωb 大 → 复现输入能力强、<span class="kw-r">响应快</span>；但 ωb 过大则高频噪声抑制能力变差，须折中。
+          <br>一般就以 <b>Mr、ωb</b> 作为闭环系统的频域指标。</div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">对照</span><span>开环指标看 <b>γ、ωc</b>（在 Nyquist / Bode 图上量取）；闭环指标看 <b>Mr、ωb</b>（在等 M 圆 / Nichols 图或闭环幅频曲线上量取）。</span></div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("fig");
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const MF = "Cambria Math,STIX Two Math,Georgia,Microsoft YaHei,sans-serif";
+  const SUB = (n, s) => { const esc = t => t.replace(/&/g, "&amp;").replace(/</g, "&lt;"); let html = "", sub = false; for (const p of String(s).split(/(_\{[^}]*\})/)) { if (!p) continue; if (p.startsWith("_{")) { html += '<tspan' + (sub ? '' : ' dy="6"') + ' font-size="72%">' + esc(p.slice(2, -1)) + '</tspan>'; sub = true; } else { html += sub ? '<tspan dy="-6">' + esc(p) + '</tspan>' : esc(p); sub = false; } } n.innerHTML = html; };
+  const tx = (x, y, s, o, parent) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 17, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal" , "font-family": MF }, parent); SUB(n, s); if (o && o.halo) n.setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:6;stroke-linejoin:round"); return n; };
+  const defs = mk("defs", {});
+  const m1 = mk("marker", { id: "a77", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, m1);
+  const x0 = 96, x1 = 826, y0 = 560, y1 = 60;    // ω ∈ [0, 4], M ∈ [0, 1.6]
+  const X = w => x0 + w / 4 * (x1 - x0);
+  const Y = v => y0 - v / 1.6 * (y0 - y1);
+  const z = 0.4, M = w => 1 / Math.sqrt((1 - w * w) ** 2 + (2 * z * w) ** 2);
+  // 坐标轴
+  mk("line", { x1: x0, y1: y0, x2: x1 + 16, y2: y0, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a77)" });
+  mk("line", { x1: x0, y1: y0, x2: x0, y2: y1 - 14, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a77)" });
+  for (let w = 0; w <= 4; w += 0.5) { mk("line", { x1: X(w), y1: y0, x2: X(w), y2: y0 - 6, stroke: "#5B6B8C", "stroke-width": 1.2 }); tx(X(w), y0 + 26, w.toFixed(1), { fs: 16.5, fill: "#5B6B8C" }); }
+  [0, 0.5, 1.0, 1.5].forEach(v => { mk("line", { x1: x0 - 6, y1: Y(v), x2: x0, y2: Y(v), stroke: "#5B6B8C", "stroke-width": 1.2 }); tx(x0 - 12, Y(v) + 5, v.toFixed(1), { fs: 16.5, fill: "#5B6B8C", an: "end" }); });
+  tx(x1 + 22, y0 + 6, "ω", { fs: 19, it: true, b: true, fill: "#5B6B8C", an: "start" });
+  tx(x0 - 14, y1 - 20, "M(ω)", { fs: 18, it: true, b: true, fill: "#1B3B8B", an: "end" });
+  // 幅频曲线
+  let d = "";
+  for (let i = 0; i <= 400; i++) { const w = 4 * i / 400; d += (i ? "L" : "M") + X(w).toFixed(1) + "," + Y(Math.min(1.62, M(w))).toFixed(1); }
+  mk("path", { d, stroke: "#2B5CE6", "stroke-width": 4, fill: "none" });
+  const wr = Math.sqrt(1 - 2 * z * z), mr = 1 / (2 * z * Math.sqrt(1 - z * z));
+  const wb = Math.sqrt(1 - 2 * z * z + Math.sqrt(2 - 4 * z * z + 4 * z ** 4));
+  const dyn = mk("g", {});
+  function paint(k) {
+    dyn.innerHTML = "";
+    if (k >= 1) {  // M(0)
+      mk("line", { x1: x0, y1: Y(1), x2: X(2.2), y2: Y(1), stroke: "#1D3FA0", "stroke-width": 1.6, "stroke-dasharray": "7 5" }, dyn);
+      mk("circle", { cx: X(0), cy: Y(1), r: 7.5, fill: "#1D3FA0" }, dyn);
+      tx(X(0) - 14, Y(1) - 16, "M(0)=1", { fs: 16.5, b: true, fill: "#1D3FA0", an: "end" }, dyn);
+    }
+    if (k >= 2) {  // Mr, ωr
+      mk("line", { x1: X(wr), y1: y0, x2: X(wr), y2: Y(mr), stroke: "#D63A2F", "stroke-width": 1.8, "stroke-dasharray": "7 5" }, dyn);
+      mk("line", { x1: x0, y1: Y(mr), x2: X(wr), y2: Y(mr), stroke: "#D63A2F", "stroke-width": 1.8, "stroke-dasharray": "7 5" }, dyn);
+      mk("circle", { cx: X(wr), cy: Y(mr), r: 8, fill: "#D63A2F" }, dyn);
+      tx(X(wr) + 14, Y(mr) - 14, "Mm：谐振峰", { fs: 16.5, b: true, fill: "#D63A2F", an: "start" }, dyn);
+      tx(X(wr), y0 + 48, "ωr", { fs: 16.5, b: true, fill: "#D63A2F" }, dyn);
+      tx(x0 + 6, Y(mr) - 14, "Mr = Mm/M(0)", { fs: 16.5, b: true, fill: "#D63A2F", an: "start" }, dyn);
+    }
+    if (k >= 3) {  // ωb
+      mk("line", { x1: x0, y1: Y(0.707), x2: X(wb), y2: Y(0.707), stroke: "#1E9E57", "stroke-width": 1.8, "stroke-dasharray": "7 5" }, dyn);
+      mk("line", { x1: X(wb), y1: y0, x2: X(wb), y2: Y(0.707), stroke: "#1E9E57", "stroke-width": 1.8, "stroke-dasharray": "7 5" }, dyn);
+      mk("circle", { cx: X(wb), cy: Y(0.707), r: 8, fill: "#1E9E57" }, dyn);
+      tx(x0 + 6, Y(0.707) - 12, "0.707 M(0)（−3dB）", { fs: 16.5, b: true, fill: "#1E9E57", an: "start" }, dyn);
+      tx(X(wb), y0 + 48, "ωb", { fs: 16.5, b: true, fill: "#1E9E57" }, dyn);
+    }
+    if (k >= 4) {  // 带宽
+      mk("rect", { x: x0, y: Y(0.707), width: X(wb) - x0, height: y0 - Y(0.707), fill: "rgba(30,158,87,0.09)" }, dyn);
+      mk("line", { x1: x0 + 8, y1: y0 - 26, x2: X(wb) - 8, y2: y0 - 26, stroke: "#1E9E57", "stroke-width": 2.4, "marker-end": "url(#a77g)" }, dyn);
+      mk("line", { x1: X(wb) - 8, y1: y0 - 26, x2: x0 + 8, y2: y0 - 26, stroke: "#1E9E57", "stroke-width": 2.4, "marker-end": "url(#a77g)" }, dyn);
+      tx((x0 + X(wb)) / 2, y0 - 40, "频带宽度 0 ~ ωb", { fs: 17, b: true, fill: "#1E9E57" }, dyn);
+    }
+  }
+  const mg = mk("marker", { id: "a77g", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#1E9E57" }, mg);
+  const S = ACT.step;
+  const _next = S.next.bind(S), _reset = S.reset.bind(S);
+  S.next = function () { const r = _next(); paint(S.cur); return r; };
+  S.reset = function () { _reset(); paint(0); };
+  window.prev = function () { const n = Math.max(0, S.cur - 1); S.reset(); for (let i = 0; i < n; i++) S.next(); };
+  paint(0);
+});
+</script>
+</body>
+</html>

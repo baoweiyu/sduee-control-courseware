@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>2.2 一阶微分环节的 Bode 图</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=223">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=223" defer></script>
+<style>
+  .row { display:flex; gap:26px; height:100%; min-height:0; }
+  .tx { flex:1; display:flex; flex-direction:column; min-height:0; }
+  .tx .bd { flex:1; display:flex; flex-direction:column; justify-content:space-evenly; gap:14px; font-size:22px; line-height:1.7; }
+  .tx .mathbox { font-size:23px; padding:12px 16px; }
+  .seg { background:var(--sky); border-radius:12px; padding:14px 18px; }
+  .figc { flex:1.3; display:flex; flex-direction:column; overflow:hidden; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:8px 14px; min-height:0; }
+  .figc svg { width:100%; height:100%; }
+</style>
+</head>
+<body data-title="2.2 一阶微分环节的 Bode 图" data-page="38 / 88">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="act-card tx">
+        <div class="hd"><span class="tex" style="font-size:24px">G(s)=Ts+1</span></div>
+        <div class="bd">
+          <div class="mathbox math eqline tex tex-d">L(\omega)=+10\lg\!\left(1+\omega^{2}T^{2}\right)</div>
+          <div class="mathbox math eqline tex tex-d">\varphi(\omega)=+\operatorname{arctg}\,\omega T</div>
+          <div class="seg"><b>低频段：</b>0dB 水平线；<b>高频段：</b><span class="kw-r">+20dB/dec</span> 斜线；交接频率同为 <span class="tex">\omega=1/T</span>。</div>
+          <div class="seg">交接频率处精确值 <span class="tex">L=+3.01\,\mathrm{dB}</span>，<span class="tex">\varphi=+45^{\circ}</span>。</div>
+          <div>与惯性环节<span class="kw-r">互为倒数</span>：两条曲线分别关于 0dB 线、0° 线<span class="kw-r">镜像</span>。</div>
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd"><span style="flex:1"><span class="tex">G(s)=0.5s+1</span>（蓝）与 <span class="tex">G(s)=1/(0.5s+1)</span>（红）的镜像对比</span></div>
+        <div class="bd2"><svg id="fig" viewBox="0 0 880 640"></svg></div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">记忆</span><span>"惯性往下拐、微分往上拐"——<span class="kw-r">同一个交接频率、相反方向的 20dB/dec</span>，叠加时可以互相抵消。</span></div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("fig");
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const MF = "Cambria Math,STIX Two Math,Georgia,Microsoft YaHei,sans-serif";
+  const SUB = (n, s) => { const esc = t => t.replace(/&/g, "&amp;").replace(/</g, "&lt;"); let html = "", sub = false; for (const p of String(s).split(/(_\{[^}]*\})/)) { if (!p) continue; if (p.startsWith("_{")) { html += '<tspan' + (sub ? '' : ' dy="6"') + ' font-size="72%">' + esc(p.slice(2, -1)) + '</tspan>'; sub = true; } else { html += sub ? '<tspan dy="-6">' + esc(p) + '</tspan>' : esc(p); sub = false; } } n.innerHTML = html; };
+  const tx = (x, y, s, o) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 18, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal" , "font-family": MF }); SUB(n, s); if (o && o.halo) n.setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:6;stroke-linejoin:round"); return n; };
+  const defs = mk("defs", {});
+  const m1 = mk("marker", { id: "a34", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, m1);
+  const x0 = 90, x1 = 830, W = 700, DEC = W / 3;
+  const X = w => x0 + (Math.log10(w) + 1) * DEC;
+  const T = 0.5;
+
+  // ============ 幅频（上）：带区 y 70..300，0dB 居中 y=185 ============
+  const lT = 70, lB = 300, lM = 185;
+  const YL = v => lM - v / 36 * (lM - lT); // v∈[+36,-36]
+  mk("line", { x1: x0, y1: lM, x2: x1, y2: lM, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a34)" });
+  mk("line", { x1: x0, y1: lB, x2: x0, y2: lT, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a34)" });
+  [0.1, 1, 10, 100].forEach(w => { const x = X(w); mk("line", { x1: x, y1: lB, x2: x, y2: lT, stroke: "#E4EAF7", "stroke-width": 1 }); tx(x, lB + 24, String(w >= 1 ? w : "0.1"), { fs: 18, fill: "#5B6B8C" }); });
+  [20, 0, -20].forEach(v => { const y = YL(v); mk("line", { x1: x0, y1: y, x2: x1, y2: y, stroke: v === 0 ? "#8AA6D8" : "#F0F4FC", "stroke-width": v === 0 ? 1.8 : 1, "stroke-dasharray": v === 0 ? "9 6" : "0" }); if (v !== 0) tx(x0 - 12, y + 6, v + "", { fs: 18, fill: "#5B6B8C", an: "end" }); });
+  tx(x1 + 6, lM + 6, "ω", { fs: 18, it: true, b: true, fill: "#5B6B8C", an: "start" });
+  tx(x0 - 12, lT - 6, "L/dB", { fs: 18, b: true, fill: "#1B3B8B", an: "end" });
+  const Lc = (w, s) => s * 10 * Math.log10(1 + w * w * T * T);
+  [[1, "#2B5CE6"], [-1, "#D63A2F"]].forEach(([s, c]) => {
+    let d = "";
+    for (let i = 0; i <= 300; i++) { const w = 0.1 * Math.pow(1000, i / 300); d += (i ? "L" : "M") + X(w).toFixed(1) + "," + YL(Lc(w, s)).toFixed(1); }
+    mk("path", { d, stroke: c, "stroke-width": 3.6, fill: "none" });
+    // 渐近线（同色虚线）
+    mk("line", { x1: X(0.1), y1: YL(0), x2: X(2), y2: YL(0), stroke: c, "stroke-width": 2.2, "stroke-dasharray": "9 6", opacity: 0.55 });
+    mk("line", { x1: X(2), y1: YL(0), x2: X(63), y2: YL(s * 20 * Math.log10(63 * T)), stroke: c, "stroke-width": 2.2, "stroke-dasharray": "9 6", opacity: 0.55 });
+  });
+  mk("line", { x1: X(2), y1: lB, x2: X(2), y2: lT, stroke: "#5B6B8C", "stroke-width": 1.4, "stroke-dasharray": "6 5" });
+  tx(X(2) + 10, lT + 18, "交接频率 ω=2", { fs: 18, b: true, fill: "#5B6B8C", an: "start" });
+  tx(X(11), YL(21.2) - 22, "+20dB/dec", { fs: 18, b: true, fill: "#2B5CE6", an: "start" });
+  tx(X(11), YL(-21.2) + 34, "−20dB/dec", { fs: 18, b: true, fill: "#D63A2F", an: "start" });
+
+  // ============ 相频（下）：带区 y 380..560，0° 居中 y=470 ============
+  const pT = 380, pB = 560, pM = 470;
+  const YP = v => pM - v / 90 * 80;
+  mk("line", { x1: x0, y1: pB, x2: x1, y2: pB, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a34)" });
+  mk("line", { x1: x0, y1: pB, x2: x0, y2: pT - 8, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a34)" });
+  [0.1, 1, 10, 100].forEach(w => { const x = X(w); mk("line", { x1: x, y1: pB, x2: x, y2: pT, stroke: "#F0F4FC", "stroke-width": 1 }); tx(x, pB + 24, String(w >= 1 ? w : "0.1"), { fs: 18, fill: "#5B6B8C" }); });
+  [90, 0, -90].forEach(v => { const y = YP(v); mk("line", { x1: x0, y1: y, x2: x1, y2: y, stroke: v === 0 ? "#E4EAF7" : "#F0F4FC", "stroke-width": 1.2 }); tx(x0 - 12, y + 5, v > 0 ? "+" + v + "°" : v + "°", { fs: 18, fill: "#5B6B8C", an: "end" }); });
+  tx(x1 + 6, pB + 6, "ω", { fs: 18, it: true, b: true, fill: "#5B6B8C", an: "start" });
+  tx(x0 - 12, pT - 12, "φ", { fs: 18, b: true, fill: "#1B3B8B", an: "end" });
+  [[1, "#2B5CE6"], [-1, "#D63A2F"]].forEach(([s, c]) => {
+    let d = "";
+    for (let i = 0; i <= 300; i++) { const w = 0.1 * Math.pow(1000, i / 300); const ph = s * Math.atan(w * T) * 180 / Math.PI; d += (i ? "L" : "M") + X(w).toFixed(1) + "," + YP(ph).toFixed(1); }
+    mk("path", { d, stroke: c, "stroke-width": 3.2, fill: "none" });
+  });
+  mk("circle", { cx: X(2), cy: YP(45), r: 6, fill: "#2B5CE6" });
+  mk("circle", { cx: X(2), cy: YP(-45), r: 6, fill: "#D63A2F" });
+  tx(X(2) + 14, YP(45) - 10, "+45°", { fs: 18, b: true, fill: "#2B5CE6", an: "start" });
+  tx(X(2) + 14, YP(-45) + 24, "−45°", { fs: 18, b: true, fill: "#D63A2F", an: "start" });
+});
+</script>
+</body>
+</html>

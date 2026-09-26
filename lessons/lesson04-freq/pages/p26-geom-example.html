@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>1.5 例：相量几何求 G(jω)</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=223">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=223" defer></script>
+<style>
+  .figc { display:flex; flex-direction:column; overflow:hidden; height:100%; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:6px 12px; min-height:0; }
+  .figc svg { width:100%; height:100%; }
+  .prog { font-size:17px; color:var(--muted); font-weight:400; }
+</style>
+</head>
+<body data-title="1.5 例：相量几何求 G(jω)" data-page="26 / 88">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="act-card figc">
+      <div class="hd">例：<span class="tex">G(j\omega)=K/[j\omega(1+j\omega T)]</span> 的相量几何（点「下一步」让 jω 沿虚轴上行）　<span class="prog" id="prog">0 / 5</span></div>
+      <div class="bd2"><svg id="fig" viewBox="0 0 860 620"></svg></div>
+    </div>
+  </div>
+  <div data-step="1" style="display:none"></div><div data-step="2" style="display:none"></div><div data-step="3" style="display:none"></div><div data-step="4" style="display:none"></div><div data-step="5" style="display:none"></div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("fig");
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const MF = "Cambria Math,STIX Two Math,Georgia,Microsoft YaHei,sans-serif";
+  const tx = (x, y, s, o, parent) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 21, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal", "font-family": MF }, parent); const esc = t => t.replace(/&/g, "&amp;").replace(/</g, "&lt;"); let html = "", sub = false; for (const p of String(s).split(/(_\{[^}]*\})/)) { if (!p) continue; if (p.startsWith("_{")) { html += `<tspan${sub ? "" : " dy=\"6\""} font-size="72%">${esc(p.slice(2, -1))}</tspan>`; sub = true; } else { html += sub ? `<tspan dy="-6">${esc(p)}</tspan>` : esc(p); sub = false; } } n.innerHTML = html; if (o && o.halo) n.setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:6;stroke-linejoin:round"); return n; };
+  const defs = mk("defs", {});
+  const m1 = mk("marker", { id: "a23", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, m1);
+  const mB = mk("marker", { id: "a23b", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#1D3FA0" }, mB);
+  const mR = mk("marker", { id: "a23r", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#D63A2F" }, mR);
+  // s 平面：极点 0 与 -1/T=-1，虚轴上 jω 点
+  const O = { x: 470, y: 560 }, SC = 150; // ω∈[0,3.4]
+  const X = v => O.x + v * SC, Y = v => O.y - v * SC;
+  mk("line", { x1: 60, y1: O.y, x2: 830, y2: O.y, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a23)" });
+  mk("line", { x1: O.x, y1: 600, x2: O.x, y2: 20, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a23)" });
+  tx(824, O.y + 28, "Re", { fs: 22, it: true, b: true, fill: "#5B6B8C", an: "end" });
+  tx(O.x + 24, 34, "jω 轴", { fs: 22, it: true, b: true, fill: "#5B6B8C", an: "start" });
+  tx(O.x + 10, O.y + 28, "O", { fs: 20, fill: "#5B6B8C", an: "start" });
+  // 极点标记（×）
+  const cross = (cx, cy, lb, color) => {
+    mk("line", { x1: cx - 10, y1: cy - 10, x2: cx + 10, y2: cy + 10, stroke: color, "stroke-width": 3.2 });
+    mk("line", { x1: cx - 10, y1: cy + 10, x2: cx + 10, y2: cy - 10, stroke: color, "stroke-width": 3.2 });
+    tx(cx - 18, cy - 16, lb, { fs: 22, b: true, it: true, fill: color, an: "end" });
+  };
+  cross(X(-1), O.y, "p₂=−1/T", "#1D3FA0");
+  cross(O.x, O.y, "p₁=0", "#D63A2F");
+  const dyn = mk("g", {});
+  const WS = [0.15, 0.5, 1.0, 2.0, 3.2];
+  const TOTAL = 5;
+  let K = 0;
+  function paint() {
+    dyn.innerHTML = "";
+    if (K > 0) {
+      const w = WS[K - 1], py = Y(w);
+      // 测试点
+      mk("circle", { cx: O.x, cy: py, r: 8, fill: "#F5821F" }, dyn);
+      tx(O.x + 16, py - 12, "jω（ω=" + w + "）", { fs: 22, b: true, it: true, fill: "#F5821F", an: "start" }, dyn);
+      // 相量 p1→jω（红）、p2→jω（蓝）
+      mk("line", { x1: O.x, y1: O.y, x2: O.x, y2: py, stroke: "#D63A2F", "stroke-width": 3.2, "marker-end": "url(#a23r)" }, dyn);
+      mk("line", { x1: X(-1), y1: O.y, x2: O.x, y2: py, stroke: "#1D3FA0", "stroke-width": 3.2, "marker-end": "url(#a23b)" }, dyn);
+      // 读数：只保留两条结论（长度→|G|，角度→∠G）
+      const L1 = w, L2 = Math.sqrt(1 + w * w);
+      const a2 = Math.atan(w) * 180 / Math.PI;
+      tx(90, 96, "|G| = K/(L₁·L₂) = " + (1 / (L1 * L2)).toFixed(2) + "K", { fs: 23, b: true, fill: "#1B3B8B", an: "start" }, dyn);
+      tx(90, 138, "∠G = −(90° + " + a2.toFixed(1) + "°) = −" + (90 + a2).toFixed(1) + "°", { fs: 23, b: true, fill: "#1B3B8B", an: "start" }, dyn);
+    } else {
+      tx(90, 96, "点「下一步」，让 jω 沿虚轴上行", { fs: 22, fill: "#5B6B8C", an: "start" }, dyn);
+    }
+    document.getElementById("prog").textContent = K + " / " + TOTAL;
+  }
+  const S = ACT.step;
+  const _next = S.next.bind(S), _reset = S.reset.bind(S);
+  S.next = function () { if (K < TOTAL) K++; const d = _next(); paint(); return d; };
+  S.reset = function () { K = 0; _reset(); paint(); };
+  window.prev = function () { if (K <= 0) return; const t = K - 1; S.reset(); for (let i = 0; i < t; i++) S.next(); };
+  paint();
+});
+</script>
+</body>
+</html>

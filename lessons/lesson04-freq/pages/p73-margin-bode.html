@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>3.4 Bode 图上的稳定裕度</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=223">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=223" defer></script>
+<style>
+  .row { display:flex; flex-direction:row-reverse; gap:22px; height:100%; min-height:0; }
+  .figc { flex:1.45; display:flex; flex-direction:column; overflow:hidden; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:6px 12px; min-height:0; }
+  .figc svg { width:100%; height:100%; }
+  .lst { flex:1; display:flex; flex-direction:column; justify-content:space-evenly; gap:10px; min-height:0; }
+  .seg { background:#fff; border:2px solid var(--line); border-radius:13px; padding:12px 17px; font-size:19.5px; line-height:1.6; }
+  .seg b { color:var(--navy); }
+  .seg .mathbox { font-size:18.5px; padding:5px 11px; }
+  table.act-table { font-size:17.5px; }
+  .act-table th { font-size:17.5px; padding:5px 9px; }
+  .act-table td { padding:5px 9px; text-align:center; }
+</style>
+</head>
+<body data-title="3.4 Bode 图上的稳定裕度" data-page="73 / 88">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="act-card figc">
+        <div class="hd">同一系统（模型同上页）的 Bode 图：分步读出 γ 与 K<sub>g</sub></div>
+        <div class="bd2"><svg id="fig" viewBox="0 0 960 640"></svg></div>
+      </div>
+      <div class="lst">
+        <div class="seg" data-step="1"><b>① 读 γ</b>：L(ω) 穿 0dB 于 <b>ωc≈0.880</b> → 向下找 φ(ωc)≈−143.7° → <span class="tex">\gamma=180^{\circ}+\varphi(\omega_{c})\approx 36.3^{\circ}</span>。</div>
+        <div class="seg" data-step="2"><b>② 读 K<sub>g</sub></b>：φ(ω) 穿 −180° 于 <b>ωg=2</b> → 向上找 L(ωg)≈−12.4dB → <span class="tex">K_{g}(\mathrm{dB})=-L(\omega_{g})\approx 12.4\,\mathrm{dB}</span>（线性 K<sub>g</sub>≈4.17，仅作辅助）。</div>
+        <div class="seg" data-step="3"><b>③ Bode 图判稳</b>（本例：P=0 的最小相位系统、单组交越）：<span class="kw-r">ωg &gt; ωc 时 γ&gt;0、Kg(dB)&gt;0，闭环稳定</span>；非最小相位、多交越或开环不稳定的系统仍按 Nyquist 判据。两穿越频率离得越远，通常裕度越大。</div>
+        <div class="seg" data-step="4"><b>④ 表 4-4　Nyquist 图 ↔ Bode 图对应关系</b>
+          <table class="act-table">
+            <tr><th>Nyquist 图</th><th>Bode 图</th></tr>
+            <tr><td>单位圆</td><td class="kw-r">0 dB 线</td></tr>
+            <tr><td>负实轴</td><td class="kw-r">−180° 线</td></tr>
+            <tr><td>(−1, j0) 点</td><td>0dB 与 −180° 的"交点"</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">工程要求</span><span>γ = 30°~60°、K<sub>g</sub> &gt; 6dB；本例 γ≈36.3°、K<sub>g</sub>(dB)≈12.4dB，<span class="kw-r">满足要求</span>。Bode 图上读裕度比 Nyquist 图更方便，是工程首选。</span></div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("fig");
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const MF = "Cambria Math,STIX Two Math,Georgia,Microsoft YaHei,sans-serif";
+  const SUB = (n, s) => { const esc = t => t.replace(/&/g, "&amp;").replace(/</g, "&lt;"); let html = "", sub = false; for (const p of String(s).split(/(_\{[^}]*\})/)) { if (!p) continue; if (p.startsWith("_{")) { html += '<tspan' + (sub ? '' : ' dy="6"') + ' font-size="72%">' + esc(p.slice(2, -1)) + '</tspan>'; sub = true; } else { html += sub ? '<tspan dy="-6">' + esc(p) + '</tspan>' : esc(p); sub = false; } } n.innerHTML = html; };
+  const tx = (x, y, s, o, parent) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 18, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal" , "font-family": MF }, parent); SUB(n, s); if (o && o.halo) n.setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:6;stroke-linejoin:round"); return n; };
+  const defs = mk("defs", {});
+  const m1 = mk("marker", { id: "a67", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, m1);
+  const x0 = 84, x1 = 930, DEC = (x1 - x0) / 2;   // ω: 0.1..10
+  const X = w => x0 + (Math.log10(w) + 1) * DEC;
+  const LG = Math.log10, D = 180 / Math.PI;
+  const Lf = w => 20 * LG(1.2) - 20 * LG(w) - 10 * LG(1 + w * w) - 10 * LG(1 + 0.0625 * w * w);
+  const Pf = w => -90 - Math.atan(w) * D - Math.atan(0.25 * w) * D;
+  // 幅频区 L∈[-28, 24]
+  const yT1 = 46, yB1 = 296, Lmax = 24, Lmin = -28;
+  const Y1 = v => yT1 + (Lmax - v) / (Lmax - Lmin) * (yB1 - yT1);
+  mk("line", { x1: x0, y1: yB1, x2: x1, y2: yB1, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a67)" });
+  mk("line", { x1: x0, y1: yB1, x2: x0, y2: yT1, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a67)" });
+  [0.1, 1, 10].forEach(w => { const x = X(w); mk("line", { x1: x, y1: yB1, x2: x, y2: yT1, stroke: "#EDF2FB", "stroke-width": 1 }); tx(x, yB1 + 24, String(w), { fs: 18.5, fill: "#5B6B8C" }); });
+  [20, 0, -20].forEach(v => { const y = Y1(v); mk("line", { x1: x0, y1: y, x2: x1, y2: y, stroke: v === 0 ? "#8AA6D8" : "#F0F4FC", "stroke-width": v === 0 ? 1.8 : 1, "stroke-dasharray": v === 0 ? "9 6" : "0" }); tx(x0 - 12, y + 6, v + "", { fs: 18, fill: "#5B6B8C", an: "end" }); });
+  tx(x1 + 2, yB1 + 7, "ω", { fs: 20, it: true, b: true, fill: "#5B6B8C", an: "start" });
+  tx(x0 - 12, yT1 - 4, "L/dB", { fs: 18, b: true, an: "end" });
+  tx(x1 - 6, Y1(0) - 12, "0dB 线 ⇔ 单位圆", { fs: 18, b: true, fill: "#2B5CE6", an: "end", halo: 1 });
+  // 相频区 φ∈[-270, 0]
+  const yT2 = 366, yB2 = 600;
+  const Y2 = v => yT2 + (-v) / 270 * (yB2 - yT2);
+  mk("line", { x1: x0, y1: yT2, x2: x1, y2: yT2, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a67)" });
+  mk("line", { x1: x0, y1: yB2, x2: x0, y2: yT2, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a67)" });
+  [0.1, 1, 10].forEach(w => { const x = X(w); mk("line", { x1: x, y1: yB2, x2: x, y2: yT2, stroke: "#F0F4FC", "stroke-width": 1 }); tx(x, yB2 + 22, String(w), { fs: 18.5, fill: "#5B6B8C" }); });
+  [0, -90, -180, -270].forEach(v => { const y = Y2(v); mk("line", { x1: x0, y1: y, x2: x1, y2: y, stroke: v === -180 ? "#8AA6D8" : "#F0F4FC", "stroke-width": v === -180 ? 1.8 : 1, "stroke-dasharray": v === -180 ? "9 6" : "0" }); tx(x0 - 12, y + 6, v + "°", { fs: 18, fill: "#5B6B8C", an: "end" }); });
+  tx(x1 + 2, yT2 + 7, "ω", { fs: 20, it: true, b: true, fill: "#5B6B8C", an: "start" });
+  tx(x0 - 12, yT2 - 4, "φ", { fs: 18, b: true, an: "end" });
+  tx(x1 - 6, Y2(-180) - 10, "−180° 线 ⇔ 负实轴", { fs: 18, b: true, fill: "#D63A2F", an: "end" });
+  // 曲线
+  let d = "";
+  for (let i = 0; i <= 400; i++) { const w = 0.1 * Math.pow(100, i / 400); d += (i ? "L" : "M") + X(w).toFixed(1) + "," + Y1(Lf(w)).toFixed(1); }
+  mk("path", { d, stroke: "#2B5CE6", "stroke-width": 4, fill: "none" });
+  let d2 = "";
+  for (let i = 0; i <= 400; i++) { const w = 0.1 * Math.pow(100, i / 400); d2 += (i ? "L" : "M") + X(w).toFixed(1) + "," + Y2(Pf(w)).toFixed(1); }
+  mk("path", { d: d2, stroke: "#D63A2F", "stroke-width": 4, fill: "none" });
+  const dyn = mk("g", {});
+  const wc = 0.8799, wg = 2;
+  let K = 0; const TOTAL = 4;
+  function paint() {
+    dyn.innerHTML = "";
+    if (K >= 1) {
+      mk("line", { x1: X(wc), y1: yT1, x2: X(wc), y2: yB2, stroke: "#1D3FA0", "stroke-width": 1.8, "stroke-dasharray": "7 5" }, dyn);
+      mk("circle", { cx: X(wc), cy: Y1(0), r: 8, fill: "#1D3FA0" }, dyn);
+      tx(X(wc) + 10, Y1(0) - 16, "ωc≈0.880（L=0dB）", { fs: 18, b: true, fill: "#1D3FA0", an: "start", halo: 1 }, dyn);
+      mk("circle", { cx: X(wc), cy: Y2(Pf(wc)), r: 8, fill: "#1D3FA0" }, dyn);
+      // γ 双向箭头：φ(ωc) → −180
+      mk("line", { x1: X(wc) - 26, y1: Y2(Pf(wc)), x2: X(wc) - 26, y2: Y2(-180), stroke: "#2B5CE6", "stroke-width": 2.4 }, dyn);
+      mk("path", { d: "M" + (X(wc) - 26) + "," + (Y2(Pf(wc)) - 2) + " l-5,10 l10,0 Z", fill: "#2B5CE6" }, dyn);
+      mk("path", { d: "M" + (X(wc) - 26) + "," + (Y2(-180) + 2) + " l-5,-10 l10,0 Z", fill: "#2B5CE6" }, dyn);
+      tx(X(wc) - 38, (Y2(Pf(wc)) + Y2(-180)) / 2 + 7, "γ≈36.3°", { fs: 19, b: true, fill: "#2B5CE6", an: "end", halo: 1 }, dyn);
+      tx(X(wc) + 12, Y2(Pf(wc)) - 16, "φ(ωc)≈−143°", { fs: 18, b: true, fill: "#1D3FA0", an: "start", halo: 1 }, dyn).setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:5");
+    }
+    if (K >= 2) {
+      mk("line", { x1: X(wg), y1: yT1, x2: X(wg), y2: yB2, stroke: "#F5821F", "stroke-width": 1.8, "stroke-dasharray": "7 5" }, dyn);
+      mk("circle", { cx: X(wg), cy: Y2(-180), r: 8, fill: "#F5821F" }, dyn);
+      tx(X(wg) + 12, Y2(-180) - 12, "ωg=2", { fs: 18, b: true, fill: "#F5821F", an: "start" }, dyn).setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:5");
+      mk("circle", { cx: X(wg), cy: Y1(Lf(wg)), r: 8, fill: "#F5821F" }, dyn);
+      // Kg 双向箭头：L(ωg) → 0dB
+      mk("line", { x1: X(wg) + 26, y1: Y1(Lf(wg)), x2: X(wg) + 26, y2: Y1(0), stroke: "#F5821F", "stroke-width": 2.4 }, dyn);
+      mk("path", { d: "M" + (X(wg) + 26) + "," + (Y1(Lf(wg)) + 2) + " l-5,-10 l10,0 Z", fill: "#F5821F" }, dyn);
+      mk("path", { d: "M" + (X(wg) + 26) + "," + (Y1(0) - 2) + " l-5,10 l10,0 Z", fill: "#F5821F" }, dyn);
+      tx(X(wg) + 38, (Y1(Lf(wg)) + Y1(0)) / 2 + 6, "Kg(dB)≈12.4dB", { fs: 18, b: true, fill: "#F5821F", an: "start" }, dyn);
+    }
+  }
+  const S = ACT.step, _next = S.next.bind(S), _reset = S.reset.bind(S);
+  S.next = function () { if (K < TOTAL) K++; const d = _next(); paint(); return d; };
+  S.reset = function () { K = 0; _reset(); paint(); };
+  window.prev = function () { const n = Math.max(0, S.cur - 1); S.reset(); for (let i = 0; i < n; i++) S.next(); };
+  paint();
+});
+</script>
+</body>
+</html>
