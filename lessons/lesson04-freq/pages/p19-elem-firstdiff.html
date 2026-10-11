@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <title>1.5 一阶微分环节的极坐标图</title>
-<link rel="stylesheet" href="../../../theme/theme.css?v=223">
+<link rel="stylesheet" href="../../../theme/theme.css?v=224">
 <script src="../../../theme/mathjax/mathjax-render.js"></script>
 <script src="../../../theme/mathjax/tex-chtml.js"></script>
 <script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
-<script src="../../../theme/act-base.js?v=223" defer></script>
+<script src="../../../theme/act-base.js?v=224" defer></script>
 <style>
   .row { display:flex; gap:26px; height:100%; min-height:0; }
   .tx { flex:1; display:flex; flex-direction:column; gap:20px; min-height:0; }
@@ -43,12 +43,12 @@
         </div>
       </div>
       <div class="act-card figc">
-        <div class="hd">轨迹：过 (1, j0) 的竖直射线</div>
+        <div class="hd">轨迹：过 (1, j0) 的竖直射线（本图取 T = 0.5）</div>
         <div class="bd2"><svg id="fig" viewBox="0 0 700 600"></svg></div>
       </div>
     </div>
   </div>
-  <div class="act-note"><span class="lead">操作</span><span>点"下一步"让 ω 逐段增大，观察动点从 (1, j0) 沿竖直线上升（共 5 段）。</span></div>
+  <div class="act-note"><span class="lead">说明</span><span>射线形状与 T 无关（横轴量纲为 ωT）；本图取 <span class="kw-r">T = 0.5</span>，故 ωT = 3.0 对应 ω = 6。T 只改变同一 ω 下动点的高度。</span></div>
   <div data-step="1" style="display:none"></div><div data-step="2" style="display:none"></div><div data-step="3" style="display:none"></div><div data-step="4" style="display:none"></div><div data-step="5" style="display:none"></div>
 </div></div>
 <script>
@@ -61,6 +61,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const defs = mk("defs", {});
   const m1 = mk("marker", { id: "a16", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
   mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, m1);
+  const mB = mk("marker", { id: "a16b", markerWidth: 11, markerHeight: 11, refX: 7.5, refY: 3.2, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7.5,3.2 L0,6.4 Z", fill: "#2B5CE6" }, mB);
   const O = { x: 300, y: 510 }, SC = 150; // ωT ∈ [0, 3]
   const X = v => O.x + v * SC, Y = v => O.y - v * SC;
   mk("line", { x1: 40, y1: O.y, x2: 660, y2: O.y, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a16)" });
@@ -78,15 +80,20 @@ document.addEventListener("DOMContentLoaded", () => {
   let K = 0;
   function paint() {
     dyn.innerHTML = "";
-    const f = K / TOTAL, top = 3 * f;
+    const f = K / TOTAL, top = 3 * f, last = K >= TOTAL;
     if (K > 0) {
       mk("line", { x1: X1, y1: O.y, x2: X1, y2: Y(top), stroke: "#2B5CE6", "stroke-width": 4 }, dyn);
       mk("circle", { cx: X1, cy: Y(top), r: 8, fill: "#D63A2F" }, dyn);
-      tx(X1 + 18, Y(top) + 7, "ωT=" + top.toFixed(1), { fs: 20, b: true, it: true, fill: "#D63A2F", an: "start", halo: 1 }, dyn);
+      if (last) tx(X1 - 16, Y(top) + 7, "ωT=" + top.toFixed(1), { fs: 20, b: true, it: true, fill: "#D63A2F", an: "end", halo: 1 }, dyn);
+      else tx(X1 + 18, Y(top) + 7, "ωT=" + top.toFixed(1), { fs: 20, b: true, it: true, fill: "#D63A2F", an: "start", halo: 1 }, dyn);
     }
     mk("circle", { cx: X1, cy: O.y, r: 7, fill: "#1D3FA0" }, dyn);
     tx(X1 - 6, O.y - 20, "ω=0（起点 1∠0°）", { fs: 20, b: true, it: true, fill: "#1D3FA0", an: "end", halo: 1 }, dyn);
-    if (K >= TOTAL) tx(X1 + 14, Y(3) - 18, "ω→∞", { fs: 20, b: true, it: true, fill: "#D63A2F", an: "start", halo: 1 }, dyn);
+    if (last) {
+      // 射线继续向上无限延伸：虚线+箭头远离 ωT=3.0 的标注点
+      mk("line", { x1: X1, y1: Y(3) - 10, x2: X1, y2: 20, stroke: "#2B5CE6", "stroke-width": 3, "stroke-dasharray": "9 7", "marker-end": "url(#a16b)" }, dyn);
+      tx(X1 + 16, 34, "ω→∞（无限延伸）", { fs: 19, b: true, it: true, fill: "#D63A2F", an: "start", halo: 1 }, dyn);
+    }
   }
   const S = ACT.step;
   const _next = S.next.bind(S), _reset = S.reset.bind(S);

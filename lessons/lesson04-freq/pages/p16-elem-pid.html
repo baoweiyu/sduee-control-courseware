@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <title>1.5 典型环节的极坐标图① 比例·积分·微分</title>
-<link rel="stylesheet" href="../../../theme/theme.css?v=223">
+<link rel="stylesheet" href="../../../theme/theme.css?v=224">
 <script src="../../../theme/mathjax/mathjax-render.js"></script>
 <script src="../../../theme/mathjax/tex-chtml.js"></script>
 <script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
-<script src="../../../theme/act-base.js?v=223" defer></script>
+<script src="../../../theme/act-base.js?v=224" defer></script>
 <style>
   .row { display:flex; gap:26px; height:100%; min-height:0; }
   .col { flex:1; display:flex; flex-direction:column; min-height:0; }
@@ -144,7 +144,15 @@ document.addEventListener("DOMContentLoaded", () => {
   // Space 分步：依次播放 比例 → 积分 → 微分（与按钮同一入口）
   const PANELS = [["playK", drawK], ["playI", drawI], ["playD", drawD]];
   const SPB = ACT.step, _sn = SPB.next.bind(SPB), _sr = SPB.reset.bind(SPB);
-  SPB.next = function () { const p = PANELS[SPB.cur - 1]; if (p) playOne(p[1], document.getElementById(p[0])); return _sn(); };
+  SPB.next = function () {
+    const i = SPB.cur; // 当前已展示的步数（0 起），本步应播放第 i 个图
+    if (i < PANELS.length) {
+      const p = PANELS[i], btn = document.getElementById(p[0]);
+      if (btn.dataset.busy) p[1](1); // 上一动画未播完时直接补全本图
+      else playOne(p[1], btn);
+    }
+    return _sn();
+  };
   SPB.reset = function () { _sr(); drawK(0); drawI(0); drawD(0); };
   const qp = new URLSearchParams(location.search).get("play");
   if (qp === "k") drawK(1);

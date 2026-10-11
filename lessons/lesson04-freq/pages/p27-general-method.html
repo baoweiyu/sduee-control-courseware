@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <title>1.5 一般系统极坐标图的绘制方法</title>
-<link rel="stylesheet" href="../../../theme/theme.css?v=223">
+<link rel="stylesheet" href="../../../theme/theme.css?v=224">
 <script src="../../../theme/mathjax/mathjax-render.js"></script>
 <script src="../../../theme/mathjax/tex-chtml.js"></script>
 <script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
-<script src="../../../theme/act-base.js?v=223" defer></script>
+<script src="../../../theme/act-base.js?v=224" defer></script>
 <style>
   .row { display:flex; gap:26px; height:100%; min-height:0; }
   .steps { flex:1; display:flex; flex-direction:column; min-height:0; }
@@ -34,10 +34,11 @@
       <div class="act-card vec">
         <div class="hd">相量的几何含义：为什么起点终点能"看出来"</div>
         <div class="bd">
-          <div class="mathbox math eqline tex tex-d">G(j\omega)=K\cdot\dfrac{\prod_i (j\omega-z_i)}{\prod_j (j\omega-p_j)}</div>
-          <div>每个因子都是 s 平面上<span class="kw-r">从零点/极点指向 jω 点的相量</span>：</div>
-          <div style="text-align:center;"><span class="tex">|G|=\dfrac{K\prod_i|j\omega-z_i|}{\prod_j|j\omega-p_j|},\qquad \angle G=\sum_i\angle(j\omega-z_i)-\sum_j\angle(j\omega-p_j)</span></div>
-          <div>ω 沿虚轴上行，各相量的<span class="kw-r">长度与转角</span>连续变化。</div>
+          <div>任意系统的开环频率特性都可写成<span class="kw-r">尾 1 标准型</span>：</div>
+          <div class="mathbox math eqline tex tex-d">G(j\omega)=\dfrac{K\prod_i (j\omega\tau_i+1)}{(j\omega)^{\nu}\,\prod_j (j\omega T_j+1)}</div>
+          <div>每个因子都是 s 平面上的相量：<span class="tex">j\omega T+1</span> 对应从 <span class="tex">-1/T</span> 指向 jω 的线段（乘以常数 T），<span class="tex">j\omega</span> 对应从原点指向 jω 的线段：</div>
+          <div style="text-align:center;"><span class="tex">|G|=\dfrac{K\prod_i|j\omega\tau_i+1|}{\omega^{\nu}\prod_j|j\omega T_j+1|},\qquad \angle G=\sum_i\operatorname{arctg}\omega\tau_i-\nu\cdot90^{\circ}-\sum_j\operatorname{arctg}\omega T_j</span></div>
+          <div>ω 沿虚轴上行，各相量的<span class="kw-r">长度与转角</span>连续变化——幅值=模值乘除、相角=相角加减。</div>
         </div>
       </div>
     </div>

@@ -3,13 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>1.5 例：相量几何求 G(jω)</title>
-<link rel="stylesheet" href="../../../theme/theme.css?v=223">
+<link rel="stylesheet" href="../../../theme/theme.css?v=224">
 <script src="../../../theme/mathjax/mathjax-render.js"></script>
 <script src="../../../theme/mathjax/tex-chtml.js"></script>
 <script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
-<script src="../../../theme/act-base.js?v=223" defer></script>
+<script src="../../../theme/act-base.js?v=224" defer></script>
 <style>
-  .figc { display:flex; flex-direction:column; overflow:hidden; height:100%; }
+  .row { display:flex; gap:24px; height:100%; min-height:0; }
+  .intro { flex:0.92; display:flex; flex-direction:column; min-height:0; }
+  .intro .bd { flex:1; display:flex; flex-direction:column; justify-content:space-evenly; gap:12px; padding:12px 22px; font-size:20.5px; line-height:1.6; }
+  .intro .mathbox { font-size:21.5px; padding:10px 16px; }
+  .figc { flex:1.25; display:flex; flex-direction:column; overflow:hidden; }
   .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:6px 12px; min-height:0; }
   .figc svg { width:100%; height:100%; }
   .prog { font-size:17px; color:var(--muted); font-weight:400; }
@@ -18,9 +22,20 @@
 <body data-title="1.5 例：相量几何求 G(jω)" data-page="26 / 88">
 <div class="act-stage"><div class="act-slide">
   <div class="act-body">
-    <div class="act-card figc">
-      <div class="hd">例：<span class="tex">G(j\omega)=K/[j\omega(1+j\omega T)]</span> 的相量几何（点「下一步」让 jω 沿虚轴上行）　<span class="prog" id="prog">0 / 5</span></div>
-      <div class="bd2"><svg id="fig" viewBox="0 0 860 620"></svg></div>
+    <div class="row">
+      <div class="act-card intro">
+        <div class="hd">例：方法与目的</div>
+        <div class="bd">
+          <div><b>目的</b>：用<span class="kw-r">向量几何法</span>求 <span class="tex">G(j\omega)=\dfrac{K}{j\omega(1+j\omega T)}</span> 的极坐标图，分析其幅频与相频特性。</div>
+          <div><b>方法</b>：把传递函数分解为典型环节的乘积；代入 s=jω 后，每个因子都是 s 平面上<span class="kw-r">从极点（或零点）指向 jω 点的相量</span>。</div>
+          <div class="mathbox math eqline tex tex-d">|G|=\dfrac{K}{L_{1}\,L_{2}}\;(\text{模值乘除}),\quad \angle G=-(\theta_{1}+\theta_{2})\;(\text{相角加减})</div>
+          <div>本题两个极点 <span class="tex">p_{1}=0</span>、<span class="tex">p_{2}=-1/T</span>；让 jω 沿虚轴上行，两条相量的<b>长度与转角</b>连续变化，即可逐点读出 |G| 与 ∠G。</div>
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd"><span style="flex:1">s 平面上的相量几何　<span class="prog" id="prog">0 / 5</span></span></div>
+        <div class="bd2"><svg id="fig" viewBox="0 0 860 620"></svg></div>
+      </div>
     </div>
   </div>
   <div data-step="1" style="display:none"></div><div data-step="2" style="display:none"></div><div data-step="3" style="display:none"></div><div data-step="4" style="display:none"></div><div data-step="5" style="display:none"></div>
@@ -75,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
       tx(90, 96, "|G| = K/(L₁·L₂) = " + (1 / (L1 * L2)).toFixed(2) + "K", { fs: 23, b: true, fill: "#1B3B8B", an: "start" }, dyn);
       tx(90, 138, "∠G = −(90° + " + a2.toFixed(1) + "°) = −" + (90 + a2).toFixed(1) + "°", { fs: 23, b: true, fill: "#1B3B8B", an: "start" }, dyn);
     } else {
-      tx(90, 96, "点「下一步」，让 jω 沿虚轴上行", { fs: 22, fill: "#5B6B8C", an: "start" }, dyn);
+      tx(90, 96, "两个极点已标出：p₁=0（红）、p₂=−1/T（蓝）", { fs: 22, fill: "#5B6B8C", an: "start" }, dyn);
     }
     document.getElementById("prog").textContent = K + " / " + TOTAL;
   }

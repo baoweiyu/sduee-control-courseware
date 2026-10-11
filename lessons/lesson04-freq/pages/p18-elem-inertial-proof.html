@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <title>1.5 惯性环节的极坐标图是半圆（例 4-3）</title>
-<link rel="stylesheet" href="../../../theme/theme.css?v=223">
+<link rel="stylesheet" href="../../../theme/theme.css?v=224">
 <script src="../../../theme/mathjax/mathjax-render.js"></script>
 <script src="../../../theme/mathjax/tex-chtml.js"></script>
 <script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
-<script src="../../../theme/act-base.js?v=223" defer></script>
+<script src="../../../theme/act-base.js?v=224" defer></script>
 <style>
   .row { display:flex; gap:26px; height:100%; min-height:0; }
   .drv { flex:1.25; display:flex; flex-direction:column; min-height:0; }
@@ -41,11 +41,13 @@
         </div>
       </div>
       <div class="act-card figc">
-        <div class="hd">G(jω) 的轨迹：下半圆</div>
+        <div class="hd"><span style="flex:1">G(jω) 的轨迹：下半圆 · T 对比演示</span><button class="pbtn" id="playT" style="font-size:15px;padding:3px 12px;border-radius:8px;border:none;background:#fff;color:var(--blue);font-weight:700;cursor:pointer;">▶ 播放</button></div>
         <div class="bd2"><svg id="fig" viewBox="0 0 760 620"></svg></div>
+        <div class="tcap" style="flex:none;font-size:19px;color:var(--navy);background:var(--sky);border-radius:12px;padding:11px 18px;margin:0 14px 14px;line-height:1.55;">轨迹形状与 T <b>无关</b>（恒为该下半圆）；T 只影响<b>同一 ω 下动点的位置</b>：T 越大，同一 ω 处幅值越小、相角滞后越大，动点沿半圆<span class="kw-r">顺时针移动得越快</span>（转折频率 1/T 越低）。</div>
       </div>
     </div>
   </div>
+  <div data-step="4" style="display:none"></div>
 </div></div>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
@@ -87,6 +89,35 @@ document.addEventListener("DOMContentLoaded", () => {
   tx(X(1) + 12, Y(0) - 22, "ω=0 (1∠0)", { fs: 20, b: true, fill: "#1D3FA0", an: "start" });
   mk("circle", { cx: X(0), cy: Y(0), r: 9, fill: "#fff", stroke: "#D63A2F", "stroke-width": 3.4 });
   tx(X(0) - 12, Y(0) + 40, "ω→∞ (0∠−90°)", { fs: 20, b: true, fill: "#D63A2F", an: "end" });
+  // ---- T 对比动画：同一 ω 扫频下三个动点沿同一半圆移动的快慢 ----
+  const TCFG = [[0.5, "#2B5CE6"], [1, "#F5821F"], [5, "#D63A2F"]];
+  const dots = mk("g", {});
+  const txd = (x, y, s, o) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 20, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal", "font-family": MF }, dots); SUB(n, s); if (o && o.halo) n.setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:6;stroke-linejoin:round"); return n; };
+  let tPlaying = false;
+  function paintDots(w) {
+    dots.innerHTML = "";
+    if (w <= 0) return;
+    for (const [Tv, color] of TCFG) {
+      const u = Tv * w, d = 1 + u * u, px = 1 / d, py = u / d;
+      mk("circle", { cx: X(px), cy: Y(py), r: 8.5, fill: color }, dots);
+      txd(X(px) + 16, Y(py) - 10, "T=" + Tv, { fs: 18, b: true, fill: color, an: "start", halo: 1 });
+    }
+    txd(640, 596, "ω = " + w.toFixed(1), { fs: 21, b: true, it: true, fill: "#1B3B8B", an: "end" });
+  }
+  function playT() {
+    if (tPlaying) return;
+    tPlaying = true;
+    const t0 = performance.now(), DUR = 6000, WMAX = 8;
+    (function fr(ts) {
+      const f = Math.min(1, (ts - t0) / DUR);
+      paintDots(WMAX * f);
+      if (f < 1) requestAnimationFrame(fr); else tPlaying = false;
+    })(t0);
+  }
+  document.getElementById("playT").onclick = playT;
+  // 第 4 步：自动播放 T 对比动画
+  const SB = ACT.step, _sn18 = SB.next.bind(SB);
+  SB.next = function () { const d = _sn18(); if (SB.cur >= 4) playT(); return d; };
 });
 </script>
 </body>
