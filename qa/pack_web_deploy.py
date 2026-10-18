@@ -7,7 +7,7 @@ components/ + 实际引用的 assets + DEPLOY-部署说明.md + 可选 server.js
 import os, re, json, zipfile
 
 ROOT = r"H:\D_tools\courseware-system-kimi"
-OUT = os.path.join(ROOT, "act-courseware-web-deploy-v2.26.zip")
+OUT = os.path.join(ROOT, "act-courseware-web-deploy-v2.27.zip")
 
 COMMON_DIRS = ["player", "components", "theme"]
 LESSON_IDS = ["lesson01-intro", "lesson02-math-model", "lesson03-timedomain", "lesson04-freq", "lesson05-root-locus", "lesson06-correction"]
@@ -62,13 +62,14 @@ https://github.com/baoweiyu/sduee-control-courseware/releases
 - 第五章 根轨迹法（61 页，数值严谨绘制 + 连贯/分步动画 + 图面缩放）
 - 第六章 控制系统的校正（48 页，Bode 图数值绘制 + 设计步骤分步演示）
 
-整体版本 V2.26（2026-10-19）。本地播放版与网页部署版使用同一版本号。
+整体版本 V2.27（2026-10-19）。本地播放版与网页部署版使用同一版本号。
 V2.21 更新：第六章《控制系统的校正》首次发布（48 页，一轮修改版）。
 V2.22 更新：第三章 8 页排版与框图精修（P51/52/54/69/71/77/78/85），含 E(s) 标注完整显示、60° 角弧方向修正等。
 V2.23 更新：第四章 P8/P12/P22/P25 精修，原 P26-28 重排为四页（例题→三步法→起终点→练习），起终点图重绘并补 ν=3、n−m=4 情形，全章 88 页。
 V2.24 更新：第四章 P16-P19 典型环节极坐标图动画精修（T 三值切换与对比演示、分步播放修复、标注防重叠），P26 补方法目的说明，P27 改尾 1 标准型公式，P28 补推导基础条并将起终点图重绘为对称双走向。
 V2.25 更新：第四章 P27 右下幅值/相角公式改两行显示、等号对齐。
 V2.26 更新：第四章新增「T 与惯性环节 Bode 图」滑块实验页（全章 89 页，P37 起页码顺延）；P32/P35/P43/P46/P47/P50/P53 七页排版与标注精修，例 4-6 分步动画拆为逐转角演示。
+V2.27 更新：第四章 P75 小结后新增扩展两页（ζ 与相频跳变陡度：分步数学证明 + S 平面矢量法互动，含 ζ 滑块联动「看车比喻」插画交叉淡化与扫频描迹动画），全章 91 页、P76 起页码顺延。
 V2.20 更新：第三章 10 页修改——P36 互动实验左右等大双图版式并重做极点平面
 （固定比例尺，修复 ωn 滑块极点不动缺陷）；P39 结构图放大改规范分式；
 P51/52/54/60/66/72/77/79 八页留白填充与字号放大。其余章节内容未变。

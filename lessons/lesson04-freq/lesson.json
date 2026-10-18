@@ -605,111 +605,127 @@
     },
     {
       "id": "l4-p76",
-      "file": "pages/p76-part4-cover.html",
+      "file": "pages/p76-zeta-slope-proof.html",
+      "title": "扩展①：ζ 越小相频跳变越陡——数学证明",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l4-p77",
+      "file": "pages/p77-zeta-slope-vectors.html",
+      "title": "扩展②：S 平面矢量法——几何与物理直觉",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l4-p78",
+      "file": "pages/p78-part4-cover.html",
       "title": "第四部分封面 · 闭环频率特性与频域指标",
       "complexity": "L0",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
-      "id": "l4-p77",
-      "file": "pages/p77-cl-problem.html",
+      "id": "l4-p79",
+      "file": "pages/p79-cl-problem.html",
       "title": "4.1 单位反馈闭环系统的频率响应：相量法",
       "complexity": "L1",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
-      "id": "l4-p78",
-      "file": "pages/p78-mcircle-deriv.html",
+      "id": "l4-p80",
+      "file": "pages/p80-mcircle-deriv.html",
       "title": "4.1 等 M 圆（等幅值轨迹）的推导",
       "complexity": "L1",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
-      "id": "l4-p79",
-      "file": "pages/p79-mcircle-plot.html",
+      "id": "l4-p81",
+      "file": "pages/p81-mcircle-plot.html",
       "title": "互动实验：等 M 圆与谐振峰值",
       "complexity": "L2",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
-      "id": "l4-p80",
-      "file": "pages/p80-ncircle.html",
+      "id": "l4-p82",
+      "file": "pages/p82-ncircle.html",
       "title": "4.1 等 N 圆（等相角轨迹）",
       "complexity": "L1",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
-      "id": "l4-p81",
-      "file": "pages/p81-nichols.html",
+      "id": "l4-p83",
+      "file": "pages/p83-nichols.html",
       "title": "4.1 Nichols 图（对数幅相图）",
       "complexity": "L1",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
-      "id": "l4-p82",
-      "file": "pages/p82-gamma-zeta.html",
+      "id": "l4-p84",
+      "file": "pages/p84-gamma-zeta.html",
       "title": "4.2 二阶系统：相角裕度 γ 与阻尼比 ζ",
       "complexity": "L1",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
-      "id": "l4-p83",
-      "file": "pages/p83-wc-ts.html",
+      "id": "l4-p85",
+      "file": "pages/p85-wc-ts.html",
       "title": "4.2 二阶系统：γ、ωc 与调节时间 ts",
       "complexity": "L1",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
-      "id": "l4-p84",
-      "file": "pages/p84-cl-metrics.html",
+      "id": "l4-p86",
+      "file": "pages/p86-cl-metrics.html",
       "title": "4.2 闭环频率特性与闭环频域指标",
       "complexity": "L1",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
-      "id": "l4-p85",
-      "file": "pages/p85-cl-zeta-lab.html",
+      "id": "l4-p87",
+      "file": "pages/p87-cl-zeta-lab.html",
       "title": "互动实验：ζ 与闭环频域/时域指标联动",
       "complexity": "L2",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
-      "id": "l4-p86",
-      "file": "pages/p86-highorder-empirical.html",
+      "id": "l4-p88",
+      "file": "pages/p88-highorder-empirical.html",
       "title": "4.2 高阶系统：频域与时域指标的经验公式",
       "complexity": "L1",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
-      "id": "l4-p87",
-      "file": "pages/p87-three-band.html",
+      "id": "l4-p89",
+      "file": "pages/p89-three-band.html",
       "title": "4.3 三频段理论：开环 Bode 图的分段解读",
       "complexity": "L1",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
-      "id": "l4-p88",
-      "file": "pages/p88-quiz-metrics.html",
+      "id": "l4-p90",
+      "file": "pages/p90-quiz-metrics.html",
       "title": "课堂互动 · 频域指标的选择",
       "complexity": "L2",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
-      "id": "l4-p89",
-      "file": "pages/p89-ch4-summary.html",
+      "id": "l4-p91",
+      "file": "pages/p91-ch4-summary.html",
       "title": "第四章小结：频率响应法",
       "complexity": "L1",
       "status": "Draft",

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>扩展①：ζ 越小相频跳变越陡——数学证明</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=227">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=227" defer></script>
+<style>
+  .row { display:flex; gap:22px; height:100%; min-height:0; }
+  .lst { flex:1.12; display:flex; flex-direction:column; justify-content:space-evenly; gap:12px; min-height:0; }
+  .seg { background:#fff; border:2px solid var(--line); border-radius:13px; padding:12px 15px; font-size:19px; line-height:1.55; }
+  .seg b { color:var(--navy); }
+  .seg .mathbox { font-size:19.5px; padding:6px 11px; }
+  .seg .no { display:inline-grid; place-items:center; width:28px; height:28px; border-radius:50%; background:var(--blue); color:#fff; font-weight:800; font-size:16px; margin-right:6px; }
+  .res { background:#FFF3E8; border-left:5px solid var(--orange); }
+  .rcol { flex:1; display:flex; flex-direction:column; gap:14px; min-height:0; }
+  .conc { flex:none; }
+  .conc .cbd { padding:11px 16px 13px; background:#fff; border-radius:0 0 12px 12px; }
+  .tbl { width:100%; border-collapse:collapse; font-size:18px; }
+  .tbl th { background:var(--sky); color:var(--navy); font-weight:700; padding:6px 8px; border:1.5px solid var(--line); }
+  .tbl td { padding:5.5px 8px; border:1.5px solid var(--line); text-align:center; color:var(--ink); }
+  .tbl td.m { font-family:var(--font-math); font-style:italic; font-size:19px; color:var(--navy); }
+  .tbl tr.hl td { background:#FFF3E8; font-weight:700; }
+  .figc { flex:1; display:flex; flex-direction:column; overflow:hidden; min-height:0; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:6px 12px; min-height:0; }
+  .figc svg { width:100%; height:100%; }
+</style>
+</head>
+<body data-title="扩展①：ζ 越小相频跳变越陡——数学证明" data-page="76 / 91">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lst">
+        <div class="seg" data-step="1"><span class="no">1</span><b>相角公式</b>（无量纲频率 u = ω/ω<sub>n</sub>）——"跳变有多陡"⇔ 曲线在中心点 <b>u=1</b> 处的<b>斜率</b>：
+          <div class="mathbox math eqline tex tex-d">\phi(u)=-\arctan\!\left(\dfrac{2\zeta u}{1-u^{2}}\right),\qquad u=\dfrac{\omega}{\omega_{n}}</div>
+        </div>
+        <div class="seg" data-step="2"><span class="no">2</span><b>复合求导</b>：设内层 <span class="tex">y=\dfrac{2\zeta u}{1-u^{2}}</span>，由链式法则 <span class="tex">\frac{d\phi}{du}=\frac{d\phi}{dy}\cdot\frac{dy}{du}</span>：
+          <div class="mathbox math eqline tex tex-d">\dfrac{d\phi}{du}=-\dfrac{1}{1+y^{2}}\cdot\dfrac{2\zeta\left(1+u^{2}\right)}{\left(1-u^{2}\right)^{2}}</div>
+        </div>
+        <div class="seg" data-step="3"><span class="no">3</span><b>代入 y 并化简</b>——得斜率的精确表达式（对一切 u 成立）：
+          <div class="mathbox math eqline tex tex-d">\dfrac{d\phi}{du}=-\dfrac{2\zeta\left(1+u^{2}\right)}{\left(1-u^{2}\right)^{2}+4\zeta^{2}u^{2}}</div>
+        </div>
+        <div class="seg res" data-step="4"><span class="no">4</span><b>代入中心点 u=1</b>（即 ω=ω<sub>n</sub> 处）：
+          <div class="mathbox math eqline tex tex-d">\left.\dfrac{d\phi}{du}\right|_{u=1}=-\dfrac{2\zeta\cdot 2}{0+4\zeta^{2}}=-\dfrac{1}{\zeta}</div>
+          ω<sub>n</sub> 处斜率与 ζ <span class="kw-r">严格成反比</span>——ζ 减半，跳变陡一倍。
+        </div>
+      </div>
+      <div class="rcol">
+        <div class="act-card conc">
+          <div class="hd">结论：ω<sub>n</sub> 处相频斜率 = −1/ζ</div>
+          <div class="cbd">
+            <table class="tbl">
+              <tr><th>阻尼比 ζ</th><th>斜率 −1/ζ</th><th>跳变形态</th></tr>
+              <tr><td class="m">1</td><td class="m">−1</td><td>平缓过渡</td></tr>
+              <tr><td class="m">0.5</td><td class="m">−2</td><td>明显变陡</td></tr>
+              <tr class="hl"><td class="m">0.1</td><td class="m">−10</td><td>断崖式跳变</td></tr>
+              <tr class="hl"><td class="m">→ 0</td><td class="m">→ −∞</td><td>垂直跳变：0°→−180°</td></tr>
+            </table>
+          </div>
+        </div>
+        <div class="act-card figc">
+          <div class="hd">φ(u) 曲线与 u=1 处切线（切线斜率 = −1/ζ）</div>
+          <div class="bd2"><svg id="fig" viewBox="0 0 760 560"></svg></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">结论</span><span>数学上，ω=ω<sub>n</sub> 处相频斜率恒等于 <span class="kw-r">−1/ζ</span>：ζ→0 时斜率 →−∞，相角在 ω<sub>n</sub> 瞬间由 0° 垂直跌落至 −180°。为什么斜率恰好是 −1/ζ？下一页用 <span class="kw-r">S 平面矢量法</span>看它的几何本质。</span></div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("fig");
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const MF = "Cambria Math,STIX Two Math,Georgia,Microsoft YaHei,sans-serif";
+  const SUB = (n, s) => { const esc = t => t.replace(/&/g, "&amp;").replace(/</g, "&lt;"); let html = "", sub = false; for (const p of String(s).split(/(_\{[^}]*\})/)) { if (!p) continue; if (p.startsWith("_{")) { html += '<tspan' + (sub ? '' : ' dy="6"') + ' font-size="72%">' + esc(p.slice(2, -1)) + '</tspan>'; sub = true; } else { html += sub ? '<tspan dy="-6">' + esc(p) + '</tspan>' : esc(p); sub = false; } } n.innerHTML = html; };
+  const tx = (x, y, s, o) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 17.5, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal", "font-family": MF }); SUB(n, s); if (o && o.halo) n.setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:6;stroke-linejoin:round"); return n; };
+
+  const x0 = 80, x1 = 726, yT = 46, yB = 496;         // u∈[0,3]，φ∈[−180,0]
+  const X = u => x0 + u / 3 * (x1 - x0);
+  const Y = v => yT + (-v) / 180 * (yB - yT);
+  const PH = (u, z) => -Math.atan2(2 * z * u, 1 - u * u) * 180 / Math.PI;
+
+  const defs = mk("defs", {});
+  const m1 = mk("marker", { id: "a76", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, m1);
+
+  // 坐标轴（左轴 φ，底轴 u）
+  mk("line", { x1: x0, y1: yB, x2: x1, y2: yB, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a76)" });
+  mk("line", { x1: x0, y1: yB, x2: x0, y2: yT, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a76)" });
+  tx(x1 - 4, yB + 40, "u = ω/ω_{n}", { fs: 18, it: true, b: true, fill: "#5B6B8C", an: "end" });
+  tx(x0 - 12, yT - 8, "φ(u)", { fs: 18, it: true, b: true, fill: "#1B3B8B", an: "end" });
+  [0, 0.5, 1, 1.5, 2, 2.5, 3].forEach(u => {
+    const x = X(u);
+    if (u > 0 && u !== 1) mk("line", { x1: x, y1: yB, x2: x, y2: yT, stroke: "#F0F4FC", "stroke-width": 1 });
+    tx(x, yB + 22, String(u), { fs: 17, fill: "#5B6B8C" });
+  });
+  [0, -45, -90, -135, -180].forEach(v => {
+    const y = Y(v);
+    if (v !== 0 && v !== -180) mk("line", { x1: x0, y1: y, x2: x1, y2: y, stroke: v === -90 ? "#DCE5F6" : "#F0F4FC", "stroke-width": v === -90 ? 1.6 : 1, "stroke-dasharray": v === -90 ? "7 5" : "0" });
+    tx(x0 - 12, y + 5, v + "°", { fs: 17, fill: "#5B6B8C", an: "end" });
+  });
+  // u = 1 竖直虚线（ω = ωn）
+  mk("line", { x1: X(1), y1: yB, x2: X(1), y2: yT, stroke: "#D63A2F", "stroke-width": 1.8, "stroke-dasharray": "7 5" });
+  tx(X(1) + 10, yT + 20, "u=1（ω = ω_{n}）", { fs: 17.5, b: true, fill: "#D63A2F", an: "start", halo: true });
+  // 三条相频曲线
+  const ZS = [[1, "#7C9CF0", 3.2], [0.3, "#2B5CE6", 3.6], [0.1, "#D63A2F", 3.8]];
+  ZS.forEach(([z, c, w]) => {
+    let d = "";
+    for (let i = 0; i <= 500; i++) { const u = 0.002 + (3 - 0.002) * i / 500; d += (i ? "L" : "M") + X(u).toFixed(1) + "," + Y(PH(u, z)).toFixed(1); }
+    mk("path", { d, stroke: c, "stroke-width": w, fill: "none" });
+  });
+  // u=1 处切线（斜率 −180/(πζ) °/单位u）
+  ZS.forEach(([z, c]) => {
+    const k = 180 / Math.PI / z;                       // 度 / 单位 u
+    const du = Math.min(0.36, 26 / k);                 // 控制切线半长，φ 方向约 ±26°
+    mk("line", { x1: X(1 - du), y1: Y(-90 + k * du), x2: X(1 + du), y2: Y(-90 - k * du), stroke: c, "stroke-width": 2.2 });
+    mk("circle", { cx: X(1), cy: Y(-90), r: 5, fill: c });
+  });
+  tx(X(1.5), Y(-24), "u=1 处切线：斜率 = −1/ζ", { fs: 18, b: true, fill: "#D63A2F", an: "start", halo: true });
+  // 曲线标签（右侧，随曲线高度；ζ=0.1 放曲线上方，避开底轴刻度）
+  [[1, "#7C9CF0", 2.28, -16], [0.3, "#2B5CE6", 2.42, -12], [0.1, "#D63A2F", 2.55, -14]].forEach(([z, c, uL, dy]) => {
+    tx(X(uL), Y(PH(uL, z)) + dy, "ζ=" + z, { fs: 18, b: true, fill: c, an: "start", halo: true });
+  });
+  tx(X(0.35), Y(-115), "ζ 越小，过 −90° 越陡", { fs: 17.5, b: true, fill: "#1D3FA0", an: "middle", halo: true });
+});
+</script>
+</body>
+</html>
