@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <title>3.3 例 4-10（下）：补全曲线并判断稳定性</title>
-<link rel="stylesheet" href="../../../theme/theme.css?v=227">
+<link rel="stylesheet" href="../../../theme/theme.css?v=228">
 <script src="../../../theme/mathjax/mathjax-render.js"></script>
 <script src="../../../theme/mathjax/tex-chtml.js"></script>
 <script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
-<script src="../../../theme/act-base.js?v=227" defer></script>
+<script src="../../../theme/act-base.js?v=228" defer></script>
 <style>
   .row { display:flex; gap:22px; height:100%; min-height:0; }
-  .lst { flex:0.98; display:flex; flex-direction:column; gap:10px; min-height:0; }
+  .lst { flex:0.98; display:flex; flex-direction:column; justify-content:space-evenly; gap:10px; min-height:0; }
   .seg { background:#fff; border:2px solid var(--line); border-radius:13px; padding:10px 16px; font-size:18px; line-height:1.55; }
   .seg b { color:var(--navy); }
   .seg .mathbox { font-size:19px; padding:6px 12px; }
@@ -20,7 +20,7 @@
   .figc svg { width:100%; height:100%; }
 </style>
 </head>
-<body data-title="3.3 例 4-10（下）：补全曲线并判断稳定性" data-page="68 / 91">
+<body data-title="3.3 例 4-10（下）：补全曲线并判断稳定性" data-page="70 / 91">
 <div class="act-stage"><div class="act-slide">
   <div class="act-body has-note">
     <div class="row">
@@ -35,7 +35,7 @@
         <div class="ok" data-step="4"><b>闭环系统稳定</b>，且对<b>任意 K&gt;0、T&gt;0 都稳定</b>——论据是补全围线后 N=0、P=0；可用特征多项式 Ts²+s+K 系数全正作独立代数校验（如 K=2、T=1 时曲线低频段在 −1 左侧，仍稳定）。</div>
       </div>
       <div class="act-card figc">
-        <div class="hd">完整 Nyquist 曲线：正频段（实线）+ 镜像负频段 + ∞ 圆弧（虚线）</div>
+        <div class="hd">完整 Nyquist 曲线（闭合）：正频段（红实线）+ 镜像段与 ∞ 补圆弧（蓝虚线）</div>
         <div class="bd2"><svg id="fig" viewBox="0 0 1000 640"></svg></div>
       </div>
     </div>
@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const defs = mk("defs", {});
   const m1 = mk("marker", { id: "a61", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
   mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, m1);
-  const SC = 150, O = { x: 560, y: 320 };
+  const SC = 130, O = { x: 560, y: 320 };
   const X = v => O.x + v * SC, Y = v => O.y - v * SC;
   mk("line", { x1: 60, y1: O.y, x2: 950, y2: O.y, stroke: "#5B6B8C", "stroke-width": 1.6, "marker-end": "url(#a61)" });
   mk("line", { x1: O.x, y1: 600, x2: O.x, y2: 40, stroke: "#5B6B8C", "stroke-width": 1.6, "marker-end": "url(#a61)" });
@@ -62,45 +62,63 @@ document.addEventListener("DOMContentLoaded", () => {
   tx(O.x - 14, O.y + 28, "O", { fs: 19.5, fill: "#5B6B8C", an: "end" });
   mk("circle", { cx: X(-1), cy: Y(0), r: 9, fill: "#fff", stroke: "#D63A2F", "stroke-width": 3.4 });
   tx(X(-1), Y(0) + 36, "(−1, j0)", { fs: 19.5, b: true, fill: "#D63A2F" });
-  // G(jω) K=T=1: Re=-1/(1+w²), Im=-1/[w(1+w²)]
+  // G(jω) K=T=1: Re=-1/(1+w²), Im=-1/[w(1+w²)]；w0 截断于图幅下缘附近，补圆弧端点与之相接
   const Gp = w => [-1 / (1 + w * w), -1 / (w * (1 + w * w))];
+  const W0 = 0.425, W1 = 24;
+  const P0 = Gp(W0);                                   // 截断端点（≈(−0.85, ∓1.99)）
+  const EX = X(P0[0]), EY = Y(P0[1]);                  // 正频段下端点
+  const MY = 2 * O.y - EY;                             // 镜像段上端点（关于实轴对称）
+  // 方向箭头（三点取中点切线）
+  function arr3(pA, pB, pC, col, parent) {
+    const ang = Math.atan2(pC[1] - pA[1], pC[0] - pA[0]) * 180 / Math.PI;
+    mk("path", { d: "M-11,-8 L12,0 L-11,8 Z", fill: col, transform: "translate(" + pB[0].toFixed(1) + "," + pB[1].toFixed(1) + ") rotate(" + ang.toFixed(1) + ")" }, parent);
+  }
   const dyn = mk("g", {});
-  function posBranch(dash, col) {
+  function branchPath(mirror, col, wdt, dash) {
     let d = "";
-    for (let i = 0; i <= 400; i++) { const w = 0.06 * Math.pow(400, i / 400); const [a, b] = Gp(w); d += (i ? "L" : "M") + X(a).toFixed(1) + "," + Y(b).toFixed(1); }
-    return mk("path", { d, fill: "none", stroke: col, "stroke-width": 4.2, "stroke-dasharray": dash || "0" }, dyn);
+    for (let i = 0; i <= 400; i++) { const w = W0 * Math.pow(W1 / W0, i / 400); const [a, b] = Gp(w); d += (i ? "L" : "M") + X(a).toFixed(1) + "," + Y(mirror ? -b : b).toFixed(1); }
+    return mk("path", { d, fill: "none", stroke: col, "stroke-width": wdt, "stroke-dasharray": dash || "0" }, dyn);
   }
   let K = 0; const TOTAL = 4;
   function paint() {
     dyn.innerHTML = "";
     if (K >= 1) {
-      // 正频段（红实线）+ 方向
-      posBranch("0", "#D63A2F");
-      const [a1, b1] = Gp(0.5);
-      mk("path", { d: "M" + (X(a1) - 10) + "," + (Y(b1) - 12) + " l14,-2 l-6,13 Z", fill: "#D63A2F" }, dyn);
-      tx(X(-0.6), Y(-1.1), "正频段 ω:0⁺→+∞", { fs: 19.5, b: true, fill: "#D63A2F", an: "start" }, dyn);
-      // 镜像负频段（紫）
-      let d = "";
-      for (let i = 0; i <= 400; i++) { const w = 0.06 * Math.pow(400, i / 400); const [a, b] = Gp(w); d += (i ? "L" : "M") + X(a).toFixed(1) + "," + Y(-b).toFixed(1); }
-      mk("path", { d, fill: "none", stroke: "#2B5CE6", "stroke-width": 3.6, "stroke-dasharray": "9 6" }, dyn);
-      // 渐近线 Re=-1
-      mk("line", { x1: X(-1), y1: Y(-2.2), x2: X(-1), y2: Y(2.2), stroke: "#C6D2EA", "stroke-width": 1.4, "stroke-dasharray": "6 5" }, dyn);
-      tx(X(-1) - 10, Y(-1.55), "渐近线 Re=−KT", { fs: 19.5, fill: "#5B6B8C", an: "end" }, dyn);
+      // 图例（左上空白区）
+      mk("rect", { x: 78, y: 56, width: 316, height: 66, rx: 10, fill: "rgba(255,255,255,0.92)", stroke: "#C9D6F2", "stroke-width": 1.5 }, dyn);
+      mk("line", { x1: 92, y1: 78, x2: 136, y2: 78, stroke: "#D63A2F", "stroke-width": 4.2 }, dyn);
+      tx(146, 84, "正频段 ω: 0⁺→+∞（实测）", { fs: 17.5, fill: "#D63A2F", an: "start" }, dyn);
+      mk("line", { x1: 92, y1: 104, x2: 136, y2: 104, stroke: "#2B5CE6", "stroke-width": 3.4, "stroke-dasharray": "8 5" }, dyn);
+      tx(146, 110, "镜像段 + ∞ 补圆弧（辅助闭合）", { fs: 17.5, fill: "#2B5CE6", an: "start" }, dyn);
+      // 正频段（红实线）+ 切线方向箭头
+      branchPath(false, "#D63A2F", 4.2);
+      const a1 = Gp(1.05), a2 = Gp(1.2), a3 = Gp(1.38);
+      arr3([X(a1[0]), Y(a1[1])], [X(a2[0]), Y(a2[1])], [X(a3[0]), Y(a3[1])], "#D63A2F", dyn);
+      // 渐近线 Re=−KT
+      mk("line", { x1: X(-1), y1: EY + 8, x2: X(-1), y2: MY - 8, stroke: "#C6D2EA", "stroke-width": 1.6, "stroke-dasharray": "6 5" }, dyn);
+      tx(X(-1) - 8, EY - 26, "渐近线 Re=−KT", { fs: 18, fill: "#5B6B8C", an: "end", halo: true }, dyn);
     }
     if (K >= 2) {
-      // ∞ 右半大圆（顺时针，从 +j∞ 端 → −j∞ 端）—— GH 平面上是右半 ∞ 半圆，示意画大虚线圆
-      mk("path", { d: "M" + X(0.35) + "," + Y(2.05) + " A" + 2.24 * SC + "," + 2.24 * SC + " 0 0 1 " + X(0.35) + "," + Y(-2.05), fill: "none", stroke: "#2B5CE6", "stroke-width": 3, "stroke-dasharray": "12 9" }, dyn);
-      tx(X(2.15), Y(0.35), "∞ 补圆弧", { fs: 19.5, b: true, fill: "#2B5CE6", an: "start" }, dyn);
+      // 镜像负频段（蓝虚线）+ 方向箭头（走向：原点 → 上端点）
+      branchPath(true, "#2B5CE6", 3.4, "9 6");
+      const b1 = Gp(1.38), b2 = Gp(1.2), b3 = Gp(1.05);
+      arr3([X(b1[0]), Y(-b1[1])], [X(b2[0]), Y(-b2[1])], [X(b3[0]), Y(-b3[1])], "#2B5CE6", dyn);
+      // ∞ 右半补圆弧（蓝虚线，顺时针：上端点 → 经右侧 → 下端点）+ 右缘箭头
+      const RC = (EY - MY) / 2;
+      mk("path", { d: "M" + EX + "," + MY + " A" + RC + "," + RC + " 0 0 1 " + EX + "," + EY, fill: "none", stroke: "#2B5CE6", "stroke-width": 3, "stroke-dasharray": "11 8" }, dyn);
+      arr3([EX + RC - 8, O.y - 40], [EX + RC, O.y], [EX + RC - 8, O.y + 40], "#2B5CE6", dyn);
+      tx(EX + RC + 10, O.y - 30, "∞ 补圆弧", { fs: 18.5, b: true, fill: "#2B5CE6", an: "start", halo: true }, dyn);
+      tx(EX + RC + 10, O.y - 6, "（半径→∞，示意）", { fs: 16.5, fill: "#2B5CE6", an: "start", halo: true }, dyn);
+      // 段③：∞ 大半圆的像缩成原点
+      mk("circle", { cx: O.x, cy: O.y, r: 7, fill: "none", stroke: "#2B5CE6", "stroke-width": 3 }, dyn);
+      tx(O.x + 16, O.y - 14, "③ 缩成原点", { fs: 17, b: true, fill: "#2B5CE6", an: "start", halo: true }, dyn);
+      // 闭合提示
+      tx(EX - 12, EY + 26, "ω=0⁺ 端", { fs: 16.5, fill: "#5B6B8C", an: "middle", halo: true }, dyn);
+      tx(EX - 12, MY - 18, "ω=0⁻ 端", { fs: 16.5, fill: "#5B6B8C", an: "middle", halo: true }, dyn);
     }
     if (K >= 3) {
-      // 不包围示意：(-1,j0) 在曲线左侧之外
+      // 不包围示意：(-1,j0) 在闭合曲线之外
       mk("circle", { cx: X(-1), cy: Y(0), r: 18, fill: "none", stroke: "#D63A2F", "stroke-width": 2, "stroke-dasharray": "5 4" }, dyn);
-      tx(X(-1) - 16, Y(0) - 26, "曲线不经过、不包围此点 ⇒ N=0", { fs: 19.5, b: true, fill: "#D63A2F", an: "end" }, dyn);
-    }
-    // 紫段标注最后画，确保在所有曲线之上（halo 才真正有效）
-    if (K >= 1) {
-      tx(X(0.02), Y(1.62), "镜像负频段 ω:−∞→0⁻", { fs: 19.5, b: true, fill: "#2B5CE6", an: "start" }, dyn)
-        .setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:6");
+      tx(X(-1) - 16, Y(0) - 26, "闭合曲线不经过、不包围此点 ⇒ N=0", { fs: 19.5, b: true, fill: "#D63A2F", an: "end", halo: true }, dyn);
     }
   }
   const S = ACT.step, _next = S.next.bind(S), _reset = S.reset.bind(S);

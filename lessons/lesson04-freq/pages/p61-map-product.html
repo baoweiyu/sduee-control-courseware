@@ -2,14 +2,14 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<title>3.2 映射原理⑥ 一般式：零极点混合</title>
-<link rel="stylesheet" href="../../../theme/theme.css?v=227">
+<title>3.2 映射原理③ 向量的乘积</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=228">
 <script src="../../../theme/mathjax/mathjax-render.js"></script>
 <script src="../../../theme/mathjax/tex-chtml.js"></script>
 <script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
-<script src="../../../theme/act-base.js?v=227" defer></script>
+<script src="../../../theme/act-base.js?v=228" defer></script>
 <style>
-  /* ===== T4 双平面统一版式（P55-60 六页严格一致）：顶部模型带 + 两张等大图 + 底部控制与三大读数 ===== */
+  /* ===== T4 双平面统一版式（P59-64 六页严格一致）：顶部模型带 + 两张等大图 + 底部控制与三大读数 ===== */
   .colwrap { display:flex; flex-direction:column; gap:12px; height:100%; min-height:0; }
   .modelband { background:#fff; border:2.5px solid var(--line); border-radius:14px; padding:8px 24px; display:flex; align-items:center; gap:24px; flex:none; height:96px; }
   .modelband .mb { font-size:24px; color:var(--navy); font-weight:700; flex:none; }
@@ -30,22 +30,22 @@
   .bigread .val { font-size:30px; font-weight:700; color:var(--navy); font-family:var(--font-math); font-style:italic; white-space:nowrap; }
 </style>
 </head>
-<body data-title="3.2 映射原理⑥ 一般式：零极点混合" data-page="62 / 91">
+<body data-title="3.2 映射原理③ 向量的乘积" data-page="61 / 91">
 <div class="act-stage"><div class="act-slide">
   <div class="act-body has-note">
     <div class="colwrap">
       <div class="modelband">
         <span class="mb">模型：</span>
-        <span class="mathbox math mf eqline tex tex-d">F(s)=\dfrac{K\prod(s-z_{i})}{\prod(s-p_{j})}</span>
-        <span class="q"><span class="tex">z_{1}=-1</span>（○）、<span class="tex">p_{1}=-2</span>、<span class="tex">p_{2}=-3</span>（×）全在 C 内（C：圆心 −2、半径 1.8 顺时针）。<b>问题：零点贡献为正、极点取反，N = ？</b></span>
+        <span class="mathbox math mf eqline tex tex-d">F(s)=(s-z_{1})(s-z_{2})</span>
+        <span class="q"><span class="tex">z_{1}=-1</span>、<span class="tex">z_{2}=-2</span>（均在 |s|=0.7 的圆外）。<b>问题：模相乘、相角相加——s 转一圈，F(s) 转几圈？</b></span>
       </div>
       <div class="figs">
         <div class="act-card pc">
-          <div class="hd">s 平面：C 内 1 零点 + 2 极点</div>
+          <div class="hd">s 平面：两根向量 (s−z₁)、(s−z₂)</div>
           <div class="bd2"><svg id="figL" viewBox="0 0 470 620"></svg></div>
         </div>
         <div class="act-card pc">
-          <div class="hd">F(s) 平面：零极点混合的像</div>
+          <div class="hd"><span style="flex:1">F(s) 平面：像 <span class="tex">F(s)=(s-z_{1})(s-z_{2})</span></span></div>
           <div class="bd2"><svg id="figR" viewBox="0 0 470 620"></svg></div>
         </div>
       </div>
@@ -55,9 +55,9 @@
           <button class="pbtn" id="stepq">◑ ¼ 步进</button>
           <button class="pbtn" id="reset">⟲ 重置</button>
         </div>
-        <div class="bigread"><span class="lab">零点 z₁ 贡献</span><span class="val" id="r-v1">—</span></div>
-        <div class="bigread"><span class="lab">极点合计（取反）</span><span class="val" id="r-v2">—</span></div>
-        <div class="bigread"><span class="lab">包围圈数 N = Δ/360°</span><span class="val" id="r-v3">—</span></div>
+        <div class="bigread"><span class="lab">相角和 ∠F = θ₁+θ₂</span><span class="val" id="r-v1">—</span></div>
+        <div class="bigread"><span class="lab">模积 |F| = |s−z₁|·|s−z₂|</span><span class="val" id="r-v2">—</span></div>
+        <div class="bigread"><span class="lab">一圈净绕数</span><span class="val" id="r-v3">—</span></div>
       </div>
       <div data-step="1" style="display:none"></div>
       <div data-step="2" style="display:none"></div>
@@ -65,7 +65,7 @@
       <div data-step="4" style="display:none"></div>
     </div>
   </div>
-  <div class="act-note"><span class="lead">一句话记住</span><span>围线里<span class="kw-r">每个零点让 Γ 顺时针多转 1 圈、每个极点让 Γ 逆时针多转 1 圈</span>，围线外的零极点不算数——这正是 Nyquist 判据"数圈数"的全部原理。</span></div>
+  <div class="act-note"><span class="lead">乘法规则</span><span>复数相乘——<span class="kw-r">模相乘、相角相加</span>。既然相角是各因子相角的代数和，s 绕一圈后 F(s) 净转角 = 各因子净转角的代数和——本例两零点都在圆外，净绕数为 0。</span></div>
 </div></div>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
@@ -95,17 +95,16 @@ document.addEventListener("DOMContentLoaded", () => {
     P.tx(221, 350, "O", { fs: 22, fill: "#5B6B8C", an: "end" });
     if (capTop) P.tx(235, 584, capTop, { fs: 22, fill: "#5B6B8C" });
   }
-  const OX = 235, OY = 320, US = 56, Z1 = -1, P1 = -2, P2 = -3, CC = -2, R0 = 1.8;
+  const OX = 235, OY = 320, US = 100, Z1 = -1, Z2 = -2, R0 = 0.7;
   const X = v => OX + v * US, Y = v => OY - v * US;
-  const D = 180 / Math.PI, T = 12000, NP = 360;
+  const D = 180 / Math.PI, T = 10000, NP = 300;
   const cMul = (a, b) => [a[0] * b[0] - a[1] * b[1], a[0] * b[1] + a[1] * b[0]];
-  const cDiv = (a, b) => { const d = b[0] * b[0] + b[1] * b[1]; return [(a[0] * b[0] + a[1] * b[1]) / d, (a[1] * b[0] - a[0] * b[1]) / d]; };
   const sPts = [], fPts = [];
   let maxm = 0;
   for (let i = 0; i <= NP; i++) {
     const a = -2 * Math.PI * i / NP;
-    const s = [CC + R0 * Math.cos(a), R0 * Math.sin(a)];
-    const f = cDiv([s[0] - Z1, s[1]], cMul([s[0] - P1, s[1]], [s[0] - P2, s[1]]));
+    const s = [R0 * Math.cos(a), R0 * Math.sin(a)];
+    const f = cMul([s[0] - Z1, s[1]], [s[0] - Z2, s[1]]);
     sPts.push(s); fPts.push(f);
     maxm = Math.max(maxm, Math.hypot(f[0], f[1]));
   }
@@ -120,28 +119,21 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     return out;
   }
-  const accZ = accOf(sPts.map(s => [s[0] - Z1, s[1]]));
-  const accP1 = accOf(sPts.map(s => [s[0] - P1, s[1]]));
-  const accP2 = accOf(sPts.map(s => [s[0] - P2, s[1]]));
   const accF = accOf(fPts);
   const FS = 192 / maxm;
   const FX = v => OX + v * FS, FY = v => OY - v * FS;
   // ---- 左：s 平面 ----
-  const L = panel("figL", "a60l");
-  stage(L, "a60l", "围线 C：圆心 −2、半径 1.8（顺时针）");
-  L.mk("circle", { cx: X(Z1), cy: Y(0), r: 9, fill: "none", stroke: "#D63A2F", "stroke-width": 3.6 });
-  L.tx(X(Z1), Y(0) + 36, "z₁ = −1", { fs: 21, b: true, fill: "#D63A2F" });
-  [[P1, "p₁ = −2", 52], [P2, "p₂ = −3", 34]].forEach(([px, lab, dy]) => {
-    const cx = X(px), cy = Y(0);
-    L.mk("line", { x1: cx - 9, y1: cy - 9, x2: cx + 9, y2: cy + 9, stroke: "#1D3FA0", "stroke-width": 3.6 });
-    L.mk("line", { x1: cx - 9, y1: cy + 9, x2: cx + 9, y2: cy - 9, stroke: "#1D3FA0", "stroke-width": 3.6 });
-    L.tx(cx, cy + dy, lab, { fs: 21, b: true, fill: "#1D3FA0" });
+  const L = panel("figL", "a57l");
+  stage(L, "a57l", "|s| = 0.7 的圆（两零点均在圆外）");
+  [[Z1, "z₁ = −1"], [Z2, "z₂ = −2"]].forEach(([zx, lab]) => {
+    L.mk("circle", { cx: X(zx), cy: Y(0), r: 9, fill: "none", stroke: "#D63A2F", "stroke-width": 3.6 });
+    L.tx(X(zx), Y(0) + 36, lab, { fs: 22, b: true, fill: "#D63A2F" });
   });
-  L.mk("circle", { cx: X(CC), cy: Y(0), r: R0 * US, fill: "none", stroke: "#B9C6E4", "stroke-width": 1.8, "stroke-dasharray": "7 5" });
+  L.mk("circle", { cx: OX, cy: OY, r: R0 * US, fill: "none", stroke: "#B9C6E4", "stroke-width": 1.8, "stroke-dasharray": "7 5" });
   const dynL = L.mk("g", {});
   // ---- 右：F 平面 ----
-  const Rp = panel("figR", "a60r");
-  stage(Rp, "a60r", "像轨迹 Γ（虚线预览，逆时针 1 圈）");
+  const Rp = panel("figR", "a57r");
+  stage(Rp, "a57r", "像轨迹（虚线预览，不绕原点）");
   Rp.mk("circle", { cx: OX, cy: OY, r: 7, fill: "#D63A2F" });
   Rp.tx(219, 352, "原点", { fs: 21, b: true, fill: "#D63A2F", an: "end" });
   let dG = "";
@@ -149,18 +141,20 @@ document.addEventListener("DOMContentLoaded", () => {
   Rp.mk("path", { d: dG + "Z", fill: "none", stroke: "#F0C9BE", "stroke-width": 1.8, "stroke-dasharray": "7 5" });
   const dynR = Rp.mk("g", {});
   const r1 = document.getElementById("r-v1"), r2 = document.getElementById("r-v2"), r3 = document.getElementById("r-v3");
+  const wrap = a => { while (a > 180) a -= 360; while (a < -180) a += 360; return a; };
   function draw(u) {
     const k = u === 0 ? 0 : Math.max(1, Math.round(u * NP));
     const s = sPts[k], f = fPts[k];
+    const v1 = [s[0] - Z1, s[1]], v2 = [s[0] - Z2, s[1]];
+    const t1 = Math.atan2(v1[1], v1[0]) * D, t2 = Math.atan2(v2[1], v2[0]) * D;
     dynL.innerHTML = ""; dynR.innerHTML = "";
     if (u > 0) {
       let d = "";
       for (let i = 0; i <= k; i++) d += (i ? "L" : "M") + X(sPts[i][0]).toFixed(1) + "," + Y(sPts[i][1]).toFixed(1);
       L.mk("path", { d, fill: "none", stroke: "#2B5CE6", "stroke-width": 3.8 }, dynL);
     }
-    L.mk("line", { x1: X(Z1), y1: Y(0), x2: X(s[0]), y2: Y(s[1]), stroke: "#2B5CE6", "stroke-width": 3, "marker-end": "url(#a60lB)" }, dynL);
-    L.mk("line", { x1: X(P1), y1: Y(0), x2: X(s[0]), y2: Y(s[1]), stroke: "#2B5CE6", "stroke-width": 2.8, "stroke-dasharray": "9 6", "marker-end": "url(#a60lB)" }, dynL);
-    L.mk("line", { x1: X(P2), y1: Y(0), x2: X(s[0]), y2: Y(s[1]), stroke: "#2B5CE6", "stroke-width": 2.8, "stroke-dasharray": "3 4", "marker-end": "url(#a60lB)" }, dynL);
+    L.mk("line", { x1: X(Z1), y1: Y(0), x2: X(s[0]), y2: Y(s[1]), stroke: "#2B5CE6", "stroke-width": 3, "marker-end": "url(#a57lB)" }, dynL);
+    L.mk("line", { x1: X(Z2), y1: Y(0), x2: X(s[0]), y2: Y(s[1]), stroke: "#2B5CE6", "stroke-width": 3, "stroke-dasharray": "9 6", "marker-end": "url(#a57lB)" }, dynL);
     L.mk("circle", { cx: X(s[0]), cy: Y(s[1]), r: 9, fill: "#2B5CE6" }, dynL);
     L.tx(X(s[0]) + 18, Y(s[1]) - 16, "s", { fs: 26, b: true, it: true, fill: "#2B5CE6" }, dynL);
     if (u > 0) {
@@ -168,13 +162,13 @@ document.addEventListener("DOMContentLoaded", () => {
       for (let i = 0; i <= k; i++) d += (i ? "L" : "M") + FX(fPts[i][0]).toFixed(1) + "," + FY(fPts[i][1]).toFixed(1);
       Rp.mk("path", { d, fill: "none", stroke: "#D63A2F", "stroke-width": 3.8 }, dynR);
     }
-    Rp.mk("line", { x1: OX, y1: OY, x2: FX(f[0]), y2: FY(f[1]), stroke: "#D63A2F", "stroke-width": 3.4, "marker-end": "url(#a60rR)" }, dynR);
+    Rp.mk("line", { x1: OX, y1: OY, x2: FX(f[0]), y2: FY(f[1]), stroke: "#D63A2F", "stroke-width": 3.4, "marker-end": "url(#a57rR)" }, dynR);
     Rp.mk("circle", { cx: FX(f[0]), cy: FY(f[1]), r: 9, fill: "#D63A2F" }, dynR);
     if (FX(f[0]) > 378) Rp.tx(FX(f[0]) - 18, FY(f[1]) - 16, "F(s)", { fs: 26, b: true, it: true, fill: "#D63A2F", an: "end" }, dynR);
     else Rp.tx(FX(f[0]) + 18, FY(f[1]) - 16, "F(s)", { fs: 26, b: true, it: true, fill: "#D63A2F" }, dynR);
-    r1.textContent = (accZ[k] * D).toFixed(0) + "°";
-    r2.textContent = (-(accP1[k] + accP2[k]) * D).toFixed(0) + "°";
-    const nv = accF[k] * D / 360; r3.textContent = (Math.abs(nv) < 0.005 ? 0 : nv).toFixed(2);
+    r1.textContent = wrap(t1 + t2).toFixed(1) + "°";
+    r2.textContent = (Math.hypot(v1[0], v1[1]) * Math.hypot(v2[0], v2[1])).toFixed(3);
+    const lap = accF[k] * D / 360; r3.textContent = (Math.abs(lap) < 0.005 ? 0 : lap).toFixed(2) + " 圈";
   }
   // ---- 播放控制：播放/暂停、¼ 步进（与 ACT 分步同一进度）、重置 ----
   const playBtn = document.getElementById("play"), stepBtn = document.getElementById("stepq"), resetBtn = document.getElementById("reset");

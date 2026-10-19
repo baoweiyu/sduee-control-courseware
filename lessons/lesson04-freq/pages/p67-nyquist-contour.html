@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <title>3.3 Nyquist 轨线与虚轴上的开环极点</title>
-<link rel="stylesheet" href="../../../theme/theme.css?v=227">
+<link rel="stylesheet" href="../../../theme/theme.css?v=228">
 <script src="../../../theme/mathjax/mathjax-render.js"></script>
 <script src="../../../theme/mathjax/tex-chtml.js"></script>
 <script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
-<script src="../../../theme/act-base.js?v=227" defer></script>
+<script src="../../../theme/act-base.js?v=228" defer></script>
 <style>
   .row { display:flex; gap:22px; height:100%; min-height:0; }
   .figc { flex:1.15; display:flex; flex-direction:column; overflow:hidden; }
@@ -22,7 +22,7 @@
   .act-table td { padding:10px 9px; text-align:center; }
 </style>
 </head>
-<body data-title="3.3 Nyquist 轨线与虚轴上的开环极点" data-page="65 / 91">
+<body data-title="3.3 Nyquist 轨线与虚轴上的开环极点" data-page="67 / 91">
 <div class="act-stage"><div class="act-slide">
   <div class="act-body has-note">
     <div class="row">
@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const svg = document.getElementById("fig");
   const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
   const MF = "Cambria Math,STIX Two Math,Georgia,Microsoft YaHei,sans-serif";
-  const SUB = (n, s) => { const esc = t => t.replace(/&/g, "&amp;").replace(/</g, "&lt;"); let html = "", sub = false; for (const p of String(s).split(/(_\{[^}]*\})/)) { if (!p) continue; if (p.startsWith("_{")) { html += '<tspan' + (sub ? '' : ' dy="6"') + ' font-size="72%">' + esc(p.slice(2, -1)) + '</tspan>'; sub = true; } else { html += sub ? '<tspan dy="-6">' + esc(p) + '</tspan>' : esc(p); sub = false; } } n.innerHTML = html; };
+  const SUB = (n, s) => { const esc = t => t.replace(/&/g, "&amp;").replace(/</g, "&lt;"); let html = "", sub = 0; for (const p of String(s).split(/([_^]\{[^}]*\})/)) { if (!p) continue; if (p.startsWith("_{")) { html += '<tspan' + (sub ? '' : ' dy="6"') + ' font-size="72%">' + esc(p.slice(2, -1)) + '</tspan>'; sub = 1; } else if (p.startsWith("^{")) { html += '<tspan dy="-12" font-size="72%">' + esc(p.slice(2, -1)) + '</tspan>'; sub = 2; } else { html += sub === 1 ? '<tspan dy="-6">' + esc(p) + '</tspan>' : sub === 2 ? '<tspan dy="12">' + esc(p) + '</tspan>' : esc(p); sub = 0; } } n.innerHTML = html; };
   const tx = (x, y, s, o) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 17, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal" , "font-family": MF }); SUB(n, s); if (o && o.halo) n.setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:6;stroke-linejoin:round"); return n; };
   const defs = mk("defs", {});
   const m1 = mk("marker", { id: "a58", markerWidth: 11, markerHeight: 11, refX: 7, refY: 3, orient: "auto" }, defs);
@@ -79,17 +79,21 @@ document.addEventListener("DOMContentLoaded", () => {
   mk("line", { x1: O.x, y1: O.y - EP, x2: O.x, y2: O.y - R, stroke: "#2B5CE6", "stroke-width": 3.6 });
   // 虚轴下段
   mk("line", { x1: O.x, y1: O.y + R, x2: O.x, y2: O.y + EP, stroke: "#2B5CE6", "stroke-width": 3.6 });
-  // ε 小右半圆（从 ω=0− 到 ω=0+，顺时针经右侧）
-  mk("path", { d: "M" + O.x + "," + (O.y + EP) + " A" + EP + "," + EP + " 0 0 1 " + O.x + "," + (O.y - EP), fill: "none", stroke: "#D63A2F", "stroke-width": 4 });
+  // ε 小右半圆（从 ω=0− 经右侧绕到 ω=0+，对应 θ:−90°→+90°，把原点极点留在围线外）
+  const mR = mk("marker", { id: "a58r", markerWidth: 11, markerHeight: 11, refX: 7, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#D63A2F" }, mR);
+  mk("path", { d: "M" + O.x + "," + (O.y + EP) + " A" + EP + "," + EP + " 0 0 0 " + O.x + "," + (O.y - EP), fill: "none", stroke: "#D63A2F", "stroke-width": 4, "marker-end": "url(#a58r)" });
   // R 大右半圆（顺时针：从 +j∞ 经右侧到 −j∞）
   mk("path", { d: "M" + O.x + "," + (O.y - R) + " A" + R + "," + R + " 0 0 1 " + O.x + "," + (O.y + R), fill: "none", stroke: "#2B5CE6", "stroke-width": 3.6 });
-  // 方向箭头
+  // 方向箭头：虚轴上段↑、虚轴下段↑、大圆右侧↓
   mk("line", { x1: O.x, y1: O.y - 150, x2: O.x, y2: O.y - 151, stroke: "#2B5CE6", "stroke-width": 3.6, "marker-end": "url(#a58)" });
+  mk("line", { x1: O.x, y1: O.y + 190, x2: O.x, y2: O.y + 189, stroke: "#2B5CE6", "stroke-width": 3.6, "marker-end": "url(#a58)" });
+  mk("line", { x1: O.x + R, y1: O.y - 1, x2: O.x + R, y2: O.y + 1, stroke: "#2B5CE6", "stroke-width": 3.6, "marker-end": "url(#a58)" });
   // 标注
   tx(O.x - 16, O.y - 170, "ω: 0⁺ → +∞", { fs: 18.5, b: true, fill: "#2B5CE6", an: "end" });
-  tx(O.x - 16, O.y + 190, "ω: −∞ → 0⁻", { fs: 18.5, b: true, fill: "#2B5CE6", an: "end" });
-  tx(O.x + 42, O.y + 42, "s=εe^{jθ}", { fs: 18.5, b: true, fill: "#D63A2F", an: "start" });
-  tx(O.x + 42, O.y + 68, "θ: −90°→+90°", { fs: 17, fill: "#D63A2F", an: "start" });
+  tx(O.x - 16, O.y + 215, "ω: −∞ → 0⁻", { fs: 18.5, b: true, fill: "#2B5CE6", an: "end" });
+  tx(O.x + 42, O.y + 42, "s=εe^{jθ}", { fs: 18.5, b: true, fill: "#D63A2F", an: "start", halo: true });
+  tx(O.x + 42, O.y + 68, "θ: −90°→+90°", { fs: 17, fill: "#D63A2F", an: "start", halo: true });
   tx(O.x + 290, O.y - 250, "半径 R→∞", { fs: 18.5, b: true, fill: "#2B5CE6", an: "end" });
   tx(O.x + 290, O.y - 227, "ω: +∞ → −∞", { fs: 17, fill: "#2B5CE6", an: "end" });
   mk("circle", { cx: O.x, cy: O.y, r: 6, fill: "#fff", stroke: "#D63A2F", "stroke-width": 3 });
