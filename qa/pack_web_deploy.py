@@ -7,7 +7,7 @@ components/ + 实际引用的 assets + DEPLOY-部署说明.md + 可选 server.js
 import os, re, json, zipfile
 
 ROOT = r"H:\D_tools\courseware-system-kimi"
-OUT = os.path.join(ROOT, "act-courseware-web-deploy-v2.30.zip")
+OUT = os.path.join(ROOT, "act-courseware-web-deploy-v2.31.zip")
 
 COMMON_DIRS = ["player", "components", "theme"]
 LESSON_IDS = ["lesson01-intro", "lesson02-math-model", "lesson03-timedomain", "lesson04-freq", "lesson05-root-locus", "lesson06-correction"]
@@ -62,7 +62,8 @@ https://github.com/baoweiyu/sduee-control-courseware/releases
 - 第五章 根轨迹法（61 页，数值严谨绘制 + 连贯/分步动画 + 图面缩放）
 - 第六章 控制系统的校正（48 页，Bode 图数值绘制 + 设计步骤分步演示）
 
-整体版本 V2.30（2026-10-20）。本地播放版与网页部署版使用同一版本号。
+整体版本 V2.31（2026-10-20）。本地播放版与网页部署版使用同一版本号。
+V2.31 更新：第四章 P75/P77 Nyquist 四段像全部改用精确复数计算（①段 ε 弧精确像两端与②④尾端严丝相接、②④段 ω 算到 10⁴ 真正进原点），闭合性有数学保证；实轴交点标注引线避开曲线；P74 图鉴删干扰箭头与小字注释、度数徽章加大。
 V2.30 更新：第四章 Nyquist 图修正——P75/P77 删去 ∞ 大半圆在有限半径下产生的假环（段③改画为贴原点的小弧），低频补圆螺旋两端与正/负频段尾端精确相接；P75 顶部信息框排版修复；P74 低频补线图鉴四图标重绘（尾段出框、补弧加大、180°/360°/540° 徽章）。
 V2.29 更新：第四章 14 项修改——P45/P46 标注与尾一标准型规范、低频延长虚线与转折点修正精确曲线；根号显示通篇修复；最小相位系统扩为三页并移至第二部分末；新增开闭环零极点关系页与四步拼图法页；Nyquist 系列页（绕行方向、标题等高、补图闭合、分段联动动画、标注避线）精修；全章 91→95 页。
 V2.21 更新：第六章《控制系统的校正》首次发布（48 页，一轮修改版）。

@@ -1,0 +1,35 @@
+#!/bin/bash
+# V2.31 验证截图：p74 图标简化 / p75 / p77 四段精确闭合 / p72 对照
+cd /h/D_tools/courseware-system-kimi
+P=lessons/lesson04-freq/pages
+OUT="H:\\D_tools\\courseware-system-kimi\\qa\\lesson04-freq-qa\\png"
+CHROME="/c/Program Files/Google/Chrome/Application/chrome.exe"
+
+sed 's/let K = 0; const TOTAL = 4;/let K = 4; const TOTAL = 4;/' $P/p75-ex412.html > $P/zz-qa-p75k4.html
+sed 's/let K = 0; const TOTAL = 4;/let K = 2; const TOTAL = 4;/' $P/p75-ex412.html > $P/zz-qa-p75k2.html
+sed 's/let K = 0; const TOTAL = 4;/let K = 4; const TOTAL = 4;/' $P/p77-conditional-stab.html > $P/zz-qa-p77k4.html
+sed -e 's/let K = 0; const TOTAL = 4;/let K = 4; const TOTAL = 4;/' -e 's/DEFAULT_K = 2;/DEFAULT_K = 0.5;/' -e 's/value="2"/value="0.5"/' $P/p77-conditional-stab.html > $P/zz-qa-p77k05.html
+sed 's/let K = 0; const TOTAL = 4;/let K = 4; const TOTAL = 4;/' $P/p72-ex410.html > $P/zz-qa-p72k4.html
+
+node server.js --port 7199 >/dev/null 2>&1 &
+SRV=$!
+sleep 2
+
+shot() {
+  "$CHROME" --headless=new --disable-gpu --window-size=1600,900 --virtual-time-budget=9000 \
+    --screenshot="$OUT\\$1.png" "http://localhost:7199/lessons/lesson04-freq/pages/$2" >/dev/null 2>&1
+  echo "$1: $?"
+}
+
+shot v231-p74-fourstep p74-fourstep-puzzle.html
+shot v231-p75-k2 zz-qa-p75k2.html
+shot v231-p75-k4 zz-qa-p75k4.html
+shot v231-p77-k4 zz-qa-p77k4.html
+shot v231-p77-k05 zz-qa-p77k05.html
+shot v231-p72-k4 zz-qa-p72k4.html
+
+kill $SRV 2>/dev/null
+PID=$(netstat -ano | grep 7199 | grep LISTEN | awk '{print $5}' | head -1)
+[ -n "$PID" ] && taskkill //PID $PID //F 2>/dev/null
+rm -f $P/zz-qa-*.html
+echo DONE
