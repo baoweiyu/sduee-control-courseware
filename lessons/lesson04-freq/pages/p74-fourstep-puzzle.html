@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <title>3.3 四步拼图法：拼画闭合 Nyquist 曲线</title>
-<link rel="stylesheet" href="../../../theme/theme.css?v=229">
+<link rel="stylesheet" href="../../../theme/theme.css?v=230">
 <script src="../../../theme/mathjax/mathjax-render.js"></script>
 <script src="../../../theme/mathjax/tex-chtml.js"></script>
 <script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
-<script src="../../../theme/act-base.js?v=229" defer></script>
+<script src="../../../theme/act-base.js?v=230" defer></script>
 <style>
   .col-wrap { display:flex; flex-direction:column; gap:14px; height:100%; min-height:0; }
   .steps { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
@@ -37,7 +37,7 @@
         <div class="stp"><span class="no">4</span><b>低频端补线</b><br>ν 型系统从 ω=0⁻ 端<span class="kw-r">顺时针补 ν×180°</span> 的 ∞ 圆弧至 ω=0⁺ 端（ν=0 不补）。</div>
       </div>
       <div class="act-card atlas">
-        <div class="hd">低频补线图鉴：补多少，只看系统型别 ν</div>
+        <div class="hd">低频补线图鉴：补多少，只看型别 ν<span style="font-size:14px;font-weight:400;color:#5B6B8C">（补弧实际在 ∞ 远处，图中为示意；红实线=正频段尾端，蓝虚线=镜像段尾端与补弧）</span></div>
         <div class="bd">
           <div class="icons">
             <div class="ico"><svg data-icon="0" viewBox="0 0 170 150"></svg><div class="cp"><b>0 型</b>：起点 (K, j0) 有限值<br>已自闭合，<b>不补线</b></div></div>
@@ -59,7 +59,8 @@ document.addEventListener("DOMContentLoaded", () => {
   function drawIcon(svg, kind) {
     const mk = (tag, attrs) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); svg.appendChild(n); return n; };
     const tri = (x, y, deg, col) => mk("path", { d: "M-6,-4.6 L7,0 L-6,4.6 Z", fill: col, transform: "translate(" + x + "," + y + ") rotate(" + deg + ")" });
-    const OX = 85, OY = 78;
+    const badge = (x, y, s) => { const t = mk("text", { x, y, "font-size": 16.5, "font-weight": 800, fill: RED, "text-anchor": "middle", "font-family": "Cambria Math,STIX Two Math,Georgia,Microsoft YaHei,sans-serif" }); t.textContent = s; t.setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:5;stroke-linejoin:round"); };
+    const OX = 85, OY = 76;
     // 坐标轴（箭头用手绘三角，避免 marker 在小 viewBox 下错位）
     mk("line", { x1: 12, y1: OY, x2: 152, y2: OY, stroke: GRY, "stroke-width": 1.3 });
     tri(154, OY, 0, GRY);
@@ -67,36 +68,48 @@ document.addEventListener("DOMContentLoaded", () => {
     tri(OX, 20, -90, GRY);
     mk("circle", { cx: OX, cy: OY, r: 3.2, fill: GRY });
     if (kind === 0) {
-      // 闭合小圆：下半红实线、上半蓝虚线
-      mk("path", { d: "M132,78 A27,27 0 0 1 78,78", fill: "none", stroke: RED, "stroke-width": 3.2 });
-      mk("path", { d: "M78,78 A27,27 0 0 1 132,78", fill: "none", stroke: BLU, "stroke-width": 2.8, "stroke-dasharray": "7 5" });
-      mk("circle", { cx: 132, cy: 78, r: 4.5, fill: RED });
-      tri(105, 105, 180, RED);            // 底部切线向左（ω 增大方向）
-      tri(105, 51, 0, BLU);               // 顶部切线向右
+      // 闭合小圆：下半红实线（正频段）、上半蓝虚线（镜像段），已自闭合不补线
+      mk("path", { d: "M134,76 A27,27 0 0 1 82,76", fill: "none", stroke: RED, "stroke-width": 3.4 });
+      mk("path", { d: "M82,76 A27,27 0 0 1 134,76", fill: "none", stroke: BLU, "stroke-width": 3, "stroke-dasharray": "7 5" });
+      mk("circle", { cx: 134, cy: 76, r: 4.8, fill: RED });
+      tri(108, 103, 180, RED);
+      tri(108, 49, 0, BLU);
+      mk("path", { d: "M120,114 l5,6 l9,-12", fill: "none", stroke: "#1E9E57", "stroke-width": 3.4, "stroke-linecap": "round", "stroke-linejoin": "round" });
     } else if (kind === 1) {
-      // 红：② 尾段（自底部 ∞ 上行）；蓝：④ 尾段（向上 ∞）；补弧：右半圆
-      mk("path", { d: "M85,124 L85,100", fill: "none", stroke: RED, "stroke-width": 3.2 });
-      tri(85, 108, -90, RED);
-      mk("path", { d: "M85,58 L85,34", fill: "none", stroke: BLU, "stroke-width": 2.8, "stroke-dasharray": "7 5" });
-      tri(85, 44, -90, BLU);
-      mk("path", { d: "M85,34 A44,44 0 0 1 85,122", fill: "none", stroke: BLU, "stroke-width": 2.8, "stroke-dasharray": "9 6" });
-      tri(129, 78, 90, BLU);
+      // 尾段：镜像段终于顶 ∞（蓝虚上行出框）；正频段起于底 ∞（红实上行入图）
+      mk("path", { d: "M85,56 L85,12", fill: "none", stroke: BLU, "stroke-width": 3, "stroke-dasharray": "7 5" });
+      tri(85, 34, -90, BLU);
+      mk("path", { d: "M85,146 L85,108", fill: "none", stroke: RED, "stroke-width": 3.4 });
+      tri(85, 128, -90, RED);
+      // 补弧：顶端 →（顺时针，经右侧）→ 底端，180°
+      mk("path", { d: "M85,14 A62,62 0 0 1 85,138", fill: "none", stroke: BLU, "stroke-width": 3.8, "stroke-dasharray": "10 7" });
+      tri(147, 76, 90, BLU);
+      badge(34, 30, "180°");
     } else if (kind === 2) {
-      // 红：② 尾段（自左 ∞ 右行）；蓝：④ 尾段（向左 ∞）；补弧：整圆
-      mk("path", { d: "M30,72 L58,72", fill: "none", stroke: RED, "stroke-width": 3.2 });
-      tri(46, 72, 0, RED);
-      mk("path", { d: "M58,84 L30,84", fill: "none", stroke: BLU, "stroke-width": 2.8, "stroke-dasharray": "7 5" });
-      tri(40, 84, 180, BLU);
-      mk("path", { d: "M41,74 A44,44 0 1 1 41,82", fill: "none", stroke: BLU, "stroke-width": 2.8, "stroke-dasharray": "9 6" });
-      tri(85, 34, 0, BLU);
+      // 尾段：正频段自左 ∞ 右行（红实，上方）；镜像段向左 ∞（蓝虚，下方）
+      mk("path", { d: "M8,62 L48,62", fill: "none", stroke: RED, "stroke-width": 3.4 });
+      tri(32, 62, 0, RED);
+      mk("path", { d: "M48,90 L8,90", fill: "none", stroke: BLU, "stroke-width": 3, "stroke-dasharray": "7 5" });
+      tri(28, 90, 180, BLU);
+      // 补弧：整圆 360°（左端起止，顺时针）
+      mk("path", { d: "M25,83 A60,60 0 1 1 25,69", fill: "none", stroke: BLU, "stroke-width": 3.8, "stroke-dasharray": "10 7" });
+      tri(85, 16, 0, BLU);
+      badge(34, 30, "360°");
     } else {
-      // 红：② 尾段（自顶部 ∞ 下行）；蓝：④ 尾段（向下 ∞）；补弧：540° 螺旋
-      mk("path", { d: "M85,46 L85,68", fill: "none", stroke: RED, "stroke-width": 3.2 });
-      tri(85, 60, 90, RED);
-      mk("path", { d: "M85,88 L85,118", fill: "none", stroke: BLU, "stroke-width": 2.8, "stroke-dasharray": "7 5" });
-      tri(85, 108, 90, BLU);
-      mk("path", { d: "M85,122 A46,46 0 0 1 85,30 A46,46 0 0 1 85,122 A38,38 0 0 1 85,46", fill: "none", stroke: BLU, "stroke-width": 2.8, "stroke-dasharray": "9 6" });
-      tri(39, 78, -90, BLU);
+      // 尾段：正频段自顶 ∞ 下行（红实）；镜像段向底 ∞（蓝虚）
+      mk("path", { d: "M85,34 L85,64", fill: "none", stroke: RED, "stroke-width": 3.4 });
+      tri(85, 52, 90, RED);
+      mk("path", { d: "M85,96 L85,142", fill: "none", stroke: BLU, "stroke-width": 3, "stroke-dasharray": "7 5" });
+      tri(85, 126, 90, BLU);
+      // 补弧：540° 螺旋（自底端顺时针一圈半至顶端，逐圈内缩便于分辨圈数）
+      let d = "";
+      for (let j = 0; j <= 140; j++) {
+        const u = j / 140, th = (-90 - 540 * u) * Math.PI / 180, r = 60 - 22 * u;
+        d += (j ? "L" : "M") + (85 + r * Math.cos(th)).toFixed(1) + "," + (76 - r * Math.sin(th)).toFixed(1);
+      }
+      mk("path", { d, fill: "none", stroke: BLU, "stroke-width": 3.6, "stroke-dasharray": "10 7" });
+      tri(25, 76, -90, BLU);
+      badge(34, 30, "540°");
     }
   }
   document.querySelectorAll("svg[data-icon]").forEach(s => drawIcon(s, +s.dataset.icon));
