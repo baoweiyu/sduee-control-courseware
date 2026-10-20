@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>3.3 开环与闭环的零极点：F(s) 的角色</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=229">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=229" defer></script>
+<style>
+  .row { display:flex; gap:22px; height:100%; min-height:0; }
+  .dv { flex:1.04; display:flex; flex-direction:column; min-height:0; }
+  .dv .bd { flex:1; display:flex; flex-direction:column; justify-content:space-evenly; padding:12px 20px; overflow:hidden; }
+  .bx { background:#fff; border:2px solid var(--line); border-radius:12px; padding:12px 18px; font-size:20px; line-height:1.55; }
+  .bx.key { background:var(--sky); border-color:#8AA6D8; }
+  .bx b { color:var(--navy); }
+  .bx .mathbox { font-size:21px; padding:7px 12px; }
+  .darr { text-align:center; color:var(--orange); font-size:24px; font-weight:800; line-height:1.1; margin:2px 0; }
+  .rt { flex:1; display:flex; flex-direction:column; min-height:0; }
+  .rt .bd { flex:1; display:flex; flex-direction:column; justify-content:space-evenly; gap:13px; padding:12px 20px; overflow:hidden; }
+  table.role { width:100%; border-collapse:collapse; font-size:19px; background:#fff; }
+  table.role th, table.role td { border:1.6px solid #C9D6F2; padding:10px 10px; text-align:center; vertical-align:middle; }
+  table.role th { background:#E8F0FE; color:var(--navy); font-size:18px; }
+  table.role td { font-size:18.5px; line-height:1.45; }
+  table.role .sym { font-size:23px; font-weight:800; color:var(--navy); font-style:italic; font-family:var(--font-math); }
+  .seg { background:var(--sky); border-radius:11px; padding:13px 17px; font-size:20px; line-height:1.6; }
+  .seg b { color:var(--navy); }
+</style>
+</head>
+<body data-title="3.3 开环与闭环的零极点：F(s) 的角色" data-page="68 / 95">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="act-card dv">
+        <div class="hd">推导链：F(s) = 1 + G(s)H(s) 的零极点</div>
+        <div class="bd">
+          <div class="bx"><b>设开环传递函数</b>（N、D 为 s 的多项式）
+            <div class="mathbox math eqline tex tex-d">G(s)H(s)=\dfrac{N(s)}{D(s)}</div>
+          </div>
+          <div class="darr">↓ 闭环特征方程 1 + G(s)H(s) = 0</div>
+          <div class="bx key"><b>引入辅助函数</b>（闭环特征式）
+            <div class="mathbox math eqline tex tex-d">F(s)=1+G(s)H(s)=\dfrac{D(s)+N(s)}{D(s)}</div>
+          </div>
+          <div class="darr">↓ 分子、分母分别看</div>
+          <div class="bx">
+            <div><b>F(s) 的零点</b>：D(s)+N(s)=0 的根 —— 正是<span class="kw-r">闭环特征根（闭环极点）</span>；</div>
+            <div style="margin-top:6px"><b>F(s) 的极点</b>：D(s)=0 的根 —— 正是<span class="kw-r">开环极点</span>。</div>
+          </div>
+        </div>
+      </div>
+      <div class="act-card rt">
+        <div class="hd">Z、P、N 三个量的角色</div>
+        <div class="bd">
+          <table class="role">
+            <tr><th style="width:64px">量</th><th>含义</th><th style="width:31%">来源</th></tr>
+            <tr><td class="sym">Z</td><td>右半 s 平面 <b>F(s) 零点</b>数 = 右半<b>闭环极点</b>数</td><td>待判定——稳定要求 <b>Z=0</b></td></tr>
+            <tr><td class="sym">P</td><td>右半 s 平面 <b>F(s) 极点</b>数 = 右半<b>开环极点</b>数</td><td>已知——开环传递函数直接读出</td></tr>
+            <tr><td class="sym">N</td><td>Г 曲线包围原点的圈数 = <b>GH 曲线包围 (−1, j0)</b> 的圈数</td><td>图上数出（逆时针为正）</td></tr>
+          </table>
+          <div class="seg"><b>映射原理落到此处</b>：<span class="tex">Z=P-N</span>。闭环极点难求 ⇒ 转化为"<b>已知 P、图上数 N</b>"——这就是 Nyquist 图解判稳的全部逻辑。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">承上启下</span><span>F(s)=1+GH 把闭环极点与开环零极点连在一起：F 平面的<span class="kw-r">原点</span>对应 GH 平面的 <span class="kw-r">(−1, j0)</span> 点——下一页正式搬到 G(s)H(s) 平面。</span></div>
+</div></div>
+</body>
+</html>

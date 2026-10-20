@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>2.6 最小相位系统：定义与工程意义</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=229">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=229" defer></script>
+<style>
+  .row { display:flex; gap:22px; height:100%; min-height:0; }
+  .tx { flex:1.08; display:flex; flex-direction:column; min-height:0; }
+  .tx .bd { flex:1; display:flex; flex-direction:column; justify-content:space-evenly; gap:13px; padding:12px 20px; font-size:21px; line-height:1.66; overflow:hidden; }
+  .seg { background:var(--sky); border-radius:11px; padding:14px 18px; }
+  .seg.def { background:#FFF3E8; border-left:5px solid var(--orange); }
+  .seg b { color:var(--navy); }
+  .rt { flex:1; display:flex; flex-direction:column; min-height:0; }
+  .rt .bd { flex:1; display:flex; flex-direction:column; justify-content:space-evenly; gap:14px; padding:12px 20px; overflow:hidden; }
+  table.bind { width:100%; border-collapse:collapse; font-size:20px; }
+  table.bind th, table.bind td { border:1.6px solid #C9D6F2; padding:9px 10px; text-align:center; }
+  table.bind th { background:#E8F0FE; color:var(--navy); font-size:19px; }
+  table.bind td.neg { color:#B02E24; font-weight:700; }
+  .flow { background:#fff; border:2px solid var(--line); border-radius:12px; padding:12px 16px; font-size:19.5px; line-height:1.6; }
+  .flow b { color:var(--navy); }
+  .flow .chain { display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-top:6px; }
+  .flow .nd { background:var(--sky); border-radius:9px; padding:5px 12px; font-weight:700; color:var(--navy); font-size:18.5px; }
+  .flow .ar { color:var(--orange); font-weight:800; font-size:20px; }
+  .flow .lim { margin-top:8px; font-size:17.5px; color:#B02E24; font-weight:700; }
+</style>
+</head>
+<body data-title="2.6 最小相位系统：定义与工程意义" data-page="53 / 95">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="act-card tx">
+        <div class="hd">定义、背景与核心性质</div>
+        <div class="bd">
+          <div class="seg def"><b>定义</b>：开环传递函数的<span class="kw-r">零点、极点全部位于左半 s 平面</span>，且不含纯延迟环节 <span class="tex">e^{-\tau s}</span> 的系统，称为<span class="kw-r">最小相位系统</span>；否则称为非最小相位系统（如含因子 <span class="tex">1-Ts</span> 或 <span class="tex">e^{-\tau s}</span>）。</div>
+          <div class="seg"><b>工程背景</b>：实验建模时，<b>幅频特性容易测</b>（逐点测输出/输入的幅值比即可）；<b>相频特性很难测准</b>——工业现场噪声使波形的时间差难以读取。</div>
+          <div class="seg"><b>核心性质</b>：最小相位系统的幅频特性与相频特性<span class="kw-r">一一对应</span>——由 L(ω) 渐近线唯一确定 φ(ω)，因而可以<span class="kw-r">直接反写 G(s)</span>。</div>
+        </div>
+      </div>
+      <div class="act-card rt">
+        <div class="hd">斜率与相角的绑定关系 + 实验建模流程</div>
+        <div class="bd">
+          <table class="bind">
+            <tr><th>渐近线斜率</th><th>0 dB/dec</th><th>−20</th><th>−40</th><th>−60</th></tr>
+            <tr><td><b>对应相角趋向</b></td><td>0°</td><td class="neg">−90°</td><td class="neg">−180°</td><td class="neg">−270°</td></tr>
+          </table>
+          <div style="text-align:center;font-size:17.5px;color:var(--muted)">每 ±20 dB/dec 的斜率 ⇔ ±90° 的相角（左半平面零、极点）</div>
+          <div class="flow"><b>实验法建模流程</b>（上节例 4-9 的合法性依据）
+            <div class="chain"><span class="nd">实测 L(ω)</span><span class="ar">→</span><span class="nd">画渐近线</span><span class="ar">→</span><span class="nd">拆典型环节</span><span class="ar">→</span><span class="nd">反写 G(s)</span></div>
+            <div class="lim">仅当系统为最小相位时成立：幅频 ⇔ 相频一一对应，反写结果唯一。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">注意</span><span>非最小相位系统的幅频特性可与某最小相位系统<span class="kw-r">完全相同</span>，但相位滞后更大——只看幅频图会写出错误的 G(s)。</span></div>
+</div></div>
+</body>
+</html>

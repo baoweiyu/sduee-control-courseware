@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <title>2.3 顺序斜率叠加法：折线逐段生长</title>
-<link rel="stylesheet" href="../../../theme/theme.css?v=228">
+<link rel="stylesheet" href="../../../theme/theme.css?v=229">
 <script src="../../../theme/mathjax/mathjax-render.js"></script>
 <script src="../../../theme/mathjax/tex-chtml.js"></script>
 <script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
-<script src="../../../theme/act-base.js?v=228" defer></script>
+<script src="../../../theme/act-base.js?v=229" defer></script>
 <style>
   .colwrap { display:flex; flex-direction:column; gap:14px; height:100%; min-height:0; }
   .modelband { background:#fff; border:2.5px solid var(--line); border-radius:14px; padding:8px 24px; display:flex; align-items:center; gap:24px; flex:none; }
@@ -30,12 +30,12 @@
   .figc svg { width:100%; height:100%; }
 </style>
 </head>
-<body data-title="2.3 顺序斜率叠加法：折线逐段生长" data-page="46 / 91">
+<body data-title="2.3 顺序斜率叠加法：折线逐段生长" data-page="46 / 95">
 <div class="act-stage"><div class="act-slide">
   <div class="act-body has-note">
     <div class="colwrap">
       <div class="modelband">
-        <span class="mb">例题模型：</span>
+        <span class="mb">例题：</span>
         <span class="mathbox math mf eqline tex tex-d">G(s)H(s)=\dfrac{40\,(0.5s+1)}{s\,(2s+1)\,\left(\dfrac{s}{30}+1\right)}</span>
         <span class="wn">K=40（20lg40≈32dB）、ν=1；转角排序：<b>0.5（惯性）→ 2（一阶微分）→ 30（惯性）</b></span>
       </div>
@@ -61,6 +61,7 @@
       <div data-step="3" style="display:none"></div>
       <div data-step="4" style="display:none"></div>
       <div data-step="5" style="display:none"></div>
+      <div data-step="6" style="display:none"></div>
     </div>
   </div>
   <div class="act-note"><span class="lead">相频</span><span>相频特性用<span class="kw-r">描点连线法</span>：写出 φ(ω)=−90°+arctg0.5ω−arctg2ω−arctg(ω/30)，选若干 ω 计算相角、连点描线即可。</span></div>
@@ -93,13 +94,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const SLP = ["−20", "−40", "−20", "−40"];
   const STEPS = {
     0: ["（未开始）", "—", "渐近线尚未绘制"],
-    1: ["定基准点", "基准点 (1, 32dB) 为低频延长线上的点", "标出转角 0.5 / 2 / 30"],
-    2: ["画低频段（ν=1）", "斜率 −20dB/dec", "过基准点延伸至 ω=0.5"],
+    1: ["定基准点", "基准点 (1, 32dB) 在低频段延长线上", "标出转角 0.5 / 2 / 30"],
+    2: ["画低频段（ν=1）", "斜率 −20dB/dec，画到转角 0.5", "蓝色虚线延长过基准点 (1, 32dB)"],
     3: ["过 ω=0.5（惯性）", "叠加 −20 → −40dB/dec", "延伸至 ω=2"],
     4: ["过 ω=2（一阶微分）", "叠加 +20 → −20dB/dec", "延伸至 ω=30"],
     5: ["过 ω=30（惯性）", "叠加 −20 → −40dB/dec", "延伸至高频，渐近线完成 ✓"],
+    6: ["转折点处修正", "惯性转角 −3dB、一阶微分转角 +3dB", "红虚线 = 精确幅频特性曲线"],
   };
-  let K = 0; const TOTAL = 5;
+  let K = 0; const TOTAL = 6;
   function paint() {
     dyn.innerHTML = "";
     const st = STEPS[Math.min(K, 5)];
@@ -118,6 +120,10 @@ document.addEventListener("DOMContentLoaded", () => {
         .setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:5");
     }
     if (K >= 2) {
+      // 低频段渐近线的延长虚线（过基准点 (1, 32dB)）
+      const yExt = Y(38.06 - 20 * LG(1.9 / 0.5));
+      mk("line", { x1: X(0.5), y1: Y(38.06), x2: X(1.9), y2: yExt, stroke: "#1D3FA0", "stroke-width": 2.2, "stroke-dasharray": "7 6" }, dyn);
+      tx(X(1.9) + 8, yExt + 24, "延长线过基准点", { fs: 19, b: true, fill: "#1D3FA0", an: "start", halo: 1 }, dyn);
       const nseg = Math.min(K - 1, 4);
       for (let i = 0; i < nseg; i++) {
         const [wa, la] = PTS[i], [wb, lb] = PTS[i + 1];
@@ -130,9 +136,17 @@ document.addEventListener("DOMContentLoaded", () => {
       const [wl, ll] = PTS[nseg];
       mk("circle", { cx: X(wl), cy: Y(ll), r: 6, fill: "#1D3FA0" }, dyn);
     }
-    if (K >= 5) {
+    if (K === 5) {
       tx(X(100) - 10, Y(-30.46) + 30, "渐近线完成 ✓", { fs: 22, b: true, fill: "#1D3FA0", an: "end" }, dyn)
         .setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:5");
+    }
+    if (K >= 6) {
+      // 转折点修正后的精确幅频特性曲线（红虚线）
+      const ex = w => 32.0416 + 10 * LG(1 + 0.25 * w * w) - 20 * LG(w) - 10 * LG(1 + 4 * w * w) - 10 * LG(1 + (w / 30) ** 2);
+      let d = "";
+      for (let i = 0; i <= 320; i++) { const w = 0.1 * Math.pow(1000, i / 320); d += (i ? "L" : "M") + X(w).toFixed(1) + "," + Y(ex(w)).toFixed(1); }
+      mk("path", { d, fill: "none", stroke: "#D63A2F", "stroke-width": 3.2, "stroke-dasharray": "8 5" }, dyn);
+      tx(X(100) - 10, Y(ex(100)) - 20, "精确曲线（转角处 ±3dB 修正）", { fs: 21, b: true, fill: "#D63A2F", an: "end", halo: 1 }, dyn);
     }
   }
   const S = ACT.step, _next = S.next.bind(S), _reset = S.reset.bind(S);

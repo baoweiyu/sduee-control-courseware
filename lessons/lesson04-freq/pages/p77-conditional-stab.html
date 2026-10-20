@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>互动实验：条件稳定系统</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=229">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=229" defer></script>
+<style>
+  .col-wrap { display:flex; flex-direction:column; gap:12px; height:100%; min-height:0; }
+  .band { background:#fff; border:2px solid var(--line); border-radius:12px; padding:8px 16px; }
+  .band .l1 { display:flex; align-items:center; gap:16px; font-size:18px; }
+  .band .l1 .tex { font-size:18.5px; }
+  .band .l2 { display:flex; align-items:center; gap:14px; margin-top:6px; font-size:17px; }
+  .band b { color:var(--navy); }
+  .reg { font-size:17px; font-weight:700; color:#fff; border-radius:14px; padding:3px 16px; margin-left:auto; }
+  .reg.ok { background:#1E9E57; } .reg.no { background:#D63A2F; } .reg.bd { background:#E06D00; }
+  .sliderow { display:flex; align-items:center; gap:10px; flex:1; min-width:0; }
+  .sliderow input[type=range] { flex:1; accent-color:var(--orange); height:26px; min-width:0; }
+  .sliderow .val { min-width:76px; text-align:center; font-weight:700; color:var(--navy); background:var(--sky); border-radius:9px; padding:3px 8px; font-size:18px; }
+  .sliderow .sy { font-style:italic; font-family:var(--font-math); font-size:21px; color:var(--navy); }
+  .presets { display:flex; gap:8px; align-items:center; flex:none; }
+  .presets .plab { font-size:15.5px; color:var(--muted); }
+  .pb { font-size:15.5px; font-weight:700; color:var(--blue); background:#F6F9FF; border:1.5px solid var(--line); border-radius:9px; padding:3px 11px; cursor:pointer; }
+  .pb:hover { background:#E8F0FE; }
+  .reads { display:flex; gap:12px; flex:none; }
+  .rd { background:var(--sky); border-radius:9px; padding:4px 12px; font-size:15.5px; color:var(--ink); white-space:nowrap; }
+  .rd b { color:var(--navy); font-size:16px; font-style:italic; font-family:var(--font-math); }
+  .row { display:flex; gap:20px; flex:1; min-height:0; }
+  .pc { flex:1; display:flex; flex-direction:column; overflow:hidden; }
+  .pc .hd { min-height:52px; display:flex; align-items:center; }
+  .pc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:4px 10px; min-height:0; }
+  .pc svg { width:100%; height:100%; }
+  .chips { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+  .chip { background:#fff; border:2.5px solid; border-radius:12px; padding:5px 12px; font-size:14.5px; line-height:1.38; }
+  .chip.now { border-color:#D63A2F !important; background:#FDF1EF; }
+  .chip.now b { color:#D63A2F !important; }
+  .chip b { font-size:15px; }
+  .k1,.k2,.k3,.k4 { border-color:#2B5CE6; }
+  .k1 b,.k2 b,.k3 b,.k4 b { color:#1D3FA0; }
+  .playbar { position:absolute; right:26px; top:12px; }
+  .playbtn { border:none; background:var(--blue); color:#fff; font-size:15px; font-weight:700; border-radius:9px; padding:5px 14px; cursor:pointer; }
+  .playbtn:hover { background:var(--navy); }
+</style>
+</head>
+<body data-title="互动实验：条件稳定系统" data-page="77 / 95">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="col-wrap">
+      <div class="band">
+        <div class="l1"><b>开环传递函数（ν=3）</b><span class="tex">G(s)H(s)=\dfrac{K(s+1)(0.5s+1)}{s^{3}}</span><span style="font-size:16px;color:var(--ink)">临界增益 K<sub>临界</sub> = 1/[(T₁+T₂)T₁T₂] = <b>4/3 ≈ 1.333</b></span><span class="reg ok" id="reg">稳定</span></div>
+        <div class="l2">
+          <div class="sliderow"><span class="sy">K</span><input id="sk" type="range" min="0.5" max="3" step="0.05" value="2"><span class="val" id="vk">2.00</span></div>
+          <div class="presets"><span class="plab">快速试试：</span>
+            <button class="pb" data-k="0.5">K=0.50</button>
+            <button class="pb" data-k="1.2">K=1.20</button>
+            <button class="pb" data-k="exact">K=4/3</button>
+            <button class="pb" data-k="2">K=2.00</button>
+          </div>
+          <div class="reads">
+            <div class="rd">ω* <b>1.41</b></div>
+            <div class="rd">交点 −0.75K <b id="m-re">—</b></div>
+            <div class="rd">N <b id="m-n">—</b></div>
+            <div class="rd">Z=P−N <b id="m-z">—</b></div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="act-card pc">
+          <div class="hd"><span style="flex:1;font-size:20px">s 平面：Nyquist 轨线</span></div>
+          <div class="bd2"><svg id="figL" viewBox="0 0 640 560"></svg></div>
+        </div>
+        <div class="act-card pc" style="position:relative">
+          <div class="hd"><span style="flex:1;font-size:20px">G(s)H(s) 平面：闭合曲线随 K 的变化</span></div>
+          <div class="playbar"><button class="playbtn" id="play">▶ 连续播放</button></div>
+          <div class="bd2"><svg id="figR" viewBox="0 0 640 560"></svg></div>
+        </div>
+      </div>
+      <div class="chips">
+        <div class="chip k1" data-step="1"><b>① ω：0⁻→0⁺</b>　ε 小半圆 ⇒ 像 <span class="tex">\infty e^{-j3\theta}</span>：∞ 处顺时针<b>一圈半（540°）</b>。</div>
+        <div class="chip k2" data-step="2"><b>② ω：0⁺→+∞</b>　正虚轴 ⇒ 像：∞∠+90° → <b>穿实轴于 −0.75K</b> → 进原点。</div>
+        <div class="chip k3" data-step="3"><b>③ ω：+∞→−∞</b>　大圆弧 ⇒ 像缩成<b>原点附近小弧</b>。</div>
+        <div class="chip k4" data-step="4"><b>④ ω：−∞→0⁻</b>　负虚轴 ⇒ <b>与②镜像</b>，闭合。</div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">定义</span><span>稳定性<span class="kw-r">随参数 K 的取值而改变</span>、只在某个 K 范围内稳定的系统——<span class="kw-r">条件稳定系统</span>。本例 K &gt; 4/3 稳定（K 大稳定、K 小反而不稳定）；工程上还要留足裕度 → 3.4 稳定裕度。</span></div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const EP = 0.45, RR = 3.1;
+  const T1 = 1, T2 = 0.5, KC = 4 / 3, DEFAULT_K = 2;
+  let Kg = DEFAULT_K;
+  const G = s => {
+    const a = s[0], b = s[1];
+    const s2 = [a * a - b * b, 2 * a * b];
+    const s3 = [s2[0] * a - s2[1] * b, s2[0] * b + s2[1] * a];
+    const n1 = [T1 * a + 1, T1 * b], n2 = [T2 * a + 1, T2 * b];
+    const num = [n1[0] * n2[0] - n1[1] * n2[1], n1[0] * n2[1] + n1[1] * n2[0]];
+    const dd = s3[0] * s3[0] + s3[1] * s3[1];
+    return [Kg * (num[0] * s3[0] + num[1] * s3[1]) / dd, Kg * (num[1] * s3[0] - num[0] * s3[1]) / dd];
+  };
+  const CUR = "#D63A2F", DONE = "#2B5CE6";
+  const segs = [
+    u => { const th = (-90 + 180 * u) * Math.PI / 180; return [EP * Math.cos(th), EP * Math.sin(th)]; },
+    u => [0, EP + (RR - EP) * u],
+    u => { const th = (90 - 180 * u) * Math.PI / 180; return [RR * Math.cos(th), RR * Math.sin(th)]; },
+    u => [0, -RR + (RR - EP) * u]
+  ];
+  function panel(id, mid) {
+    const svg = document.getElementById(id);
+    const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+    const MF = "Cambria Math,STIX Two Math,Georgia,Microsoft YaHei,sans-serif";
+    const SUB = (n, s) => { const esc = t => t.replace(/&/g, "&amp;").replace(/</g, "&lt;"); let html = "", sub = false; for (const p of String(s).split(/(_\{[^}]*\})/)) { if (!p) continue; if (p.startsWith("_{")) { html += '<tspan' + (sub ? '' : ' dy="6"') + ' font-size="72%">' + esc(p.slice(2, -1)) + '</tspan>'; sub = true; } else { html += sub ? '<tspan dy="-6">' + esc(p) + '</tspan>' : esc(p); sub = false; } } n.innerHTML = html; };
+    const tx = (x, y, s, o, parent) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 16, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal", "font-family": MF }, parent); SUB(n, s); if (o && o.halo) n.setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:6;stroke-linejoin:round"); return n; };
+    const defs = mk("defs", {});
+    const m1 = mk("marker", { id: mid, markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+    mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, m1);
+    return { svg, mk, tx, mid };
+  }
+  // ===== 左：s 平面 =====
+  const L = panel("figL", "a64l");
+  const LS = 76, LO = { x: 300, y: 280 };
+  // ===== 右：GH 平面 =====
+  const Rp = panel("figR", "a64r");
+  const SC = 93, RO = { x: 330, y: 280 }, CC = 2.6, MM = 0.8;
+  const cmp = v => CC / (Math.hypot(v[0], v[1]) + MM);
+  const RXc = v => RO.x + v[0] * cmp(v) * SC, RYc = v => RO.y - v[1] * cmp(v) * SC;
+  const RC = CC * SC;
+  const R0 = Kg => (Kg / (EP * EP * EP)) * (CC / (Kg / (EP * EP * EP) + MM)) * SC;
+  const clR = p => [Math.max(30, Math.min(610, p[0])), Math.max(20, Math.min(540, p[1]))];
+  function arrowT(mkf, parent, p0, p1, p2, col) {
+    const ang = Math.atan2(p2[1] - p0[1], p2[0] - p0[0]) * 180 / Math.PI;
+    mkf("path", { d: "M-10,-7 L11,0 L-10,7 Z", fill: col, transform: "translate(" + p1[0].toFixed(1) + "," + p1[1].toFixed(1) + ") rotate(" + ang.toFixed(1) + ")" }, parent);
+  }
+  const NP = 160;
+  let fSegs = [];
+  function recompute() { fSegs = segs.map(fn => { const pts = []; for (let j = 0; j <= NP; j++) pts.push(G(fn(j / NP))); return pts; }); }
+  const sp = u => {
+    const th = (270 - 540 * u) * Math.PI / 180;
+    const rr = R0(Kg) - 28 * Math.max(0, (u - 2 / 3) * 3);
+    return [RO.x + rr * Math.cos(th), RO.y - rr * Math.sin(th)];
+  };
+  // 左图静态底稿
+  const LX = v => LO.x + v * LS, LY = v => LO.y - v * LS;
+  L.mk("line", { x1: 30, y1: LO.y, x2: 610, y2: LO.y, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a64l)" });
+  L.mk("line", { x1: LO.x, y1: 540, x2: LO.x, y2: 20, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a64l)" });
+  L.tx(604, LO.y - 12, "Re", { fs: 18, it: true, b: true, fill: "#5B6B8C", an: "end" });
+  L.tx(LO.x + 18, 36, "jIm", { fs: 18, it: true, b: true, fill: "#5B6B8C", an: "start" });
+  L.tx(LO.x - 12, LO.y + 26, "O", { fs: 16, fill: "#5B6B8C", an: "end" });
+  const segGray = "stroke:#B9C6E4;stroke-width:2";
+  L.svg.insertAdjacentHTML("beforeend",
+    '<line x1="' + LO.x + '" y1="' + LY(EP) + '" x2="' + LO.x + '" y2="' + LY(RR) + '" style="' + segGray + '"/>' +
+    '<line x1="' + LO.x + '" y1="' + LY(-RR) + '" x2="' + LO.x + '" y2="' + LY(-EP) + '" style="' + segGray + '"/>' +
+    '<path d="M' + LO.x + ',' + LY(-EP) + ' A' + EP * LS + ',' + EP * LS + ' 0 0 1 ' + LO.x + ',' + LY(EP) + '" fill="none" style="' + segGray + '"/>' +
+    '<path d="M' + LO.x + ',' + LY(RR) + ' A' + RR * LS + ',' + RR * LS + ' 0 0 1 ' + LO.x + ',' + LY(-RR) + '" fill="none" style="' + segGray + '"/>');
+  L.tx(LO.x - 14, LY(EP) - 8, "C (ω=0⁺)", { fs: 14.5, fill: "#5B6B8C", an: "end" });
+  L.tx(LO.x - 14, LY(-EP) + 22, "A (ω=0⁻)", { fs: 14.5, fill: "#5B6B8C", an: "end" });
+  L.tx(LO.x + EP * LS + 32, LO.y + 8, "B：ε 小半圆", { fs: 14.5, fill: "#D63A2F", an: "start", b: true });
+  const dynL = L.mk("g", {});
+  // 右图静态
+  Rp.mk("line", { x1: 30, y1: RO.y, x2: 610, y2: RO.y, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a64r)" });
+  Rp.mk("line", { x1: RO.x, y1: 540, x2: RO.x, y2: 20, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a64r)" });
+  Rp.tx(606, RO.y + 30, "Re", { fs: 18, it: true, b: true, fill: "#5B6B8C", an: "end" });
+  Rp.tx(RO.x + 18, 36, "jIm", { fs: 18, it: true, b: true, fill: "#5B6B8C", an: "start" });
+  Rp.tx(RO.x - 12, RO.y + 26, "O", { fs: 16, fill: "#5B6B8C", an: "end" });
+  Rp.mk("circle", { cx: RO.x, cy: RO.y, r: RC, fill: "none", stroke: "#C9D6F2", "stroke-width": 1.6, "stroke-dasharray": "3 6" });
+  const xM1 = RXc([-1, 0]);
+  Rp.mk("circle", { cx: xM1, cy: RO.y, r: 9, fill: "#fff", stroke: "#D63A2F", "stroke-width": 3 });
+  Rp.tx(xM1, RO.y - 48, "(−1, j0)", { fs: 16.5, b: true, fill: "#D63A2F", halo: true, an: "middle" });
+  Rp.tx(RO.x, 552, "∞ 远区经径向压缩显示（包围关系、左右相对位置不变）", { fs: 14, fill: "#8AA0C8" });
+  const dynR = Rp.mk("g", {});
+  const dynX = Rp.mk("g", {});   // 交点标记层（随 K）
+  let K = 0; const TOTAL = 4;
+  function paint() {
+    dynL.innerHTML = ""; dynR.innerHTML = "";
+    for (let i = 0; i < K; i++) {
+      const colI = i === K - 1 ? CUR : DONE;
+      let dl = "";
+      for (let j = 0; j <= NP; j++) { const s = segs[i](j / NP); dl += (j ? "L" : "M") + LX(s[0]).toFixed(1) + "," + LY(s[1]).toFixed(1); }
+      L.mk("path", { d: dl, fill: "none", stroke: colI, "stroke-width": 4.2 }, dynL);
+      const sA = segs[i](0.44), sB = segs[i](0.5), sC = segs[i](0.56);
+      arrowT(L.mk, dynL, [LX(sA[0]), LY(sA[1])], [LX(sB[0]), LY(sB[1])], [LX(sC[0]), LY(sC[1])], colI);
+      if (i === 0) {
+        let d = "";
+        for (let j = 0; j <= NP; j++) { const p = sp(j / NP); d += (j ? "L" : "M") + p[0].toFixed(1) + "," + p[1].toFixed(1); }
+        Rp.mk("path", { d, fill: "none", stroke: colI, "stroke-width": 3.6, "stroke-dasharray": "10 7" }, dynR);
+        [0.22, 0.72].forEach(u => arrowT(Rp.mk, dynR, sp(u - 0.02), sp(u), sp(u + 0.02), colI));
+      } else if (i === 2) {
+        let d = "";
+        fSegs[2].forEach(v => { const p = clR([RXc(v), RYc(v)]); d += (d ? "L" : "M") + p[0].toFixed(1) + "," + p[1].toFixed(1); });
+        Rp.mk("path", { d, fill: "none", stroke: colI, "stroke-width": 4.2 }, dynR);
+        Rp.mk("circle", { cx: RO.x, cy: RO.y, r: 7, fill: "#fff", stroke: colI, "stroke-width": 3 }, dynR);
+      } else {
+        let d = "";
+        fSegs[i].forEach(v => { const p = clR([RXc(v), RYc(v)]); d += (d ? "L" : "M") + p[0].toFixed(1) + "," + p[1].toFixed(1); });
+        Rp.mk("path", { d, fill: "none", stroke: colI, "stroke-width": 4.2, "stroke-dasharray": i === 3 ? "9 6" : "0" }, dynR);
+        const fA = fSegs[i][Math.floor(NP * 0.44)], fB = fSegs[i][Math.floor(NP * 0.5)], fC = fSegs[i][Math.floor(NP * 0.56)];
+        arrowT(Rp.mk, dynR, clR([RXc(fA), RYc(fA)]), clR([RXc(fB), RYc(fB)]), clR([RXc(fC), RYc(fC)]), colI);
+      }
+    }
+  }
+  function paintCross() {
+    dynX.innerHTML = "";
+    const re = -Kg * (T1 + T2) * T1 * T2, xCr = RXc([re, 0]);
+    const boundary = Math.abs(Kg - KC) < 1e-6;
+    if (boundary) {
+      Rp.mk("circle", { cx: xM1, cy: RO.y, r: 13, fill: "none", stroke: "#F5821F", "stroke-width": 3.4 }, dynX);
+      Rp.tx(xM1, RO.y + 44, "交点 = (−1, j0)", { fs: 16.5, b: true, fill: "#E06D00", halo: true, an: "middle" }, dynX);
+    } else {
+      Rp.mk("circle", { cx: xCr, cy: RO.y, r: 8, fill: "#F5821F" }, dynX);
+      Rp.mk("line", { x1: xCr + 6, y1: RO.y + 10, x2: xCr + 62, y2: RO.y + 52, stroke: "#999", "stroke-width": 1.2 }, dynX);
+      Rp.tx(xCr + 66, RO.y + 58, "交点 " + re.toFixed(2), { fs: 16, b: true, fill: "#F5821F", halo: true, an: "start" }, dynX);
+    }
+  }
+  // 动点
+  let t0 = null, dotG = null, dotS = null;
+  function frame(ts) { if (t0 === null) t0 = ts; paintDots(ts); requestAnimationFrame(frame); }
+  function paintDots(ts) {
+    if (dotG) { dotG.remove(); dotG = null; }
+    if (dotS) { dotS.remove(); dotS = null; }
+    if (K < 1) return;
+    const i = K - 1;
+    const u = (ts / 2600) % 1;
+    const s = segs[i](u);
+    dotS = L.mk("circle", { cx: LX(s[0]), cy: LY(s[1]), r: 9, fill: CUR, stroke: "#fff", "stroke-width": 2.5 });
+    let p;
+    if (i === 0) p = sp(u);
+    else { const f = G(s); p = clR([RXc(f), RYc(f)]); }
+    dotG = Rp.mk("circle", { cx: p[0], cy: p[1], r: 9, fill: CUR, stroke: "#fff", "stroke-width": 2.5 });
+  }
+  const S = ACT.step, _next = S.next.bind(S), _reset = S.reset.bind(S);
+  function syncChips() { document.querySelectorAll(".chip").forEach(c => c.classList.toggle("now", +c.dataset.step === K)); }
+  S.next = function () { if (K < TOTAL) K++; const d = _next(); paint(); syncChips(); return d; };
+  S.reset = function () { K = 0; _reset(); paint(); syncChips(); };
+  window.prev = function () { const n = Math.max(0, S.cur - 1); S.reset(); for (let i = 0; i < n; i++) S.next(); };
+  let timer = null;
+  document.getElementById("play").addEventListener("click", () => {
+    if (timer) { clearInterval(timer); timer = null; return; }
+    if (K >= TOTAL) S.reset();
+    timer = setInterval(() => { if (K >= TOTAL) { clearInterval(timer); timer = null; } else S.next(); }, 2400);
+  });
+  // —— 滑块与读数 ——
+  const sk = document.getElementById("sk"), vk = document.getElementById("vk");
+  function readings() {
+    const re = -Kg * (T1 + T2) * T1 * T2;
+    const boundary = Math.abs(Kg - KC) < 1e-6;
+    const stable = Kg > KC;
+    document.getElementById("m-re").textContent = re.toFixed(2) + (boundary ? "（恰在 −1）" : stable ? "（在 −1 左）" : "（在 −1 右）");
+    document.getElementById("m-n").textContent = boundary ? "穿 (−1,j0)" : stable ? "0（不包围）" : "−2（顺时针 2 圈）";
+    document.getElementById("m-z").textContent = boundary ? "虚轴根 ±j√2" : stable ? "0" : "2";
+    const reg = document.getElementById("reg");
+    reg.textContent = boundary ? "边界（虚轴根）" : stable ? "稳定" : "不稳定";
+    reg.className = "reg " + (boundary ? "bd" : stable ? "ok" : "no");
+  }
+  function setK(K) {
+    Kg = K;
+    sk.value = Math.min(3, Math.max(0.5, K));
+    vk.textContent = Math.abs(K - KC) < 1e-9 ? "4/3" : K.toFixed(2);
+    recompute(); paint(); paintCross(); readings();
+  }
+  sk.addEventListener("input", () => setK(+sk.value));
+  document.querySelectorAll(".pb").forEach(b => b.addEventListener("click", () => setK(b.dataset.k === "exact" ? KC : +b.dataset.k)));
+  window.addEventListener("message", ev => {
+    const m = ev.data || {};
+    if (m.type === "act-reset") setK(DEFAULT_K);
+  });
+  setK(DEFAULT_K);
+  requestAnimationFrame(frame);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>扩展②：S 平面矢量法——几何与物理直觉</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=229">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=229" defer></script>
+<style>
+  .row { display:flex; gap:22px; height:100%; min-height:0; }
+  .figc { flex:1.5; display:flex; flex-direction:column; overflow:hidden; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:6px 12px; min-height:0; }
+  .figc svg { width:100%; height:100%; }
+  .ctl { flex:1; display:flex; flex-direction:column; gap:13px; min-height:0; }
+  .panel { background:#fff; border:2px solid var(--line); border-radius:14px; padding:12px 20px; }
+  .panel .h { font-size:20px; font-weight:700; color:var(--blue); margin-bottom:8px; display:flex; justify-content:space-between; align-items:center; }
+  .reg { font-size:17.5px; font-weight:700; color:#fff; background:var(--orange); border-radius:14px; padding:3px 14px; }
+  .sliderow { display:flex; align-items:center; gap:12px; font-size:21px; margin:7px 0; }
+  .sliderow input[type=range] { flex:1; accent-color:var(--orange); height:30px; }
+  .sliderow .val { min-width:78px; text-align:center; font-weight:700; color:var(--navy); background:var(--sky); border-radius:10px; padding:4px 10px; font-size:21px; }
+  .sliderow .sy { font-style:italic; font-family:var(--font-math); font-size:23px; color:var(--navy); min-width:30px; }
+  .pbtn { font-size:17.5px; font-weight:700; color:#fff; background:var(--blue); border:none; border-radius:9px; padding:7px 15px; cursor:pointer; flex:none; white-space:nowrap; }
+  .pbtn:disabled { opacity:.55; cursor:default; }
+  .illu { flex:1; display:flex; flex-direction:column; min-height:0; }
+  .imgbox { position:relative; flex:1; min-height:150px; border-radius:11px; overflow:hidden; background:#0E1B3D; }
+  .imgbox img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:opacity .55s ease; }
+  .icap { font-size:17.5px; line-height:1.5; margin-top:9px; color:var(--ink); }
+  .icap b { color:var(--navy); }
+  .reads { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .rd { background:var(--sky); border-radius:11px; padding:8px 13px; font-size:17.5px; color:var(--ink); display:flex; justify-content:space-between; align-items:center; gap:8px; }
+  .rd b { color:var(--navy); font-size:19px; font-style:italic; font-family:var(--font-math); white-space:nowrap; }
+</style>
+</head>
+<body data-title="扩展②：S 平面矢量法——几何与物理直觉" data-page="58 / 95">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="act-card figc">
+        <div class="hd"><span style="flex:1"><span class="tex">G(s)=\dfrac{\omega_{n}^{2}}{s^{2}+2\zeta\omega_{n}s+\omega_{n}^{2}}</span>：极点矢量（左）与相频描迹（右），ω<sub>n</sub>=1 归一化</span></div>
+        <div class="bd2"><svg id="fig" viewBox="0 0 1000 510"></svg></div>
+      </div>
+      <div class="ctl">
+        <div class="panel">
+          <div class="h">参数与扫频<span class="reg" id="reg">−1/ζ = −3.3</span></div>
+          <div class="sliderow">
+            <span class="sy">ζ</span>
+            <input id="sz" type="range" min="0.05" max="1" step="0.01" value="0.3">
+            <span class="val" id="vz">0.30</span>
+          </div>
+          <div class="sliderow">
+            <span class="sy">ω</span>
+            <input id="sw" type="range" min="0" max="2.5" step="0.01" value="0">
+            <span class="val" id="vw">0.00</span>
+            <button class="pbtn" id="btnPlay">▶ 播放</button>
+          </div>
+        </div>
+        <div class="panel illu">
+          <div class="h">看车比喻（随 ζ 联动）</div>
+          <div class="imgbox">
+            <img id="imNear" src="../../../assets/image2/zeta-watch-near.png" alt="紧贴路边看车">
+            <img id="imFar" src="../../../assets/image2/zeta-watch-far.png" alt="高楼远眺看车">
+          </div>
+          <div class="icap" id="icap"></div>
+        </div>
+        <div class="panel">
+          <div class="h">读数（随 ζ、ω 实时变化）</div>
+          <div class="reads">
+            <div class="rd"><span>极点实部 −ζω<sub>n</sub></span><b id="m-dist">—</b></div>
+            <div class="rd"><span>ω<sub>n</sub> 处斜率</span><b id="m-slope">—</b></div>
+            <div class="rd"><span>当前 ω/ω<sub>n</sub></span><b id="m-w">—</b></div>
+            <div class="rd"><span>当前相角 φ</span><b id="m-phi">—</b></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">几何根源</span><span>相角 = 两矢量夹角之和（取负）。ζ 越小，极点越<span class="kw-r">贴近虚轴</span>，ω 扫过 ω<sub>n</sub> 的短暂区间内，来自上方极点的矢量近乎瞬时翻转 <span class="kw-r">180°</span>——这就是断崖式跳变的几何根源；ζ=0 时极点长在虚轴上，跳变退化为一条竖线。</span></div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const R = document.getElementById("fig");
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || R).appendChild(n); return n; };
+  const MF = "Cambria Math,STIX Two Math,Georgia,Microsoft YaHei,sans-serif";
+  const SUB = (n, s) => { const esc = t => t.replace(/&/g, "&amp;").replace(/</g, "&lt;"); let html = "", sub = false; for (const p of String(s).split(/(_\{[^}]*\})/)) { if (!p) continue; if (p.startsWith("_{")) { html += '<tspan' + (sub ? '' : ' dy="6"') + ' font-size="72%">' + esc(p.slice(2, -1)) + '</tspan>'; sub = true; } else { html += sub ? '<tspan dy="-6">' + esc(p) + '</tspan>' : esc(p); sub = false; } } n.innerHTML = html; };
+  const tx = (x, y, s, o, parent) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 17.5, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal", "font-family": MF }, parent); SUB(n, s); if (o && o.halo) n.setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:6;stroke-linejoin:round"); return n; };
+
+  // ===== 布局：左 S 平面 / 右相频图 =====
+  const SC = 100, Ox = 310, Oy = 310;                 // S 平面（ωn=1）
+  const SX = v => Ox + v * SC, SY = v => Oy - v * SC;
+  const px0 = 520, px1 = 966, pyT = 64, pyB = 448;    // 相频图：u∈[0,2.5]，φ∈[−180,0]
+  const PX = u => px0 + u / 2.5 * (px1 - px0);
+  const PY = v => pyT + (-v) / 180 * (pyB - pyT);
+
+  const PHI = (u, z) => { const wd = Math.sqrt(Math.max(0, 1 - z * z)); return -(Math.atan2(u - wd, z) + Math.atan2(u + wd, z)) * 180 / Math.PI; };
+
+  function render(z, w) {
+    R.innerHTML = "";
+    const wd = Math.sqrt(Math.max(0, 1 - z * z));
+    const defs = mk("defs", {});
+    const mkArr = (id, c) => { const m = mk("marker", { id, markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs); mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: c }, m); };
+    mkArr("a77g", "#5B6B8C"); mkArr("a77r", "#D63A2F"); mkArr("a77b", "#2B5CE6");
+
+    // ===== 左：S 平面 =====
+    tx(40, 30, "S 平面（ω_{n}=1 归一化）", { fs: 19, b: true, an: "start" });
+    mk("line", { x1: 64, y1: Oy, x2: 452, y2: Oy, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a77g)" });
+    mk("line", { x1: Ox, y1: 446, x2: Ox, y2: 52, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a77g)" });
+    tx(446, Oy - 12, "Re", { fs: 18, it: true, b: true, fill: "#5B6B8C", an: "end" });
+    tx(Ox + 14, 66, "jIm", { fs: 18, it: true, b: true, fill: "#5B6B8C", an: "start" });
+    tx(Ox - 12, Oy + 28, "O", { fs: 17, fill: "#5B6B8C", an: "end" });
+    [-1, -0.5].forEach(v => { mk("line", { x1: SX(v), y1: Oy - 5, x2: SX(v), y2: Oy + 5, stroke: "#5B6B8C", "stroke-width": 1.4 }); tx(SX(v), Oy + 26, String(v), { fs: 16, fill: "#5B6B8C" }); });
+    [1, 2].forEach(v => { mk("line", { x1: Ox - 5, y1: SY(v), x2: Ox + 5, y2: SY(v), stroke: "#5B6B8C", "stroke-width": 1.4 }); tx(Ox - 12, SY(v) + 5, "j" + v, { fs: 16, fill: "#5B6B8C", an: "end" }); });
+    // ω = ωn 虚线（测试点掠过的高度）；标注放最左端，避开极点标签
+    mk("line", { x1: 64, y1: SY(1), x2: SX(0.42), y2: SY(1), stroke: "#F5821F", "stroke-width": 1.6, "stroke-dasharray": "6 5" });
+    tx(66, SY(1) - 8, "虚部 = ω_{n}", { fs: 16.5, b: true, fill: "#F5821F", an: "start", halo: true });
+    // 极点连线（Re = −ζ）与距虚轴标注
+    mk("line", { x1: SX(-z), y1: SY(wd), x2: SX(-z), y2: SY(-wd), stroke: "#B9C8E8", "stroke-width": 1.6, "stroke-dasharray": "5 5" });
+    const yD = SY(-1.22);
+    mk("line", { x1: Ox, y1: yD, x2: SX(-z), y2: yD, stroke: "#F5821F", "stroke-width": 2, "marker-end": "url(#a77r)", "marker-start": "url(#a77r)" });
+    tx((Ox + SX(-z)) / 2, yD + 22, "距虚轴 ζω_{n}", { fs: 16.5, b: true, fill: "#F5821F", halo: true });
+    // 极点 ×
+    const pole = (vx, vy, lab, dy) => {
+      mk("line", { x1: SX(vx) - 8, y1: SY(vy) - 8, x2: SX(vx) + 8, y2: SY(vy) + 8, stroke: "#1D3FA0", "stroke-width": 3.4 });
+      mk("line", { x1: SX(vx) - 8, y1: SY(vy) + 8, x2: SX(vx) + 8, y2: SY(vy) - 8, stroke: "#1D3FA0", "stroke-width": 3.4 });
+      tx(SX(vx) - 18, SY(vy) + dy, lab, { fs: 18, b: true, fill: "#1D3FA0", an: "end", halo: true });
+    };
+    const merged = wd < 0.06;                      // ζ≈1：两重极点重合，合并标注
+    if (merged) pole(-z, 0, "p_{1}=p_{2}", 26); else { pole(-z, wd, "p_{1}", -12); pole(-z, -wd, "p_{2}", 24); }
+    // 测试点与两条矢量
+    const Tx = Ox, Ty = SY(w);
+    const th1 = Math.atan2(w - wd, z), th2 = Math.atan2(w + wd, z);
+    const vec = (vx, vy, c, arr) => mk("line", { x1: SX(vx), y1: SY(vy), x2: Tx, y2: Ty, stroke: c, "stroke-width": 3, "marker-end": arr });
+    vec(-z, wd, "#D63A2F", "url(#a77r)");
+    vec(-z, -wd, "#2B5CE6", "url(#a77b)");
+    // 矢量夹角弧（从正实方向起）
+    const arc = (vx, vy, th, c, lab) => {
+      const rA = 27, x1a = SX(vx) + rA, y1a = SY(vy);
+      const x2a = SX(vx) + rA * Math.cos(th), y2a = SY(vy) - rA * Math.sin(th);
+      mk("path", { d: "M" + x1a + "," + y1a + " A" + rA + "," + rA + " 0 0 " + (th >= 0 ? 0 : 1) + " " + x2a + "," + y2a, stroke: c, "stroke-width": 2.2, fill: "none" });
+      const rL = 46, am = th / 2;
+      tx(SX(vx) + rL * Math.cos(am), SY(vy) - rL * Math.sin(am) + 5, lab, { fs: 17, b: true, fill: c, halo: true });
+    };
+    if (merged) arc(-z, 0, th2, "#2B5CE6", "θ_{1}=θ_{2}"); else { arc(-z, wd, th1, "#D63A2F", "θ_{1}"); arc(-z, -wd, th2, "#2B5CE6", "θ_{2}"); }
+    mk("circle", { cx: Tx, cy: Ty, r: 7.5, fill: "#D63A2F", stroke: "#fff", "stroke-width": 2.5 });
+    tx(Tx + 16, Ty + 5, "jω", { fs: 18, it: true, b: true, fill: "#D63A2F", an: "start", halo: true });
+    tx(452, 30, "相角 φ = −(θ_{1}+θ_{2})", { fs: 17.5, b: true, fill: "#D63A2F", an: "end" });
+
+    // ===== 右：相频图 =====
+    tx(px0, 30, "相频特性 φ（描迹同步进行）", { fs: 19, b: true, an: "start" });
+    mk("line", { x1: px0, y1: pyB, x2: px1, y2: pyB, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a77g)" });
+    mk("line", { x1: px0, y1: pyB, x2: px0, y2: pyT, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a77g)" });
+    tx(px1 - 2, pyB + 40, "ω/ω_{n}", { fs: 18, it: true, b: true, fill: "#5B6B8C", an: "end" });
+    tx(px0 - 12, pyT - 8, "φ", { fs: 18, it: true, b: true, fill: "#1B3B8B", an: "end" });
+    [0, 0.5, 1, 1.5, 2, 2.5].forEach(u => { const x = PX(u); if (u > 0 && u !== 1) mk("line", { x1: x, y1: pyB, x2: x, y2: pyT, stroke: "#F0F4FC", "stroke-width": 1 }); tx(x, pyB + 22, String(u), { fs: 16, fill: "#5B6B8C" }); });
+    [0, -45, -90, -135, -180].forEach(v => { const y = PY(v); if (v !== 0 && v !== -180) mk("line", { x1: px0, y1: y, x2: px1, y2: y, stroke: v === -90 ? "#DCE5F6" : "#F0F4FC", "stroke-width": v === -90 ? 1.6 : 1, "stroke-dasharray": v === -90 ? "7 5" : "0" }); tx(px0 - 12, y + 5, v + "°", { fs: 16, fill: "#5B6B8C", an: "end" }); });
+    mk("line", { x1: PX(1), y1: pyB, x2: PX(1), y2: pyT, stroke: "#F5821F", "stroke-width": 1.6, "stroke-dasharray": "6 5" });
+    tx(PX(1), pyT - 8, "ω_{n}", { fs: 16.5, b: true, fill: "#F5821F", halo: true });
+    // 全曲线（浅）+ 已扫部分（红）
+    let dAll = "";
+    for (let i = 0; i <= 400; i++) { const u = 0.001 + 2.499 * i / 400; dAll += (i ? "L" : "M") + PX(u).toFixed(1) + "," + PY(PHI(u, z)).toFixed(1); }
+    mk("path", { d: dAll, stroke: "#C9D6F2", "stroke-width": 2.6, fill: "none" });
+    const wt = Math.max(w, 0.004);
+    let dT = "";
+    const NT = Math.max(8, Math.round(400 * wt / 2.5));
+    for (let i = 0; i <= NT; i++) { const u = 0.001 + (wt - 0.001) * i / NT; dT += (i ? "L" : "M") + PX(u).toFixed(1) + "," + PY(PHI(u, z)).toFixed(1); }
+    mk("path", { d: dT, stroke: "#D63A2F", "stroke-width": 3.8, fill: "none" });
+    mk("circle", { cx: PX(wt), cy: PY(PHI(wt, z)), r: 7, fill: "#1D3FA0", stroke: "#fff", "stroke-width": 2.5 });
+    tx(PX(1.06), PY(-22), "斜率 −1/ζ", { fs: 17, b: true, fill: "#D63A2F", an: "start", halo: true });
+
+    // ===== 读数 / 徽章 =====
+    document.getElementById("m-dist").textContent = "−" + z.toFixed(2);
+    document.getElementById("m-slope").textContent = "−" + (1 / z).toFixed(1);
+    document.getElementById("m-w").textContent = w.toFixed(2);
+    document.getElementById("m-phi").textContent = PHI(wt, z).toFixed(1) + "°";
+    document.getElementById("reg").textContent = "−1/ζ = −" + (1 / z).toFixed(1);
+  }
+
+  // ===== 插画交叉淡化 =====
+  const imFar = document.getElementById("imFar"), imNear = document.getElementById("imNear"), icap = document.getElementById("icap");
+  function illu(z) {
+    const op = Math.min(1, Math.max(0, (z - 0.15) / 0.35));
+    imFar.style.opacity = op; imNear.style.opacity = 1 - op;
+    icap.innerHTML = op >= 0.5
+      ? "<b>ζ 大</b>：极点离虚轴远——像在高楼上看车：车从视野左边开到右边，脖子慢慢转，相角<b>平缓过渡</b>。"
+      : "<b>ζ 小</b>：极点紧贴虚轴——像紧贴马路边站着：车“嗖”地掠过鼻尖的一瞬，脖子必须<b>猛转 180°</b>！";
+  }
+
+  const sz = document.getElementById("sz"), sw = document.getElementById("sw");
+  const vz = document.getElementById("vz"), vw = document.getElementById("vw");
+  const btnPlay = document.getElementById("btnPlay");
+  function upd() { const z = +sz.value, w = +sw.value; vz.textContent = z.toFixed(2); vw.textContent = w.toFixed(2); render(z, w); illu(z); }
+  sz.addEventListener("input", upd);
+  sw.addEventListener("input", upd);
+  let busy = false;
+  btnPlay.addEventListener("click", () => {
+    if (busy) return;
+    let ws = +sw.value; if (ws >= 2.49) ws = 0;
+    busy = true; btnPlay.disabled = true; btnPlay.textContent = "扫频中…";
+    const t0 = performance.now(), D = 5200 * (2.5 - ws) / 2.5;
+    const tick = t => {
+      const k = Math.min(1, (t - t0) / D);
+      sw.value = ws + (2.5 - ws) * k; upd();
+      if (k < 1) requestAnimationFrame(tick);
+      else { busy = false; btnPlay.disabled = false; btnPlay.textContent = "▶ 播放"; }
+    };
+    requestAnimationFrame(tick);
+  });
+  upd();
+});
+</script>
+</body>
+</html>

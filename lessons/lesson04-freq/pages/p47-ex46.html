@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <title>2.3 例 4-6：先化标准式，再顺序叠加</title>
-<link rel="stylesheet" href="../../../theme/theme.css?v=228">
+<link rel="stylesheet" href="../../../theme/theme.css?v=229">
 <script src="../../../theme/mathjax/mathjax-render.js"></script>
 <script src="../../../theme/mathjax/tex-chtml.js"></script>
 <script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
-<script src="../../../theme/act-base.js?v=228" defer></script>
+<script src="../../../theme/act-base.js?v=229" defer></script>
 <style>
   .colwrap { display:flex; flex-direction:column; gap:14px; height:100%; min-height:0; }
   .modelband { background:#fff; border:2.5px solid var(--line); border-radius:14px; padding:8px 24px; display:flex; align-items:center; gap:24px; flex:none; }
@@ -30,12 +30,12 @@
   .figc svg { width:100%; height:100%; }
 </style>
 </head>
-<body data-title="2.3 例 4-6：先化标准式，再顺序叠加" data-page="47 / 91">
+<body data-title="2.3 例 4-6：先化标准式，再顺序叠加" data-page="47 / 95">
 <div class="act-stage"><div class="act-slide">
   <div class="act-body has-note">
     <div class="colwrap">
       <div class="modelband">
-        <span class="mb">例 4-6 模型：</span>
+        <span class="mb">例 4-6：</span>
         <span class="mathbox math mf eqline tex tex-d">G(s)H(s)=\dfrac{10(s+3)}{s(s+2)(s^{2}+s+2)}=\dfrac{7.5\left(\dfrac{s}{3}+1\right)}{s\left(\dfrac{s}{2}+1\right)\left(\dfrac{s^{2}}{2}+\dfrac{s}{2}+1\right)}</span>
         <span class="wn">K=7.5；转角：<b>√2≈1.4（振荡，ζ≈0.35）→ 2（惯性）→ 3（微分）</b></span>
       </div>
@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   const STEPS = {
     0: ["（未开始）", "—", "渐近线尚未绘制"],
-    1: ["化为标准式（尾 1 型）", "提出常数项：10×3÷(2×2)=7.5", "K=7.5，标准式见顶部模型带"],
+    1: ["化为标准式（尾 1 型）", "提出常数项：10×3÷(2×2)=7.5", "K=7.5，标准式见顶部"],
     2: ["求转角并排序", "振荡 √2≈1.4（ζ≈0.35）→ 惯性 2 → 微分 3", "转角竖线已标出"],
     3: ["画低频段（ν=1）", "斜率 −20dB/dec，基准点 (1, " + KB.toFixed(1) + "dB) 为延长线基准", "−20 直线延伸至 ω=√2"],
     4: ["过 ω=√2（振荡）", "叠加 −40 → −60dB/dec", "延伸至 ω=2"],

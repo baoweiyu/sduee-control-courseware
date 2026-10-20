@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>2.6 为什么叫「最小相位」：零点相位动态对比</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=229">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=229" defer></script>
+<style>
+  .row { display:flex; gap:22px; height:100%; min-height:0; }
+  .tx { flex:0.92; display:flex; flex-direction:column; min-height:0; }
+  .tx .bd { flex:1; display:flex; flex-direction:column; justify-content:space-evenly; gap:13px; padding:12px 18px; font-size:20px; line-height:1.62; overflow:hidden; }
+  .seg { background:var(--sky); border-radius:11px; padding:13px 16px; }
+  .seg.def { background:#FFF3E8; border-left:5px solid var(--orange); }
+  .seg b { color:var(--navy); }
+  table.cmp { width:100%; border-collapse:collapse; font-size:19px; background:#fff; }
+  table.cmp th, table.cmp td { border:1.6px solid #C9D6F2; padding:8px 8px; text-align:center; }
+  table.cmp th { background:#E8F0FE; color:var(--navy); font-size:18px; }
+  table.cmp td.up { color:#1D3FA0; font-weight:700; }
+  table.cmp td.dn { color:#B02E24; font-weight:700; }
+  .figc { flex:1.12; display:flex; flex-direction:column; overflow:hidden; position:relative; }
+  .figc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:4px 10px; min-height:0; }
+  .figc svg { width:100%; height:100%; }
+  .playbar { position:absolute; right:22px; top:12px; }
+  .playbtn { border:none; background:var(--blue); color:#fff; font-size:15px; font-weight:700; border-radius:9px; padding:6px 15px; cursor:pointer; }
+  .playbtn:hover { background:var(--navy); }
+</style>
+</head>
+<body data-title="2.6 为什么叫「最小相位」：零点相位动态对比" data-page="54 / 95">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="act-card tx">
+        <div class="hd">同一幅值，两种相位</div>
+        <div class="bd">
+          <div class="seg"><b>对比对象</b>：零点因子 <span class="tex">Ts+1</span>（零点 <span class="tex">s=-1/T</span>，左半平面）与 <span class="tex">1-Ts</span>（零点 <span class="tex">s=+1/T</span>，右半平面）。两者幅值完全相同：<span class="tex">|1\pm j\omega T|=\sqrt{1+(\omega T)^{2}}</span>。</div>
+          <table class="cmp">
+            <tr><th>ω</th><th><span class="tex">Ts+1</span> 相角</th><th><span class="tex">1-Ts</span> 相角</th></tr>
+            <tr><td>→ 0</td><td>0°</td><td>0°</td></tr>
+            <tr><td>= 1/T</td><td class="up">+45°</td><td class="dn">−45°</td></tr>
+            <tr><td>→ ∞</td><td class="up">+90°</td><td class="dn">−90°</td></tr>
+            <tr><td><b>净变化</b></td><td class="up">+90°（超前）</td><td class="dn">−90°（滞后）</td></tr>
+          </table>
+          <div class="seg def"><b>命名由来</b>：在所有<span class="kw-r">幅频特性相同</span>的系统中，零、极点全在左半 s 平面者<span class="kw-r">相位滞后最小</span>——故称最小相位系统（实为"最小滞后相位"系统）。</div>
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd"><span style="flex:1">动态扫频：<span class="tex" style="font-size:19px">Ts+1</span> 与 <span class="tex" style="font-size:19px">1-Ts</span> 的 Bode 图（T=1）</span></div>
+        <div class="playbar"><button class="playbtn" id="play">⏸ 暂停</button></div>
+        <div class="bd2"><svg id="fig" viewBox="0 0 760 640"></svg></div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">结论</span><span>幅频相同 ≠ 系统相同：<span class="kw-r">1−Ts 与 Ts+1 幅值一样、相位相反</span>。判断是否为最小相位系统，还要看高频处的相位"总账"（下一页）。</span></div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("fig");
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const MF = "Cambria Math,STIX Two Math,Georgia,Microsoft YaHei,sans-serif";
+  const SUB = (n, s) => { const esc = t => t.replace(/&/g, "&amp;").replace(/</g, "&lt;"); let html = "", sub = false; for (const p of String(s).split(/(_\{[^}]*\})/)) { if (!p) continue; if (p.startsWith("_{")) { html += '<tspan' + (sub ? '' : ' dy="6"') + ' font-size="72%">' + esc(p.slice(2, -1)) + '</tspan>'; sub = true; } else { html += sub ? '<tspan dy="-6">' + esc(p) + '</tspan>' : esc(p); sub = false; } } n.innerHTML = html; };
+  const tx = (x, y, s, o, parent) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 17.5, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal", "font-family": MF }, parent); SUB(n, s); if (o && o.halo) n.setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:6;stroke-linejoin:round"); return n; };
+  const defs = mk("defs", {});
+  const m1 = mk("marker", { id: "aMp", markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, m1);
+  const x0 = 74, x1 = 718, DEC = (x1 - x0) / 3;         // ωT: 0.1..100
+  const X = w => x0 + (Math.log10(w) + 1) * DEC;
+  const D = 180 / Math.PI;
+  const Lm = w => 10 * Math.log10(1 + w * w);           // 两因子共同的幅频
+  const pA = w => Math.atan(w) * D, pB = w => -Math.atan(w) * D;
+  // —— 上：幅频（两因子重合，只画一条）——
+  const yT1 = 46, yB1 = 252, Lmax = 44;
+  const Y1 = v => yB1 - v / Lmax * (yB1 - yT1);
+  mk("line", { x1: x0, y1: yB1, x2: x1, y2: yB1, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#aMp)" });
+  mk("line", { x1: x0, y1: yB1, x2: x0, y2: yT1 - 6, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#aMp)" });
+  [0.1, 1, 10, 100].forEach(w => { const x = X(w); mk("line", { x1: x, y1: yB1, x2: x, y2: yT1, stroke: "#F0F4FC", "stroke-width": 1 }); tx(x, yB1 + 21, w === 1 ? "1" : String(w), { fs: 16.5, fill: "#5B6B8C" }); });
+  [0, 20, 40].forEach(v => { const y = Y1(v); mk("line", { x1: x0, y1: y, x2: x1, y2: y, stroke: v === 0 ? "#8AA6D8" : "#F0F4FC", "stroke-width": v === 0 ? 1.5 : 1 }); tx(x0 - 10, y + 5, String(v), { fs: 16.5, fill: "#5B6B8C", an: "end" }); });
+  tx(x1 + 6, yB1 + 6, "ω", { fs: 18, it: true, b: true, fill: "#5B6B8C", an: "start" });
+  tx(x0 - 12, yT1 - 6, "L/dB", { fs: 16.5, b: true, an: "end" });
+  // —— 下：相频 ——
+  const yT2 = 326, yB2 = 586;
+  const Y2 = v => yT2 + (100 - v) / 200 * (yB2 - yT2);
+  mk("line", { x1: x0, y1: Y2(0), x2: x1, y2: Y2(0), stroke: "#8AA6D8", "stroke-width": 1.5 });
+  mk("line", { x1: x0, y1: yB2, x2: x0, y2: yT2 - 6, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#aMp)" });
+  mk("line", { x1: x0, y1: yB2, x2: x1, y2: yB2, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#aMp)" });
+  [0.1, 1, 10, 100].forEach(w => { const x = X(w); mk("line", { x1: x, y1: yB2, x2: x, y2: yT2, stroke: "#F0F4FC", "stroke-width": 1 }); tx(x, yB2 + 21, w === 1 ? "1" : String(w), { fs: 16.5, fill: "#5B6B8C" }); });
+  [90, 45, 0, -45, -90].forEach(v => { const y = Y2(v); if (v !== 0) mk("line", { x1: x0, y1: y, x2: x1, y2: y, stroke: "#F0F4FC", "stroke-width": 1 }); tx(x0 - 10, y + 5, (v > 0 ? "+" : "") + v + "°", { fs: 16.5, fill: "#5B6B8C", an: "end" }); });
+  tx(x1 + 6, yB2 + 6, "ω", { fs: 18, it: true, b: true, fill: "#5B6B8C", an: "start" });
+  tx(x0 - 12, yT2 - 6, "φ", { fs: 17, b: true, an: "end" });
+  // ωT=1 竖虚线（两图联动）
+  [yT1, yT2].forEach(yt => { const yb = yt === yT1 ? yB1 : yB2; mk("line", { x1: X(1), y1: yb, x2: X(1), y2: yt, stroke: "#8AA6D8", "stroke-width": 1.4, "stroke-dasharray": "7 5" }); });
+  tx(X(1), yT1 - 8, "ωT = 1", { fs: 16, b: true, fill: "#5B6B8C" });
+  // 底稿（淡）
+  const N = 300, ws = [];
+  for (let i = 0; i <= N; i++) ws.push(0.1 * Math.pow(1000, i / N));
+  const pathTo = (f, Y, upto) => { let d = ""; for (let i = 0; i <= upto; i++) { d += (i ? "L" : "M") + X(ws[i]).toFixed(1) + "," + Y(f(ws[i])).toFixed(1); } return d; };
+  mk("path", { d: pathTo(Lm, Y1, N), stroke: "#DCE6F8", "stroke-width": 3, fill: "none" });
+  mk("path", { d: pathTo(pA, Y2, N), stroke: "#DCE6F8", "stroke-width": 3, fill: "none" });
+  mk("path", { d: pathTo(pB, Y2, N), stroke: "#DCE6F8", "stroke-width": 3, fill: "none" });
+  // 关键点标注
+  tx(X(1) + 12, Y2(45) - 8, "+45°", { fs: 16.5, b: true, fill: "#2B5CE6", an: "start", halo: true });
+  tx(X(1) + 12, Y2(-45) + 20, "−45°", { fs: 16.5, b: true, fill: "#D63A2F", an: "start", halo: true });
+  tx(x1 - 4, Y2(90) + 22, "+90°", { fs: 16.5, b: true, fill: "#2B5CE6", an: "end", halo: true });
+  tx(x1 - 4, Y2(-90) - 10, "−90°", { fs: 16.5, b: true, fill: "#D63A2F", an: "end", halo: true });
+  tx(X(30), Y1(Lm(30)) + 30, "两因子幅频曲线重合", { fs: 17, b: true, fill: "#1D3FA0", halo: true });
+  // 图例放相频图左下空区（红曲线 ω≈3 之后才降到此处，短标签不压线）
+  mk("line", { x1: x0 + 16, y1: yB2 - 40, x2: x0 + 56, y2: yB2 - 40, stroke: "#2B5CE6", "stroke-width": 3.6 });
+  tx(x0 + 66, yB2 - 34, "Ts+1（左半零点）", { fs: 16.5, b: true, fill: "#1D3FA0", an: "start" });
+  mk("line", { x1: x0 + 16, y1: yB2 - 14, x2: x0 + 56, y2: yB2 - 14, stroke: "#D63A2F", "stroke-width": 3.6 });
+  tx(x0 + 66, yB2 - 8, "1−Ts（右半零点）", { fs: 16.5, b: true, fill: "#B02E24", an: "start" });
+  // 动态层
+  const dyn = mk("g", {});
+  const readout = tx(x0 + 16, yT1 + 26, "", { fs: 17.5, b: true, fill: "#0B2A6B", an: "start", halo: true });
+  let running = true, t0 = null, u0 = 0;
+  function frame(ts) {
+    if (!running) return;
+    if (t0 === null) t0 = ts;
+    const u = (ts - t0) / 6200 % 1;
+    dyn.innerHTML = "";
+    const i = Math.max(1, Math.floor(u * N)), w = ws[i];
+    mk("path", { d: pathTo(Lm, Y1, i), stroke: "#1D3FA0", "stroke-width": 3.6, fill: "none" }, dyn);
+    mk("path", { d: pathTo(pA, Y2, i), stroke: "#2B5CE6", "stroke-width": 3.8, fill: "none" }, dyn);
+    mk("path", { d: pathTo(pB, Y2, i), stroke: "#D63A2F", "stroke-width": 3.8, fill: "none" }, dyn);
+    [[X(w), Y1(Lm(w)), "#1D3FA0"], [X(w), Y2(pA(w)), "#2B5CE6"], [X(w), Y2(pB(w)), "#D63A2F"]].forEach(([cx, cy, c]) => {
+      mk("circle", { cx, cy, r: 8, fill: c, stroke: "#fff", "stroke-width": 2.5 }, dyn);
+    });
+    readout.textContent = "ωT = " + (w < 10 ? w.toFixed(2) : w.toFixed(1)) + "　φ(Ts+1) = +" + pA(w).toFixed(1) + "°　φ(1−Ts) = " + pB(w).toFixed(1) + "°";
+    requestAnimationFrame(frame);
+  }
+  document.getElementById("play").addEventListener("click", function () {
+    running = !running;
+    this.textContent = running ? "⏸ 暂停" : "▶ 播放";
+    if (running) { t0 = null; requestAnimationFrame(frame); }
+  });
+  requestAnimationFrame(frame);
+});
+</script>
+</body>
+</html>

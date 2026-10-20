@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <title>2.3 例 4-5：五环节渐近线逐条叠加</title>
-<link rel="stylesheet" href="../../../theme/theme.css?v=228">
+<link rel="stylesheet" href="../../../theme/theme.css?v=229">
 <script src="../../../theme/mathjax/mathjax-render.js"></script>
 <script src="../../../theme/mathjax/tex-chtml.js"></script>
 <script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
-<script src="../../../theme/act-base.js?v=228" defer></script>
+<script src="../../../theme/act-base.js?v=229" defer></script>
 <style>
   .colwrap { display:flex; flex-direction:column; gap:14px; height:100%; min-height:0; }
   .modelband { background:#fff; border:2.5px solid var(--line); border-radius:14px; padding:10px 24px; display:flex; align-items:center; gap:24px; flex:none; }
@@ -30,13 +30,13 @@
   .figc svg { width:100%; height:100%; }
 </style>
 </head>
-<body data-title="2.3 例 4-5：五环节渐近线逐条叠加" data-page="45 / 91">
+<body data-title="2.3 例 4-5：五环节渐近线逐条叠加" data-page="45 / 95">
 <div class="act-stage"><div class="act-slide">
   <div class="act-body has-note">
     <div class="colwrap">
       <div class="modelband">
-        <span class="mb">例 4-5 模型：</span>
-        <span class="mathbox math mf eqline tex tex-d">G(s)H(s)=\dfrac{4\,(1+0.5s)}{s\,(1+2s)\,(1+0.05s+s^{2}/64)}</span>
+        <span class="mb">例 4-5：</span>
+        <span class="mathbox math mf eqline tex tex-d">G(s)H(s)=\dfrac{4\,(0.5s+1)}{s\,(2s+1)\,(s^{2}/64+0.05s+1)}</span>
         <span class="wn">二阶因子：ω<sub>n</sub>=8 rad/s、ζ=0.2</span>
       </div>
       <div class="row">
@@ -103,8 +103,8 @@ document.addEventListener("DOMContentLoaded", () => {
     0: ["（未开始）", "—", "渐近线尚未叠加"],
     1: ["比例环节 K=4", "+12.04dB 水平线（斜率 0）", "整体抬高至 " + LK.toFixed(2) + "dB 的水平线"],
     2: ["积分环节 1/s", "斜率 −20dB/dec（全频段）", "过 ω=1 的 −20dB/dec 直线"],
-    3: ["惯性环节 1/(1+2s)，转角 0.5", "转角后增加 −20dB/dec", "合成斜率变为 −40dB/dec"],
-    4: ["一阶微分 (1+0.5s)，转角 2", "转角后增加 +20dB/dec", "合成斜率回到 −20dB/dec"],
+    3: ["惯性环节 1/(2s+1)，转角 0.5", "转角后增加 −20dB/dec", "合成斜率变为 −40dB/dec"],
+    4: ["一阶微分 (0.5s+1)，转角 2", "转角后增加 +20dB/dec", "合成斜率回到 −20dB/dec"],
     5: ["振荡环节，ωn=8、ζ=0.2", "转角后增加 −40dB/dec", "合成斜率变为 −60dB/dec"],
     6: ["精确校核（虚线）", "ωn=8 处谐振隆起（ζ=0.2 小阻尼）", "渐近线 + 精确曲线对照"]
   };
@@ -150,7 +150,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // 合成渐近线（深蓝粗线）
     if (K >= 1) {
       mk("path", { d: pathOf(w => cum(w, K), 0.1, 100), stroke: "#1D3FA0", "stroke-width": 4.6, fill: "none" }, dyn);
-      const vp = { 0.5: [10, -16, "start"], 2: [-18, 40, "end"], 8: [-14, 36, "end"] };
+      const vp = { 0.5: [12, -14, "start"], 2: [12, -14, "start"], 8: [12, -14, "start"] };
       [0.5, 2, 8].forEach(w => {
         const v = cum(w, K);
         if (v > Lmin + 2) {

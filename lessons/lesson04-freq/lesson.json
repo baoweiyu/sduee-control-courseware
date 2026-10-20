@@ -204,12 +204,12 @@
       "legacy_action": "REDESIGN"
     },
     {
-      "complexity": "L1",
-      "status": "Draft",
-      "legacy_action": "REDESIGN",
       "id": "l4-p26",
       "file": "pages/p26-geom-example.html",
-      "title": "1.5 例：相量几何求 G(jω)"
+      "title": "1.5 例：相量几何求 G(jω)",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
     },
     {
       "id": "l4-p27",
@@ -389,343 +389,375 @@
     },
     {
       "id": "l4-p49",
-      "file": "pages/p49-min-phase.html",
-      "title": "2.4 最小相位系统与非最小相位系统",
-      "complexity": "L1",
-      "status": "Draft",
-      "legacy_action": "REDESIGN"
-    },
-    {
-      "id": "l4-p50",
-      "file": "pages/p50-bode-ess.html",
+      "file": "pages/p49-bode-ess.html",
       "title": "2.5 开环对数频率特性与闭环稳态误差",
       "complexity": "L1",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
-      "id": "l4-p51",
-      "file": "pages/p51-quiz-ka.html",
+      "id": "l4-p50",
+      "file": "pages/p50-quiz-ka.html",
       "title": "课堂互动 · 由低频段读 Ka",
       "complexity": "L2",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
-      "id": "l4-p52",
-      "file": "pages/p52-experiment.html",
+      "id": "l4-p51",
+      "file": "pages/p51-experiment.html",
       "title": "2.5 用实验法确定系统的传递函数",
       "complexity": "L1",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
-      "id": "l4-p53",
-      "file": "pages/p53-ex49.html",
+      "id": "l4-p52",
+      "file": "pages/p52-ex49.html",
       "title": "2.5 例 4-9：由实验曲线求传递函数",
       "complexity": "L1",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
-      "id": "l4-p54",
-      "file": "pages/p54-part2-summary.html",
-      "title": "第二部分小结",
+      "id": "l4-p53",
+      "file": "pages/p53-minphase-def.html",
+      "title": "2.6 最小相位系统：定义与工程意义",
       "complexity": "L1",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
+      "id": "l4-p54",
+      "file": "pages/p54-minphase-why.html",
+      "title": "2.6 为什么叫「最小相位」：零点相位动态对比",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
       "id": "l4-p55",
-      "file": "pages/p55-zeta-slope-proof.html",
-      "title": "扩展①：ζ 越小相频跳变越陡——数学证明",
+      "file": "pages/p55-minphase-judge.html",
+      "title": "2.6 最小相位系统的判断：高频「总账」",
       "complexity": "L1",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
       "id": "l4-p56",
-      "file": "pages/p56-zeta-slope-vectors.html",
+      "file": "pages/p56-part2-summary.html",
+      "title": "第二部分小结",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l4-p57",
+      "file": "pages/p57-zeta-slope-proof.html",
+      "title": "扩展①：ζ 越小相频跳变越陡——数学证明",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l4-p58",
+      "file": "pages/p58-zeta-slope-vectors.html",
       "title": "扩展②：S 平面矢量法——几何与物理直觉",
       "complexity": "L2",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
-      "id": "l4-p57",
-      "file": "pages/p57-part3-cover.html",
+      "id": "l4-p59",
+      "file": "pages/p59-part3-cover.html",
       "title": "第三部分封面 · 系统稳定性分析",
       "complexity": "L0",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
-      "id": "l4-p58",
-      "file": "pages/p58-alg-to-freq.html",
+      "id": "l4-p60",
+      "file": "pages/p60-alg-to-freq.html",
       "title": "3.1 从代数判据到图解判据",
       "complexity": "L1",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
-      "id": "l4-p59",
-      "file": "pages/p59-map-vector.html",
+      "id": "l4-p61",
+      "file": "pages/p61-map-vector.html",
       "title": "3.2 映射原理① 单向量的映射",
       "complexity": "L2",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
-      "id": "l4-p60",
-      "file": "pages/p60-map-diff.html",
+      "id": "l4-p62",
+      "file": "pages/p62-map-diff.html",
       "title": "3.2 映射原理② 两向量之差 s−z",
       "complexity": "L2",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
-      "id": "l4-p61",
-      "file": "pages/p61-map-product.html",
+      "id": "l4-p63",
+      "file": "pages/p63-map-product.html",
       "title": "3.2 映射原理③ 向量的乘积",
       "complexity": "L2",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
-      "id": "l4-p62",
-      "file": "pages/p62-map-encircle.html",
+      "id": "l4-p64",
+      "file": "pages/p64-map-encircle.html",
       "title": "3.2 映射原理④ 包围零点的围线",
       "complexity": "L2",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
-      "id": "l4-p63",
-      "file": "pages/p63-map-outside.html",
+      "id": "l4-p65",
+      "file": "pages/p65-map-outside.html",
       "title": "3.2 映射原理⑤ 围线外的零点",
       "complexity": "L2",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
-      "id": "l4-p64",
-      "file": "pages/p64-map-general.html",
+      "id": "l4-p66",
+      "file": "pages/p66-map-general.html",
       "title": "3.2 映射原理⑥ 一般式：零极点混合",
       "complexity": "L2",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
-      "id": "l4-p65",
-      "file": "pages/p65-map-conclusion.html",
+      "id": "l4-p67",
+      "file": "pages/p67-map-conclusion.html",
       "title": "3.2 映射原理（幅角原理）总结",
       "complexity": "L2",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
-      "id": "l4-p66",
-      "file": "pages/p66-f-to-gh.html",
-      "title": "3.3 从 F(s) 平面到 G(s)H(s) 平面",
-      "complexity": "L1",
-      "status": "Draft",
-      "legacy_action": "REDESIGN"
-    },
-    {
-      "id": "l4-p67",
-      "file": "pages/p67-nyquist-contour.html",
-      "title": "3.3 Nyquist 轨线与虚轴上的开环极点",
-      "complexity": "L1",
-      "status": "Draft",
-      "legacy_action": "REDESIGN"
-    },
-    {
       "id": "l4-p68",
-      "file": "pages/p68-nyquist-criterion.html",
-      "title": "3.3 Nyquist 稳定判据",
+      "file": "pages/p68-opencl-poles.html",
+      "title": "3.3 开环与闭环的零极点：F(s) 的角色",
       "complexity": "L1",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
       "id": "l4-p69",
-      "file": "pages/p69-ex410.html",
-      "title": "3.3 例 4-10（上）：Nyquist 轨线四段映射",
-      "complexity": "L2",
+      "file": "pages/p69-f-to-gh.html",
+      "title": "3.3 从 F(s) 平面到 G(s)H(s) 平面",
+      "complexity": "L1",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
       "id": "l4-p70",
-      "file": "pages/p70-ex410-concl.html",
-      "title": "3.3 例 4-10（下）：补全曲线并判断稳定性",
-      "complexity": "L2",
+      "file": "pages/p70-nyquist-contour.html",
+      "title": "3.3 Nyquist 轨线与虚轴上的开环极点",
+      "complexity": "L1",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
       "id": "l4-p71",
-      "file": "pages/p71-ex412.html",
-      "title": "3.3 例 4-12：3 型系统的 Nyquist 判稳",
+      "file": "pages/p71-nyquist-criterion.html",
+      "title": "3.3 Nyquist 稳定判据",
       "complexity": "L1",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
       "id": "l4-p72",
-      "file": "pages/p72-quiz-nyquist.html",
-      "title": "课堂互动 · 补全 Nyquist 曲线",
+      "file": "pages/p72-ex410.html",
+      "title": "3.3 例 4-10（上）：Nyquist 轨线四段映射",
       "complexity": "L2",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
       "id": "l4-p73",
-      "file": "pages/p73-conditional-stab.html",
-      "title": "互动实验：条件稳定系统",
+      "file": "pages/p73-ex410-concl.html",
+      "title": "3.3 例 4-10（下）：补全曲线并判断稳定性",
       "complexity": "L2",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
       "id": "l4-p74",
-      "file": "pages/p74-margin-intro.html",
-      "title": "3.4 相对稳定性：离临界还有多远",
+      "file": "pages/p74-fourstep-puzzle.html",
+      "title": "3.3 四步拼图法：拼画闭合 Nyquist 曲线",
       "complexity": "L1",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
       "id": "l4-p75",
-      "file": "pages/p75-margin-nyquist.html",
-      "title": "3.4 Nyquist 图上的稳定裕度",
+      "file": "pages/p75-ex412.html",
+      "title": "3.3 例 4-12：3 型系统的 Nyquist 判稳",
       "complexity": "L1",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
       "id": "l4-p76",
-      "file": "pages/p76-margin-bode.html",
-      "title": "3.4 Bode 图上的稳定裕度",
-      "complexity": "L1",
+      "file": "pages/p76-quiz-nyquist.html",
+      "title": "课堂互动 · 补全 Nyquist 曲线",
+      "complexity": "L2",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
       "id": "l4-p77",
-      "file": "pages/p77-notes-summary.html",
-      "title": "3.4 Bode 定理与第三部分小结",
-      "complexity": "L1",
+      "file": "pages/p77-conditional-stab.html",
+      "title": "互动实验：条件稳定系统",
+      "complexity": "L2",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
       "id": "l4-p78",
-      "file": "pages/p78-part4-cover.html",
-      "title": "第四部分封面 · 闭环频率特性与频域指标",
-      "complexity": "L0",
+      "file": "pages/p78-margin-intro.html",
+      "title": "3.4 相对稳定性：离临界还有多远",
+      "complexity": "L1",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
       "id": "l4-p79",
-      "file": "pages/p79-cl-problem.html",
-      "title": "4.1 单位反馈闭环系统的频率响应：相量法",
+      "file": "pages/p79-margin-nyquist.html",
+      "title": "3.4 Nyquist 图上的稳定裕度",
       "complexity": "L1",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
       "id": "l4-p80",
-      "file": "pages/p80-mcircle-deriv.html",
-      "title": "4.1 等 M 圆（等幅值轨迹）的推导",
+      "file": "pages/p80-margin-bode.html",
+      "title": "3.4 Bode 图上的稳定裕度",
       "complexity": "L1",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
       "id": "l4-p81",
-      "file": "pages/p81-mcircle-plot.html",
-      "title": "互动实验：等 M 圆与谐振峰值",
-      "complexity": "L2",
-      "status": "Draft",
-      "legacy_action": "REDESIGN"
-    },
-    {
-      "id": "l4-p82",
-      "file": "pages/p82-ncircle.html",
-      "title": "4.1 等 N 圆（等相角轨迹）",
+      "file": "pages/p81-notes-summary.html",
+      "title": "3.4 Bode 定理与第三部分小结",
       "complexity": "L1",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
+      "id": "l4-p82",
+      "file": "pages/p82-part4-cover.html",
+      "title": "第四部分封面 · 闭环频率特性与频域指标",
+      "complexity": "L0",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
       "id": "l4-p83",
-      "file": "pages/p83-nichols.html",
-      "title": "4.1 Nichols 图（对数幅相图）",
+      "file": "pages/p83-cl-problem.html",
+      "title": "4.1 单位反馈闭环系统的频率响应：相量法",
       "complexity": "L1",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
       "id": "l4-p84",
-      "file": "pages/p84-gamma-zeta.html",
-      "title": "4.2 二阶系统：相角裕度 γ 与阻尼比 ζ",
+      "file": "pages/p84-mcircle-deriv.html",
+      "title": "4.1 等 M 圆（等幅值轨迹）的推导",
       "complexity": "L1",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
       "id": "l4-p85",
-      "file": "pages/p85-wc-ts.html",
-      "title": "4.2 二阶系统：γ、ωc 与调节时间 ts",
-      "complexity": "L1",
+      "file": "pages/p85-mcircle-plot.html",
+      "title": "互动实验：等 M 圆与谐振峰值",
+      "complexity": "L2",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
       "id": "l4-p86",
-      "file": "pages/p86-cl-metrics.html",
-      "title": "4.2 闭环频率特性与闭环频域指标",
+      "file": "pages/p86-ncircle.html",
+      "title": "4.1 等 N 圆（等相角轨迹）",
       "complexity": "L1",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
       "id": "l4-p87",
-      "file": "pages/p87-cl-zeta-lab.html",
-      "title": "互动实验：ζ 与闭环频域/时域指标联动",
-      "complexity": "L2",
+      "file": "pages/p87-nichols.html",
+      "title": "4.1 Nichols 图（对数幅相图）",
+      "complexity": "L1",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
       "id": "l4-p88",
-      "file": "pages/p88-highorder-empirical.html",
-      "title": "4.2 高阶系统：频域与时域指标的经验公式",
+      "file": "pages/p88-gamma-zeta.html",
+      "title": "4.2 二阶系统：相角裕度 γ 与阻尼比 ζ",
       "complexity": "L1",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
       "id": "l4-p89",
-      "file": "pages/p89-three-band.html",
-      "title": "4.3 三频段理论：开环 Bode 图的分段解读",
+      "file": "pages/p89-wc-ts.html",
+      "title": "4.2 二阶系统：γ、ωc 与调节时间 ts",
       "complexity": "L1",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
       "id": "l4-p90",
-      "file": "pages/p90-quiz-metrics.html",
+      "file": "pages/p90-cl-metrics.html",
+      "title": "4.2 闭环频率特性与闭环频域指标",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l4-p91",
+      "file": "pages/p91-cl-zeta-lab.html",
+      "title": "互动实验：ζ 与闭环频域/时域指标联动",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l4-p92",
+      "file": "pages/p92-highorder-empirical.html",
+      "title": "4.2 高阶系统：频域与时域指标的经验公式",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l4-p93",
+      "file": "pages/p93-three-band.html",
+      "title": "4.3 三频段理论：开环 Bode 图的分段解读",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l4-p94",
+      "file": "pages/p94-quiz-metrics.html",
       "title": "课堂互动 · 频域指标的选择",
       "complexity": "L2",
       "status": "Draft",
       "legacy_action": "REDESIGN"
     },
     {
-      "id": "l4-p91",
-      "file": "pages/p91-ch4-summary.html",
+      "id": "l4-p95",
+      "file": "pages/p95-ch4-summary.html",
       "title": "第四章小结：频率响应法",
       "complexity": "L1",
       "status": "Draft",

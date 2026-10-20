@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>3.3 例 4-12：3 型系统的 Nyquist 判稳</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=229">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=229" defer></script>
+<style>
+  .col-wrap { display:flex; flex-direction:column; gap:12px; height:100%; min-height:0; }
+  .band { display:flex; gap:14px; }
+  .bc { background:#fff; border:2px solid var(--line); border-radius:12px; padding:7px 14px; font-size:17.5px; line-height:1.45; display:flex; align-items:center; }
+  .bc .tex { font-size:18px; }
+  .bc.b1 { flex:1.05; } .bc.b2 { flex:1.15; } .bc.b3 { flex:1; border-color:#1E9E57; background:#F0FAF4; }
+  .bc.b1, .bc.b2 { white-space:nowrap; }
+  .bc b { color:var(--navy); }
+  .bc .okb { color:#166B3B; font-weight:800; }
+  .row { display:flex; gap:20px; flex:1; min-height:0; }
+  .pc { flex:1; display:flex; flex-direction:column; overflow:hidden; }
+  .pc .hd { min-height:56px; display:flex; align-items:center; }
+  .pc .bd2 { flex:1; display:grid; place-items:center; background:#fff; padding:4px 10px; min-height:0; }
+  .pc svg { width:100%; height:100%; }
+  .chips { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+  .chip { background:#fff; border:2.5px solid; border-radius:12px; padding:6px 12px; font-size:15px; line-height:1.4; }
+  .chip.now { border-color:#D63A2F !important; background:#FDF1EF; }
+  .chip.now b { color:#D63A2F !important; }
+  .chip b { font-size:15.5px; }
+  .k1 { border-color:#2B5CE6; } .k1 b { color:#1D3FA0; }
+  .k2 { border-color:#2B5CE6; } .k2 b { color:#1D3FA0; }
+  .k3 { border-color:#2B5CE6; } .k3 b { color:#1D3FA0; }
+  .k4 { border-color:#2B5CE6; } .k4 b { color:#1D3FA0; }
+  .playbar { position:absolute; right:26px; top:14px; }
+  .playbtn { border:none; background:var(--blue); color:#fff; font-size:15.5px; font-weight:700; border-radius:9px; padding:6px 15px; cursor:pointer; }
+  .playbtn:hover { background:var(--navy); }
+</style>
+</head>
+<body data-title="3.3 例 4-12：3 型系统的 Nyquist 判稳" data-page="75 / 95">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="col-wrap">
+      <div class="band">
+        <div class="bc b1"><b>开环传递函数（ν=3）</b>&nbsp;<span class="tex">G(s)H(s)=\dfrac{K(T_{1}s+1)(T_{2}s+1)}{s^{3}}</span></div>
+        <div class="bc b2"><b>实轴交点</b>&nbsp;<span class="tex">\omega^{*}=1/\sqrt{T_{1}T_{2}}=1.41,\ \mathrm{Re}^{*}=-K(T_{1}+T_{2})T_{1}T_{2}</span></div>
+        <div class="bc b3">K=2（T₁=1，T₂=0.5）⇒ 交点 −1.50 在 (−1, j0) <b>左侧</b>&nbsp;<span class="okb">⇒ N=0，Z=P−N=0，稳定 ✓</span></div>
+      </div>
+      <div class="row">
+        <div class="act-card pc">
+          <div class="hd"><span style="flex:1;font-size:21px">s 平面：Nyquist 轨线（同例 4-10）</span></div>
+          <div class="bd2"><svg id="figL" viewBox="0 0 640 600"></svg></div>
+        </div>
+        <div class="act-card pc" style="position:relative">
+          <div class="hd"><span style="flex:1;font-size:21px">G(s)H(s) 平面：映射像（∞ 远区压缩显示）</span></div>
+          <div class="playbar"><button class="playbtn" id="play">▶ 连续播放</button></div>
+          <div class="bd2"><svg id="figR" viewBox="0 0 640 600"></svg></div>
+        </div>
+      </div>
+      <div class="chips">
+        <div class="chip k1" data-step="1"><b>① ω：0⁻→0⁺</b>　<span class="tex">s=\varepsilon e^{j\theta}</span> ⇒ 像 <span class="tex">\infty e^{-j3\theta}</span>：∞ 处<b>顺时针转一圈半（540°）</b>（虚线补圆）。</div>
+        <div class="chip k2" data-step="2"><b>② ω：0⁺→+∞</b>　正虚轴 ⇒ 像：∞∠+90° 出发 → <b>穿实轴于 −1.50</b> → 0∠−90° 进原点。</div>
+        <div class="chip k3" data-step="3"><b>③ ω：+∞→−∞</b>　∞ 大半圆 ⇒ 像：缩成<b>原点附近的小弧</b>（n−m=1，趋于原点）。</div>
+        <div class="chip k4" data-step="4"><b>④ ω：−∞→0⁻</b>　负虚轴 ⇒ 像：从原点 → 穿 −1.50 → −j∞ 端（<b>与②镜像</b>）。</div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">观察</span><span>四段拼成闭合曲线后数包围圈数：本例 K=2 时曲线从 (−1, j0) <span class="kw-r">左侧</span>绕过，N=0，闭环稳定。若 K 变小使交点缩到 (−1, j0) 右侧呢？——后面互动页揭晓。</span></div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const EP = 0.45, RR = 3.1;
+  const Kg = 2, T1 = 1, T2 = 0.5;
+  // G(s) = K(T1 s+1)(T2 s+1)/s^3，复数计算
+  const G = s => {
+    const a = s[0], b = s[1];
+    const s2 = [a * a - b * b, 2 * a * b];
+    const s3 = [s2[0] * a - s2[1] * b, s2[0] * b + s2[1] * a];
+    const n1 = [T1 * a + 1, T1 * b], n2 = [T2 * a + 1, T2 * b];
+    const num = [n1[0] * n2[0] - n1[1] * n2[1], n1[0] * n2[1] + n1[1] * n2[0]];
+    const dd = s3[0] * s3[0] + s3[1] * s3[1];
+    return [Kg * (num[0] * s3[0] + num[1] * s3[1]) / dd, Kg * (num[1] * s3[0] - num[0] * s3[1]) / dd];
+  };
+  const CUR = "#D63A2F", DONE = "#2B5CE6";
+  const segs = [
+    u => { const th = (-90 + 180 * u) * Math.PI / 180; return [EP * Math.cos(th), EP * Math.sin(th)]; },
+    u => [0, EP + (RR - EP) * u],
+    u => { const th = (90 - 180 * u) * Math.PI / 180; return [RR * Math.cos(th), RR * Math.sin(th)]; },
+    u => [0, -RR + (RR - EP) * u]
+  ];
+  function panel(id, mid) {
+    const svg = document.getElementById(id);
+    const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+    const MF = "Cambria Math,STIX Two Math,Georgia,Microsoft YaHei,sans-serif";
+    const SUB = (n, s) => { const esc = t => t.replace(/&/g, "&amp;").replace(/</g, "&lt;"); let html = "", sub = false; for (const p of String(s).split(/(_\{[^}]*\})/)) { if (!p) continue; if (p.startsWith("_{")) { html += '<tspan' + (sub ? '' : ' dy="6"') + ' font-size="72%">' + esc(p.slice(2, -1)) + '</tspan>'; sub = true; } else { html += sub ? '<tspan dy="-6">' + esc(p) + '</tspan>' : esc(p); sub = false; } } n.innerHTML = html; };
+    const tx = (x, y, s, o, parent) => { const n = mk("text", { x, y, "font-size": (o && o.fs) || 16, "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B", "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal", "font-family": MF }, parent); SUB(n, s); if (o && o.halo) n.setAttribute("style", "paint-order:stroke;stroke:#FFFFFF;stroke-width:6;stroke-linejoin:round"); return n; };
+    const defs = mk("defs", {});
+    const m1 = mk("marker", { id: mid, markerWidth: 10, markerHeight: 10, refX: 7, refY: 3, orient: "auto" }, defs);
+    mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: "#5B6B8C" }, m1);
+    return { svg, mk, tx, mid };
+  }
+  // ===== 左：s 平面 =====
+  const L = panel("figL", "a62l");
+  const LS = 82, LO = { x: 300, y: 300 };
+  const LX = v => LO.x + v * LS, LY = v => LO.y - v * LS;
+  L.mk("line", { x1: 30, y1: LO.y, x2: 610, y2: LO.y, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a62l)" });
+  L.mk("line", { x1: LO.x, y1: 580, x2: LO.x, y2: 20, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a62l)" });
+  L.tx(604, LO.y - 12, "Re", { fs: 18, it: true, b: true, fill: "#5B6B8C", an: "end" });
+  L.tx(LO.x + 18, 36, "jIm", { fs: 18, it: true, b: true, fill: "#5B6B8C", an: "start" });
+  L.tx(LO.x - 12, LO.y + 26, "O", { fs: 16, fill: "#5B6B8C", an: "end" });
+  const segGray = "stroke:#B9C6E4;stroke-width:2";
+  L.svg.insertAdjacentHTML("beforeend",
+    '<line x1="' + LO.x + '" y1="' + LY(EP) + '" x2="' + LO.x + '" y2="' + LY(RR) + '" style="' + segGray + '"/>' +
+    '<line x1="' + LO.x + '" y1="' + LY(-RR) + '" x2="' + LO.x + '" y2="' + LY(-EP) + '" style="' + segGray + '"/>' +
+    '<path d="M' + LO.x + ',' + LY(-EP) + ' A' + EP * LS + ',' + EP * LS + ' 0 0 1 ' + LO.x + ',' + LY(EP) + '" fill="none" style="' + segGray + '"/>' +
+    '<path d="M' + LO.x + ',' + LY(RR) + ' A' + RR * LS + ',' + RR * LS + ' 0 0 1 ' + LO.x + ',' + LY(-RR) + '" fill="none" style="' + segGray + '"/>');
+  L.tx(LO.x - 14, LY(EP) - 8, "C (ω=0⁺)", { fs: 14.5, fill: "#5B6B8C", an: "end" });
+  L.tx(LO.x - 14, LY(-EP) + 22, "A (ω=0⁻)", { fs: 14.5, fill: "#5B6B8C", an: "end" });
+  L.tx(LO.x - 14, LY(RR) - 4, "D (+j∞)", { fs: 14.5, fill: "#5B6B8C", an: "end" });
+  L.tx(LO.x - 14, LY(-RR) + 12, "F (−j∞)", { fs: 14.5, fill: "#5B6B8C", an: "end" });
+  L.tx(LO.x + EP * LS + 34, LO.y + 8, "B：ε 小半圆", { fs: 14.5, fill: "#D63A2F", an: "start", b: true });
+  const dynL = L.mk("g", {});
+  // ===== 右：GH 平面（径向压缩显示 ∞）=====
+  const Rp = panel("figR", "a62r");
+  const SC = 100, RO = { x: 330, y: 300 }, CC = 2.6, MM = 0.8;
+  const cmp = v => CC / (Math.hypot(v[0], v[1]) + MM);         // 压缩因子
+  const RXc = v => RO.x + v[0] * cmp(v) * SC, RYc = v => RO.y - v[1] * cmp(v) * SC;
+  const RC = CC * SC;                                            // ∞ 圆半径（显示）
+  const R0 = (Kg / (EP * EP * EP)) * (CC / (Kg / (EP * EP * EP) + MM)) * SC;  // ε 段像的半径 ≈251
+  Rp.mk("line", { x1: 30, y1: RO.y, x2: 610, y2: RO.y, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a62r)" });
+  Rp.mk("line", { x1: RO.x, y1: 580, x2: RO.x, y2: 20, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a62r)" });
+  Rp.tx(606, RO.y + 30, "Re", { fs: 18, it: true, b: true, fill: "#5B6B8C", an: "end" });
+  Rp.tx(RO.x + 18, 36, "jIm", { fs: 18, it: true, b: true, fill: "#5B6B8C", an: "start" });
+  Rp.tx(RO.x - 12, RO.y + 26, "O", { fs: 16, fill: "#5B6B8C", an: "end" });
+  // ∞ 圆（淡灰点线）
+  Rp.mk("circle", { cx: RO.x, cy: RO.y, r: RC, fill: "none", stroke: "#C9D6F2", "stroke-width": 1.6, "stroke-dasharray": "3 6" });
+  // (−1,j0) 与实轴交点 −1.50（压缩后位置）
+  const xM1 = RXc([-1, 0]), xCr = RXc([-Kg * (T1 + T2) * T1 * T2, 0]);
+  Rp.mk("circle", { cx: xM1, cy: RO.y, r: 9, fill: "#fff", stroke: "#D63A2F", "stroke-width": 3 });
+  Rp.tx(xM1, RO.y - 48, "(−1, j0)", { fs: 17, b: true, fill: "#D63A2F", halo: true, an: "middle" });
+  Rp.mk("circle", { cx: xCr, cy: RO.y, r: 8, fill: "#F5821F" });
+  Rp.mk("line", { x1: xCr + 6, y1: RO.y + 10, x2: xCr + 62, y2: RO.y + 52, stroke: "#999", "stroke-width": 1.2 });
+  Rp.tx(xCr + 66, RO.y + 58, "交点 −1.50", { fs: 16.5, b: true, fill: "#F5821F", halo: true, an: "start" });
+  Rp.tx(RO.x, 592, "∞ 远区经径向压缩显示（包围关系、左右相对位置不变）", { fs: 14.5, fill: "#8AA0C8" });
+  const dynR = Rp.mk("g", {});
+  // 预计算各段像（段① 用理想化 ∞e^{−j3θ} 螺旋，其余用精确 G）
+  const NP = 160;
+  const fSegs = segs.map((fn, i) => {
+    const pts = [];
+    for (let j = 0; j <= NP; j++) pts.push(G(fn(j / NP)));
+    return pts;
+  });
+  const sp = u => { // 段① 理想化螺旋：角度 270°→−270°，末 1/3 圈半径略缩避免重叠
+    const th = (270 - 540 * u) * Math.PI / 180;
+    const rr = R0 - 30 * Math.max(0, (u - 2 / 3) * 3);
+    return [RO.x + rr * Math.cos(th), RO.y - rr * Math.sin(th)];
+  };
+  const clR = p => [Math.max(30, Math.min(610, p[0])), Math.max(20, Math.min(580, p[1]))];
+  function arrowT(mkf, parent, p0, p1, p2, col) {
+    const ang = Math.atan2(p2[1] - p0[1], p2[0] - p0[0]) * 180 / Math.PI;
+    mkf("path", { d: "M-10,-7 L11,0 L-10,7 Z", fill: col, transform: "translate(" + p1[0].toFixed(1) + "," + p1[1].toFixed(1) + ") rotate(" + ang.toFixed(1) + ")" }, parent);
+  }
+  let K = 0; const TOTAL = 4;
+  function paint() {
+    dynL.innerHTML = ""; dynR.innerHTML = "";
+    for (let i = 0; i < K; i++) {
+      const colI = i === K - 1 ? CUR : DONE;
+      // 左：该段描粗
+      let dl = "";
+      for (let j = 0; j <= NP; j++) { const s = segs[i](j / NP); dl += (j ? "L" : "M") + LX(s[0]).toFixed(1) + "," + LY(s[1]).toFixed(1); }
+      L.mk("path", { d: dl, fill: "none", stroke: colI, "stroke-width": 4.2 }, dynL);
+      const sA = segs[i](0.44), sB = segs[i](0.5), sC = segs[i](0.56);
+      arrowT(L.mk, dynL, [LX(sA[0]), LY(sA[1])], [LX(sB[0]), LY(sB[1])], [LX(sC[0]), LY(sC[1])], colI);
+      // 右：该段的像
+      if (i === 0) {
+        let d = "";
+        for (let j = 0; j <= NP; j++) { const p = sp(j / NP); d += (j ? "L" : "M") + p[0].toFixed(1) + "," + p[1].toFixed(1); }
+        Rp.mk("path", { d, fill: "none", stroke: colI, "stroke-width": 3.6, "stroke-dasharray": "10 7" }, dynR);
+        [0.22, 0.72].forEach(u => arrowT(Rp.mk, dynR, sp(u - 0.02), sp(u), sp(u + 0.02), colI));
+      } else if (i === 2) {
+        let d = "";
+        fSegs[2].forEach((v, j) => { const p = clR([RXc(v), RYc(v)]); d += (j ? "L" : "M") + p[0].toFixed(1) + "," + p[1].toFixed(1); });
+        Rp.mk("path", { d, fill: "none", stroke: colI, "stroke-width": 4.2 }, dynR);
+        Rp.mk("circle", { cx: RO.x, cy: RO.y, r: 7, fill: "#fff", stroke: colI, "stroke-width": 3 }, dynR);
+      } else {
+        let d = "";
+        fSegs[i].forEach((v, j) => { const p = clR([RXc(v), RYc(v)]); d += (j ? "L" : "M") + p[0].toFixed(1) + "," + p[1].toFixed(1); });
+        Rp.mk("path", { d, fill: "none", stroke: colI, "stroke-width": 4.2, "stroke-dasharray": i === 3 ? "9 6" : "0" }, dynR);
+        const fA = fSegs[i][Math.floor(NP * 0.44)], fB = fSegs[i][Math.floor(NP * 0.5)], fC = fSegs[i][Math.floor(NP * 0.56)];
+        arrowT(Rp.mk, dynR, clR([RXc(fA), RYc(fA)]), clR([RXc(fB), RYc(fB)]), clR([RXc(fC), RYc(fC)]), colI);
+      }
+    }
+  }
+  // 动点：沿当前段循环
+  let t0 = null, dotG = null, dotS = null;
+  function frame(ts) { if (t0 === null) t0 = ts; paintDots(ts); requestAnimationFrame(frame); }
+  function paintDots(ts) {
+    if (dotG) { dotG.remove(); dotG = null; }
+    if (dotS) { dotS.remove(); dotS = null; }
+    if (K < 1) return;
+    const i = K - 1;
+    const u = (ts / 2600) % 1;
+    const s = segs[i](u);
+    dotS = L.mk("circle", { cx: LX(s[0]), cy: LY(s[1]), r: 9, fill: CUR, stroke: "#fff", "stroke-width": 2.5 });
+    let p;
+    if (i === 0) p = sp(u);
+    else { const f = G(s); p = clR([RXc(f), RYc(f)]); }
+    dotG = Rp.mk("circle", { cx: p[0], cy: p[1], r: 9, fill: CUR, stroke: "#fff", "stroke-width": 2.5 });
+  }
+  const S = ACT.step, _next = S.next.bind(S), _reset = S.reset.bind(S);
+  function syncChips() { document.querySelectorAll(".chip").forEach(c => c.classList.toggle("now", +c.dataset.step === K)); }
+  S.next = function () { if (K < TOTAL) K++; const d = _next(); paint(); syncChips(); return d; };
+  S.reset = function () { K = 0; _reset(); paint(); syncChips(); };
+  window.prev = function () { const n = Math.max(0, S.cur - 1); S.reset(); for (let i = 0; i < n; i++) S.next(); };
+  let timer = null;
+  document.getElementById("play").addEventListener("click", () => {
+    if (timer) { clearInterval(timer); timer = null; return; }
+    if (K >= TOTAL) S.reset();
+    timer = setInterval(() => { if (K >= TOTAL) { clearInterval(timer); timer = null; } else S.next(); }, 2400);
+  });
+  paint();
+  requestAnimationFrame(frame);
+});
+</script>
+</body>
+</html>

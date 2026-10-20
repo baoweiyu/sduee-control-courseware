@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>2.6 最小相位系统的判断：高频「总账」</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=229">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=229" defer></script>
+<style>
+  .row { display:flex; gap:22px; height:100%; min-height:0; }
+  .tx { flex:1; display:flex; flex-direction:column; min-height:0; }
+  .tx .bd { flex:1; display:flex; flex-direction:column; justify-content:space-evenly; gap:13px; padding:12px 20px; font-size:20.5px; line-height:1.62; overflow:hidden; }
+  .seg { background:var(--sky); border-radius:11px; padding:13px 17px; }
+  .seg.def { background:#FFF3E8; border-left:5px solid var(--orange); }
+  .seg b { color:var(--navy); }
+  .rt { flex:1.06; display:flex; flex-direction:column; min-height:0; }
+  .rt .bd { flex:1; display:flex; flex-direction:column; justify-content:space-evenly; gap:12px; padding:12px 18px; overflow:hidden; }
+  table.ex { width:100%; border-collapse:collapse; font-size:18px; background:#fff; }
+  table.ex th, table.ex td { border:1.6px solid #C9D6F2; padding:8px 8px; text-align:center; }
+  table.ex th { background:#E8F0FE; color:var(--navy); font-size:17.5px; }
+  table.ex .ok { color:#166B3B; font-weight:800; }
+  table.ex .no { color:#B02E24; font-weight:800; }
+  table.ex .tex { font-size:17px; }
+  .figbox { background:#fff; border:2px solid var(--line); border-radius:12px; padding:8px 10px; }
+  .figbox .cap { text-align:center; font-size:17px; color:var(--navy); font-weight:700; margin-bottom:2px; }
+  .figbox svg { width:100%; display:block; }
+</style>
+</head>
+<body data-title="2.6 最小相位系统的判断：高频「总账」" data-page="55 / 95">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="act-card tx">
+        <div class="hd">高频判据与判断步骤</div>
+        <div class="bd">
+          <div class="seg def"><b>高频判据（算总账）</b>：ω → ∞ 时，最小相位系统的相角为
+            <div class="mathbox math eqline tex tex-d">\varphi(\infty)=-(n-m)\times 90^{\circ}</div>
+            n：开环极点数，m：开环零点数。原理：ω→∞ 时每个左半极点彻底贡献 −90°、每个左半零点彻底贡献 +90°，与参数无关。</div>
+          <div class="seg"><b>判断三步</b>：
+            <div style="margin-top:4px">① 由幅频渐近线<b>末端斜率</b> −20(n−m) dB/dec 读出 n−m；</div>
+            <div>② 算出应有相角 <span class="tex">-(n-m)\times90^{\circ}</span>；</div>
+            <div>③ 对照实际 φ(∞)：<b>相等 ⇒ 最小相位</b>；多滞后 180° 的整数倍、或持续下降不收敛 ⇒ <span class="kw-r">非最小相位</span>。</div>
+          </div>
+          <div class="seg" style="font-size:19px"><b>直觉</b>：看渐近线末端，就能发现"藏"在右半平面的零点或延迟环节——它们不改变末端斜率，却让相位多付"账"。</div>
+        </div>
+      </div>
+      <div class="act-card rt">
+        <div class="hd">算例对照（三者幅频特性完全相同）</div>
+        <div class="bd">
+          <table class="ex">
+            <tr><th>开环传递函数</th><th>n−m</th><th>φ(∞)</th><th>判定</th></tr>
+            <tr><td><span class="tex">G_{1}=\dfrac{0.5s+1}{s(2s+1)}</span></td><td>1</td><td>−90°</td><td class="ok">✓ 最小相位</td></tr>
+            <tr><td><span class="tex">G_{2}=\dfrac{1-0.5s}{s(2s+1)}</span></td><td>1</td><td>−270°</td><td class="no">✗ 非最小相位</td></tr>
+            <tr><td><span class="tex">G_{3}=\dfrac{e^{-\tau s}(0.5s+1)}{s(2s+1)}</span></td><td>1</td><td>→ −∞</td><td class="no">✗ 非最小相位</td></tr>
+          </table>
+          <div class="figbox">
+            <div class="cap">三条相频曲线的高频去向（示意）</div>
+            <svg viewBox="0 0 560 240">
+              <defs><marker id="aJg" markerWidth="9" markerHeight="9" refX="6" refY="2.6" orient="auto"><path d="M0,0 L6,2.6 L0,5.2 Z" fill="#5B6B8C"/></marker></defs>
+              <line x1="46" y1="52" x2="540" y2="52" stroke="#8AA6D8" stroke-width="1.4"/>
+              <line x1="46" y1="222" x2="46" y2="18" stroke="#5B6B8C" stroke-width="1.4" marker-end="url(#aJg)"/>
+              <line x1="46" y1="222" x2="540" y2="222" stroke="#5B6B8C" stroke-width="1.4" marker-end="url(#aJg)"/>
+              <text x="534" y="242" font-size="15" font-style="italic" fill="#5B6B8C" text-anchor="end" font-family="Cambria Math,STIX Two Math,Georgia,serif">ω（对数）</text>
+              <text x="40" y="30" font-size="15" font-style="italic" fill="#5B6B8C" text-anchor="end" font-family="Cambria Math,STIX Two Math,Georgia,serif">φ</text>
+              <text x="40" y="57" font-size="14.5" fill="#5B6B8C" text-anchor="end">0°</text>
+              <line x1="46" y1="96" x2="540" y2="96" stroke="#F0F4FC" stroke-width="1"/>
+              <text x="40" y="101" font-size="14.5" fill="#5B6B8C" text-anchor="end">−90°</text>
+              <line x1="46" y1="184" x2="540" y2="184" stroke="#F0F4FC" stroke-width="1"/>
+              <text x="40" y="189" font-size="14.5" fill="#5B6B8C" text-anchor="end">−270°</text>
+              <path d="M52,54 C150,58 260,86 520,94" fill="none" stroke="#2B5CE6" stroke-width="3.4"/>
+              <path d="M52,54 C150,60 260,150 520,180" fill="none" stroke="#D63A2F" stroke-width="3.4" stroke-dasharray="9 6"/>
+              <path d="M52,54 C140,60 200,90 300,180 Q340,222 372,238" fill="none" stroke="#E06D00" stroke-width="3.4" stroke-dasharray="2 5"/>
+              <text x="524" y="88" font-size="15.5" font-weight="700" fill="#1D3FA0" text-anchor="end" style="paint-order:stroke;stroke:#fff;stroke-width:5">G₁ → −90°</text>
+              <text x="524" y="172" font-size="15.5" font-weight="700" fill="#B02E24" text-anchor="end" style="paint-order:stroke;stroke:#fff;stroke-width:5">G₂ → −270°</text>
+              <text x="330" y="232" font-size="15.5" font-weight="700" fill="#E06D00" text-anchor="end" style="paint-order:stroke;stroke:#fff;stroke-width:5">G₃ 持续下降（延迟）</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">小结</span><span>最小相位系统：由 L(ω) 渐近线即可唯一反写 G(s)；非最小相位系统（右半平面零点 / 延迟环节）<span class="kw-r">幅频相同、相位更负</span>，必须另测相位才能辨识。</span></div>
+</div></div>
+</body>
+</html>

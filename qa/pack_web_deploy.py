@@ -7,7 +7,7 @@ components/ + 实际引用的 assets + DEPLOY-部署说明.md + 可选 server.js
 import os, re, json, zipfile
 
 ROOT = r"H:\D_tools\courseware-system-kimi"
-OUT = os.path.join(ROOT, "act-courseware-web-deploy-v2.28.zip")
+OUT = os.path.join(ROOT, "act-courseware-web-deploy-v2.29.zip")
 
 COMMON_DIRS = ["player", "components", "theme"]
 LESSON_IDS = ["lesson01-intro", "lesson02-math-model", "lesson03-timedomain", "lesson04-freq", "lesson05-root-locus", "lesson06-correction"]
@@ -54,15 +54,16 @@ https://github.com/baoweiyu/sduee-control-courseware
 https://github.com/baoweiyu/sduee-control-courseware/releases
 
 ## 这是什么
-纯静态 HTML 课件站点（无后端、无数据库、无构建步骤），内含第一~六章共 367 页：
+纯静态 HTML 课件站点（无后端、无数据库、无构建步骤），内含第一~六章共 375 页：
 - 第一章 绪论（35 页）
 - 第二章 控制系统的数学模型（51 页）
 - 第三章 时域分析法（85 页）
-- 第四章 频率响应法（87 页，含外部精修终审全部修复）
+- 第四章 频率响应法（95 页）
 - 第五章 根轨迹法（61 页，数值严谨绘制 + 连贯/分步动画 + 图面缩放）
 - 第六章 控制系统的校正（48 页，Bode 图数值绘制 + 设计步骤分步演示）
 
-整体版本 V2.28（2026-10-19）。本地播放版与网页部署版使用同一版本号。
+整体版本 V2.29（2026-10-20）。本地播放版与网页部署版使用同一版本号。
+V2.29 更新：第四章 14 项修改——P45/P46 标注与尾一标准型规范、低频延长虚线与转折点修正精确曲线；根号显示通篇修复；最小相位系统扩为三页并移至第二部分末；新增开闭环零极点关系页与四步拼图法页；Nyquist 系列页（绕行方向、标题等高、补图闭合、分段联动动画、标注避线）精修；全章 91→95 页。
 V2.21 更新：第六章《控制系统的校正》首次发布（48 页，一轮修改版）。
 V2.22 更新：第三章 8 页排版与框图精修（P51/52/54/69/71/77/78/85），含 E(s) 标注完整显示、60° 角弧方向修正等。
 V2.23 更新：第四章 P8/P12/P22/P25 精修，原 P26-28 重排为四页（例题→三步法→起终点→练习），起终点图重绘并补 ν=3、n−m=4 情形，全章 88 页。
@@ -101,7 +102,7 @@ V2.16 更新：①全部页面 theme.css/act-base.js 引用加版本号缓存破
 - 直达某章某页：`/?lesson=<章节id>&p=<页码>`（页码从 1 开始），例如：
   - 第一章第 1 页：`/?lesson=lesson01-intro&p=1`
   - 第四章第 56 页：`/?lesson=lesson04-freq&p=56`
-- 章节 id：lesson01-intro / lesson02-math-model / lesson03-timedomain / lesson04-freq / lesson05-root-locus
+- 章节 id：lesson01-intro / lesson02-math-model / lesson03-timedomain / lesson04-freq / lesson05-root-locus / lesson06-correction
 - 播放器操作：←/→/↑/↓/PgUp/PgDn/Space = 上一步/下一步（步尽自动翻页，无动画页等同翻页，翻页笔两种映射均可）；底栏「上一页/下一页」直接翻页；F 全屏；R 重置本页；右上角「导航」按页码+关键词跳转。
 
 ## 目录结构（请勿重命名/移动任何目录）
