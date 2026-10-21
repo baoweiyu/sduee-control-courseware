@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <title>互动实验：条件稳定系统</title>
-<link rel="stylesheet" href="../../../theme/theme.css?v=231">
+<link rel="stylesheet" href="../../../theme/theme.css?v=232">
 <script src="../../../theme/mathjax/mathjax-render.js"></script>
 <script src="../../../theme/mathjax/tex-chtml.js"></script>
 <script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
-<script src="../../../theme/act-base.js?v=231" defer></script>
+<script src="../../../theme/act-base.js?v=232" defer></script>
 <style>
   .col-wrap { display:flex; flex-direction:column; gap:12px; height:100%; min-height:0; }
   .band { background:#fff; border:2px solid var(--line); border-radius:12px; padding:8px 16px; }
@@ -124,32 +124,65 @@ document.addEventListener("DOMContentLoaded", () => {
   // ===== 左：s 平面 =====
   const L = panel("figL", "a64l");
   const LS = 76, LO = { x: 300, y: 280 };
-  // ===== 右：GH 平面 =====
+  // ===== 右：GH 平面（教材式完整闭合曲线：真坐标等比例，红虚线 = |G|→∞ 部分；比例尺随 K 自适应）=====
   const Rp = panel("figR", "a64r");
-  const SC = 93, RO = { x: 330, y: 280 }, CC = 2.6, MM = 0.8;
-  const cmp = v => CC / (Math.hypot(v[0], v[1]) + MM);
-  const RXc = v => RO.x + v[0] * cmp(v) * SC, RYc = v => RO.y - v[1] * cmp(v) * SC;
-  const RC = CC * SC;
-  const clR = p => [Math.max(30, Math.min(610, p[0])), Math.max(20, Math.min(540, p[1]))];
+  const RO = { x: 330, y: 280 };
+  let SC = 40, R_ARC = 5, LIM = 7, WA = 1;                 // 由 recompute() 按 K 设定
+  const PX = v => RO.x + v[0] * SC, PY = v => RO.y - v[1] * SC;
+  const clR = p => [Math.max(26, Math.min(614, p[0])), Math.max(18, Math.min(542, p[1]))];
+  const c2p = v => clR([PX(v), PY(v)]);
+  const absG = w => Kg * Math.hypot(1, T1 * w) * Math.hypot(1, T2 * w) / (w * w * w);
+  const solveW = R => { let lo = 1e-3, hi = 60; for (let k = 0; k < 90; k++) { const m = Math.sqrt(lo * hi); if (absG(m) > R) lo = m; else hi = m; } return Math.sqrt(lo * hi); };
   function arrowT(mkf, parent, p0, p1, p2, col) {
     const ang = Math.atan2(p2[1] - p0[1], p2[0] - p0[0]) * 180 / Math.PI;
     mkf("path", { d: "M-10,-7 L11,0 L-10,7 Z", fill: col, transform: "translate(" + p1[0].toFixed(1) + "," + p1[1].toFixed(1) + ") rotate(" + ang.toFixed(1) + ")" }, parent);
   }
-  const NP = 240;
-  let fSegs = [];
-  const wArr = []; for (let j = 0; j <= NP; j++) wArr.push(EP * Math.pow(1e4 / EP, j / NP));
-  function recompute() { // 四段共用同一个精确 G，闭合有数学保证（① ε 弧精确像；②④ ω 对数加密算到 10⁴ 真正进原点）
-    fSegs = [
-      (() => { const a = []; for (let j = 0; j <= NP; j++) { const th = (-90 + 180 * j / NP) * Math.PI / 180; a.push(G([EP * Math.cos(th), EP * Math.sin(th)])); } return a; })(),
-      wArr.map(w => G([0, w])),
-      null,
-      wArr.map(w => G([0, -w])).reverse()
-    ];
+  function pathOf(pts) { let d = ""; pts.forEach((p, j) => { d += (j ? "L" : "M") + p[0].toFixed(1) + "," + p[1].toFixed(1); }); return d; }
+  function arrowByLen(pts, frac, col, parent) {              // 按弧长 frac 处沿行进方向画箭头
+    const cum = [0]; for (let j = 1; j < pts.length; j++) cum.push(cum[j - 1] + Math.hypot(pts[j][0] - pts[j - 1][0], pts[j][1] - pts[j - 1][1]));
+    const tgt = frac * cum[cum.length - 1]; let m = 1; while (m < pts.length - 2 && cum[m] < tgt) m++;
+    arrowT(Rp.mk, parent, pts[m - 1], pts[m], pts[m + 1], col);
   }
-  const arcPix = u => { // 段①显示像素：精确像 + 中段 9% 内缩（两端因子=1，与②④尾端严丝相接）
-    const v = fSegs[0][Math.min(NP, Math.round(u * NP))], c = cmp(v), sn = Math.sin(Math.PI * u), tp = 1 - 0.09 * sn * sn;
-    return [RO.x + v[0] * c * SC * tp, RO.y - v[1] * c * SC * tp];
+  const N1 = 480, N2 = 400, W_HI = 50;
+  const dGw = w => { const d = 1e-6, gp = G([0, w + d]), gm = G([0, w - d]); return [(gp[0] - gm[0]) / (2 * d), (gp[1] - gm[1]) / (2 * d)]; };
+  const bez3 = (P0, d0, P3, d3, n) => {                    // 三次 Bézier：P0 沿 d0 出发、P3 沿 d3 到达（两端切向匹配）
+    const n0 = Math.hypot(d0[0], d0[1]) || 1, n3 = Math.hypot(d3[0], d3[1]) || 1;
+    const LL = Math.hypot(P3[0] - P0[0], P3[1] - P0[1]);
+    const c1 = [P0[0] + 0.45 * LL * d0[0] / n0, P0[1] + 0.45 * LL * d0[1] / n0];
+    const c2 = [P3[0] - 0.35 * LL * d3[0] / n3, P3[1] - 0.35 * LL * d3[1] / n3];
+    const pts = [];
+    for (let j = 0; j <= n; j++) {
+      const t = j / n, mt = 1 - t;
+      pts.push([mt * mt * mt * P0[0] + 3 * mt * mt * t * c1[0] + 3 * mt * t * t * c2[0] + t * t * t * P3[0],
+                mt * mt * mt * P0[1] + 3 * mt * mt * t * c1[1] + 3 * mt * t * t * c2[1] + t * t * t * P3[1]]);
+    }
+    return pts;
   };
+  let P1 = [], CN1 = [], CN2 = [], P2b = [], P4b = [], P2A = [], P4A = [];
+  let arcD = [], brPos = [], brNeg = [], cn1D = [], cn2D = [];   // 数据坐标（放大插图同步用）
+  function recompute() { // 全部随 K 重建：特征尺度、∞ 弧半径、比例尺与四段像素；支路实线止于 |G|=F，与 ∞ 弧之间用两端切向匹配的 Bézier 虚线光滑衔接，全程无折角
+    const CROSS = Kg * (T1 + T2) * T1 * T2;
+    const F = Math.max(1.6, 1.6 * CROSS);
+    R_ARC = 2.3 * F; LIM = 1.35 * R_ARC; SC = 240 / LIM;   // ∞ 弧恒显示约 178px
+    WA = solveW(F);                                        // 支路实线低端频率 |G(j WA)|=F
+    arcD = [];                                             // ① ∞ 圆弧（数据坐标）：∠270°→∠−270° 顺时针 540°，±8% 波纹分隔重迭圈
+    for (let j = 0; j <= N1; j++) {
+      const t = j / N1, ph = (270 - 540 * t) * Math.PI / 180, r = R_ARC * (1 + 0.08 * Math.sin(2 * Math.PI * t));
+      arcD.push([r * Math.cos(ph), r * Math.sin(ph)]);
+    }
+    brPos = [];                                            // ② 支路（数据坐标）：ω 对数间隔 WA→W_HI（终点≈原点）
+    for (let j = 0; j <= N2; j++) brPos.push(G([0, WA * Math.pow(W_HI / WA, j / N2)]));
+    brNeg = [];                                            // ④ 支路镜像：自原点出发 ω:−∞→0⁻
+    for (let j = N2; j >= 0; j--) brNeg.push(G([0, -WA * Math.pow(W_HI / WA, j / N2)]));
+    const tArc0 = [arcD[2][0] - arcD[0][0], arcD[2][1] - arcD[0][1]];
+    const tArcE = [arcD[N1][0] - arcD[N1 - 2][0], arcD[N1][1] - arcD[N1 - 2][1]];
+    cn1D = bez3(brNeg[N2], dGw(-WA), arcD[0], tArc0, 90);         // 衔接段：镜像支路 → 弧起点（|G|→∞ 延伸，虚线）
+    cn2D = bez3(arcD[N1], tArcE, brPos[0], dGw(WA), 90);          // 衔接段：弧终点 → 正支路
+    P1 = arcD.map(c2p); CN1 = cn1D.map(c2p); CN2 = cn2D.map(c2p);
+    P2b = brPos.map(c2p); P4b = brNeg.map(c2p);
+    P2A = CN2.concat(P2b.slice(1)); P4A = P4b.concat(CN1.slice(1));
+    drawStatics();
+  }
   // 左图静态底稿
   const LX = v => LO.x + v * LS, LY = v => LO.y - v * LS;
   L.mk("line", { x1: 30, y1: LO.y, x2: 610, y2: LO.y, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a64l)" });
@@ -167,61 +200,114 @@ document.addEventListener("DOMContentLoaded", () => {
   L.tx(LO.x - 14, LY(-EP) + 22, "A (ω=0⁻)", { fs: 14.5, fill: "#5B6B8C", an: "end" });
   L.tx(LO.x + EP * LS + 32, LO.y + 8, "B：ε 小半圆", { fs: 14.5, fill: "#D63A2F", an: "start", b: true });
   const dynL = L.mk("g", {});
-  // 右图静态
+  // 右图静态：坐标轴与图注（网格与随 K 标注画入 dynG）
   Rp.mk("line", { x1: 30, y1: RO.y, x2: 610, y2: RO.y, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a64r)" });
   Rp.mk("line", { x1: RO.x, y1: 540, x2: RO.x, y2: 20, stroke: "#5B6B8C", "stroke-width": 1.5, "marker-end": "url(#a64r)" });
   Rp.tx(606, RO.y + 30, "Re", { fs: 18, it: true, b: true, fill: "#5B6B8C", an: "end" });
   Rp.tx(RO.x + 18, 36, "jIm", { fs: 18, it: true, b: true, fill: "#5B6B8C", an: "start" });
   Rp.tx(RO.x - 12, RO.y + 26, "O", { fs: 16, fill: "#5B6B8C", an: "end" });
-  Rp.mk("circle", { cx: RO.x, cy: RO.y, r: RC, fill: "none", stroke: "#C9D6F2", "stroke-width": 1.6, "stroke-dasharray": "3 6" });
-  const xM1 = RXc([-1, 0]);
-  Rp.mk("circle", { cx: xM1, cy: RO.y, r: 9, fill: "#fff", stroke: "#D63A2F", "stroke-width": 3 });
-  Rp.tx(xM1, RO.y - 48, "(−1, j0)", { fs: 16.5, b: true, fill: "#D63A2F", halo: true, an: "middle" });
-  Rp.tx(RO.x, 552, "∞ 远区经径向压缩显示（包围关系、左右相对位置不变）", { fs: 14, fill: "#8AA0C8" });
+  Rp.tx(RO.x, 552, "红虚线 = |G|→∞ 部分（∞ 圆弧为示意半径；闭合关系与包围圈数不变）", { fs: 14, fill: "#8AA0C8" });
+  const dynG = Rp.mk("g", {});   // 网格与标注层（随 K 重画）
   const dynR = Rp.mk("g", {});
   const dynX = Rp.mk("g", {});   // 交点标记层（随 K）
+  // —— 原点附近放大插图（随 K 与动画进度同步重绘；数据坐标固定比例，看清曲线与 (−1,j0) 的关系）——
+  const IB = { x: 392, y: 366, w: 224, h: 172, xc: -0.9, sc: 62 };
+  const IX = v => IB.x + IB.w / 2 + (v[0] - IB.xc) * IB.sc, IY = v => IB.y + IB.h / 2 - v[1] * IB.sc;
+  const i2p = v => [IX(v), IY(v)];
+  const pathI = pts => { let d = ""; pts.forEach(p => { d += (d ? "L" : "M") + p[0].toFixed(1) + "," + p[1].toFixed(1); }); return d; };
+  const insCp = Rp.mk("clipPath", { id: "insCp77" }, Rp.svg);
+  Rp.mk("rect", { x: IB.x, y: IB.y + 20, width: IB.w, height: IB.h - 20 }, insCp);
+  Rp.mk("rect", { x: IB.x, y: IB.y, width: IB.w, height: IB.h, fill: "#FFFFFF", stroke: "#9DB4DE", "stroke-width": 1.6, rx: 10 }, Rp.svg);
+  Rp.tx(IB.x + IB.w / 2, IB.y + 15, "原点附近放大", { fs: 12.5, b: true, fill: "#5B6B8C" });
+  Rp.mk("line", { x1: IB.x + 8, y1: IY([0, 0]), x2: IB.x + IB.w - 8, y2: IY([0, 0]), stroke: "#B9C6E4", "stroke-width": 1 }, Rp.svg);
+  Rp.mk("line", { x1: IX([0, 0]), y1: IB.y + 22, x2: IX([0, 0]), y2: IB.y + IB.h - 8, stroke: "#B9C6E4", "stroke-width": 1 }, Rp.svg);
+  const xmI = IX([-1, 0]), ymI = IY([0, 0]);
+  Rp.mk("line", { x1: xmI - 6, y1: ymI - 6, x2: xmI + 6, y2: ymI + 6, stroke: "#D63A2F", "stroke-width": 2.6, "stroke-linecap": "round" }, Rp.svg);
+  Rp.mk("line", { x1: xmI - 6, y1: ymI + 6, x2: xmI + 6, y2: ymI - 6, stroke: "#D63A2F", "stroke-width": 2.6, "stroke-linecap": "round" }, Rp.svg);
+  Rp.tx(xmI, ymI - 10, "−1", { fs: 12.5, b: true, fill: "#D63A2F" });
+  const dynI = Rp.mk("g", { "clip-path": "url(#insCp77)" }, Rp.svg);
+  function drawStatics() {
+    dynG.innerHTML = "";
+    for (let g = -Math.floor(LIM); g <= Math.floor(LIM); g++) {   // 淡蓝点线网格（整数间隔）
+      if (!g) continue;
+      Rp.mk("line", { x1: PX([g, 0]), y1: 24, x2: PX([g, 0]), y2: 536, stroke: "#DCE4F6", "stroke-width": 1, "stroke-dasharray": "2 5" }, dynG);
+      Rp.mk("line", { x1: 34, y1: PY([0, g]), x2: 614, y2: PY([0, g]), stroke: "#DCE4F6", "stroke-width": 1, "stroke-dasharray": "2 5" }, dynG);
+    }
+    const xM1 = PX([-1, 0]);                                      // (−1, j0) 红 ×
+    Rp.mk("line", { x1: xM1 - 8, y1: RO.y - 8, x2: xM1 + 8, y2: RO.y + 8, stroke: "#D63A2F", "stroke-width": 3.2, "stroke-linecap": "round" }, dynG);
+    Rp.mk("line", { x1: xM1 - 8, y1: RO.y + 8, x2: xM1 + 8, y2: RO.y - 8, stroke: "#D63A2F", "stroke-width": 3.2, "stroke-linecap": "round" }, dynG);
+    Rp.tx(xM1, RO.y - 16, "−1", { fs: 16.5, b: true, fill: "#D63A2F", halo: true }, dynG);
+    Rp.tx(RO.x + 80, RO.y - 95, "R→∞ 虚线圆弧", { fs: 14, b: true, fill: "#D63A2F", halo: true }, dynG);
+    Rp.tx(RO.x + 80, RO.y - 75, "顺时针 3×180°=540°", { fs: 14, fill: "#D63A2F", halo: true }, dynG);
+    const q1 = Rp.tx(117, RO.y, "第1圈", { fs: 13, fill: "#D63A2F" }, dynG); q1.setAttribute("transform", "rotate(-90 117 " + RO.y + ")");
+    const q2 = Rp.tx(184, RO.y, "第2圈", { fs: 13, fill: "#D63A2F" }, dynG); q2.setAttribute("transform", "rotate(-90 184 " + RO.y + ")");
+    Rp.tx(396, RO.y - 18, "ω=−∞（支路起点）", { fs: 13, fill: "#2B5CE6", an: "start", halo: true }, dynG);
+    Rp.tx(396, RO.y + 16, "ω=+∞（支路终端）", { fs: 13, fill: "#2B5CE6", an: "start", halo: true }, dynG);
+    Rp.tx(P2b[0][0] - 14, P2b[0][1] - 10, "ω→0+", { fs: 13.5, fill: "#D63A2F", an: "end", halo: true }, dynG);
+    Rp.tx(P4b[N2][0] - 14, P4b[N2][1] + 16, "ω→0−", { fs: 13.5, fill: "#D63A2F", an: "end", halo: true }, dynG);
+  }
   let K = 0; const TOTAL = 4;
   function paint() {
     dynL.innerHTML = ""; dynR.innerHTML = "";
     for (let i = 0; i < K; i++) {
-      const colI = i === K - 1 ? CUR : DONE;
+      const cur = i === K - 1, colB = cur ? CUR : DONE;      // 当前段红、已完成支路蓝；∞ 部分恒红虚线
       let dl = "";
-      for (let j = 0; j <= NP; j++) { const s = segs[i](j / NP); dl += (j ? "L" : "M") + LX(s[0]).toFixed(1) + "," + LY(s[1]).toFixed(1); }
-      L.mk("path", { d: dl, fill: "none", stroke: colI, "stroke-width": 4.2 }, dynL);
+      for (let j = 0; j <= 160; j++) { const s = segs[i](j / 160); dl += (j ? "L" : "M") + LX(s[0]).toFixed(1) + "," + LY(s[1]).toFixed(1); }
+      L.mk("path", { d: dl, fill: "none", stroke: cur ? CUR : DONE, "stroke-width": 4.2 }, dynL);
       const sA = segs[i](0.44), sB = segs[i](0.5), sC = segs[i](0.56);
-      arrowT(L.mk, dynL, [LX(sA[0]), LY(sA[1])], [LX(sB[0]), LY(sB[1])], [LX(sC[0]), LY(sC[1])], colI);
+      arrowT(L.mk, dynL, [LX(sA[0]), LY(sA[1])], [LX(sB[0]), LY(sB[1])], [LX(sC[0]), LY(sC[1])], cur ? CUR : DONE);
       if (i === 0) {
-        let d = "";
-        for (let j = 0; j <= NP; j++) { const p = arcPix(j / NP); d += (j ? "L" : "M") + p[0].toFixed(1) + "," + p[1].toFixed(1); }
-        Rp.mk("path", { d, fill: "none", stroke: colI, "stroke-width": 3.6, "stroke-dasharray": "10 7" }, dynR);
-        [0.22, 0.72].forEach(u => arrowT(Rp.mk, dynR, arcPix(u - 0.015), arcPix(u), arcPix(u + 0.015), colI));
+        Rp.mk("path", { d: pathOf(P1), fill: "none", stroke: CUR, "stroke-width": 3.4, "stroke-dasharray": "11 7" }, dynR);
+        [80, 240, 400].forEach(m => arrowT(Rp.mk, dynR, P1[m - 3], P1[m], P1[m + 3], CUR));
+      } else if (i === 1) {
+        Rp.mk("path", { d: pathOf(CN2), fill: "none", stroke: CUR, "stroke-width": 3.2, "stroke-dasharray": "9 6" }, dynR);
+        Rp.mk("path", { d: pathOf(P2b), fill: "none", stroke: colB, "stroke-width": 4.2 }, dynR);
+        arrowByLen(CN2, 0.5, CUR, dynR);
+        arrowByLen(P2b, 0.25, colB, dynR);
       } else if (i === 2) {
-        // ③ 的像（R→∞ 极限缩成原点）：画贴原点的小弧 ∠−90°→∠+90° 示意高频端打结
+        // ③ 的像（R→∞ 极限缩成原点）：贴原点的小弧 ∠−90°→∠+90° 示意高频端打结
         let d = "";
         for (let j = 0; j <= 24; j++) { const ph = (-90 + 180 * j / 24) * Math.PI / 180; d += (j ? "L" : "M") + (RO.x + 16 * Math.cos(ph)).toFixed(1) + "," + (RO.y - 16 * Math.sin(ph)).toFixed(1); }
-        Rp.mk("path", { d, fill: "none", stroke: colI, "stroke-width": 4.2 }, dynR);
-        Rp.mk("circle", { cx: RO.x, cy: RO.y, r: 7, fill: "#fff", stroke: colI, "stroke-width": 3 }, dynR);
+        Rp.mk("path", { d, fill: "none", stroke: colB, "stroke-width": 4.2 }, dynR);
+        Rp.mk("circle", { cx: RO.x, cy: RO.y, r: 7, fill: "#fff", stroke: colB, "stroke-width": 3 }, dynR);
       } else {
-        let d = "";
-        fSegs[i].forEach(v => { const p = clR([RXc(v), RYc(v)]); d += (d ? "L" : "M") + p[0].toFixed(1) + "," + p[1].toFixed(1); });
-        Rp.mk("path", { d, fill: "none", stroke: colI, "stroke-width": 4.2, "stroke-dasharray": i === 3 ? "9 6" : "0" }, dynR);
-        const m = Math.floor(NP * (i === 1 ? 0.10 : 0.90)); // 对数间隔下 ②的 0.10、④的 0.90 均落在 ω≈1.2（穿实轴附近），镜像对称
-        const fA = fSegs[i][m - 2], fB = fSegs[i][m], fC = fSegs[i][m + 2];
-        arrowT(Rp.mk, dynR, clR([RXc(fA), RYc(fA)]), clR([RXc(fB), RYc(fB)]), clR([RXc(fC), RYc(fC)]), colI);
+        Rp.mk("path", { d: pathOf(P4b), fill: "none", stroke: colB, "stroke-width": 4.2 }, dynR);
+        Rp.mk("path", { d: pathOf(CN1), fill: "none", stroke: CUR, "stroke-width": 3.2, "stroke-dasharray": "9 6" }, dynR);
+        arrowByLen(P4b, 0.75, colB, dynR);
+        arrowByLen(CN1, 0.5, CUR, dynR);
       }
     }
+    // 放大插图同步
+    dynI.innerHTML = "";
+    for (let i = 0; i < K; i++) {
+      const cur = i === K - 1, colB = cur ? CUR : DONE;
+      if (i === 0) {
+        Rp.mk("path", { d: pathI(arcD.map(i2p)), fill: "none", stroke: CUR, "stroke-width": 2, "stroke-dasharray": "6 4" }, dynI);
+      } else if (i === 1) {
+        Rp.mk("path", { d: pathI(cn2D.map(i2p)), fill: "none", stroke: CUR, "stroke-width": 2, "stroke-dasharray": "5 3.5" }, dynI);
+        Rp.mk("path", { d: pathI(brPos.map(i2p)), fill: "none", stroke: colB, "stroke-width": 2.6 }, dynI);
+      } else if (i === 2) {
+        Rp.mk("circle", { cx: IX([0, 0]), cy: IY([0, 0]), r: 8, fill: "none", stroke: colB, "stroke-width": 2.4 }, dynI);
+      } else {
+        Rp.mk("path", { d: pathI(brNeg.map(i2p)), fill: "none", stroke: colB, "stroke-width": 2.6 }, dynI);
+        Rp.mk("path", { d: pathI(cn1D.map(i2p)), fill: "none", stroke: CUR, "stroke-width": 2, "stroke-dasharray": "5 3.5" }, dynI);
+      }
+    }
+    const crI = -Kg * (T1 + T2) * T1 * T2, bdI = Math.abs(Kg - KC) < 1e-6;
+    if (bdI) Rp.mk("circle", { cx: xmI, cy: ymI, r: 11, fill: "none", stroke: "#F5821F", "stroke-width": 3 }, dynI);
+    else if (K >= 2) Rp.mk("circle", { cx: IX([crI, 0]), cy: ymI, r: 4.5, fill: "#1E9E57" }, dynI);
   }
   function paintCross() {
     dynX.innerHTML = "";
-    const re = -Kg * (T1 + T2) * T1 * T2, xCr = RXc([re, 0]);
-    const boundary = Math.abs(Kg - KC) < 1e-6;
-    if (boundary) {
+    const re = -Kg * (T1 + T2) * T1 * T2, xCr = PX([re, 0]), xM1 = PX([-1, 0]);
+    if (Math.abs(Kg - KC) < 1e-6) {
       Rp.mk("circle", { cx: xM1, cy: RO.y, r: 13, fill: "none", stroke: "#F5821F", "stroke-width": 3.4 }, dynX);
-      Rp.tx(xM1, RO.y + 44, "交点 = (−1, j0)", { fs: 16.5, b: true, fill: "#E06D00", halo: true, an: "middle" }, dynX);
+      Rp.tx(xM1 + 18, RO.y + 48, "交点 = (−1, j0)", { fs: 16, b: true, fill: "#E06D00", halo: true, an: "start" }, dynX);
     } else {
-      Rp.mk("circle", { cx: xCr, cy: RO.y, r: 8, fill: "#F5821F" }, dynX);
-      Rp.mk("line", { x1: xCr + 7, y1: RO.y + 12, x2: xCr + 68, y2: RO.y + 86, stroke: "#999", "stroke-width": 1.2 }, dynX);
-      Rp.tx(xCr + 72, RO.y + 94, "交点 " + re.toFixed(2), { fs: 16, b: true, fill: "#F5821F", halo: true, an: "start" }, dynX);
+      Rp.mk("circle", { cx: xCr, cy: RO.y, r: 6, fill: "#1E9E57" }, dynX);
+      Rp.mk("line", { x1: xCr + 5, y1: RO.y + 8, x2: xCr + 26, y2: RO.y + 30, stroke: "#1E9E57", "stroke-width": 1.1 }, dynX);
+      Rp.tx(xCr + 32, RO.y + 38, "(" + re.toFixed(2) + ", j0)", { fs: 14.5, b: true, fill: "#166B3B", halo: true, an: "start" }, dynX);
+      Rp.tx(xCr + 32, RO.y + 57, "ω*=1.41", { fs: 14, fill: "#166B3B", halo: true, an: "start" }, dynX);
     }
   }
   // 动点
@@ -236,9 +322,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const s = segs[i](u);
     dotS = L.mk("circle", { cx: LX(s[0]), cy: LY(s[1]), r: 9, fill: CUR, stroke: "#fff", "stroke-width": 2.5 });
     let p;
-    if (i === 0) p = arcPix(u);
+    if (i === 0) p = P1[Math.round(u * N1)];
     else if (i === 2) { const ph = (-90 + 180 * u) * Math.PI / 180; p = [RO.x + 16 * Math.cos(ph), RO.y - 16 * Math.sin(ph)]; }
-    else { const v = fSegs[i][Math.min(NP, Math.round(u * NP))]; p = clR([RXc(v), RYc(v)]); }
+    else { const arr = i === 1 ? P2A : P4A; p = arr[Math.min(arr.length - 1, Math.round(u * (arr.length - 1)))]; }
     dotG = Rp.mk("circle", { cx: p[0], cy: p[1], r: 9, fill: CUR, stroke: "#fff", "stroke-width": 2.5 });
   }
   const S = ACT.step, _next = S.next.bind(S), _reset = S.reset.bind(S);
