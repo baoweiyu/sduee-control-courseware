@@ -26,6 +26,8 @@
   .s-ok .cap b, .s-no .cap b, .s-cr .cap b { color:var(--navy); }
   .s-ok .hd2 .dot, .s-no .hd2 .dot, .s-cr .hd2 .dot { background:var(--blue); }
   .colwrap { display:flex; flex-direction:column; gap:16px; height:100%; min-height:0; }
+  .premise { background:var(--sky); border-radius:12px; padding:10px 20px; font-size:20px; line-height:1.55; flex:none; }
+  .premise b { color:var(--navy); }
 </style>
 </head>
 <body data-title="3.3 Nyquist 稳定判据" data-page="71 / 95">
@@ -36,14 +38,15 @@
         <div class="mathbox math eqline tex tex-d">Z = P - N</div>
         <div class="ds"><b>P</b> = 开环右半平面极点数（已知）；<b>N</b> = 全频段 Nyquist 曲线<span class="kw-r">逆时针包围 (−1, j0)</span> 的圈数；<b>Z</b> = 闭环右半平面极点数。<b>Z = 0 ⇔ 闭环稳定。</b></div>
       </div>
+      <div class="premise"><b>前提：</b>以下三图均以最常见情形 <b>P = 0</b>（开环无右半平面极点）为例——此时 <b>闭环稳定 ⇔ N = 0</b>（曲线不包围 (−1, j0)）；若 P ≠ 0，仍用上面的 <b>Z = P − N</b> 对照计数即可。三图箭头统一为 ω 增大方向（本例曲线均为顺时针绕行）。</div>
       <div class="row3">
         <div class="sc s-ok">
-          <div class="hd2"><span class="dot"></span>稳定：N = P</div>
+          <div class="hd2"><span class="dot"></span>稳定：N = 0（不包围）</div>
           <div class="fig"><svg id="f1" viewBox="0 0 340 290"></svg></div>
           <div class="cap">P=0 时曲线<b>不包围</b> (−1, j0)（N=0）⇒ Z = P − N = 0，<b>闭环稳定</b>。</div>
         </div>
         <div class="sc s-no">
-          <div class="hd2"><span class="dot"></span>不稳定：N ≠ P</div>
+          <div class="hd2"><span class="dot"></span>不稳定：N ≠ 0（包围）</div>
           <div class="fig"><svg id="f2" viewBox="0 0 340 290"></svg></div>
           <div class="cap">P=0，曲线<b>顺时针</b>包围 (−1, j0) 一圈（N=−1）⇒ Z = P − N = 1，<b>闭环不稳定</b>。</div>
         </div>
@@ -90,19 +93,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const t = S.mk("text", { x, y, "font-size": 19, "font-weight": 700, fill: color, "text-anchor": "middle", "font-family": MF, style: "paint-order:stroke;stroke:#FFFFFF;stroke-width:6;stroke-linejoin:round" });
     t.textContent = s;
   }
-  // ① 稳定：椭圆偏右，−1 在曲线外
+  // ① 稳定：椭圆偏右，−1 在曲线外（箭头统一为顺时针 = ω 增大方向）
   const m1 = setup("f1");
   mkDot(m1, 96, "#1D3FA0");
-  curve(m1, 196, 72, "#2B5CE6", [Math.PI / 2, -Math.PI / 2]);
+  curve(m1, 196, 72, "#2B5CE6", [Math.PI / 2, -Math.PI / 2], true);
   lab(m1, 96, 178, "−1", "#1D3FA0");
   // ② 不稳定：椭圆包住 −1（箭头为顺时针，与 N=−1 一致）
   const m2 = setup("f2");
   mkDot(m2, 96, "#1D3FA0");
   curve(m2, 176, 104, "#2B5CE6", [Math.PI / 2, -Math.PI / 2], true);
   lab(m2, 96, 178, "−1", "#1D3FA0");
-  // ③ 临界：椭圆左缘恰好过 −1
+  // ③ 临界：椭圆左缘恰好过 −1（箭头同样为顺时针，三图绕向统一）
   const m3 = setup("f3");
-  curve(m3, 191, 95, "#2B5CE6", [Math.PI / 2, -Math.PI / 2]);
+  curve(m3, 191, 95, "#2B5CE6", [Math.PI / 2, -Math.PI / 2], true);
   m3.mk("circle", { cx: 96, cy: m3.O.y, r: 8, fill: "none", stroke: "#2B5CE6", "stroke-width": 3 });
   lab(m3, 96, 178, "−1", "#1D3FA0");
 });

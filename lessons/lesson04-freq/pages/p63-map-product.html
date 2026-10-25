@@ -57,7 +57,7 @@
         </div>
         <div class="bigread"><span class="lab">相角和 ∠F = θ₁+θ₂</span><span class="val" id="r-v1">—</span></div>
         <div class="bigread"><span class="lab">模积 |F| = |s−z₁|·|s−z₂|</span><span class="val" id="r-v2">—</span></div>
-        <div class="bigread"><span class="lab">一圈净绕数</span><span class="val" id="r-v3">—</span></div>
+        <div class="bigread"><span class="lab">包围圈数 N = Δ∠F/360°</span><span class="val" id="r-v3">—</span></div>
       </div>
       <div data-step="1" style="display:none"></div>
       <div data-step="2" style="display:none"></div>
@@ -65,7 +65,7 @@
       <div data-step="4" style="display:none"></div>
     </div>
   </div>
-  <div class="act-note"><span class="lead">乘法规则</span><span>复数相乘——<span class="kw-r">模相乘、相角相加</span>。既然相角是各因子相角的代数和，s 绕一圈后 F(s) 净转角 = 各因子净转角的代数和——本例两零点都在圆外，净绕数为 0。</span></div>
+  <div class="act-note"><span class="lead">乘法规则</span><span>复数相乘——<span class="kw-r">模相乘、相角相加</span>。既然相角是各因子相角的代数和，s 绕一圈后 F(s) 累计转角 = 各因子累计转角的代数和——本例两零点都在圆外，包围圈数 N = 0。</span></div>
 </div></div>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
@@ -168,7 +168,7 @@ document.addEventListener("DOMContentLoaded", () => {
     else Rp.tx(FX(f[0]) + 18, FY(f[1]) - 16, "F(s)", { fs: 26, b: true, it: true, fill: "#D63A2F" }, dynR);
     r1.textContent = wrap(t1 + t2).toFixed(1) + "°";
     r2.textContent = (Math.hypot(v1[0], v1[1]) * Math.hypot(v2[0], v2[1])).toFixed(3);
-    const lap = accF[k] * D / 360; r3.textContent = (Math.abs(lap) < 0.005 ? 0 : lap).toFixed(2) + " 圈";
+    const lap = accF[k] * D / 360; r3.textContent = (Math.abs(lap) < 0.005 ? 0 : lap).toFixed(2);
   }
   // ---- 播放控制：播放/暂停、¼ 步进（与 ACT 分步同一进度）、重置 ----
   const playBtn = document.getElementById("play"), stepBtn = document.getElementById("stepq"), resetBtn = document.getElementById("reset");

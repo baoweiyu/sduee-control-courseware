@@ -36,7 +36,7 @@
         </div>
       </div>
       <div class="act-card figc">
-        <div class="hd">三条曲线：裕度大 / 裕度小 / 已不稳定</div>
+        <div class="hd">三条曲线与虚线单位圆：在图上读出 γ 与 K<sub>g</sub></div>
         <div class="bd2"><svg id="fig" viewBox="0 0 960 640"></svg></div>
       </div>
     </div>
@@ -62,17 +62,20 @@ document.addEventListener("DOMContentLoaded", () => {
   tx(O.x + 20, 66, "jIm", { fs: 20, it: true, b: true, fill: "#5B6B8C", an: "start" });
   tx(O.x - 14, O.y + 28, "O", { fs: 19, fill: "#5B6B8C", an: "end" });
   // (−1,j0) 焦点
-  mk("circle", { cx: X(-1), cy: Y(0), r: 10, fill: "#fff", stroke: "#2B5CE6", "stroke-width": 3.6 });
-  tx(X(-1), Y(0) + 36, "(−1, j0)", { fs: 19, b: true, fill: "#2B5CE6" });
-  // 三条曲线：同一系统 G=K/[s(1+0.5s)(1+0.125s)] 不同 K 的真实 Nyquist 轨迹（ω:0+→∞，自 −j∞ 上来）
+  mk("circle", { cx: X(-1), cy: Y(0), r: 10, fill: "#fff", stroke: "#D63A2F", "stroke-width": 3.6 });
+  tx(384, Y(0) + 40, "(−1, j0)", { fs: 19, b: true, fill: "#D63A2F", an: "end", halo: 1 });
+  // 虚线单位圆：|G| = 1 的参照（与 P79 同一画法）
+  mk("circle", { cx: O.x, cy: O.y, r: SC, fill: "none", stroke: "#2B5CE6", "stroke-width": 2, "stroke-dasharray": "9 7" });
+  tx(O.x + SC * 0.70, O.y - SC * 0.70 - 12, "单位圆 |G| = 1", { fs: 19, b: true, fill: "#2B5CE6", halo: 1 });
+  // 三条曲线：同一系统 G=K/[s(1+0.5s)(1+0.125s)] 三个 K 的真实 Nyquist 轨迹（ω:0⁺→+∞，自 −j∞ 上来）
   const S1 = 0.625, P1 = 0.0625;
-  function curve(K, col, lab, ly) {
-    const pt = w => { const D = S1 * S1 * w ** 4 + w * w * (1 - P1 * w * w) ** 2;
-      return [-K * S1 * w * w / D, -K * w * (1 - P1 * w * w) / D]; };
+  function pt(K, w) { const D = S1 * S1 * w ** 4 + w * w * (1 - P1 * w * w) ** 2;
+    return [-K * S1 * w * w / D, -K * w * (1 - P1 * w * w) / D]; }
+  function curve(K, col, lab, lx, ly, an) {
     const pts = [];
     for (let i = 0; i <= 420; i++) {
       const w = 0.03 * Math.pow(400, i / 420);
-      const [re, im] = pt(w);
+      const [re, im] = pt(K, w);
       if (im < -1.2) { if (pts.length) break; continue; }
       pts.push([X(re), Y(im)]);
     }
@@ -83,12 +86,32 @@ document.addEventListener("DOMContentLoaded", () => {
     const ang = Math.atan2(a2[1] - a1[1], a2[0] - a1[0]) * 180 / Math.PI;
     mk("path", { d: "M -9,-6 L 10,0 L -9,6 Z", fill: col, transform: `translate(${pts[iA][0].toFixed(1)},${pts[iA][1].toFixed(1)}) rotate(${ang.toFixed(1)})` });
     let best = 0; for (let i = 1; i < pts.length; i++) if (Math.abs(pts[i][1] - O.y) < Math.abs(pts[best][1] - O.y)) best = i;
-    mk("circle", { cx: pts[best][0], cy: O.y, r: 6.5, fill: col });
-    tx(pts[best][0] - 6, O.y + ly, lab, { fs: 19, b: true, fill: col, halo: 1 });
+    mk("circle", { cx: pts[best][0], cy: O.y, r: 6, fill: col });
+    tx(lx, ly, lab, { fs: 19, b: true, fill: col, an: an || "middle", halo: 1 });
   }
-  curve(1.0, "#2B5CE6", "裕度大", 34);
-  curve(8, "#2B5CE6", "裕度小", 66);
-  curve(20, "#2B5CE6", "包围 → 不稳定", -24);
+  curve(1.0, "#2B5CE6", "裕度大", X(-0.079) + 14, O.y + 24, "start");
+  curve(8, "#F5821F", "裕度小", 260, 528, "start");
+  curve(20, "#D63A2F", "包围 → 不稳定", 293, 374);
+  // —— 相角裕量 γ：蓝曲线与单位圆的交点 ωc ——
+  const wc = 0.907, [cgx, cgy] = pt(1.0, wc);
+  mk("line", { x1: O.x, y1: O.y, x2: X(cgx), y2: Y(cgy), stroke: "#2B5CE6", "stroke-width": 2.6 });
+  mk("circle", { cx: X(cgx), cy: Y(cgy), r: 8, fill: "#2B5CE6" });
+  tx(X(cgx) - 11, Y(cgy) + 29, "ωc ≈ 0.91（|G| = 1）", { fs: 19, b: true, fill: "#2B5CE6", an: "end", halo: 1 });
+  const aR = Math.atan2(cgy, cgx);                       // ωc 半径线的方向角（≈ −120.9°）
+  let da = "";
+  for (let i = 0; i <= 24; i++) { const aa = Math.PI + (2 * Math.PI + aR - Math.PI) * i / 24;
+    da += (i ? "L" : "M") + (O.x + 58 * Math.cos(aa)).toFixed(1) + "," + (O.y - 58 * Math.sin(aa)).toFixed(1); }
+  mk("path", { d: da, fill: "none", stroke: "#2B5CE6", "stroke-width": 3 });
+  tx(462, 449, "γ ≈ 59°（相角裕量）", { fs: 20, b: true, fill: "#2B5CE6", an: "end", halo: 1 });
+  // —— 幅值裕量 Kg：橙曲线与负实轴的交点 ωg ——
+  const wg = 4, hgx = pt(8, wg)[0];                      // hgx = −0.633
+  mk("circle", { cx: X(hgx), cy: Y(0), r: 8, fill: "#F5821F" });
+  mk("line", { x1: X(hgx), y1: O.y + 70, x2: O.x, y2: O.y + 70, stroke: "#F5821F", "stroke-width": 2.6 });
+  mk("path", { d: "M" + (X(hgx) + 2) + "," + (O.y + 70) + " l10,-6 l0,12 Z", fill: "#F5821F" });
+  mk("path", { d: "M" + (O.x - 2) + "," + (O.y + 70) + " l-10,-6 l0,12 Z", fill: "#F5821F" });
+  mk("line", { x1: X(hgx) + 8, y1: O.y - 6, x2: 652, y2: 124, stroke: "#F5821F", "stroke-width": 1.5, "stroke-dasharray": "4 4" });
+  tx(660, 112, "ωg = 4 处 ∠G = −180°，|G| = 0.63", { fs: 19, b: true, fill: "#F5821F", an: "start", halo: 1 });
+  tx(660, 140, "Kg = 1/|G| ≈ 1.58 倍（幅值裕量）", { fs: 19, b: true, fill: "#F5821F", an: "start", halo: 1 });
 });
 </script>
 </body>

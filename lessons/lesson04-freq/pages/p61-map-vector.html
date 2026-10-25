@@ -57,7 +57,7 @@
         </div>
         <div class="bigread"><span class="lab">s 累计转角</span><span class="val" id="r-v1">—</span></div>
         <div class="bigread"><span class="lab">F(s) 累计转角</span><span class="val" id="r-v2">—</span></div>
-        <div class="bigread"><span class="lab">F(s) 已完成圈数</span><span class="val" id="r-v3">—</span></div>
+        <div class="bigread"><span class="lab">包围圈数 N = Δ∠F/360°</span><span class="val" id="r-v3">—</span></div>
       </div>
       <div data-step="1" style="display:none"></div>
       <div data-step="2" style="display:none"></div>
@@ -132,7 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
     Rp.tx(X(fx) + 18, Y(fy) - 18, "F(s)", { fs: 26, b: true, it: true, fill: "#D63A2F" }, dynR);
     r1.textContent = (th * D).toFixed(0) + "°";
     r2.textContent = (2 * th * D).toFixed(0) + "°";
-    r3.textContent = (u * 2).toFixed(2) + " 圈";
+    r3.textContent = (u * 2).toFixed(2);
   }
   // ---- 播放控制：播放/暂停、¼ 步进（与 ACT 分步同一进度）、重置 ----
   const playBtn = document.getElementById("play"), stepBtn = document.getElementById("stepq"), resetBtn = document.getElementById("reset");

@@ -6,6 +6,7 @@ assets/image2/prompts/
 # ===== 发布产物（改用 GitHub Releases 托管）=====
 版本迭代-本地播放用/
 版本迭代-服务器部署用/
+act-courseware-*.zip
 
 # ===== 原始教学素材（不进仓库）=====
 bwy-ori-oldPPT/

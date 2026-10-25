@@ -35,17 +35,22 @@
       <div class="act-card dv">
         <div class="hd">推导链：F(s) = 1 + G(s)H(s) 的零极点</div>
         <div class="bd">
-          <div class="bx"><b>设开环传递函数</b>（N、D 为 s 的多项式）
-            <div class="mathbox math eqline tex tex-d">G(s)H(s)=\dfrac{N(s)}{D(s)}</div>
+          <div class="bx"><b>把 G(s)、H(s) 各自写成分式</b>（N、D 均为 s 的多项式）
+            <div class="mathbox math eqline tex tex-d">G(s)=\dfrac{N_{G}(s)}{D_{G}(s)}\qquad H(s)=\dfrac{N_{H}(s)}{D_{H}(s)}</div>
+            <div style="margin-top:6px">开环 <span class="tex">G(s)H(s)=\dfrac{N_{G}(s)N_{H}(s)}{D_{G}(s)D_{H}(s)}</span>　⇒　<b>开环极点</b>：D<sub>G</sub>(s)·D<sub>H</sub>(s) = 0 的根</div>
           </div>
-          <div class="darr">↓ 闭环特征方程 1 + G(s)H(s) = 0</div>
-          <div class="bx key"><b>引入辅助函数</b>（闭环特征式）
-            <div class="mathbox math eqline tex tex-d">F(s)=1+G(s)H(s)=\dfrac{D(s)+N(s)}{D(s)}</div>
-          </div>
-          <div class="darr">↓ 分子、分母分别看</div>
+          <div class="darr">↓ 闭环 Φ(s) = G/(1+GH)，分子分母同乘 D<sub>G</sub>D<sub>H</sub></div>
           <div class="bx">
-            <div><b>F(s) 的零点</b>：D(s)+N(s)=0 的根 —— 正是<span class="kw-r">闭环特征根（闭环极点）</span>；</div>
-            <div style="margin-top:6px"><b>F(s) 的极点</b>：D(s)=0 的根 —— 正是<span class="kw-r">开环极点</span>。</div>
+            <div class="mathbox math eqline tex tex-d">\Phi(s)=\dfrac{G(s)}{1+G(s)H(s)}=\dfrac{N_{G}(s)D_{H}(s)}{D_{G}(s)D_{H}(s)+N_{G}(s)N_{H}(s)}</div>
+            <div style="margin-top:6px"><b>闭环特征方程</b>：<span class="kw-r">D<sub>G</sub>D<sub>H</sub> + N<sub>G</sub>N<sub>H</sub> = 0</span>　⇒　它的根 = <b>闭环极点</b></div>
+          </div>
+          <div class="darr">↓ 辅助函数 F(s) = 1 + GH 通分，与上面对照</div>
+          <div class="bx key"><b>F(s) 的分子、分母正好各管一件事</b>
+            <div class="mathbox math eqline tex tex-d">F(s)=1+G(s)H(s)=\dfrac{D_{G}(s)D_{H}(s)+N_{G}(s)N_{H}(s)}{D_{G}(s)D_{H}(s)}</div>
+          </div>
+          <div class="bx">
+            <div><b>F(s) 的零点</b>（分子 D<sub>G</sub>D<sub>H</sub>+N<sub>G</sub>N<sub>H</sub> = 0）—— 正是<span class="kw-r">闭环特征根（闭环极点）</span>；</div>
+            <div style="margin-top:6px"><b>F(s) 的极点</b>（分母 D<sub>G</sub>D<sub>H</sub> = 0）—— 正是<span class="kw-r">开环极点</span>。</div>
           </div>
         </div>
       </div>
