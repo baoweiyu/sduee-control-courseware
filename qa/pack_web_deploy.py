@@ -7,7 +7,7 @@ components/ + 实际引用的 assets + DEPLOY-部署说明.md + 可选 server.js
 import os, re, json, zipfile
 
 ROOT = r"H:\D_tools\courseware-system-kimi"
-OUT = os.path.join(ROOT, "act-courseware-web-deploy-v2.33.zip")
+OUT = os.path.join(ROOT, "act-courseware-web-deploy-v2.34.zip")
 
 COMMON_DIRS = ["player", "components", "theme"]
 LESSON_IDS = ["lesson01-intro", "lesson02-math-model", "lesson03-timedomain", "lesson04-freq", "lesson05-root-locus", "lesson06-correction"]
@@ -62,7 +62,8 @@ https://github.com/baoweiyu/sduee-control-courseware/releases
 - 第五章 根轨迹法（61 页，数值严谨绘制 + 连贯/分步动画 + 图面缩放）
 - 第六章 控制系统的校正（48 页，Bode 图数值绘制 + 设计步骤分步演示）
 
-整体版本 V2.33（2026-10-25）。本地播放版与网页部署版使用同一版本号。
+整体版本 V2.34（2026-10-26）。本地播放版与网页部署版使用同一版本号。
+V2.34 更新：第四章 P68 左栏精简（「根」字换行修复、末框简写）；P78 右图改六步分步动画（曲线→几何直观→两把尺子→γ→Kg 逐步显现），概念图删去全部具体数值标注；P81 重做为四行大字号小结（仅留关键结论，警示语并入判据行，删去底部承上启下条）。
 V2.33 更新：第四章映射原理与 Nyquist 系列精修——P61-66 右下角读数全章统一为「包围圈数 N = Δ∠F/360°」；P68 推导改 G(s)、H(s) 独立分式细化版；P71 补 P=0 前提条、三图绕行方向统一顺时针；P78 右图重画（虚线单位圆 + γ/ωc 与 Kg/ωg 双色标注，与 P79 同一画法）；P81 重做为第三部分小结（判据/画图四步/条件稳定/两裕量两读法＋非最小相位只能用 Nyquist 警示条）。
 V2.32 更新：第四章 Nyquist 系列精修——P75/P77 支路与补弧之间改两端切向匹配 Bézier 衔接段（全程平滑连续、无生硬折角），新增「原点附近放大」插图（K 滑块切换同步重绘）；P74 四步拼图法图鉴四图改为真实计算闭合曲线（与 P75/P77 同源算法），红实线=正频段、蓝虚线=镜像段、橙色闪烁仅保留严格 ν×180° 的 ∞ 补弧，支路箭头移至远端避开原点打结区。
 V2.31 更新：第四章 P75/P77 Nyquist 四段像全部改用精确复数计算（①段 ε 弧精确像两端与②④尾端严丝相接、②④段 ω 算到 10⁴ 真正进原点），闭合性有数学保证；实轴交点标注引线避开曲线；P74 图鉴删干扰箭头与小字注释、度数徽章加大。

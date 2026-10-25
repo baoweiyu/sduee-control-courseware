@@ -9,27 +9,26 @@
 <script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
 <script src="../../../theme/act-base.js?v=232" defer></script>
 <style>
-  .wrap { display:flex; flex-direction:column; justify-content:space-evenly; height:100%; min-height:0; gap:12px; }
-  .ln { background:#fff; border:2px solid var(--line); border-radius:14px; padding:15px 24px; display:flex; align-items:center; gap:18px; font-size:20.5px; line-height:1.58; color:var(--ink); }
-  .ln .k { flex:none; background:var(--blue); color:#fff; font-size:19px; font-weight:700; border-radius:9px; padding:6px 14px; white-space:nowrap; }
-  .ln b { color:var(--navy); }
-  .ln.warn { border-color:#F5821F; background:#FFF7EF; }
-  .ln.warn .k { background:#F5821F; }
-  .ln .mathbox { font-size:20px; padding:5px 12px; margin:0 4px; }
+  .wrap { display:flex; flex-direction:column; justify-content:space-evenly; height:100%; min-height:0; gap:16px; }
+  .ln { background:#fff; border:2px solid var(--line); border-radius:16px; padding:20px 28px; display:flex; align-items:center; gap:22px; }
+  .no { flex:none; width:50px; height:50px; border-radius:50%; background:var(--blue); color:#fff; font-size:27px; font-weight:800; display:grid; place-items:center; }
+  .t { flex:none; width:230px; font-size:29px; font-weight:800; color:var(--navy); }
+  .body { flex:1; font-size:25px; line-height:1.62; color:var(--ink); }
+  .body b { color:var(--navy); }
+  .fx { flex:none; font-size:26px; padding:8px 18px; margin-left:8px; }
+  .warn-i { color:#F5821F; font-weight:700; }
 </style>
 </head>
 <body data-title="第三部分小结：稳定性与相对稳定性" data-page="81 / 95">
 <div class="act-stage"><div class="act-slide">
-  <div class="act-body has-note">
+  <div class="act-body">
     <div class="wrap">
-      <div class="ln" data-step="1"><span class="k">① Nyquist 判据</span><span>频域判稳的理论基础是<b>映射原理</b>：<span class="mathbox math eqline tex tex-d">Z = P - N</span>（即 N = P − Z）——<b>P</b>＝右半平面开环极点数（已知）、<b>N</b>＝闭合 Nyquist 曲线<span class="kw-r">逆时针包围 (−1, j0)</span> 的圈数（图上数出）、<b>Z</b>＝右半平面闭环极点数；<b>Z = 0 ⇔ 闭环稳定</b>。</span></div>
-      <div class="ln" data-step="2"><span class="k">② 画图四步</span><span>闭合 Nyquist 曲线分四步拼出：先画<b>正频段</b> ω：0⁺→+∞（就是已会的极坐标图）；再补三段——<b>镜像负频段</b>（实轴对称）、<b>高频端打结</b>（n &gt; m 时 ω=±∞ 收敛于原点）、<b>低频端补弧</b>（ν 型从 ω=0⁻ 端<span class="kw-r">顺时针补 ν×180°</span> 的 ∞ 圆弧）——拼成闭合曲线后再数 N。</span></div>
-      <div class="ln" data-step="3"><span class="k">③ 条件稳定</span><span>稳定性<b>随参数（如开环增益 K）的取值而改变</b>的系统，称条件稳定系统。要会从 Nyquist 图上读出使闭环稳定的<b>参数取值范围</b>：如 P77 之例，曲线与实轴交点 −0.75K 随 K 移动——<b>K &gt; 4/3 才稳定</b>（K 大稳定、K 小反而不稳定）。</span></div>
-      <div class="ln" data-step="4"><span class="k">④ 两个裕量</span><span><b>相角裕量 γ</b>：|G|=1 的频率 ω<sub>c</sub> 处，相角距 −180° 还差多少度；<b>幅值裕量 K<sub>g</sub></b>：∠G=−180° 的频率 ω<sub>g</sub> 处，幅值距 1 还差多少倍（K<sub>g</sub>=1/|G(jω<sub>g</sub>)|）。<b>Nyquist 图</b>上看"曲线离 (−1, j0) 有多远"（配虚线单位圆）；<b>Bode 图</b>上看"L(ω) 过 0dB 时 φ 离 −180° 多远、φ 过 −180° 时 L 离 0dB 多远"——同一裕度、两种读法。</span></div>
-      <div class="ln warn" data-step="5"><span class="k">⚠ 特别强调</span><span><b>非最小相位系统不能用 Bode 图判稳</b>：含右半平面零极点或延时环节时，幅频与相频<b>不再一一对应</b>，只看 L(ω) 与 0dB、φ(ω) 与 −180° 的位置关系会读出错误结论——这类系统<span class="kw-r">只能用 Nyquist 图（数 N）判稳</span>。</span></div>
+      <div class="ln" data-step="1"><span class="no">1</span><span class="t">Nyquist 判据</span><span class="body">查 <b>P</b>（开环右半极点数，已知）→ 数 <b>N</b>（闭合曲线<span class="kw-r">逆时针包围 (−1, j0)</span> 的圈数）→ 算 <b>Z</b>：<b>Z = 0 ⇔ 闭环稳定</b>。<span class="warn-i">⚠ 非最小相位系统只能用 Nyquist 图判稳。</span></span><span class="mathbox math fx eqline tex tex-d">Z = P - N</span></div>
+      <div class="ln" data-step="2"><span class="no">2</span><span class="t">画图四步</span><span class="body"><b>正频段</b>（ω：0⁺→+∞）→ <b>镜像负频段</b> → <b>高频打结</b>（收于原点）→ <b>低频补弧</b>（顺时针补 ν×180°）——拼成闭合曲线后再数 N。</span></div>
+      <div class="ln" data-step="3"><span class="no">3</span><span class="t">条件稳定</span><span class="body">稳定性<b>随参数取值而改变</b>——从 Nyquist 图上读出使闭环稳定的<b>参数取值范围</b>（曲线与实轴的交点随 K 移动）。</span></div>
+      <div class="ln" data-step="4"><span class="no">4</span><span class="t">两个裕量</span><span class="body"><b>相角裕量 γ</b>：|G|=1 处相角距 −180° 还差多少度；<b>幅值裕量 K<sub>g</sub></b>：∠G=−180° 处幅值距 1 还差多少倍——Nyquist 图、Bode 图都能读。</span><span class="mathbox math fx eqline tex tex-d">K_{g}=\dfrac{1}{|G(j\omega_{g})|}</span></div>
     </div>
   </div>
-  <div class="act-note"><span class="lead">承上启下</span><span>扩展阅读（<b>P57 – P58</b>，第二部分末）：为什么 ζ 越小、相频跳变越陡？（数学证明 + S 平面矢量法互动，课上时间紧可跳过）。随后进入<span class="kw-r">第四部分</span>——由开环 Nyquist/Bode 图求闭环频率特性（等 M 圆、等 N 圆、Nichols 图）。</span></div>
 </div></div>
 </body>
 </html>
