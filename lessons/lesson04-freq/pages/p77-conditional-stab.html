@@ -194,7 +194,7 @@ document.addEventListener("DOMContentLoaded", () => {
   L.svg.insertAdjacentHTML("beforeend",
     '<line x1="' + LO.x + '" y1="' + LY(EP) + '" x2="' + LO.x + '" y2="' + LY(RR) + '" style="' + segGray + '"/>' +
     '<line x1="' + LO.x + '" y1="' + LY(-RR) + '" x2="' + LO.x + '" y2="' + LY(-EP) + '" style="' + segGray + '"/>' +
-    '<path d="M' + LO.x + ',' + LY(-EP) + ' A' + EP * LS + ',' + EP * LS + ' 0 0 1 ' + LO.x + ',' + LY(EP) + '" fill="none" style="' + segGray + '"/>' +
+    '<path d="M' + LO.x + ',' + LY(-EP) + ' A' + EP * LS + ',' + EP * LS + ' 0 0 0 ' + LO.x + ',' + LY(EP) + '" fill="none" style="' + segGray + '"/>' +
     '<path d="M' + LO.x + ',' + LY(RR) + ' A' + RR * LS + ',' + RR * LS + ' 0 0 1 ' + LO.x + ',' + LY(-RR) + '" fill="none" style="' + segGray + '"/>');
   L.tx(LO.x - 14, LY(EP) - 8, "C (ω=0⁺)", { fs: 14.5, fill: "#5B6B8C", an: "end" });
   L.tx(LO.x - 14, LY(-EP) + 22, "A (ω=0⁻)", { fs: 14.5, fill: "#5B6B8C", an: "end" });
