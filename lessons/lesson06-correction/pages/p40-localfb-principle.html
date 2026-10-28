@@ -71,7 +71,8 @@
           </div></div>
           <div class="stp" data-step="3" id="s3"><span class="num">3</span><div class="stx">
             <div>当 <span class="tex">|G_{2}(j\omega)G_{c}(j\omega)|\gg1</span> 的频段：</div>
-            <div class="got"><span class="tex">G_{2c}(s)\approx\dfrac{1}{G_{c}(s)}</span> —— 特性<b>只与反馈环节有关</b>，与被包围的 <span class="tex">G_{2}</span> 无关</div>
+            <div class="got"><span class="tex">G_{2c}(s)\approx\dfrac{1}{G_{c}(s)}</span> —— 特性<b>只与反馈装置有关</b>，与被包围的 <span class="tex">G_{2}</span> 无关</div>
+            <div style="font-size:18.5px;color:var(--muted);margin-top:5px">量级示例：<span class="tex">|G_{2}G_{c}|=10</span>（20 dB）时，<span class="tex">G_{2c}</span> 与 <span class="tex">1/G_{c}</span> 的幅值偏差已在 ±10% 以内；<span class="tex">|G_{2}G_{c}|</span> 越大近似越准。</div>
           </div></div>
           <div class="stp" data-step="4" id="s4"><span class="num">4</span><div class="stx">
             <div>当 <span class="tex">|G_{2}(j\omega)G_{c}(j\omega)|\ll1</span> 的频段：</div>
@@ -89,24 +90,22 @@ document.addEventListener("DOMContentLoaded", () => {
   const total = 4;
   const ORF = "#FDF3EC", ORC = "#F5821F";
   const B = BD.block("fig", [
-    { type: "line", pts: [[24, 150], [72, 150]], label: "R(s)", labelDx: -6, labelDy: -16 },
-    { type: "sum", x: 90, y: 150, r: 15 },
+    { type: "line", pts: [[24, 150], [72, 150]], label: "R(s)", labelDx: 0, labelDy: -16 },
+    { type: "sum", x: 90, y: 150, r: 15, signs: { left: "+", bottom: "−" } },
     { type: "line", pts: [[105, 150], [148, 150]] },
     { type: "box", x: 148, y: 120, w: 110, h: 60, label: "G_{1}(s)", name: "g1" },
-    { type: "line", pts: [[258, 150], [292, 150]] },
-    { type: "sum", x: 310, y: 150, r: 15 },
-    { type: "line", pts: [[325, 150], [348, 150]] },
+    { type: "line", pts: [[258, 150], [289, 150]] },
+    { type: "sum", x: 306, y: 150, r: 15, signs: { left: "+", bottom: "−" } },
+    { type: "line", pts: [[321, 150], [348, 150]] },
     { type: "box", x: 348, y: 120, w: 110, h: 60, label: "G_{2}(s)", name: "g2" },
     { type: "line", pts: [[458, 150], [624, 150]], label: "C(s)", labelDx: 44, labelDy: -16 },
     { type: "dot", x: 520, y: 150 },
     { type: "dot", x: 578, y: 150 },
     { type: "line", pts: [[520, 150], [520, 255], [458, 255]], flow: true, name: "fl1" },
     { type: "box", x: 348, y: 225, w: 110, h: 60, label: "G_{c}(s)", fill: ORF, color: ORC, name: "gc" },
-    { type: "line", pts: [[348, 255], [310, 255], [310, 165]], flow: true, name: "fl2" },
+    { type: "line", pts: [[348, 255], [306, 255], [306, 165]], flow: true, name: "fl2" },
     { type: "line", pts: [[578, 150], [578, 392], [90, 392], [90, 165]], flow: true, name: "fb" }
   ], { vw: 640, vh: 440 });
-  B.tx(B.g, 104, 190, "−", { fs: 26, b: 1, an: "start" });
-  B.tx(B.g, 324, 190, "−", { fs: 26, b: 1, an: "start" });
   B.tx(B.g, 414, 316, "局部反馈回路", { fs: 21, fill: ORC, b: 1 });
   B.tx(B.g, 334, 426, "主反馈回路", { fs: 21, fill: "#16324F", b: 1 });
   const dyn = B.mk("g", {}, B.svg);

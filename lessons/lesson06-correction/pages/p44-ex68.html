@@ -35,7 +35,7 @@
 <div class="act-body has-note">
   <div class="row">
     <div class="lft">
-      <div class="act-card" style="flex:1.08">
+      <div class="act-card" style="flex:.88">
         <div class="hd">题设</div>
         <div class="bd">
           <div>复合校正随动系统如图所示，</div>
@@ -44,7 +44,7 @@
           <div>输入 <span class="tex">r(t)=At</span>；前馈 <span class="tex">F_{r}(s)</span> 从输入端引出（按输入补偿）。</div>
         </div>
       </div>
-      <div class="act-card" style="flex:.92">
+      <div class="act-card" style="flex:1.12">
         <div class="hd">系统方框图</div>
         <div class="fg"><svg id="fig"></svg></div>
       </div>
@@ -80,25 +80,22 @@
 document.addEventListener("DOMContentLoaded", () => {
   const ORF = "#FDF3EC", ORC = "#F5821F";
   const B = BD.block("fig", [
-    { type: "line", pts: [[14, 130], [30, 130]], label: "R(s)", labelDx: -4, labelDy: -14 },
-    { type: "dot", x: 44, y: 130 },
-    { type: "line", pts: [[44, 130], [52, 130]] },
-    { type: "sum", x: 66, y: 130, r: 14 },
-    { type: "line", pts: [[80, 130], [120, 130]] },
+    { type: "line", pts: [[12, 130], [64, 130]], label: "R(s)", labelDx: 9, labelDy: -14 },
+    { type: "dot", x: 40, y: 130 },
+    { type: "sum", x: 78, y: 130, r: 14, signs: { left: "+", bottom: "−" } },
+    { type: "line", pts: [[92, 130], [120, 130]] },
     { type: "box", x: 120, y: 104, w: 100, h: 52, label: "G_{1}(s)", fs: 22 },
-    { type: "line", pts: [[220, 130], [248, 130]] },
-    { type: "sum", x: 262, y: 130, r: 14 },
-    { type: "line", pts: [[276, 130], [300, 130]] },
-    { type: "box", x: 300, y: 104, w: 100, h: 52, label: "G_{2}(s)", fs: 22 },
-    { type: "line", pts: [[400, 130], [522, 130]], label: "C(s)", labelDx: 40, labelDy: -14 },
-    { type: "dot", x: 470, y: 130 },
-    { type: "line", pts: [[470, 130], [470, 262], [66, 262], [66, 144]], flow: true },
-    { type: "line", pts: [[44, 130], [44, 50], [100, 50]], flow: true },
+    { type: "line", pts: [[220, 130], [250, 130]] },
+    { type: "sum", x: 264, y: 130, r: 14, signs: { left: "+", top: "+" } },
+    { type: "line", pts: [[278, 130], [302, 130]] },
+    { type: "box", x: 304, y: 104, w: 100, h: 52, label: "G_{2}(s)", fs: 22 },
+    { type: "line", pts: [[404, 130], [528, 130]], label: "C(s)", labelDx: 40, labelDy: -14 },
+    { type: "dot", x: 472, y: 130 },
+    { type: "line", pts: [[472, 130], [472, 262], [78, 262], [78, 144]], flow: true },
+    { type: "line", pts: [[40, 130], [40, 50], [100, 50]], flow: true },
     { type: "box", x: 100, y: 26, w: 104, h: 48, label: "F_{r}(s)", fs: 22, fill: ORF, color: ORC },
-    { type: "line", pts: [[204, 50], [262, 50], [262, 114]], flow: true }
+    { type: "line", pts: [[204, 50], [264, 50], [264, 114]], flow: true }
   ], { vw: 540, vh: 296 });
-  B.tx(B.g, 80, 160, "−", { fs: 24, b: 1, an: "start" });
-  B.tx(B.g, 276, 108, "+", { fs: 24, b: 1, an: "start" });
 });
 </script>
 <script>/* qa-steps：截图自验钩子，?steps=N 自动前进 N 步 */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>

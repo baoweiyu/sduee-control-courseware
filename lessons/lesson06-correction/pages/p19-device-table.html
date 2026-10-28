@@ -46,7 +46,7 @@
             <tr class="lk" data-row="0">
               <td class="dev">超前<br>装置</td>
               <td><span class="tex">G_{c}=\dfrac{Ts+1}{\alpha Ts+1}</span><br><span class="tex">\alpha<1</span></td>
-              <td>相位超前（<span class="tex">\varphi_{m}\le65^{\circ}</span>）；高频增益抬升 <span class="tex">-20\lg\alpha</span></td>
+              <td>相位超前（<span class="tex">\varphi_{m}\le60^{\circ}</span>）；高频增益抬升 <span class="tex">-20\lg\alpha</span></td>
               <td class="role"><span class="tex">\omega_{c}\uparrow</span>、<span class="tex">\gamma\uparrow</span>，改善暂态（<span class="tex">\sigma\%\!\downarrow</span>、<span class="tex">t_{s}\!\downarrow</span>）</td>
             </tr>
             <tr class="lk" data-row="1">
@@ -56,7 +56,7 @@
               <td class="role">利用高频衰减使 <span class="tex">\omega_{c}</span> 左移、<span class="tex">\gamma\uparrow</span>，改善稳态与抗噪</td>
             </tr>
             <tr class="lk" data-row="2">
-              <td class="dev">滞后-<br>超前</td>
+              <td class="dev">滞后—<br>超前</td>
               <td><span class="tex">G_{c}=\dfrac{T_{1}s+1}{\beta T_{1}s+1}\cdot\dfrac{T_{2}s+1}{\frac{T_{2}}{\beta}s+1}</span></td>
               <td>低频段滞后衰减，高频段超前补偿</td>
               <td class="role">滞后部分改善稳态，超前部分改善暂态</td>
@@ -129,7 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
       cap: "相位先升后降，最大超前角 φ_{m}≈54.9°（ω_{m} 处增益 −10lgα=10dB）" },
     { data: "t19_lag", title: "Bode 特性：滞后装置（β=10，T=1）",
       cap: "相位先降后升（最大滞后约 −54.9°）；高频幅值衰减 −20lgβ=−20dB" },
-    { data: "pid_ll", title: "Bode 特性：滞后-超前装置（β=10）",
+    { data: "pid_ll", title: "Bode 特性：滞后—超前装置（β=10）",
       cap: "低频段滞后衰减、高频段超前补偿，两端增益回到 0dB" },
     { data: "t19_pd", title: "Bode 特性：PD 装置（T_{d}=1）",
       cap: "相位 0°→+90° 超前；过零点频率 1/T_{d} 后幅频 +20dB/dec" },

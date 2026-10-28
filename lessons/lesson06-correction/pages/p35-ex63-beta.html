@@ -37,7 +37,7 @@
     <div class="lft">
       <div class="act-card" style="flex:1">
         <div class="hd">② 选 <span class="tex">\omega_{c2}</span>：相频上找 <span class="tex">\gamma^{*}+\varepsilon</span></div>
-        <div class="bd">
+        <div class="bd" data-step="1">
           <div class="calc"><span class="num">1</span><div class="cx">
             <div>取 <span class="tex">\varepsilon=5^{\circ}</span> 预补滞后附加相角，在未校相频上找 <span class="tex">\gamma_{0}=45^{\circ}</span> 的点。</div>
             <div class="eq"><span class="tex">\varphi_{0}(\omega_{c2})=-135^{\circ}\;\Rightarrow\;\omega_{c2}=0.56</span></div>
@@ -46,7 +46,7 @@
       </div>
       <div class="act-card" style="flex:1">
         <div class="hd">③ 定 <span class="tex">\beta</span>：量未校在 <span class="tex">\omega_{c2}</span> 处的幅值</div>
-        <div class="bd">
+        <div class="bd" data-step="2">
           <div class="calc"><span class="num">2</span><div class="cx">
             <div>要在此处穿过 0dB，须压下的分贝数 = 未校此处幅值。</div>
             <div class="eq"><span class="tex">L_{0}(0.56)\approx18\,\mathrm{dB}=20\lg\beta\;\Rightarrow\;\beta=8</span></div>
@@ -55,7 +55,7 @@
       </div>
       <div class="act-card" style="flex:1.05">
         <div class="hd">④ 定 T，写出 <span class="tex">G_{c}(s)</span></div>
-        <div class="bd">
+        <div class="bd" data-step="3">
           <div class="calc"><span class="num">3</span><div class="cx">
             <div>把滞后相角甩到低频：取 <span class="tex">\dfrac{1}{T}=0.1\omega_{c2}=0.056</span>。</div>
             <div class="eq"><span class="tex">G_{c}(s)=\dfrac{Ts+1}{\beta Ts+1}=\dfrac{17.86s+1}{143s+1}</span></div>
@@ -86,33 +86,51 @@ document.addEventListener("DOMContentLoaded", () => {
      转折频率 vline、渐近线等次要标记全部不绘 */
   BD.data["t35"] = { xlim: E.xlim,
     mag: { ylim: E.mag.ylim, curves: [E.mag.curves[0], E.mag.curves[1]], asym: [] },
-    phase: { ylim: E.phase.ylim, curves: [cutWrap(E.phase.curves[0]), E.phase.curves[1]], asym: [] },
+    phase: { ylim: [E.phase.ylim[0], 0], curves: [cutWrap(E.phase.curves[0]), E.phase.curves[1]], asym: [] },
     marks: [] };
   const WC2 = 0.56, PHI = -134.89, L0 = 17.5;
-  const F = BD.figure("fig", "t35", { mag: true, phase: true, static: true, zoom: false, extra(api) {
-    const PM = api.panelOf("mag"), PP = api.panelOf("phase"), g = api.gDyn;
-    const x = api.X(WC2);
-    /* 选定的 ωc2：贯穿双图的红虚线 */
-    [PM, PP].forEach(p => api.mk("line", { x1: x, y1: p.y0, x2: x, y2: p.y1, stroke: "#D63A2F",
-      "stroke-width": 2.2, "stroke-dasharray": "7 5", opacity: .8, "clip-path": `url(#${p.clip})` }, g));
-    api.tx(g, x + 12, PM.y0 + 22, "ω_{c2}=0.56", { fs: 22, fill: "#D63A2F", b: 1, an: "start" });
-    /* 相频：φ0(0.56)=−135°，距 −180° 正好 γ+ε=45° */
-    const yP = api.Y(PP, PHI), y180 = api.Y(PP, -180);
-    api.mk("circle", { cx: x, cy: yP, r: 9, fill: "#1D3FA0", stroke: "#fff", "stroke-width": 2.5 }, g);
-    api.mk("line", { x1: x, y1: yP, x2: x, y2: y180, stroke: "#1D3FA0", "stroke-width": 3.4 }, g);
-    api.tx(g, x + 14, yP - 20, "φ_{0}(0.56)=−135°", { fs: 22, fill: "#1D3FA0", b: 1, an: "start" });
-    api.tx(g, x - 20, (yP + y180) / 2 + 10, "γ+ε=45°", { fs: 21, fill: "#1D3FA0", b: 1, an: "end" });
-    /* 幅频：L0(0.56)≈18dB 即 20lgβ；Gc 在此频率恰给 −18dB */
-    const yL = api.Y(PM, L0), y0 = api.Y(PM, 0), yC = api.Y(PM, -18.03);
-    api.mk("circle", { cx: x, cy: yL, r: 9, fill: "#1D3FA0", stroke: "#fff", "stroke-width": 2.5 }, g);
-    api.mk("line", { x1: x, y1: yL, x2: x, y2: y0, stroke: "#1D3FA0", "stroke-width": 3.4 }, g);
-    api.tx(g, x - 16, (yL + y0) / 2 - 6, "L_{0}(0.56)≈18dB", { fs: 22, fill: "#1D3FA0", b: 1, an: "end" });
-    api.tx(g, x - 16, (yL + y0) / 2 + 26, "=20lgβ → β=8", { fs: 22, fill: "#D63A2F", b: 1, an: "end" });
-    api.mk("circle", { cx: x, cy: yC, r: 8, fill: "#0E7A36", stroke: "#fff", "stroke-width": 2.5 }, g);
-    api.tx(g, x - 16, yC + 32, "G_{c}：−20lgβ=−18dB", { fs: 21, fill: "#0E7A36", b: 1, an: "end" });
-  } });
+  const F = BD.figure("fig", "t35", { mag: true, phase: true, static: true, zoom: false });
+  const PM = F.panelOf("mag"), PP = F.panelOf("phase");
+  /* 图线分步化：① 未校 G0（初始即见）；② 相频找 ωc2；③ 幅频量 18dB 定 β（Gc 幅频出现）；④ 定 T（Gc 相频出现） */
+  F.setOp(1, 0); F.setOp(3, 0);   /* Gc 的幅/相曲线先隐藏 */
+  const g1 = F.mk("g", {}, F.svg), g2 = F.mk("g", {}, F.svg);
+  const x = F.X(WC2);
+  /* 第①步组：选定的 ωc2 红虚线（贯穿双图）+ 相频 φ0=−135° 点与 γ+ε=45° 括线 */
+  [PM, PP].forEach(p => F.mk("line", { x1: x, y1: p.y0, x2: x, y2: p.y1, stroke: "#D63A2F",
+    "stroke-width": 2.2, "stroke-dasharray": "7 5", opacity: .8, "clip-path": `url(#${p.clip})` }, g1));
+  F.tx(g1, x + 12, PM.y0 + 22, "ω_{c2}=0.56", { fs: 22, fill: "#D63A2F", b: 1, an: "start" });
+  (function () {
+    const yP = F.Y(PP, PHI), y180 = F.Y(PP, -180);
+    F.mk("circle", { cx: x, cy: yP, r: 9, fill: "#1D3FA0", stroke: "#fff", "stroke-width": 2.5 }, g1);
+    F.mk("line", { x1: x, y1: yP, x2: x, y2: y180, stroke: "#1D3FA0", "stroke-width": 3.4 }, g1);
+    F.tx(g1, x + 14, yP - 20, "φ_{0}(0.56)=−135°", { fs: 22, fill: "#1D3FA0", b: 1, an: "start" });
+    F.tx(g1, x - 20, (yP + y180) / 2 + 10, "γ+ε=45°", { fs: 21, fill: "#1D3FA0", b: 1, an: "end" });
+  })();
+  /* 第②步组：幅频 L0(0.56)≈18dB 括线 → β=8；Gc 恰给 −18dB */
+  (function () {
+    const yL = F.Y(PM, L0), y0 = F.Y(PM, 0), yC = F.Y(PM, -18.03);
+    F.mk("circle", { cx: x, cy: yL, r: 9, fill: "#1D3FA0", stroke: "#fff", "stroke-width": 2.5 }, g2);
+    F.mk("line", { x1: x, y1: yL, x2: x, y2: y0, stroke: "#1D3FA0", "stroke-width": 3.4 }, g2);
+    F.tx(g2, x - 16, (yL + y0) / 2 - 6, "L_{0}(0.56)≈18dB", { fs: 22, fill: "#1D3FA0", b: 1, an: "end" });
+    F.tx(g2, x - 16, (yL + y0) / 2 + 26, "=20lgβ → β=8", { fs: 22, fill: "#D63A2F", b: 1, an: "end" });
+    F.mk("circle", { cx: x, cy: yC, r: 8, fill: "#0E7A36", stroke: "#fff", "stroke-width": 2.5 }, g2);
+    F.tx(g2, x - 16, yC + 32, "G_{c}：−20lgβ=−18dB", { fs: 21, fill: "#0E7A36", b: 1, an: "end" });
+  })();
+  function paint() {
+    const c = ACT.step.cur;
+    g1.style.display = c >= 1 ? "" : "none";
+    g2.style.display = c >= 2 ? "" : "none";
+    F.setOp(1, c >= 2 ? 1 : 0);   /* Gc 幅频随第②步出现 */
+    F.setOp(3, c >= 3 ? 1 : 0);   /* Gc 相频随第③步出现 */
+  }
+  const S = ACT.step, _n = S.next.bind(S), _r = S.reset.bind(S);
+  S.next = function () { const d = _n(); paint(); return d; };
+  S.reset = function () { _r(); paint(); };
+  window.prev = function () { const n = Math.max(0, S.cur - 1); S.reset(); for (let i = 0; i < n; i++) S.next(); };
+  paint();
 });
 </script>
+<script>/* qa-steps：截图自验钩子，?steps=N 自动前进 N 步（播放时不生效） */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
 </div></div>
 </body>
 </html>

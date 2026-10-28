@@ -128,6 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
     else { fl = K >= 1 ? 1 : 0; fc = K >= 2 ? 1 : 0; }
     F.setF(0, fl); F.setF(2, fl); F.setF(1, fc); F.setF(3, fc);
     F.setOp(2, fc > 0 ? 0 : 1);              // 相频面板只留一条曲线
+    F.setOp(0, 1 - .75 * fc);                // 合成幅频长成时，滞后幅频渐淡到 .25
     F.gAsym.style.opacity = 0;               // 渐近折线不再出现
     F.gMark.style.opacity = K >= 3 ? 1 : 0;  // 转折频率与 −20lgβ 电平仅第③步标注
   }

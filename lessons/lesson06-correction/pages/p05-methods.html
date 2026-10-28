@@ -119,26 +119,24 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  /* 复合校正 mini 方框图（与 p04 同款 BD.block，横平竖直、直角折线、实心分支点） */
+  /* 复合校正 mini 方框图（与 p04 同款 BD.block，横平竖直、直角折线、实心分支点；线段 ≥30px） */
   const B = BD.block("mfg3", [
-    { type: "line", pts: [[12, 116], [52, 116]] },
+    { type: "line", pts: [[10, 116], [57, 116]] },
     { type: "dot", x: 40, y: 116 },
-    { type: "sum", x: 70, y: 116, r: 11 },
-    { type: "line", pts: [[81, 116], [128, 116]] },
-    { type: "sum", x: 146, y: 116, r: 11 },
-    { type: "line", pts: [[157, 116], [182, 116]] },
-    { type: "box", x: 184, y: 94, w: 74, h: 44, label: "G(s)", fs: 21 },
-    { type: "line", pts: [[258, 116], [334, 116]] },
+    { type: "sum", x: 68, y: 116, r: 11, signs: { left: "+", bottom: "−" } },
+    { type: "line", pts: [[79, 116], [126, 116]] },
+    { type: "sum", x: 144, y: 116, r: 11, signs: { left: "+", top: "+" } },
+    { type: "line", pts: [[155, 116], [186, 116]] },
+    { type: "box", x: 188, y: 94, w: 72, h: 44, label: "G(s)", fs: 21 },
+    { type: "line", pts: [[260, 116], [338, 116]] },
     { type: "dot", x: 302, y: 116 },
-    { type: "line", pts: [[302, 116], [302, 172], [70, 172], [70, 127]] },
+    { type: "line", pts: [[302, 116], [302, 172], [68, 172], [68, 127]] },
     { type: "line", pts: [[40, 116], [40, 48], [52, 48]] },
     { type: "box", x: 52, y: 26, w: 76, h: 44, label: "G_{c}(s)", fill: "#FDF3EC", color: "#F5821F", fs: 21 },
-    { type: "line", pts: [[128, 48], [146, 48], [146, 105]] }
+    { type: "line", pts: [[128, 48], [144, 48], [144, 105]] }
   ], { vw: 348, vh: 192 });
   B.tx(B.g, 20, 98, "R(s)", { fs: 20, it: 1, fill: "#16324F" });
-  B.tx(B.g, 322, 98, "C(s)", { fs: 20, it: 1, fill: "#16324F" });
-  B.tx(B.g, 84, 158, "−", { fs: 21, b: 1, an: "start" });
-  B.tx(B.g, 158, 78, "+", { fs: 21, b: 1, an: "start" });
+  B.tx(B.g, 320, 98, "C(s)", { fs: 20, it: 1, fill: "#16324F" });
 });
 </script>
 </div></div>

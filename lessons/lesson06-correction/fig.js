@@ -59,7 +59,7 @@ window.BD = window.BD || { data: {} };
       if (p.startsWith("_{")) { nd = 6; content = p.slice(2, -1); small = true; }
       else if (p.startsWith("^{")) { nd = -6; content = p.slice(2, -1); small = true; }
       const d = nd - dy; dy = nd;
-      html += `<tspan${d ? ` dy="${d}"` : ""}${small ? ' font-size="72%"' : ""}>${esc(content)}</tspan>`;
+      html += `<tspan${d ? ` dy="${d}"` : ""}${small ? ' font-size="72%" font-style="normal"' : ""}>${esc(content)}</tspan>`;
     }
     n.innerHTML = html;
     if (o.halo !== false)
@@ -228,15 +228,21 @@ window.BD = window.BD || { data: {} };
       /* 底图横轴箭头 + ω 轴名 */
       const bp = panels[panels.length - 1];
       mk("line", { x1: bp.x0 - 6, y1: bp.y1, x2: bp.x1 + 16, y2: bp.y1, stroke: AX, "stroke-width": REF.stroke.axis, "marker-end": `url(#rx${svgId})` }, gGrid);
-      tx(gGrid, Math.min(bp.x1 + 16, VW - 18), bp.y1 + 30, "ω", { fs: 28, it: 1, b: 1, fill: AX });
+      tx(gGrid, Math.min(bp.x1 + 16, VW - 18), bp.y1 + 30, opt.xname || data.xname || "ω", { fs: 28, it: 1, b: 1, fill: AX });
     }
 
     /* ---------- 底轨 / 渐近线 ---------- */
+    /* 底轨透明度跟随分支：未生长(f=0)不显示，生长中预览全路径，分支淡化时同步淡化
+       （图线分步化：同一时刻底轨只为当前/已重点曲线服务，避免一屏淡线堆叠） */
+    function syncTrack(i) {
+      const el = trackEls[i]; if (!el) return;
+      el.setAttribute("opacity", opt.static ? 0 : (bf[i] > 0 ? REF.opacity.track * bop[i] : 0));
+    }
     function drawTracks() {
       trackEls = brs.map((b, i) => {
         const p = brPanel[i];
         const el = mk("path", { fill: "none", stroke: TRACK, "stroke-width": REF.stroke.track,
-          opacity: opt.static ? 0 : REF.opacity.track, "clip-path": `url(#${p.clip})` }, gTrack);
+          opacity: 0, "clip-path": `url(#${p.clip})` }, gTrack);
         el.setAttribute("d", toPath(clipPoly(b.map(q => [X(q[0]), Y(p, q[1])]), p)));
         return el;
       });
@@ -310,7 +316,7 @@ window.BD = window.BD || { data: {} };
       bf[i] = f = Math.max(0, Math.min(1, f));
       const el = pathEls[i], g = epG[i];
       g.innerHTML = "";
-      if (f <= 0) { el.setAttribute("d", ""); return; }
+      if (f <= 0) { el.setAttribute("d", ""); syncTrack(i); return; }
       const kk = Math.max(1, Math.min(n, Math.floor(f * (n - 1)) + 1));
       const pts = [];
       for (let j = 0; j < Math.min(kk, n); j++) pts.push([X(b[j][0]), Y(p, b[j][1])]);
@@ -324,6 +330,7 @@ window.BD = window.BD || { data: {} };
       el.setAttribute("d", toPath(clipPoly(pts, p)));
       if (opt.endpoint !== false && f > 0.02 && f < 1)
         mk("circle", { cx: X(ex), cy: Y(p, ey), r: REF.marker.movingPointRadius, fill: brColor[i], stroke: "#fff", "stroke-width": 2.5 }, g);
+      syncTrack(i);
     }
 
     function render() {
@@ -392,7 +399,7 @@ window.BD = window.BD || { data: {} };
     }
 
     const api = { svg, X, Y, VW, VH, PLOT: FULL, panels, panelOf, data, tx, mk, gTop: gMark, gDyn, gGrid, gMark, gAsym,
-                  colorOf: brColor, setF, setOp: (i, op) => { bop[i] = op; pathEls[i].setAttribute("opacity", op); epG[i].setAttribute("opacity", op); },
+                  colorOf: brColor, setF, setOp: (i, op) => { bop[i] = op; pathEls[i].setAttribute("opacity", op); epG[i].setAttribute("opacity", op); syncTrack(i); },
                   setAllF: f => brs.forEach((_, i) => setF(i, f)),
                   setProgress: f => brs.forEach((_, i) => setF(i, f)),
                   getF: i => bf[i], nb: brs.length,
@@ -649,19 +656,24 @@ window.BD = window.BD || { data: {} };
           fill: b.fill || "#F4F7FE", stroke: b.color || REF.color.title, "stroke-width": REF.stroke.block }, g);
         const rows = String(b.label || "").split("\n");
         rows.forEach((r, i) => tx(g, b.x + b.w / 2, b.y + b.h / 2 + (i - (rows.length - 1) / 2) * 30 + 8, r,
-          { fs: b.fs || 24, fill: INK, b: 1, halo: false }));
+          { fs: b.fs || 24, fill: INK, b: 1, it: 1, halo: false }));
         if (b.name) lines[b.name] = rect;
       } else if (b.type === "sum") {
         const r = b.r || 16;
         const c = mk("g", {}, g);
         mk("circle", { cx: b.x, cy: b.y, r, fill: "#fff", stroke: b.color || INK, "stroke-width": REF.stroke.block }, c);
-        mk("line", { x1: b.x - r * .62, y1: b.y, x2: b.x + r * .62, y2: b.y, stroke: b.color || INK, "stroke-width": 2.2 }, c);
-        mk("line", { x1: b.x, y1: b.y - r * .62, x2: b.x, y2: b.y + r * .62, stroke: b.color || INK, "stroke-width": 2.2 }, c);
-        const pos = { left: [b.x - r - 10, b.y + 7, "end"], right: [b.x + r + 10, b.y + 7, "start"],
-                      top: [b.x, b.y - r - 8, "middle"], bottom: [b.x, b.y + r + 20, "middle"] };
+        /* 相加点：圆圈内对角 × 叉（与第二章 p29 标准一致，半长 0.5r） */
+        const k = r * .5;
+        mk("line", { x1: b.x - k, y1: b.y - k, x2: b.x + k, y2: b.y + k, stroke: b.color || INK, "stroke-width": 2.2 }, c);
+        mk("line", { x1: b.x + k, y1: b.y - k, x2: b.x - k, y2: b.y + k, stroke: b.color || INK, "stroke-width": 2.2 }, c);
+        /* ± 号贴在对应入口旁（对角方位，避开信号线）：left/right 在入口线上方侧，
+           top 在竖线右侧上方，bottom 在竖线左侧下方；字号随半径自适应 */
+        const sfs = Math.round(r * 1.7);
+        const pos = { left: [b.x - r - 5, b.y - r - 3, "end"], right: [b.x + r + 5, b.y - r - 3, "start"],
+                      top: [b.x + 7, b.y - r - 4, "start"], bottom: [b.x - 9, b.y + r + 16, "end"] };
         for (const k in (b.signs || {})) {
           const p = pos[k]; if (!p) continue;
-          tx(g, p[0], p[1], b.signs[k] === "-" ? "−" : b.signs[k], { fs: 26, fill: INK, b: 1, an: p[2] });
+          tx(g, p[0], p[1], b.signs[k] === "-" ? "−" : b.signs[k], { fs: sfs, fill: INK, b: 1, an: p[2] });
         }
         if (b.name) lines[b.name] = c;
       } else if (b.type === "line") {

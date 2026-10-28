@@ -88,11 +88,11 @@ document.addEventListener("DOMContentLoaded", () => {
   /* 纵向拉高布局（vh 600）：图面充分填充图卡；所有信号线横平竖直，折线直角转弯 */
   const B = BD.block("fig", [
     { type: "line", pts: [[24, 240], [70, 240]], label: "R(s)", labelDx: -6, labelDy: -16 },
-    { type: "sum", x: 85, y: 240, r: 15 },
+    { type: "sum", x: 85, y: 240, r: 15, signs: { left: "+", top: "−", bottom: "−" } },
     { type: "line", pts: [[100, 240], [138, 240]] },
     { type: "box", x: 138, y: 210, w: 110, h: 60, label: "G_{1}(s)", name: "g1" },
     { type: "line", pts: [[248, 240], [292, 240]] },
-    { type: "sum", x: 307, y: 240, r: 15 },
+    { type: "sum", x: 307, y: 240, r: 15, signs: { left: "+", top: "+" } },
     { type: "line", pts: [[322, 240], [352, 240]] },
     { type: "box", x: 352, y: 210, w: 110, h: 60, label: "G_{2}(s)", name: "g2" },
     { type: "line", pts: [[462, 240], [656, 240]], label: "C(s)", labelDx: 96, labelDy: -16 },
@@ -105,9 +105,6 @@ document.addEventListener("DOMContentLoaded", () => {
     { type: "line", pts: [[108, 140], [85, 140], [85, 223]], flow: true, name: "fn2" }
   ], { vw: 680, vh: 600 });
   B.tx(B.g, 337, 82, "N(s)", { fs: 24, it: 1, an: "start" });
-  B.tx(B.g, 102, 270, "−", { fs: 26, b: 1, an: "start" });
-  B.tx(B.g, 102, 216, "−", { fs: 26, b: 1, an: "start" });
-  B.tx(B.g, 323, 216, "+", { fs: 26, b: 1, an: "start" });
   B.tx(B.g, 341, 594, "主反馈回路", { fs: 21, fill: "#16324F", b: 1 });
   const dyn = B.mk("g", {}, B.svg);
 

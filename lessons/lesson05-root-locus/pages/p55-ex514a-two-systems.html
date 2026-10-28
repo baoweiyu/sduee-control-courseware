@@ -109,10 +109,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const Y0 = 100;
     label(12, Y0 - 16, "R(s)", { an: "start" });
     wire(`M38,${Y0} L104,${Y0}`);
-    /* 求和点 */
+    /* 求和点（× 叉丝，与第二章 p29 统一） */
     mk("circle", { cx: 120, cy: Y0, r: 14, fill: "#fff", stroke: BLUE, "stroke-width": 2.6 });
-    mk("line", { x1: 112, y1: Y0, x2: 128, y2: Y0, stroke: BLUE, "stroke-width": 1.8 });
-    mk("line", { x1: 120, y1: Y0 - 8, x2: 120, y2: Y0 + 8, stroke: BLUE, "stroke-width": 1.8 });
+    mk("line", { x1: 113, y1: Y0 - 7, x2: 127, y2: Y0 + 7, stroke: BLUE, "stroke-width": 1.8 });
+    mk("line", { x1: 113, y1: Y0 + 7, x2: 127, y2: Y0 - 7, stroke: BLUE, "stroke-width": 1.8 });
     label(100, Y0 - 18, "+", { fs: 21, fill: NAVY });
     label(102, Y0 + 38, "−", { fs: 21, fill: NAVY });
     wire(`M134,${Y0} L178,${Y0}`);

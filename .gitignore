@@ -67,3 +67,6 @@ lessons/*.bak*/
 __pycache__/
 qa/*.log
 qa/measure_*.json
+
+# ===== V2.36 审查截图产物 =====
+qa/review-shots/

@@ -82,8 +82,8 @@ document.addEventListener("DOMContentLoaded", () => {
   };
   const mkSum = (cx, cy, signs) => {
     mk("circle", { cx, cy, r: 20, fill: "#fff", stroke: BLUE, "stroke-width": 3 }, svg);
-    mk("line", { x1: cx - 12, y1: cy, x2: cx + 12, y2: cy, stroke: BLUE, "stroke-width": 2 }, svg);
-    mk("line", { x1: cx, y1: cy - 12, x2: cx, y2: cy + 12, stroke: BLUE, "stroke-width": 2 }, svg);
+    mk("line", { x1: cx - 10, y1: cy - 10, x2: cx + 10, y2: cy + 10, stroke: BLUE, "stroke-width": 2 }, svg);
+    mk("line", { x1: cx - 10, y1: cy + 10, x2: cx + 10, y2: cy - 10, stroke: BLUE, "stroke-width": 2 }, svg);
     (signs || []).forEach(([x, y, s]) => label(x, y, s, { fs: 26, fill: NAVY }));
   };
   const mkBlock = (x, y, w, h, lines, hl) => {

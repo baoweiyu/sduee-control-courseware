@@ -68,8 +68,19 @@
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   /* 两题只考法则三/四：与题无关的分离点红点、虚轴方块显式关闭 */
-  RL.figure("fig", "asymB", { vw: 900, vh: 560, static: true, brkDots: false, crossSq: false });
+  const F = RL.figure("fig", "asymB", { vw: 900, vh: 560, static: true, brkDots: false, crossSq: false });
   const S = ACT.step, _n = S.next.bind(S), _r = S.reset.bind(S);
+  /* 答案门控（清单 37/73：图上答案不得先于文字揭晓）：
+     0 步只有坐标轴与三个开环极点；≥1 步淡入实轴段（Q1 答案）；
+     ≥2 步淡入渐近线及 ±60°/180°、σₐ 标注（Q2 答案），并补全分支轨迹作全图收束 */
+  F.segEls.forEach(e => { e.style.transition = "opacity .45s"; });
+  F.gAsym.style.transition = "opacity .45s";
+  function gate() {
+    const k = S.cur;
+    F.segEls.forEach(e => { e.style.opacity = k >= 1 ? .9 : 0; });
+    F.gAsym.style.opacity = k >= 2 ? 1 : 0;
+    F.setAllF(k >= 2 ? 1 : 0);
+  }
   function mark() {
     document.querySelectorAll(".qz").forEach((qz, qi) => {
       const on = S.cur >= qi + 1;
@@ -78,9 +89,11 @@ document.addEventListener("DOMContentLoaded", () => {
         o.classList.toggle("wrong", on && o.dataset.mark === "0");
       });
     });
+    gate();
   }
   S.next = function () { const d = _n(); mark(); return d; };
   S.reset = function () { _r(); mark(); };
+  mark();
   window.prev = function () { const n = Math.max(0, S.cur - 1); S.reset(); for (let i = 0; i < n; i++) S.next(); };
 });
 </script>

@@ -112,6 +112,14 @@ document.addEventListener("DOMContentLoaded", () => {
     g = grp("lt1");  segLine(g, -2, 0);
     g = grp("eq1");  ring(g, [-1, 0], 20);
     g = grp("gt1");  brLine(g, 1); brLine(g, -1);
+    /* 实轴段两支相向方向箭头：intro 数据每支仅一枚中段箭头且落在垂直部，
+       实轴移动段按 p04 式样显式补两枚（画在 gTop，位于实轴粗段之上） */
+    const tri = (vx, deg, c) => {
+      const g2 = api.mk("g", { transform: `translate(${X(vx)},${Y(0)}) rotate(${deg})` }, api.gTop);
+      api.mk("path", { d: "M10,0 L-10,7.5 L-10,-7.5 Z", fill: c, stroke: "#fff", "stroke-width": 1.2 }, g2);
+    };
+    tri(-1.5, 0, api.colorOf[0]);    // p₂=−2 出发的分支向右 → 会合点 −1
+    tri(-0.5, 180, api.colorOf[1]);  // p₁=0 出发的分支向左 → 会合点 −1
     /* 行点击联动 */
     const clear = () => {
       document.querySelectorAll(".krow.sel,.srow.sel").forEach(e => e.classList.remove("sel"));

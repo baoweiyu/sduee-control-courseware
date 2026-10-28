@@ -28,24 +28,24 @@
 
 <div class="act-body has-note">
   <div class="wrap">
-    <div class="tr good" data-step="1">
+    <div class="tr good">
       <div class="lab"><span class="ic">✓</span><span class="nm">优点</span></div>
-      <div class="cnt">
-        <div><span class="tex">\omega_{c}</span> 增大 → <span class="tex">t_{s}</span> 缩短，<b>响应加快</b>（例6-1：5.77 s → 1.08 s）；</div>
-        <div><span class="tex">\gamma</span> 增大 → σ% 下降，<b>平稳性改善</b>（例6-1：61.6% → 29.2%）；</div>
+      <div class="cnt" data-step="1">
+        <div><span class="tex">\omega_{c}</span> 增大 → <span class="tex">t_{s}</span> 缩短，<b>响应加快</b>（例6-1：5.70 s → 1.08 s）；</div>
+        <div><span class="tex">\gamma</span> 增大 → σ% 下降，<b>平稳性改善</b>（例6-1：63.2% → 29.2%）；</div>
         <div>低频段形状不变，<b>稳态精度不受影响</b>。</div>
       </div>
     </div>
-    <div class="tr bad" data-step="2">
+    <div class="tr bad">
       <div class="lab"><span class="ic">✗</span><span class="nm">缺点</span></div>
-      <div class="cnt">
+      <div class="cnt" data-step="2">
         <div><span class="tex">\omega_{c2}</span> 上移、高频增益抬高，<b>抗高频干扰能力下降</b>；</div>
-        <div>α 过小则网络负担过重，单级超前角一般<b>不超过 60°</b>；需求更大时需多级串联或改用滞后-超前校正。</div>
+        <div>α 过小则网络负担过重，单级超前角一般<b>不超过 60°</b>；需求更大时需多级串联或改用滞后—超前校正。</div>
       </div>
     </div>
-    <div class="tr fit" data-step="3">
+    <div class="tr fit">
       <div class="lab"><span class="ic">◎</span><span class="nm">适用范围</span></div>
-      <div class="cnt">
+      <div class="cnt" data-step="3">
         <div>稳态精度已满足、要求 <b>σ% 减小、t<sub>s</sub> 缩短</b>以改善暂态的场合；</div>
         <div><b>高频干扰不是主要问题</b>的系统；</div>
         <div><span class="tex">\omega_{c1}</span> 附近相角滞后<b>随 ω 增大缓慢增加</b>的系统——否则 ε 将消耗过多超前角，单级超前难以奏效。</div>
@@ -60,7 +60,7 @@
 window.addEventListener("load", () => {
   const q = new URLSearchParams(location.search);
   if (q.has("all") || q.has("ff"))
-    document.querySelectorAll("[data-step]").forEach(e => e.classList.add("shown"));
+    document.querySelectorAll("[data-step]").forEach(e => { e.style.transition = "none"; e.classList.add("shown"); });
 });
 </script>
 </div></div>

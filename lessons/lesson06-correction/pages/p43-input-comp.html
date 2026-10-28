@@ -65,25 +65,22 @@ document.addEventListener("DOMContentLoaded", () => {
   const ORF = "#FDF3EC", ORC = "#F5821F";
   /* 宽幅 viewBox：主通道横向铺开，图面撑满卡片；所有信号线横平竖直 */
   const B = BD.block("fig", [
-    { type: "line", pts: [[24, 170], [44, 170]], label: "R(s)", labelDx: -4, labelDy: -16 },
-    { type: "dot", x: 60, y: 170 },
-    { type: "line", pts: [[60, 170], [76, 170]] },
-    { type: "sum", x: 92, y: 170, r: 15 },
-    { type: "line", pts: [[107, 170], [158, 170]] },
+    { type: "line", pts: [[24, 170], [79, 170]], label: "R(s)", labelDx: 2, labelDy: -16 },
+    { type: "dot", x: 62, y: 170 },
+    { type: "sum", x: 94, y: 170, r: 15, signs: { left: "+", bottom: "−" } },
+    { type: "line", pts: [[109, 170], [158, 170]] },
     { type: "box", x: 158, y: 140, w: 128, h: 60, label: "G_{1}(s)" },
     { type: "line", pts: [[286, 170], [326, 170]] },
-    { type: "sum", x: 341, y: 170, r: 15 },
+    { type: "sum", x: 341, y: 170, r: 15, signs: { left: "+", top: "+" } },
     { type: "line", pts: [[356, 170], [398, 170]] },
     { type: "box", x: 398, y: 140, w: 128, h: 60, label: "G_{2}(s)" },
     { type: "line", pts: [[526, 170], [950, 170]], label: "C(s)", labelDx: 120, labelDy: -16 },
     { type: "dot", x: 900, y: 170 },
-    { type: "line", pts: [[900, 170], [900, 320], [92, 320], [92, 185]], flow: true },
-    { type: "line", pts: [[60, 170], [60, 60], [188, 60]], flow: true },
+    { type: "line", pts: [[900, 170], [900, 320], [94, 320], [94, 185]], flow: true },
+    { type: "line", pts: [[62, 170], [62, 60], [188, 60]], flow: true },
     { type: "box", x: 188, y: 30, w: 136, h: 60, label: "F_{r}(s)", fill: ORF, color: ORC },
     { type: "line", pts: [[324, 60], [341, 60], [341, 153]], flow: true }
   ], { vw: 1000, vh: 350 });
-  B.tx(B.g, 108, 198, "−", { fs: 26, b: 1, an: "start" });
-  B.tx(B.g, 357, 146, "+", { fs: 26, b: 1, an: "start" });
   B.tx(B.g, 256, 20, "前馈（按输入补偿）", { fs: 21, fill: ORC, b: 1 });
 });
 </script>

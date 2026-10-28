@@ -65,7 +65,7 @@
     <div class="cmp">
       <div class="cell b4" data-step="1">
         <div class="ct">校正前</div>
-        <div class="cv"><span><span class="tex">\omega_{c1}=3.5</span>，<span class="tex">\gamma_{0}=16^{\circ}</span></span><span><b>σ%=61.6%</b>，<span class="tex">t_{s}=5.77\ \mathrm{s}</span></span></div>
+        <div class="cv"><span><span class="tex">\omega_{c1}=3.5</span>，<span class="tex">\gamma_{0}=16^{\circ}</span></span><span><b>σ%=63.2%</b>，<span class="tex">t_{s}=5.70\ \mathrm{s}</span></span></div>
         <div class="cd">超调大、调节慢，振荡剧烈</div>
       </div>
       <div class="cell af" data-step="2">
@@ -175,7 +175,7 @@ document.addEventListener("DOMContentLoaded", () => {
   BD.wire(3, paint, { figs: [F], FS, dur: 11000, playLabel: "▶ 连贯生长", frame: f => chor(f) });
 
   /* ---- ⧉分步（金标准）：点一下推进一步；图与结论条逐部分亮相 ---- */
-  const STEPS = ["① 校前：σ%=61.6%，ts=5.77 s", "② 校后：σ%=29.2%，ts=1.08 s", "③ 时域表现：ωc↑→ts↓，γ↑→σ%↓"];
+  const STEPS = ["① 校前：σ%=63.2%，ts=5.70 s", "② 校后：σ%=29.2%，ts=1.08 s", "③ 时域表现：ωc↑→ts↓，γ↑→σ%↓"];
   const chip = document.getElementById("segChip"), total = 3, stepBtn = document.getElementById("step");
   const wNext = ACT.step.next, wReset = ACT.step.reset;
   let segRaf = null, segTok = 0;

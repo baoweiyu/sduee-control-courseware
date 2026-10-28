@@ -24,10 +24,10 @@
     display:flex;align-items:center;gap:12px}
   .way>.hd .tag{background:var(--orange);border-radius:8px;font-size:19px;padding:3px 12px;letter-spacing:1px}
   .way>.bd{flex:1;display:flex;flex-direction:column;gap:8px;padding:14px 18px 10px;min-height:0}
-  .way .l1{font-size:21px;line-height:1.5;color:var(--ink);min-height:64px}
+  .way .l1{font-size:21px;line-height:1.5;color:var(--ink);min-height:54px}
   .way .l1 b{color:var(--navy)}
-  .way .l2{font-size:21px;line-height:1.45;color:#16324F;min-height:62px}
-  .way .fg{flex:1;min-height:0;border-top:2px solid var(--sky);padding-top:6px}
+  .way .l2{font-size:21px;line-height:1.45;color:#16324F;min-height:52px}
+  .way .fg{flex:1;min-height:150px;border-top:2px solid var(--sky);padding-top:6px}
   .way .fg svg{width:100%;height:100%}
 </style>
 </head>
@@ -71,71 +71,67 @@
     </div>
   </div>
 </div>
-<div class="act-note"><span class="lead">要点</span><span>三种方式的区别在于<span style="color:var(--danger);font-weight:700">校正装置的接入位置</span>：串联在前向通道、反馈在局部反馈通道、复合在反馈之外加前馈（图中橙色框）。</span></div>
+<div class="act-note"><span class="lead">要点</span><span>三种方式的区别在于<span style="color:var(--danger);font-weight:700">校正装置的接入位置</span>：串联在前向通道、反馈在局部反馈通道、复合在反馈之外加前馈——随后出现的三张结构图中，橙色框均为校正装置。</span></div>
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const ORF = "#FDF3EC", ORC = "#F5821F", SIG = "#16324F";
-  /* 三张图共用画布：vw=452, vh=320，主信号线统一在 y=170（三列同基线对齐） */
+  /* 三张图共用画布：vw=452, vh=320，主信号线统一在 y=170（三列同基线对齐）；
+     线段 ≥28px 保证箭头可见；R(s)/C(s) 与 ± 号分行分位防碰 */
   /* ① 串联校正：R →⊖→ Gc → G0 → C，单位负反馈 */
   const B1 = BD.block("fg1", [
-    { type: "line", pts: [[16, 170], [70, 170]] },
-    { type: "sum", x: 88, y: 170, r: 14 },
-    { type: "line", pts: [[102, 170], [126, 170]] },
-    { type: "box", x: 128, y: 142, w: 92, h: 56, label: "G_{c}(s)", fill: ORF, color: ORC, fs: 26 },
-    { type: "line", pts: [[220, 170], [244, 170]] },
-    { type: "box", x: 248, y: 142, w: 92, h: 56, label: "G_{0}(s)", fs: 26 },
-    { type: "line", pts: [[340, 170], [430, 170]] },
-    { type: "dot", x: 386, y: 170 },
-    { type: "line", pts: [[386, 170], [386, 252], [88, 252], [88, 184]] }
+    { type: "line", pts: [[8, 170], [56, 170]] },
+    { type: "sum", x: 70, y: 170, r: 14, signs: { left: "+", bottom: "−" } },
+    { type: "line", pts: [[84, 170], [112, 170]] },
+    { type: "box", x: 114, y: 142, w: 88, h: 56, label: "G_{c}(s)", fill: ORF, color: ORC, fs: 26 },
+    { type: "line", pts: [[202, 170], [232, 170]] },
+    { type: "box", x: 234, y: 142, w: 88, h: 56, label: "G_{0}(s)", fs: 26 },
+    { type: "line", pts: [[322, 170], [440, 170]] },
+    { type: "dot", x: 378, y: 170 },
+    { type: "line", pts: [[378, 170], [378, 252], [70, 252], [70, 184]] }
   ], { vw: 452, vh: 320 });
-  B1.tx(B1.g, 42, 152, "R(s)", { fs: 26, it: 1, fill: SIG });
-  B1.tx(B1.g, 410, 152, "C(s)", { fs: 26, it: 1, fill: SIG });
-  B1.tx(B1.g, 106, 226, "−", { fs: 26, b: 1, an: "start" });
+  B1.tx(B1.g, 36, 150, "R(s)", { fs: 26, it: 1, fill: SIG, an: "end" });
+  B1.tx(B1.g, 416, 150, "C(s)", { fs: 26, it: 1, fill: SIG });
 
   /* ② 反馈校正：内环 Hc 包围 G2，外环单位负反馈 */
   const B2 = BD.block("fg2", [
-    { type: "line", pts: [[16, 170], [56, 170]] },
-    { type: "sum", x: 72, y: 170, r: 14 },
-    { type: "line", pts: [[86, 170], [110, 170]] },
-    { type: "box", x: 112, y: 142, w: 82, h: 56, label: "G_{1}(s)", fs: 26 },
-    { type: "line", pts: [[194, 170], [208, 170]] },
-    { type: "sum", x: 224, y: 170, r: 14 },
-    { type: "line", pts: [[238, 170], [262, 170]] },
-    { type: "box", x: 264, y: 142, w: 82, h: 56, label: "G_{2}(s)", fs: 26 },
-    { type: "line", pts: [[346, 170], [430, 170]] },
-    { type: "dot", x: 362, y: 170 },
-    { type: "line", pts: [[362, 170], [362, 220], [334, 220]] },
-    { type: "box", x: 242, y: 192, w: 92, h: 56, label: "H_{c}(s)", fill: ORF, color: ORC, fs: 26 },
-    { type: "line", pts: [[242, 220], [224, 220], [224, 184]] },
+    { type: "line", pts: [[8, 170], [49, 170]] },
+    { type: "sum", x: 62, y: 170, r: 13, signs: { left: "+", bottom: "−" } },
+    { type: "line", pts: [[75, 170], [103, 170]] },
+    { type: "box", x: 105, y: 144, w: 70, h: 52, label: "G_{1}(s)", fs: 23 },
+    { type: "line", pts: [[175, 170], [207, 170]] },
+    { type: "sum", x: 220, y: 170, r: 13, signs: { left: "+", bottom: "−" } },
+    { type: "line", pts: [[233, 170], [259, 170]] },
+    { type: "box", x: 261, y: 144, w: 70, h: 52, label: "G_{2}(s)", fs: 23 },
+    { type: "line", pts: [[331, 170], [442, 170]] },
+    { type: "dot", x: 348, y: 170 },
+    { type: "line", pts: [[348, 170], [348, 238], [333, 238]] },
+    { type: "box", x: 261, y: 212, w: 72, h: 52, label: "H_{c}(s)", fill: ORF, color: ORC, fs: 23 },
+    { type: "line", pts: [[261, 238], [220, 238], [220, 183]] },
     { type: "dot", x: 404, y: 170 },
-    { type: "line", pts: [[404, 170], [404, 286], [72, 286], [72, 184]] }
+    { type: "line", pts: [[404, 170], [404, 292], [62, 292], [62, 183]] }
   ], { vw: 452, vh: 320 });
-  B2.tx(B2.g, 40, 152, "R(s)", { fs: 26, it: 1, fill: SIG });
-  B2.tx(B2.g, 410, 152, "C(s)", { fs: 26, it: 1, fill: SIG });
-  B2.tx(B2.g, 90, 246, "−", { fs: 26, b: 1, an: "start" });
-  B2.tx(B2.g, 214, 212, "−", { fs: 26, b: 1, an: "end" });
+  B2.tx(B2.g, 36, 150, "R(s)", { fs: 26, it: 1, fill: SIG, an: "end" });
+  B2.tx(B2.g, 416, 150, "C(s)", { fs: 26, it: 1, fill: SIG });
 
   /* ③ 复合校正（按输入补偿）：反馈主回路 + 输入前馈 Gc（Gc 出口直角折线引入相加点） */
   const B3 = BD.block("fg3", [
-    { type: "line", pts: [[16, 170], [76, 170]] },
-    { type: "dot", x: 56, y: 170 },
-    { type: "sum", x: 94, y: 170, r: 14 },
+    { type: "line", pts: [[10, 170], [80, 170]] },
+    { type: "dot", x: 58, y: 170 },
+    { type: "sum", x: 94, y: 170, r: 14, signs: { left: "+", bottom: "−" } },
     { type: "line", pts: [[108, 170], [176, 170]] },
-    { type: "sum", x: 194, y: 170, r: 14 },
-    { type: "line", pts: [[208, 170], [232, 170]] },
+    { type: "sum", x: 194, y: 170, r: 14, signs: { left: "+", top: "+" } },
+    { type: "line", pts: [[208, 170], [234, 170]] },
     { type: "box", x: 236, y: 142, w: 88, h: 56, label: "G(s)", fs: 26 },
-    { type: "line", pts: [[324, 170], [430, 170]] },
+    { type: "line", pts: [[324, 170], [438, 170]] },
     { type: "dot", x: 384, y: 170 },
     { type: "line", pts: [[384, 170], [384, 262], [94, 262], [94, 184]] },
-    { type: "line", pts: [[56, 170], [56, 64], [82, 64]] },
+    { type: "line", pts: [[58, 170], [58, 64], [82, 64]] },
     { type: "box", x: 84, y: 36, w: 82, h: 56, label: "G_{c}(s)", fill: ORF, color: ORC, fs: 26 },
     { type: "line", pts: [[166, 64], [194, 64], [194, 156]] }
   ], { vw: 452, vh: 320 });
-  B3.tx(B3.g, 30, 152, "R(s)", { fs: 26, it: 1, fill: SIG });
-  B3.tx(B3.g, 410, 152, "C(s)", { fs: 26, it: 1, fill: SIG });
-  B3.tx(B3.g, 112, 240, "−", { fs: 26, b: 1, an: "start" });
-  B3.tx(B3.g, 212, 120, "+", { fs: 26, b: 1, an: "start" });
+  B3.tx(B3.g, 44, 150, "R(s)", { fs: 26, it: 1, fill: SIG, an: "end" });
+  B3.tx(B3.g, 412, 150, "C(s)", { fs: 26, it: 1, fill: SIG });
 
   /* QA 钩子：?seg=k 亮前 k 步；?ff=1 全部亮出（截图管线用） */
   window.addEventListener("load", () => {

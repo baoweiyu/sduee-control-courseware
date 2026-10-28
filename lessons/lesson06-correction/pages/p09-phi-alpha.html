@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
   /* 4 个采样点改为页面自绘（值取自 meta，均为精确计算值），替代数据文件中的单一标注 */
   const SAMPLES = [["0.5", 19.47], ["0.2", 41.81], ["0.1", 54.90], ["0.05", 64.79]];
   BD.data.phi_alpha.marks = [];
-  const F = BD.figure("fig", "phi_alpha", { mag: true, phase: false, static: true, vh: 560,
+  const F = BD.figure("fig", "phi_alpha", { mag: true, phase: false, static: true, vh: 560, xname: "α",
     extra: api => {
       const p = api.panels[0], FOCUS = "#D63A2F";
       SAMPLES.forEach(([a, v]) => {

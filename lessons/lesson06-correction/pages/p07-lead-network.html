@@ -38,14 +38,14 @@
           <div class="hd"><span style="flex:1">由阻抗分压求传递函数</span></div>
           <div class="bd">
             <div data-step="1"><div class="st">① 复阻抗：<span class="tex">R_{1}</span> 与 <span class="tex">C</span> 并联得 <span class="tex">Z_{1}=\dfrac{R_{1}}{R_{1}Cs+1}</span>，输出臂 <span class="tex">Z_{2}=R_{2}</span></div></div>
-            <div data-step="2"><div class="eq">分压 <span class="tex">G_{c}(s)=\dfrac{U_{c}(s)}{U_{r}(s)}=\dfrac{Z_{2}}{Z_{1}+Z_{2}}=\dfrac{1}{\alpha}\cdot\dfrac{Ts+1}{\alpha Ts+1}</span></div></div>
+            <div data-step="2"><div class="eq">分压 <span class="tex">G_{c}(s)=\dfrac{U_{c}(s)}{U_{r}(s)}=\dfrac{Z_{2}}{Z_{1}+Z_{2}}=\alpha\cdot\dfrac{Ts+1}{\alpha Ts+1}</span></div></div>
             <div data-step="3"><div class="eq hl">其中 <span class="tex">\alpha=\dfrac{R_{2}}{R_{1}+R_{2}}&lt;1,\qquad T=R_{1}C</span></div></div>
           </div>
         </div>
         <div class="act-card" style="flex:1">
           <div class="hd"><span style="flex:1">衰减补偿与标准形</span></div>
           <div class="bd">
-            <div class="st">因子 <span class="tex">\dfrac{1}{\alpha}&gt;1</span> 意味着网络使开环增益<span class="kw-r">衰减为原来的 α 倍</span>，该衰减已由提高放大器放大系数所补偿。</div>
+            <div class="st">因子 <span class="tex">\alpha&lt;1</span> 意味着网络使开环增益<span class="kw-r">衰减为原来的 α 倍</span>，该衰减已由提高放大器放大系数所补偿（增益提高 1/α 倍）。</div>
             <div class="eq hl">无源超前网络标准形 <span class="tex">G_{c}(s)=\dfrac{Ts+1}{\alpha Ts+1},\quad \alpha&lt;1</span></div>
             <div class="st">零点 <span class="tex">\dfrac{1}{T}</span> 在前、极点 <span class="tex">\dfrac{1}{\alpha T}</span> 在后 —— 相位<span class="kw-r">超前</span>。</div>
           </div>

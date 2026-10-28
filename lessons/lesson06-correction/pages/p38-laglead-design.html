@@ -48,11 +48,13 @@
         <div class="hd">策略：两段分工</div>
         <div class="bd">
           <div class="split">
-            <div class="half"><div class="h">滞后部分 → 稳态</div><div>低频衰减段压中频、换取增益裕量，改善稳态精度。</div></div>
-            <div class="half"><div class="h">超前部分 → 暂态</div><div>在新 <span class="tex">\omega_{c}</span> 附近补相角，保证 γ 与响应速度。</div></div>
+            <div class="half" data-step="1"><div class="h">滞后部分 → 稳态</div><div>低频衰减段压中频、换取增益裕量，改善稳态精度。</div></div>
+            <div class="half" data-step="2"><div class="h">超前部分 → 暂态</div><div>在新 <span class="tex">\omega_{c}</span> 附近补相角，保证 γ 与响应速度。</div></div>
           </div>
-          <div style="font-size:20.5px;line-height:1.5">先滞后压高频，再超前补相角：</div>
-          <div class="eq"><span class="tex">G_{c}(s)=\frac{T_{1}s+1}{\beta T_{1}s+1}\cdot\frac{T_{2}s+1}{\dfrac{T_{2}}{\beta}s+1}\quad(\beta>1)</span></div>
+          <div data-step="3" style="display:flex;flex-direction:column;gap:12px">
+            <div style="font-size:20.5px;line-height:1.5">先滞后压高频，再超前补相角：</div>
+            <div class="eq"><span class="tex">G_{c}(s)=\frac{T_{1}s+1}{\beta T_{1}s+1}\cdot\frac{T_{2}s+1}{\dfrac{T_{2}}{\beta}s+1}\quad(\beta>1)</span></div>
+          </div>
         </div>
       </div>
     </div>
@@ -62,13 +64,58 @@
     </div>
   </div>
 </div>
-<div class="act-note"><span class="lead">分工</span><span>低频段像<span class="kw-r">滞后</span>（衰减、抬稳态），高频段像<span class="kw-r">超前</span>（补相角、保带宽）——一副装置，两段分工。</span></div>
+<div class="act-note"><span class="lead">分工</span><span>低频段像<span class="kw-r">滞后</span>（衰减、抬稳态），高频段像<span class="kw-r">超前</span>（补相角、保带宽）——一副装置，两段分工；教材例 6-2 即为滞后—超前校正的设计实例，课后自学。</span></div>
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  BD.figure("fig", "laglead", { mag: true, phase: true, static: true });
+  const D = BD.data.laglead;
+  D.marks = [];                 /* 转折频率与电平改为页面自绘、第③步出现 */
+  const F = BD.figure("fig", "laglead", { mag: true, phase: true, static: true, asym: false });
+  const PM = F.panelOf("mag"), PP = F.panelOf("phase");
+  /* 图线分步化：① 滞后部分（蓝）；② 合成曲线（红，滞后淡化参照）；③ 转折频率与 −20lgβ 电平 */
+  const g1 = F.mk("g", {}, F.svg), g2 = F.mk("g", {}, F.svg), g3 = F.mk("g", {}, F.svg);
+  /* 两条渐近线改页面自绘，随所属曲线出现 */
+  function asym(g, pts, color) {
+    const P = pts.map(q => [F.X(q[0]), F.Y(PM, q[1])]);
+    F.mk("path", { d: F.toPath(F.clipPoly(P, PM)), fill: "none", stroke: color,
+      "stroke-width": 2.6, "stroke-dasharray": "9 6", opacity: .9, "clip-path": `url(#${PM.clip})` }, g);
+  }
+  asym(g1, D.mag.asym[0].pts, "#1D3FA0");   /* 滞后部分渐近线 */
+  asym(g2, D.mag.asym[1].pts, "#F5821F");   /* 合成渐近线 */
+  F.tx(g1, F.X(20), F.Y(PM, -19), "滞后部分", { fs: 22, fill: "#1D3FA0", b: 1 });
+  F.tx(g2, F.X(23), F.Y(PM, 2.2), "合成 G_{c}", { fs: 22, fill: "#C02A20", b: 1 });
+  /* ③ 三个转折频率（贯穿双图）+ 中频电平 */
+  [[0.1, "1/(βT)=0.1", 20], [1.0, "1/T=1", 46], [10.0, "1/(αT)=10", 52]].forEach(function (a) {
+    const x = F.X(a[0]);
+    [PM, PP].forEach(p => F.mk("line", { x1: x, y1: p.y0, x2: x, y2: p.y1, stroke: "#5B6B8C",
+      "stroke-width": 2.2, "stroke-dasharray": "7 5", opacity: .8, "clip-path": `url(#${p.clip})` }, g3));
+    F.tx(g3, x, PM.y0 + a[2], a[1], { fs: 21, fill: "#5B6B8C", b: 1 });
+  });
+  (function () {
+    const y = F.Y(PM, -20), x0 = F.X(1), x1 = F.X(10);
+    F.mk("line", { x1: x0, y1: y, x2: x1, y2: y, stroke: "#F5821F", "stroke-width": 2.2,
+      "stroke-dasharray": "6 5", opacity: .9 }, g3);
+    F.tx(g3, (x0 + x1) / 2, y - 12, "−20lgβ=−20 dB", { fs: 21, fill: "#F5821F", b: 1 });
+  })();
+  function paint() {
+    const c = ACT.step.cur;
+    F.setOp(0, c >= 1 ? (c >= 2 ? .3 : 1) : 0);   /* 滞后 mag */
+    F.setOp(2, c >= 1 ? (c >= 2 ? .3 : 1) : 0);   /* 滞后 phase */
+    F.setOp(1, c >= 2 ? 1 : 0);                   /* 合成 mag */
+    F.setOp(3, c >= 2 ? 1 : 0);                   /* 合成 phase */
+    g1.style.display = c >= 1 ? "" : "none";
+    g2.style.display = c >= 2 ? "" : "none";
+    g3.style.display = c >= 3 ? "" : "none";
+    g1.style.opacity = c >= 2 ? .35 : 1;
+  }
+  const S = ACT.step, _n = S.next.bind(S), _r = S.reset.bind(S);
+  S.next = function () { const d = _n(); paint(); return d; };
+  S.reset = function () { _r(); paint(); };
+  window.prev = function () { const n = Math.max(0, S.cur - 1); S.reset(); for (let i = 0; i < n; i++) S.next(); };
+  paint();
 });
 </script>
+<script>/* qa-steps：截图自验钩子，?steps=N 自动前进 N 步（播放时不生效） */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
 </div></div>
 </body>
 </html>
