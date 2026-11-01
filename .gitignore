@@ -70,3 +70,6 @@ qa/measure_*.json
 
 # ===== V2.36 审查截图产物 =====
 qa/review-shots/
+
+# ===== 其他独立工具（不属于课件，不入库）=====
+sfr-analyzer/
