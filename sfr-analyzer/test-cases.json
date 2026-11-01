@@ -1,0 +1,23 @@
+{
+  "description": "SFR Lab 典型数值验证工况；参数均采用标幺值，时间单位为 s。",
+  "cases": [
+    {"name":"T1等于T2_过阻尼","parameters":{"H":5,"D":1,"KF":20,"TR":10,"FH":0.5}},
+    {"name":"T1不等于T2","parameters":{"H":5,"D":1,"KF":20,"TR":5,"FH":0.5}},
+    {"name":"FH等于0_欠阻尼","parameters":{"H":1,"D":1,"KF":20,"TR":10,"FH":0}},
+    {"name":"FH等于1_极零相消","parameters":{"H":5,"D":1,"KF":20,"TR":10,"FH":1}},
+    {"name":"临界阻尼_极点重合","parameters":{"H":1,"D":1,"KF":0.8,"TR":10,"FH":0}},
+    {"name":"过阻尼_零点移动","parameters":{"H":5,"D":1,"KF":20,"TR":5,"FH":0.3}},
+    {"name":"D等于0_物理模型","parameters":{"H":5,"D":0,"KF":20,"TR":10,"FH":0.5}},
+    {"name":"H单独变化_小惯量","parameters":{"H":2,"D":1,"KF":20,"TR":10,"FH":0.5}},
+    {"name":"H单独变化_大惯量","parameters":{"H":8,"D":1,"KF":20,"TR":10,"FH":0.5}},
+    {"name":"D单独变化","parameters":{"H":5,"D":0.4,"KF":20,"TR":10,"FH":0.5}},
+    {"name":"KF单独变化","parameters":{"H":5,"D":1,"KF":8,"TR":10,"FH":0.5}},
+    {"name":"TR单独变化","parameters":{"H":5,"D":1,"KF":20,"TR":16,"FH":0.5}},
+    {"name":"T1扫描_固定D","config":{"base":{"H":5,"D":1,"KF":20,"TR":10,"FH":0.5},"ranges":{"H":[1,10],"D":[0.2,2],"KF":[5,40],"TR":[2,20],"FH":[0,1]},"scan":{"variable":"T1","path":"fixedD","min":2,"max":20}},"scanValue":16},
+    {"name":"T1扫描_固定H","config":{"base":{"H":5,"D":1,"KF":20,"TR":10,"FH":0.5},"ranges":{"H":[1,10],"D":[0.2,2],"KF":[5,40],"TR":[2,20],"FH":[0,1]},"scan":{"variable":"T1","path":"fixedH","min":2,"max":20}},"scanValue":16},
+    {"name":"lambda路径A_固定T1","config":{"base":{"H":5,"D":1,"KF":20,"TR":10,"FH":0.5},"ranges":{"H":[1,10],"D":[0.2,2],"KF":[5,40],"TR":[2,20],"FH":[0,1]},"scan":{"variable":"lambda","path":"A","min":0.25,"max":4}},"scanValue":2},
+    {"name":"lambda路径B_固定T2","config":{"base":{"H":5,"D":1,"KF":20,"TR":10,"FH":0.5},"ranges":{"H":[1,10],"D":[0.2,2],"KF":[5,40],"TR":[2,20],"FH":[0,1]},"scan":{"variable":"lambda","path":"B","min":0.25,"max":4}},"scanValue":2},
+    {"name":"lambda路径C_固定Tm","config":{"base":{"H":5,"D":1,"KF":20,"TR":10,"FH":0.5},"ranges":{"H":[1,10],"D":[0.2,2],"KF":[5,40],"TR":[2,20],"FH":[0,1]},"scan":{"variable":"lambda","path":"C","min":0.25,"max":4}},"scanValue":2},
+    {"name":"lambda路径C_小比值","config":{"base":{"H":5,"D":1,"KF":20,"TR":10,"FH":0.5},"ranges":{"H":[1,10],"D":[0.2,2],"KF":[5,40],"TR":[2,20],"FH":[0,1]},"scan":{"variable":"lambda","path":"C","min":0.25,"max":4}},"scanValue":0.5}
+  ]
+}

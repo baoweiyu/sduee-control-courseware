@@ -45,12 +45,12 @@
             <div class="law"><b>终点（<span class="tex">K_{1}\to\infty</span>）</b>：m 条止于<span class="kw-r">开环零点</span> <span class="tex">z_{j}</span>，其余 <span class="tex">n-m</span> 条止于<span class="kw-r">无穷远</span>（把无穷远看作"无穷远零点"）。</div>
           </div>
         </div>
-        <div class="act-card" style="flex:1.28">
+        <div class="act-card" style="flex:1.38">
           <div class="hd">法则由来</div>
           <div class="bd" style="gap:10px">
-            <div class="eq"><span class="tex">K_{1}\to0:\;D(s)+K_{1}N(s)=D(s)=0</span>，根 → 开环极点 <span class="tex">p_{i}</span></div>
-            <div class="eq"><span class="tex">K_{1}\to\infty:\;\dfrac{D(s)}{K_{1}}+N(s)=N(s)=0</span>，根 → 开环零点 <span class="tex">z_{j}</span></div>
-            <div class="tip">其余 <span class="tex">n-m</span> 个根：需 <span class="tex">|s|\to\infty</span> 使 <span class="tex">GH\approx K_{1}/s^{\,n-m}\to0</span>，方能维持 <span class="tex">GH=-1</span>，故趋向无穷远。</div>
+            <div class="eq">幅值条件　<span class="tex">\dfrac{\prod_{i=1}^{n}|s-p_{i}|}{\prod_{j=1}^{m}|s-z_{j}|}=K_{1}</span></div>
+            <div class="eq"><span class="tex">K_{1}\to0</span> ⇒ 分子 → 0 ⇒ <span class="tex">s\to p_{i}</span>（<span class="kw-r">开环极点</span>）</div>
+            <div class="eq"><span class="tex">K_{1}\to\infty</span> ⇒ 分母 → 0 ⇒ <span class="tex">s\to z_{j}</span>（<span class="kw-r">开环零点</span>）；<span class="tex">|s|\to\infty</span> 时分式 <span class="tex">\sim|s|^{\,n-m}\to\infty</span>，其余 <span class="tex">n-m</span> 条趋向<span class="kw-r">无穷远</span>。</div>
           </div>
         </div>
         <div class="act-card" style="flex:.8">

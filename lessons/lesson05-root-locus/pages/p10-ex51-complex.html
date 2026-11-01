@@ -32,17 +32,17 @@
         <div class="act-card">
           <div class="hd">系统与试验点</div>
           <div class="bd">
-            <div class="eq"><span class="tex">G(s)H(s)=\dfrac{K_{1}(s+4)}{(s+2)(s+6.6)}</span></div>
-            <div class="kv" data-step="1">开环零点 <span class="tex">z_{1}=-4</span>；开环极点 <span class="tex">p_{1}=-2</span>、<span class="tex">p_{2}=-6.6</span>。</div>
+            <div class="eq"><span class="tex">G(s)H(s)=\dfrac{K_{1}(s+4)}{s(s+2)(s+6.6)}</span></div>
+            <div class="kv" data-step="1">开环零点 <span class="tex">z_{1}=-4</span>；开环极点 <span class="tex">p_{1}=0</span>（原点，来自纯积分环节 <span class="tex">1/s</span>）、<span class="tex">p_{2}=-2</span>、<span class="tex">p_{3}=-6.6</span>。</div>
             <div class="kv" data-step="2">取复平面试验点 <span class="tex">s=-1.5+j2.55</span>，问：它在根轨迹上吗？</div>
           </div>
         </div>
         <div class="act-card" style="flex:1.2">
           <div class="hd">逐项量相角（相角条件）</div>
           <div class="bd">
-            <div class="eq" data-step="3"><span class="tex">\angle(s-z_{1})=45.6^{\circ},\quad \angle(s-p_{1})=78.9^{\circ}</span><br><span class="tex">\angle(s-p_{2})=26.6^{\circ}</span></div>
-            <div class="eq hl" data-step="4"><span class="tex">45.6^{\circ}-78.9^{\circ}-26.6^{\circ}=-59.9^{\circ}\neq(2q+1)\times180^{\circ}</span><br>→　该点<span class="kw-r">不在</span>根轨迹上</div>
-            <div class="kv" data-step="5">示例二将给出真正在轨迹上的点，并用幅值条件定 <span class="tex">K_{1}</span>。</div>
+            <div class="eq" data-step="3"><span class="tex">\angle(s-z_{1})=45^{\circ},\quad \angle(s-p_{1})=120^{\circ}</span><br><span class="tex">\angle(s-p_{2})=79^{\circ},\quad \angle(s-p_{3})=26^{\circ}</span></div>
+            <div class="eq hl" data-step="4"><span class="tex">45^{\circ}-120^{\circ}-79^{\circ}-26^{\circ}=-180^{\circ}=(2q+1)\times180^{\circ}</span><br>→　该点<span class="kw-r">在</span>根轨迹上</div>
+            <div class="kv" data-step="5">示例二再取实轴试验点，用幅值条件定 <span class="tex">K_{1}</span>。</div>
           </div>
         </div>
       </div>
@@ -56,14 +56,20 @@
   <div class="act-note"><span class="lead">方法</span><span>相角条件是<span class="kw-r">充要判据</span>：点在不在轨迹上，量相角就知道；<span class="tex">K_{1}</span> 的事交给幅值条件（示例二演示）。</span></div>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  /* 与 N11 同构图：同一系统、同一坐标范围；否定例不显示轨迹 */
+  /* 与 N11 同构图：同一系统、同一坐标范围；肯定例加淡色完整轨迹底轨 */
   const F = RL.figure("fig", "ex51", { vw: 960, vh: 600, ylim: [-2.2, 3.0], static: true,
-                                       asym: false, brkDots: false, crossSq: false,
+                                       asym: false, brkDots: false, crossSq: false, segs: true,
                                        extra: api => {
+    /* 淡色完整轨迹底轨（数据来自 data/ex51.js?v=219 分支点列） */
+    api.data.branches.forEach(b => {
+      const d = api.toPath(api.clipPoly(b.map(p => [api.X(p[0]), api.Y(p[1])]), api.PLOT));
+      api.mk("path", { d, fill: "none", stroke: "#C9D6F2", "stroke-width": 5, opacity: .9 }, api.gBase);
+    });
     const sx = -1.5, sy = 2.55;
-    const ZP = [[-4, "z"], [-2, "p"], [-6.6, "p"]];
-    /* 向量 + 相角弧 + 角度读数（角度由 atan2 现算，不手填） */
-    ZP.forEach(([vx]) => {
+    /* 教材取整读数：零点 45°、极点 79°/26°/120°（原点极点来自纯积分环节） */
+    const ZP = [[-4, "z", "45"], [-2, "p", "79"], [-6.6, "p", "26"], [0, "p", "120"]];
+    /* 向量 + 相角弧 + 角度读数（弧线由 atan2 现算，读数按教材取整） */
+    ZP.forEach(([vx, , shown]) => {
       const ang = Math.atan2(sy - 0, sx - vx) * 180 / Math.PI;
       const x1 = api.X(vx), y1 = api.Y(0), x2 = api.X(sx), y2 = api.Y(sy);
       api.mk("line", { x1, y1, x2: x2 - (x2 - x1) * 0.05, y2: y2 - (y2 - y1) * 0.05,
@@ -72,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
       api.angleArc(vx, 0, 90 - ang, 90, api.gDyn, { r: 46 });
       const hm = (ang / 2) * Math.PI / 180, rl = 46 + 34;   // 角平分线方向放置读数
       api.tx(api.gDyn, x1 + rl * Math.cos(hm), y1 - rl * Math.sin(hm),
-        ang.toFixed(1) + "°", { fs: 23, b: 1, fill: "#B3541E" });
+        shown + "°", { fs: 23, b: 1, fill: "#B3541E" });
     });
     /* 试验点 */
     api.mk("circle", { cx: api.X(sx), cy: api.Y(sy), r: 10, fill: RL.FOCUS, stroke: "#fff", "stroke-width": 2.5 }, api.gDyn);

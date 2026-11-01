@@ -26,7 +26,8 @@ const MIME = {
 
 http.createServer((req, res) => {
   let p = decodeURIComponent(req.url.split("?")[0]);
-  if (p === "/") p = "/player/index.html";
+  if (p === "/") { res.writeHead(302, { Location: "/sfr-analyzer/index.html" }); return res.end(); }
+  if (p === "/sfr-analyzer/") p = "/sfr-analyzer/index.html";
   const file = path.normalize(path.join(ROOT, p));
   if (!file.startsWith(ROOT)) { res.writeHead(403); return res.end("forbidden"); }
   fs.readFile(file, (err, data) => {
