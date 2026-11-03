@@ -228,25 +228,9 @@
       "legacy_action": "NEW"
     },
     {
-      "id": "l5-p29",
-      "file": "pages/p29-ex54-calc-full.html",
-      "title": "例5-4：关键要素完整计算",
-      "complexity": "L2",
-      "status": "Draft",
-      "legacy_action": "NEW"
-    },
-    {
-      "id": "l5-p30",
-      "file": "pages/p30-ex54-anim.html",
-      "title": "例5-4：完整根轨迹绘制",
-      "complexity": "L2",
-      "status": "Draft",
-      "legacy_action": "NEW"
-    },
-    {
       "id": "l5-p31",
       "file": "pages/p31-ex52-analysis.html",
-      "title": "例5-2：分析与计算",
+      "title": "例5-5：分析与计算",
       "complexity": "L2",
       "status": "Draft",
       "legacy_action": "NEW"
@@ -254,7 +238,23 @@
     {
       "id": "l5-p32",
       "file": "pages/p32-ex52-full.html",
-      "title": "例5-2：完整根轨迹绘制",
+      "title": "例5-5：完整根轨迹绘制",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p29",
+      "file": "pages/p29-ex54-calc-full.html",
+      "title": "例5-6：关键要素完整计算",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p30",
+      "file": "pages/p30-ex54-anim.html",
+      "title": "例5-6：完整根轨迹绘制",
       "complexity": "L2",
       "status": "Draft",
       "legacy_action": "NEW"

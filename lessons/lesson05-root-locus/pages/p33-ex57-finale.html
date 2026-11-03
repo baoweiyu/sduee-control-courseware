@@ -18,6 +18,7 @@
   .kv{background:var(--sky);border-radius:12px;padding:6px 13px;font-size:18.5px;line-height:1.38}
   .kv.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
   .kv.on{background:#FDF3EC;border-left:5px solid var(--danger);border-top-left-radius:0;border-bottom-left-radius:0;font-weight:700;box-shadow:0 0 0 2px rgba(214,58,47,.22)}
+  .lft .act-card:nth-child(2) .kv{font-size:17px;line-height:1.3;padding:5px 11px}
   .figc{flex:1.2;display:flex;flex-direction:column;overflow:hidden;position:relative}
   .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
   .figc svg{width:100%;height:100%}
@@ -49,7 +50,7 @@
         <div class="bd" style="font-size:19px;line-height:1.42">
           <div style="text-align:center"><span class="tex">G(s)H(s)=\dfrac{K_{1}}{s(s+4)(s^{2}+4s+20)}</span></div>
           <div class="kv" id="c1">渐近线：<span class="tex">\sigma_{a}=-2</span>，<span class="tex">\varphi_{a}=\pm45^{\circ}</span>、<span class="tex">\pm135^{\circ}</span></div>
-          <div class="kv" id="c2">分离点：<span class="tex">s_{1}=-2</span>（<span class="tex">K_{1}=64</span>，复根 <span class="tex">-2\pm j\sqrt{6}</span> 舍）；出射角 <span class="tex">\theta_{p_{3}}=180^{\circ}-(116.6^{\circ}+63.4^{\circ}+90^{\circ})=-90^{\circ}</span></div>
+          <div class="kv" id="c2">分离点：<span class="tex">d_{1}=-2</span>（<span class="tex">K_{1}=64</span>）；共轭复分离点 <span class="tex">-2\pm j\sqrt{6}</span>（<span class="tex">K_{1}=100</span>）；出射角 <span class="tex">\theta_{p_{3}}=180^{\circ}-(116.6^{\circ}+63.4^{\circ}+90^{\circ})=-90^{\circ}</span></div>
           <div class="kv" id="c3">虚轴交点：劳斯判据 <span class="tex">K_{1}=260</span>，<span class="tex">s=\pm j\sqrt{10}\approx\pm j3.16</span>；稳定 <span class="tex">0&lt;K_{1}&lt;260</span></div>
           <div class="kv hl">稳定有上限——这类"K 太大也会失稳"的系统就是 5.3 节要讲的条件稳定系统。</div>
         </div>
@@ -61,15 +62,16 @@
           <div class="kv" id="s2">② 确定实轴段根轨迹：[−4, 0]</div>
           <div class="kv" id="s3">③ 四条渐近线：σₐ=−2，±45°、±135°</div>
           <div class="kv" id="s4">④ d=−2 分离（K₁=64）；p₃、p₄ 沿 ∓90° 垂直出射</div>
-          <div class="kv" id="s5">⑤ 过虚轴 ±j√10（K₁=260，临界）</div>
-          <div class="kv" id="s6">⑥ 沿渐近线趋向无穷远（K₁→∞）</div>
+          <div class="kv" id="s5">⑤ 共轭复分离点 −2±j√6（K₁=100）：两支在此汇合再分离</div>
+          <div class="kv" id="s6">⑥ 过虚轴 ±j√10（K₁=260，临界）</div>
+          <div class="kv" id="s7">⑦ 沿渐近线趋向无穷远（K₁→∞）</div>
         </div>
       </div>
     </div>
     <div class="act-card figc">
       <div class="hd"><span style="flex:1">例5-7 四分支根轨迹绘制过程</span></div>
       <span class="segfloat" id="segChip" style="display:none"></span>
-      <span class="prog" id="prog">0 / 6</span>
+      <span class="prog" id="prog">0 / 7</span>
       <div class="bd2"><svg id="fig"></svg></div>
       <div class="ctl">
         <div class="ctl-r">
@@ -90,11 +92,12 @@
 <div data-step="1" style="display:none"></div><div data-step="2" style="display:none"></div>
 <div data-step="3" style="display:none"></div><div data-step="4" style="display:none"></div>
 <div data-step="5" style="display:none"></div><div data-step="6" style="display:none"></div>
+<div data-step="7" style="display:none"></div>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const F = RL.figure("fig", "ex57", { vw: 960, vh: 600, asym: false, brkDots: false, crossSq: false, sigA: false });
-  const fD = F.f_of_K(64), fC = F.f_of_K(260);
-  const FS = [0, 0, 0, 0, fD, fC, 1];
+  const fD = F.f_of_K(64), fB = F.f_of_K(100), fC = F.f_of_K(260);
+  const FS = [0, 0, 0, 0, fD, fB, fC, 1];
   /* 实时读数：K₁ 与稳定状态（图外面板逐帧联动） */
   function stabUI(K1, inf) {
     const st = document.getElementById("stab");
@@ -144,16 +147,25 @@ document.addEventListener("DOMContentLoaded", () => {
       F.tx(g, x - 16, y + 56, "分离点 d=−2", { fs: 23, fill: RL.FOCUS, b: 1, an: "end" });
       departArrows(g);
     }
-    if (K >= 5) {  // ⑤ 虚轴交点（方块+标注）
-      F.crossSq.forEach(el => { el.style.opacity = 1; if (K === 5) el.classList.add("rl-flash"); });
+    if (K >= 5) {  // ⑤ 共轭复分离点 −2±j√6（K₁=100，两支汇合再分离）
+      const g = F.mk("g", { "class": K === 5 ? "rl-flash" : "" }, F.gDyn);
+      [[-2, Math.sqrt(6)], [-2, -Math.sqrt(6)]].forEach(([bx, by]) => {
+        F.mk("circle", { cx: F.X(bx), cy: F.Y(by), r: 9, fill: RL.FOCUS, stroke: "#fff", "stroke-width": 2.5 }, g);
+      });
+      F.tx(g, F.X(-2) - 20, F.Y(Math.sqrt(6)) - 20, "复分离点 −2+j√6（K₁=100）", { fs: 22, fill: RL.FOCUS, b: 1, an: "end" });
+      F.tx(g, F.X(-2) - 20, F.Y(-Math.sqrt(6)) + 38, "复分离点 −2−j√6（K₁=100）", { fs: 22, fill: RL.FOCUS, b: 1, an: "end" });
+    }
+    if (K >= 6) {  // ⑥ 虚轴交点（方块+标注）
+      F.crossSq.forEach(el => { el.style.opacity = 1; if (K === 6) el.classList.add("rl-flash"); });
       F.tx(F.gDyn, F.X(0) + 24, F.Y(3.1623) - 16, "±j√10", { fs: 23, fill: "#B3541E", b: 1, an: "start" });
     } else F.crossSq.forEach(el => el.style.opacity = 0);
-    for (let i = 1; i <= 6; i++)
+    for (let i = 1; i <= 7; i++)
       document.getElementById("s" + i).classList.toggle("on", i === K);
-    ["c1", "c2", "c3"].forEach((id, j) =>
-      document.getElementById(id).classList.toggle("hl", K === j + 3));
+    document.getElementById("c1").classList.toggle("hl", K === 3);
+    document.getElementById("c2").classList.toggle("hl", K === 4 || K === 5);
+    document.getElementById("c3").classList.toggle("hl", K === 6);
   }
-  RL.wire(6, paint, {
+  RL.wire(7, paint, {
     figs: [F], FS, dur: 12000,
     frame: f => frame(f),
     pick: hit => {
@@ -163,8 +175,8 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   /* ---- ⧉分步：点一下推进一步；左栏步骤与右图元素 1:1 同步高亮 ---- */
   const STEPS = ["① 标记四个开环极点", "② 实轴段根轨迹 [−4,0]", "③ 渐近线 σₐ=−2，±45°/±135°",
-                 "④ d=−2 分离＋∓90° 垂直出射", "⑤ 过虚轴 ±j√10（K₁=260）", "⑥ 沿渐近线 → ∞"];
-  const chip = document.getElementById("segChip"), total = 6;
+                 "④ d=−2 分离＋∓90° 垂直出射", "⑤ 共轭复分离点 −2±j√6（K₁=100）", "⑥ 过虚轴 ±j√10（K₁=260）", "⑦ 沿渐近线 → ∞"];
+  const chip = document.getElementById("segChip"), total = 7;
   const wNext = ACT.step.next, wReset = ACT.step.reset;
   let segRaf = null, segTok = 0;
   function segStopUI() {

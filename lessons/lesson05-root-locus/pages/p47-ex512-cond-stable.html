@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   function frame(f) {
     const K1 = F.K_of_f(f);
-    document.getElementById("kv").textContent = RL.fmtK(K1);
+    document.getElementById("kv").textContent = f >= 0.999 ? "→ ∞" : RL.fmtK(K1);
     stabUI(K1);
   }
   function paint(K) {

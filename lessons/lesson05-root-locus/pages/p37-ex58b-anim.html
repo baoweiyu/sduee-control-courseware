@@ -36,23 +36,24 @@
 <div class="act-body has-note">
   <div class="row">
     <div class="lft">
-      <div class="act-card" style="flex:1.25">
+      <div class="act-card" style="flex:.95">
         <div class="hd">等效系统与实时读数</div>
         <div class="bd">
           <div style="text-align:center;font-size:21px"><span class="tex">G^{*}(s)H^{*}(s)=\dfrac{as}{(s+j2)(s-j2)}</span></div>
           <div class="kv">参量 a：0 → ∞（时间常数型参量的标准形态）</div>
           <div class="kv">a = <b id="kv" style="color:var(--danger)">0</b></div>
           <div class="kv">闭环极点：<b id="lp" style="color:var(--navy)">±j2</b></div>
-          <div class="kv">出射角：θ=180°（自 ±j2 沿圆左行）</div>
         </div>
       </div>
-      <div class="act-card">
-        <div class="hd">绘制步骤</div>
-        <div class="bd" style="gap:5px">
-          <div class="kv" id="s1">① 等效零点 0、等效极点 ±j2</div>
-          <div class="kv" id="s2">② a:0→4，两支沿圆 |s|=2 相向绕行</div>
-          <div class="kv" id="s3">③ a=4 会合于 s=−2（重根）</div>
-          <div class="kv" id="s4">④ a→∞：一支止于零点 0，一支沿负实轴趋向 −∞</div>
+      <div class="act-card" style="flex:1.35">
+        <div class="hd">按根轨迹法则绘制</div>
+        <div class="bd" style="gap:4px;padding:8px 12px;font-size:18px">
+          <div class="kv" id="s1">① 标零极点：零点 0，极点 ±j2（n=2，m=1）</div>
+          <div class="kv" id="s2">② 实轴根轨迹：(−∞,0]（右侧零极点数为奇数）</div>
+          <div class="kv" id="s3">③ 渐近线：n−m=1 条，σₐ=0，φₐ=180°</div>
+          <div class="kv" id="s4">④ 出射角 θ=180°：两支自 ±j2 沿 |s|=2 相向</div>
+          <div class="kv" id="s5">⑤ 会合点：a=4 时在 s=−2 会合（重根）</div>
+          <div class="kv" id="s6">⑥ 终点：a→∞，一支止零点 0，一支沿负实轴→−∞</div>
         </div>
       </div>
     </div>
@@ -99,8 +100,8 @@ document.addEventListener("DOMContentLoaded", () => {
       F.tx(F.gDyn, F.X(-1) + 14, F.Y(0) + 50, "止于零点 0", { fs: 23, fill: "#1B3B8B", b: 1, an: "start" });
       F.tx(F.gDyn, F.X(-3.4), F.Y(0) + 50, "沿负实轴 → −∞", { fs: 23, fill: "#1B3B8B", b: 1, an: "start" });
     }
-    const ROW = [1, 1, 2, 3, 4];
-    for (let i = 1; i <= 4; i++)
+    const ROW = [1, 1, 4, 5, 6];
+    for (let i = 1; i <= 6; i++)
       document.getElementById("s" + i).classList.toggle("hl", i === ROW[K]);
   }
   RL.wire(4, paint, {
