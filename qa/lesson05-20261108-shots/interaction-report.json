@@ -1,0 +1,158 @@
+[
+  {
+    "name": "P38 单图步进互不干扰",
+    "ok": true
+  },
+  {
+    "name": "P38 单图播放可启动",
+    "ok": true
+  },
+  {
+    "name": "P38 翻页笔十二步到末态",
+    "ok": true
+  },
+  {
+    "name": "P38 上一步回退",
+    "ok": true
+  },
+  {
+    "name": "P38 总重置",
+    "ok": true
+  },
+  {
+    "name": "P38/P39 数据起点与终点完整",
+    "ok": true
+  },
+  {
+    "name": "P38 放大且各图独立",
+    "ok": true
+  },
+  {
+    "name": "P38 视图复位",
+    "ok": true
+  },
+  {
+    "name": "P38B 下一条生长",
+    "ok": true
+  },
+  {
+    "name": "P38B 图例单独查看",
+    "ok": true
+  },
+  {
+    "name": "P38B 重置",
+    "ok": true
+  },
+  {
+    "name": "P38B 翻页笔三条叠加",
+    "ok": true
+  },
+  {
+    "name": "P38B 上一步",
+    "ok": true
+  },
+  {
+    "name": "P39 轨迹簇放大",
+    "ok": true
+  },
+  {
+    "name": "P39 轨迹簇视图复位",
+    "ok": true
+  },
+  {
+    "name": "p41-ex510a-analyze.html 分步到末态",
+    "ok": true
+  },
+  {
+    "name": "p41-ex510a-analyze.html 回退",
+    "ok": true
+  },
+  {
+    "name": "p41-ex510a-analyze.html 重置",
+    "ok": true
+  },
+  {
+    "name": "p41-ex510a-analyze.html 播放",
+    "ok": true
+  },
+  {
+    "name": "p50-trial-method.html 分步到末态",
+    "ok": true
+  },
+  {
+    "name": "p50-trial-method.html 回退",
+    "ok": true
+  },
+  {
+    "name": "p50-trial-method.html 重置",
+    "ok": true
+  },
+  {
+    "name": "p50-trial-method.html 播放",
+    "ok": true
+  },
+  {
+    "name": "p51-ex513a-zeta.html 分步到末态",
+    "ok": true
+  },
+  {
+    "name": "p51-ex513a-zeta.html 回退",
+    "ok": true
+  },
+  {
+    "name": "p51-ex513a-zeta.html 重置",
+    "ok": true
+  },
+  {
+    "name": "p51-ex513a-zeta.html 播放",
+    "ok": true
+  },
+  {
+    "name": "P55 根轨迹分步",
+    "ok": true
+  },
+  {
+    "name": "p43-nonmin-phase.html 文本框无裁切",
+    "ok": true
+  },
+  {
+    "name": "p53-pole-effects.html 文本框无裁切",
+    "ok": true
+  },
+  {
+    "name": "p44-ex511-classify.html 左侧文字初始全部显示",
+    "ok": true
+  },
+  {
+    "name": "p44-ex511-classify.html 下一步仅改变右图",
+    "ok": true
+  },
+  {
+    "name": "p45-ex511-dual-anim.html 左侧文字初始全部显示",
+    "ok": true
+  },
+  {
+    "name": "p45-ex511-dual-anim.html 下一步仅改变右图",
+    "ok": true
+  },
+  {
+    "name": "P45/P46 两页右侧图完全一致",
+    "ok": true
+  },
+  {
+    "name": "播放器第五章60页与新增第39页",
+    "ok": true
+  },
+  {
+    "name": "播放器下一步推进动画",
+    "ok": true
+  },
+  {
+    "name": "播放器下一页直接翻页",
+    "ok": true
+  },
+  {
+    "name": "播放器上一页直接翻页",
+    "ok": true
+  }
+]

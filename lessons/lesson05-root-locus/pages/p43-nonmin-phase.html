@@ -25,34 +25,34 @@
   .figc .cap{flex:none;font-size:19.5px;color:var(--navy);background:var(--sky);border-radius:10px;padding:6px 14px;margin:0 12px 10px;line-height:1.4}
 </style>
 </head>
-<body data-title="③ 非最小相位系统：概念与判型" data-page="43 / 61">
+<body data-title="③ 非最小相位系统：概念与判型" data-page="44 / 60">
 <div class="act-stage"><div class="act-slide">
   <div class="act-body has-note">
     <div class="row">
       <div class="col" style="flex:1.08">
-        <div class="act-card" style="flex:.9">
+        <div class="act-card" style="flex:.84">
           <div class="hd">定义</div>
           <div class="bd">
             <div class="kv" data-step="1">开环传递函数在<b>右半 s 平面</b>含有<span class="kw-r">零点或极点</span>的系统 ⇒ <b>非最小相位系统</b>。</div>
           </div>
         </div>
-        <div class="act-card" style="flex:1.3">
+        <div class="act-card" style="flex:1.46">
           <div class="hd">判型依据</div>
-          <div class="bd" style="font-size:19.5px">
-            <div class="eq" data-step="2">先整理首一标准形　<span class="tex">K_{1}\dfrac{\prod_{j}(s-z_{j})}{\prod_{i}(s-p_{i})}</span>（首一、增益为正，多余负号提到前面）</div>
+          <div class="bd" style="font-size:19px;gap:7px">
+            <div class="eq" data-step="2"><div style="margin-bottom:4px">先整理首一标准形</div><span class="tex">K_{1}\dfrac{\prod_{j}(s-z_{j})}{\prod_{i}(s-p_{i})}</span><div style="font-size:17.5px;margin-top:4px">首一、增益为正，多余负号提到前面</div></div>
             <div class="kv hl" data-step="3">首一化时<b>提出了负号</b>（<span class="tex">1-G^{*}(s)H^{*}(s)=0</span>）⇒ 按 <span class="kw-r">0° 法则</span>；没提 ⇒ 按 <b>180° 法则</b>。</div>
           </div>
         </div>
-        <div class="act-card" style="flex:1.35">
-          <div class="hd">例5-11 判型（预告）</div>
-          <div class="bd" style="font-size:19px">
+        <div class="act-card" style="flex:1.25">
+          <div class="hd">例5-11 判型</div>
+          <div class="bd" style="font-size:19px;justify-content:center;gap:10px">
             <div class="kv" data-step="4">系统(1)：<span class="tex">(s-1)</span> 已首一、增益为正 ⇒ <b>180° 根轨迹</b>。</div>
             <div class="kv" data-step="5">系统(2)：<span class="tex">(1-s)=-(s-1)</span>，首一化<span class="kw-r">提出负号</span> ⇒ <b>0° 根轨迹</b>。</div>
           </div>
         </div>
       </div>
       <div class="act-card figc" style="flex:1">
-        <div class="hd"><span style="flex:1">例5-11 两系统零极点分布（右半平面 元素红标）</span></div>
+        <div class="hd"><span style="flex:1">例5-11 两系统零极点分布</span></div>
         <div class="bd2">
           <div class="pz">
             <div class="eq">系统(1)　<span class="tex">G_{1}(s)H_{1}(s)=\dfrac{K_{1}(s-1)}{s(s+1)(s+2)}</span>　→ 180° 法则</div>
@@ -67,7 +67,7 @@
       </div>
     </div>
   </div>
-  <div class="act-note"><span class="lead">要点</span><span>判型口诀只讲一遍：<span class="kw-r">先整理首一标准形、再看增益符号</span>——"有 右半平面 极点 ⇒ 0°"之类的口诀是错的。</span></div>
+  <div class="act-note"><span class="lead">要点</span><span><span class="kw-r">先整理首一标准形，再看增益符号</span>：增益为正按 180° 法则，首一化提出负号则按 0° 法则。</span></div>
 <script>
 /* 例5-11 两系统 s 平面零极点并排小图（纯示意，右半平面 元素红标） */
 document.addEventListener("DOMContentLoaded", () => {

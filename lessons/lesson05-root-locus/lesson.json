@@ -1,7 +1,7 @@
 {
   "lesson_id": "lesson05-root-locus",
   "title": "第五章 根轨迹法",
-  "source": "bwy-ori-oldPPT/chapt5 根轨迹法V2.pdf；逐页制作依据：素材/第五章逐页spec与根轨迹绘制规范.md；P6/P15/P19/P21/P37 为已验收样片并入终版页位；2026-09-17 按修改Spec完成全章重构（5.1–5.4 共 61 页）",
+  "source": "bwy-ori-oldPPT/chapt5 根轨迹法V2.pdf；逐页制作依据：素材/第五章逐页spec与根轨迹绘制规范.md；P6/P15/P19/P21/P37 为已验收样片并入终版页位；2026-11-08 按课堂反馈完成全章修订（5.1–5.4 共 60 页）",
   "pages": [
     {
       "id": "l5-p01",
@@ -262,7 +262,7 @@
     {
       "id": "l5-p33",
       "file": "pages/p33-ex57-finale.html",
-      "title": "例5-7：完整根轨迹绘制（条件稳定型）",
+      "title": "例5-7：完整根轨迹绘制",
       "complexity": "L2",
       "status": "Draft",
       "legacy_action": "NEW"
@@ -302,7 +302,15 @@
     {
       "id": "l5-p38",
       "file": "pages/p38-ex59-family.html",
-      "title": "① 参量根轨迹：双参数根轨迹族（例5-9）",
+      "title": "① 参量根轨迹：固定 K₁ 的三幅轨迹（例5-9）",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l5-p38b",
+      "file": "pages/p38b-ex59-family.html",
+      "title": "① 参量根轨迹：K₁ 与 a 双参数轨迹簇（例5-9）",
       "complexity": "L2",
       "status": "Draft",
       "legacy_action": "NEW"
@@ -326,7 +334,7 @@
     {
       "id": "l5-p41",
       "file": "pages/p41-ex510a-analyze.html",
-      "title": "② 零度根轨迹：正反馈系统分析（例5-10）",
+      "title": "② 零度根轨迹：正反馈系统分步绘制（例5-10）",
       "complexity": "L2",
       "status": "Draft",
       "legacy_action": "NEW"
@@ -350,7 +358,7 @@
     {
       "id": "l5-p44",
       "file": "pages/p44-ex511-classify.html",
-      "title": "③ 非最小相位系统：判型与等效整理（例5-11）",
+      "title": "③ 非最小相位系统：分步绘制（例5-11）",
       "complexity": "L2",
       "status": "Draft",
       "legacy_action": "NEW"
@@ -359,22 +367,6 @@
       "id": "l5-p45",
       "file": "pages/p45-ex511-dual-anim.html",
       "title": "③ 非最小相位系统：180°/0° 对照（例5-11）",
-      "complexity": "L2",
-      "status": "Draft",
-      "legacy_action": "NEW"
-    },
-    {
-      "id": "l5-p46",
-      "file": "pages/p46-cond-stable-concept.html",
-      "title": "④ 条件稳定系统：概念",
-      "complexity": "L2",
-      "status": "Draft",
-      "legacy_action": "NEW"
-    },
-    {
-      "id": "l5-p47",
-      "file": "pages/p47-ex512-cond-stable.html",
-      "title": "④ 条件稳定系统：根轨迹与稳定域（例5-12）",
       "complexity": "L2",
       "status": "Draft",
       "legacy_action": "NEW"

@@ -2,257 +2,174 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<title>① 参量根轨迹：双参数根轨迹族（例5-9）</title>
+<title>① 参量根轨迹：固定 K₁ 的三幅轨迹（例5-9）</title>
 <link rel="stylesheet" href="../../../theme/theme.css?v=219">
 <script src="../../../theme/mathjax/mathjax-render.js"></script>
 <script src="../../../theme/mathjax/tex-chtml.js"></script>
 <script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
 <script src="../../../theme/act-base.js?v=219" defer></script>
 <script src="../fig.js?v=219"></script>
-<script src="../data/fam59.js?v=219"></script>
+<script src="../data/ex59fixed.js?v=219"></script>
 <style>
-  .row{display:flex;gap:22px;height:100%;min-height:0}
-  .lft{flex:1;display:flex;flex-direction:column;min-height:0}
+  .wrap{height:100%;min-height:0;display:flex;flex-direction:column;gap:12px}
   .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
-  /* 两步法主卡：橙色描边重点卡，独占左栏整高，行距拉开、分层排布 */
-  .act-card.big{border:2.5px solid var(--orange)}
-  .act-card.big>.hd{font-size:30px;padding:16px 26px}
-  .act-card.big>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:18px;padding:20px 26px;font-size:21.5px;line-height:1.6}
-  .eq{background:var(--sky);border-radius:12px;padding:12px 16px;text-align:center;font-size:24px;line-height:1.55}
-  .kv{background:var(--sky);border-radius:12px;padding:12px 17px;line-height:1.58}
-  .figc{flex:1.2;display:flex;flex-direction:column;overflow:hidden;position:relative}
-  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
-  .figc svg{width:100%;height:100%}
-  .segfloat{position:absolute;top:56px;left:50%;transform:translateX(-50%);z-index:5;background:#fff;
-    border:2px solid var(--blue);border-radius:10px;padding:5px 16px;font-size:18px;font-weight:700;
-    color:var(--navy);white-space:nowrap;box-shadow:0 2px 10px rgba(20,40,90,.18)}
-  .legend{display:flex;gap:8px;justify-content:center;flex-wrap:nowrap;padding:2px 6px 4px}
-  .legend .chip{display:flex;align-items:center;gap:6px;font-size:17.5px;font-weight:700;color:var(--navy);
-    background:var(--sky);border:2px solid transparent;border-radius:9px;padding:3px 9px;white-space:nowrap}
-  .legend .chip i{display:inline-block;width:22px;height:6px;border-radius:3px}
-  .legend .chip.cur{border-color:var(--danger);background:#FDF3EC}
-  .ctl{display:flex;align-items:center;gap:10px;justify-content:center;padding:2px 0 10px;flex:none}
-  .btn{background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:19px;font-weight:700;padding:8px 20px;cursor:pointer}
-  .btn.ghost{background:#fff;color:var(--blue);border:2px solid var(--blue)}
-  .kr{font-size:19.5px;color:var(--navy);font-weight:700;background:var(--sky);border-radius:10px;padding:7px 14px;white-space:nowrap}
-  #kr{min-width:13.6em;text-align:center}  /* 读数文字随步骤变化，钉死防按钮跳动（A1-G1） */
-  .prog{font-size:18px;color:var(--muted);min-width:64px}
-  /* 两步法方法框：橙色描边重点框，两步各占一行，行距拉开 */
-  .mth{background:#FDF3EC;border:2.5px solid var(--orange);border-radius:14px;padding:16px 20px;display:flex;flex-direction:column;gap:14px}
-  .mth .mt{font-size:23px;font-weight:700;color:var(--orange)}
-  .mth .ml{display:flex;gap:12px;align-items:flex-start;font-size:21.5px;line-height:1.55;font-weight:700;color:var(--navy)}
-  .mth .ml b.no{flex:none;color:var(--orange);font-size:25px}
-  .legend .chip{cursor:pointer}
+  .top{flex:none}
+  .top>.bd{padding:10px 18px;display:grid;grid-template-columns:1.12fr 1fr;gap:10px 22px;font-size:20px;line-height:1.42}
+  .eq{background:var(--sky);border-radius:11px;padding:7px 12px;text-align:center;grid-row:span 2;display:flex;align-items:center;justify-content:center}
+  .rule{background:var(--sky);border-radius:11px;padding:6px 12px}
+  .rule b{color:var(--navy)}
+  .grid{flex:1;min-height:0;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .figcard{position:relative}
+  .figcard>.hd{font-size:25px;padding:12px 14px;text-align:center}
+  .figcard .sub{flex:none;text-align:center;font-size:17.5px;color:var(--navy);padding:0 8px 4px}
+  .plot{flex:1;min-height:0;background:#fff;margin:0 8px;border-radius:9px;overflow:hidden;position:relative}
+  .plot svg{width:100%;height:100%;display:block}
+  .zbar{position:absolute;right:7px;bottom:7px;display:flex;gap:4px;z-index:2}
+  .zbtn{width:31px;height:31px;border:2px solid var(--blue);border-radius:7px;background:rgba(255,255,255,.94);color:var(--blue);font-size:20px;font-weight:700;line-height:1;cursor:pointer;padding:0}
+  .zbtn.reset{font-size:14px;width:38px}
+  .zbtn:focus-visible{outline:3px solid var(--orange);outline-offset:1px}
+  .read{flex:none;display:flex;justify-content:center;gap:7px;margin:5px 7px 0;font-size:16.5px;white-space:nowrap}
+  .pill{background:var(--sky);border-radius:8px;padding:4px 8px;color:var(--navy);font-weight:700}
+  .pill.stable{background:#E8F3EA;color:#176B34}
+  .pill.critical{background:#FFF1DF;color:#9A4E12}
+  .pill.unstable{background:#FDECEA;color:var(--danger)}
+  .ctl{flex:none;display:flex;justify-content:center;gap:7px;padding:7px 5px 9px}
+  .btn{border:0;border-radius:8px;background:var(--blue);color:#fff;font-size:16px;font-weight:700;padding:6px 11px;cursor:pointer;white-space:nowrap;min-width:76px}
+  .btn.ghost{background:#fff;color:var(--blue);border:2px solid var(--blue);padding:4px 9px}
+  .btn:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+  .prog{font-size:15.5px;color:var(--muted);align-self:center;min-width:34px;text-align:center}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+  .flash{animation:pulse .8s ease-in-out infinite}
 </style>
 </head>
-<body data-title="① 参量根轨迹：双参数根轨迹族（例5-9）" data-page="38 / 61">
+<body data-title="① 参量根轨迹：固定 K₁ 的三幅轨迹（例5-9）" data-page="38 / 60">
 <div class="act-stage"><div class="act-slide">
   <div class="act-body has-note">
-    <div class="row">
-      <div class="lft">
-        <div class="act-card big" style="flex:1">
-          <div class="hd">双参数系统两步法</div>
-          <div class="bd">
-            <div class="eq">题目　<span class="tex">G(s)H(s)=\dfrac{K_{1}}{s(s+1)(s+a)}</span></div>
-            <div class="kv" data-step="1">两个参数 K₁、a 都可调。特征方程：<span class="tex">s(s+1)(s+a)+K_{1}=0</span>。</div>
-            <div class="mth">
-              <div class="mt">方法：两步法</div>
-              <div class="ml" data-step="2"><b class="no">①</b><span>固定 <span class="tex">K_{1}</span>，整理出 a 的等效开环，画 <span class="tex">a:0\to\infty</span> 的参量轨迹；</span></div>
-              <div class="ml" data-step="3"><b class="no">②</b><span>取一系列 <span class="tex">K_{1}</span> 重复，得<b>根轨迹族</b>——均从极点 0、−1 出发。</span></div>
-            </div>
-            <div class="kv" data-step="4">定量稳定边界（劳斯判据）：<span class="tex">a(a+1)&gt;K_{1}</span>，即 <span class="tex">a&gt;a^{*}=\dfrac{\sqrt{1+4K_{1}}-1}{2}</span>；临界时过虚轴 <span class="tex">\pm j\sqrt{a^{*}}</span>。</div>
-          </div>
+    <div class="wrap">
+      <div class="act-card top">
+        <div class="hd">先固定 K₁，只让参量 a 变化</div>
+        <div class="bd">
+          <div class="eq"><span class="tex">s(s+1)(s+a)+K_{1}=0\;\Longleftrightarrow\;1+a\dfrac{s(s+1)}{s^{2}(s+1)+K_{1}}=0</span></div>
+          <div class="rule"><b>等效零极点：</b>零点 <span class="tex">0,-1</span>；极点为 <span class="tex">s^{2}(s+1)+K_{1}=0</span> 的三个根。</div>
+          <div class="rule"><b>通用法则：</b><span class="tex">n=3,m=2</span>，一条渐近线为 <span class="tex">180^{\circ}</span>；稳定边界 <span class="tex">a(a+1)=K_{1}</span>。</div>
         </div>
       </div>
-      <div class="act-card figc">
-        <div class="hd"><span style="flex:1">根轨迹族：六个 K₁ 值的参量轨迹（a: 0→∞）</span></div>
-        <span class="segfloat" id="segChip" style="display:none"></span>
-        <div class="bd2"><svg id="fig"></svg></div>
-        <div class="legend" id="legend"></div>
-        <div class="ctl">
-          <button class="btn" id="play">▶ 播放</button>
-          <button class="btn ghost" id="step">⧉ 分步</button>
-          <button class="btn ghost" onclick="ACT.step.reset()">↺ 重置</button>
-          <span class="kr" id="kr">K₁ 越大，稳定所需 a 越大</span>
-          <span class="prog" id="prog">0 / 4</span>
-        </div>
-      </div>
+      <div class="grid" id="grid"></div>
     </div>
   </div>
-  <div class="act-note"><span class="lead">要点</span><span>根轨迹族 = 多张参量轨迹的叠加：定量边界 <span class="tex">a(a+1)&gt;K_{1}</span> 表明<span class="kw-r">K₁ 越大允许的稳定 a 范围越小</span>——两个参数需协同设计。</span></div>
+  <div class="act-note"><span class="lead">读图</span><span>每幅图只改变 <span class="tex">a</span>：三支从等效极点出发，两支最终止于零点 <span class="tex">0,-1</span>，另一支沿负实轴趋向无穷；<span class="tex">a&gt;a^{*}</span> 时闭环稳定。</span></div>
+<div data-step="1" style="display:none"></div><div data-step="2" style="display:none"></div><div data-step="3" style="display:none"></div><div data-step="4" style="display:none"></div>
+<div data-step="5" style="display:none"></div><div data-step="6" style="display:none"></div><div data-step="7" style="display:none"></div><div data-step="8" style="display:none"></div>
+<div data-step="9" style="display:none"></div><div data-step="10" style="display:none"></div><div data-step="11" style="display:none"></div><div data-step="12" style="display:none"></div>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  const SHADE = ["#8FA9E3", "#6E93DD", "#4C74D2", "#3558BC", "#24419A", "#16296E"];
-  const F = RL.figure("fig", "fam59", { vw: 960, vh: 600, static: true, asym: false,
-                                        xlim: [-2.4, 1.05], ylim: [-2.6, 2.6] });
-  const FAMS = F.data.fams;
-  const KS = FAMS.map(f => f.k);
-  const AC = KS.map(k => (Math.sqrt(1 + 4 * k) - 1) / 2);   // 临界 a*
-  const NF = FAMS.length;
-  /* 图例（可点击：点某个 K₁ 即显示该值的根轨迹并着重标记） */
-  const leg = document.getElementById("legend");
-  KS.forEach((k, i) => {
-    const c = document.createElement("span");
-    c.className = "chip"; c.id = "chip" + i;
-    c.innerHTML = `<i style="background:${SHADE[i]}"></i>K₁=${k}`;
-    c.onclick = () => pickFam(i);
-    leg.appendChild(c);
+  const CASES = [
+    { key:"ex59k05", label:"K₁ = 0.5" },
+    { key:"ex59k2",  label:"K₁ = 2" },
+    { key:"ex59k10", label:"K₁ = 10" }
+  ];
+  const grid = document.getElementById("grid");
+  const controllers = [];
+  CASES.forEach((c, idx) => {
+    const card = document.createElement("div");
+    card.className = "act-card figcard";
+    card.innerHTML = `<div class="hd">${c.label}</div>
+      <div class="sub">固定 K₁，a：0 → ∞</div>
+      <div class="plot"><svg id="fig${idx}" aria-label="${c.label} 的参量根轨迹"></svg><div class="zbar"><button class="zbtn" id="zp${idx}" title="放大" aria-label="放大第 ${idx+1} 幅图">＋</button><button class="zbtn" id="zm${idx}" title="缩小" aria-label="缩小第 ${idx+1} 幅图">−</button><button class="zbtn reset" id="zr${idx}" title="复位视图" aria-label="复位第 ${idx+1} 幅图">1:1</button></div></div>
+      <div class="read"><span class="pill" id="av${idx}">a = 0</span><span class="pill" id="st${idx}">等待绘制</span><span class="prog" id="pg${idx}">0/4</span></div>
+      <div class="ctl"><button class="btn" id="pl${idx}">▶ 播放</button><button class="btn ghost" id="nx${idx}">下一步</button><button class="btn ghost" id="rs${idx}">重置</button></div>`;
+    grid.appendChild(card);
   });
-  /* 家族底图层：插在 gDyn 之下，随视窗重绘 */
-  const gFam = document.createElementNS("http://www.w3.org/2000/svg", "g");
-  F.svg.insertBefore(gFam, F.gDyn);
-  function famPath(b) { return F.toPath(F.clipPoly(b.map(p => [F.X(p[0]), F.Y(p[1])]), F.PLOT)); }
-  /* 方向箭头：沿分支 a 增大方向，取已画出部分中段的稳定方向（相邻点有重复坐标，回看 8 个点） */
-  function addArrow(b, frac, color, into, op) {
-    const n = b.length; if (n < 3) return;
-    const m = Math.max(2, Math.round(n * frac));
-    const j = Math.min(m - 1, Math.max(1, Math.floor((m - 1) * .55)));
-    const p0 = b[Math.max(0, j - 8)], p1 = b[j];
-    const x0 = F.X(p0[0]), y0 = F.Y(p0[1]), x1 = F.X(p1[0]), y1 = F.Y(p1[1]);
-    if (x1 < F.PLOT.x0 || x1 > F.PLOT.x1 || y1 < F.PLOT.y0 || y1 > F.PLOT.y1) return;
-    if (Math.hypot(x1 - x0, y1 - y0) < 1) return;
-    const ang = Math.atan2(y1 - y0, x1 - x0) * 180 / Math.PI;
-    const g = F.mk("g", { transform: `translate(${x1},${y1}) rotate(${ang})`, opacity: op == null ? 1 : op }, into);
-    F.mk("path", { d: "M11,0 L-9,7 L-9,-7 Z", fill: color, stroke: "#fff", "stroke-width": 1.1 }, g);
-  }
-  function drawBase() {
-    gFam.innerHTML = "";
-    FAMS.forEach((fam, fi) => fam.branches.forEach(b => {
-      F.mk("path", { d: famPath(b), fill: "none", stroke: SHADE[fi], "stroke-width": 2.6, opacity: .3 }, gFam);
-      addArrow(b, 1, SHADE[fi], gFam, .3);
-    }));
-  }
-  const _render = F.render;
-  F.render = () => { _render(); drawBase(); paint(); };
-  /* 高亮：按 K₁ 值匹配索引（不硬编码下标） */
-  const idxOfK = k => KS.findIndex(v => Math.abs(v - k) < 1e-9);
-  function drawFam(i, frac, bold, into) {
-    FAMS[i].branches.forEach(b => {
-      const n = Math.max(2, Math.round(b.length * frac));
-      const pts = b.slice(0, n).map(p => [F.X(p[0]), F.Y(p[1])]);
-      F.mk("path", { d: F.toPath(F.clipPoly(pts, F.PLOT)), fill: "none",
-        stroke: bold ? RL.FOCUS : SHADE[i], "stroke-width": bold ? 6 : 4, opacity: 1 }, into);
-      if (frac > 0.55) addArrow(b, frac, bold ? RL.FOCUS : SHADE[i], into, 1);
-    });
-  }
-  /* state: mode idle | play | seg（seg 仅当前一条的生长动画，播完即停，不连播）；segJ 下一条序号 */
-  let mode = "idle", prog = 0, hi = -1, raf = null, segJ = 0;
-  const chip = document.getElementById("segChip");
-  const TOT = () => ACT.step.els.length;   // ACT 分步总数（两步法 4 步）；init 晚于本脚本，惰性取值
-  function paint() {
-    F.gDyn.innerHTML = "";
-    for (let i = 0; i < NF; i++) document.getElementById("chip" + i).classList.remove("cur");
-    if (mode === "play") {
-      const full = Math.min(NF, Math.floor(prog)), fr = prog - full;
-      for (let i = 0; i < full; i++) drawFam(i, 1, false, F.gDyn);
-      if (full < NF && fr > 0) { drawFam(full, fr, true, F.gDyn); setCur(full); }
-    } else if (hi >= 0) {
-      gFam.style.opacity = .55;   // 底图弱化，当前条亮显
-      drawFam(hi, 1, true, F.gDyn);
-      setCur(hi);
+
+  CASES.forEach((c, idx) => {
+    const F = RL.figure("fig"+idx, c.key, { vw:640, vh:400, static:true, asym:false,
+      crossSq:false, pzLabels:false, zoom:true, xlim:[-3.6,1.0], ylim:[-2.6,2.6] });
+    const fc = F.f_of_K(F.data.astar);
+    let cur = 0, fNow = 0, raf = 0, playing = false;
+    const $ = s => document.getElementById(s+idx);
+    const stop = () => { if (raf) cancelAnimationFrame(raf); raf = 0; playing = false; $("pl").textContent = "▶ 播放"; };
+    function status(f) {
+      const a = F.K_of_f(f), ast = F.data.astar;
+      $("av").textContent = f >= .999 ? "a → ∞" : "a = " + RL.fmtK(a);
+      const st = $("st"); st.className = "pill";
+      if (f <= .002) { st.textContent = "等效零极点"; return; }
+      if (Math.abs(a-ast) < Math.max(.012,ast*.012)) { st.textContent = "临界稳定"; st.classList.add("critical"); }
+      else if (a > ast) { st.textContent = "a > a*，稳定"; st.classList.add("stable"); }
+      else { st.textContent = "a < a*，不稳定"; st.classList.add("unstable"); }
     }
-    if (mode !== "play" && hi < 0) gFam.style.opacity = 1;
-  }
-  function setCur(i) {
-    document.getElementById("chip" + i).classList.add("cur");
-    document.getElementById("kr").textContent =
-      "K₁=" + KS[i] + "：a>" + (AC[i] >= 1 ? AC[i].toFixed(2) : AC[i].toFixed(2)) + " 稳定";
-  }
-  function stopRaf() { if (raf) { cancelAnimationFrame(raf); raf = null; } }
-  function clearFig() { stopRaf(); mode = "idle"; hi = -1; chip.style.display = "none";
-    gFam.style.opacity = 1; F.gDyn.innerHTML = "";
-    for (let i = 0; i < NF; i++) document.getElementById("chip" + i).classList.remove("cur"); }
-  /* 选中第 i 条（图例点击共用）：底图弱化 + 当前条粗线亮显 + 读数/图例标记 */
-  function showFam(i, frac) {
-    hi = idxOfK(KS[i]);
-    gFam.style.opacity = .55;
-    F.gDyn.innerHTML = "";
-    for (let k = 0; k < NF; k++) document.getElementById("chip" + k).classList.remove("cur");
-    drawFam(hi, frac, true, F.gDyn);
-    setCur(hi);
-  }
-  function pickFam(i) {   // 图例点击：直接定格显示该 K₁ 的轨迹
-    stopRaf(); mode = "idle";
-    document.getElementById("play").textContent = "▶ 播放";
-    segJ = i + 1;
-    showFam(i, 1);
-    chip.textContent = "K₁=" + KS[i] + " 的参量轨迹（临界 a*=" + AC[i].toFixed(2) + "）";
-    chip.style.display = "";
-    document.getElementById("prog").textContent = "分步 " + (i + 1) + " / " + NF;
-  }
-  const S = ACT.step, _n = S.next.bind(S), _r = S.reset.bind(S);
-  /* ACT 步进：仅驱动左卡 4 步文字；图保持底图，逐条观察走图例点击/分步按钮 */
-  function syncFromStep() {
-    mode = "idle"; stopRaf();
-    document.getElementById("play").textContent = "▶ 播放";
-    hi = -1; segJ = 0;
-    gFam.style.opacity = 1;
-    chip.style.display = "none";
-    paint();
-    document.getElementById("prog").textContent = S.cur + " / " + TOT();
-  }
-  S.next = function () { const d = _n(); syncFromStep(); return d; };
-  S.reset = function () { _r(); clearFig(); segJ = 0;
-    document.getElementById("kr").textContent = "K₁ 越大，稳定所需 a 越大";
-    document.getElementById("prog").textContent = "0 / " + TOT();
-    document.getElementById("play").textContent = "▶ 播放";
-    document.getElementById("step").textContent = "⧉ 分步";
-    paint(); };
-  window.prev = function () { if (S.cur <= 0) return; const t = S.cur - 1; S.reset(); for (let i = 0; i < t; i++) S.next(); };
-  /* ▶ 播放：K₁ 从 0.25 到 10 六条参量轨迹连续逐条扫出 */
-  document.getElementById("play").onclick = function () {
-    if (mode === "play") { stopRaf(); mode = "idle"; this.textContent = "▶ 播放"; return; }
-    clearFig(); mode = "play"; this.textContent = "❚❚ 暂停";
-    chip.textContent = "K₁ 连续增大：六条参量轨迹逐条扫出"; chip.style.display = "";
-    const DUR = 13000, t0 = performance.now(), p0 = 0;
-    const tick = now => {
-      if (mode !== "play") return;
-      prog = Math.min(NF, p0 + NF * (now - t0) / DUR);
-      paint();
-      if (prog >= NF) {
-        mode = "idle"; this.textContent = "▶ 播放"; chip.style.display = "none";
-        document.getElementById("kr").textContent = "K₁ 越大，稳定所需 a 越大";
-        return;
+    function decorations(f) {
+      F.gDyn.innerHTML = "";
+      if (cur === 1) {
+        const g = F.mk("g", { "class":"flash" }, F.gDyn);
+        [...F.data.poles, ...F.data.zeros].forEach(p => F.mk("circle", { cx:F.X(p[0]), cy:F.Y(p[1]), r:20,
+          fill:"none", stroke:RL.FOCUS, "stroke-width":3 }, g));
       }
+      if (f + 1e-6 >= fc) {
+        const w = F.data.crossings[0].w;
+        [w,-w].forEach(y => {
+          F.mk("rect", { x:F.X(0)-8, y:F.Y(y)-8, width:16, height:16, fill:"#fff", stroke:RL.FOCUS, "stroke-width":3,
+            "class":cur === 3 ? "flash" : "" }, F.gDyn);
+        });
+      }
+    }
+    function render(f) { fNow = f; F.setAllF(f); decorations(f); status(f); $("pg").textContent = cur + "/4"; }
+    function animate(to, done) {
+      if (raf) cancelAnimationFrame(raf);
+      const from = fNow, t0 = performance.now(), dur = 1450 + 1800*Math.abs(to-from);
+      const tick = now => {
+        const u = Math.min(1,(now-t0)/dur), f = from+(to-from)*u;
+        render(f);
+        if (u < 1) raf = requestAnimationFrame(tick); else { raf = 0; if (done) done(); }
+      };
+      raf = requestAnimationFrame(tick);
+    }
+    function setStep(n, instant=false) {
+      stop(); cur = n;
+      const target = [0,0,fc,fc,1][n];
+      if (instant || n === 1 || n === 3) render(target); else animate(target);
+    }
+    $("nx").onclick = () => setStep(cur >= 4 ? 1 : cur+1);
+    $("rs").onclick = () => { stop(); cur = 0; render(0); };
+    $("pl").onclick = () => {
+      if (playing) { stop(); return; }
+      stop(); cur = 2; playing = true; $("pl").textContent = "❚❚ 暂停"; render(0);
+      const t0 = performance.now(), dur = 6500;
+      const tick = now => {
+        if (!playing) return;
+        const f = Math.min(1,(now-t0)/dur);
+        cur = f < fc ? 2 : (f < .995 ? 3 : 4); render(f);
+        if (f < 1) raf = requestAnimationFrame(tick); else { stop(); cur = 4; render(1); }
+      };
       raf = requestAnimationFrame(tick);
     };
-    raf = requestAnimationFrame(tick);
-  };
-  /* ⧉ 分步：点一下只扫出当前 K₁ 的一条轨迹，播完停住；再点一下才出现下一个 K₁ */
-  document.getElementById("step").onclick = function () {
-    if (segJ >= NF) {   // 六条全部播完：清图后从头再来
-      S.reset();
-    }
-    stopRaf(); mode = "seg";
-    document.getElementById("play").textContent = "▶ 播放";
-    const j = segJ;
-    chip.textContent = "分步 " + (j + 1) + " / " + NF + "：K₁=" + KS[j] + " 的参量轨迹（临界 a*=" + AC[j].toFixed(2) + "）";
-    chip.style.display = "";
-    document.getElementById("prog").textContent = "分步 " + (j + 1) + " / " + NF;
-    hi = idxOfK(KS[j]);
-    gFam.style.opacity = .55;
-    const t0 = performance.now(), SEG = 1500;
-    const tk = now => {
-      if (mode !== "seg") return;
-      const t = Math.min(1, (now - t0) / SEG);
-      showFam(hi, t);
-      if (t < 1) raf = requestAnimationFrame(tk);
-      else { mode = "idle"; segJ = j + 1; }   // 播完停住，等待下一次点击
-    };
-    raf = requestAnimationFrame(tk);
-  };
-  /* QA 钩子：?case=N（1..6）直达第 N 条 K₁ 曲线的高亮态 */
-  const qp = new URLSearchParams(location.search);
-  if (qp.has("case")) {
-    const j = Math.max(1, Math.min(NF, parseInt(qp.get("case"), 10) || 1)) - 1;
-    segJ = j + 1;
-    showFam(j, 1);
-    document.getElementById("prog").textContent = "分步 " + (j + 1) + " / " + NF;
+    const zoomBy = factor => { F.view.s=Math.max(F.home.s*.65,Math.min(F.home.s*16,F.view.s*factor));F.render(); };
+    $("zp").onclick=()=>zoomBy(1.35);$("zm").onclick=()=>zoomBy(1/1.35);$("zr").onclick=()=>F.resetView();
+    F.onView=()=>decorations(fNow);
+    controllers.push({ reset:() => { stop(); cur = 0; render(0); }, step:(n,instant=true) => setStep(n,instant), zoomBy, resetView:()=>F.resetView(), fig:F });
+    render(0);
+  });
+  const baseNext = ACT.step.next.bind(ACT.step), baseReset = ACT.step.reset.bind(ACT.step);
+  function applyGlobal(k, instant=false) {
+    controllers.forEach((ctl,i) => {
+      const n = Math.max(0,Math.min(4,k-i*4));
+      ctl.step(n,instant || n !== ((k-1)%4+1) || i !== Math.floor((k-1)/4));
+    });
   }
-  drawBase(); paint();
+  ACT.step.next = function() {
+    if (ACT.step.cur >= 12) return true;
+    baseNext(); applyGlobal(ACT.step.cur,false); return ACT.step.cur >= 12;
+  };
+  ACT.step.reset = function() { baseReset(); controllers.forEach(ctl=>ctl.reset()); return 0; };
+  window.prev = function() {
+    const k=Math.max(0,ACT.step.cur-1); baseReset();
+    for(let i=0;i<k;i++)baseNext(); applyGlobal(k,true);
+  };
+  window.qaFinal = () => { baseReset(); for(let i=0;i<12;i++)baseNext(); applyGlobal(12,true); };
+  /* 截图自验：?case=1&step=4；不影响正常课堂操作。 */
+  const q = new URLSearchParams(location.search), ci = +(q.get("case")||0), sn = +(q.get("step")||0);
+  if (ci >= 1 && ci <= 3 && sn >= 0) controllers[ci-1].step(Math.min(4,sn));
 });
 </script>
 </div></div>
-<script>/* qa-steps：截图自验钩子，?steps=N 自动前进 N 步（播放时不生效） */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
 </body>
 </html>

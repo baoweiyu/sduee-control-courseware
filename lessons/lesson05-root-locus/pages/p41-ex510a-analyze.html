@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<title>② 零度根轨迹：正反馈系统分析（例5-10）</title>
+<title>② 零度根轨迹：正反馈系统分步绘制（例5-10）</title>
 <link rel="stylesheet" href="../../../theme/theme.css?v=219">
 <script src="../../../theme/mathjax/mathjax-render.js"></script>
 <script src="../../../theme/mathjax/tex-chtml.js"></script>
@@ -12,65 +12,109 @@
 <script src="../data/zex52.js?v=219"></script>
 <style>
   .row{display:flex;gap:22px;height:100%;min-height:0}
-  .lft{flex:1.04;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .lft{flex:.94;display:flex;flex-direction:column;gap:14px;min-height:0}
   .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
-  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:8px;padding:12px 20px;font-size:21px;line-height:1.5}
-  .eq{background:var(--sky);border-radius:12px;padding:9px 14px;text-align:center;font-size:21.5px;line-height:1.5}
-  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
-  .kv{background:var(--sky);border-radius:12px;padding:8px 14px;line-height:1.45}
-  .grp{display:flex;flex-direction:column;gap:4px;margin-top:5px}
-  .li{position:relative;padding-left:22px;line-height:1.35}
-  .li::before{content:"";position:absolute;left:2px;top:.42em;width:9px;height:9px;border-radius:2px;background:var(--orange)}
-  .figc{flex:1.08;display:flex;flex-direction:column;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:6px;padding:9px 16px}
+  .eq{background:var(--sky);border-radius:12px;padding:7px 12px;text-align:center;font-size:20px;line-height:1.42}
+  .task{text-align:center;font-size:18px;color:var(--navy);font-weight:700}
+  .stp{display:flex;gap:10px;align-items:flex-start;background:var(--sky);border-radius:12px;padding:7px 12px 7px 9px;font-size:18.5px;line-height:1.4;border-left:5px solid transparent}
+  .stp .num{flex:none;width:28px;height:28px;margin-top:2px;border-radius:50%;background:var(--blue);color:#fff;font-weight:700;font-size:17px;display:grid;place-items:center}
+  .stp .stx{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
+  .stp .got{font-weight:700;color:var(--navy)}
+  .stp .got::before{content:"▸";color:var(--orange);margin-right:7px}
+  .stp .got b{color:var(--danger)}
+  .stp.on{background:#FDF3EC;border-left-color:var(--danger);box-shadow:0 0 0 2px rgba(214,58,47,.22)}
+  .stp.on .num{background:var(--danger)}
+  .figc{flex:1.18;display:flex;flex-direction:column;overflow:hidden;position:relative}
   .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
   .figc svg{width:100%;height:100%}
+  .segfloat{position:absolute;top:56px;right:14px;z-index:5;max-width:78%;background:#fff;border:2px solid var(--blue);border-radius:10px;padding:5px 14px;font-size:18px;font-weight:700;color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 2px 10px rgba(20,40,90,.18)}
+  .prog{position:absolute;top:60px;left:16px;z-index:5;font-size:17px;color:var(--muted);background:rgba(255,255,255,.9);padding:2px 10px;border-radius:8px}
+  .ctl{display:flex;flex-direction:column;gap:6px;padding:6px 0 8px}
+  .ctl-r{display:flex;align-items:center;gap:10px;justify-content:center}
+  .btn{background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:19px;font-weight:700;padding:8px 20px;cursor:pointer;min-width:112px;text-align:center;white-space:nowrap}
+  .btn.ghost{background:#fff;color:var(--blue);border:2px solid var(--blue)}
+  .kr,.stab{font-size:19px;font-weight:700;border-radius:10px;padding:7px 14px;white-space:nowrap}
+  .kr{color:var(--navy);background:var(--sky)}
+  .stab{color:#fff;background:var(--danger)}
+  @keyframes rlPulse{0%,100%{opacity:1}50%{opacity:.25}}
+  .rl-flash{animation:rlPulse .9s ease-in-out infinite}
 </style>
 </head>
-<body data-title="② 零度根轨迹：正反馈系统分析（例5-10）" data-page="41 / 61">
+<body data-title="② 零度根轨迹：正反馈系统分步绘制（例5-10）" data-page="42 / 60">
 <div class="act-stage"><div class="act-slide">
-  <div class="act-body has-note">
-    <div class="row">
-      <div class="lft">
-        <div class="act-card" style="flex:.94">
-          <div class="hd">正反馈系统（零度根轨迹）</div>
-          <div class="bd">
-            <div class="eq"><span class="tex">G(s)H(s)=\dfrac{K_{1}}{s(s+1)(s+2)}</span><span>（正反馈）</span></div>
-            <div class="kv" data-step="1">与例5-5 同一开环，但接成正反馈 → 相角条件 0°+2qπ → 按<span class="kw-r">零度根轨迹</span>绘制。</div>
-          </div>
-        </div>
-        <div class="act-card" style="flex:1.43">
-          <div class="hd">按 0° 规则逐条分析</div>
-          <div class="bd">
-            <div data-step="2"><div class="eq">实轴段（右侧偶数）：<span class="tex">[-2,\,-1]</span> 与 <span class="tex">[0,\,+\infty)</span></div></div>
-            <div data-step="3"><div class="eq"><span class="tex">\sigma_{a}=-1</span>，<span class="tex">\varphi_{a}=\dfrac{2q\times180^{\circ}}{3}=0^{\circ},\,\pm120^{\circ}</span></div></div>
-            <div data-step="4"><div class="eq">分离点：<span class="tex">3s^{2}+6s+2=0</span> 的两根中取 <span class="tex">s=-1.58</span>（−0.42 属负反馈情形）</div></div>
-            <div class="kv" data-step="5"><b>直观解释</b>：正实轴 <span class="tex">[0,+\infty)</span> 为何整段都是根轨迹？
-              <div class="grp">
-                <div class="li">0° 规则要求右侧实零极点数为<b>偶数</b></div>
-                <div class="li">正实轴上任意点右侧恰有 <b>0</b> 个（偶数）→ 整段成立</div>
-                <div class="li">故一支闭环极点<span class="kw-r">常驻右半平面</span></div>
-              </div>
-            </div>
-          </div>
+<div class="act-body has-note">
+  <div class="row">
+    <div class="lft">
+      <div class="act-card">
+        <div class="hd">题设：同一开环，改为正反馈</div>
+        <div class="bd" style="justify-content:center;gap:9px">
+          <div class="eq"><span class="tex">G(s)H(s)=\dfrac{K_{1}}{s(s+1)(s+2)}</span>（正反馈）</div>
+          <div class="task">特征方程 <span class="tex">1-G(s)H(s)=0</span>，按 0° 法则绘制</div>
         </div>
       </div>
-      <div class="act-card figc">
-        <div class="hd"><span style="flex:1">完整 0° 根轨迹：实轴段、渐近线、分离点全标注</span></div>
-        <div class="bd2"><svg id="fig"></svg></div>
+      <div class="act-card" style="flex:1">
+        <div class="hd">按法则逐步绘制（与右图联动）</div>
+        <div class="bd">
+          <div class="stp" id="s1"><span class="num">1</span><div class="stx"><div>开环极点 <span class="tex">0,-1,-2</span>，<span class="tex">n=3,m=0</span></div><div class="got">标出 <b>3 个极点</b>，确定 3 条分支</div></div></div>
+          <div class="stp" id="s2"><span class="num">2</span><div class="stx"><div>实轴上，右侧实零极点数为<b>偶数</b>的区段属于 0° 根轨迹</div><div class="got">得 <b>[−2,−1]</b> 与 <b>[0,+∞)</b></div></div></div>
+          <div class="stp" id="s3"><span class="num">3</span><div class="stx"><div><span class="tex">\sigma_{a}=\dfrac{0-1-2}{3}=-1</span>，<span class="tex">\varphi_{a}=\dfrac{2q\times180^{\circ}}{3}</span></div><div class="got">渐近线角为 <b>0°、±120°</b></div></div></div>
+          <div class="stp" id="s4"><span class="num">4</span><div class="stx"><div><span class="tex">3s^{2}+6s+2=0</span>，仅 <span class="tex">s=-1.577</span> 位于本例实轴轨迹段</div><div class="got">在 <b>−1.577 分离</b>（<span class="tex">K_{1}\approx0.385</span>）</div></div></div>
+          <div class="stp" id="s5"><span class="num">5</span><div class="stx"><div><span class="tex">K_{1}\to\infty</span>：复数两支沿 ±120° 渐近线延伸，另一支沿正实轴延伸</div><div class="got"><b>正实轴一支恒在右半平面</b></div></div></div>
+        </div>
       </div>
     </div>
+    <div class="act-card figc">
+      <div class="hd">例5-10：0° 根轨迹逐步生长</div>
+      <span class="segfloat" id="segChip" style="display:none"></span><span class="prog" id="prog">0 / 5</span>
+      <div class="bd2"><svg id="fig"></svg></div>
+      <div class="ctl"><div class="ctl-r"><button class="btn" id="play">▶ 播放</button><button class="btn ghost" id="step">⧉ 分步</button><button class="btn ghost" onclick="ACT.step.reset()">↺ 重置</button></div>
+        <div class="ctl-r"><span class="kr">K₁ = <b id="kv" style="color:var(--danger)">0</b></span><span class="stab" id="stab">K₁&gt;0：恒不稳定</span></div></div>
+    </div>
   </div>
-  <div class="act-note"><span class="lead">注意</span><span>同一开环、同一极点：只因反馈极性不同，实轴段判据由奇变偶、渐近线角由 ±60°/180° 变为 0°/±120°。</span></div>
+</div>
+<div class="act-note"><span class="lead">要点</span><span>零度根轨迹仍按“零极点 → 实轴段 → 渐近线 → 关键点 → 完整分支”的顺序绘制；本例正实轴分支使系统对任意 <span class="tex">K_{1}&gt;0</span> 均不稳定。</span></div>
+<div data-step="1" style="display:none"></div><div data-step="2" style="display:none"></div><div data-step="3" style="display:none"></div><div data-step="4" style="display:none"></div><div data-step="5" style="display:none"></div>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  const F = RL.figure("fig", "zex52", { vw: 960, vh: 600, static: true });
-  F.setAllF(1);
-  /* 关键要素标注（渐近线角/σₐ 由 fig.js?v=219 自动标注，这里只补实轴段与分离点） */
-  F.tx(F.gDyn, F.X(1.7), F.Y(0) - 42, "[0,+∞) 整段", { fs: 24, fill: RL.FOCUS, b: 1 });
-  F.tx(F.gDyn, F.X(-1.5), F.Y(0) - 58, "[−2,−1]", { fs: 24, fill: "#1B3B8B", b: 1 });
-  const bx = F.X(-1.5774), by = F.Y(0);
-  F.mk("circle", { cx: bx, cy: by, r: 9, fill: RL.FOCUS, stroke: "#fff", "stroke-width": 2.5 }, F.gDyn);
-  F.tx(F.gDyn, bx - 16, by + 54, "分离点 −1.58", { fs: 23, fill: RL.FOCUS, b: 1, an: "end" });
+  const F = RL.figure("fig", "zex52", { vw:960, vh:600, segs:false, asym:false, brkDots:false, crossSq:false, asymLabels:false, sigA:false });
+  const fD = F.f_of_K(0.3849), FS = [0,0,0,0,fD,1];
+  function frame(f){document.getElementById("kv").textContent=f>=.999?"→ ∞":RL.fmtK(F.K_of_f(f));}
+  function unflash(){F.segEls.forEach(e=>e.classList.remove("rl-flash"));F.gAsym.classList.remove("rl-flash");F.brkDots.forEach(e=>e.classList.remove("rl-flash"));}
+  function paint(K){
+    unflash();
+    if(K===1){const g=F.mk("g",{"class":"rl-flash"},F.gDyn);F.data.poles.forEach(p=>F.mk("circle",{cx:F.X(p[0]),cy:F.Y(p[1]),r:22,fill:"none",stroke:RL.FOCUS,"stroke-width":3.5},g));}
+    F.segEls.forEach(e=>{e.style.opacity=K>=2?.48:0;if(K===2)e.classList.add("rl-flash");});
+    F.gAsym.style.opacity=K>=3?1:0;
+    if(K>=3){
+      if(K===3)F.gAsym.classList.add("rl-flash");
+      F.tx(F.gDyn,F.X(2.6),F.Y(0)-30,"0°",{fs:25,fill:RL.ASY,b:1});
+      F.tx(F.gDyn,F.X(-2.75),F.Y(2.9),"+120°",{fs:25,fill:RL.ASY,b:1});
+      F.tx(F.gDyn,F.X(-2.75),F.Y(-2.9),"−120°",{fs:25,fill:RL.ASY,b:1});
+      F.tx(F.gDyn,F.X(-1),F.Y(0)+52,"σ_{a}=−1",{fs:25,fill:RL.ASY,b:1});
+    }
+    F.brkDots.forEach(e=>{e.style.opacity=K>=4?1:0;if(K===4)e.classList.add("rl-flash");});
+    if(K>=4)F.tx(F.gDyn,F.X(-1.5774)-18,F.Y(0)+56,"分离点 −1.577",{fs:23,fill:RL.FOCUS,b:1,an:"end"});
+    if(K>=5)F.tx(F.gDyn,F.X(1.35),F.Y(0)-54,"正实轴分支：恒在右半平面",{fs:23,fill:RL.FOCUS,b:1});
+    for(let i=1;i<=5;i++)document.getElementById("s"+i).classList.toggle("on",i===K);
+  }
+  RL.wire(5,paint,{figs:[F],FS,dur:11000,frame,pick:hit=>{document.getElementById("kv").textContent=RL.fmtK(hit.K);}});
+  const STEPS=["① 标记三个开环极点","② 实轴段 [−2,−1]、[0,+∞)","③ 渐近线 σₐ=−1，0°/±120°","④ 在 −1.577 分离","⑤ 沿渐近线趋向无穷"];
+  const chip=document.getElementById("segChip"),total=5,wNext=ACT.step.next,wReset=ACT.step.reset;
+  let segRaf=null,segTok=0;
+  function segStopUI(){segTok++;if(segRaf){cancelAnimationFrame(segRaf);segRaf=null;}chip.style.display="none";}
+  ACT.step.next=function(){segStopUI();return wNext();};
+  ACT.step.reset=function(){segStopUI();return wReset();};
+  const playBtn=document.getElementById("play");if(playBtn&&playBtn.onclick){const po=playBtn.onclick;playBtn.onclick=e=>{segStopUI();po(e);};}
+  function segGo(instant){
+    segStopUI();if(ACT.step.cur>=total)wReset();wNext();const k=ACT.step.cur,f0=FS[k-1],f1=FS[k];
+    chip.textContent="分步 "+k+" / "+total+"　"+STEPS[k-1];chip.style.display="";
+    if(instant||f1<=f0+1e-9){F.setAllF(f1);frame(f1);return;}
+    F.setAllF(f0);frame(f0);const t0=performance.now(),D=1700,tok=segTok;
+    const tick=now=>{if(tok!==segTok)return;const u=Math.min(1,(now-t0)/D),f=f0+(f1-f0)*u;F.setAllF(f);frame(f);if(u<1)segRaf=requestAnimationFrame(tick);else segRaf=null;};segRaf=requestAnimationFrame(tick);
+  }
+  document.getElementById("step").onclick=()=>segGo(false);
+  window.addEventListener("load",()=>{const n=+(new URLSearchParams(location.search).get("step")||0);for(let i=0;i<Math.min(n,total);i++)segGo(true);});
 });
 </script>
 </div></div>

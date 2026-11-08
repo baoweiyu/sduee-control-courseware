@@ -1,0 +1,922 @@
+[
+  {
+    "number": 1,
+    "file": "pages/p01-cover.html",
+    "page": "1 / 60",
+    "title": "第五章封面",
+    "steps": 0,
+    "mathErrors": 0,
+    "clipped": [],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 2,
+    "file": "pages/p02-schedule.html",
+    "page": "2 / 60",
+    "title": "本章课次安排",
+    "steps": 0,
+    "mathErrors": 0,
+    "clipped": [],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 3,
+    "file": "pages/p03-part1-cover.html",
+    "page": "3 / 60",
+    "title": "5.1 节封面 · 根轨迹的基本概念",
+    "steps": 0,
+    "mathErrors": 0,
+    "clipped": [],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 4,
+    "file": "pages/p04-intro.html",
+    "page": "4 / 60",
+    "title": "引言：为什么需要根轨迹",
+    "steps": 3,
+    "mathErrors": 0,
+    "clipped": [],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 5,
+    "file": "pages/p05-ex-derive.html",
+    "page": "5 / 60",
+    "title": "引例（1）：系统与闭环特征方程",
+    "steps": 4,
+    "mathErrors": 0,
+    "clipped": [],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 6,
+    "file": "pages/p06-ex-table.html",
+    "page": "6 / 60",
+    "title": "引例（2）：特征根随 K₁ 变化的数值表",
+    "steps": 3,
+    "mathErrors": 0,
+    "clipped": [
+      {
+        "title": "读表",
+        "sh": 293,
+        "ch": 278,
+        "sw": 610,
+        "cw": 610
+      }
+    ],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 7,
+    "file": "pages/p07-intro-anim.html",
+    "page": "7 / 60",
+    "title": "引例（3）：根轨迹的定义",
+    "steps": 6,
+    "mathErrors": 0,
+    "clipped": [
+      {
+        "title": "引例系统（单位负反馈）",
+        "sh": 193,
+        "ch": 188,
+        "sw": 553,
+        "cw": 553
+      },
+      {
+        "title": "实时读数（随 K₁ 联动）",
+        "sh": 225,
+        "ch": 219,
+        "sw": 553,
+        "cw": 553
+      },
+      {
+        "title": "运动过程",
+        "sh": 315,
+        "ch": 307,
+        "sw": 553,
+        "cw": 553
+      }
+    ],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 8,
+    "file": "pages/p08-perf-link.html",
+    "page": "8 / 60",
+    "title": "引例（4）：由根轨迹读取系统性能",
+    "steps": 3,
+    "mathErrors": 0,
+    "clipped": [],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 9,
+    "file": "pages/p09-equation.html",
+    "page": "9 / 60",
+    "title": "根轨迹方程",
+    "steps": 8,
+    "mathErrors": 0,
+    "clipped": [],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 10,
+    "file": "pages/p10-ex51-complex.html",
+    "page": "10 / 60",
+    "title": "两个条件的应用·示例一：复平面试验点判定",
+    "steps": 5,
+    "mathErrors": 0,
+    "clipped": [
+      {
+        "title": "逐项量相角（相角条件）",
+        "sh": 355,
+        "ch": 343,
+        "sw": 610,
+        "cw": 610
+      }
+    ],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 11,
+    "file": "pages/p11-ex51-real.html",
+    "page": "11 / 60",
+    "title": "两个条件的应用·示例二：实轴试验点与求 K₁",
+    "steps": 4,
+    "mathErrors": 0,
+    "clipped": [
+      {
+        "title": "逐项验算（先相角、后幅值）",
+        "sh": 354,
+        "ch": 327,
+        "sw": 610,
+        "cw": 610
+      }
+    ],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 12,
+    "file": "pages/p12-quiz1.html",
+    "page": "12 / 60",
+    "title": "课堂互动①：方程与两个条件",
+    "steps": 1,
+    "mathErrors": 0,
+    "clipped": [],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 13,
+    "file": "pages/p13-sec52-cover.html",
+    "page": "13 / 60",
+    "title": "5.2节封面：绘制根轨迹的基本规则",
+    "steps": 0,
+    "mathErrors": 0,
+    "clipped": [],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 14,
+    "file": "pages/p14-rule1-symmetry.html",
+    "page": "14 / 60",
+    "title": "法则一：分支数与对称性",
+    "steps": 3,
+    "mathErrors": 0,
+    "clipped": [],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 15,
+    "file": "pages/p15-rule2-endpoints.html",
+    "page": "15 / 60",
+    "title": "法则二：起点与终点",
+    "steps": 3,
+    "mathErrors": 0,
+    "clipped": [
+      {
+        "title": "法则内容",
+        "sh": 230,
+        "ch": 223,
+        "sw": 610,
+        "cw": 610
+      }
+    ],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 16,
+    "file": "pages/p16-rule3.html",
+    "page": "16 / 60",
+    "title": "法则三：实轴上的根轨迹",
+    "steps": 6,
+    "mathErrors": 0,
+    "clipped": [
+      {
+        "title": "法则三（判定规则）",
+        "sh": 153,
+        "ch": 143,
+        "sw": 553,
+        "cw": 553
+      },
+      {
+        "title": "怎么来的（相角条件）",
+        "sh": 239,
+        "ch": 234,
+        "sw": 553,
+        "cw": 553
+      }
+    ],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 17,
+    "file": "pages/p17-ex53-system.html",
+    "page": "17 / 60",
+    "title": "例5-3：系统与实轴段",
+    "steps": 3,
+    "mathErrors": 0,
+    "clipped": [],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 18,
+    "file": "pages/p18-ex53-circle-proof.html",
+    "page": "18 / 60",
+    "title": "例5-3：圆根轨迹是解析圆",
+    "steps": 4,
+    "mathErrors": 0,
+    "clipped": [],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 19,
+    "file": "pages/p19-rule4-asymptote.html",
+    "page": "19 / 60",
+    "title": "法则四：渐近线",
+    "steps": 3,
+    "mathErrors": 0,
+    "clipped": [
+      {
+        "title": "示例（𝐺(𝑠) =𝐾1𝑠(𝑠+1)(𝑠+4)，𝑛 −𝑚 =3）",
+        "sh": 122,
+        "ch": 111,
+        "sw": 634,
+        "cw": 634
+      }
+    ],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 20,
+    "file": "pages/p20-asym-dual.html",
+    "page": "20 / 60",
+    "title": "法则四：渐近线计算示例（双例对照）",
+    "steps": 3,
+    "mathErrors": 0,
+    "clipped": [],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 21,
+    "file": "pages/p21-rule5-breakaway.html",
+    "page": "21 / 60",
+    "title": "法则五：分离点与会合点",
+    "steps": 3,
+    "mathErrors": 0,
+    "clipped": [],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 22,
+    "file": "pages/p22-ex53-breakaway.html",
+    "page": "22 / 60",
+    "title": "例5-3：分离点与会合点",
+    "steps": 5,
+    "mathErrors": 0,
+    "clipped": [],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 23,
+    "file": "pages/p23-ex53-circle.html",
+    "page": "23 / 60",
+    "title": "例5-3：圆根轨迹完整绘制",
+    "steps": 5,
+    "mathErrors": 0,
+    "clipped": [
+      {
+        "title": "绘制步骤（与右图分步联动）",
+        "sh": 280,
+        "ch": 272,
+        "sw": 566,
+        "cw": 566
+      }
+    ],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 24,
+    "file": "pages/p24-rule6-angles.html",
+    "page": "24 / 60",
+    "title": "法则六：出射角与入射角",
+    "steps": 4,
+    "mathErrors": 0,
+    "clipped": [
+      {
+        "title": "法则内容",
+        "sh": 291,
+        "ch": 270,
+        "sw": 646,
+        "cw": 646
+      },
+      {
+        "title": "演示步骤（与右图分步一一对应）",
+        "sh": 251,
+        "ch": 245,
+        "sw": 646,
+        "cw": 646
+      }
+    ],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 25,
+    "file": "pages/p25-departure-example.html",
+    "page": "25 / 60",
+    "title": "出射角计算示例",
+    "steps": 4,
+    "mathErrors": 0,
+    "clipped": [],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 26,
+    "file": "pages/p26-rule7-crossing.html",
+    "page": "26 / 60",
+    "title": "法则七：根轨迹与虚轴的交点",
+    "steps": 3,
+    "mathErrors": 0,
+    "clipped": [],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 27,
+    "file": "pages/p27-rules-table.html",
+    "page": "27 / 60",
+    "title": "绘制根轨迹的基本法则总表",
+    "steps": 0,
+    "mathErrors": 0,
+    "clipped": [],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 28,
+    "file": "pages/p28-quiz2.html",
+    "page": "28 / 60",
+    "title": "课堂互动②：实轴段与渐近线",
+    "steps": 2,
+    "mathErrors": 0,
+    "clipped": [],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 29,
+    "file": "pages/p31-ex52-analysis.html",
+    "page": "29 / 60",
+    "title": "例5-5：分析与计算",
+    "steps": 5,
+    "mathErrors": 0,
+    "clipped": [],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 30,
+    "file": "pages/p32-ex52-full.html",
+    "page": "30 / 60",
+    "title": "例5-5：完整根轨迹绘制",
+    "steps": 6,
+    "mathErrors": 0,
+    "clipped": [],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 31,
+    "file": "pages/p29-ex54-calc-full.html",
+    "page": "31 / 60",
+    "title": "例5-6：关键要素完整计算",
+    "steps": 5,
+    "mathErrors": 0,
+    "clipped": [
+      {
+        "title": "计算与绘制步骤（与右图分步联动）",
+        "sh": 602,
+        "ch": 595,
+        "sw": 634,
+        "cw": 634
+      }
+    ],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 32,
+    "file": "pages/p30-ex54-anim.html",
+    "page": "32 / 60",
+    "title": "例5-6：完整根轨迹绘制",
+    "steps": 6,
+    "mathErrors": 0,
+    "clipped": [],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 33,
+    "file": "pages/p33-ex57-finale.html",
+    "page": "33 / 60",
+    "title": "例5-7：完整根轨迹绘制",
+    "steps": 7,
+    "mathErrors": 0,
+    "clipped": [
+      {
+        "title": "绘制步骤（与右图分步联动）",
+        "sh": 332,
+        "ch": 326,
+        "sw": 564,
+        "cw": 564
+      }
+    ],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 34,
+    "file": "pages/p34-part3-cover.html",
+    "page": "34 / 60",
+    "title": "5.3节封面：广义根轨迹",
+    "steps": 0,
+    "mathErrors": 0,
+    "clipped": [],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 35,
+    "file": "pages/p35-general-idea.html",
+    "page": "35 / 60",
+    "title": "引·概念与黄金法则：整理成标准形",
+    "steps": 10,
+    "mathErrors": 0,
+    "clipped": [],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 36,
+    "file": "pages/p36-ex58a-equiv.html",
+    "page": "36 / 60",
+    "title": "① 参量根轨迹：等效变换（例5-8）",
+    "steps": 3,
+    "mathErrors": 0,
+    "clipped": [],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 37,
+    "file": "pages/p37-ex58b-anim.html",
+    "page": "37 / 60",
+    "title": "① 参量根轨迹：圆轨迹绘制动画（例5-8）",
+    "steps": 4,
+    "mathErrors": 0,
+    "clipped": [],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 38,
+    "file": "pages/p38-ex59-family.html",
+    "page": "38 / 60",
+    "title": "① 参量根轨迹：固定 K₁ 的三幅轨迹（例5-9）",
+    "steps": 12,
+    "mathErrors": 0,
+    "clipped": [],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 39,
+    "file": "pages/p38b-ex59-family.html",
+    "page": "39 / 60",
+    "title": "① 参量根轨迹：K₁ 与 a 双参数轨迹簇（例5-9）",
+    "steps": 3,
+    "mathErrors": 0,
+    "clipped": [],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 40,
+    "file": "pages/p39-zero-a.html",
+    "page": "40 / 60",
+    "title": "② 零度根轨迹：由来与相角条件",
+    "steps": 4,
+    "mathErrors": 0,
+    "clipped": [],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 41,
+    "file": "pages/p40-zero-b.html",
+    "page": "41 / 60",
+    "title": "② 零度根轨迹：规则对照表",
+    "steps": 8,
+    "mathErrors": 0,
+    "clipped": [],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 42,
+    "file": "pages/p41-ex510a-analyze.html",
+    "page": "42 / 60",
+    "title": "② 零度根轨迹：正反馈系统分步绘制（例5-10）",
+    "steps": 5,
+    "mathErrors": 0,
+    "clipped": [],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 43,
+    "file": "pages/p42-ex510b-dual-anim.html",
+    "page": "43 / 60",
+    "title": "② 零度根轨迹：180°/0° 对照动画（例5-10）",
+    "steps": 4,
+    "mathErrors": 0,
+    "clipped": [],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 44,
+    "file": "pages/p43-nonmin-phase.html",
+    "page": "44 / 60",
+    "title": "③ 非最小相位系统：概念与判型",
+    "steps": 5,
+    "mathErrors": 0,
+    "clipped": [],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 45,
+    "file": "pages/p44-ex511-classify.html",
+    "page": "45 / 60",
+    "title": "③ 非最小相位系统：分步绘制（例5-11）",
+    "steps": 4,
+    "mathErrors": 0,
+    "clipped": [],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 46,
+    "file": "pages/p45-ex511-dual-anim.html",
+    "page": "46 / 60",
+    "title": "③ 非最小相位系统：180°/0° 对照（例5-11）",
+    "steps": 4,
+    "mathErrors": 0,
+    "clipped": [],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 47,
+    "file": "pages/p48-part4-cover.html",
+    "page": "47 / 60",
+    "title": "5.4 根轨迹分析方法",
+    "steps": 0,
+    "mathErrors": 0,
+    "clipped": [],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 48,
+    "file": "pages/p49-closed-zero-gain.html",
+    "page": "48 / 60",
+    "title": "① 闭环零点与闭环增益",
+    "steps": 5,
+    "mathErrors": 0,
+    "clipped": [],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 49,
+    "file": "pages/p50-trial-method.html",
+    "page": "49 / 60",
+    "title": "② 闭环极点的确定：试探法与根之和校验",
+    "steps": 4,
+    "mathErrors": 0,
+    "clipped": [],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 50,
+    "file": "pages/p51-ex513a-zeta.html",
+    "page": "50 / 60",
+    "title": "② 闭环极点的确定｜例5-13：按 ζ=0.5 选点求 K₁",
+    "steps": 4,
+    "mathErrors": 0,
+    "clipped": [],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 51,
+    "file": "pages/p52-ex513b-phi.html",
+    "page": "51 / 60",
+    "title": "② 闭环极点的确定｜例5-13：求其余极点并写出 Φ(s)",
+    "steps": 5,
+    "mathErrors": 0,
+    "clipped": [],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 52,
+    "file": "pages/p53-pole-effects.html",
+    "page": "52 / 60",
+    "title": "③ 零极点分布与性能：四条对应关系",
+    "steps": 5,
+    "mathErrors": 0,
+    "clipped": [],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 53,
+    "file": "pages/p54-dipole.html",
+    "page": "53 / 60",
+    "title": "③ 零极点分布与性能：闭环偶极子",
+    "steps": 4,
+    "mathErrors": 0,
+    "clipped": [],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 54,
+    "file": "pages/p55-ex514a-two-systems.html",
+    "page": "54 / 60",
+    "title": "④ 闭环零点的影响｜例5-14：同一根轨迹为何有不同闭环零点",
+    "steps": 3,
+    "mathErrors": 0,
+    "clipped": [],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 55,
+    "file": "pages/p56-ex514b-response-anim.html",
+    "page": "55 / 60",
+    "title": "④ 闭环零点的影响｜例5-14：闭环零点对阶跃响应的影响",
+    "steps": 0,
+    "mathErrors": 0,
+    "clipped": [],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 56,
+    "file": "pages/p57-ex515-dominant.html",
+    "page": "56 / 60",
+    "title": "⑤ 主导极点与高阶降阶｜例5-15：三阶系统的二阶近似",
+    "steps": 0,
+    "mathErrors": 0,
+    "clipped": [
+      {
+        "title": "二阶近似",
+        "sh": 204,
+        "ch": 188,
+        "sw": 624,
+        "cw": 624
+      }
+    ],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 57,
+    "file": "pages/p58-ex516-zero-move-anim.html",
+    "page": "57 / 60",
+    "title": "⑥ 开环零极点配置｜例5-16：开环零点位置的影响",
+    "steps": 5,
+    "mathErrors": 0,
+    "clipped": [
+      {
+        "title": "结论",
+        "sh": 232,
+        "ch": 225,
+        "sw": 569,
+        "cw": 569
+      }
+    ],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 58,
+    "file": "pages/p59-three-rules.html",
+    "page": "58 / 60",
+    "title": "⑥ 开环零极点配置的三大规律",
+    "steps": 0,
+    "mathErrors": 0,
+    "clipped": [],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 59,
+    "file": "pages/p60-summary-quiz3.html",
+    "page": "59 / 60",
+    "title": "⑦ 本章小结：从概念到设计",
+    "steps": 0,
+    "mathErrors": 0,
+    "clipped": [
+      {
+        "title": "⑤ 分析与设计（5.4）",
+        "sh": 159,
+        "ch": 154,
+        "sw": 1267,
+        "cw": 1267
+      }
+    ],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  },
+  {
+    "number": 60,
+    "file": "pages/p61-quiz3.html",
+    "page": "60 / 60",
+    "title": "⑦ 课堂互动：根轨迹法综合判断",
+    "steps": 1,
+    "mathErrors": 0,
+    "clipped": [],
+    "badButtons": [],
+    "noteOverlap": false,
+    "errors": [],
+    "failed": []
+  }
+]

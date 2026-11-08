@@ -10,13 +10,13 @@
 <script src="../../../theme/act-base.js?v=219" defer></script>
 <style>
   .row{display:flex;gap:22px;height:100%;min-height:0}
-  .lft{flex:1.08;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .lft{flex:1.08;display:flex;flex-direction:column;gap:10px;min-height:0}
   .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
-  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:6px;padding:8px 20px;font-size:19.5px;line-height:1.42}
-  .kv{background:var(--sky);border-radius:12px;padding:8px 14px;line-height:1.45}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:4px;padding:5px 17px;font-size:18.5px;line-height:1.34}
+  .kv{background:var(--sky);border-radius:12px;padding:6px 13px;line-height:1.34}
   .kv.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
-  .grp{display:flex;flex-direction:column;gap:7px}
-  .li{position:relative;padding-left:22px;line-height:1.42}
+  .grp{display:flex;flex-direction:column;gap:5px}
+  .li{position:relative;padding-left:22px;line-height:1.38}
   .li::before{content:"";position:absolute;left:2px;top:.42em;width:9px;height:9px;border-radius:2px;background:var(--orange)}
   .figc{flex:1;display:flex;flex-direction:column;overflow:hidden}
   .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:6px 10px;min-height:0}
@@ -24,7 +24,7 @@
   .figc .cap{flex:none;font-size:19.5px;color:var(--navy);background:var(--sky);border-radius:12px;padding:9px 16px;margin:0 14px 12px;line-height:1.45}
 </style>
 </head>
-<body data-title="③ 零极点分布与性能：四条对应关系" data-page="53 / 61">
+<body data-title="③ 零极点分布与性能：四条对应关系" data-page="52 / 60">
 <div class="act-stage"><div class="act-slide">
   <div class="act-body has-note">
     <div class="row">
@@ -56,19 +56,19 @@
             </div>
           </div>
         </div>
-        <div class="act-card" style="flex:1">
+        <div class="act-card" style="flex:1.12">
           <div class="hd">④ 快速性</div>
-          <div class="bd">
-            <div class="grp" data-step="4">
-              <div class="li">主导极点<span class="kw">离虚轴越远</span>，<span class="tex">e^{\sigma t}</span> 衰减越快</div>
-              <div class="li">调节时间 <span class="tex">t_{s}\approx3\sim4\,/\,|\sigma|</span> 越短</div>
+          <div class="bd" style="padding:3px 15px;gap:2px">
+            <div class="grp" data-step="4" style="gap:4px;line-height:1.3">
+              <div class="li" style="line-height:1.3">主导极点<span class="kw">离虚轴越远</span>，<span class="tex">e^{\sigma t}</span> 衰减越快</div>
+              <div class="li" style="line-height:1.3">也可利用<span class="kw">闭环零点</span>与虚轴附近的闭环极点构成<span class="kw">闭环偶极子</span>，削弱慢模态，使衰减加快</div>
             </div>
           </div>
         </div>
-        <div class="act-card" style="flex:.98">
+        <div class="act-card" style="flex:1.02">
           <div class="hd">结论：主导极点</div>
           <div class="bd">
-            <div class="kv hl" data-step="5">高阶系统中<span class="kw">离虚轴最近且附近无零点</span>的极点对衰减最慢、<span class="kw">主导整个响应</span>（降阶见例5-15）。</div>
+            <div class="kv hl" data-step="5">高阶系统中，<span class="kw">离虚轴最近且附近无零点</span>的极点对衰减最慢，通常<span class="kw">主导响应</span>（降阶见例5-15）。</div>
           </div>
         </div>
       </div>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>① 参量根轨迹：K₁ 与 a 双参数轨迹簇（例5-9）</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=219">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=219" defer></script>
+<script src="../fig.js?v=219"></script>
+<script src="../data/fam59.js?v=219"></script>
+<style>
+  .row{display:flex;gap:20px;height:100%;min-height:0}
+  .left{flex:.86;display:flex;flex-direction:column;gap:13px;min-height:0}
+  .left>.act-card{flex:1}
+  .left>.act-card:first-child{flex:1.28}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:9px;padding:11px 17px;font-size:20px;line-height:1.47}
+  .eq{background:var(--sky);border-radius:11px;padding:9px 12px;text-align:center}
+  .kv{background:var(--sky);border-radius:11px;padding:8px 12px}
+  .kv.orange{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .figc{flex:1.25;position:relative}
+  .figc .bd2{flex:1;min-height:0;background:#fff;margin:0 8px;border-radius:10px;position:relative}
+  .figc svg{width:100%;height:100%}
+  .zbar{position:absolute;right:8px;bottom:8px;display:flex;gap:5px;z-index:2}
+  .zbtn{width:35px;height:35px;border:2px solid var(--blue);border-radius:8px;background:rgba(255,255,255,.95);color:var(--blue);font-size:23px;font-weight:700;line-height:1;cursor:pointer;padding:0}
+  .zbtn.reset{font-size:16px;width:43px}
+  .zbtn:focus-visible{outline:3px solid var(--orange);outline-offset:1px}
+  .legend{flex:none;display:flex;justify-content:center;gap:9px;padding:7px 5px 2px}
+  .chip{display:flex;align-items:center;gap:6px;border:2px solid transparent;background:var(--sky);border-radius:9px;padding:5px 10px;font-size:17px;font-weight:700;color:var(--navy);cursor:pointer;white-space:nowrap}
+  .chip i{width:24px;height:6px;border-radius:3px}
+  .chip.cur{border-color:var(--danger);background:#FDF3EC}
+  .chip:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+  .ctl{flex:none;display:flex;align-items:center;justify-content:center;gap:9px;padding:7px 6px 10px}
+  .btn{border:0;border-radius:9px;background:var(--blue);color:#fff;font-size:18px;font-weight:700;padding:7px 17px;cursor:pointer;white-space:nowrap}
+  .btn.ghost{background:#fff;color:var(--blue);border:2px solid var(--blue);padding:5px 15px}
+  .read{font-size:17px;color:var(--navy);font-weight:700;background:var(--sky);border-radius:9px;padding:6px 11px;white-space:nowrap}
+</style>
+</head>
+<body data-title="① 参量根轨迹：K₁ 与 a 双参数轨迹簇（例5-9）" data-page="39 / 60">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="left">
+        <div class="act-card">
+          <div class="hd">从三条轨迹到一簇轨迹</div>
+          <div class="bd">
+            <div class="eq"><span class="tex">s(s+1)(s+a)+K_{1}=0</span></div>
+            <div class="kv">沿<b>同一条曲线</b>移动：固定 <span class="tex">K_{1}</span>，只改变 <span class="tex">a</span>。</div>
+            <div class="kv">从一条曲线切换到另一条：改变 <span class="tex">K_{1}</span>，再让 <span class="tex">a</span> 变化。</div>
+            <div class="kv orange">因此，右图每条曲线仍是一幅参量根轨迹；三条曲线叠合后，才构成<b>双参数根轨迹簇</b>。</div>
+          </div>
+        </div>
+        <div class="act-card">
+          <div class="hd">共同的稳定边界</div>
+          <div class="bd" style="justify-content:center">
+            <div class="eq"><span class="tex">a(a+1)&gt;K_{1}\quad\Longleftrightarrow\quad a&gt;a^{*}=\dfrac{\sqrt{1+4K_{1}}-1}{2}</span></div>
+            <div class="kv">临界虚轴交点：<span class="tex">s=\pm j\sqrt{a^{*}}</span>。<span class="tex">K_{1}</span> 越大，稳定所需的 <span class="tex">a</span> 越大。</div>
+          </div>
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd">K₁ 与 a 同时变化：三幅参量轨迹的叠合</div>
+        <div class="bd2"><svg id="fig" aria-label="例5-9双参数根轨迹簇"></svg><div class="zbar"><button class="zbtn" id="zoomIn" title="放大" aria-label="放大根轨迹簇">＋</button><button class="zbtn" id="zoomOut" title="缩小" aria-label="缩小根轨迹簇">−</button><button class="zbtn reset" id="zoomReset" title="复位视图" aria-label="复位根轨迹簇视图">1:1</button></div></div>
+        <div class="legend" id="legend"></div>
+        <div class="ctl">
+          <button class="btn" id="play">▶ 播放</button><button class="btn ghost" id="step">下一条</button><button class="btn ghost" id="reset">重置</button>
+          <span class="read" id="read">点击播放，逐条叠加轨迹</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">要点</span><span>根轨迹簇不是一条新的轨迹，而是<span class="kw-r">多个固定 K₁ 下的参量根轨迹集合</span>；每条曲线上仍以 a 为变化参量。图内＋/−缩放，拖动平移，1:1 复位。</span></div>
+<div data-step="1" style="display:none"></div><div data-step="2" style="display:none"></div><div data-step="3" style="display:none"></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const F = RL.figure("fig", "fam59", { vw:960, vh:600, static:true, asym:false,
+    pzLabels:false, zoom:true, xlim:[-3.6,1.0], ylim:[-2.6,2.6] });
+  const fams = F.data.fams, colors = ["#1D3FA0", "#0E7A36", "#C2410C"];
+  const legend = document.getElementById("legend");
+  fams.forEach((fam,i) => {
+    const b = document.createElement("button"); b.className = "chip"; b.id = "chip"+i;
+    b.innerHTML = `<i style="background:${colors[i]}"></i>K₁=${fam.k}`;
+    b.onclick = () => isolate(i); legend.appendChild(b);
+  });
+  const path = (branch, frac=1) => {
+    const n = Math.max(2,Math.round(branch.length*frac));
+    const pts = branch.slice(0,n).map(p => [F.X(p[0]),F.Y(p[1])]);
+    return F.toPath(F.clipPoly(pts,F.PLOT));
+  };
+  function arrow(branch, color) {
+    const j = Math.floor(branch.length*.56), p0 = branch[j-5], p1 = branch[j];
+    const x0=F.X(p0[0]), y0=F.Y(p0[1]), x1=F.X(p1[0]), y1=F.Y(p1[1]);
+    if (x1<F.PLOT.x0 || x1>F.PLOT.x1 || y1<F.PLOT.y0 || y1>F.PLOT.y1) return;
+    const ang=Math.atan2(y1-y0,x1-x0)*180/Math.PI;
+    const g=F.mk("g",{transform:`translate(${x1},${y1}) rotate(${ang})`},F.gDyn);
+    F.mk("path",{d:"M10,0 L-9,6.5 L-9,-6.5 Z",fill:color,stroke:"#fff","stroke-width":1.2},g);
+  }
+  let progress=[0,0,0], selected=-1, raf=0, playing=false;
+  const stop=()=>{if(raf)cancelAnimationFrame(raf);raf=0;playing=false;document.getElementById("play").textContent="▶ 播放";};
+  function paint(){
+    F.gDyn.innerHTML="";
+    /* 公共等效零点只标一次；各组等效极点使用同色小叉。 */
+    [[0,0],[-1,0]].forEach(z=>F.mk("circle",{cx:F.X(z[0]),cy:F.Y(z[1]),r:11,fill:"#fff",stroke:"#16324F","stroke-width":4},F.gDyn));
+    fams.forEach((fam,i)=>{
+      const active=selected<0||selected===i, op=active?1:.13;
+      fam.poles.forEach(p=>{
+        const x=F.X(p[0]),y=F.Y(p[1]),r=8;
+        F.mk("line",{x1:x-r,y1:y-r,x2:x+r,y2:y+r,stroke:colors[i],"stroke-width":3,opacity:op},F.gDyn);
+        F.mk("line",{x1:x-r,y1:y+r,x2:x+r,y2:y-r,stroke:colors[i],"stroke-width":3,opacity:op},F.gDyn);
+      });
+      fam.branches.forEach(b=>{
+        if(progress[i]>0)F.mk("path",{d:path(b,progress[i]),fill:"none",stroke:colors[i],"stroke-width":active?4.5:3.5,"stroke-linecap":"round",opacity:op},F.gDyn);
+      });
+      if(progress[i]>=.999){fam.branches.forEach(b=>arrow(b,colors[i]));const w=fam.crossings[0].w;[w,-w].forEach(y=>F.mk("rect",{x:F.X(0)-7,y:F.Y(y)-7,width:14,height:14,fill:"#fff",stroke:colors[i],"stroke-width":2.5,opacity:op},F.gDyn));}
+      document.getElementById("chip"+i).classList.toggle("cur",selected===i);
+    });
+  }
+  const zoomBy=factor=>{F.view.s=Math.max(F.home.s*.65,Math.min(F.home.s*16,F.view.s*factor));F.render();};
+  document.getElementById("zoomIn").onclick=()=>zoomBy(1.35);
+  document.getElementById("zoomOut").onclick=()=>zoomBy(1/1.35);
+  document.getElementById("zoomReset").onclick=()=>F.resetView();
+  F.onView=paint;
+  function grow(i,done){
+    if(raf)cancelAnimationFrame(raf);selected=i;const t0=performance.now(),from=progress[i];
+    const tick=now=>{const u=Math.min(1,(now-t0)/2100);progress[i]=from+(1-from)*u;paint();
+      if(u<1)raf=requestAnimationFrame(tick);else{raf=0;if(done)done();}};raf=requestAnimationFrame(tick);
+  }
+  const baseNext=ACT.step.next.bind(ACT.step),baseReset=ACT.step.reset.bind(ACT.step);
+  function syncStep(k){baseReset();for(let j=0;j<k;j++)baseNext();}
+  function readFor(k){document.getElementById("read").textContent=k?`K₁=${fams[k-1].k}：稳定条件 a > a* = ${fams[k-1].astar.toFixed(2)}`:"点击播放，逐条叠加轨迹";}
+  function showThrough(k,instant=false){
+    stop();progress=fams.map((_,i)=>i<k-1?1:0);selected=k?k-1:-1;
+    if(k){progress[k-1]=instant?1:0;if(instant){selected=-1;paint();}else grow(k-1,()=>{progress=fams.map((_,i)=>i<k?1:0);selected=-1;paint();});}
+    else paint();readFor(k);
+  }
+  function isolate(i){stop();progress=fams.map((_,j)=>j===i?1:0);selected=i;paint();document.getElementById("read").textContent=`K₁=${fams[i].k}：稳定条件 a > a* = ${fams[i].astar.toFixed(2)}`;}
+  ACT.step.next=function(){if(ACT.step.cur>=3)return true;baseNext();showThrough(ACT.step.cur,false);return ACT.step.cur>=3;};
+  ACT.step.reset=function(){baseReset();showThrough(0,true);return 0;};
+  window.prev=function(){const k=Math.max(0,ACT.step.cur-1);syncStep(k);showThrough(k,true);};
+  window.qaFinal=()=>{syncStep(3);showThrough(3,true);document.getElementById("read").textContent="三条轨迹全部叠加";};
+  document.getElementById("step").onclick=()=>{if(ACT.step.cur>=3)ACT.step.reset();ACT.step.next();};
+  document.getElementById("play").onclick=()=>{
+    if(playing){stop();return;}ACT.step.reset();progress=[0,0,0];selected=0;playing=true;document.getElementById("play").textContent="❚❚ 暂停";
+    const t0=performance.now(),dur=9000;
+    const tick=now=>{if(!playing)return;const p=Math.min(3,3*(now-t0)/dur),full=Math.floor(p);progress=fams.map((_,i)=>i<full?1:(i===full?p-full:0));selected=Math.min(2,full);paint();
+      if(p<3)raf=requestAnimationFrame(tick);else{stop();selected=-1;syncStep(3);paint();document.getElementById("read").textContent="三条轨迹全部叠加";}};raf=requestAnimationFrame(tick);
+  };
+  document.getElementById("reset").onclick=()=>ACT.step.reset();
+  const q=new URLSearchParams(location.search);if(q.has("case"))isolate(Math.max(0,Math.min(2,+(q.get("case")||1)-1)));else paint();
+});
+</script>
+</div></div>
+</body>
+</html>

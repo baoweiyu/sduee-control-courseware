@@ -36,7 +36,7 @@
   .kv2 b{display:inline-block;min-width:4ch;font-variant-numeric:tabular-nums;color:var(--danger)}
 </style>
 </head>
-<body data-title="④ 闭环零点的影响｜例5-14：同一根轨迹为何有不同闭环零点" data-page="55 / 61">
+<body data-title="④ 闭环零点的影响｜例5-14：同一根轨迹为何有不同闭环零点" data-page="54 / 60">
 <div class="act-stage"><div class="act-slide">
   <div class="act-body">
     <div class="col">
@@ -60,15 +60,20 @@
       </div>
       <div class="botrow">
         <div class="act-card figc">
-          <div class="hd"><span style="flex:1">两系统共同的根轨迹（开环零极点相同 ⟹ 根轨迹相同）</span></div>
-          <div class="mini"><b>同一根轨迹 → 同一组闭环极点</b>，两系统差别仅在闭环零点</div>
+          <div class="hd"><span style="flex:1">共同根轨迹：闭环极点相同</span></div>
+          <div class="mini"><b>同一根轨迹 → 同一组闭环极点</b><br><span class="tex">s^{2}+(0.2+K_{1})s+1.25K_{1}=0,\quad K_{1}=0.16K</span></div>
           <div class="bd2"><svg id="rl"></svg></div>
           <div class="ctl">
             <button class="btn" id="play">▶ 播放</button>
             <button class="btn ghost" id="rst">↺ 重置</button>
             <span class="prog" id="prog">0 / 3</span>
-            <span class="kv2">K = <b id="kv">0</b>｜闭环极点 <b id="cp">0，−0.2</b></span>
           </div>
+          <div class="kv2" style="text-align:center;padding:0 5px 7px">K = <b id="kv">0</b>｜闭环极点 <b id="cp">0，−0.2</b></div>
+        </div>
+        <div class="act-card figc">
+          <div class="hd"><span style="flex:1">单位阶跃响应：闭环零点不同</span></div>
+          <div class="mini"><b>(a) 有闭环零点 −1.25</b>；(b) 无闭环零点（K=5）</div>
+          <div class="bd2"><svg id="resp55" viewBox="0 0 960 600" preserveAspectRatio="xMidYMid meet"></svg></div>
         </div>
       </div>
     </div>
@@ -173,6 +178,45 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   RL.wire(3, paint, { figs: [F], FS, dur: 9000, frame });
   document.getElementById("rst").onclick = () => ACT.step.reset();
+
+  /* ---- 与下一页相同的单位阶跃响应图：便于同页对照极点与零点的作用 ---- */
+  (function drawResponse() {
+    const svg = document.getElementById("resp55");
+    const mkR = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag);
+      for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+    const txR = (x, y, s, o) => { o = o || {}; const n = mkR("text", {
+      x, y, "font-size": o.fs || 23, "text-anchor": o.an || "middle",
+      fill: o.fill || "#16324F", "font-weight": o.b ? 700 : 400, "font-family": MF });
+      n.textContent = s;
+      n.setAttribute("style", "paint-order:stroke;stroke:#FFF;stroke-width:6;stroke-linejoin:round"); return n; };
+    const X0 = 74, X1 = 916, Y1 = 534, Y0 = 60, T = 10, YM = [-0.1, 1.5];
+    const X = t => X0 + (t / T) * (X1 - X0), Y = y => Y1 - (y - YM[0]) / (YM[1] - YM[0]) * (Y1 - Y0);
+    const wd = 0.8660254, al = 0.5;
+    const yb = t => 1 - Math.exp(-al * t) * (Math.cos(wd * t) + (al / wd) * Math.sin(wd * t));
+    const dyb = t => (1 / wd) * Math.exp(-al * t) * Math.sin(wd * t);
+    const ya = t => yb(t) + 0.8 * dyb(t);
+    mkR("line", { x1: X0 - 8, y1: Y1 + 6, x2: X1 + 14, y2: Y1 + 6, stroke: "#5B6B8C", "stroke-width": 2.2 });
+    mkR("line", { x1: X0, y1: Y1 + 6, x2: X0, y2: Y0 - 14, stroke: "#5B6B8C", "stroke-width": 2.2 });
+    txR(X1 + 2, Y1 + 52, "t/s", { fs: 22, fill: "#5B6B8C", b: 1 });
+    txR(X0 - 26, Y0 - 26, "h(t)", { fs: 22, fill: "#5B6B8C", b: 1 });
+    [0.5, 1.0, 1.5].forEach(v => {
+      mkR("line", { x1: X0 - 6, y1: Y(v), x2: X0 + 6, y2: Y(v), stroke: "#5B6B8C", "stroke-width": 1.6 });
+      txR(X0 - 14, Y(v) + 7, v.toFixed(1), { fs: 20, fill: "#5B6B8C", an: "end" });
+    });
+    [2, 4, 6, 8].forEach(v => {
+      mkR("line", { x1: X(v), y1: Y1, x2: X(v), y2: Y1 + 6, stroke: "#5B6B8C", "stroke-width": 1.6 });
+      txR(X(v), Y1 + 30, String(v), { fs: 20, fill: "#5B6B8C" });
+    });
+    mkR("line", { x1: X0, y1: Y(1), x2: X1, y2: Y(1), stroke: "#C9D6F2", "stroke-width": 2, "stroke-dasharray": "6 5" });
+    const pathOf = f => { let d = ""; for (let i = 0; i <= 560; i++) {
+      const t = T * i / 560; d += (i ? "L" : "M") + X(t).toFixed(1) + "," + Y(f(t)).toFixed(1); } return d; };
+    mkR("path", { d: pathOf(ya), fill: "none", stroke: "#C02A20", "stroke-width": 4.5 });
+    mkR("path", { d: pathOf(yb), fill: "none", stroke: "#1D3FA0", "stroke-width": 4.5 });
+    txR(446, 120, "(a) 比例微分：σ%=24.6%，tp=2.63s", { fs: 22, b: 1, fill: "#C02A20", an: "start" });
+    txR(446, 158, "(b) 速度反馈：σ%=16.3%，tp=3.63s", { fs: 22, b: 1, fill: "#1D3FA0", an: "start" });
+    [[2.63, ya(2.63), "#C02A20"], [3.63, yb(3.63), "#1D3FA0"]].forEach(([t, y, c]) =>
+      mkR("circle", { cx: X(t), cy: Y(y), r: 7, fill: c, stroke: "#fff", "stroke-width": 2.5 }));
+  })();
 });
 </script>
 </div></div>

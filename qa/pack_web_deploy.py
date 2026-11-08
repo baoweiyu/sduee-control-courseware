@@ -7,7 +7,7 @@ components/ + 实际引用的 assets + DEPLOY-部署说明.md + 可选 server.js
 import os, re, json, zipfile
 
 ROOT = r"H:\D_tools\courseware-system-kimi"
-OUT = os.path.join(ROOT, "act-courseware-web-deploy-v2.35.zip")
+OUT = os.path.join(ROOT, "act-courseware-web-deploy-v2.39.zip")
 
 COMMON_DIRS = ["player", "components", "theme"]
 LESSON_IDS = ["lesson01-intro", "lesson02-math-model", "lesson03-timedomain", "lesson04-freq", "lesson05-root-locus", "lesson06-correction"]
@@ -50,19 +50,23 @@ DEPLOY_MD = """# 《自动控制理论》交互课件 — Web 部署说明
 ## 源码仓库与版本
 源码托管于 GitHub（公开仓库）：
 https://github.com/baoweiyu/sduee-control-courseware
-各版本打包下载（本地播放版五章包 + 本网页部署版）见 Releases：
+各版本打包下载（本地播放版六章包 + 本网页部署版）见 Releases：
 https://github.com/baoweiyu/sduee-control-courseware/releases
 
 ## 这是什么
-纯静态 HTML 课件站点（无后端、无数据库、无构建步骤），内含第一~六章共 375 页：
+纯静态 HTML 课件站点（无后端、无数据库、无构建步骤），内含第一~六章共 374 页：
 - 第一章 绪论（35 页）
 - 第二章 控制系统的数学模型（51 页）
 - 第三章 时域分析法（85 页）
 - 第四章 频率响应法（95 页）
-- 第五章 根轨迹法（61 页，数值严谨绘制 + 连贯/分步动画 + 图面缩放）
+- 第五章 根轨迹法（60 页，数值严谨绘制 + 连贯/分步动画 + 图面缩放）
 - 第六章 控制系统的校正（48 页，Bode 图数值绘制 + 设计步骤分步演示）
 
-整体版本 V2.35（2026-10-26）。本地播放版与网页部署版使用同一版本号。
+整体版本 V2.39（2026-11-08）。本地播放版与网页部署版使用同一版本号。
+V2.39 更新：第五章多项教学精修——P38/P39例5-9轨迹补齐至开环零点或无穷远，新增独立缩放、平移和复位；P45/P46左栏文字默认全部显示，步进仅改变右图；P39左栏双卡片纵向铺满，消除左下角空白。全章动画、缩放与播放器导航通过39项交互检查。
+V2.38 更新：第五章例5-5/5-6/5-7顺序与编号统一；例5-7复数分离点及根轨迹连续性修正；参量根轨迹步骤补全；出射角/入射角标注与多页根轨迹完整性修复。
+V2.37 更新：第五章例5-1补纯积分环节并修正试验点判据；P15法则由来按幅值条件简化。
+V2.36 更新：第五、六章课堂审查精修，第六章传递函数框图规范化与复杂配图分步突出显示。
 V2.35 更新：第四章 P72/P75/P77 左侧 s 平面 Nyquist 轨线的播放前灰色预览线修复——0⁻→0⁺ 区段 ε 小半圆由向左偏转改为向右偏转（与播放动画一致）；全章同类弧线逐一核对无误。
 V2.34 更新：第四章 P68 左栏精简（「根」字换行修复、末框简写）；P78 右图改六步分步动画（曲线→几何直观→两把尺子→γ→Kg 逐步显现），概念图删去全部具体数值标注；P81 重做为四行大字号小结（仅留关键结论，警示语并入判据行，删去底部承上启下条）。
 V2.33 更新：第四章映射原理与 Nyquist 系列精修——P61-66 右下角读数全章统一为「包围圈数 N = Δ∠F/360°」；P68 推导改 G(s)、H(s) 独立分式细化版；P71 补 P=0 前提条、三图绕行方向统一顺时针；P78 右图重画（虚线单位圆 + γ/ωc 与 Kg/ωg 双色标注，与 P79 同一画法）；P81 重做为第三部分小结（判据/画图四步/条件稳定/两裕量两读法＋非最小相位只能用 Nyquist 警示条）。
@@ -182,15 +186,16 @@ with zipfile.ZipFile(OUT, "w", zipfile.ZIP_DEFLATED, compresslevel=6) as z:
     for a in assets:
         z.write(os.path.join(ROOT, a), arc(a))
         count += 1
-    # 可选 Node 服务器
+    # 可选 Node 服务器与站点图标
     z.write(os.path.join(ROOT, "server.js"), "server.js")
-    count += 1
+    z.write(os.path.join(ROOT, "favicon.ico"), "favicon.ico")
+    count += 2
 
 size = os.path.getsize(OUT)
 with zipfile.ZipFile(OUT) as z:
     names = set(z.namelist())
 must = ["index.html", "DEPLOY-部署说明.md", "player/index.html", "lessons/index.json",
-        "theme/theme.css", "server.js"] + \
+        "theme/theme.css", "server.js", "favicon.ico"] + \
        [arc(os.path.join("lessons", l, "lesson.json")) for l in LESSON_IDS] + [arc(a) for a in assets]
 lack = [m for m in must if m not in names]
 leak = [n for n in names if "image2_config" in n or n.endswith("generate.py") or "prompts/" in n]
