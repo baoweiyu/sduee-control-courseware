@@ -12,6 +12,7 @@ act-courseware-*.zip
 bwy-ori-oldPPT/
 bwy-ori-template/
 bwy-chapt4-sources/
+bwy-chapt6-sources/
 1/
 
 # ===== 交接/备份与工作文档 =====
@@ -24,6 +25,7 @@ GitHub发布指引-给Agents.md
 
 # ===== QA 产物（脚本保留，产物排除）=====
 qa/*-qa/
+qa/*.png
 qa/ch4-extract/
 qa/pdf/
 qa/png/

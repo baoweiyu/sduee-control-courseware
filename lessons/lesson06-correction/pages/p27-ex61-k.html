@@ -41,7 +41,7 @@
   .flash{animation:bdPulse .85s ease-in-out infinite}
 </style>
 </head>
-<body data-title="例6-1：题设与 K 的确定" data-page="27 / 48">
+<body data-title="例6-1：题设与 K 的确定" data-page="27 / 51">
 <div class="act-stage"><div class="act-slide">
 
 <div class="act-body has-note">
@@ -50,32 +50,32 @@
       <div class="act-card" style="flex:1.05">
         <div class="hd">题设</div>
         <div class="bd">
-          <div class="eq"><span class="tex">G_{0}(s)=\dfrac{k}{s(s+1)}</span>（单位负反馈）</div>
+          <div class="eq"><span class="tex">G_{0}(s)=\dfrac{K}{s(s+1)}</span>（单位负反馈）</div>
           <div style="font-size:21px;line-height:1.6">
-            要求：<span class="tex">r(t)=t</span> 时 <span class="tex">e_{ss}\leq0.083</span>；<span class="tex">\gamma\geq40^{\circ}</span>。设计串联校正装置 <span class="tex">G_{c}(s)</span>。
+            要求：相角裕度 <span class="tex">\gamma\geq35^{\circ}</span>，开环增益 <span class="tex">K=15</span>。设计串联超前校正装置 <span class="tex">G_{c}(s)</span>。
           </div>
         </div>
       </div>
       <div class="act-card" style="flex:1.55">
-        <div class="hd">第①步：定 K，画未校 Bode（与右图分步联动）</div>
+        <div class="hd">第①步：由 K=15 画未校 Bode</div>
         <div class="bd">
           <div class="stp" id="s1"><span class="num">1</span><div class="stx">
-            <div><span class="tex">e_{ss}=\dfrac{1}{k_{v}}\leq0.083</span>，本系统 <span class="tex">k_{v}=k</span></div>
-            <div class="got">k≥12，取 <b>k=12</b>（20lg12=21.6 dB）</div>
+            <div>本系统为 I 型，<span class="tex">K_{v}=K</span></div>
+            <div class="got">取 <b>K=15</b>（<span class="tex">20\lg15=23.5\,\mathrm{dB}</span>）</div>
           </div></div>
           <div class="stp" id="s2"><span class="num">2</span><div class="stx">
             <div>画未校 Bode 图：幅频穿越 0 dB</div>
-            <div class="got">读 <b><span class="tex">\omega_{c1}=3.5</span></b></div>
+            <div class="got">读 <b><span class="tex">\omega_{c1}\approx3.9</span></b></div>
           </div></div>
           <div class="stp" id="s3"><span class="num">3</span><div class="stx">
             <div><span class="tex">\gamma_{0}=180^{\circ}+\varphi(\omega_{c1})</span></div>
-            <div class="got"><b><span class="tex">\gamma_{0}=16^{\circ}&lt;40^{\circ}</span>，不满足</b>——需校正</div>
+            <div class="got"><b><span class="tex">\gamma_{0}\approx14^{\circ}&lt;35^{\circ}</span>，不满足</b>——需校正</div>
           </div></div>
         </div>
       </div>
     </div>
     <div class="act-card figc">
-      <div class="hd"><span style="flex:1">未校系统 G₀=12/[s(s+1)] 的 Bode 图</span></div>
+      <div class="hd"><span style="flex:1">未校系统 G₀=15/[s(s+1)] 的 Bode 图</span></div>
       <span class="segfloat" id="segChip" style="display:none"></span>
       <span class="prog" id="prog">0 / 3</span>
       <div class="bd2"><svg id="fig"></svg></div>
@@ -87,7 +87,7 @@
     </div>
   </div>
 </div>
-<div class="act-note"><span class="lead">诊断</span><span>K 够了、<span class="kw-r">γ 不够</span>：<span class="tex">\omega_{c1}=3.5</span> 处 <span class="tex">\gamma_{0}</span> 只有 16°——稳态与裕度难以兼得，正是超前校正的用武之地。</span></div>
+<div class="act-note"><span class="lead">诊断</span><span>开环增益已给定，但<span class="kw-r">相角裕度不足</span>：<span class="tex">\omega_{c1}\approx3.9</span> 处 <span class="tex">\gamma_{0}\approx14^{\circ}</span>，需要用超前校正提升中频段相角。</span></div>
 
 <div data-step="1" style="display:none"></div><div data-step="2" style="display:none"></div>
 <div data-step="3" style="display:none"></div>
@@ -114,8 +114,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (K === 2) F.gMark.setAttribute("class", "flash"); else F.gMark.removeAttribute("class");
     if (K >= 2) {  /* ② 必要转折频率 ω=1（渐近线折点，小标注不抢戏） */
       const g0 = F.mk("g", {}, F.gDyn);
-      F.mk("circle", { cx: F.X(1), cy: F.Y(F.panelOf("mag"), 21.584), r: 7, fill: "#16324F", stroke: "#fff", "stroke-width": 2.2 }, g0);
-      F.tx(g0, F.X(1) + 12, F.Y(F.panelOf("mag"), 21.584) - 14, "ω=1", { fs: 20, fill: "#16324F", b: 1, an: "start", halo: 1 });
+      F.mk("circle", { cx: F.X(1), cy: F.Y(F.panelOf("mag"), 23.5218), r: 7, fill: "#16324F", stroke: "#fff", "stroke-width": 2.2 }, g0);
+      F.tx(g0, F.X(1) + 12, F.Y(F.panelOf("mag"), 23.5218) - 14, "ω=1", { fs: 20, fill: "#16324F", b: 1, an: "start", halo: 1 });
     }
     if (K >= 3) {  /* ③ γ0 读数：括线 + 唯一合并标注 */
       const g = F.mk("g", { "class": K === 3 ? "flash" : "" }, F.gDyn);
@@ -124,7 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "stroke-dasharray": "7 5", opacity: .55, "clip-path": `url(#${PP.clip})` }, g);
       F.mk("line", { x1: x, y1: y1, x2: x, y2: y2, stroke: "#D63A2F", "stroke-width": 3.4 }, g);
       F.mk("circle", { cx: x, cy: y1, r: 9, fill: "#D63A2F", stroke: "#fff", "stroke-width": 2.5 }, g);
-      F.tx(g, x - 14, (y1 + y2) / 2 + 8, "γ_{0}=16°＜40°，不满足", { fs: 23, fill: "#D63A2F", b: 1, an: "end", halo: 1 });
+      F.tx(g, x - 14, (y1 + y2) / 2 + 8, "γ_{0}≈14°＜35°，不满足", { fs: 23, fill: "#D63A2F", b: 1, an: "end", halo: 1 });
     }
     for (let i = 1; i <= 3; i++)
       document.getElementById("s" + i).classList.toggle("on", i === K);
@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
   BD.wire(3, paint, { figs: [F], FS, dur: 9000, playLabel: "▶ 连贯生长", frame: f => chor(f) });
 
   /* ---- ⧉分步（金标准）：点一下推进一步；左栏步骤与图内元素同步高亮 ---- */
-  const STEPS = ["① ess 定 K=12", "② 未校 Bode：ωc1=3.5", "③ γ0=16°＜40° 不满足"];
+  const STEPS = ["① 取 K=15", "② 未校 Bode：ωc1≈3.9", "③ γ0≈14°＜35° 不满足"];
   const chip = document.getElementById("segChip"), total = 3, stepBtn = document.getElementById("step");
   const wNext = ACT.step.next, wReset = ACT.step.reset;
   let segRaf = null, segTok = 0;

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><title>例6-5：题设与未校分析</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=221"><link rel="stylesheet" href="../ex65.css">
+<script src="../../../theme/mathjax/mathjax-render.js"></script><script src="../../../theme/mathjax/tex-chtml.js"></script><script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script><script src="../../../theme/act-base.js?v=221" defer></script><script src="../fig.js"></script><script src="../data/ex65.js"></script></head>
+<body data-title="例6-5：题设与未校分析" data-page="39 / 51"><div class="act-stage"><div class="act-slide">
+<div class="act-body has-note"><div class="row"><div class="lft">
+<div class="act-card" style="flex:.95"><div class="hd">题设</div><div class="bd">
+<div class="eq"><span class="tex">G_{0}(s)=\dfrac{K}{s(0.5s+1)(0.167s+1)}</span></div>
+<div class="txt">单位负反馈系统。要求 <span class="tex">K_{v}\geq180</span>，<span class="tex">\gamma\geq40^{\circ}</span>，<span class="tex">3&lt;\omega_{c}&lt;5\,\mathrm{rad/s}</span>。设计串联滞后—超前校正装置。</div>
+</div></div>
+<div class="act-card" style="flex:1.65"><div class="hd">第①步：确定 K，分析未校系统</div><div class="bd">
+<div class="stp" id="s1"><span class="num">1</span><div class="stx"><div><span class="tex">K_{v}=\lim_{s\to0}sG_{0}(s)=K</span></div><div class="got">取 <b>K=180</b>，满足稳态要求</div></div></div>
+<div class="stp" id="s2"><span class="num">2</span><div class="stx"><div>画未校 Bode 图，原系统转折频率为 2、6 rad/s</div><div class="got">由课本渐近线读图：<b><span class="tex">\omega_{c1}\approx12.9</span></b></div></div></div>
+<div class="stp" id="s3"><span class="num">3</span><div class="stx"><div><span class="tex">\gamma_{0}=180^{\circ}+\varphi_{0}(\omega_{c1})</span></div><div class="got"><b><span class="tex">\gamma_{0}\approx-56^{\circ}</span>，未校系统不稳定</b></div></div></div>
+</div></div></div>
+<div class="act-card figc"><div class="hd"><span style="flex:1">未校系统 G₀=180/[s(0.5s+1)(0.167s+1)]</span></div><div class="bd2"><svg id="fig"></svg></div><div class="ctl"><span class="prog" id="prog">0 / 3</span><button class="btn" id="play">▶ 连贯生长</button><button class="btn ghost" id="step">⧉ 下一步</button><button class="btn ghost" onclick="ACT.step.reset()">↺ 重置</button></div></div>
+</div></div><div class="act-note"><span class="lead">诊断</span><span>未校系统不仅裕度不足，而且<span class="kw-r">相角裕度为负</span>；同时还要把截止频率压到 3～5 rad/s，需要滞后与超前两部分协同。</span></div>
+<div data-step="1" style="display:none"></div><div data-step="2" style="display:none"></div><div data-step="3" style="display:none"></div>
+<script>
+document.addEventListener("DOMContentLoaded",()=>{const D=BD.data.ex65,M=D.meta;D.mag.asym=[D.mag.asym[0]];D.marks=[];const F=BD.figure("fig","ex65",{mag:true,phase:true});const PM=F.panelOf("mag"),PP=F.panelOf("phase");
+function chor(f){const a=Math.min(f/.45,1),b=Math.max(0,Math.min((f-.45)/.45,1));F.setF(0,a);F.setF(3,b);F.setOp(0,1);F.setOp(3,1);[1,2,4,5].forEach(i=>{F.setF(i,0);F.setOp(i,0);});}
+function paint(K){chor(FS[K]);for(let i=1;i<=3;i++)document.getElementById("s"+i).classList.toggle("on",i===K);if(K>=2){const g=F.mk("g",{"class":K===2?"flash":""},F.gDyn),x=F.X(M.wc1.val),y=F.Y(PM,0);F.mk("line",{x1:x,y1:PM.y0,x2:x,y2:PM.y1,stroke:"#D63A2F","stroke-width":2.2,"stroke-dasharray":"7 5","clip-path":`url(#${PM.clip})`},g);F.mk("circle",{cx:x,cy:y,r:9,fill:"#D63A2F",stroke:"#fff","stroke-width":2.5},g);F.tx(g,x-14,y-24,"ω_{c1}≈12.9",{fs:22,fill:"#D63A2F",b:1,an:"end"});}if(K>=3){const g=F.mk("g",{"class":"flash"},F.gDyn),x=F.X(M.wc1.val),y1=F.Y(PP,-180+M.gamma0.val),y2=F.Y(PP,-180);F.mk("line",{x1:x,y1:y1,x2:x,y2:y2,stroke:"#D63A2F","stroke-width":3.4},g);F.mk("circle",{cx:x,cy:y1,r:9,fill:"#D63A2F",stroke:"#fff","stroke-width":2.5},g);F.tx(g,x-14,(y1+y2)/2,"γ_{0}≈−56°＜0",{fs:22,fill:"#D63A2F",b:1,an:"end"});}}
+const FS=[0,.45,.9,1];BD.wire(3,paint,{figs:[F],FS,dur:9000,playLabel:"▶ 连贯生长",frame:f=>chor(f)});document.getElementById("step").onclick=()=>ACT.step.next();});
+</script></div></div></body></html>

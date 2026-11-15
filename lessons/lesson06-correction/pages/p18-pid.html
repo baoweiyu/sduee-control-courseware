@@ -9,62 +9,47 @@
 <script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
 <script src="../../../theme/act-base.js?v=221" defer></script>
 <style>
-  .row{display:flex;gap:24px;height:100%;min-height:0}
-  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
-  .law .bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:16px;padding:16px 26px;font-size:22.5px;line-height:1.6}
-  .law .fm{background:var(--sky);border-radius:14px;padding:16px 22px;text-align:center;font-size:24px;color:var(--navy)}
-  .law ul{list-style:none;display:flex;flex-direction:column;gap:14px}
-  .law li{display:flex;gap:12px;align-items:flex-start}
-  .law li::before{content:"";flex:none;width:12px;height:12px;border-radius:50%;background:var(--orange);margin-top:10px}
-  .figc .bd{flex:1;display:flex;flex-direction:column;min-height:0;padding:8px 12px}
-  .figc .fbox{flex:1;min-height:0}
-  .figc svg{width:100%;height:100%}
-  .figc .capnote{flex:none;font-size:19.5px;color:var(--navy);background:var(--sky);border-radius:10px;padding:8px 16px;margin:8px 6px 6px;line-height:1.5;text-align:center}
+  .row{display:flex;gap:24px;height:100%;min-height:0}.act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .law .bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:12px;padding:13px 20px;font-size:20.5px;line-height:1.5;min-height:0}
+  .circuit{flex:none;border:1px solid #d7e0ec;border-radius:12px;background:#fbfcfe;padding:5px 10px 8px}.circuit svg{display:block;width:100%;height:250px}.circuit .name{text-align:center;font-size:18px;color:var(--muted);margin-top:1px}
+  .wire{fill:none;stroke:#263b60;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}.node{fill:#263b60}.terminal{fill:#fff;stroke:#263b60;stroke-width:2.2}
+  .el{font-family:"STIX Two Math","Cambria Math",serif;font-size:24px;font-style:italic;fill:#172b57}.sign{font-family:Arial,sans-serif;font-size:22px;fill:#172b57}
+  .law .fm{background:var(--sky);border-radius:12px;padding:12px 14px;text-align:center;font-size:21.5px;line-height:1.65;color:var(--navy)}
+  .law ul{list-style:none;display:flex;flex-direction:column;gap:10px;margin:0}.law li{display:flex;gap:11px;align-items:flex-start}.law li::before{content:"";flex:none;width:10px;height:10px;border-radius:50%;background:var(--orange);margin-top:10px}
+  .figc .bd{flex:1;display:flex;flex-direction:column;min-height:0;padding:8px 12px}.figc .fbox{flex:1;min-height:0}.figc svg{width:100%;height:100%}
+  .figc .capnote{flex:none;font-size:19px;color:var(--navy);background:var(--sky);border-radius:10px;padding:10px 14px;margin:8px 6px 6px;line-height:1.5;text-align:center}
 </style>
 </head>
-<body data-title="④ PID 控制" data-page="18 / 48">
-<div class="act-stage"><div class="act-slide">
-  <div class="act-body has-note">
-    <div class="row">
-      <div class="act-card law" style="flex:1.02">
-        <div class="hd">比例-积分-微分（PID）控制规律</div>
-        <div class="bd">
-          <div class="fm">
-            <span class="tex">G_{c}(s)=K_{p}+\dfrac{K_{I}}{s}+K_{D}s=K_{p}\,\dfrac{T_{d}T_{i}s^{2}+T_{i}s+1}{T_{i}s}</span>
-          </div>
-          <ul>
-            <li><span>PID 控制相当于给系统增加<span class="kw-r">一个极点（原点处）与两个零点</span>。</span></li>
-            <li><span>原点处的极点可<span class="kw-r">改善稳态性能</span>；两个零点可<span class="kw-r">改善稳定性和暂态性能</span>。</span></li>
-            <li><span>低频段呈积分（I）特性、高频段呈微分（D）特性——I 稳态、D 暂态，各管一段。</span></li>
-            <li><span>右图（取 <span class="tex">T_{i}=1,\ T_{d}=0.2</span>）：相频 <span class="tex">-90^{\circ}\!\to\!+90^{\circ}</span>，两零点 <span class="tex">s=-1.38,\,-3.62</span> 均为负实数。</span></li>
-          </ul>
-        </div>
-      </div>
-      <div class="act-card figc" style="flex:1.1">
-        <div class="hd">PID 装置的 Bode 特性</div>
-        <div class="bd">
-          <div class="fbox"><svg id="figPID"></svg></div>
-          <div class="capnote">相位 <span class="tex">-90^{\circ}\to+90^{\circ}</span>：低频滞后（I）、高频超前（D），幅频中段下凹、两端抬起</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="act-note"><span class="lead">结论</span><span>PID 兼顾稳态、稳定与暂态三方面性能，是<span class="kw-r">工业中应用最广</span>的校正装置。</span></div>
-</div></div>
-<script src="../fig.js"></script>
-<script src="../data/pid.js"></script>
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  /* 从 BD.data.pid 中按曲线名筛出 PID 单曲线（含专属标注），注册为独立数据集 */
-  const d = BD.data.pid, tag = "PID";
-  BD.data["pid_pid"] = {
-    xlim: d.xlim,
-    mag:   { ylim: d.mag.ylim,   curves: d.mag.curves.filter(c => c.name === tag) },
-    phase: { ylim: d.phase.ylim, curves: d.phase.curves.filter(c => c.name === tag) },
-    marks: d.marks.filter(m => m.curve === tag)
-  };
-  BD.figure("figPID", "pid_pid", { static: true, zoom: false });
-});
-</script>
-</body>
-</html>
+<body data-title="④ PID 控制" data-page="18 / 51">
+<div class="act-stage"><div class="act-slide"><div class="act-body has-note"><div class="row">
+  <div class="act-card law" style="flex:1.12"><div class="hd">比例—积分—微分（PID）有源网络</div><div class="bd">
+    <div class="circuit"><svg viewBox="0 0 720 300" role="img" aria-label="图6-19有源PID运放网络">
+      <path class="wire" d="M30 158H90 M150 158H280 M420 175H680"/>
+      <rect x="90" y="145" width="60" height="26" fill="#fbfcfe" stroke="#263b60" stroke-width="2.4"/>
+      <path class="wire" d="M280 115V235L420 175Z"/>
+      <path class="wire" d="M260 158V60H310 M380 60H400 M424 60H480 M550 60H590V175"/>
+      <rect x="310" y="47" width="70" height="26" fill="#fbfcfe" stroke="#263b60" stroke-width="2.4"/>
+      <rect x="480" y="47" width="70" height="26" fill="#fbfcfe" stroke="#263b60" stroke-width="2.4"/>
+      <path class="wire" d="M400 43V77 M424 43V77"/>
+      <path class="wire" d="M452 60V103 M432 103H472 M432 115H472 M452 115V130 M430 130H474 M437 138H467 M444 146H460"/>
+      <path class="wire" d="M280 205H245V275 M30 275H680"/>
+      <circle class="node" cx="260" cy="158" r="4.5"/><circle class="node" cx="452" cy="60" r="4.5"/><circle class="node" cx="590" cy="175" r="4.5"/>
+      <circle class="terminal" cx="30" cy="158" r="5"/><circle class="terminal" cx="680" cy="175" r="5"/>
+      <circle class="terminal" cx="30" cy="275" r="5"/><circle class="terminal" cx="680" cy="275" r="5"/>
+      <text class="el" x="105" y="137">R<tspan baseline-shift="sub" font-size="16">0</tspan></text>
+      <text class="el" x="330" y="38">R<tspan baseline-shift="sub" font-size="16">1</tspan></text>
+      <text class="el" x="397" y="35">C<tspan baseline-shift="sub" font-size="16">1</tspan></text>
+      <text class="el" x="500" y="38">R<tspan baseline-shift="sub" font-size="16">2</tspan></text>
+      <text class="el" x="483" y="119">C<tspan baseline-shift="sub" font-size="16">2</tspan></text><text class="el" x="337" y="184">K</text>
+      <text class="sign" x="288" y="153">−</text><text class="sign" x="288" y="214">+</text>
+      <text class="el" x="51" y="224">u<tspan baseline-shift="sub" font-size="16">1</tspan>(t)</text>
+      <text class="el" x="566" y="230">u<tspan baseline-shift="sub" font-size="16">2</tspan>(t)</text>
+    </svg><div class="name">图 6-19　有源 PID 网络</div></div>
+    <div class="fm"><span class="tex">G_{c}(s)=\dfrac{U_{2}(s)}{U_{1}(s)}=K_{p}+\dfrac{K_{I}}{s}+K_{D}s</span><br><span class="tex">G_{c}(s)=K_{p}\dfrac{T_{d}T_{i}s^{2}+T_{i}s+1}{T_{i}s}</span></div>
+    <ul><li><span>增加一个原点极点与两个零点：兼顾稳态精度、稳定性与暂态性能。</span></li><li><span>低频呈积分（I）特性，高频呈微分（D）特性；相频由 <span class="tex">-90^{\circ}</span> 趋向 <span class="tex">+90^{\circ}</span>。</span></li></ul>
+  </div></div>
+  <div class="act-card figc" style="flex:1"><div class="hd">PID 装置的 Bode 特性</div><div class="bd"><div class="fbox"><svg id="figPID"></svg></div><div class="capnote">低频滞后（I）、高频超前（D）；幅频中段下凹、两端抬起</div></div></div>
+</div></div><div class="act-note"><span class="lead">结论</span><span>PID 兼顾稳态、稳定与暂态三方面性能，是工业中应用广泛的校正装置。</span></div></div></div>
+<script src="../fig.js"></script><script src="../data/pid.js"></script>
+<script>document.addEventListener("DOMContentLoaded",()=>{const d=BD.data.pid,tag="PID";BD.data.pid_pid={xlim:d.xlim,mag:{ylim:d.mag.ylim,curves:d.mag.curves.filter(c=>c.name===tag)},phase:{ylim:d.phase.ylim,curves:d.phase.curves.filter(c=>c.name===tag)},marks:d.marks.filter(m=>m.curve===tag)};BD.figure("figPID","pid_pid",{static:true,zoom:false});});</script>
+</body></html>

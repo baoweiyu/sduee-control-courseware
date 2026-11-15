@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><title>例6-5：校后 Bode 与检验</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=221"><link rel="stylesheet" href="../ex65.css">
+<script src="../../../theme/mathjax/mathjax-render.js"></script><script src="../../../theme/mathjax/tex-chtml.js"></script><script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script><script src="../../../theme/act-base.js?v=221" defer></script><script src="../fig.js"></script><script src="../data/ex65.js"></script></head>
+<body data-title="例6-5：校后 Bode 与检验" data-page="41 / 51"><div class="act-stage"><div class="act-slide">
+<div class="act-body has-note"><div class="row"><div class="lft">
+<div class="act-card" style="flex:1.05"><div class="hd">校正装置与校后开环</div><div class="bd"><div class="eq"><span class="tex">G_{c}(s)=\dfrac{(1.43s+1)(0.5s+1)}{(73.3s+1)(0.009s+1)}</span></div><div class="eq" style="font-size:18px"><span class="tex">G(s)=\dfrac{180(1.43s+1)}{s(73.3s+1)(0.167s+1)(0.009s+1)}</span></div></div></div>
+<div class="act-card" style="flex:1.55"><div class="hd">叠加与检验</div><div class="bd">
+<div class="stp" id="s1"><span class="num">1</span><div class="stx"><div>未校 <span class="tex">G_{0}</span>（蓝）与校正装置 <span class="tex">G_{c}</span>（绿）生长</div><div class="got">观察滞后段衰减与超前段相角补偿</div></div></div>
+<div class="stp" id="s2"><span class="num">2</span><div class="stx"><div>逐点叠加，校后 <span class="tex">G=G_{c}G_{0}</span>（红）生长</div><div class="got">课本图解法取 <b><span class="tex">\omega_{c2}=3.5</span></b></div></div></div>
+<div class="stp" id="s3"><span class="num">3</span><div class="stx"><div>检验三项指标</div><div class="got"><b><span class="tex">\gamma\approx46.7^{\circ}&gt;40^{\circ}</span>，<span class="tex">3&lt;3.5&lt;5</span>，<span class="tex">K_{v}=180</span></b></div></div></div>
+</div></div></div>
+<div class="act-card figc"><div class="hd"><span style="flex:1">G₀ ＋ Gc → G：校后曲线与设计点检验</span></div><div class="bd2"><svg id="fig"></svg></div><div class="ctl"><span class="prog" id="prog">0 / 3</span><button class="btn" id="play">▶ 连贯生长</button><button class="btn ghost" id="step">⧉ 下一步</button><button class="btn ghost" onclick="ACT.step.reset()">↺ 重置</button></div></div>
+</div></div><div class="act-note"><span class="lead">结论</span><span>校后开环分子保留 <span class="tex">180</span>，稳态要求不变；截止频率进入指定区间，<span class="kw-r">相角裕度约 46.7°</span>，设计完成。</span></div>
+<div data-step="1" style="display:none"></div><div data-step="2" style="display:none"></div><div data-step="3" style="display:none"></div>
+<script>
+document.addEventListener("DOMContentLoaded",()=>{const F=BD.figure("fig","ex65",{mag:true,phase:true,marks:false}),PM=F.panelOf("mag"),PP=F.panelOf("phase");function chor(f){const a=Math.min(f/.45,1),b=Math.max(0,Math.min((f-.45)/.35,1)),pre=1-.82*b;F.setF(0,a);F.setF(1,a);F.setF(3,a);F.setF(4,a);F.setF(2,b);F.setF(5,b);[0,1,3,4].forEach(i=>F.setOp(i,pre));F.setOp(2,1);F.setOp(5,1);}
+function paint(K){chor(FS[K]);for(let i=1;i<=3;i++)document.getElementById("s"+i).classList.toggle("on",i===K);if(K>=2){const g=F.mk("g",{"class":K===2?"flash":""},F.gDyn),x=F.X(3.5);[PM,PP].forEach(p=>F.mk("line",{x1:x,y1:p.y0,x2:x,y2:p.y1,stroke:"#D63A2F","stroke-width":2.2,"stroke-dasharray":"7 5",opacity:.8,"clip-path":`url(#${p.clip})`},g));F.tx(g,x+14,PM.y0+24,"设计频率 ω_{c2}=3.5",{fs:22,fill:"#D63A2F",b:1,an:"start"});}if(K>=3){const g=F.mk("g",{"class":"flash"},F.gDyn),x=F.X(3.5),y1=F.Y(PP,-133.3),y2=F.Y(PP,-180);F.mk("line",{x1:x,y1:y1,x2:x,y2:y2,stroke:"#0E7A36","stroke-width":3.4},g);F.mk("circle",{cx:x,cy:y1,r:9,fill:"#0E7A36",stroke:"#fff","stroke-width":2.5},g);F.tx(g,x+16,(y1+y2)/2,"γ≈46.7°＞40°",{fs:22,fill:"#0E7A36",b:1,an:"start"});F.tx(g,PM.x1-16,PM.y1-18,"K_{v}=180；3＜ω_{c2}＜5",{fs:22,fill:"#0E7A36",b:1,an:"end"});}}
+const FS=[0,.45,.8,1];BD.wire(3,paint,{figs:[F],FS,dur:11000,playLabel:"▶ 连贯生长",frame:f=>chor(f)});document.getElementById("step").onclick=()=>ACT.step.next();});
+</script></div></div></body></html>

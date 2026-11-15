@@ -2,76 +2,82 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<title>① 时域指标与频域指标的转换</title>
+<title>校正设计中的时域与频域指标</title>
 <link rel="stylesheet" href="../../../theme/theme.css?v=221">
 <script src="../../../theme/mathjax/mathjax-render.js"></script>
 <script src="../../../theme/mathjax/tex-chtml.js"></script>
 <script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
 <script src="../../../theme/act-base.js?v=221" defer></script>
 <style>
-  .col{display:flex;flex-direction:column;gap:16px;height:100%;min-height:0}
-  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;flex:1.55;min-height:0}
+  .pagecol{height:100%;display:grid;grid-template-rows:32px minmax(0,1fr) 182px;gap:12px;min-height:0}
+  .subtitle{font-size:21px;color:var(--muted);padding-left:4px;letter-spacing:.02em}
+  .main{display:grid;grid-template-columns:1.48fr 1fr;gap:20px;min-height:0}
   .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
-  .grid .bd{flex:1;display:flex;flex-direction:column;justify-content:center;gap:10px;padding:10px 20px}
-  .fml{background:var(--sky);border-radius:12px;padding:10px 14px;text-align:center;font-size:21px;line-height:1.5}
-  .cmt{font-size:18.5px;line-height:1.4;color:var(--ink)}
-  .cmt b{color:var(--danger)}
-  .wide{flex:.85}
-  .wide .bd{flex:1;display:flex;flex-direction:column;justify-content:center;gap:8px;padding:10px 22px}
+  .bd{flex:1;min-height:0}.metrics .bd{display:grid;grid-template-rows:34px repeat(3,minmax(0,1fr));gap:10px;padding:12px 20px 16px}
+  .colheads{display:grid;grid-template-columns:1fr 56px 1fr;align-items:center;text-align:center;font-size:19px;color:var(--muted)}
+  .colheads span:last-child{grid-column:3;color:var(--blue)}
+  .mrow{display:grid;grid-template-rows:1fr auto;border:1px solid #d9e2ee;border-radius:12px;background:#fbfcfe;padding:12px 18px 10px;min-height:0}
+  .map{display:grid;grid-template-columns:1fr 56px 1fr;align-items:center;text-align:center;gap:4px}
+  .domain{font-size:26px;color:#303943;line-height:1.35}.target{font-size:27px;font-weight:750;color:#1769aa;line-height:1.35}.target.phase{color:#cb782b}
+  .arrow{font-family:Arial,sans-serif;font-size:34px;color:#7b8ba2;text-align:center}
+  .detail{text-align:center;font-size:18.5px;color:var(--muted);line-height:1.45;border-top:1px dashed #d9e2ee;padding-top:5px;margin-top:5px}.detail .tex{font-size:20px;color:var(--navy)}
+  .bode .bd{padding:5px 10px 8px;display:flex}.bode svg{width:100%;height:100%}
+  #metricBode>path{fill:none!important}
+  .axis{stroke:#5d6c81;stroke-width:1.5}.gridline{stroke:#d5dae0;stroke-width:1.2;stroke-dasharray:6 6}.wc{stroke:#1769aa;stroke-width:1.5;stroke-dasharray:6 5}
+  .mag{fill:none!important;stroke:#1769aa;stroke-width:3.2;stroke-linecap:round}.phasecurve{fill:none!important;stroke:#cb782b;stroke-width:3.2;stroke-linecap:round}
+  .svgtext{font-family:"Microsoft YaHei",sans-serif;font-size:16px;fill:#4d5b6c}.svgmath{font-family:"STIX Two Math","Cambria Math",serif;font-size:19px;font-style:italic;fill:#263b60}.blue{fill:#1769aa}.orange{fill:#cb782b}
+  .example .bd{display:grid;grid-template-columns:1fr 70px 1fr;grid-template-rows:1fr 28px;align-items:center;padding:10px 26px 8px;column-gap:12px}
+  .example .req,.example .goal{text-align:center;font-size:24px;color:var(--navy)}.example .goal{color:#1769aa;font-weight:700}
+  .example .goarrow{font-family:Arial,sans-serif;font-size:38px;color:#7b8ba2;text-align:center}.example .condition{grid-column:1/4;text-align:center;font-size:16.5px;color:var(--muted)}
 </style>
 </head>
-<body data-title="① 时域指标与频域指标的转换" data-page="24 / 48">
-<div class="act-stage"><div class="act-slide">
-
-<div class="act-body has-note">
-  <div class="col">
-    <div class="grid">
-      <div class="act-card" data-step="1">
-        <div class="hd">相角裕度 γ ↔ 阻尼比 ζ</div>
-        <div class="bd">
-          <div class="fml"><span class="tex tex-d">\gamma=\operatorname{arctg}\frac{2\zeta}{\sqrt{\sqrt{1+4\zeta^{4}}-2\zeta^{2}}}</span></div>
-          <div class="cmt">γ 只由 ζ 决定：γ 越大 → ζ 越大 → <b>σ% 越小</b>（<span class="tex">\sigma\%=e^{-\pi\zeta/\sqrt{1-\zeta^{2}}}\times100\%</span>）。</div>
-        </div>
-      </div>
-      <div class="act-card" data-step="2">
-        <div class="hd">谐振峰值 M<sub>r</sub> ↔ 阻尼比 ζ</div>
-        <div class="bd">
-          <div class="fml"><span class="tex tex-d">M_{r}=\frac{1}{2\zeta\sqrt{1-\zeta^{2}}}\quad(0\leq\zeta\leq0.707)</span></div>
-          <div class="cmt">M<sub>r</sub> 与 σ% 同向：<b>M<sub>r</sub> 越小，振荡越弱</b>，相对稳定性越好。</div>
-        </div>
-      </div>
-      <div class="act-card" data-step="3">
-        <div class="hd">带宽频率 ω<sub>b</sub> ↔ 速度</div>
-        <div class="bd">
-          <div class="fml"><span class="tex tex-d">\omega_{b}=\omega_{n}\sqrt{1-2\zeta^{2}+\sqrt{2-4\zeta^{2}+4\zeta^{4}}}</span></div>
-          <div class="cmt">ζ 一定时 ω<sub>b</sub> ∝ ω<sub>n</sub>：<b>频带越宽，响应越快</b>——ω<sub>c</sub> 常作为 ω<sub>b</sub> 的近似度量。</div>
-        </div>
-      </div>
-      <div class="act-card" data-step="4">
-        <div class="hd">调节时间 t<sub>s</sub> ↔ ζ、ω<sub>n</sub></div>
-        <div class="bd">
-          <div class="fml"><span class="tex tex-d">t_{s}=\frac{3.5}{\zeta\omega_{n}}\quad(\Delta=5\%)</span></div>
-          <div class="cmt">t<sub>s</sub> 与 ζω<sub>n</sub> 成反比：<b>ω<sub>c</sub> 越大 → t<sub>s</sub> 越小</b>，这就是"提高 ω<sub>c</sub> 加快响应"的依据。</div>
-        </div>
-      </div>
-    </div>
-    <div class="act-card wide" data-step="5">
-      <div class="hd">高阶系统的经验公式（1≤M<sub>r</sub>≤1.8 时适用）</div>
-      <div class="bd">
-        <div class="fml"><span class="tex tex-d">\sigma=0.16+0.4(M_{r}-1),\qquad t_{s}=\frac{K\pi}{\omega_{c}},\qquad K=2+1.5(M_{r}-1)+2.5(M_{r}-1)^{2}</span></div>
-        <div class="cmt">高阶系统没有解析关系，先用二阶公式估算、再由仿真校核——<b>M<sub>r</sub> 成为频域与时域之间的桥梁量</b>。</div>
-      </div>
-    </div>
+<body data-title="校正设计中的时域与频域指标" data-page="24 / 51">
+<div class="act-stage"><div class="act-slide"><div class="act-body"><div class="pagecol">
+  <div class="subtitle">时域提出性能要求，频域确定校正目标。</div>
+  <div class="main">
+    <div class="act-card metrics"><div class="hd">三组核心指标：由闭环要求确定开环目标</div><div class="bd">
+      <div class="colheads"><span>时域性能指标</span><span></span><span>频域设计指标</span></div>
+      <div class="mrow"><div class="map"><div class="domain">稳态误差 <span class="tex">e_{ss}\downarrow</span></div><div class="arrow">→</div><div class="target">低频增益 ↑</div></div><div class="detail"><span class="tex">e_{ss}=\dfrac{1}{K_{v}}</span>　（单位反馈、I 型系统、单位斜坡输入）</div></div>
+      <div class="mrow"><div class="map"><div class="domain">调节时间 <span class="tex">t_{s}\downarrow</span></div><div class="arrow">→</div><div class="target">截止频率 <span class="tex">\omega_{c}\uparrow</span></div></div><div class="detail">阻尼相近时，开环截止频率越高，响应通常越快。</div></div>
+      <div class="mrow"><div class="map"><div class="domain">超调量 <span class="tex">M_{p}\downarrow</span></div><div class="arrow">→</div><div class="target phase">相角裕度 <span class="tex">\gamma\uparrow</span></div></div><div class="detail"><span class="tex">M_{p}=10\%\ \Rightarrow\ \zeta\approx0.59\ \Rightarrow\ \gamma\approx59^{\circ}</span>　（典型标准二阶系统）</div></div>
+    </div></div>
+    <div class="act-card bode"><div class="hd">三个频域指标在开环 Bode 图上的位置</div><div class="bd">
+      <svg id="metricBode" viewBox="0 0 560 540" role="img" aria-label="开环幅频与相频特性示意图">
+        <defs><marker id="arrOrange" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L8 4L0 8Z" fill="#cb782b"/></marker></defs>
+        <text class="svgtext" x="70" y="25">开环幅频特性</text><text class="svgtext" x="70" y="279">开环相频特性</text>
+        <path class="axis" d="M70 42V222H520 M70 292V482H520"/>
+        <path class="gridline" d="M70 143H520 M70 455H520"/>
+        <path id="magPath" class="mag" fill="none" style="fill:none"/><path id="phasePath" class="phasecurve" fill="none" style="fill:none"/>
+        <path class="wc" d="M310 55V455"/>
+        <circle cx="310" cy="143" r="5" fill="#1769aa"/><circle id="phasePoint" cx="310" cy="0" r="5" fill="#cb782b"/>
+        <path id="gammaLeader" d="M310 390H285" fill="none" stroke="#cb782b" stroke-width="1.8"/>
+        <path id="gammaArrow" d="M285 398V448" fill="none" stroke="#cb782b" stroke-width="2.4" marker-start="url(#arrOrange)" marker-end="url(#arrOrange)"/>
+        <text class="svgmath" x="60" y="149" text-anchor="end">0 dB</text>
+        <text class="svgmath" x="326" y="252" text-anchor="start">ω<tspan baseline-shift="sub" font-size="14">c</tspan></text>
+        <text class="svgmath" x="60" y="461" text-anchor="end">−180°</text><text class="svgmath orange" x="260" y="443" text-anchor="end">γ</text>
+        <text class="svgmath" x="510" y="65" text-anchor="end">L(ω)/dB</text><text class="svgmath" x="510" y="315" text-anchor="end">φ(ω)/(°)</text>
+        <text class="svgtext blue" x="92" y="192">低频增益</text><text class="svgmath" x="510" y="518" text-anchor="end">lg ω</text>
+      </svg>
+    </div></div>
   </div>
-</div>
-<div class="act-note"><span class="lead">桥梁</span><span>指标从时域提出（σ%、t<sub>s</sub>），设计在频域进行（γ、ω<sub>c</sub>、M<sub>r</sub>）——<span class="kw-r">转换公式把两个域连接起来</span>。</span></div>
-
+  <div class="act-card example"><div class="hd">例：将时域要求转化为频域指标（标准二阶近似）</div><div class="bd">
+    <div class="req"><span class="tex">M_{p}\leq10\%,\qquad t_{s}(2\%)\leq2\,\mathrm{s}</span></div><div class="goarrow">→</div><div class="goal"><span class="tex">\boxed{\gamma\approx60^{\circ},\qquad\omega_{c}\gtrsim2.4\,\mathrm{rad/s}}</span></div>
+    <div class="condition">采用 <span class="tex">\zeta=0.6</span> 的标准二阶模型近似估算；实际校正后仍需验证闭环时域响应。</div>
+  </div></div>
+</div></div></div></div>
 <script>
-window.addEventListener("load", () => {
-  if (new URLSearchParams(location.search).has("all"))
-    document.querySelectorAll("[data-step]").forEach(e => e.classList.add("shown"));
+document.addEventListener("DOMContentLoaded",()=>{
+  const zeta=0.6,wn=1/Math.sqrt(Math.sqrt(1+4*zeta**4)-2*zeta**2),a=2*zeta*wn;
+  const x=w=>70+(Math.log10(w)+1)*225;
+  const my=w=>143-20*Math.log10(wn*wn/(w*Math.hypot(w,a)))*2.1;
+  const py=w=>292+(90+180/Math.PI*Math.atan(w/a))*163/180;
+  let mp="",pp="";
+  for(let i=0;i<=220;i++){const w=10**(-1+2*i/220);mp+=(i?"L":"M")+x(w).toFixed(2)+" "+my(w).toFixed(2);pp+=(i?"L":"M")+x(w).toFixed(2)+" "+py(w).toFixed(2);}
+  document.getElementById("magPath").setAttribute("d",mp);document.getElementById("phasePath").setAttribute("d",pp);
+  const yc=py(1);
+  document.getElementById("phasePoint").setAttribute("cy",yc);
+  document.getElementById("gammaLeader").setAttribute("d",`M310 ${yc}H285`);
+  document.getElementById("gammaArrow").setAttribute("d",`M285 ${yc+8}V448`);
 });
 </script>
-</div></div>
-</body>
-</html>
+</body></html>

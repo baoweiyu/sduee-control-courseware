@@ -40,7 +40,7 @@
   .flash{animation:bdPulse .85s ease-in-out infinite}
 </style>
 </head>
-<body data-title="② 串联超前校正：原理" data-page="25 / 48">
+<body data-title="② 串联超前校正：原理" data-page="25 / 51">
 <div class="act-stage"><div class="act-slide">
 
 <div class="act-body has-note">
@@ -54,19 +54,19 @@
         </div>
       </div>
       <div class="act-card" style="flex:1.55">
-        <div class="hd">相角"借"给穿越频率（与右图分步联动）</div>
+        <div class="hd">相角"借"给穿越频率</div>
         <div class="bd">
           <div class="stp" id="s1"><span class="num">1</span><div class="stx">
-            <div>未校相频 φ₀(ω)：在 <span class="tex">\omega_{c1}=3.5</span> 处 φ₀=−163.6°</div>
-            <div class="got">γ0=16°，<b>裕度不足</b></div>
+            <div>未校相频 φ₀(ω)：在 <span class="tex">\omega_{c1}\approx3.9</span> 处 φ₀≈−165.3°</div>
+            <div class="got">γ0≈14°，<b>裕度不足</b></div>
           </div></div>
           <div class="stp" id="s2"><span class="num">2</span><div class="stx">
             <div>超前网络 φ<sub>c</sub>(ω)：在 1/T 与 1/(αT) 之间鼓起</div>
-            <div class="got"><span class="tex">\omega_{m}</span> 处最大超前 <b><span class="tex">\varphi_{m}\approx31^{\circ}</span></b>（本例 α=0.3158）</div>
+            <div class="got"><span class="tex">\omega_{m}</span> 处最大超前 <b><span class="tex">\varphi_{m}=30^{\circ}</span></b>（本例 α=0.334）</div>
           </div></div>
           <div class="stp" id="s3"><span class="num">3</span><div class="stx">
             <div>叠加 φ=φ₀+φ<sub>c</sub>：让 <span class="tex">\omega_{m}</span> 对准新穿越频率 <span class="tex">\omega_{c2}</span></div>
-            <div class="got"><span class="tex">\omega_{c2}=4.6</span> 处相角被抬起，<b><span class="tex">\gamma=42.6^{\circ}</span></b></div>
+            <div class="got"><span class="tex">\omega_{c2}\approx5.2</span> 处相角被抬起，<b><span class="tex">\gamma\approx41^{\circ}</span></b></div>
           </div></div>
         </div>
       </div>
@@ -115,25 +115,25 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   function paint(K) {
     chor(K / 3);
-    const X1 = F.X(3.3927), X2 = F.X(WC2);
+    const X1 = F.X(D.meta.wc1.val), X2 = F.X(WC2);
     if (K >= 1) {  /* ① γ0 读数（ωc1 处小括线，标注置于底排左侧） */
       const g = F.mk("g", { "class": K === 1 ? "flash" : "" }, F.gDyn);
-      const y1 = F.Y(PP, -163.58), y2 = F.Y(PP, -180);
+      const y1 = F.Y(PP, -180 + D.meta.gamma0.val), y2 = F.Y(PP, -180);
       F.mk("line", { x1: X1, y1: PP.y0, x2: X1, y2: PP.y1, stroke: "#D63A2F", "stroke-width": 2.2,
         "stroke-dasharray": "7 5", opacity: .55, "clip-path": `url(#${PP.clip})` }, g);
       F.mk("line", { x1: X1, y1: y1, x2: X1, y2: y2, stroke: "#D63A2F", "stroke-width": 3.4 }, g);
       F.mk("circle", { cx: X1, cy: y1, r: 9, fill: "#D63A2F", stroke: "#fff", "stroke-width": 2.5 }, g);
-      F.tx(g, X1 - 14, PP.y1 - 16, "γ_{0}=16.4°", { fs: 22, fill: "#D63A2F", b: 1, an: "end", halo: 1 });
+      F.tx(g, X1 - 14, PP.y1 - 16, "γ_{0}≈14°", { fs: 22, fill: "#D63A2F", b: 1, an: "end", halo: 1 });
     }
     if (K >= 2) {  /* ② 网络相角鼓包：仅标 φm 峰 */
       const g = F.mk("g", { "class": K === 2 ? "flash" : "" }, F.gDyn);
       const x = F.X(WM), y = F.Y(PP, PHIM);
       F.mk("circle", { cx: x, cy: y, r: 9, fill: "#0E7A36", stroke: "#fff", "stroke-width": 2.5 }, g);
-      F.tx(g, x - 16, y - 16, "φ_{m}=31.3°", { fs: 22, fill: "#0E7A36", b: 1, an: "end", halo: 1 });
+      F.tx(g, x - 16, y - 16, "φ_{m}=30°", { fs: 22, fill: "#0E7A36", b: 1, an: "end", halo: 1 });
     }
     if (K >= 3) {  /* ③ ωc2 处抬升箭头 + γ 读数（标注分置底排与右侧，互不压线） */
       const g = F.mk("g", { "class": K === 3 ? "flash" : "" }, F.gDyn);
-      const yA = F.Y(PP, interp(phi0, WC2)), yB = F.Y(PP, -136.22), y2 = F.Y(PP, -180);
+      const yA = F.Y(PP, interp(phi0, WC2)), yB = F.Y(PP, -180 + D.meta.gamma.val), y2 = F.Y(PP, -180);
       F.mk("line", { x1: X2, y1: PP.y0, x2: X2, y2: PP.y1, stroke: "#D63A2F", "stroke-width": 2.2,
         "stroke-dasharray": "7 5", opacity: .55, "clip-path": `url(#${PP.clip})` }, g);
       F.mk("line", { x1: X2, y1: yA, x2: X2, y2: yB, stroke: "#0E7A36", "stroke-width": 4,
@@ -141,8 +141,8 @@ document.addEventListener("DOMContentLoaded", () => {
       F.tx(g, X2 - 16, (yA + yB) / 2 + 4, "+φ_{c}", { fs: 21, fill: "#0E7A36", b: 1, an: "end", halo: 1 });
       F.mk("line", { x1: X2, y1: yB, x2: X2, y2: y2, stroke: "#D63A2F", "stroke-width": 3.4 }, g);
       F.mk("circle", { cx: X2, cy: yB, r: 9, fill: "#D63A2F", stroke: "#fff", "stroke-width": 2.5 }, g);
-      F.tx(g, X2 + 14, (yB + y2) / 2 + 6, "γ=43.8°", { fs: 22, fill: "#D63A2F", b: 1, an: "start", halo: 1 });
-      F.tx(g, X2 + 14, PP.y1 - 16, "ω_{c2}=4.6", { fs: 22, fill: "#D63A2F", b: 1, an: "start", halo: 1 });
+      F.tx(g, X2 + 14, (yB + y2) / 2 + 6, "γ≈41°", { fs: 22, fill: "#D63A2F", b: 1, an: "start", halo: 1 });
+      F.tx(g, X2 + 14, PP.y1 - 16, "ω_{c2}≈5.2", { fs: 22, fill: "#D63A2F", b: 1, an: "start", halo: 1 });
     }
     for (let i = 1; i <= 3; i++)
       document.getElementById("s" + i).classList.toggle("on", i === K);
@@ -151,7 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
   BD.wire(3, paint, { figs: [F], FS, dur: 11000, playLabel: "▶ 连贯生长", frame: f => chor(f) });
 
   /* ---- ⧉分步（金标准）：点一下推进一步 ---- */
-  const STEPS = ["① 未校 φ₀：γ0=16° 不足", "② 网络 φc：ωm 处 φm≈31°", "③ 叠加：ωc2 处 γ=42.6°"];
+  const STEPS = ["① 未校 φ₀：γ0≈14° 不足", "② 网络 φc：ωm 处 φm=30°", "③ 叠加：ωc2 处 γ≈41°"];
   const chip = document.getElementById("segChip"), total = 3, stepBtn = document.getElementById("step");
   const wNext = ACT.step.next, wReset = ACT.step.reset;
   let segRaf = null, segTok = 0;

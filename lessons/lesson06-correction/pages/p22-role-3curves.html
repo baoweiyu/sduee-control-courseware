@@ -40,7 +40,7 @@
   .flash{animation:bdPulse .85s ease-in-out infinite}
 </style>
 </head>
-<body data-title="① 校正的作用：三条曲线" data-page="22 / 48">
+<body data-title="① 校正的作用：三条曲线" data-page="22 / 51">
 <div class="act-stage"><div class="act-slide">
 
 <div class="act-body has-note">
@@ -53,19 +53,19 @@
         </div>
       </div>
       <div class="act-card" style="flex:1.75">
-        <div class="hd">三条曲线的启示（与右图分步联动）</div>
+        <div class="hd">三条曲线的启示</div>
         <div class="bd">
           <div class="stp" id="s1"><span class="num">Ⅰ</span><div class="stx">
             <div>K 取小（K=3）：稳定裕度大、闭环平稳</div>
             <div class="got">但低频增益低，<b>稳态精度不满足</b></div>
           </div></div>
           <div class="stp" id="s2"><span class="num">Ⅱ</span><div class="stx">
-            <div>K 提到 12：低频段抬高，稳态精度达标</div>
-            <div class="got"><span class="tex">\omega_{c1}=3.5</span> 处 <span class="tex">\gamma_{0}=16^{\circ}</span>，<b>裕度太小、暂态差</b></div>
+            <div>K 提到 15：低频段抬高，稳态精度达标</div>
+            <div class="got"><span class="tex">\omega_{c1}\approx3.9</span> 处 <span class="tex">\gamma_{0}\approx14^{\circ}</span>，<b>裕度太小、暂态差</b></div>
           </div></div>
           <div class="stp" id="s3"><span class="num">Ⅲ</span><div class="stx">
-            <div>保持 K=12，串联超前校正装置</div>
-            <div class="got"><span class="tex">\omega_{c2}=4.6</span>、<span class="tex">\gamma=42.6^{\circ}</span>，<b>稳态·稳定·暂态兼顾</b></div>
+            <div>保持 K=15，串联超前校正装置</div>
+            <div class="got"><span class="tex">\omega_{c2}\approx5.2</span>、<span class="tex">\gamma\approx41^{\circ}</span>，<b>稳态·稳定·暂态兼顾</b></div>
           </div></div>
         </div>
       </div>
@@ -95,8 +95,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const M_WC1 = MK.find(m => m.type === "wc" && m.w < 4),  M_G0 = MK.find(m => m.type === "margin" && m.w < 4);
   const M_WC2 = MK.find(m => m.type === "wc" && m.w > 4),  M_G  = MK.find(m => m.type === "margin" && m.w > 4);
   const PM = F.panelOf("mag"), PP = F.panelOf("phase");
-  /* 曲线Ⅰ：K=3，即 G0 幅频精确下移 20lg(12/3)=12.04dB（相频与 K 无关，不变） */
-  const dK = -20 * Math.log10(4);
+  /* 曲线Ⅰ：K=3，即 G0 幅频精确下移 20lg(15/3)=13.98dB（相频与 K 无关，不变） */
+  const dK = -20 * Math.log10(5);
   const ptsIm = D.mag.curves[0].pts.map(p => [p[0], p[1] + dK]);
   const ptsIp = D.phase.curves[0].pts;
   const gI = F.mk("g", {}, F.svg);
@@ -152,17 +152,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     if (K >= 2) {
       const g = F.mk("g", { "class": K === 2 ? "flash" : "" }, F.gDyn);
-      F.tx(g, F.X(0.55), F.Y(PM, 12) - 8, "Ⅱ K=12", { fs: 24, fill: "#1D3FA0", b: 1, halo: 1 });
+      F.tx(g, F.X(0.55), F.Y(PM, 12) - 8, "Ⅱ K=15", { fs: 24, fill: "#1D3FA0", b: 1, halo: 1 });
       markWc(M_WC1, g, true, "end");
       if (K === 2) markMargin(M_G0, g, true);
     }
     if (K >= 3) {
       const g = F.mk("g", { "class": K === 3 ? "flash" : "" }, F.gDyn);
-      F.tx(g, F.X(30), F.Y(PM, -36), "Ⅲ K=12 + 超前校正", { fs: 24, fill: "#C02A20", b: 1, halo: 1 });
+      F.tx(g, F.X(30), F.Y(PM, -36), "Ⅲ K=15 + 超前校正", { fs: 24, fill: "#C02A20", b: 1, halo: 1 });
       markWc(M_WC2, g, false, "start");
       markMargin(M_G0, g, false); markMargin(M_G, g, false);
       const xm = (F.X(M_WC1.w) + F.X(M_WC2.w)) / 2;
-      F.tx(g, xm, F.Y(PP, -191), "γ_{0}=16.4° → γ=43.8°", { fs: 23, fill: "#D63A2F", b: 1, halo: 1 });
+      F.tx(g, xm, F.Y(PP, -191), "γ_{0}≈14° → γ≈41°", { fs: 23, fill: "#D63A2F", b: 1, halo: 1 });
     }
     for (let i = 1; i <= 3; i++)
       document.getElementById("s" + i).classList.toggle("on", i === K);
@@ -171,7 +171,7 @@ document.addEventListener("DOMContentLoaded", () => {
   BD.wire(3, paint, { figs: [F], FS, dur: 12000, playLabel: "▶ 连贯生长", frame: f => chor(f) });
 
   /* ---- ⧉分步（金标准）：点一下推进一步；左栏步骤与图内元素同步高亮 ---- */
-  const STEPS = ["Ⅰ K 小：稳定裕度大，稳态精度不满足", "Ⅱ K=12：稳态达标，γ0=16° 太小", "Ⅲ 加超前校正：三者兼顾"];
+  const STEPS = ["Ⅰ K 小：稳定裕度大，稳态精度不满足", "Ⅱ K=15：稳态达标，γ0≈14° 太小", "Ⅲ 加超前校正：三者兼顾"];
   const chip = document.getElementById("segChip"), total = 3, stepBtn = document.getElementById("step");
   const wNext = ACT.step.next, wReset = ACT.step.reset;
   let segRaf = null, segTok = 0;

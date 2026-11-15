@@ -40,7 +40,7 @@
   .flash{animation:bdPulse .85s ease-in-out infinite}
 </style>
 </head>
-<body data-title="例6-1：校正前后对比" data-page="30 / 48">
+<body data-title="例6-1：校正前后对比" data-page="30 / 51">
 <div class="act-stage"><div class="act-slide">
 
 <div class="act-body has-note">
@@ -65,12 +65,12 @@
     <div class="cmp">
       <div class="cell b4" data-step="1">
         <div class="ct">校正前</div>
-        <div class="cv"><span><span class="tex">\omega_{c1}=3.5</span>，<span class="tex">\gamma_{0}=16^{\circ}</span></span><span><b>σ%=63.2%</b>，<span class="tex">t_{s}=5.70\ \mathrm{s}</span></span></div>
-        <div class="cd">超调大、调节慢，振荡剧烈</div>
+        <div class="cv"><span><span class="tex">\omega_{c1}\approx3.9</span>，<span class="tex">\gamma_{0}\approx14^{\circ}</span></span><span><b>σ%=66.4%</b>，<span class="tex">t_{s}=5.86\ \mathrm{s}</span></span></div>
+        <div class="cd">超调较大、调节较慢</div>
       </div>
       <div class="cell af" data-step="2">
         <div class="ct">校正后</div>
-        <div class="cv"><span><span class="tex">\omega_{c2}=4.6</span>，<span class="tex">\gamma=42.6^{\circ}</span></span><span><b>σ%=29.2%</b>，<span class="tex">t_{s}=1.08\ \mathrm{s}</span></span></div>
+        <div class="cv"><span><span class="tex">\omega_{c2}\approx5.2</span>，<span class="tex">\gamma\approx41^{\circ}</span></span><span><b>σ%=32.5%</b>，<span class="tex">t_{s}=0.98\ \mathrm{s}</span></span></div>
         <div class="cd">超调与调节时间同步大幅下降</div>
       </div>
       <div class="cell sm" data-step="3">
@@ -160,14 +160,14 @@ document.addEventListener("DOMContentLoaded", () => {
     if (K >= 1) {
       const g = F.mk("g", { "class": K === 1 ? "flash" : "" }, F.gDyn);
       F.tx(g, F.X(30), F.Y(PM, -42), "G_{0}", { fs: 24, fill: "#1D3FA0", b: 1, halo: 1 });
-      markWc(3.3927, "ω_{c1}=3.39", true, "end", g);
-      markMargin(3.3927, -163.58, "γ_{0}=16.4°", "end", g);
+      markWc(BD.data.ex61.meta.wc1.val, "ω_{c1}≈3.9", true, "end", g);
+      markMargin(BD.data.ex61.meta.wc1.val, -180 + BD.data.ex61.meta.gamma0.val, "γ_{0}≈14°", "end", g);
     }
     if (K >= 2) {
       const g = F.mk("g", { "class": K === 2 ? "flash" : "" }, F.gDyn);
       F.tx(g, F.X(30), F.Y(PM, -20), "G_{c}G_{0}", { fs: 24, fill: "#C02A20", b: 1, halo: 1 });
-      markWc(4.5261, "ω_{c2}=4.53", false, "start", g);
-      markMargin(4.5261, -136.22, "γ=43.8°", "start", g);
+      markWc(BD.data.ex61.meta.wc2.val, "ω_{c2}≈5.2", false, "start", g);
+      markMargin(BD.data.ex61.meta.wc2.val, -180 + BD.data.ex61.meta.gamma.val, "γ≈41°", "start", g);
     }
     stepTxt(K);
   }
@@ -175,7 +175,7 @@ document.addEventListener("DOMContentLoaded", () => {
   BD.wire(3, paint, { figs: [F], FS, dur: 11000, playLabel: "▶ 连贯生长", frame: f => chor(f) });
 
   /* ---- ⧉分步（金标准）：点一下推进一步；图与结论条逐部分亮相 ---- */
-  const STEPS = ["① 校前：σ%=63.2%，ts=5.70 s", "② 校后：σ%=29.2%，ts=1.08 s", "③ 时域表现：ωc↑→ts↓，γ↑→σ%↓"];
+  const STEPS = ["① 校前：σ%=66.4%，ts=5.86 s", "② 校后：σ%=32.5%，ts=0.98 s", "③ 时域表现：ωc↑→ts↓，γ↑→σ%↓"];
   const chip = document.getElementById("segChip"), total = 3, stepBtn = document.getElementById("step");
   const wNext = ACT.step.next, wReset = ACT.step.reset;
   let segRaf = null, segTok = 0;

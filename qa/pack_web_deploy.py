@@ -7,7 +7,7 @@ components/ + 实际引用的 assets + DEPLOY-部署说明.md + 可选 server.js
 import os, re, json, zipfile
 
 ROOT = r"H:\D_tools\courseware-system-kimi"
-OUT = os.path.join(ROOT, "act-courseware-web-deploy-v2.39.zip")
+OUT = os.path.join(ROOT, "act-courseware-web-deploy-v2.40.zip")
 
 COMMON_DIRS = ["player", "components", "theme"]
 LESSON_IDS = ["lesson01-intro", "lesson02-math-model", "lesson03-timedomain", "lesson04-freq", "lesson05-root-locus", "lesson06-correction"]
@@ -54,15 +54,16 @@ https://github.com/baoweiyu/sduee-control-courseware
 https://github.com/baoweiyu/sduee-control-courseware/releases
 
 ## 这是什么
-纯静态 HTML 课件站点（无后端、无数据库、无构建步骤），内含第一~六章共 374 页：
+纯静态 HTML 课件站点（无后端、无数据库、无构建步骤），内含第一~六章共 377 页：
 - 第一章 绪论（35 页）
 - 第二章 控制系统的数学模型（51 页）
 - 第三章 时域分析法（85 页）
 - 第四章 频率响应法（95 页）
 - 第五章 根轨迹法（60 页，数值严谨绘制 + 连贯/分步动画 + 图面缩放）
-- 第六章 控制系统的校正（48 页，Bode 图数值绘制 + 设计步骤分步演示）
+- 第六章 控制系统的校正（51 页，Bode 图数值绘制 + 设计步骤分步演示）
 
-整体版本 V2.39（2026-11-08）。本地播放版与网页部署版使用同一版本号。
+整体版本 V2.40（2026-11-16）。本地播放版与网页部署版使用同一版本号。
+V2.40 更新：第六章修复章节入口；P16-P18 按课本补充并重绘 PD/PI/PID 运放网络，放大图幅、消除元件与导线重叠并充实排版；P24 改为三组时频指标关系并疏解图内标注；课本例 6-1、6-3、6-5 替换原校正例题并保留动态 Bode 图；统一大写 K、K_v，清理不自然标题与表述。
 V2.39 更新：第五章多项教学精修——P38/P39例5-9轨迹补齐至开环零点或无穷远，新增独立缩放、平移和复位；P45/P46左栏文字默认全部显示，步进仅改变右图；P39左栏双卡片纵向铺满，消除左下角空白。全章动画、缩放与播放器导航通过39项交互检查。
 V2.38 更新：第五章例5-5/5-6/5-7顺序与编号统一；例5-7复数分离点及根轨迹连续性修正；参量根轨迹步骤补全；出射角/入射角标注与多页根轨迹完整性修复。
 V2.37 更新：第五章例5-1补纯积分环节并修正试验点判据；P15法则由来按幅值条件简化。

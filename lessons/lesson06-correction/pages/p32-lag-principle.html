@@ -41,7 +41,7 @@
   .flash{animation:bdPulse .85s ease-in-out infinite}
 </style>
 </head>
-<body data-title="③ 串联滞后校正：原理" data-page="32 / 48">
+<body data-title="③ 串联滞后校正：原理" data-page="32 / 51">
 <div class="act-stage"><div class="act-slide">
 
 <div class="act-body has-note">
@@ -50,28 +50,27 @@
       <div class="act-card" style="flex:.98">
         <div class="hd">原理一句话</div>
         <div class="bd" style="font-size:21px;line-height:1.55">
-          <div>利用滞后网络的<span class="kw-r">高频幅值衰减</span>，把 0dB 穿越点压向左移（<span class="tex">\omega_{c2}<\omega_{c1}</span>）；低频增益不变，<span class="tex">e_{ss}</span> 不变，<span class="tex">\gamma</span> 增大。</div>
-          <div><span class="tex tex-d">G_{c}(s)=\frac{Ts+1}{\beta Ts+1}\quad(\beta>1)</span></div>
+          <div>利用滞后网络的<span class="kw-r">高频幅值衰减</span>，把 0dB 穿越点压向左移（<span class="tex">\omega_{c2}<\omega_{c1}</span>）；低频增益按稳态精度配置，中高频幅值衰减，<span class="tex">\gamma</span> 增大。</div>
+          <div><span class="tex tex-d">G_{c}(s)=K_{c}\frac{Ts+1}{\beta Ts+1}\quad(\beta>1)</span></div>
         </div>
       </div>
       <div class="act-card" style="flex:1.62">
-        <div class="hd">压低高频"换"裕度（与右图分步联动）</div>
+        <div class="hd">压低高频"换"裕度</div>
         <div class="bd">
           <div class="stp" id="s1"><span class="num">1</span><div class="stx">
-            <div>未校 <span class="tex">G_{0}</span>：幅频在 <span class="tex">\omega_{c1}=2.2</span> 处穿 0dB</div>
-            <div class="got"><span class="tex">\gamma_{0}=-23^{\circ}&lt;0</span>，<b>系统不稳定</b></div>
+            <div>未校 <span class="tex">G_{0}</span>：幅频在 <span class="tex">\omega_{c1}\approx2.7</span> 处穿 0dB</div>
+            <div class="got"><span class="tex">\gamma_{0}\approx-33^{\circ}&lt;0</span>，<b>系统不稳定</b></div>
           </div></div>
           <div class="stp" id="s2"><span class="num">2</span><div class="stx">
-            <div>接入滞后 <span class="tex">G_{c}</span>：低频段 ≈0dB（增益不动），高频段压下 <span class="tex">-20\lg\beta</span></div>
-            <div class="got">本例 <b>−20lgβ=−18dB</b>（β=8）</div>
+            <div>接入滞后 <span class="tex">G_{c}</span>：低频增益按 <span class="tex">K_{v}</span> 配置，中高频段压下</div>
+            <div class="got">本例 <b>β=20</b>，高频段约衰减 26dB</div>
           </div></div>
           <div class="stp" id="s3"><span class="num">3</span><div class="stx">
             <div>校后 <span class="tex">G_{c}G_{0}</span>：0dB 穿越点左移至 <span class="tex">\omega_{c2}=0.56</span></div>
-            <div class="got"><span class="tex">\gamma=+40.2^{\circ}</span>，<b>γ 由负变正</b></div>
+            <div class="got"><span class="tex">\gamma\approx+37^{\circ}</span>，<b>γ 由负变正</b></div>
           </div></div>
         </div>
       </div>
-      <div class="dualnote">口径备注：2.2、−23°、0.56、40.2° 为渐近线读数（例6-3 教学口径）；图上曲线与标注为精确计算值（1.80、−13.0°、0.53、41.7°）。</div>
     </div>
     <div class="act-card figc">
       <div class="hd"><span style="flex:1">ωc 左移演示：高频衰减 −20lgβ 使 0dB 穿越点左移</span></div>
@@ -86,7 +85,7 @@
     </div>
   </div>
 </div>
-<div class="act-note"><span class="lead">本质</span><span>滞后校正 = 用<span class="kw-r">带宽换裕度</span>：低频增益不动（<span class="tex">e_{ss}</span> 不变），把 0dB 穿越点推向相角更宽裕的低频处，<span class="tex">\gamma</span> 由负变正。</span></div>
+<div class="act-note"><span class="lead">本质</span><span>滞后校正 = 用<span class="kw-r">带宽换裕度</span>：低频增益满足稳态精度要求，把 0dB 穿越点推向相角更宽裕的低频处，<span class="tex">\gamma</span> 由负变正。</span></div>
 
 <div data-step="1" style="display:none"></div><div data-step="2" style="display:none"></div>
 <div data-step="3" style="display:none"></div>
@@ -115,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
     F.mk("line", { x1: x, y1: PM.y0, x2: x, y2: PM.y1, stroke: "#D63A2F", "stroke-width": 2.2,
       "stroke-dasharray": "7 5", opacity: .85, "clip-path": `url(#${PM.clip})` }, g);
     F.mk("circle", { cx: x, cy: y, r: 9, fill: "#D63A2F", stroke: "#fff", "stroke-width": 2.5 }, g);
-    F.tx(g, x + (dx || 14), y + (dy || -16), label, { fs: 22, fill: "#D63A2F", b: 1, an: "start" });
+    F.tx(g, x + (dx || 14), y + (dy || -16), label, { fs: 22, fill: "#D63A2F", b: 1, an: dx < 0 ? "end" : "start" });
   }
   function marginMark(g, w, phi, label, dx, dy, color) {
     color = color || "#D63A2F";
@@ -148,23 +147,23 @@ document.addEventListener("DOMContentLoaded", () => {
     chor(FS[K]);
     if (K >= 1) {  /* ① 未校：ωc1 与 γ0 读数 */
       const g = F.mk("g", { "class": K === 1 ? "flash" : "" }, F.gDyn);
-      wcMark(g, M.wc1.val, "ω_{c1}=1.80", 14, -16);
-      marginMark(g, M.wc1.val, -193, "γ_{0}=−13.0°", 12, 6);
+      wcMark(g, M.wc1.val, "ω_{c1}≈2.7", 14, -16);
+      marginMark(g, M.wc1.val, -180 + M.gamma0.val, "γ_{0}≈−33°", 12, 6);
     }
     if (K === 2) {  /* ② 滞后装置：转折频率 + 高频衰减电平（仅本步呈现） */
       const g = F.mk("g", { "class": "flash" }, F.gDyn);
-      vlineMag(g, 0.00699, "1/(βT)=0.0070", 20, "#0E7A36");
-      vlineMag(g, 0.056, "1/T=0.056", 44, "#0E7A36");
-      const y = F.Y(PM, -18.07);
-      F.mk("line", { x1: F.X(0.056), y1: y, x2: PM.x1, y2: y, stroke: "#F5821F",
+      vlineMag(g, 0.005, "1/(βT)=0.005", 20, "#0E7A36");
+      vlineMag(g, 0.1, "1/T=0.1", 44, "#0E7A36");
+      const y = F.Y(PM, -26.02);
+      F.mk("line", { x1: F.X(0.1), y1: y, x2: PM.x1, y2: y, stroke: "#F5821F",
         "stroke-width": 2.2, "stroke-dasharray": "6 5", opacity: .9 }, g);
-      F.tx(g, PM.x1 - 10, y - 10, "−20lgβ=−18dB", { fs: 22, fill: "#F5821F", b: 1, an: "end" });
-      F.tx(g, F.X(0.0016), F.Y(PM, -20), "低频段 ≈0dB（增益不变）", { fs: 21, fill: "#0E7A36", b: 1, an: "start" });
+      F.tx(g, PM.x1 - 10, y - 10, "高频段约 −26dB", { fs: 22, fill: "#F5821F", b: 1, an: "end" });
+      F.tx(g, F.X(0.0016), F.Y(PM, -20), "低频段约 +6dB", { fs: 21, fill: "#0E7A36", b: 1, an: "start" });
     }
     if (K >= 3) {  /* ③ 校后：穿越点左移，γ 由负变正 */
       const g = F.mk("g", { "class": K === 3 ? "flash" : "" }, F.gDyn);
-      wcMark(g, M.wc2.val, "ω_{c2}=0.53", 14, -38);
-      marginMark(g, M.wc2.val, -138.34, "γ=41.7°", 12, 6);
+      wcMark(g, M.wc2.val, "设计值 ω_{c2}≈0.56", -14, -38);
+      marginMark(g, 0.56, -143, "γ≈37°", 12, 6);
       F.tx(g, PP.x1 - 18, PP.y0 + 30, "γ 由负变正", { fs: 24, fill: "#0E7A36", b: 1, an: "end" });
     }
     for (let i = 1; i <= 3; i++)
@@ -174,7 +173,7 @@ document.addEventListener("DOMContentLoaded", () => {
   BD.wire(3, paint, { figs: [F], FS, dur: 12000, playLabel: "▶ 连贯生长", frame: f => chor(f) });
 
   /* ---- ⧉分步（金标准）：点一下推进一步 ---- */
-  const STEPS = ["① 未校：ωc1=2.2 处 γ0=−23°", "② Gc：高频衰减 −18dB", "③ 校后：穿越点左移，γ=40.2°"];
+  const STEPS = ["① 未校：ωc1≈2.7 处 γ0≈−33°", "② Gc：高频衰减约 26dB", "③ 校后：穿越点左移，γ≈37°"];
   const chip = document.getElementById("segChip"), total = 3, stepBtn = document.getElementById("step");
   const wNext = ACT.step.next, wReset = ACT.step.reset;
   let segRaf = null, segTok = 0;

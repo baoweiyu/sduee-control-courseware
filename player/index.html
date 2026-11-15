@@ -25,8 +25,9 @@
   }
   #bar button:hover { background:#2B5CE6; }
   #bar .pg { min-width:76px; text-align:center; font-weight:700; }
-  #bar .meta { color:#8FA3E8; max-width:260px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  #bar select { font:inherit; background:#101C4E; color:#DCE6FF; border:1px solid rgba(120,150,255,.3); border-radius:8px; padding:5px 8px; }
+  #bar .meta { color:#8FA3E8; flex:0 1 260px; min-width:0; max-width:260px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  #bar button { flex:none; }
+  #bar select { flex:none; width:224px; font:inherit; background:#101C4E; color:#DCE6FF; border:1px solid rgba(120,150,255,.3); border-radius:8px; padding:5px 8px; }
   #hint {
     position:fixed; right:16px; top:14px; color:#8FA3E8; font-size:12.5px; z-index:10;
     background:rgba(10,18,52,.7); padding:6px 12px; border-radius:8px;

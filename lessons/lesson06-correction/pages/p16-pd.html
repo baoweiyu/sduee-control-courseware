@@ -11,59 +11,71 @@
 <style>
   .row{display:flex;gap:24px;height:100%;min-height:0}
   .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
-  .law .bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:16px;padding:16px 26px;font-size:22.5px;line-height:1.6}
-  .law .fm{background:var(--sky);border-radius:14px;padding:16px 22px;text-align:center;font-size:24px;color:var(--navy)}
-  .law ul{list-style:none;display:flex;flex-direction:column;gap:14px}
-  .law li{display:flex;gap:12px;align-items:flex-start}
-  .law li::before{content:"";flex:none;width:12px;height:12px;border-radius:50%;background:var(--orange);margin-top:10px}
+  .law .bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:16px;padding:16px 20px;font-size:21px;line-height:1.55;min-height:0}
+  .circuit{flex:none;border:1px solid #d7e0ec;border-radius:12px;background:#fbfcfe;padding:6px 10px 9px}
+  .circuit svg{display:block;width:100%;height:280px}
+  .circuit .name{text-align:center;font-size:18px;color:var(--muted);margin-top:1px}
+  .wire{fill:none;stroke:#263b60;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+  .node{fill:#263b60}.terminal{fill:#fff;stroke:#263b60;stroke-width:2.2}
+  .el{font-family:"STIX Two Math","Cambria Math",serif;font-size:24px;font-style:italic;fill:#172b57}
+  .sign{font-family:Arial,sans-serif;font-size:22px;fill:#172b57}
+  .law .fm{background:var(--sky);border-radius:12px;padding:14px 16px;text-align:center;font-size:22px;line-height:1.7;color:var(--navy)}
+  .law ul{list-style:none;display:flex;flex-direction:column;gap:12px;margin:0}
+  .law li{display:flex;gap:11px;align-items:flex-start}
+  .law li::before{content:"";flex:none;width:10px;height:10px;border-radius:50%;background:var(--orange);margin-top:11px}
   .figc .bd{flex:1;display:flex;flex-direction:column;min-height:0;padding:8px 12px}
-  .figc .fbox{flex:1;min-height:0}
-  .figc svg{width:100%;height:100%}
-  .figc .capnote{flex:none;font-size:19.5px;color:var(--navy);background:var(--sky);border-radius:10px;padding:8px 16px;margin:8px 6px 6px;line-height:1.5;text-align:center}
+  .figc .fbox{flex:1;min-height:0}.figc svg{width:100%;height:100%}
+  .figc .capnote{flex:none;font-size:19px;color:var(--navy);background:var(--sky);border-radius:10px;padding:10px 14px;margin:8px 6px 6px;line-height:1.5;text-align:center}
 </style>
 </head>
-<body data-title="④ PD 控制" data-page="16 / 48">
+<body data-title="④ PD 控制" data-page="16 / 51">
 <div class="act-stage"><div class="act-slide">
-  <div class="act-body">
-    <div class="row">
-      <div class="act-card law" style="flex:1.02">
-        <div class="hd">比例-微分（PD）控制规律</div>
-        <div class="bd">
-          <div class="fm">
-            <span class="tex">u_{2}(t)=K_{p}\,u_{1}(t)+K_{p}T_{d}\,\dfrac{\mathrm{d}u_{1}(t)}{\mathrm{d}t}</span><br>
-            <span class="tex">G_{c}(s)=K_{p}(1+T_{d}s)=K_{p}+K_{D}s</span>　<span style="font-size:19px;color:var(--muted)">（<span class="tex">K_{D}=K_{p}T_{d}</span>）</span>
-          </div>
-          <ul>
-            <li><span>微分项与误差的<span class="kw-r">变化率</span>成正比——误差尚未变大，修正作用已经到来，具有“预见”性。</span></li>
-            <li><span>PD 控制相当于给系统<span class="kw-r">增加一个开环负实零点</span> <span class="tex">s=-1/T_{d}</span>，对系统的<span class="kw-r">稳定性、暂态性能有利</span>。</span></li>
-            <li><span>右图（取 <span class="tex">T_{d}=1</span>）：相频全程为正（<span class="tex">0^{\circ}\!\to\!+90^{\circ}</span>），故 PD 属于<span class="kw-r">相位超前</span>校正。</span></li>
-          </ul>
+  <div class="act-body"><div class="row">
+    <div class="act-card law" style="flex:1.12">
+      <div class="hd">比例—微分（PD）有源网络与控制规律</div>
+      <div class="bd">
+        <div class="circuit">
+          <svg viewBox="0 0 720 300" role="img" aria-label="图6-14有源PD运放网络">
+            <!-- 输入支路、运放与输出支路 -->
+            <path class="wire" d="M30 158H90 M150 158H280 M420 175H680"/>
+            <rect x="90" y="145" width="60" height="26" fill="#fbfcfe" stroke="#263b60" stroke-width="2.4"/>
+            <path class="wire" d="M280 115V235L420 175Z"/>
+            <!-- 反馈支路整体位于运放上方 -->
+            <path class="wire" d="M260 158V60H330 M400 60H470 M540 60H590V175"/>
+            <rect x="330" y="47" width="70" height="26" fill="#fbfcfe" stroke="#263b60" stroke-width="2.4"/>
+            <rect x="470" y="47" width="70" height="26" fill="#fbfcfe" stroke="#263b60" stroke-width="2.4"/>
+            <!-- R2 与 R3 之间的电容独立接地，不与运放相交 -->
+            <path class="wire" d="M435 60V103 M415 103H455 M415 115H455 M435 115V130 M413 130H457 M420 138H450 M427 146H443"/>
+            <!-- 同相端接地与底部电压参考线 -->
+            <path class="wire" d="M280 205H245V275 M30 275H680"/>
+            <circle class="node" cx="260" cy="158" r="4.5"/><circle class="node" cx="435" cy="60" r="4.5"/><circle class="node" cx="590" cy="175" r="4.5"/>
+            <circle class="terminal" cx="30" cy="158" r="5"/><circle class="terminal" cx="680" cy="175" r="5"/>
+            <circle class="terminal" cx="30" cy="275" r="5"/><circle class="terminal" cx="680" cy="275" r="5"/>
+            <text class="el" x="105" y="137">R<tspan baseline-shift="sub" font-size="16">1</tspan></text>
+            <text class="el" x="350" y="38">R<tspan baseline-shift="sub" font-size="16">2</tspan></text>
+            <text class="el" x="492" y="38">R<tspan baseline-shift="sub" font-size="16">3</tspan></text>
+            <text class="el" x="466" y="119">C</text><text class="el" x="337" y="184">K</text>
+            <text class="sign" x="288" y="153">−</text><text class="sign" x="288" y="214">+</text>
+            <text class="el" x="51" y="224">u<tspan baseline-shift="sub" font-size="16">1</tspan>(t)</text>
+            <text class="el" x="566" y="230">u<tspan baseline-shift="sub" font-size="16">2</tspan>(t)</text>
+          </svg>
+          <div class="name">图 6-14　有源 PD 网络</div>
         </div>
-      </div>
-      <div class="act-card figc" style="flex:1.1">
-        <div class="hd">PD 装置的 Bode 特性</div>
-        <div class="bd">
-          <div class="fbox"><svg id="figPD"></svg></div>
-          <div class="capnote">相位 <span class="tex">0^{\circ}\to+90^{\circ}</span> 超前；幅频过零点频率 <span class="tex">1/T_{d}</span> 后以 +20dB/dec 上升</div>
-        </div>
+        <div class="fm"><span class="tex">u_{2}(t)=K_{p}u_{1}(t)+K_{p}T_{d}\dfrac{\mathrm{d}u_{1}(t)}{\mathrm{d}t}</span><br><span class="tex">G_{c}(s)=\dfrac{U_{2}(s)}{U_{1}(s)}=K_{p}(1+T_{d}s)=K_{p}+K_{D}s</span></div>
+        <ul>
+          <li><span>增加负实零点 <span class="tex">s=-1/T_{d}</span>，微分作用具有“预见”性，有利于改善稳定性与暂态性能。</span></li>
+          <li><span>相频由 <span class="tex">0^{\circ}</span> 趋向 <span class="tex">+90^{\circ}</span>，属于<span class="kw-r">相位超前</span>校正。</span></li>
+        </ul>
       </div>
     </div>
-  </div>
+    <div class="act-card figc" style="flex:1">
+      <div class="hd">PD 装置的 Bode 特性</div>
+      <div class="bd"><div class="fbox"><svg id="figPD"></svg></div><div class="capnote">相位 <span class="tex">0^{\circ}\to+90^{\circ}</span>；幅频在 <span class="tex">1/T_{d}</span> 后以 <span class="tex">+20\,\mathrm{dB/dec}</span> 上升</div></div>
+    </div>
+  </div></div>
 </div></div>
-<script src="../fig.js"></script>
-<script src="../data/pid.js"></script>
+<script src="../fig.js"></script><script src="../data/pid.js"></script>
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  /* 从 BD.data.pid 中按曲线名筛出 PD 单曲线（含专属标注），注册为独立数据集 */
-  const d = BD.data.pid, tag = "PD";
-  BD.data["pid_pd"] = {
-    xlim: d.xlim,
-    mag:   { ylim: d.mag.ylim,   curves: d.mag.curves.filter(c => c.name === tag) },
-    phase: { ylim: d.phase.ylim, curves: d.phase.curves.filter(c => c.name === tag) },
-    marks: d.marks.filter(m => m.curve === tag)
-  };
-  BD.figure("figPD", "pid_pd", { static: true, zoom: false });
-});
+document.addEventListener("DOMContentLoaded",()=>{const d=BD.data.pid,tag="PD";BD.data.pid_pd={xlim:d.xlim,mag:{ylim:d.mag.ylim,curves:d.mag.curves.filter(c=>c.name===tag)},phase:{ylim:d.phase.ylim,curves:d.phase.curves.filter(c=>c.name===tag)},marks:d.marks.filter(m=>m.curve===tag)};BD.figure("figPD","pid_pd",{static:true,zoom:false});});
 </script>
-</body>
-</html>
+</body></html>

@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<title>例6-1：求 α 与 ωc2</title>
+<title>例6-1：确定超前网络参数</title>
 <link rel="stylesheet" href="../../../theme/theme.css?v=221">
 <script src="../../../theme/mathjax/mathjax-render.js"></script>
 <script src="../../../theme/mathjax/tex-chtml.js"></script>
@@ -23,41 +23,41 @@
   .figc svg{width:100%;height:100%}
 </style>
 </head>
-<body data-title="例6-1：求 α 与 ωc2" data-page="28 / 48">
+<body data-title="例6-1：确定超前网络参数" data-page="28 / 51">
 <div class="act-stage"><div class="act-slide">
 
 <div class="act-body has-note">
   <div class="row">
     <div class="lft">
       <div class="act-card" data-step="1" style="flex:1.05">
-        <div class="hd">第②步·1：算超前角，定 α</div>
+        <div class="hd">① 计算所需超前角，确定 <span class="tex">\alpha</span></div>
         <div class="bd">
-          <div class="cmt"><span class="tex">\varphi_{m}=\gamma^{*}-\gamma_{0}+\varepsilon=40^{\circ}-16^{\circ}+\varepsilon</span>；按教材口径取 <span class="tex">\omega_{c2}=4.6</span> 试算（相当于 ε≈4.6°）：</div>
-          <div class="fml"><span class="tex tex-d">\alpha=\frac{1-\sin\varphi_{m}}{1+\sin\varphi_{m}}=0.3158</span></div>
+          <div class="cmt">取修正值 <span class="tex">\varepsilon=9^{\circ}</span>，所需最大超前角为 <span class="tex">\varphi_{m}=35^{\circ}-14^{\circ}+9^{\circ}=30^{\circ}</span>：</div>
+          <div class="fml"><span class="tex tex-d">\alpha=\frac{1-\sin30^{\circ}}{1+\sin30^{\circ}}=0.334</span></div>
         </div>
       </div>
       <div class="act-card" data-step="2" style="flex:.95">
-        <div class="hd">第②步·2：在未校幅频上找 ωc2</div>
+        <div class="hd">② 在未校幅频特性上确定 <span class="tex">\omega_{c2}</span></div>
         <div class="bd">
-          <div class="cmt">网络在 <span class="tex">\omega_{m}</span> 处抬高 <span class="tex">-10\lg\alpha=5.0\ \mathrm{dB}</span>，故令 <span class="tex">\omega_{c2}</span> 为未校 <span class="tex">L_{0}(\omega)=-5.0\ \mathrm{dB}</span> 处的频率（右图）：</div>
-          <div class="fml"><span class="tex tex-d">\omega_{c2}=\omega_{m}=4.6</span></div>
+          <div class="cmt">网络在 <span class="tex">\omega_{m}</span> 处抬高 <span class="tex">10\lg(1/\alpha)=4.77\ \mathrm{dB}</span>，故在未校幅频上找 <span class="tex">L_{0}(\omega)=-4.77\ \mathrm{dB}</span> 处：</div>
+          <div class="fml"><span class="tex tex-d">\omega_{c2}=\omega_{m}\approx5.2</span></div>
         </div>
       </div>
       <div class="act-card" data-step="3" style="flex:1.1">
-        <div class="hd">第②步·3：定 T，写出 Gc(s)</div>
+        <div class="hd">③ 计算 <span class="tex">T</span>，写出校正装置 <span class="tex">G_{c}(s)</span></div>
         <div class="bd">
-          <div class="fml"><span class="tex tex-d">T=\frac{1}{\omega_{m}\sqrt{\alpha}}=0.38</span></div>
-          <div class="fml"><span class="tex tex-d">G_{c}(s)=\frac{0.38s+1}{0.12s+1},\quad \frac{1}{T}=2.6,\ \frac{1}{\alpha T}=8</span></div>
+          <div class="fml"><span class="tex tex-d">T=\frac{1}{\omega_{m}\sqrt{\alpha}}\approx0.33</span></div>
+          <div class="fml"><span class="tex tex-d">G_{c}(s)=\frac{0.33s+1}{0.11s+1},\quad \frac{1}{T}\approx3,\ \frac{1}{\alpha T}\approx9</span></div>
         </div>
       </div>
     </div>
     <div class="act-card figc">
-      <div class="hd"><span style="flex:1">在未校 L₀(ω) 上：L₀=10lgα=−5.0 dB 处定 ωc2</span></div>
+      <div class="hd"><span style="flex:1">在未校 <span class="tex">L_{0}(\omega)</span> 上：由 <span class="tex">L_{0}=-4.77\,\mathrm{dB}</span> 确定 <span class="tex">\omega_{c2}</span></span></div>
       <div class="bd2"><svg id="fig"></svg></div>
     </div>
   </div>
 </div>
-<div class="act-note"><span class="lead">口径</span><span>页面文字按教材口径：α=0.3158、T=0.38、<span class="tex">\omega_{c2}=4.6</span>、γ=42.6°；图内曲线与标注为精确计算值（<span class="tex">\omega_{c2}=4.53</span>、γ=43.8°），二者并存；<span class="tex">\omega_{c1}</span> 同理（教材读图 3.5，精确 3.39）。</span></div>
+<div class="act-note"><span class="lead">图解法</span><span>按课本 Bode 渐近线读图取 <span class="tex">\omega_{c2}\approx5.2</span>，由 <span class="tex">\alpha=0.334</span> 得两个转折频率约为 3 与 9 rad/s。</span></div>
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
@@ -73,15 +73,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const xL = PM.x0 + 6, x = F.X(M.wc2.val), y = F.Y(PM, LV), y0 = F.Y(PM, 0);
     F.mk("line", { x1: xL, y1: y, x2: x, y2: y, stroke: "#F5821F", "stroke-width": 2.2,
       "stroke-dasharray": "6 5", opacity: .9 }, g2);
-    F.tx(g2, xL + 10, y - 12, "L_{0}=10lgα=−5.0 dB", { fs: 21, fill: "#F5821F", b: 1, an: "start" });
+    F.tx(g2, xL + 10, y + 30, "L_{0}=−4.77 dB", { fs: 21, fill: "#F5821F", b: 1, an: "start" });
     F.mk("circle", { cx: x, cy: y, r: 9, fill: "#F5821F", stroke: "#fff", "stroke-width": 2.5 }, g2);
     F.mk("line", { x1: x, y1: PM.y0, x2: x, y2: PM.y1, stroke: "#D63A2F", "stroke-width": 2.2,
       "stroke-dasharray": "7 5", opacity: .85, "clip-path": `url(#${PM.clip})` }, g2);
     F.mk("circle", { cx: x, cy: y0, r: 9, fill: "#D63A2F", stroke: "#fff", "stroke-width": 2.5 }, g2);
-    F.tx(g2, x + 12, y0 - 14, "ω_{c2}=4.53", { fs: 22, fill: "#D63A2F", b: 1, an: "start" });
+    F.tx(g2, x + 12, y0 - 14, "ω_{c2}≈5.2", { fs: 22, fill: "#D63A2F", b: 1, an: "start" });
   })();
   (function () {   /* ③ 校正装置两个转折频率 */
-    [[2.632, "1/T=2.63", 22], [8.333, "1/(αT)=8.33", 48]].forEach(function (a) {
+    [[3, "1/T≈3", 22], [9, "1/(αT)≈9", 48]].forEach(function (a) {
       const x = F.X(a[0]);
       F.mk("line", { x1: x, y1: PM.y0, x2: x, y2: PM.y1, stroke: "#0E7A36", "stroke-width": 2.2,
         "stroke-dasharray": "7 5", opacity: .8, "clip-path": `url(#${PM.clip})` }, g3);

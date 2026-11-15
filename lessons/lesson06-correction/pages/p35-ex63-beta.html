@@ -29,7 +29,7 @@
   .figc svg{width:100%;height:100%}
 </style>
 </head>
-<body data-title="例6-3：选 ωc2 与 β" data-page="35 / 48">
+<body data-title="例6-3：选 ωc2 与 β" data-page="35 / 51">
 <div class="act-stage"><div class="act-slide">
 
 <div class="act-body has-note">
@@ -39,7 +39,7 @@
         <div class="hd">② 选 <span class="tex">\omega_{c2}</span>：相频上找 <span class="tex">\gamma^{*}+\varepsilon</span></div>
         <div class="bd" data-step="1">
           <div class="calc"><span class="num">1</span><div class="cx">
-            <div>取 <span class="tex">\varepsilon=5^{\circ}</span> 预补滞后附加相角，在未校相频上找 <span class="tex">\gamma_{0}=45^{\circ}</span> 的点。</div>
+            <div>取 <span class="tex">\varepsilon=10^{\circ}</span> 预补滞后附加相角，在未校相频上找 <span class="tex">\gamma_{0}=45^{\circ}</span> 的点。</div>
             <div class="eq"><span class="tex">\varphi_{0}(\omega_{c2})=-135^{\circ}\;\Rightarrow\;\omega_{c2}=0.56</span></div>
           </div></div>
         </div>
@@ -49,7 +49,7 @@
         <div class="bd" data-step="2">
           <div class="calc"><span class="num">2</span><div class="cx">
             <div>要在此处穿过 0dB，须压下的分贝数 = 未校此处幅值。</div>
-            <div class="eq"><span class="tex">L_{0}(0.56)\approx18\,\mathrm{dB}=20\lg\beta\;\Rightarrow\;\beta=8</span></div>
+            <div class="eq"><span class="tex">L_{0}(0.56)\approx26\,\mathrm{dB}\approx20\lg\beta\;\Rightarrow\;\beta=20</span></div>
           </div></div>
         </div>
       </div>
@@ -57,12 +57,11 @@
         <div class="hd">④ 定 T，写出 <span class="tex">G_{c}(s)</span></div>
         <div class="bd" data-step="3">
           <div class="calc"><span class="num">3</span><div class="cx">
-            <div>把滞后相角甩到低频：取 <span class="tex">\dfrac{1}{T}=0.1\omega_{c2}=0.056</span>。</div>
-            <div class="eq"><span class="tex">G_{c}(s)=\dfrac{Ts+1}{\beta Ts+1}=\dfrac{17.86s+1}{143s+1}</span></div>
+            <div>取高端转折频率 <span class="tex">\dfrac{1}{T}=\dfrac{\omega_{c2}}{5}\approx0.1</span>，则 <span class="tex">T=10</span>。</div>
+            <div class="eq"><span class="tex">G_{c}(s)=\dfrac{1}{10}\dfrac{s+0.1}{s+0.005}=2\dfrac{10s+1}{200s+1}</span></div>
           </div></div>
         </div>
       </div>
-      <div class="dualnote">口径备注：图上蓝点读数（φ0(0.56)=−134.9°、L0(0.56)=17.5dB）为精确曲线值；教学取整 −135°、18dB。</div>
     </div>
     <div class="act-card figc">
       <div class="hd"><span style="flex:1">在未校 Bode 图上选 ωc2 与 β（G₀ 蓝、Gc 绿）</span></div>
@@ -70,7 +69,7 @@
     </div>
   </div>
 </div>
-<div class="act-note"><span class="lead">一条链</span><span>相频上找 <span class="tex">45^{\circ}</span> 定 <span class="tex">\omega_{c2}</span> → 幅频上量 <span class="tex">18\,\mathrm{dB}</span> 定 β → <span class="tex">0.1\omega_{c2}</span> 定 T——<span class="kw-r">三个读数一条链</span>。</span></div>
+<div class="act-note"><span class="lead">一条链</span><span>相频上找 <span class="tex">45^{\circ}</span> 定 <span class="tex">\omega_{c2}</span> → 幅频上量约 <span class="tex">26\,\mathrm{dB}</span> 定 β → 取 <span class="tex">1/T=0.1</span>——<span class="kw-r">三个读数一条链</span>。</span></div>
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
@@ -88,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
     mag: { ylim: E.mag.ylim, curves: [E.mag.curves[0], E.mag.curves[1]], asym: [] },
     phase: { ylim: [E.phase.ylim[0], 0], curves: [cutWrap(E.phase.curves[0]), E.phase.curves[1]], asym: [] },
     marks: [] };
-  const WC2 = 0.56, PHI = -134.89, L0 = 17.5;
+  const WC2 = 0.56, PHI = -135, L0 = 26;
   const F = BD.figure("fig", "t35", { mag: true, phase: true, static: true, zoom: false });
   const PM = F.panelOf("mag"), PP = F.panelOf("phase");
   /* 图线分步化：① 未校 G0（初始即见）；② 相频找 ωc2；③ 幅频量 18dB 定 β（Gc 幅频出现）；④ 定 T（Gc 相频出现） */
@@ -106,15 +105,15 @@ document.addEventListener("DOMContentLoaded", () => {
     F.tx(g1, x + 14, yP - 20, "φ_{0}(0.56)=−135°", { fs: 22, fill: "#1D3FA0", b: 1, an: "start" });
     F.tx(g1, x - 20, (yP + y180) / 2 + 10, "γ+ε=45°", { fs: 21, fill: "#1D3FA0", b: 1, an: "end" });
   })();
-  /* 第②步组：幅频 L0(0.56)≈18dB 括线 → β=8；Gc 恰给 −18dB */
+  /* 第②步组：幅频 L0(0.56)≈26dB 括线 → β=20；Gc 高频约衰减 26dB */
   (function () {
-    const yL = F.Y(PM, L0), y0 = F.Y(PM, 0), yC = F.Y(PM, -18.03);
+    const yL = F.Y(PM, L0), y0 = F.Y(PM, 0), yC = F.Y(PM, -26.02);
     F.mk("circle", { cx: x, cy: yL, r: 9, fill: "#1D3FA0", stroke: "#fff", "stroke-width": 2.5 }, g2);
     F.mk("line", { x1: x, y1: yL, x2: x, y2: y0, stroke: "#1D3FA0", "stroke-width": 3.4 }, g2);
-    F.tx(g2, x - 16, (yL + y0) / 2 - 6, "L_{0}(0.56)≈18dB", { fs: 22, fill: "#1D3FA0", b: 1, an: "end" });
-    F.tx(g2, x - 16, (yL + y0) / 2 + 26, "=20lgβ → β=8", { fs: 22, fill: "#D63A2F", b: 1, an: "end" });
+    F.tx(g2, x - 16, (yL + y0) / 2 - 6, "L_{0}(0.56)≈26dB", { fs: 22, fill: "#1D3FA0", b: 1, an: "end" });
+    F.tx(g2, x - 16, (yL + y0) / 2 + 26, "=20lgβ → β=20", { fs: 22, fill: "#D63A2F", b: 1, an: "end" });
     F.mk("circle", { cx: x, cy: yC, r: 8, fill: "#0E7A36", stroke: "#fff", "stroke-width": 2.5 }, g2);
-    F.tx(g2, x - 16, yC + 32, "G_{c}：−20lgβ=−18dB", { fs: 21, fill: "#0E7A36", b: 1, an: "end" });
+    F.tx(g2, x - 16, yC + 32, "G_{c}：高频约 −26dB", { fs: 21, fill: "#0E7A36", b: 1, an: "end" });
   })();
   function paint() {
     const c = ACT.step.cur;

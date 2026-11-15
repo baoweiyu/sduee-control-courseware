@@ -42,7 +42,7 @@
   .flash{animation:bdPulse .85s ease-in-out infinite}
 </style>
 </head>
-<body data-title="例6-3：题设与未校分析" data-page="34 / 48">
+<body data-title="例6-3：题设与未校分析" data-page="34 / 51">
 <div class="act-stage"><div class="act-slide">
 
 <div class="act-body has-note">
@@ -51,33 +51,32 @@
       <div class="act-card" style="flex:.9">
         <div class="hd">题设</div>
         <div class="bd">
-          <div class="eq"><span class="tex">G_{0}(s)=\dfrac{k}{s(s+1)(0.5s+1)}</span>（单位负反馈）</div>
+          <div class="eq"><span class="tex">G_{0}(s)=\dfrac{K}{s(s+1)(0.5s+1)}</span>（单位负反馈）</div>
           <div style="font-size:20px;line-height:1.5">
-            要求：<span class="tex">r(t)=t</span> 时 <span class="tex">e_{ss}\leq0.2</span>；<span class="tex">\gamma\geq40^{\circ}</span>；<span class="tex">K_{g}\geq10\,\mathrm{dB}</span>。设计串联校正装置 <span class="tex">G_{c}(s)</span>。
+            要求：<span class="tex">K_{v}=10</span>，<span class="tex">\gamma\geq35^{\circ}</span>，<span class="tex">K_{g}\geq10\,\mathrm{dB}</span>。设计串联滞后校正装置 <span class="tex">G_{c}(s)</span>。
           </div>
         </div>
       </div>
       <div class="act-card" style="flex:1.72">
-        <div class="hd">第①步：定 K，画未校 Bode（与右图分步联动）</div>
+        <div class="hd">第①步：定 K，画未校 Bode</div>
         <div class="bd">
           <div class="stp" id="s1"><span class="num">1</span><div class="stx">
-            <div><span class="tex">e_{ss}=\dfrac{1}{k_{v}}\leq0.2</span>，本系统 <span class="tex">k_{v}=k</span></div>
-            <div class="got">k≥5，取 <b>k=5</b>（20lg5=14 dB）</div>
+            <div><span class="tex">K_{v}=\lim_{s\to0}sG_{0}(s)=K=10</span></div>
+            <div class="got">取 <b>K=10</b>（<span class="tex">20\lg10=20\,\mathrm{dB}</span>）</div>
           </div></div>
           <div class="stp" id="s2"><span class="num">2</span><div class="stx">
             <div>画未校 Bode 图：转折频率 <span class="tex">\omega_{1}=1</span>、<span class="tex">\omega_{2}=2</span>，幅频穿 0dB</div>
-            <div class="got">读 <b><span class="tex">\omega_{c1}=2.2</span></b>（渐近线读数）</div>
+            <div class="got">读 <b><span class="tex">\omega_{c1}\approx2.7</span></b>（课本读图）</div>
           </div></div>
           <div class="stp" id="s3"><span class="num">3</span><div class="stx">
-            <div><span class="tex">\gamma_{0}=180^{\circ}+\varphi(\omega_{c1})=-23^{\circ}</span></div>
+            <div><span class="tex">\gamma_{0}=180^{\circ}+\varphi(\omega_{c1})\approx-33^{\circ}</span></div>
             <div class="got"><b>γ0＜0，系统不稳定</b>——必须校正</div>
           </div></div>
         </div>
       </div>
-      <div class="dualnote">口径备注：ωc1=2.2、γ0=−23° 为渐近线读数；精确曲线穿越 ωc1=1.80，该处 γ0=−13.0°（图内标注为精确值）。</div>
     </div>
     <div class="act-card figc">
-      <div class="hd"><span style="flex:1">未校系统 G₀=5/[s(s+1)(0.5s+1)] 的 Bode 图</span></div>
+      <div class="hd"><span style="flex:1">未校系统 G₀=10/[s(s+1)(0.5s+1)] 的 Bode 图</span></div>
       <span class="segfloat" id="segChip" style="display:none"></span>
       <span class="prog" id="prog">0 / 3</span>
       <div class="bd2"><svg id="fig"></svg></div>
@@ -125,30 +124,22 @@ document.addEventListener("DOMContentLoaded", () => {
     chor(FS[K]);
     F.gMark.style.opacity = K >= 2 ? 1 : 0;
     if (K === 2) F.gMark.setAttribute("class", "flash"); else F.gMark.removeAttribute("class");
-    if (K >= 2) {  /* ② ωc1：精确穿越 + 渐近线读数（双口径上下错开，互不重叠） */
+    if (K >= 2) {  /* ② 未校幅频穿越，读数按课本图解法取近似值 */
       const g = F.mk("g", { "class": K === 2 ? "flash" : "" }, F.gDyn);
       const x = F.X(M.wc1.val), y = F.Y(PM, 0);
       F.mk("line", { x1: x, y1: PM.y0, x2: x, y2: PM.y1, stroke: "#D63A2F", "stroke-width": 2.2,
         "stroke-dasharray": "7 5", opacity: .85, "clip-path": `url(#${PM.clip})` }, g);
       F.mk("circle", { cx: x, cy: y, r: 9, fill: "#D63A2F", stroke: "#fff", "stroke-width": 2.5 }, g);
-      F.tx(g, x - 18, y + 36, "ω_{c1}=1.80（精确）", { fs: 21, fill: "#D63A2F", b: 1, an: "end" });
-      const xa = F.X(M.wc1_asym);
-      F.mk("circle", { cx: xa, cy: y, r: 8, fill: "#fff", stroke: "#F5821F", "stroke-width": 3 }, g);
-      F.tx(g, xa + 20, y - 24, "ω_{c1}≈2.2", { fs: 21, fill: "#F5821F", b: 1, an: "start" });
-      F.tx(g, xa + 20, y - 50, "（渐近线读数）", { fs: 19, fill: "#F5821F", an: "start" });
+      F.tx(g, x - 18, y + 36, "ω_{c1}≈2.7", { fs: 21, fill: "#D63A2F", b: 1, an: "end" });
     }
-    if (K >= 3) {  /* ③ γ0 读数（两口径）+ 不稳定判定 */
+    if (K >= 3) {  /* ③ 相角裕度读数与不稳定判定 */
       const g = F.mk("g", { "class": K === 3 ? "flash" : "" }, F.gDyn);
-      const x = F.X(M.wc1.val), y1 = F.Y(PP, -193), y2 = F.Y(PP, -180);
+      const x = F.X(M.wc1.val), y1 = F.Y(PP, -180 + M.gamma0.val), y2 = F.Y(PP, -180);
       F.mk("line", { x1: x, y1: PP.y0, x2: x, y2: PP.y1, stroke: "#D63A2F", "stroke-width": 2.2,
         "stroke-dasharray": "7 5", opacity: .55, "clip-path": `url(#${PP.clip})` }, g);
       F.mk("line", { x1: x, y1: y1, x2: x, y2: y2, stroke: "#D63A2F", "stroke-width": 3.4 }, g);
       F.mk("circle", { cx: x, cy: y1, r: 9, fill: "#D63A2F", stroke: "#fff", "stroke-width": 2.5 }, g);
-      F.tx(g, x - 14, (y1 + y2) / 2 + 6, "γ_{0}=−13.0°", { fs: 22, fill: "#D63A2F", b: 1, an: "end" });
-      const xa = F.X(M.wc1_asym), ya = F.Y(PP, -180 + M["gamma0_at_2.2"]);
-      F.mk("line", { x1: xa, y1: y2, x2: xa, y2: ya, stroke: "#F5821F", "stroke-width": 3,
-        "stroke-dasharray": "5 4" }, g);
-      F.tx(g, xa + 16, ya + 22, "γ_{0}(2.2)=−23°", { fs: 21, fill: "#F5821F", b: 1, an: "start" });
+      F.tx(g, x - 14, (y1 + y2) / 2 + 6, "γ_{0}≈−33°", { fs: 22, fill: "#D63A2F", b: 1, an: "end" });
       F.tx(g, PP.x1 - 18, PP.y0 + 30, "γ_{0}＜0，不稳定", { fs: 24, fill: "#D63A2F", b: 1, an: "end" });
     }
     for (let i = 1; i <= 3; i++)
@@ -158,7 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
   BD.wire(3, paint, { figs: [F], FS, dur: 9000, playLabel: "▶ 连贯生长", frame: f => chor(f) });
 
   /* ---- ⧉分步（金标准）：点一下推进一步；左栏步骤与图内元素同步高亮 ---- */
-  const STEPS = ["① ess 定 K=5", "② 未校 Bode：ωc1=2.2", "③ γ0=−23°＜0 不稳定"];
+  const STEPS = ["① Kv=10，取 K=10", "② 未校 Bode：ωc1≈2.7", "③ γ0≈−33°＜0 不稳定"];
   const chip = document.getElementById("segChip"), total = 3, stepBtn = document.getElementById("step");
   const wNext = ACT.step.next, wReset = ACT.step.reset;
   let segRaf = null, segTok = 0;

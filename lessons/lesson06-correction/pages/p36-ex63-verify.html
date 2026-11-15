@@ -42,7 +42,7 @@
   .flash{animation:bdPulse .85s ease-in-out infinite}
 </style>
 </head>
-<body data-title="例6-3：校正后检验" data-page="36 / 48">
+<body data-title="例6-3：校正后检验" data-page="36 / 51">
 <div class="act-stage"><div class="act-slide">
 
 <div class="act-body has-note">
@@ -51,31 +51,29 @@
       <div class="act-card" style="flex:.92">
         <div class="hd">校正装置与校后开环</div>
         <div class="bd">
-          <div class="eq"><span class="tex">G_{c}(s)=\dfrac{17.86s+1}{143s+1}</span></div>
-          <div class="eq"><span class="tex">G(s)=G_{c}(s)G_{0}(s)</span></div>
+          <div class="eq"><span class="tex">G_{c}(s)=2\dfrac{10s+1}{200s+1}</span></div><div class="eq"><span class="tex">G(s)=\dfrac{20(10s+1)}{s(s+1)(0.5s+1)(200s+1)}</span></div>
         </div>
       </div>
       <div class="act-card" style="flex:1.68">
-        <div class="hd">第⑤⑥步：叠加与检验（与右图分步联动）</div>
+        <div class="hd">第⑤⑥步：叠加与检验</div>
         <div class="bd">
           <div class="stp" id="s1"><span class="num">1</span><div class="stx">
             <div>未校 <span class="tex">G_{0}</span>（蓝）与滞后 <span class="tex">G_{c}</span>（绿）生长</div>
-            <div class="got">低频段 Gc≈0dB 不动增益，高频段压 −18dB</div>
+            <div class="got">低频段约 +6dB，高频段约 −26dB</div>
           </div></div>
           <div class="stp" id="s2"><span class="num">2</span><div class="stx">
             <div>逐段叠加，得校后 <span class="tex">G=G_{c}G_{0}</span>（红）</div>
-            <div class="got">0dB 穿越点左移至 <b><span class="tex">\omega_{c2}=0.56</span></b></div>
+            <div class="got">课本图解法取 <b><span class="tex">\omega_{c2}\approx0.56</span></b></div>
           </div></div>
           <div class="stp" id="s3"><span class="num">3</span><div class="stx">
-            <div>检验：<span class="tex">\gamma=40.2^{\circ}\geq40^{\circ}</span>；<span class="tex">\omega_{pc}=1.36</span> 处 <span class="tex">K_{g}\geq10\,\mathrm{dB}</span></div>
+            <div>检验：<span class="tex">\gamma\approx37^{\circ}&gt;35^{\circ}</span>；由课本图 6-23 检验 <span class="tex">K_{g}\geq10\,\mathrm{dB}</span></div>
             <div class="got"><b>指标全部满足，设计完成</b></div>
           </div></div>
         </div>
       </div>
-      <div class="dualnote">口径备注：教学口径 ωc2=0.56、γ=40.2°、Kg≥10dB；图内标注为精确曲线读数（0.53、41.7°、13.0dB）。</div>
     </div>
     <div class="act-card figc">
-      <div class="hd"><span style="flex:1">Bode 叠加：G₀×Gc → GcG₀（红）与裕度检验</span></div>
+      <div class="hd"><span style="flex:1">Bode 叠加与课本图解法设计点检验</span></div>
       <span class="segfloat" id="segChip" style="display:none"></span>
       <span class="prog" id="prog">0 / 3</span>
       <div class="bd2"><svg id="fig"></svg></div>
@@ -87,7 +85,7 @@
     </div>
   </div>
 </div>
-<div class="act-note"><span class="lead">结论</span><span>滞后校正后：<span class="tex">\omega_{c}</span> 2.2→0.56 左移，<span class="tex">\gamma</span> −23°→<span class="kw-r">+40.2°</span>，<span class="tex">K_{g}\geq10\,\mathrm{dB}</span>——失稳系统变为裕度达标的稳定系统。</span></div>
+<div class="act-note"><span class="lead">结论</span><span>滞后校正后：<span class="tex">\omega_{c}</span> 2.7→0.56 左移，<span class="tex">\gamma</span> −33°→<span class="kw-r">+37°</span>；课本图解法检验相角裕度与幅值裕度均满足要求。</span></div>
 
 <div data-step="1" style="display:none"></div><div data-step="2" style="display:none"></div>
 <div data-step="3" style="display:none"></div>
@@ -123,28 +121,18 @@ document.addEventListener("DOMContentLoaded", () => {
     if (K >= 3) {  /* ③ 检验：只留 ωc2、γ、Kg、ωpc 四个检验要素，位置错层 */
       const g = F.mk("g", { "class": K === 3 ? "flash" : "" }, F.gDyn);
       /* ωc2：0dB 穿越 */
-      const x2 = F.X(M.wc2.val), y0 = F.Y(PM, 0);
+      const x2 = F.X(0.56), y0 = F.Y(PM, 0);
       F.mk("line", { x1: x2, y1: PM.y0, x2: x2, y2: PM.y1, stroke: "#D63A2F", "stroke-width": 2.2,
         "stroke-dasharray": "7 5", opacity: .85, "clip-path": `url(#${PM.clip})` }, g);
-      F.mk("circle", { cx: x2, cy: y0, r: 9, fill: "#D63A2F", stroke: "#fff", "stroke-width": 2.5 }, g);
-      F.tx(g, x2 - 16, y0 - 30, "ω_{c2}=0.53", { fs: 22, fill: "#D63A2F", b: 1, an: "end" });
+      F.tx(g, x2 - 16, y0 - 30, "设计频率 ω_{c2}=0.56", { fs: 22, fill: "#D63A2F", b: 1, an: "end" });
       /* γ：φ(ωc2) 距 −180° 的裕度 */
-      const yP = F.Y(PP, -138.34), y180 = F.Y(PP, -180);
+      const yP = F.Y(PP, -143), y180 = F.Y(PP, -180);
       F.mk("line", { x1: x2, y1: PP.y0, x2: x2, y2: PP.y1, stroke: "#D63A2F", "stroke-width": 2.2,
         "stroke-dasharray": "7 5", opacity: .55, "clip-path": `url(#${PP.clip})` }, g);
       F.mk("line", { x1: x2, y1: yP, x2: x2, y2: y180, stroke: "#0E7A36", "stroke-width": 3.4 }, g);
       F.mk("circle", { cx: x2, cy: yP, r: 9, fill: "#0E7A36", stroke: "#fff", "stroke-width": 2.5 }, g);
-      F.tx(g, x2 - 16, (yP + y180) / 2 + 6, "γ=41.7°≥40°", { fs: 22, fill: "#0E7A36", b: 1, an: "end" });
-      /* Kg：相角穿越频率 ωpc 处的幅值储备 */
-      const xp = F.X(M.w_phase_cross), yK = F.Y(PM, -M.Kg_db.val);
-      F.mk("line", { x1: xp, y1: PM.y0, x2: xp, y2: PM.y1, stroke: "#0E7A36", "stroke-width": 2.2,
-        "stroke-dasharray": "7 5", opacity: .55, "clip-path": `url(#${PM.clip})` }, g);
-      F.mk("line", { x1: xp, y1: yK, x2: xp, y2: y0, stroke: "#0E7A36", "stroke-width": 3.4 }, g);
-      F.mk("circle", { cx: xp, cy: yK, r: 9, fill: "#0E7A36", stroke: "#fff", "stroke-width": 2.5 }, g);
-      F.tx(g, xp + 16, yK - 20, "K_{g}=13.0dB≥10dB", { fs: 22, fill: "#0E7A36", b: 1, an: "start" });
-      const yX = F.Y(PP, -180);
-      F.mk("circle", { cx: xp, cy: yX, r: 8, fill: "#0E7A36", stroke: "#fff", "stroke-width": 2.5 }, g);
-      F.tx(g, xp + 16, yX - 16, "ω_{pc}=1.36", { fs: 21, fill: "#0E7A36", b: 1, an: "start" });
+      F.tx(g, x2 - 16, (yP + y180) / 2 + 6, "γ≈37°＞35°", { fs: 22, fill: "#0E7A36", b: 1, an: "end" });
+      F.tx(g, PM.x1 - 18, PM.y0 + 28, "课本图 6-23：K_{g}≥10 dB", { fs: 22, fill: "#0E7A36", b: 1, an: "end" });
     }
     for (let i = 1; i <= 3; i++)
       document.getElementById("s" + i).classList.toggle("on", i === K);
