@@ -187,6 +187,14 @@
       "legacy_action": "NEW"
     },
     {
+      "id": "l6-p23a",
+      "file": "pages/p23a-midband-20db.html",
+      "title": "为什么中频段希望以 −20 dB/dec 穿越 0 dB？",
+      "complexity": "L3",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
       "id": "l6-p24",
       "file": "pages/p24-time-freq.html",
       "title": "① 时域指标与频域指标的转换",
@@ -406,6 +414,14 @@
       "id": "l6-p48",
       "file": "pages/p48-quiz2.html",
       "title": "课堂互动：校正法综合判断",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l6-p49",
+      "file": "pages/p49-laglead-method.html",
+      "title": "补充：滞后–超前校正的三个参数如何确定？",
       "complexity": "L2",
       "status": "Draft",
       "legacy_action": "NEW"

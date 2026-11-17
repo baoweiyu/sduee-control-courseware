@@ -42,7 +42,7 @@
   .flash{animation:bdPulse .85s ease-in-out infinite}
 </style>
 </head>
-<body data-title="例6-3：题设与未校分析" data-page="34 / 51">
+<body data-title="例6-3：题设与未校分析" data-page="35 / 53">
 <div class="act-stage"><div class="act-slide">
 
 <div class="act-body has-note">
@@ -95,18 +95,18 @@
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const E = BD.data.ex63, M = E.meta;
-  /* 相频数据在 −180° 处折回（wrap）到 +180°，折回段全部落在图框（ylim 上限 −60°）之外，
-     在折回跳变处截断后可见曲线与 BD 数据完全一致，仅消除竖直连线 */
-  function cutWrap(c) {
-    const pts = c.pts.slice();
-    for (let i = 1; i < pts.length; i++)
-      if (pts[i][1] - pts[i - 1][1] > 180) { pts.length = i; break; }
-    return Object.assign({}, c, { pts });
+  /* 圆点纵坐标直接从对应精确曲线插值，避免读数文字与图线位置不一致。 */
+  function sample(c, w) {
+    const p = c.pts;
+    let i = 1;
+    while (i < p.length - 1 && p[i][0] < w) i++;
+    const a = p[i - 1], b = p[i], t = (Math.log(w) - Math.log(a[0])) / (Math.log(b[0]) - Math.log(a[0]));
+    return a[1] + (b[1] - a[1]) * Math.max(0, Math.min(1, t));
   }
-  /* 只留未校 G0（曲线逐点取自 BD.data.ex63）+ G0 渐近线 + 转折频率标注 */
+  /* 保留完整相频曲线：数据连续延伸至约 −268°，纵轴范围完整覆盖，不在 −180° 截断。 */
   BD.data["t34"] = { xlim: E.xlim,
     mag: { ylim: E.mag.ylim, curves: [E.mag.curves[0]], asym: [E.mag.asym[0]] },
-    phase: { ylim: E.phase.ylim, curves: [cutWrap(E.phase.curves[0])], asym: [] },
+    phase: { ylim: E.phase.ylim, curves: [E.phase.curves[0]], asym: [] },
     marks: [
       { type: "vline", w: 1, label: "ω_{1}=1", color: "#5B6B8C", dy: 20 },
       { type: "vline", w: 2, label: "ω_{2}=2", color: "#5B6B8C", dy: 42 }
@@ -124,17 +124,17 @@ document.addEventListener("DOMContentLoaded", () => {
     chor(FS[K]);
     F.gMark.style.opacity = K >= 2 ? 1 : 0;
     if (K === 2) F.gMark.setAttribute("class", "flash"); else F.gMark.removeAttribute("class");
-    if (K >= 2) {  /* ② 未校幅频穿越，读数按课本图解法取近似值 */
+    if (K >= 2) {  /* ② 圆点落在精确幅频曲线上，文字保留课本近似读数 */
       const g = F.mk("g", { "class": K === 2 ? "flash" : "" }, F.gDyn);
-      const x = F.X(M.wc1.val), y = F.Y(PM, 0);
+      const x = F.X(M.wc1.val), y = F.Y(PM, sample(E.mag.curves[0], M.wc1.val));
       F.mk("line", { x1: x, y1: PM.y0, x2: x, y2: PM.y1, stroke: "#D63A2F", "stroke-width": 2.2,
         "stroke-dasharray": "7 5", opacity: .85, "clip-path": `url(#${PM.clip})` }, g);
       F.mk("circle", { cx: x, cy: y, r: 9, fill: "#D63A2F", stroke: "#fff", "stroke-width": 2.5 }, g);
       F.tx(g, x - 18, y + 36, "ω_{c1}≈2.7", { fs: 21, fill: "#D63A2F", b: 1, an: "end" });
     }
-    if (K >= 3) {  /* ③ 相角裕度读数与不稳定判定 */
+    if (K >= 3) {  /* ③ 相频点同样由曲线插值，不用独立常数定位 */
       const g = F.mk("g", { "class": K === 3 ? "flash" : "" }, F.gDyn);
-      const x = F.X(M.wc1.val), y1 = F.Y(PP, -180 + M.gamma0.val), y2 = F.Y(PP, -180);
+      const x = F.X(M.wc1.val), y1 = F.Y(PP, sample(E.phase.curves[0], M.wc1.val)), y2 = F.Y(PP, -180);
       F.mk("line", { x1: x, y1: PP.y0, x2: x, y2: PP.y1, stroke: "#D63A2F", "stroke-width": 2.2,
         "stroke-dasharray": "7 5", opacity: .55, "clip-path": `url(#${PP.clip})` }, g);
       F.mk("line", { x1: x, y1: y1, x2: x, y2: y2, stroke: "#D63A2F", "stroke-width": 3.4 }, g);

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>滞后–超前校正：三个参数如何确定？</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=221">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=221" defer></script>
+<style>
+  .wrap{height:100%;display:flex;flex-direction:column;gap:13px;min-height:0}
+  .top{flex:none;display:flex;gap:18px;height:168px}
+  .top .act-card{display:flex;flex-direction:column;overflow:hidden}
+  .top .bd{flex:1;display:flex;align-items:center;justify-content:center;padding:6px 14px;font-size:20px}
+  .network{flex:1.22}.constraints{flex:1}
+  .constraints .bd{gap:14px}.constraint{background:var(--sky);border-radius:10px;padding:5px 12px;text-align:center;line-height:1.3}
+  .cols{flex:1;display:flex;gap:20px;min-height:0}
+  .left{flex:1.17;display:flex;flex-direction:column;gap:9px;min-height:0}
+  .flow{flex:1;display:flex;gap:12px;align-items:center;background:#fff;border:2px solid var(--line);border-left:6px solid var(--blue);border-radius:13px;padding:8px 14px;min-height:0;transition:.2s}
+  .flow.emph{border-left-color:var(--danger);background:#FDF5F2;box-shadow:inset 0 0 0 2px rgba(214,58,47,.08)}
+  .num{flex:none;width:37px;height:37px;border-radius:50%;display:grid;place-items:center;background:var(--blue);color:#fff;font-size:20px;font-weight:800}
+  .flow.emph .num{background:var(--danger)}
+  .ftext{font-size:20.5px;line-height:1.4;color:var(--ink)}
+  .ftext b{color:var(--navy)}
+  .verify{flex:none;background:var(--sky);border-radius:11px;padding:8px 16px;text-align:center;font-size:20px;color:var(--navy)}
+  .right{flex:1;display:flex;flex-direction:column;gap:12px;min-height:0}
+  .right .act-card{display:flex;flex-direction:column;overflow:hidden;min-height:0}
+  .right .act-card>.hd{font-size:22px;padding:10px 18px}
+  .right .act-card>.bd{padding:10px 16px;font-size:20px;line-height:1.45}
+  .mapcard{flex:1.25}.example{flex:.88}
+  .map{position:relative;height:295px;width:100%}
+  .map svg{position:absolute;inset:0;width:100%;height:100%}
+  .flab{position:absolute;top:12px;transform:translateX(-50%);font-size:18px;white-space:nowrap;color:var(--blue);font-weight:700}
+  .flab.orange{color:#C65D13}.flab.wc{top:52px;color:var(--danger);font-size:19px}
+  .paramline{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:2px}
+  .param{border:2px solid var(--line);background:var(--sky);border-radius:10px;padding:7px 8px;text-align:center;font-size:18px;line-height:1.4}
+  .param b{color:var(--navy)}
+  .coupled{font-size:19px;line-height:1.45;color:var(--danger);font-weight:700;text-align:center;margin-top:8px}
+  .chain{display:flex;align-items:center;justify-content:center;gap:7px;background:var(--sky);border-radius:10px;padding:8px;font-size:18.5px;white-space:nowrap}
+  .chain b{color:var(--navy)}.arr{color:var(--orange);font-size:26px;font-weight:800}
+  .smallnote{font-size:17px;line-height:1.4;color:var(--muted);margin-top:8px}
+  .act-note{font-size:21px;line-height:1.4;padding:11px 23px}
+</style>
+</head>
+<body data-title="补充：滞后–超前校正的三个参数如何确定？" data-page="53 / 53">
+<div class="act-stage"><div class="act-slide">
+<div class="act-body has-note"><div class="wrap">
+  <div class="top">
+    <div class="act-card network"><div class="hd">三参数耦合网络：<span class="tex">G_c(0)=1</span>，低频增益由 K 保证</div><div class="bd"><div style="text-align:center"><span class="tex">G_c(s)=\underbrace{\dfrac{1+T_2s}{1+\beta T_2s}}_{\text{滞后}}\underbrace{\dfrac{1+T_1s}{1+T_1s/\beta}}_{\text{超前}},\quad \beta>1,\ T_2>T_1>0</span></div></div></div>
+    <div class="act-card constraints"><div class="hd">两个设计约束</div><div class="bd"><div class="constraint"><span class="tex">|L(j\omega_c^*)|=1</span><br>决定目标截止频率</div><div class="constraint"><span class="tex">180^\circ+\angle L(j\omega_c^*)=\gamma^*</span><br>决定目标相角裕度</div></div></div>
+  </div>
+  <div class="cols">
+    <div class="left">
+      <div class="flow"><span class="num">1</span><div class="ftext"><b>定 K：</b><span class="tex">L_0(s)=KG_0(s)</span>，先满足稳态精度；接入归一化网络不改变低频增益系数。</div></div>
+      <div class="flow"><span class="num">2</span><div class="ftext"><b>定目标：</b>由动态性能确定 <span class="tex">\omega_c^*,\ \gamma^*</span>。</div></div>
+      <div class="flow"><span class="num">3</span><div class="ftext"><b>算补偿：</b>读取 <span class="tex">L_0(j\omega_c^*)</span>，同时求所需<span class="tex">|G_c(j\omega_c^*)|</span> 与 <span class="tex">\varphi_c^*</span>。</div></div>
+      <div class="flow"><span class="num">4</span><div class="ftext"><b>先安排滞后位置：</b><span class="tex">1/T_2=\omega_c^*/10</span>。此时只定位置，<span class="tex">\beta</span> 未知，滞后极点仍未确定。</div></div>
+      <div class="flow emph"><span class="num">5</span><div class="ftext"><b>联合确定 <span class="tex">\beta,T_1</span>：</b>两个约束 → 两个参数；<span class="tex">T_1</span> 调整超前位置，<span class="tex">\beta</span> 同时控制衰减与相角能力，不能只按相角选 <span class="tex">\beta</span>。</div></div>
+      <div class="verify">校正后完整 Bode 图 → 检验 <span class="tex">\omega_c,\gamma</span> → 验证闭环响应；不满足则调整参数。</div>
+    </div>
+    <div class="right">
+      <div class="act-card mapcard"><div class="hd">四个转折频率：位置与参数耦合</div><div class="bd">
+        <div class="map">
+          <svg viewBox="0 0 560 250" aria-label="滞后超前网络四个转折频率的位置示意">
+            <line x1="35" y1="128" x2="530" y2="128" stroke="#5B6B8C" stroke-width="2.5"/><path d="M530,128 l-13,-7 v14 z" fill="#5B6B8C"/>
+            <text x="516" y="154" text-anchor="end" font-size="19" fill="#5B6B8C">对数频率 ω</text>
+            <g stroke="#1D3FA0" stroke-width="2.5"><line x1="70" y1="91" x2="70" y2="164"/><line x1="175" y1="91" x2="175" y2="164"/></g>
+            <g stroke="#E87522" stroke-width="2.5"><line x1="305" y1="91" x2="305" y2="164"/><line x1="458" y1="91" x2="458" y2="164"/></g>
+            <g fill="#fff" stroke-width="3"><circle cx="70" cy="128" r="8" stroke="#1D3FA0"/><circle cx="175" cy="128" r="8" stroke="#1D3FA0"/><circle cx="305" cy="128" r="8" stroke="#E87522"/><circle cx="458" cy="128" r="8" stroke="#E87522"/></g>
+            <line x1="381" y1="72" x2="381" y2="177" stroke="#D63A2F" stroke-width="2.3" stroke-dasharray="7 5"/>
+            <path d="M70,181 v12 h105 v-12 M70,187 h105" fill="none" stroke="#1D3FA0" stroke-width="2"/>
+            <text x="122" y="218" text-anchor="middle" font-size="19" font-weight="700" fill="#1D3FA0">滞后：调整中频增益</text>
+            <path d="M305,181 v12 h153 v-12 M305,187 h153" fill="none" stroke="#E87522" stroke-width="2"/>
+            <text x="381" y="218" text-anchor="middle" font-size="19" font-weight="700" fill="#C65D13">超前：提供正相角</text>
+          </svg>
+          <div class="flab" style="left:12.5%"><span class="tex">\dfrac{1}{\beta T_2}</span></div><div class="flab" style="left:31.25%"><span class="tex">\dfrac{1}{T_2}</span></div><div class="flab orange" style="left:54.5%"><span class="tex">\dfrac{1}{T_1}</span></div><div class="flab orange" style="left:81.8%"><span class="tex">\dfrac{\beta}{T_1}</span></div><div class="flab wc" style="left:68%"><span class="tex">\omega_c^*</span></div>
+        </div>
+        <div class="paramline"><div class="param"><b><span class="tex">T_2</span></b><br>滞后零极点一起移动</div><div class="param"><b><span class="tex">T_1</span></b><br>超前零极点一起移动</div><div class="param"><b><span class="tex">\beta</span></b><br>两组间距同时改变</div></div>
+        <div class="coupled"><span class="tex">\varphi_{\max}=\arcsin\dfrac{\beta-1}{\beta+1}</span>；<span class="tex">\beta</span> 不能为两部分分别独立选择。</div>
+      </div></div>
+      <div class="act-card example"><div class="hd">简短数值示例：三个参数、两个约束、一个位置自由度</div><div class="bd">
+        <div>取 <span class="tex">\omega_c^*=1</span>，<span class="tex">T_2=10</span>，联合设计得 <span class="tex">\beta=4,\ T_1=2</span>：</div>
+        <div style="text-align:center;margin:4px 0"><span class="tex">G_c(s)=\dfrac{(1+10s)(1+2s)}{(1+40s)(1+0.5s)}</span></div>
+        <div class="chain"><b>原系统 +6 dB、−155°</b><span class="arr">→</span><b>补偿 −6 dB、+32.6°</b><span class="arr">→</span><b>约 0 dB、−122.4°</b></div>
+        <div class="smallnote">局部设计结果：<span class="tex">\gamma\approx57.6^\circ</span>。仍需用完整原系统检验全频域与闭环时域性能。</div>
+      </div></div>
+    </div>
+  </div>
+</div></div>
+<div class="act-note"><span class="lead">设计要点</span><span><b>滞后–超前校正不是分别设计两个独立网络，而是在既定稳态精度下，通过三个耦合参数，联合满足截止频率和相角裕度要求。</b></span></div>
+</div></div>
+</body>
+</html>

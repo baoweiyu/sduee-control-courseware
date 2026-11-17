@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>为什么希望中频段以 −20 dB/dec 穿越 0 dB？</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=221">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=221" defer></script>
+<style>
+  .midrow{display:flex;gap:20px;height:100%;min-height:0}
+  .figcard{flex:1.58;display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .figcard>.hd{font-size:23px;padding:11px 20px}
+  .figwrap{flex:1;min-height:0;padding:2px 8px 8px;background:#fff}
+  .figwrap svg{width:100%;height:100%;display:block}
+  .side{flex:.86;display:flex;flex-direction:column;gap:10px;min-width:0;min-height:0}
+  .side>.act-card:first-child{flex:.82 !important}.side>.act-card:last-child{flex:1.3 !important}
+  .side .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .side .act-card>.hd{font-size:21px;padding:8px 16px}
+  .side .act-card>.bd{padding:8px 14px;font-size:19px;line-height:1.38}
+  .model{font-size:18px;text-align:center;background:var(--sky);border-radius:10px;padding:3px 7px}
+  .sliderline{display:flex;align-items:center;gap:9px;margin:6px 0}
+  .sliderline input{flex:1;min-width:0;accent-color:var(--orange)}
+  .aval{font-size:25px;font-weight:800;color:var(--danger);min-width:66px;text-align:center;font-variant-numeric:tabular-nums}
+  .btns{display:flex;gap:7px;flex-wrap:nowrap}
+  .pbtn{flex:1;border:2px solid var(--blue);background:#fff;color:var(--blue);border-radius:9px;padding:5px 3px;font-size:17px;font-weight:700;cursor:pointer;white-space:nowrap}
+  .pbtn.on{background:var(--blue);color:#fff}
+  .play{width:100%;margin-top:7px;background:var(--blue);color:#fff;border:0;border-radius:10px;padding:7px;font-size:19px;font-weight:700;cursor:pointer}
+  .gamma{text-align:center;color:var(--danger);font-size:50px;font-weight:800;line-height:1.02;font-variant-numeric:tabular-nums}
+  .glabel{text-align:center;color:var(--navy);font-weight:700;font-size:19px;margin-bottom:4px}
+  .metrics{display:grid;grid-template-columns:1fr 1fr;gap:3px 12px;font-size:18px;margin:6px 0}
+  .metrics span:nth-child(even){text-align:right;color:var(--navy);font-weight:700;font-variant-numeric:tabular-nums}
+  .phasebox{background:var(--sky);border-radius:10px;padding:6px 9px;font-size:18px;line-height:1.4}
+  .phasebox b{color:var(--navy)}
+  .observe{font-size:18px;line-height:1.36;color:var(--navy);margin-top:6px}
+  .act-note{font-size:22px;line-height:1.42;padding:11px 24px}
+  .svgtxt{font-family:"Microsoft YaHei","Segoe UI",sans-serif;fill:#22304A}
+  .svgmath{font-family:"Cambria Math","STIX Two Math",Georgia,serif;fill:#5B6B8C}
+  .halo{paint-order:stroke;stroke:#fff;stroke-width:5px;stroke-linejoin:round}
+</style>
+</head>
+<body data-title="为什么中频段希望以 −20 dB/dec 穿越 0 dB？" data-page="24 / 53">
+<div class="act-stage"><div class="act-slide">
+<div class="act-body has-note">
+  <div class="midrow">
+    <div class="act-card figcard">
+      <div class="hd">幅频斜率不直接决定相角：<span style="color:#FFD9B0">零极点位置</span>同时决定两条曲线</div>
+      <div class="figwrap"><svg id="midfig" viewBox="0 0 900 650" role="img" aria-label="随参数变化的精确幅频和相频曲线"></svg></div>
+    </div>
+    <div class="side">
+      <div class="act-card" style="flex:.9">
+        <div class="hd">交互模型：截止频率始终不变</div>
+        <div class="bd">
+          <div class="model"><span class="tex">L_a(s)=\dfrac{1}{as^2}\dfrac{1+as}{1+s/a},\qquad \omega_c=1</span></div>
+          <div class="sliderline"><label for="aSlider">距离系数 <i>a</i></label><input id="aSlider" type="range" min="1.2" max="10" step="0.01" value="3"><span class="aval" id="aVal">3.00</span></div>
+          <div class="btns"><button class="pbtn" data-a="2">a=2 · 较窄</button><button class="pbtn on" data-a="3">a=3 · 适中</button><button class="pbtn" data-a="10">a=10 · 较宽</button></div>
+          <button class="play" id="mbPlay">▶ 播放：往返改变中频段宽度</button>
+        </div>
+      </div>
+      <div class="act-card" style="flex:1.16">
+        <div class="hd">实时结果与相角来源</div>
+        <div class="bd">
+          <div class="glabel">相角裕度 γ</div><div class="gamma" id="gamma">53.1°</div>
+          <div class="metrics"><span>零点转折 ωz</span><span id="wz">0.333</span><span>极点转折 ωp</span><span id="wp">3.000</span><span>截止频率 ωc</span><span>1 rad/s</span><span>实际局部斜率</span><span id="slope">−24.0 dB/dec</span></div>
+          <div class="phasebox"><b>在 ωc 处：</b>两个积分环节 −180°<br>零点贡献 <b id="pz">+71.6°</b>，极点贡献 <b id="pp">−18.4°</b><br><span class="tex">\gamma=\arctan a-\arctan(1/a)</span></div>
+          <div class="observe" id="observe">中频段位于 0.333 至 3.000 rad/s，相角裕度约 53.1°。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">核心结论</span><span>中频段需要一定宽度，不是因为 −20 dB/dec 直接对应 −90°，而是因为它使截止频率附近的系统更接近单积分环节特性，从而有利于获得较大的相角裕度。</span></div>
+<script>
+document.addEventListener("DOMContentLoaded",()=>{
+  const NS="http://www.w3.org/2000/svg",svg=document.getElementById("midfig");
+  const X0=78,X1=860,YM0=64,YM1=292,YP0=374,YP1=592,WMIN=.01,WMAX=100;
+  const $=id=>document.getElementById(id);
+  function mk(tag,a,p){const n=document.createElementNS(NS,tag);for(const k in a)n.setAttribute(k,a[k]);(p||svg).appendChild(n);return n;}
+  function text(x,y,s,o={}){const n=mk("text",{x,y,"font-size":o.fs||18,"text-anchor":o.an||"middle",fill:o.fill||"#22304A","font-weight":o.b?700:400,"class":o.halo===false?"svgtxt":"svgtxt halo"},o.p||svg);n.textContent=s;return n;}
+  const X=w=>X0+(Math.log10(w)-Math.log10(WMIN))/(Math.log10(WMAX)-Math.log10(WMIN))*(X1-X0);
+  const YM=v=>YM0+(90-v)/180*(YM1-YM0),YP=v=>YP0+(-80-v)/115*(YP1-YP0);
+  const mag=(w,a)=>-20*Math.log10(a)-40*Math.log10(w)+10*Math.log10(1+(a*w)**2)-10*Math.log10(1+(w/a)**2);
+  const phase=(w,a)=>-180+Math.atan(a*w)*180/Math.PI-Math.atan(w/a)*180/Math.PI;
+  const asym=(w,a)=>w<1/a?-20*Math.log10(a)-40*Math.log10(w):(w<a?-20*Math.log10(w):20*Math.log10(a)-40*Math.log10(w));
+  mk("rect",{x:0,y:0,width:900,height:650,fill:"#fff"});
+  const defs=mk("defs",{}),clipM=mk("clipPath",{id:"midMagClip"},defs),clipP=mk("clipPath",{id:"midPhaseClip"},defs);
+  mk("rect",{x:X0,y:YM0,width:X1-X0,height:YM1-YM0},clipM);mk("rect",{x:X0,y:YP0,width:X1-X0,height:YP1-YP0},clipP);
+  const gBand=mk("g",{}),gGrid=mk("g",{}),gCurve=mk("g",{}),gMark=mk("g",{});
+  const bandM=mk("rect",{y:YM0,height:YM1-YM0,fill:"#DDEBFF",opacity:.65},gBand);
+  const bandP=mk("rect",{y:YP0,height:YP1-YP0,fill:"#DDEBFF",opacity:.24},gBand);
+  [0.01,.1,1,10,100].forEach(w=>{const x=X(w);[[YM0,YM1],[YP0,YP1]].forEach(r=>mk("line",{x1:x,y1:r[0],x2:x,y2:r[1],stroke:"#D8E2F2","stroke-width":1.4},gGrid));text(x,621,w===1?"1":(w===.01?"0.01":w===.1?"0.1":String(w)),{fs:18,p:gGrid,fill:"#5B6B8C"});});
+  [-60,-30,0,30,60].forEach(v=>{const y=YM(v);mk("line",{x1:X0,y1:y,x2:X1,y2:y,stroke:v===0?"#8A97B5":"#E2E9F4","stroke-width":v===0?2.2:1.2,"stroke-dasharray":v===0?"7 5":"none"},gGrid);text(X0-12,y+6,String(v),{fs:17,an:"end",p:gGrid,fill:"#5B6B8C"});});
+  [-180,-150,-120,-90].forEach(v=>{const y=YP(v);mk("line",{x1:X0,y1:y,x2:X1,y2:y,stroke:v===-180?"#8A97B5":"#E2E9F4","stroke-width":v===-180?2.2:1.2,"stroke-dasharray":v===-180?"7 5":"none"},gGrid);text(X0-12,y+6,String(v)+"°",{fs:17,an:"end",p:gGrid,fill:"#5B6B8C"});});
+  [[YM0,YM1],[YP0,YP1]].forEach(r=>mk("rect",{x:X0,y:r[0],width:X1-X0,height:r[1]-r[0],fill:"none",stroke:"#8A97B5","stroke-width":1.4},gGrid));
+  text(25,47,"L(ω) / dB",{fs:21,an:"start",b:1,p:gGrid,fill:"#1D3FA0"});text(25,357,"φ(ω) / °",{fs:21,an:"start",b:1,p:gGrid,fill:"#C65D13"});text(846,646,"ω / (rad/s)",{fs:20,an:"end",b:1,p:gGrid,fill:"#5B6B8C"});
+  text(469,329,"零点提前贡献正相角，极点延后贡献负相角",{fs:20,p:gGrid,fill:"#16324F"});
+  const pMag=mk("path",{fill:"none",stroke:"#1D3FA0","stroke-width":4,"stroke-linecap":"round","stroke-linejoin":"round","clip-path":"url(#midMagClip)"},gCurve);
+  const pAsym=mk("path",{fill:"none",stroke:"#F5821F","stroke-width":3,"stroke-dasharray":"9 6","clip-path":"url(#midMagClip)"},gCurve);
+  const pPhase=mk("path",{fill:"none",stroke:"#E87522","stroke-width":4,"stroke-linecap":"round","stroke-linejoin":"round","clip-path":"url(#midPhaseClip)"},gCurve);
+  text(790,44,"蓝色：精确幅频　橙色虚线：渐近线",{fs:17,an:"end",p:gCurve,fill:"#5B6B8C"});
+  const vLines=[0,1,2].map(i=>mk("line",{stroke:i===2?"#D63A2F":"#6D87B5","stroke-width":i===2?2.3:1.8,"stroke-dasharray":i===2?"7 5":"5 5"},gMark));
+  const dot=mk("circle",{r:8,fill:"#E87522",stroke:"#fff","stroke-width":2.5},gMark);
+  const gammaLine=mk("line",{stroke:"#D63A2F","stroke-width":3.5},gMark);
+  const tZ=text(0,0,"",{fs:18,b:1,p:gMark,fill:"#1D3FA0"}),tP=text(0,0,"",{fs:18,b:1,p:gMark,fill:"#1D3FA0"}),tC=text(X(1)+12,YM1-12,"ωc=1",{fs:19,an:"start",b:1,p:gMark,fill:"#D63A2F"});
+  const tMid=text(X(1),132,"中频段渐近斜率：−20 dB/dec",{fs:21,b:1,p:gMark,fill:"#1D3FA0"});
+  const tPhi=text(0,0,"",{fs:20,an:"start",b:1,p:gMark,fill:"#C65D13"}),tGamma=text(0,0,"",{fs:21,an:"start",b:1,p:gMark,fill:"#D63A2F"});
+  let current=3,raf=0,playing=false,dir=1,last=0;
+  function path(fn,a,map){let d="";for(let i=0;i<=520;i++){const lw=Math.log10(WMIN)+i/520*4,w=10**lw,x=X(w),y=map(fn(w,a));d+=(i?"L":"M")+x.toFixed(2)+","+y.toFixed(2);}return d;}
+  function setA(a){
+    current=Math.max(1.2,Math.min(10,a));$("aSlider").value=current;
+    const wz=1/current,wp=current,gamma=Math.atan(current)*180/Math.PI-Math.atan(1/current)*180/Math.PI,phi=-180+gamma;
+    pMag.setAttribute("d",path(mag,current,YM));pPhase.setAttribute("d",path(phase,current,YP));pAsym.setAttribute("d",path(asym,current,YM));
+    [[bandM,X(wz),X(wp)-X(wz)],[bandP,X(wz),X(wp)-X(wz)]].forEach(v=>{v[0].setAttribute("x",v[1]);v[0].setAttribute("width",v[2]);});
+    [[vLines[0],wz],[vLines[1],wp],[vLines[2],1]].forEach(v=>{const x=X(v[1]);v[0].setAttribute("x1",x);v[0].setAttribute("x2",x);v[0].setAttribute("y1",YM0);v[0].setAttribute("y2",YP1);});
+    tZ.setAttribute("x",X(wz)-8);tZ.setAttribute("y",YM0+27);tZ.setAttribute("text-anchor","end");tZ.textContent="ωz="+wz.toFixed(current<2?2:3);
+    tP.setAttribute("x",X(wp)+8);tP.setAttribute("y",YM0+27);tP.setAttribute("text-anchor","start");tP.textContent="ωp="+wp.toFixed(2);
+    dot.setAttribute("cx",X(1));dot.setAttribute("cy",YP(phi));gammaLine.setAttribute("x1",X(1));gammaLine.setAttribute("x2",X(1));gammaLine.setAttribute("y1",YP(phi));gammaLine.setAttribute("y2",YP(-180));
+    tPhi.setAttribute("x",X(1)+16);tPhi.setAttribute("y",Math.max(YP0+24,YP(phi)-18));tPhi.textContent="φ(1)="+phi.toFixed(1)+"°";
+    tGamma.setAttribute("x",X(1)+18);tGamma.setAttribute("y",Math.min(YP1-10,(YP(phi)+YP(-180))/2+28));tGamma.textContent="γ="+gamma.toFixed(1)+"°";
+    $("aVal").textContent=current.toFixed(2);$("gamma").textContent=gamma.toFixed(1)+"°";$("wz").textContent=wz.toFixed(3);$("wp").textContent=wp.toFixed(3);
+    $("slope").textContent="−"+(20+40/(1+current*current)).toFixed(1)+" dB/dec";
+    const z=Math.atan(current)*180/Math.PI,p=-Math.atan(1/current)*180/Math.PI;$("pz").textContent="+"+z.toFixed(1)+"°";$("pp").textContent=p.toFixed(1)+"°";
+    $("observe").textContent="中频段位于 "+wz.toFixed(3)+" 至 "+wp.toFixed(3)+" rad/s，相角裕度约 "+gamma.toFixed(1)+"。零极点离截止频率越远，裕度越大。";
+    document.querySelectorAll(".pbtn").forEach(b=>b.classList.toggle("on",Math.abs(+b.dataset.a-current)<.005));
+  }
+  function stop(){playing=false;last=0;if(raf)cancelAnimationFrame(raf);raf=0;$("mbPlay").textContent="▶ 播放：往返改变中频段宽度";}
+  function animateTo(target){stop();const from=current,t0=performance.now();function tick(t){const u=Math.min(1,(t-t0)/420);setA(from+(target-from)*(u*u*(3-2*u)));if(u<1)raf=requestAnimationFrame(tick);else raf=0;}raf=requestAnimationFrame(tick);}
+  $("aSlider").addEventListener("input",e=>{stop();setA(+e.target.value);});document.querySelectorAll(".pbtn").forEach(b=>b.onclick=()=>animateTo(+b.dataset.a));
+  $("mbPlay").onclick=()=>{if(playing){stop();return;}playing=true;dir=current>=9.99?-1:1;last=performance.now();$("mbPlay").textContent="❚❚ 暂停：保持当前曲线";function tick(t){if(!playing)return;const dt=Math.min(50,t-last);last=t;let a=current+dir*dt*.0022;if(a>=10){a=10;dir=-1;}if(a<=1.2){a=1.2;dir=1;}setA(a);raf=requestAnimationFrame(tick);}raf=requestAnimationFrame(tick);};
+  window.midband={setA,stop,get a(){return current;},get gamma(){return Math.atan(current)*180/Math.PI-Math.atan(1/current)*180/Math.PI;}};
+  const qa=+(new URLSearchParams(location.search)).get("a");setA(Number.isFinite(qa)&&qa>=1.2?qa:3);
+});
+</script>
+</div></div>
+</body>
+</html>

@@ -29,7 +29,7 @@
   .figc svg{width:100%;height:100%}
 </style>
 </head>
-<body data-title="例6-3：选 ωc2 与 β" data-page="35 / 51">
+<body data-title="例6-3：选 ωc2 与 β" data-page="36 / 53">
 <div class="act-stage"><div class="act-slide">
 
 <div class="act-body has-note">
@@ -74,27 +74,25 @@
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const E = BD.data.ex63, M = E.meta;
-  /* 相频折回段（wrap 到 +180°）全部在图框外，截断后可见曲线与 BD 数据一致，仅消除竖直连线 */
-  function cutWrap(c) {
-    const pts = c.pts.slice();
-    for (let i = 1; i < pts.length; i++)
-      if (pts[i][1] - pts[i - 1][1] > 180) { pts.length = i; break; }
-    return Object.assign({}, c, { pts });
+  /* 所有标记点均从对应曲线插值，确保圆点严格落在曲线上。 */
+  function sample(c, w) {
+    const p = c.pts;
+    let i = 1;
+    while (i < p.length - 1 && p[i][0] < w) i++;
+    const a = p[i - 1], b = p[i], t = (Math.log(w) - Math.log(a[0])) / (Math.log(b[0]) - Math.log(a[0]));
+    return a[1] + (b[1] - a[1]) * Math.max(0, Math.min(1, t));
   }
-  /* 只留选 ωc2 与定 β 必需的线：未校 G0 + 滞后 Gc（曲线逐点取自 BD.data.ex63），
-     转折频率 vline、渐近线等次要标记全部不绘 */
+  /* 保留完整相频曲线；只显示本题所需的未校 G0 与滞后装置 Gc。 */
   BD.data["t35"] = { xlim: E.xlim,
     mag: { ylim: E.mag.ylim, curves: [E.mag.curves[0], E.mag.curves[1]], asym: [] },
-    phase: { ylim: [E.phase.ylim[0], 0], curves: [cutWrap(E.phase.curves[0]), E.phase.curves[1]], asym: [] },
+    phase: { ylim: [E.phase.ylim[0], 0], curves: [E.phase.curves[0], E.phase.curves[1]], asym: [] },
     marks: [] };
-  const WC2 = 0.56, PHI = -135, L0 = 26;
+  const WC2 = 0.56, PHI = sample(E.phase.curves[0], WC2), L0 = sample(E.mag.curves[0], WC2);
   const F = BD.figure("fig", "t35", { mag: true, phase: true, static: true, zoom: false });
   const PM = F.panelOf("mag"), PP = F.panelOf("phase");
-  /* 图线分步化：① 未校 G0（初始即见）；② 相频找 ωc2；③ 幅频量 18dB 定 β（Gc 幅频出现）；④ 定 T（Gc 相频出现） */
-  F.setOp(1, 0); F.setOp(3, 0);   /* Gc 的幅/相曲线先隐藏 */
+  F.setOp(1, 0); F.setOp(3, 0);
   const g1 = F.mk("g", {}, F.svg), g2 = F.mk("g", {}, F.svg);
   const x = F.X(WC2);
-  /* 第①步组：选定的 ωc2 红虚线（贯穿双图）+ 相频 φ0=−135° 点与 γ+ε=45° 括线 */
   [PM, PP].forEach(p => F.mk("line", { x1: x, y1: p.y0, x2: x, y2: p.y1, stroke: "#D63A2F",
     "stroke-width": 2.2, "stroke-dasharray": "7 5", opacity: .8, "clip-path": `url(#${p.clip})` }, g1));
   F.tx(g1, x + 12, PM.y0 + 22, "ω_{c2}=0.56", { fs: 22, fill: "#D63A2F", b: 1, an: "start" });
@@ -102,18 +100,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const yP = F.Y(PP, PHI), y180 = F.Y(PP, -180);
     F.mk("circle", { cx: x, cy: yP, r: 9, fill: "#1D3FA0", stroke: "#fff", "stroke-width": 2.5 }, g1);
     F.mk("line", { x1: x, y1: yP, x2: x, y2: y180, stroke: "#1D3FA0", "stroke-width": 3.4 }, g1);
-    F.tx(g1, x + 14, yP - 20, "φ_{0}(0.56)=−135°", { fs: 22, fill: "#1D3FA0", b: 1, an: "start" });
+    F.tx(g1, x + 14, yP - 20, "φ_{0}(0.56)≈−135°", { fs: 22, fill: "#1D3FA0", b: 1, an: "start" });
     F.tx(g1, x - 20, (yP + y180) / 2 + 10, "γ+ε=45°", { fs: 21, fill: "#1D3FA0", b: 1, an: "end" });
   })();
-  /* 第②步组：幅频 L0(0.56)≈26dB 括线 → β=20；Gc 高频约衰减 26dB */
   (function () {
-    const yL = F.Y(PM, L0), y0 = F.Y(PM, 0), yC = F.Y(PM, -26.02);
+    const yL = F.Y(PM, L0), y0 = F.Y(PM, 0), wHF = 100, xC = F.X(wHF), yC = F.Y(PM, sample(E.mag.curves[1], wHF));
     F.mk("circle", { cx: x, cy: yL, r: 9, fill: "#1D3FA0", stroke: "#fff", "stroke-width": 2.5 }, g2);
     F.mk("line", { x1: x, y1: yL, x2: x, y2: y0, stroke: "#1D3FA0", "stroke-width": 3.4 }, g2);
     F.tx(g2, x - 16, (yL + y0) / 2 - 6, "L_{0}(0.56)≈26dB", { fs: 22, fill: "#1D3FA0", b: 1, an: "end" });
-    F.tx(g2, x - 16, (yL + y0) / 2 + 26, "=20lgβ → β=20", { fs: 22, fill: "#D63A2F", b: 1, an: "end" });
-    F.mk("circle", { cx: x, cy: yC, r: 8, fill: "#0E7A36", stroke: "#fff", "stroke-width": 2.5 }, g2);
-    F.tx(g2, x - 16, yC + 32, "G_{c}：高频约 −26dB", { fs: 21, fill: "#0E7A36", b: 1, an: "end" });
+    F.tx(g2, PM.x0 + 24, PM.y1 - 18, "课本读图：20lgβ≈26dB → β=20", { fs: 21, fill: "#D63A2F", b: 1, an: "start" });
+    F.mk("circle", { cx: xC, cy: yC, r: 8, fill: "#0E7A36", stroke: "#fff", "stroke-width": 2.5 }, g2);
+    F.tx(g2, xC - 16, yC - 20, "G_{c}：高频约 −20dB", { fs: 21, fill: "#0E7A36", b: 1, an: "end" });
   })();
   function paint() {
     const c = ACT.step.cur;

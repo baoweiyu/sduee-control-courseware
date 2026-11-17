@@ -2,7 +2,7 @@
 <html lang="zh-CN"><head><meta charset="UTF-8"><title>例6-5：题设与未校分析</title>
 <link rel="stylesheet" href="../../../theme/theme.css?v=221"><link rel="stylesheet" href="../ex65.css">
 <script src="../../../theme/mathjax/mathjax-render.js"></script><script src="../../../theme/mathjax/tex-chtml.js"></script><script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script><script src="../../../theme/act-base.js?v=221" defer></script><script src="../fig.js"></script><script src="../data/ex65.js"></script></head>
-<body data-title="例6-5：题设与未校分析" data-page="39 / 51"><div class="act-stage"><div class="act-slide">
+<body data-title="例6-5：题设与未校分析" data-page="40 / 53"><div class="act-stage"><div class="act-slide">
 <div class="act-body has-note"><div class="row"><div class="lft">
 <div class="act-card" style="flex:.95"><div class="hd">题设</div><div class="bd">
 <div class="eq"><span class="tex">G_{0}(s)=\dfrac{K}{s(0.5s+1)(0.167s+1)}</span></div>
@@ -13,7 +13,7 @@
 <div class="stp" id="s2"><span class="num">2</span><div class="stx"><div>画未校 Bode 图，原系统转折频率为 2、6 rad/s</div><div class="got">由课本渐近线读图：<b><span class="tex">\omega_{c1}\approx12.9</span></b></div></div></div>
 <div class="stp" id="s3"><span class="num">3</span><div class="stx"><div><span class="tex">\gamma_{0}=180^{\circ}+\varphi_{0}(\omega_{c1})</span></div><div class="got"><b><span class="tex">\gamma_{0}\approx-56^{\circ}</span>，未校系统不稳定</b></div></div></div>
 </div></div></div>
-<div class="act-card figc"><div class="hd"><span style="flex:1">未校系统 G₀=180/[s(0.5s+1)(0.167s+1)]</span></div><div class="bd2"><svg id="fig"></svg></div><div class="ctl"><span class="prog" id="prog">0 / 3</span><button class="btn" id="play">▶ 连贯生长</button><button class="btn ghost" id="step">⧉ 下一步</button><button class="btn ghost" onclick="ACT.step.reset()">↺ 重置</button></div></div>
+<div class="act-card figc"><div class="hd"><span style="flex:1">未校系统 <span class="tex">G_{0}(s)=\dfrac{180}{s(0.5s+1)(0.167s+1)}</span> 的 Bode 图</span></div><div class="bd2"><svg id="fig"></svg></div><div class="ctl"><span class="prog" id="prog">0 / 3</span><button class="btn" id="play">▶ 连贯生长</button><button class="btn ghost" id="step">⧉ 下一步</button><button class="btn ghost" onclick="ACT.step.reset()">↺ 重置</button></div></div>
 </div></div><div class="act-note"><span class="lead">诊断</span><span>未校系统不仅裕度不足，而且<span class="kw-r">相角裕度为负</span>；同时还要把截止频率压到 3～5 rad/s，需要滞后与超前两部分协同。</span></div>
 <div data-step="1" style="display:none"></div><div data-step="2" style="display:none"></div><div data-step="3" style="display:none"></div>
 <script>
