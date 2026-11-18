@@ -2,6 +2,7 @@
 """Publish a versioned release: source commit, git tag, GitHub Release and all assets."""
 import glob
 import os
+import shutil
 import subprocess
 import sys
 
@@ -9,7 +10,12 @@ ROOT = r"H:\D_tools\courseware-system-kimi"
 GH = r"C:\Program Files\GitHub CLI\gh.exe"
 LOCAL_DIR = os.path.join(ROOT, "版本迭代-本地播放用")
 WEB_DIR = os.path.join(ROOT, "版本迭代-服务器部署用")
+UPLOAD_DIR = os.path.join(ROOT, "qa", "release-upload")
 CHAPTERS = [f"Ch{i}" for i in range(1, 9)]
+CHAPTER_SLUGS = [
+    "ch1-intro", "ch2-math-model", "ch3-time-domain", "ch4-frequency-response",
+    "ch5-root-locus", "ch6-correction", "ch7-discrete-control", "ch8-nonlinear-systems",
+]
 REDLINE_PATTERNS = [
     "image2_config.json", "assets/image2/generate.py", "assets/image2/prompts/",
     "bwy-ori-oldPPT/", "bwy-ori-template/", "封面配图提示词.md",
@@ -66,6 +72,18 @@ def main():
     for path in zips:
         print("  资产:", os.path.relpath(path, ROOT), flush=True)
 
+    # GitHub CLI 对中文资产名的兼容性不稳定；以上传副本统一使用 ASCII 文件名。
+    if os.path.isdir(UPLOAD_DIR):
+        shutil.rmtree(UPLOAD_DIR)
+    os.makedirs(UPLOAD_DIR)
+    uploads = []
+    for index, path in enumerate(zips):
+        name = (f"act-courseware-{CHAPTER_SLUGS[index]}-{ver}.zip" if index < 8
+                else f"act-courseware-web-deploy-{ver}.zip")
+        target = os.path.join(UPLOAD_DIR, name)
+        shutil.copy2(path, target)
+        uploads.append(target)
+
     print("== 1. 提交源码 ==", flush=True)
     run(["git", "add", "-A"])
     staged = out(["git", "diff", "--cached", "--name-only"]).replace("\\", "/")
@@ -87,13 +105,14 @@ def main():
     print("== 4. 创建 Release ==", flush=True)
     notes = (
         f"自动控制理论三层 HTML 课件 {ver}\n\n"
-        "- 八章共 468 页，新增第七章离散控制系统、第八章非线性系统分析\n"
-        "- 8 个章节 zip：本地播放版，解压后运行 start.bat / start.command\n"
-        "- act-courseware-web-deploy：网页部署版，含全部八章\n"
-        "- 融合 8 张新生成配图；修复第七、八章章节导航空白并强化异步切换\n"
-        "- 第七章、第八章完成理论、视觉、数值与脚本回归\n"
+        "- 八章共 468 页；本版针对第八章描述函数与自激振荡分析进行数学复核\n"
+        "- P21：区分描述函数模值随幅值变化与负倒描述函数虚部恒定\n"
+        "- P27：以闭式二次方程独立验证两个交点，并明确近似局部稳定性的适用边界\n"
+        "- P26–P30：统一描述函数法近似结论口径，补充 P=0、完整 Nyquist 范围与低通前提\n"
+        "- 8 个章节 zip 为本地播放版；web-deploy 包含全部八章的静态网页部署版\n"
+        "- 已通过高精度数值、Fourier 积分、51 个脚本语法及重点页面视觉回归\n"
     )
-    run([GH, "release", "create", ver, "--title", f"课件 {ver.upper()}", "--notes", notes] + zips)
+    run([GH, "release", "create", ver, "--title", f"课件 {ver.upper()}", "--notes", notes] + uploads)
     url = out([GH, "release", "view", ver, "--json", "url", "-q", ".url"])
     assets_json = out([GH, "release", "view", ver, "--json", "assets", "-q", ".assets | length"])
     if assets_json.strip() != "9":

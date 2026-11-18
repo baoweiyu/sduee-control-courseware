@@ -49,10 +49,10 @@
           </div></div>
           <div class="stp" data-step="2"><span class="no">3</span><div class="bx">
             <div class="eq"><span class="tex">K=7.5:\ b_{1}\left(-\frac{1}{2},\ j0\right)</span>（射线端点、临界等幅）；<span class="tex">K<7.5</span>：不相交</div>
-            <div class="sub">K=7.5 时小信号等效线性系统临界，<b>不是稳定自激振荡</b>；K&gt;7.5 时交点经扰动分析对应稳定自振。</div>
+            <div class="sub">K=7.5 时小信号等效线性系统临界，<b>不是稳定自激振荡</b>；K&gt;7.5 时，描述函数法预测稳定自振候选。</div>
           </div></div>
           <div class="stp" data-step="3"><span class="no">4</span><div class="bx">
-            <div class="fin">K&lt;7.5 平衡状态渐近稳定，不产生自振荡</div>
+            <div class="fin">K&lt;7.5：小信号线性化下平衡渐近稳定；描述函数法预测无自振</div>
           </div></div>
           <div class="stp" data-step="4"><span class="no">5</span><div class="bx">
             <div class="eng"><b>工程注记：</b>若运行中出现自振，可<b>减小 K</b> 或<b>串联校正</b>，使 G(jω) 不再与 −1/N(X) 相交。</div>
@@ -65,13 +65,13 @@
           <div class="bd2"><svg id="figA"></svg></div>
         </div>
         <div class="act-card figc">
-          <div class="hd"><span style="flex:1">(b) K=15：相交于 (−1, j0)（自振）</span></div>
+          <div class="hd"><span style="flex:1">(b) K=15：相交于 (−1, j0)（自振候选）</span></div>
           <div class="bd2"><svg id="figB"></svg></div>
         </div>
       </div>
     </div>
   </div>
-  <div class="act-note"><span class="lead">要点</span><span>非线性系统的稳定是有条件的——K 超过临界值即出现自振。</span></div>
+  <div class="act-note"><span class="lead">要点</span><span>K&lt;7.5 的小信号稳定由线性化严格判定；K&gt;7.5 的自振及其稳定性为描述函数近似预测，需时域方法进一步验证。</span></div>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const PI = Math.PI, C1 = "#1D3FA0", C2 = "#0E7A36", RED = "#D63A2F", MUT = "#5B6B8C";
@@ -132,7 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
   FB.mk("circle", { cx: FB.X(-1), cy: FB.Y(0), r: 10, fill: RED, stroke: "#fff", "stroke-width": 3 }, FB.gDyn);
   arrow(FB, -2.15, 0, 180, "narA");
   tArrow(FB, GB, 5.0, "narB");
-  FB.tx(FB.gDyn, FB.X(-1) - 16, FB.Y(0) - 28, "交点 (−1, j0)：自振", { fs: 22, fill: RED, b: 1, an: "end" });
+  FB.tx(FB.gDyn, FB.X(-1) - 16, FB.Y(0) - 28, "交点 (−1, j0)：自振候选", { fs: 22, fill: RED, b: 1, an: "end" });
   FB.tx(FB.gDyn, FB.X(-0.44), FB.Y(0) + 40, "−0.5", { fs: 22, fill: C1, b: 1 });
   FB.tx(FB.gDyn, FB.X(-2.62), FB.Y(0) + 40, "−1/N(X)", { fs: 22, fill: C1, b: 1, an: "start" });
   FB.tx(FB.gDyn, FB.X(-2.6), FB.Y(-0.8), "G(jω)，K=15", { fs: 22, fill: C2, b: 1, an: "start" });

@@ -57,29 +57,30 @@
       <div class="rgt" style="flex:1">
 <div data-step="1" style="display:none"></div> <!-- 首步驱动动画；基础内容常显 -->
         <div class="case" >
-          <div class="t">① 线性部分 G(s)=30/[s(0.1s+1)(0.2s+1)]</div>
-          <div class="s">Im[G(jω)]=0 ⇒ ω=√50≈7.07，奈氏曲线交负实轴于 <b>−K/15=−2</b>。</div>
+          <div class="t">① 线性部分 <span class="tex">G(s)=\frac{30}{s(0.1s+1)(0.2s+1)}</span></div>
+          <div class="s"><span class="tex">\operatorname{Im}G(j\omega)=0\Rightarrow\omega=\sqrt{50}</span>，奈氏曲线交负实轴于 <b>−K/15=−2</b>；本例 <b>P=0</b>（原点极点按标准绕行）。</div>
         </div>
         <div class="case" data-step="2">
           <div class="t">② 非线性部分：死区继电器（M=1、a=1）</div>
-          <div class="s">−1/N(X)=−πX/(4√(1−1/X²))：X=1⁺→−∞，X=√2 取极值 <b>−π/2≈−1.571</b>，X→∞→−∞（折返）。</div>
+          <div class="s"><span class="tex">-\frac{1}{N(X)}=-\frac{\pi X^{2}}{4\sqrt{X^{2}-1}}</span>：X=1⁺→−∞，X=√2 取极值 <b>−π/2≈−1.571</b>，X→∞→−∞（折返）。</div>
         </div>
         <div class="case o" data-step="3">
-          <div class="t">③ 两交点（程序求解 −1/N(X)=−2）</div>
-          <div class="s"><b>b：X_b≈1.11</b>（去程）、<b>a：X_a≈2.29</b>（回程），频率 ω_a=ω_b=√50≈7.07 rad/s；扰动使工作点沿 −1/N(X) 移动。</div>
+          <div class="t">③ 两交点：闭式求解 −1/N(X)=−2</div>
+          <div class="s">令 <span class="tex">y=X^{2}</span>，则 <span class="tex">\pi^{2}y^{2}-64y+64=0</span>，故 <span class="tex">y=\frac{32\pm8\sqrt{16-\pi^{2}}}{\pi^{2}}</span>。</div>
+          <div class="s"><b>b：X_b≈1.11146</b>（去程）、<b>a：X_a≈2.29112</b>（回程），频率均为 <b>√50≈7.07107 rad/s</b>。</div>
         </div>
         <div class="case g" data-step="4">
-          <div class="t">④ a 点扰动分析　→　<span class="vg">a 稳定，可形成稳定自振荡</span></div>
-          <div class="s">X 略增→c：<span class="vg">不被包围→收敛</span>，振幅衰减回 X_a；X 略减→d：<span class="vr">被包围→发散</span>，振幅增大回 X_a。</div>
+          <div class="t">④ a 点　→　<span class="vg">描述函数近似局部稳定</span></div>
+          <div class="s">在描述函数振幅模型中：X 略增→c，<span class="vg">不被包围→振幅衰减</span>；X 略减→d，<span class="vr">被包围→振幅增大</span>，两侧均回到 X_a。</div>
         </div>
         <div class="case r" data-step="5">
-          <div class="t">⑤ b 点扰动分析　→　<span class="vr">b 不稳定，不能作为稳定自振持续观察</span></div>
-          <div class="s">最终状态：扰动振幅 <b>&lt;X_b</b> → 趋于平衡，无自振；<b>&gt;X_b</b> → <span class="vg">稳定自振：振幅 X_a≈2.29、ω=√50≈7.07 rad/s</span>。</div>
+          <div class="t">⑤ b 点　→　<span class="vr">描述函数近似局部不稳定</span></div>
+          <div class="s">两侧小扰动均使振幅离开 X_b，本模型预测其分别趋向平衡或 a；<b>严格全局结论仍需时域仿真或其他方法验证</b>。</div>
         </div>
       </div>
     </div>
   </div>
-  <div class="act-note"><span class="lead">要点</span><span>自振稳定判据——X 增大落入稳定区则收敛回原幅值，落入不稳定区则继续发散。</span></div>
+  <div class="act-note"><span class="lead">近似局部判据</span><span>两侧小扰动均回到原幅值，才是稳定自振候选；任一侧趋离，则该候选不稳定。准正弦、缓变振幅与低通滤波是描述函数近似的前提。</span></div>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const TOTAL = 5;
@@ -97,12 +98,10 @@ document.addEventListener("DOMContentLoaded", () => {
   for (let X = 1.02; X <= SQ2; X += 0.004) dzOut.push([f2(X), EP]);
   for (let X = SQ2; X <= 12; X += 0.02) dzBack.push([f2(X), -EP]);
   const XEXT = -Math.PI / 2;
-  /* 交点求解（bisection）：−1/N(X)=−2 → 去程 X_b、回程 X_a */
-  function bis(lo, hi, up) {
-    for (let i = 0; i < 200; i++) { const m = (lo + hi) / 2; if ((f2(m) < -2) === up) lo = m; else hi = m; }
-    return (lo + hi) / 2;
-  }
-  const XB = bis(1.0001, SQ2, true), XA = bis(SQ2, 60, false);
+  /* 闭式求解：π²y²−64y+64=0，y=X²；小根为 b，大根为 a */
+  const YDISC = Math.sqrt(16 - Math.PI * Math.PI);
+  const XB = Math.sqrt((32 - 8 * YDISC) / (Math.PI * Math.PI));
+  const XA = Math.sqrt((32 + 8 * YDISC) / (Math.PI * Math.PI));
   const XC = f2(XA + 0.55), XD = f2(XA - 0.55);   // a 点扰动后的工作点 c（左）、d（右）
   const F = DZ.plot("fig", {
     xlim: [-5.6, 1.2], ylim: [-2.15, 2.1], xlabel: "Re", ylabel: "Im",
@@ -124,10 +123,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   function judge(k) {
     const J = document.getElementById("judge");
-    if (k >= 5) J.innerHTML = '<span class="jr">b：X 略增 → 被包围 → 振幅增大 → 远离 b 趋向 a</span>' +
-      '<span class="jg">稳定自振：振幅 X_a=' + XA.toFixed(2) + '，ω=√50≈7.07 rad/s</span>';
-    else if (k >= 4) J.innerHTML = '<span class="jg">c 不被 G 包围 → 收敛 → 振幅衰减回 X_a → 回到 a</span>' +
-      '<span class="jr">d 被 G 包围 → 不稳定 → 振幅增大 → 回到 a</span>';
+    if (k >= 5) J.innerHTML = '<span class="jr">b：两侧小扰动均趋离 → 描述函数近似局部不稳定</span>' +
+      '<span class="jg">描述函数预测：稳定自振候选 X_a=' + XA.toFixed(2) + '，ω=√50≈7.07 rad/s</span>';
+    else if (k >= 4) J.innerHTML = '<span class="jg">c 不被 G 包围 → 振幅衰减回 X_a</span>' +
+      '<span class="jr">d 被 G 包围 → 振幅增大回 X_a</span>';
     else J.innerHTML = "";
   }
   function deco(k, g) {
@@ -192,9 +191,9 @@ document.addEventListener("DOMContentLoaded", () => {
     segments: [
       { label: "① G(jω) 奈奎斯特曲线（K=30）：交负实轴于 −2（ω=√50）", parts: [{ F, b: [0], f0: 0, f1: 1 }], draw: (t, g) => deco(1, g) },
       { label: "② −1/N(X) 折返曲线：X=1⁺→√2 去程向右，√2→∞ 回程向左", parts: [{ F, b: [1, 2], f0: 0, f1: 1 }], draw: (t, g) => deco(2, g) },
-      { label: "③ 程序求解交点：b（X_b=" + XB.toFixed(2) + "）、a（X_a=" + XA.toFixed(2) + "）", parts: [{ F, b: [0], f0: 1, f1: 1 }], draw: (t, g) => deco(3, g) },
-      { label: "④ 扰动 a：c 不被包围→收敛回 a；d 被包围→振幅增大回 a ⇒ a 稳定", parts: [{ F, b: [0], f0: 1, f1: 1 }], draw: (t, g) => deco(4, g) },
-      { label: "⑤ 扰动 b：X 略增即被包围 → 振幅增大远离 b ⇒ b 不稳定", parts: [{ F, b: [0], f0: 1, f1: 1 }], draw: (t, g) => deco(5, g) }
+      { label: "③ 闭式求解交点：b（X_b=" + XB.toFixed(5) + "）、a（X_a=" + XA.toFixed(5) + "）", parts: [{ F, b: [0], f0: 1, f1: 1 }], draw: (t, g) => deco(3, g) },
+      { label: "④ 扰动 a：两侧振幅均回复 ⇒ 描述函数近似局部稳定", parts: [{ F, b: [0], f0: 1, f1: 1 }], draw: (t, g) => deco(4, g) },
+      { label: "⑤ 扰动 b：两侧小扰动均趋离 ⇒ 描述函数近似局部不稳定", parts: [{ F, b: [0], f0: 1, f1: 1 }], draw: (t, g) => deco(5, g) }
     ],
     segLabel: (label, si, n) => {
       if (label == null) { chip.style.display = "none"; F.gDyn.innerHTML = ""; paint(TOTAL); return; }
