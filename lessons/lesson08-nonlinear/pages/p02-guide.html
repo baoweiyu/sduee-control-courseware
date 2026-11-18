@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>本章导学</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=800">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=800" defer></script>
+<style>
+  .row{display:flex;gap:24px;height:100%;min-height:0}
+  .lft{flex:1;display:flex;flex-direction:column;gap:18px;min-height:0}
+  .rgt{flex:1.15;display:flex;flex-direction:column;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.hd{flex:none}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:10px;padding:12px 22px;font-size:22px;line-height:1.6;min-height:0;overflow:hidden}
+  .goal{display:flex;gap:12px;align-items:flex-start;background:var(--sky);border:2px solid var(--line);border-radius:12px;padding:10px 16px;font-size:21px;line-height:1.45;color:var(--ink)}
+  .goal .no{flex:none;width:40px;height:40px;border-radius:50%;background:var(--navy);color:#fff;font-size:23px;font-weight:700;display:grid;place-items:center}
+  .goal b{color:var(--navy)}
+  .map{display:flex;flex-direction:column;gap:14px;height:100%;justify-content:space-evenly}
+  .band{border:2px solid var(--line);border-radius:14px;overflow:hidden;background:#fff}
+  .band .bh{background:var(--navy);color:#fff;font-size:23px;font-weight:700;padding:10px 20px;letter-spacing:2px}
+  .band .bb{display:flex;align-items:stretch;gap:0;padding:12px 16px;background:var(--sky)}
+  .node{flex:1;background:#fff;border:2px solid var(--blue);border-radius:10px;padding:12px 8px;text-align:center;font-size:21.5px;font-weight:700;color:var(--navy);display:grid;place-items:center;line-height:1.35}
+  .arr{flex:none;align-self:center;color:var(--orange);font-size:30px;font-weight:700;padding:0 6px}
+  .mainline{background:#FDF3EC;border:2px solid var(--orange);border-radius:12px;padding:12px 20px;font-size:22px;color:var(--ink);line-height:1.5}
+  .mainline b{color:var(--orange)}
+</style>
+</head>
+<body data-title="本章导学" data-page="2 / 33">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lft">
+        <div class="act-card" style="flex:2.1">
+          <div class="hd"><span style="flex:1">学习目标</span></div>
+          <div class="bd">
+            <div class="goal"><span class="no">1</span><span><b>认清非线性系统的三大特征</b>——稳定性问题复杂、频率畸变、自激振荡，理解其与线性系统的本质区别。</span></div>
+            <div class="goal"><span class="no">2</span><span><b>掌握四大典型非线性环节</b>——死区、饱和、间隙、继电器的特性曲线及其对系统的影响。</span></div>
+            <div class="goal"><span class="no">3</span><span><b>会用描述函数法</b>——理解 N(X) 的定义与使用条件，借助 G(jω) 与 −1/N(X) 两条曲线判断稳定性、求自激振荡的振幅与频率。</span></div>
+          </div>
+        </div>
+        <div class="act-card" style="flex:.9">
+          <div class="hd"><span style="flex:1">课时与考查重点</span></div>
+          <div class="bd" style="font-size:21.5px">
+            <div>■ 全章约 <b>4 学时</b>：概述（1）→ 典型非线性环节（1）→ 描述函数法与稳定性分析（2）。</div>
+            <div>■ 考核高频点：<b>描述函数定义、使用条件、−1/N(X) 判稳、例 8-1 自振计算</b>。</div>
+          </div>
+        </div>
+      </div>
+      <div class="rgt">
+        <div class="act-card">
+          <div class="hd"><span style="flex:1">本章知识地图</span></div>
+          <div class="bd" style="padding:16px 22px">
+            <div class="map">
+              <div class="band">
+                <div class="bh">第一层　认知非线性</div>
+                <div class="bb">
+                  <div class="node">非线性<br>普遍存在</div><div class="arr">→</div>
+                  <div class="node">三大特征<br>稳定性·频率·自振</div>
+                </div>
+              </div>
+              <div class="band">
+                <div class="bh">第二层　建模工具</div>
+                <div class="bb">
+                  <div class="node">典型环节<br>死区·饱和·间隙·继电器</div><div class="arr">→</div>
+                  <div class="node">描述函数<br>N(X)=Y₁/X·e^{jφ₁}</div><div class="arr">→</div>
+                  <div class="node">使用条件<br>串联·奇对称·低通</div>
+                </div>
+              </div>
+              <div class="band">
+                <div class="bh">第三层　频域分析</div>
+                <div class="bb">
+                  <div class="node">画两条曲线<br>G(jω)、−1/N(X)</div><div class="arr">→</div>
+                  <div class="node">判稳<br>包围与否</div><div class="arr">→</div>
+                  <div class="node">自激振荡<br>交点 (X, ω)</div>
+                </div>
+              </div>
+              <div class="mainline"><b>主线：</b>把非线性环节「线性化」为 N(X)，就能沿用奈奎斯特判据——画图即分析。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">导学</span><span>本章主线：<b>用线性系统的频域工具，回答非线性系统的问题。</b></span></div>
+</div></div>
+</body>
+</html>

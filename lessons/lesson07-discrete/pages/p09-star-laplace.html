@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>⑥ 采样信号的拉氏变换与频谱</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=700">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=700" defer></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:1.3;display:flex;flex-direction:column;gap:12px;min-height:0}
+  .rgt{flex:.85;display:flex;flex-direction:column;gap:12px;min-height:0}
+  .stepb{flex:1;display:flex;align-items:center;gap:16px;background:#fff;border:2px solid var(--line);
+    border-left:6px solid var(--blue);border-radius:14px;padding:10px 18px;min-height:0;overflow:hidden}
+  .stepb .num{flex:none;width:38px;height:38px;border-radius:50%;background:var(--blue);
+    color:#fff;font-weight:700;font-size:21px;display:grid;place-items:center}
+  .stepb .cc{flex:1;min-width:0}
+  .stepb .tt{font-size:23px;font-weight:700;color:var(--navy);line-height:1.4;margin-bottom:6px}
+  .stepb .fml{background:var(--sky);border-radius:10px;padding:9px 16px;font-size:22px;line-height:1.55;
+    color:var(--navy);text-align:center}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:14px;padding:14px 22px}
+  .st{font-size:22.5px;color:var(--ink);line-height:1.65}
+</style>
+</head>
+<body data-title="⑥ 采样信号的拉氏变换与频谱" data-page="9 / 56">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lft">
+        <div class="stepb" >
+          <span class="num">1</span>
+          <div class="cc">
+            <div class="tt"><span class="tex">\delta_{T}(t)</span> 是周期函数 → 展开成傅里叶级数</div>
+            <div class="fml"><span class="tex">\delta_{T}(t)=\sum_{n=-\infty}^{\infty}C_{n}e^{jn\omega_{s}t}</span>，　<span class="tex">\omega_{s}=\frac{2\pi}{T}</span>，　<span class="tex">C_{n}=\frac{1}{T}\int_{-T/2}^{T/2}\delta_{T}(t)e^{-jn\omega_{s}t}dt=\frac{1}{T}</span></div>
+          </div>
+        </div>
+        <div class="stepb">
+          <span class="num">2</span>
+          <div class="cc">
+            <div class="tt">代入定义式：<span class="tex">e^{*}(t)=e(t)\delta_{T}(t)</span></div>
+            <div class="fml"><span class="tex">e^{*}(t)=\frac{1}{T}\sum_{n=-\infty}^{\infty}e(t)e^{jn\omega_{s}t}</span>　（谐波序号 <span class="tex">n</span> 仍取全体整数）</div>
+          </div>
+        </div>
+        <div class="stepb" data-step="2">
+          <span class="num">3</span>
+          <div class="cc">
+            <div class="tt">取拉氏变换，用<span style="color:var(--danger)">复数位移定理</span></div>
+            <div class="fml"><span class="tex">L[e^{*}(t)]=E^{*}(s)=\frac{1}{T}\sum_{n=-\infty}^{\infty}E(s+jn\omega_{s})</span></div>
+          </div>
+        </div>
+        <div class="stepb" data-step="3">
+          <span class="num">4</span>
+          <div class="cc">
+            <div class="tt">令 <span class="tex">s=j\omega</span> → 采样信号的傅里叶变换</div>
+            <div class="fml"><span class="tex">E^{*}(j\omega)=\frac{1}{T}\sum_{n=-\infty}^{\infty}E(j\omega+jn\omega_{s})</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="rgt">
+        <div class="act-card" style="flex:1.25">
+          <div class="hd" style="font-size:23px"><span style="flex:1">上式的物理意义</span></div>
+          <div class="bd">
+            <div class="st">采样信号的频谱 = 原连续频谱 <span class="tex">E(j\omega)</span> 以 <span class="tex">\omega_{s}</span> 为周期<span class="kw-r">无限复制、叠加</span>（幅值 <span class="tex">1/T</span>）。</div>
+            <div class="st">拉氏变换式还表明：<span class="tex">E^{*}(s)</span> 是 <span class="tex">s</span> 的<span class="kw-r">周期函数</span>（周期 <span class="tex">j\omega_{s}</span>）。</div>
+          </div>
+        </div>
+        <div class="act-card" data-step="4" style="flex:1">
+          <div class="hd" style="font-size:23px"><span style="flex:1">为什么关心频谱？</span></div>
+          <div class="bd">
+            <div class="st">采样频率太低（周期 <span class="tex">T</span> 过大）时，输入信号的大量信息随采样丢失。</div>
+            <div class="st">复制后的频谱是否<span style="color:var(--navy);font-weight:700">互相重叠</span>，决定了原信号能否被完全恢复 —— 下一页展开。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">结论</span><span>采样把单一连续频谱变成以 <span class="tex">\omega_{s}</span> 为周期<span class="kw-r">重复出现的频谱序列</span>。</span></div>
+<script>/* qa-steps：?steps=N 自动前进 N 步 */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

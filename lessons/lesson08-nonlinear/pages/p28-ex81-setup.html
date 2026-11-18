@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>例8-1 题设与作图</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=800">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=800" defer></script>
+<script src="../fig.js"></script>
+<style>
+  .col2{display:flex;flex-direction:column;gap:16px;height:100%;min-height:0}
+  .row2{display:flex;gap:20px;flex:1;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .setup .bd{flex:1;display:flex;gap:22px;align-items:center;padding:14px 26px;min-height:0}
+  .setup .txt{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:12px;min-height:0;align-self:stretch}
+  .st{font-size:21px;color:var(--ink);line-height:1.55}
+  .st b{color:var(--navy)}
+  .q{display:flex;gap:12px;font-size:21px;color:var(--ink);line-height:1.5}
+  .q .tag{flex:none;background:var(--blue);color:#fff;border-radius:8px;padding:1px 11px;font-weight:700;font-size:21px;height:fit-content;margin-top:2px}
+  .q b{color:var(--navy)}
+  .blkbox{flex:none;width:480px;display:grid;place-items:center;background:#fff;border-radius:12px;padding:4px 6px;align-self:stretch}
+  .blkbox svg{width:100%;height:100%}
+  .lft .bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:13px;padding:14px 24px;min-height:0}
+  .eq{background:var(--sky);border-radius:12px;padding:10px 16px;text-align:center;font-size:21px;position:relative}
+  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .todo{background:#FDF3EC;border:2px solid var(--orange);border-radius:12px;padding:10px 18px;font-size:21px;color:var(--navy);line-height:1.55;text-align:center;font-weight:700}
+  .todo .tex{font-weight:400}
+  .figc{position:relative}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 10px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .figc .capnote{flex:none;font-size:21px;color:var(--navy);background:var(--sky);border-radius:12px;padding:9px 18px;margin:0 14px 12px;line-height:1.5}
+  .capnote b{color:var(--navy)}
+</style>
+</head>
+<body data-title="例8-1 题设与作图" data-page="28 / 33">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="col2">
+      <div class="act-card setup" style="flex:none;height:264px">
+        <div class="hd"><span style="flex:1">【例 8-1】具有饱和非线性特性的控制系统（图 8-10(a)）</span></div>
+        <div class="bd">
+          <div class="txt">
+            <div class="st">线性部分 <span class="tex">G(s)=\dfrac{K}{s(0.1s+1)(0.2s+1)}</span>，饱和特性斜率 <b>k=2</b>、阈值 <b>a=1</b>，单位反馈。</div>
+            <div class="q"><span class="tag">(1)</span><span><b>K=15</b> 时判断系统自振荡的性质；若有自振，求其<b>振幅与频率</b>。</span></div>
+            <div class="q"><span class="tag">(2)</span><span><b>K 取何值</b>时系统稳定（不产生自振荡）？</span></div>
+          </div>
+          <div class="blkbox"><svg id="f-blk"></svg></div>
+        </div>
+      </div>
+      <div class="row2">
+        <div class="act-card lft" style="flex:1">
+          <div class="hd"><span style="flex:1">饱和描述函数 N(X) 与 −1/N(X)</span></div>
+          <div class="bd">
+            <div >
+              <div class="eq"><span class="tex">N(X)=\frac{4}{\pi}\left[\arcsin\frac{1}{X}+\frac{1}{X}\sqrt{1-\frac{1}{X^{2}}}\right],\quad X\ge 1</span></div>
+              <div class="st" style="margin-top:7px">代入 k=2：N(X) 为<b>实数</b>，且随 X 增大<b>单调下降</b>——X=1 时 N=2，X→∞ 时 N→0。</div>
+            </div>
+            <div data-step="1">
+              <div class="eq hl"><span class="tex">-\frac{1}{N(X)}</span>：X=1 → <b>−0.5</b>；X→∞ → <b>−∞</b></div>
+              <div class="st" style="margin-top:7px"><b>−1/N(X)</b> 是负实轴上从 <b>−0.5</b> 出发、随 X 增大向左延伸至 −∞ 的<b>射线</b>。</div>
+            </div>
+            <div data-step="2">
+              <div class="todo">待求：交点处 <span class="tex">\mathrm{Re}[G]=-\frac{1}{N(X)}</span> 决定振幅 X，<span class="tex">\mathrm{Im}[G]=0</span> 决定频率 ω</div>
+            </div>
+          </div>
+        </div>
+        <div class="act-card figc" style="flex:1.12">
+          <div class="hd"><span style="flex:1">−1/N(X) 与 G(jω)（K=15，程序精确绘制）</span></div>
+          <div class="bd2"><svg id="fig"></svg></div>
+          <div class="capnote">两曲线相交于 <b>(−1, j0)</b>：交点横坐标由 G(jω) 过负实轴的位置决定，对应自振的振幅与频率（下页求解）。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">要点</span><span>描述函数法作图：−1/N(X) 射线 + G(jω) 曲线，交点即自振候选点。</span></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  /* ---- 图 8-10(a)：r → ⊕(−) → 饱和特性 → G(s) → c，单位反馈（虚线） ---- */
+  const B = BD.block("f-blk", [
+    { type: "line", pts: [[18, 132], [78, 132]] },
+    { type: "sum", x: 95, y: 132, r: 16 },
+    { type: "line", pts: [[111, 132], [150, 132]] },
+    { type: "box", x: 150, y: 88, w: 148, h: 88, label: "饱和特性\nk=2, a=1", fs: 22 },
+    { type: "line", pts: [[298, 132], [338, 132]] },
+    { type: "box", x: 338, y: 88, w: 158, h: 88, label: "G(s)", fs: 23 },
+    { type: "line", pts: [[496, 132], [592, 132]] },
+    { type: "dot", x: 552, y: 132 }
+  ], { vw: 620, vh: 300, static: true });
+  B.mk("path", { d: "M552,132 L552,246 L95,246 L95,148", fill: "none", stroke: "#5B6B8C",
+    "stroke-width": 3, "stroke-dasharray": "11 9", "stroke-linejoin": "round",
+    "marker-end": "url(#bxf-blk)" }, B.g);
+  B.tx(B.g, 34, 110, "r(t)", { fs: 22, it: 1, fill: "#16324F" });
+  B.tx(B.g, 80, 110, "+", { fs: 26, b: 1, fill: "#16324F" });
+  B.tx(B.g, 117, 192, "−", { fs: 26, b: 1, fill: "#16324F" });
+  B.tx(B.g, 132, 110, "e(t)", { fs: 22, it: 1, fill: "#16324F" });
+  B.tx(B.g, 318, 110, "x(t)", { fs: 22, it: 1, fill: "#16324F" });
+  B.tx(B.g, 574, 110, "c(t)", { fs: 22, it: 1, fill: "#16324F" });
+  B.tx(B.g, 324, 274, "单位反馈", { fs: 22, fill: "#5B6B8C", b: 1 });
+
+  /* ---- 右图：−1/N(X) 射线 + G(jω)（K=15），全部按公式现算 ---- */
+  const PI = Math.PI, C1 = "#1D3FA0", C2 = "#0E7A36", RED = "#D63A2F", MUT = "#5B6B8C";
+  const NofX = X => (4 / PI) * (Math.asin(1 / X) + (1 / X) * Math.sqrt(1 - 1 / (X * X)));
+  const ray = [];
+  for (let X = 1; X <= 30; X += 0.02) ray.push([-1 / NofX(X), 0]);
+  const K = 15, Gp = [];
+  for (let i = 0; i <= 900; i++) {
+    const w = 0.05 * Math.pow(80 / 0.05, i / 900);
+    const dr = -0.3 * w * w, di = w * (1 - 0.02 * w * w), m2 = dr * dr + di * di;
+    Gp.push([K * dr / m2, -K * di / m2]);
+  }
+  const F = DZ.plot("fig", {
+    xlim: [-4.7, 0.9], ylim: [-2.6, 1.5], xlabel: "Re", ylabel: "Im",
+    curves: [
+      { pts: ray, color: C1, width: 5.5 },
+      { pts: Gp, color: C2, width: 4.5 }
+    ]
+  }, { vw: 960, vh: 620, equal: true, static: true });
+  F.svg.querySelectorAll('text[font-size="20"]').forEach(t => t.setAttribute("font-size", 21));
+  const g = F.gDyn, mk = F.mk;
+  /* 方向箭头 */
+  const defs = F.svg.querySelector("defs");
+  [["narA", C1], ["narB", C2]].forEach(([id, c]) => {
+    const m = mk("marker", { id, markerWidth: 11, markerHeight: 9, refX: 7, refY: 3.2, orient: "auto" }, defs);
+    mk("path", { d: "M0,0 L7.5,3.2 L0,6.4 Z", fill: c }, m);
+  });
+  function arrow(x, y, deg, id) {
+    const p = mk("line", { x1: F.X(x), y1: F.Y(y), x2: F.X(x) + 1, y2: F.Y(y),
+      stroke: "none", "marker-end": "url(#" + id + ")" }, g);
+    p.setAttribute("transform", `rotate(${deg} ${F.X(x)} ${F.Y(y)})`);
+  }
+  /* G(jω) 曲线上 w0 处沿 ω 增大方向的切线箭头 */
+  function tArrow(w0, id) {
+    let i = 0;
+    while (i < Gp.length - 2 && 0.05 * Math.pow(80 / 0.05, i / 900) < w0) i++;
+    const a = Gp[i], b = Gp[Math.min(i + 10, Gp.length - 1)];
+    arrow(a[0], a[1], -Math.atan2(b[1] - a[1], b[0] - a[0]) * 180 / PI, id);
+  }
+  /* −1/N(X) 射线：起点 −0.5 标记 + X 增大箭头 */
+  mk("circle", { cx: F.X(-0.5), cy: F.Y(0), r: 8, fill: C1, stroke: "#fff", "stroke-width": 2.5 }, g);
+  arrow(-2.6, 0, 180, "narA");
+  F.tx(g, F.X(-0.64), F.Y(0) - 30, "X=1：−1/N = −0.5", { fs: 22, fill: C1, b: 1, an: "end" });
+  F.tx(g, F.X(-2.6), F.Y(0) + 42, "X 增大", { fs: 22, fill: MUT });
+  F.tx(g, F.X(-4.45), F.Y(0) - 32, "−1/N(X)（射线）", { fs: 22, fill: C1, b: 1, an: "start" });
+  /* G(jω)：ω 增大箭头 + 曲线名 */
+  tArrow(5.2, "narB");
+  tArrow(13, "narB");
+  F.tx(g, F.X(-3.6), F.Y(-1.55), "G(jω)，K=15", { fs: 22, fill: C2, b: 1, an: "start" });
+  F.tx(g, F.X(-1.55), F.Y(-0.62) + 40, "ω 增大", { fs: 22, fill: MUT });
+  /* 交点 (−1, j0) */
+  mk("circle", { cx: F.X(-1), cy: F.Y(0), r: 10, fill: RED, stroke: "#fff", "stroke-width": 3 }, g);
+  F.tx(g, F.X(-1) + 14, F.Y(0) + 46, "交点 (−1, j0)", { fs: 22, fill: RED, b: 1, an: "start" });
+});
+</script>
+<script>/* qa-steps：截图自验钩子 */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

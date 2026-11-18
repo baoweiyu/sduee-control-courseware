@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>㉙ 数字控制器与单位反馈</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=700">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=700" defer></script>
+<script src="../fig.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:.82;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .rgt{flex:1.28;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:9px;padding:11px 22px}
+  .st{font-size:21.5px;color:var(--ink);line-height:1.58}
+  .eq{background:var(--sky);border-radius:12px;padding:9px 14px;text-align:center;font-size:21.5px;color:var(--navy);line-height:1.5}
+  .eq .no{color:var(--muted);font-size:21px}
+  .figc .capnote{flex:none;font-size:21px;color:var(--navy);background:var(--sky);border-radius:12px;padding:9px 18px;margin:0 14px 12px;line-height:1.5}
+  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .figc{display:flex;flex-direction:column;overflow:hidden}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 10px;min-height:0}
+  .figc svg{width:100%;height:100%}
+</style>
+</head>
+<body data-title="㉙ 数字控制器与单位反馈" data-page="43 / 56">
+<div class="act-stage"><div class="act-slide">
+<div class="act-body has-note">
+  <div class="row">
+    <div class="lft">
+      <div class="act-card" style="flex:1">
+        <div class="hd" style="font-size:23px"><span style="flex:1">特例：单位反馈 H(s)=1</span></div>
+        <div class="bd">
+          <div class="st">令 <span class="tex">H(s)=1</span>（此时 <span class="tex">GH(z)=G(z)</span>），上页两个闭环公式化为：</div>
+          <div class="eq hl"><span class="tex">\frac{C(z)}{R(z)}=\frac{G(z)}{1+G(z)}</span></div>
+          <div class="eq hl"><span class="tex">\frac{E(z)}{R(z)}=\frac{1}{1+G(z)}</span></div>
+          <div class="st">形式与连续系统完全对应，只是把 <span class="tex">s</span> 换成 <span class="tex">z</span>。</div>
+        </div>
+      </div>
+      <div class="act-card fill" style="flex:.72">
+        <div class="hd" style="font-size:22px"><span style="flex:1">为什么要研究数字控制器？</span></div>
+        <div class="bd">
+          <div class="st">计算机只能处理离散信号：<span class="tex">D(z)</span> 置于两开关之间，是离散校正的物理实现。</div>
+        </div>
+      </div>
+    </div>
+    <div class="rgt">
+      <div class="act-card figc" style="flex:1.05">
+        <div class="hd" style="font-size:22px"><span style="flex:1">图 7-25　具有数字控制器的离散系统（重绘）</span></div>
+        <div class="bd2"><svg id="fig"></svg></div>
+        <div class="capnote">D(s) 两端均有采样开关：D(z) 可独立分出，特征方程变为 1+GH(z)D(z)=0。</div>
+      </div>
+      <div class="act-card" style="flex:1.2">
+        <div class="hd" style="font-size:23px"><span style="flex:1">推导：与图 7-24 同样的方法</span></div>
+        <div class="bd">
+          <div ><div class="st">① 由图列方程并采样（<span class="tex">X^{*}(s)</span> 是 <span class="tex">D(s)</span> 后的离散信号）：</div>
+            <div class="eq"><span class="tex">E(s)=R(s)-H(s)G(s)X^{*}(s)\;\Rightarrow\;E^{*}(s)=R^{*}(s)-GH^{*}(s)X^{*}(s)</span></div></div>
+          <div data-step="1"><div class="st">② 数字控制器两端均有开关：<span class="tex">X(s)=D(s)E^{*}(s)\;\Rightarrow\;X^{*}(s)=D^{*}(s)E^{*}(s)</span>。</div></div>
+          <div data-step="2"><div class="st">③ 消去 <span class="tex">E^{*}</span>、<span class="tex">X^{*}</span>：<span class="tex">C^{*}(s)=G^{*}(s)D^{*}(s)\,R^{*}(s)/\left[1+GH^{*}(s)D^{*}(s)\right]</span>。</div></div>
+          <div data-step="3"><div class="st">④ 写成 z 变换形式：</div>
+            <div class="eq hl"><span class="tex">\frac{C(z)}{R(z)}=\frac{G(z)\,D(z)}{1+GH(z)\,D(z)}</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">结论</span><span>数字控制器 D(z) 的位置决定了特征方程的形式。</span></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  function drawSwitch(B, id, x0, x1, y, dashed) {
+    const mk = B.mk, tx = B.tx, g = B.g, INK = BD.INK;
+    const defs = B.svg.querySelector("defs");
+    const m = mk("marker", { id, markerWidth: 10, markerHeight: 8, refX: 6, refY: 3, orient: "auto" }, defs);
+    mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: INK }, m);
+    const da = dashed ? { "stroke-dasharray": "6 5" } : {};
+    mk("circle", Object.assign({ cx: x0, cy: y, r: 5, fill: "#fff", stroke: INK, "stroke-width": 2.6 }, da), g);
+    mk("circle", Object.assign({ cx: x1, cy: y, r: 5, fill: "#fff", stroke: INK, "stroke-width": 2.6 }, da), g);
+    mk("line", Object.assign({ x1: x0, y1: y, x2: x1 - 7, y2: y - 26, stroke: INK, "stroke-width": 3,
+      "stroke-linecap": "round", "marker-end": "url(#" + id + ")" }, da), g);
+    tx(g, (x0 + x1) / 2, y - 46, "T", { fs: 25, it: 1, b: 1, fill: INK });
+  }
+  /* 图 7-25：R(s)→⊕(−)→T→D(s)→T→G(s)→C(s)，反馈 H(s) */
+  const B = BD.block("fig", [
+    { type: "line", pts: [[26, 150], [112, 150]], arrow: false, label: "R(s)", labelDy: -18 },
+    { type: "sum", x: 128, y: 150, r: 17 },
+    { type: "line", pts: [[145, 150], [176, 150]], label: "E(s)", labelDx: 0, labelDy: -18 },
+    { type: "line", pts: [[228, 150], [268, 150]], label: "E^{*}(s)", labelDx: 12, labelDy: 40 },
+    { type: "box", x: 268, y: 106, w: 150, h: 88, label: "D(s)" },
+    { type: "line", pts: [[418, 150], [458, 150]], label: "X(s)", labelDx: 14, labelDy: -18 },
+    { type: "line", pts: [[510, 150], [550, 150]], label: "X^{*}(s)", labelDx: 14, labelDy: 40 },
+    { type: "box", x: 550, y: 106, w: 160, h: 88, label: "G(s)" },
+    { type: "line", pts: [[710, 150], [872, 150]], label: "C(s)", labelDy: -18 },
+    { type: "dot", x: 800, y: 150 },
+    /* 反馈通道 */
+    { type: "line", pts: [[800, 150], [800, 268], [472, 268]], arrow: false },
+    { type: "box", x: 282, y: 240, w: 190, h: 56, label: "H(s)" },
+    { type: "line", pts: [[282, 268], [128, 268], [128, 170]], arrow: true }
+  ], { vw: 940, vh: 330, static: true });
+  drawSwitch(B, "sw1", 180, 224, 150, false);
+  drawSwitch(B, "sw2", 462, 506, 150, false);
+  /* 求和点 +/− 手动放置（避开箭头与反馈竖线） */
+  B.tx(B.g, 100, 160, "+", { fs: 26, b: 1, an: "end", fill: BD.INK });
+  B.tx(B.g, 112, 210, "−", { fs: 26, b: 1, an: "end", fill: BD.INK });
+});
+</script>
+<script>/* qa-steps：?steps=N 自动前进 N 步 */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>④ 采样过程就是脉冲调制</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=700">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=700" defer></script>
+<style>
+  .row{display:flex;gap:20px;height:100%;min-height:0}
+  .lft{flex:.8;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .figc{flex:1.35;display:flex;flex-direction:column;overflow:hidden;position:relative}
+  .figc .rows{flex:1;display:flex;flex-direction:column;background:#fff;padding:2px 8px;min-height:0}
+  .prow{flex:1;display:flex;align-items:stretch;min-height:0;border-bottom:1.5px dashed var(--line)}
+  .prow:last-child{border-bottom:none}
+  .prow .rlab{flex:none;width:118px;display:grid;place-items:center;font-size:22px;font-weight:700;color:var(--navy);line-height:1.3;text-align:center}
+  .prow svg{flex:1;width:100%;height:100%;min-width:0}
+  .segfloat{position:absolute;top:52px;right:12px;z-index:5;max-width:80%;background:#fff;
+    border:2px solid var(--blue);border-radius:10px;padding:4px 13px;font-size:17.5px;font-weight:700;
+    color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 2px 10px rgba(20,40,90,.18)}
+  .ctl{display:flex;align-items:center;gap:10px;justify-content:center;padding:6px 0 8px}
+  .btn{background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:19px;font-weight:700;padding:8px 20px;cursor:pointer;min-width:112px;text-align:center}
+  .btn.ghost{background:#fff;color:var(--blue);border:2px solid var(--blue)}
+  .btn:disabled{opacity:.42;cursor:not-allowed}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:10px;padding:12px 20px}
+  .st{font-size:22px;color:var(--ink);line-height:1.65}
+  .eq{background:var(--sky);border-radius:12px;padding:14px 16px;text-align:center;font-size:23px;line-height:1.55}
+</style>
+</head>
+<body data-title="④ 采样过程就是脉冲调制" data-page="7 / 56">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="row">
+      <div class="lft">
+        <div class="act-card" style="flex:1">
+          <div class="hd" style="font-size:23px"><span style="flex:1">采样过程</span></div>
+          <div class="bd">
+            <div class="st">采样开关（采样器）可看作<span class="kw-r">产生脉冲序列的元件</span>；实际开关每隔 <span class="tex">T</span> 闭合一次，闭合时间 <span class="tex">\tau\ll T</span>。</div>
+            <div class="st">理想化 <span class="tex">\tau\to 0</span>：采样开关等效为<span style="color:var(--navy);font-weight:700">理想单位脉冲序列发生器</span> <span class="tex">\delta_{T}(t)</span>，输出为理想脉冲序列 <span class="tex">e^{*}(t)</span>。</div>
+          </div>
+        </div>
+        <div class="act-card" style="flex:1.2">
+          <div class="hd" style="font-size:23px"><span style="flex:1">脉冲调制的数学表达</span></div>
+          <div class="bd">
+            <div class="eq"><span class="tex">\delta_{T}(t)=\sum_{n=-\infty}^{\infty}\delta(t-nT)</span></div>
+            <div class="eq"><span class="tex">e^{*}(t)=e(t)\delta_{T}(t)=\sum_{n=-\infty}^{\infty}e(nT)\delta(t-nT)</span></div>
+            <div class="st">每根脉冲的<span class="kw-r">强度</span>等于该采样时刻的函数值 <span class="tex">e(nT)</span>。</div>
+          </div>
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd"><span style="flex:1">调制过程三波形（<span class="tex">T=1</span>，<span class="tex">e(t)=2\sin(0.8t)</span> 示意波形）</span></div>
+        <span class="segfloat" id="segChip" style="display:none"></span>
+        <span id="prog">0 / 3</span>
+        <div class="rows">
+          <div class="prow"><span class="rlab">被调制信号<br><span class="tex">e(t)</span></span><svg id="fe"></svg></div>
+          <div class="prow"><span class="rlab">载波<br><span class="tex">\delta_{T}(t)</span></span><svg id="fd"></svg></div>
+          <div class="prow"><span class="rlab">脉冲序列<br><span class="tex">e^{*}(t)</span></span><svg id="fs"></svg></div>
+        </div>
+        <div class="ctl">
+          <button class="btn" id="play">▶ 播放</button>
+          <button class="btn ghost" id="step">⧉ 分步</button>
+          <button class="btn ghost" id="rst">↺ 重置</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<div data-step="1" style="display:none"></div><div data-step="2" style="display:none"></div>
+<div data-step="3" style="display:none"></div>
+<script src="../fig.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const TOTAL = 3, T = 1, N = 7;
+  const eOf = t => 2 * Math.sin(0.8 * t);
+  /* ① 被调制信号 e(t) */
+  const ePts = [];
+  for (let i = 0; i <= 320; i++) { const t = i / 320 * 7.8 - 0.8; ePts.push([t, eOf(Math.max(0, t))]); }
+  const Fe = DZ.plot("fe", {
+    xlim: [-0.8, 7.8], ylim: [-2.4, 2.4], xlabel: "t", ylabel: "e(t)",
+    curves: [{ pts: ePts, color: "#1D3FA0" }]
+  }, { vw: 960, vh: 235 });
+  /* ② 载波 δT(t)：理想单位脉冲序列（箭头 + 顶端标注 T 间距） */
+  const dPts = [];
+  for (let n = 0; n <= N; n++) dPts.push([n * T, 1]);
+  const Fd = DZ.stem("fd", { pts: dPts, xlabel: "t", ylabel: "δ_{T}(t)", color: "#C2410C", tips: false },
+    { vw: 960, vh: 235 });
+  /* ③ e*(t)=e(t)δT(t)：脉冲高度=e(nT)，程序现算 */
+  const sPts = [];
+  for (let n = 0; n <= N; n++) sPts.push([n * T, eOf(n * T)]);
+  const Fs = DZ.stem("fs", { pts: sPts, xlabel: "t", ylabel: "e^{*}(t)", color: "#0E7A36" }, { vw: 960, vh: 235 });
+  /* δT 行：箭头头 + T 标注（自绘持久层，随生长进度点亮） */
+  const gArr = Fd.mk("g", {}, Fd.svg);
+  function drawDelta(f) {
+    gArr.innerHTML = "";
+    if (f <= 0) return;
+    const done = f >= 1 ? dPts.length : Math.floor(f * (dPts.length - 1)) + 1;
+    for (let k = 0; k < Math.min(done, dPts.length); k++) {
+      const x = Fd.X(dPts[k][0]), y = Fd.Y(1);
+      const p = Fd.mk("path", { d: "M-7,9 L0,0 L7,9 Z", fill: "#C2410C" }, gArr);
+      p.setAttribute("transform", `translate(${x},${y - 2})`);
+    }
+    if (done >= 2) {   // 标注采样周期 T（前两根脉冲之间）
+      const x0 = Fd.X(dPts[0][0]), x1 = Fd.X(dPts[1][0]), yb = Fd.Y(0) + 14;
+      Fd.mk("line", { x1: x0, y1: yb, x2: x1, y2: yb, stroke: "#C2410C", "stroke-width": 2 }, gArr);
+      Fd.mk("line", { x1: x0, y1: yb - 5, x2: x0, y2: yb + 5, stroke: "#C2410C", "stroke-width": 2 }, gArr);
+      Fd.mk("line", { x1: x1, y1: yb - 5, x2: x1, y2: yb + 5, stroke: "#C2410C", "stroke-width": 2 }, gArr);
+      Fd.tx(gArr, (x0 + x1) / 2, yb + 26, "T", { fs: 21, it: 1, b: 1, fill: "#C2410C" });
+    }
+  }
+  function paint(K, f) {
+    const fp = typeof f === "number" ? f : K / TOTAL;
+    const fe = Math.min(1, fp * 3);
+    const fd = Math.max(0, Math.min(1, fp * 3 - 1));
+    const fs = Math.max(0, Math.min(1, fp * 3 - 2));
+    Fe.setF(0, fe);
+    Fd.setF(0, fd > 0 ? 1 : 0); Fd.setF(1, fd); drawDelta(fd);
+    Fs.setF(0, fs > 0 ? 1 : 0); Fs.setF(1, fs);
+  }
+  const chip = document.getElementById("segChip");
+  BD.wire(TOTAL, paint, {
+    figs: [Fe, Fd, Fs], dur: 11000,
+    frame: (fa, K, info) => {   // 分步播放时同步 δT 行箭头头与 T 标注
+      if (info && info.mode === "seg") {
+        if (info.seg === 0) drawDelta(0);
+        else if (info.seg === 1) drawDelta(fa);
+        else drawDelta(1);
+        gArr.style.opacity = info.seg === 2 ? .15 : 1;
+      }
+    },
+    segments: [
+      { label: "① 被调制信号 e(t)（连续）", parts: [{ F: Fe, b: [0] }] },
+      { label: "② 载波 δT(t)：理想单位脉冲序列，周期 T", parts: [{ F: Fd, b: [1] }] },
+      { label: "③ 逐根调制：e*(t)=e(t)·δT(t)，脉冲高度=e(nT)", parts: [{ F: Fs, b: [1] }] }
+    ],
+    segLabel: (label, si) => {
+      if (label == null) { chip.style.display = "none"; gArr.style.opacity = 1; return; }
+      chip.textContent = "分步 " + (si + 1) + " / " + TOTAL + "　" + label;
+      chip.style.display = "";
+    }
+  });
+  document.getElementById("rst").onclick = () => ACT.step.reset();
+});
+</script>
+</div></div>
+</body>
+</html>

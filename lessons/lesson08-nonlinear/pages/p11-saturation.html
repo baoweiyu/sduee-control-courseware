@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>饱和非线性</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=800">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=800" defer></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:1.06;display:flex;flex-direction:column;gap:16px;min-height:0}
+  .rgt{flex:1;display:flex;flex-direction:column;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:14px;padding:18px 24px;font-size:23px;line-height:1.6}
+  .eq{background:var(--sky);border-radius:12px;padding:14px 16px;text-align:center;font-size:23px;position:relative}
+  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .st{font-size:21.5px;color:var(--ink);line-height:1.6}
+  .pt{display:flex;gap:12px;align-items:flex-start;font-size:22px;color:var(--ink);line-height:1.58}
+  .pt .no{flex:none;width:34px;height:34px;border-radius:50%;background:var(--blue);color:#fff;
+    font-size:20px;font-weight:700;display:grid;place-items:center;margin-top:3px}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:6px 12px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .figc .capnote{flex:none;font-size:21.5px;color:var(--navy);background:var(--sky);border-radius:12px;padding:10px 16px;margin:0 14px 12px;line-height:1.5}
+  .ctl{display:flex;align-items:center;gap:12px;justify-content:center;padding:6px 0 8px}
+  .btn{background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:19px;font-weight:700;padding:8px 20px;cursor:pointer;text-align:center}
+  .btn.ghost{background:#fff;color:var(--blue);border:2px solid var(--blue)}
+  .btn:disabled{opacity:.42;cursor:not-allowed}
+  .segfloat{position:absolute;top:52px;right:12px;z-index:5;max-width:86%;background:#fff;
+    border:2px solid var(--blue);border-radius:10px;padding:4px 13px;font-size:17.5px;font-weight:700;
+    color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 2px 10px rgba(20,40,90,.18)}
+</style>
+</head>
+<body data-title="饱和非线性" data-page="11 / 33">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lft">
+        <div class="act-card" style="flex:1.25">
+          <div class="hd"><span style="flex:1">饱和特性（图 8-2）</span></div>
+          <div class="bd">
+<div data-step="1" style="display:none"></div> <!-- 首步驱动动画；基础内容常显 -->
+            <div ><div class="eq hl"><span class="tex">x_{2}=\begin{cases}kx_{1}, & \left|x_{1}\right|\le a\\[2pt] ka\,\mathrm{sign}\,x_{1}, & \left|x_{1}\right|>a\end{cases}</span></div></div>
+            <div class="st" data-step="2">式中：<b>a 为线性区半宽（线性区总宽 2a）</b>；<b>ka 为输出饱和值</b>。</div>
+            <div class="st" data-step="3">实例：晶体管放大电路在<span class="kw-r">大信号输入</span>时进入饱和；电机、变压器采用铁磁材料，存在<span class="kw-r">磁饱和</span>现象。</div>
+          </div>
+        </div>
+        <div class="act-card" style="flex:1">
+          <div class="hd"><span style="flex:1">对系统的影响</span></div>
+          <div class="bd">
+            <div data-step="4" style="display:none"></div> <!-- 保持动画步序；首条说明常显 -->
+            <div class="pt"><span class="no">1</span><span>进入饱和后系统的<b>等效放大倍数降低</b>——常使<span class="kw-r">过渡过程变慢</span>、<span class="kw-r">灵敏度下降</span>。</span></div>
+            <div class="pt" data-step="5"><span class="no">2</span><span>某些系统特意加入带饱和特性的<b>限幅装置</b>，以保证系统安全工作。</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="rgt">
+        <div class="act-card figc">
+          <div class="hd"><span style="flex:1">饱和特性曲线（k=1、a=1 示意）</span></div>
+          <span class="segfloat" id="segChip" style="display:none"></span>
+          <div class="bd2"><svg id="fig"></svg></div>
+          <div class="ctl">
+            <span id="prog">0 / 5</span>
+            <button class="btn" id="play">▶ 播放</button>
+            <button class="btn ghost" id="step">⧉ 分步</button>
+            <button class="btn ghost" id="rst">↺ 重置</button>
+          </div>
+          <div class="capnote">线性区内斜率为 k；|x₁| 超过 a 后输出封顶为 ±ka。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">要点</span><span>饱和使等效增益降低，常使响应变慢、灵敏度下降；限幅装置利用饱和保证安全。</span></div>
+<script src="../fig.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const TOTAL = 5, K1 = 1, A = 1;                  // 示意参数：斜率 k=1、线性区宽度 a=1
+  /* 特性曲线按上式现算：负饱和段 → 线性段 → 正饱和段（蛇形折线） */
+  const sat = x => Math.abs(x) <= A ? K1 * x : K1 * A * Math.sign(x);
+  const pts = [];
+  for (let x = -3; x <= 3.0001; x += 0.04) pts.push([x, sat(x)]);
+  const F = DZ.plot("fig", {
+    xlim: [-3.2, 3.2], ylim: [-1.9, 1.9], xlabel: "x_{1}", ylabel: "x_{2}",
+    curves: [{ pts, color: "#1D3FA0" }]
+  }, { vw: 960, vh: 640 });
+  /* 刻度数字放大到 ≥21px（viewBox 960 基准；fig.js 公共默认 20，页面级上调） */
+  F.svg.querySelectorAll("text").forEach(t => { const f = parseFloat(t.getAttribute("font-size") || "0"); if (f && f < 21) t.setAttribute("font-size", "21"); });
+  /* DZ.setF 按采样点序号推进：共 151 点、末下标 150；−a、a 下标 50、100 */
+  const F1 = 50 / 150, F2 = 100 / 150;
+  const FS = [0, F1, F2, 1, 1, 1];
+  const RED = "#D63A2F", INK = "#16324F", MUT = "#5B6B8C";
+  function deco(k, g) {
+    g = g || F.gDyn;
+    if (k >= 2) F.tx(g, F.X(0.92), F.Y(0.3), "斜率 k", { fs: 22, fill: INK, b: 1, an: "start" });
+    if (k >= 3) {                                   // 拐点 + a / ka 标注
+      [[A, K1 * A], [-A, -K1 * A]].forEach(([x, y]) =>
+        F.mk("circle", { cx: F.X(x), cy: F.Y(y), r: 8, fill: RED, stroke: "#fff", "stroke-width": 2.5 }, g));
+      const dh = { stroke: MUT, "stroke-width": 2.2, "stroke-dasharray": "7 5", opacity: .85 };
+      F.mk("line", Object.assign({ x1: F.X(A), y1: F.Y(K1 * A), x2: F.X(A), y2: F.Y(0) }, dh), g);
+      F.mk("line", Object.assign({ x1: F.X(0), y1: F.Y(K1 * A), x2: F.X(A), y2: F.Y(K1 * A) }, dh), g);
+      F.mk("line", Object.assign({ x1: F.X(-A), y1: F.Y(-K1 * A), x2: F.X(-A), y2: F.Y(0) }, dh), g);
+      F.mk("line", Object.assign({ x1: F.X(0), y1: F.Y(-K1 * A), x2: F.X(-A), y2: F.Y(-K1 * A) }, dh), g);
+      F.tx(g, F.X(A), F.Y(0) + 44, "a", { fs: 24, fill: RED, b: 1, it: 1 });
+      F.tx(g, F.X(-A), F.Y(0) + 44, "−a", { fs: 24, fill: RED, b: 1, it: 1 });
+      F.tx(g, F.X(0) - 16, F.Y(K1 * A) + 7, "ka", { fs: 24, fill: RED, b: 1, it: 1, an: "end" });
+      F.tx(g, F.X(0) - 16, F.Y(-K1 * A) + 7, "−ka", { fs: 24, fill: RED, b: 1, it: 1, an: "end" });
+    }
+  }
+  function paint(K) { F.gDyn.innerHTML = ""; deco(K); }
+  const chip = document.getElementById("segChip");
+  BD.wire(TOTAL, paint, {
+    figs: [F], FS, dur: 9000,
+    segments: [
+      { label: "① 负饱和段：x₁<−a，输出 −ka", parts: [{ F, b: [0], f0: 0, f1: F1 }] },
+      { label: "② 线性段：|x₁|≤a，x₂=kx₁", parts: [{ F, b: [0], f0: F1, f1: F2 }],
+        draw: (t, g) => deco(2, g) },
+      { label: "③ 正饱和段：x₁>a，输出封顶 ka", parts: [{ F, b: [0], f0: F2, f1: 1 }],
+        draw: (t, g) => deco(3, g) }
+    ],
+    segLabel: (label, si, n) => {
+      if (label == null) { chip.style.display = "none"; F.gDyn.innerHTML = ""; paint(TOTAL); return; }
+      chip.textContent = "分步 " + (si + 1) + " / 3　" + label;
+      chip.style.display = "";
+    }
+  });
+  document.getElementById("rst").onclick = () => ACT.step.reset();
+});
+</script>
+<script>/* qa-steps：截图自验钩子 */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

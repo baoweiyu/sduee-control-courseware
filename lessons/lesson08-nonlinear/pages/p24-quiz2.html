@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>⑨ 课堂互动：使用条件</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=800">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=800" defer></script>
+<style>
+  .qcol{display:flex;gap:20px;height:100%;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card .bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:16px;padding:20px 22px;min-height:0}
+  .stage-tip{display:inline-block;font-size:20px;color:#fff;background:var(--blue);border-radius:20px;padding:7px 20px;width:fit-content}
+  .qt{font-size:23px;color:var(--navy);font-weight:700;line-height:1.6}
+  .qt .blk{display:inline-block;min-width:64px;border-bottom:3px solid var(--blue);color:var(--blue);text-align:center}
+  .opts{display:flex;flex-direction:column;gap:14px}
+  .opt{background:var(--sky);border:2.5px solid var(--line);border-radius:12px;padding:13px 18px;
+    font-size:22px;color:var(--ink);font-weight:700;position:relative;line-height:1.5}
+  .opt .ab{color:var(--blue);margin-right:10px}
+  .opt.right{border-color:#1E9E57;background:#F0FAF4}
+  .opt.right::after{content:"✓";position:absolute;top:-13px;right:-10px;width:32px;height:32px;border-radius:50%;
+    background:#1E9E57;color:#fff;font-weight:800;font-size:20px;display:grid;place-items:center}
+  .opt.wrong{border-color:#D63A2F;background:#FDF1EF}
+  .opt.wrong::after{content:"✗";position:absolute;top:-13px;right:-10px;width:32px;height:32px;border-radius:50%;
+    background:#D63A2F;color:#fff;font-weight:800;font-size:20px;display:grid;place-items:center}
+  .ans{font-size:19.5px;color:var(--navy);background:var(--sky);border-radius:12px;padding:8px 16px;line-height:1.45}
+  .ans b{color:var(--danger)}
+  .fx{font-size:18.5px;color:var(--muted);background:#fff;border:2px dashed var(--line);
+    border-radius:12px;padding:7px 14px;line-height:1.45}
+  .fx b{color:var(--navy)}
+</style>
+</head>
+<body data-title="⑨ 课堂互动：使用条件" data-page="24 / 33">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="qcol">
+      <div class="act-card qz" data-q="1" style="flex:1.06">
+        <div class="hd">填空 ①　三连选择</div>
+        <div class="bd">
+          <div class="qt">非线性系统可化为由线性部分 G(s) 与非线性部分 N(X) 相<span class="blk" data-blank></span>的典型结构。</div>
+          <span class="stage-tip">请先作出选择</span>
+          <div class="opts">
+            <div class="opt" data-mark="0"><span class="ab">A</span>并联</div>
+            <div class="opt" data-mark="1"><span class="ab">B</span>串联</div>
+          </div>
+          <div data-step="2">
+            <div class="ans"><b>答案：B 串联。</b></div>
+            <div class="fx" style="margin-top:10px"><b>解析：</b>典型结构（图 8-8）为 N(X) 与 G(s) <b>串联</b>的单回路。</div>
+          </div>
+        </div>
+      </div>
+      <div class="act-card qz" data-q="2" style="flex:1.06">
+        <div class="hd">填空 ②　三连选择</div>
+        <div class="bd">
+          <div class="qt">非线性环节的输入输出特性应具有<span class="blk" data-blank></span>的性质，从而保证输出不含直流分量。</div>
+          <span class="stage-tip">请先作出选择</span>
+          <div class="opts">
+            <div class="opt" data-mark="1"><span class="ab">A</span>奇对称</div>
+            <div class="opt" data-mark="0"><span class="ab">B</span>偶对称</div>
+          </div>
+          <div data-step="4">
+            <div class="ans"><b>答案：A 奇对称。</b></div>
+            <div class="fx" style="margin-top:10px"><b>解析：</b>奇对称 ⇒ 输出直流分量 A₀=0，偶对称不满足。</div>
+          </div>
+        </div>
+      </div>
+      <div class="act-card qz" data-q="3" style="flex:1.06">
+        <div class="hd">填空 ③　三连选择</div>
+        <div class="bd">
+          <div class="qt">线性部分具有较好的<span class="blk" data-blank></span>效应，保证应用描述函数法所得结果比较准确。</div>
+          <span class="stage-tip">请先作出选择</span>
+          <div class="opts">
+            <div class="opt" data-mark="1"><span class="ab">A</span>低通滤波</div>
+            <div class="opt" data-mark="0"><span class="ab">B</span>高通滤波</div>
+          </div>
+          <div data-step="6">
+            <div class="ans"><b>答案：A 低通滤波。</b></div>
+            <div class="fx" style="margin-top:10px"><b>解析：</b>低通滤波使高次谐波衰减，近似只有基波流通。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<div data-step="1" style="display:none"></div> <!-- 第1/3/5步分别仅判定三题 -->
+<div data-step="3" style="display:none"></div>
+<div data-step="5" style="display:none"></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const S = ACT.step, _n = S.next.bind(S), _r = S.reset.bind(S);
+  const ANS = { 1: "串联", 2: "奇对称", 3: "低通滤波" };
+  function paint() {
+    document.querySelectorAll(".qz").forEach(q => {
+      const k = +q.dataset.q, on = S.cur >= 2 * k - 1, reveal = S.cur >= 2 * k;
+      q.querySelectorAll(".opt").forEach(o => {
+        o.classList.toggle("right", on && o.dataset.mark === "1");
+        o.classList.toggle("wrong", on && o.dataset.mark === "0");
+      });
+      const bl = q.querySelector("[data-blank]");
+      bl.textContent = reveal ? ANS[k] : "";
+    });
+  }
+  S.next = function () { const d = _n(); paint(); return d; };
+  S.reset = function () { _r(); paint(); };
+  window.prev = function () { const n = Math.max(0, S.cur - 1); S.reset(); for (let i = 0; i < n; i++) S.next(); };
+});
+</script>
+<script>/* qa-steps：截图自验钩子 */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

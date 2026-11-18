@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>⑧ 香农采样定理</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=700">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=700" defer></script>
+<style>
+  .row{display:flex;gap:20px;height:100%;min-height:0}
+  .lft{flex:.92;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .rgt{flex:1.3;display:flex;flex-direction:column;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:10px;padding:12px 22px}
+  .st{font-size:22px;color:var(--ink);line-height:1.62}
+  .eq{background:#FDF3EC;border-left:5px solid var(--orange);border-radius:12px;border-top-left-radius:0;
+    border-bottom-left-radius:0;padding:12px 16px;text-align:center;font-size:24px}
+  .figc .bd2{flex:1;display:flex;flex-direction:column;background:#fff;padding:2px 10px;min-height:0}
+  .figc .half{flex:1;display:flex;align-items:stretch;min-height:0}
+  .figc .half .cap{flex:none;width:150px;display:grid;place-items:center;font-size:21px;font-weight:700;color:var(--navy);line-height:1.4;text-align:center}
+  .figc svg{flex:1;width:100%;height:100%;min-width:0}
+  .arrowrow{flex:none;text-align:center;font-size:21px;color:var(--navy);font-weight:700;padding:4px 0;line-height:1.4}
+</style>
+</head>
+<body data-title="⑧ 香农采样定理" data-page="11 / 56">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lft">
+        <div class="act-card"  style="flex:1.35">
+          <div class="hd" style="font-size:24px"><span style="flex:1">香农采样定理</span></div>
+          <div class="bd">
+            <div class="st">如果采样器的输入信号具有<span class="kw-r">有限带宽</span>，最高频率为 <span class="tex">\omega_{max}</span>，则<span style="color:var(--navy);font-weight:700">当且仅当</span>采样角频率满足</div>
+            <div class="eq"><span class="tex">\omega_{s}\geq 2\omega_{max}</span></div>
+            <div class="st">时，信号 <span class="tex">e(t)</span> 可<span class="kw-r">完全地</span>从采样信号 <span class="tex">e^{*}(t)</span> 中恢复。</div>
+          </div>
+        </div>
+        <div class="act-card" data-step="3" style="flex:1">
+          <div class="hd" style="font-size:24px"><span style="flex:1">工程注记</span></div>
+          <div class="bd">
+            <div class="st">定理给出不失真复现所必需的理论<span style="color:var(--navy);font-weight:700">最大采样周期</span> <span class="tex">T=\pi/\omega_{max}</span>。</div>
+            <div class="st">实际工程留有余量，常取 <span class="tex">\omega_{s}=(4\sim 10)\,\omega_{max}</span>。</div>
+          </div>
+        </div>
+      </div>
+      <div class="rgt">
+        <div class="act-card figc" style="flex:1">
+          <div class="hd" style="font-size:23px"><span style="flex:1">恢复原信号：理想低通滤波 + 放大 T 倍（<span class="tex">\omega_{s}=4\omega_{max}</span>）</span></div>
+          <div class="bd2">
+            <div class="half">
+              <span class="cap">采样频谱<br><span class="tex">|E^{*}(j\omega)|</span></span>
+              <svg id="fS"></svg>
+            </div>
+            <div class="arrowrow" data-step="1">↓ 经理想低通滤波器（虚线框，截止 <span class="tex">\omega_{s}/2</span>）滤掉全部高频分量，再<span class="kw-r">放大 T 倍</span></div>
+            <div class="half" data-step="2">
+              <span class="cap">复原频谱<br><span class="tex">|E(j\omega)|</span></span>
+              <svg id="fR"></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">准则</span><span><span class="tex">\omega_{s}\geq 2\omega_{max}</span> 是香农采样定理的核心，<span class="kw-r">必须严格遵守</span>。</span></div>
+<script src="../fig.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  /* 规范：viewBox 基准下刻度/标注字号 ≥21px（fig.js 默认 tick=20，本页统一上调） */
+  function bumpFs(svg) {
+    svg.querySelectorAll("text").forEach(t => {
+      const fs = parseFloat(t.getAttribute("font-size") || "0");
+      if (fs && fs < 21) t.setAttribute("font-size", "21");
+    });
+  }
+  const WMAX = 1, ws = 4, T = 2 * Math.PI / ws, inv = 1 / T;
+  const E = w => Math.max(0, 1 - Math.abs(w) / WMAX);
+  /* 上：采样频谱（分离情形） */
+  const curves = [];
+  const XL = 9.2;
+  for (let n = -2; n <= 2; n++) {
+    const pts = [];
+    for (let i = 0; i <= 720; i++) { const w = -XL + i / 720 * 2 * XL; pts.push([w, inv * E(w - n * ws)]); }
+    curves.push({ pts, color: n === 0 ? "#1D3FA0" : "#C9D6F2", width: n === 0 ? 4.5 : 2.6 });
+  }
+  const F = DZ.plot("fS", {
+    xlim: [-XL, XL], ylim: [0, 1.05], ylabel: "|E^{*}(jω)|",
+    curves,
+    marks: [{ type: "vline", x: ws, label: "ω_{s}", dy: 20 }, { type: "vline", x: -ws, label: "−ω_{s}", dy: 20 }]
+  }, { vw: 960, vh: 300, static: true });
+  F.tx(F.svg, 945, F.PLOT.y1 - 10, "ω/ω_{max}", { fs: 24, it: 1, b: 1, fill: "#5B6B8C", an: "end" });
+  /* 理想低通滤波器虚线矩形：|ω|<ω_s/2，增益 T（把 1/T 复原成 1） */
+  const gLp = F.mk("g", { id: "lpf", style: "display:none" }, F.svg);
+  const rx0 = F.X(-ws / 2), rx1 = F.X(ws / 2), ry0 = F.Y(0.86), ry1 = F.Y(0);
+  F.mk("rect", { x: rx0, y: ry0, width: rx1 - rx0, height: ry1 - ry0, fill: "none",
+    stroke: "#F5821F", "stroke-width": 3, "stroke-dasharray": "12 8" }, gLp);
+  F.tx(gLp, (rx0 + rx1) / 2, ry0 + 36, "理想低通滤波器（增益 T）", { fs: 22, fill: "#F5821F", b: 1 });
+  bumpFs(F.svg);
+  /* 下：复原后的连续频谱 */
+  const pR = [];
+  for (let i = 0; i <= 240; i++) { const w = -2.2 + i / 240 * 4.4; pR.push([w, E(w)]); }
+  DZ.plot("fR", {
+    xlim: [-2.2, 2.2], ylim: [0, 1.25], ylabel: "|E(jω)|",
+    curves: [{ pts: pR, color: "#0E7A36" }],
+    marks: [
+      { type: "vline", x: 1, label: "ω_{max}", dx: 10, dy: 44 },
+      { type: "vline", x: -1, label: "−ω_{max}", dx: -10, dy: 44 }
+    ]
+  }, { vw: 960, vh: 280, static: true });
+  { const fR = document.getElementById("fR");
+    BD.tx(fR, 945, 226, "ω/ω_{max}", { fs: 24, it: 1, b: 1, fill: "#5B6B8C", an: "end" });
+    bumpFs(fR); }
+  /* 分步：2 → 显示滤波器框 */
+  const S = ACT.step, _n = S.next.bind(S), _r = S.reset.bind(S);
+  function paint() { gLp.setAttribute("style", S.cur >= 2 ? "" : "display:none"); }
+  S.next = function () { const d = _n(); paint(); return d; };
+  S.reset = function () { _r(); paint(); };
+  window.prev = function () { const n = Math.max(0, S.cur - 1); S.reset(); for (let i = 0; i < n; i++) S.next(); };
+});
+</script>
+<script>/* qa-steps：?steps=N 自动前进 N 步 */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>⑦ 表 8-1 常见非线性特性的描述函数</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=800">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=800" defer></script>
+<style>
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden;height:100%}
+  .tblwrap{flex:1;display:flex;flex-direction:column;min-height:0;padding:10px 18px 12px}
+  table{width:100%;height:100%;border-collapse:collapse;table-layout:fixed}
+  th,td{border:1.6px solid var(--line);vertical-align:middle;text-align:center;padding:3px 8px}
+  th{background:var(--blue);color:#fff;font-size:22px;font-weight:700;line-height:1.3}
+  td{font-size:21px;color:var(--navy);line-height:1.3}
+  td.nm{font-weight:700;color:var(--ink);font-size:21px}
+  td.nm small{display:block;font-weight:400;color:var(--muted);font-size:18.5px;margin-top:2px}
+  td svg{width:100%;height:80px;display:block}
+  td.fml{text-align:left;padding-left:14px}
+  tr.cplx td{background:#FDF7F4}
+</style>
+</head>
+<body data-title="⑦ 表 8-1 常见非线性特性的描述函数" data-page="22 / 33">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="act-card">
+      <div class="hd"><span style="flex:1">表 8-1　常见非线性特性的描述函数（公式与特性方程一致）</span></div>
+      <div class="tblwrap">
+      <table>
+        <colgroup><col style="width:15%"><col style="width:17.5%"><col style="width:67.5%"></colgroup>
+        <tr><th>环节</th><th>特性简图</th><th>描述函数 N(X)</th></tr>
+        <tr>
+          <td class="nm">死区</td>
+          <td><svg id="m-dz" viewBox="0 0 160 96" preserveAspectRatio="xMidYMid meet"></svg></td>
+          <td class="fml"><span class="tex">N(X)=\frac{2k}{\pi}\left[\frac{\pi}{2}-\arcsin\frac{\Delta}{X}-\frac{\Delta}{X}\sqrt{1-\left(\frac{\Delta}{X}\right)^{2}}\right],\quad X\ge\Delta</span></td>
+        </tr>
+        <tr>
+          <td class="nm">饱和</td>
+          <td><svg id="m-sa" viewBox="0 0 160 96" preserveAspectRatio="xMidYMid meet"></svg></td>
+          <td class="fml"><span class="tex">N(X)=\frac{2k}{\pi}\left[\arcsin\frac{a}{X}+\frac{a}{X}\sqrt{1-\left(\frac{a}{X}\right)^{2}}\right],\quad X\ge a</span></td>
+        </tr>
+        <tr>
+          <td class="nm">理想继电器</td>
+          <td><svg id="m-id" viewBox="0 0 160 96" preserveAspectRatio="xMidYMid meet"></svg></td>
+          <td class="fml"><span class="tex">N(X)=\frac{4M}{\pi X}</span></td>
+        </tr>
+        <tr>
+          <td class="nm">死区继电器<small>m=1（只有死区）</small></td>
+          <td><svg id="m-dr" viewBox="0 0 160 96" preserveAspectRatio="xMidYMid meet"></svg></td>
+          <td class="fml"><span class="tex">N(X)=\frac{4M}{\pi X}\sqrt{1-\left(\frac{a}{X}\right)^{2}},\quad X\ge a</span>　（实函数）</td>
+        </tr>
+        <tr class="cplx">
+          <td class="nm">滞环继电器<small>m=−1（只有滞环）</small></td>
+          <td><svg id="m-hy" viewBox="0 0 160 96" preserveAspectRatio="xMidYMid meet"></svg></td>
+          <td class="fml"><span class="tex">N(X)=\frac{4M}{\pi X}\sqrt{1-\left(\frac{a}{X}\right)^{2}}-j\frac{4Ma}{\pi X^{2}},\quad X\ge a</span>　（复函数）</td>
+        </tr>
+        <tr class="cplx">
+          <td class="nm">一般继电器<small>死区 + 滞环</small></td>
+          <td><svg id="m-gr" viewBox="0 0 160 96" preserveAspectRatio="xMidYMid meet"></svg></td>
+          <td class="fml"><span class="tex">N(X)=\frac{2M}{\pi X}\left[\sqrt{1-\left(\frac{a}{X}\right)^{2}}+\sqrt{1-\left(\frac{ma}{X}\right)^{2}}\right]+j\frac{2Ma}{\pi X^{2}}(m-1),\quad X\ge a</span></td>
+        </tr>
+        <tr class="cplx">
+          <td class="nm">间隙</td>
+          <td><svg id="m-gp" viewBox="0 0 160 96" preserveAspectRatio="xMidYMid meet"></svg></td>
+          <td class="fml"><span class="tex">N(X)=\frac{k}{\pi}\left[\frac{\pi}{2}+\arcsin\left(1-\frac{2b}{X}\right)+2\left(1-\frac{2b}{X}\right)\sqrt{\frac{b}{X}\left(1-\frac{b}{X}\right)}\right]+j\frac{4kb}{\pi X}\left(\frac{b}{X}-1\right),\quad X\ge b</span></td>
+        </tr>
+      </table>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">要点</span><span>记住极限值（X→阈值、X→∞）比记全式更实用；间隙的 N(X) 是复数（相角滞后）。</span></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const BLUE = "#1D3FA0", MUT = "#5B6B8C";
+  /* 迷你特性简图：数据域 x,y∈[-2,2]，viewBox 160×96，曲线按特性公式现算 */
+  function frame(id) {
+    const svg = document.getElementById(id);
+    const mk = (t, a, p) => { const n = document.createElementNS(NS, t);
+      for (const k in a) n.setAttribute(k, a[k]); (p || svg).appendChild(n); return n; };
+    const L = 14, R = 152, T = 6, B = 88;
+    const X = x => L + (x + 2) / 4 * (R - L), Y = y => T + (2 - y) / 4 * (B - T);
+    const defs = mk("defs", {});
+    const m1 = mk("marker", { id: "mx" + id, markerWidth: 8, markerHeight: 7, refX: 5.5, refY: 2.5, orient: "auto" }, defs);
+    mk("path", { d: "M0,0 L6,2.5 L0,5 Z", fill: MUT }, m1);
+    const m2 = mk("marker", { id: "mc" + id, markerWidth: 8, markerHeight: 7, refX: 5.5, refY: 2.5, orient: "auto" }, defs);
+    mk("path", { d: "M0,0 L6,2.5 L0,5 Z", fill: BLUE }, m2);
+    mk("line", { x1: L - 4, y1: Y(0), x2: R + 3, y2: Y(0), stroke: MUT, "stroke-width": 1.6, "marker-end": `url(#mx${id})` });
+    mk("line", { x1: X(0), y1: B + 4, x2: X(0), y2: T - 4, stroke: MUT, "stroke-width": 1.6, "marker-end": `url(#mx${id})` });
+    const poly = (pts, o) => { o = o || {};
+      mk("path", { d: "M" + pts.map(p => X(p[0]).toFixed(1) + "," + Y(p[1]).toFixed(1)).join("L"),
+        fill: "none", stroke: o.color || BLUE, "stroke-width": o.w || 3.2, "stroke-linecap": "round",
+        "stroke-dasharray": o.dash || "none", "marker-end": o.arrow ? `url(#mc${id})` : "none" }); };
+    return { mk, X, Y, poly };
+  }
+  const A = 0.62, MV = 1.25, KK = 1.1, BB = 0.55;
+  /* 死区 y=k(x−Δ·sign x)，|x|>Δ */
+  (() => { const f = frame("m-dz"), d = [];
+    for (let x = A; x <= 1.95; x += 0.03) d.push([x, KK * (x - A)]);
+    f.poly(d.map(p => [-p[0], -p[1]]).reverse());
+    f.poly([[-A, 0], [A, 0]]); f.poly(d);
+  })();
+  /* 饱和 y=kx（|x|≤a），±ka（越限） */
+  (() => { const f = frame("m-sa"), d = [];
+    for (let x = -A; x <= A; x += 0.03) d.push([x, KK * x]);
+    f.poly([[-1.95, -KK * A], [-A, -KK * A]]); f.poly(d); f.poly([[A, KK * A], [1.95, KK * A]]);
+  })();
+  /* 理想继电器：单值静态特性，不画单向滞环箭头 */
+  (() => { const f = frame("m-id");
+    f.poly([[0, MV], [1.95, MV]]); f.poly([[0, -MV], [-1.95, -MV]]);
+    f.poly([[0, -MV], [0, MV]]);
+  })();
+  /* 死区继电器 m=1：单值静态特性，不画单向滞环箭头 */
+  (() => { const f = frame("m-dr");
+    f.poly([[-A, 0], [A, 0]]);
+    f.poly([[A, MV], [1.95, MV]]); f.poly([[A, 0.02], [A, MV]]);
+    f.poly([[-A, -MV], [-1.95, -MV]]); f.poly([[-A, -0.02], [-A, -MV]]);
+  })();
+  /* 滞环继电器 m=−1：上支 y=M（x>−a），下支 y=−M（x<a），±a 处换向跳变 */
+  (() => { const f = frame("m-hy");
+    f.poly([[-A, MV], [1.95, MV]]);
+    f.poly([[A, -MV], [-1.95, -MV]]);
+    f.poly([[A, -MV], [A, MV]], { arrow: true });
+    f.poly([[-A, MV], [-A, -MV]], { arrow: true });
+  })();
+  /* 一般继电器（死区 a + 滞环 ma，取 m=0.4 示意）：上支 x>ma 为 M，下支 x<−ma 为 −M，a 处上跳、−a 处下跳 */
+  (() => { const f = frame("m-gr"), mA = 0.4 * A;
+    f.poly([[mA, MV], [1.95, MV]]);
+    f.poly([[-mA, -MV], [-1.95, -MV]]);
+    f.poly([[A, 0], [A, MV]], { arrow: true });
+    f.poly([[-A, 0], [-A, -MV]], { arrow: true });
+    f.poly([[-mA, 0], [mA, 0]]);
+    f.poly([[mA, 0], [mA, MV]], { w: 2.2, dash: "4 3" });
+    f.poly([[-mA, 0], [-mA, -MV]], { w: 2.2, dash: "4 3" });
+  })();
+  /* 间隙：啮合斜支 + 换向水平保持段；端点由 Xm、b 解析计算，回线闭合 */
+  (() => { const f = frame("m-gp"), Xm = 1.75, ym = KK * (Xm - BB), loop = [[BB, 0]];
+    const leg = (fn, x0, x1, n) => { for (let i = 1; i <= n; i++) { const x = x0 + (x1 - x0) * i / n; loop.push([x, fn(x)]); } };
+    leg(x => KK * (x - BB), BB, Xm, 30);
+    leg(() => ym, Xm, Xm - 2 * BB, 12);
+    leg(x => KK * (x + BB), Xm - 2 * BB, -Xm, 50);
+    leg(() => -ym, -Xm, -Xm + 2 * BB, 12);
+    leg(x => KK * (x - BB), -Xm + 2 * BB, Xm, 50);
+    f.poly(loop);
+  })();
+});
+</script>
+</div></div>
+</body>
+</html>

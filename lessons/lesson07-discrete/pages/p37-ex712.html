@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>㉓ 例7-12 z 变换解差分方程</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=700">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=700" defer></script>
+<script src="../fig.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:1.28;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .rgt{flex:.92;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:9px;padding:10px 22px}
+  .st{font-size:21.5px;color:var(--ink);line-height:1.5}
+  .eq{background:var(--sky);border-radius:12px;padding:8px 14px;text-align:center;font-size:21.5px;color:var(--navy);line-height:1.5}
+  .eq .cond{color:var(--muted);font-size:21px}
+  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .figc{display:flex;flex-direction:column;overflow:hidden}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .capnote{flex:none;font-size:21px;color:var(--navy);background:var(--sky);border-radius:12px;padding:11px 18px;margin:0 14px 12px;line-height:1.55}
+</style>
+</head>
+<body data-title="㉓ 例7-12 z 变换解差分方程" data-page="37 / 56">
+<div class="act-stage"><div class="act-slide">
+<div class="act-body has-note">
+  <div class="row">
+    <div class="lft">
+      <div class="act-card" style="flex:.8">
+        <div class="hd" style="font-size:23px"><span style="flex:1">【例 7-12】题设</span></div>
+        <div class="bd">
+          <div class="st">用 z 变换法求解二阶差分方程（<span class="tex">y(0)=0,\ y(T)=1</span>，<span class="tex">r(t)=1(t)</span>）：</div>
+          <div class="eq"><span class="tex">y[(n+2)T]+3y[(n+1)T]+2y(nT)=r(nT)</span></div>
+        </div>
+      </div>
+      <div class="act-card" style="flex:2.3">
+        <div class="hd" style="font-size:23px"><span style="flex:1">解：z 变换 → 代数方程 → 部分分式 → 反变换</span></div>
+        <div class="bd">
+          <div ><div class="st">① 利用超前定理，对差分方程两边取 z 变换：</div>
+            <div class="eq"><span class="tex">z^{2}Y(z)-z^{2}y(0)-zy(T)+3[zY(z)-zy(0)]+2Y(z)=R(z)</span></div></div>
+          <div data-step="1"><div class="st">② 代入 <span class="tex">y(0)=0</span>、<span class="tex">y(T)=1</span>、<span class="tex">R(z)=z/(z-1)</span>，整理：</div>
+            <div class="eq"><span class="tex">(z^{2}+3z+2)Y(z)=\frac{z}{z-1}+z=\frac{z^{2}}{z-1}</span></div></div>
+          <div data-step="2"><div class="st">③ 解出 <span class="tex">Y(z)</span>：</div>
+            <div class="eq"><span class="tex">Y(z)=\frac{z^{2}}{(z-1)(z^{2}+3z+2)}=\frac{z^{2}}{(z-1)(z+2)(z+1)}</span></div></div>
+          <div data-step="3"><div class="st">④ 部分分式展开 <span class="tex">\dfrac{Y(z)}{z}=\dfrac{1/6}{z-1}+\dfrac{1/2}{z+1}-\dfrac{2/3}{z+2}</span>：</div>
+            <div class="eq"><span class="tex">Y(z)=\frac{z}{6(z-1)}+\frac{z}{2(z+1)}-\frac{2z}{3(z+2)}</span></div></div>
+          <div data-step="4"><div class="st">⑤ 逐项取 z 反变换，得输出序列：</div>
+            <div class="eq hl"><span class="tex">y(nT)=\frac{1}{6}+\frac{1}{2}(-1)^{n}-\frac{2}{3}(-2)^{n},\quad n=0,1,2,\cdots</span></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="rgt">
+      <div class="act-card figc" style="flex:1">
+        <div class="hd" style="font-size:23px"><span style="flex:1">输出序列 y(nT)：交替发散</span></div>
+        <div class="bd2"><svg id="fig"></svg></div>
+        <div class="capnote">按差分方程递推现算：0, 1, −2, 5, −10, 21, −42, 85, …（含 <span class="tex">(-2)^{n}</span> 项，交替发散）。</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">结论</span><span>z 变换法解差分方程 = 拉氏变换法解微分方程的离散版。</span></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  /* y[(n+2)T] = r(nT) − 3y[(n+1)T] − 2y(nT)，y(0)=0, y(T)=1, r≡1：递推现算 */
+  const y = [0, 1];
+  for (let n = 0; n <= 6; n++) y.push(1 - 3 * y[n + 1] - 2 * y[n]);
+  const pts = y.map((v, i) => [i, v]);   // 0,1,−2,5,−10,21,−42,85,… 取 n=0..7
+  pts.length = 8;
+  const F = DZ.stem("fig", { pts, xlabel: "n", color: "#1D3FA0" }, { vw: 640, vh: 560, static: true });
+  /* 纵轴名手动放置（避开顶部刻度 100），再标注前两项数值 */
+  F.tx(F.gMark, 96, 20, "y(nT)", { fs: 25, it: 1, b: 1, fill: "#5B6B8C", an: "start" });
+  F.tx(F.gMark, F.X(0) + 16, F.Y(0) - 26, "y(0)=0", { fs: 22, fill: "#5B6B8C", an: "start", b: 0 });
+  F.tx(F.gMark, F.X(1) + 16, F.Y(1) - 8, "y(T)=1", { fs: 22, fill: "#5B6B8C", an: "start", b: 0 });
+});
+</script>
+<script>/* qa-steps：?steps=N 自动前进 N 步 */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

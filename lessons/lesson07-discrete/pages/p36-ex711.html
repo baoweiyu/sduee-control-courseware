@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>㉒ 例7-11 离散系统差分方程</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=700">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=700" defer></script>
+<script src="../fig.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:1.12;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .rgt{flex:1;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:12px;padding:14px 22px}
+  .st{font-size:21.5px;color:var(--ink);line-height:1.62}
+  .eq{background:var(--sky);border-radius:12px;padding:11px 16px;text-align:center;font-size:22px;color:var(--navy);line-height:1.6}
+  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .figc{display:flex;flex-direction:column;overflow:hidden}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
+  .figc svg{width:100%;height:100%}
+</style>
+</head>
+<body data-title="㉒ 例7-11 离散系统差分方程" data-page="36 / 56">
+<div class="act-stage"><div class="act-slide">
+<div class="act-body has-note">
+  <div class="row">
+    <div class="lft">
+      <div class="act-card" style="flex:.62">
+        <div class="hd" style="font-size:23px"><span style="flex:1">【例 7-11】题设（图 7-20 离散控制系统）</span></div>
+        <div class="bd">
+          <div class="st">离散系统如图 7-20 所示：<b>采样开关 → 零阶保持器 → 积分环节 <span class="tex">K/s</span></b>，单位负反馈，采样周期为 <span class="tex">T</span>。试求其差分方程。</div>
+        </div>
+      </div>
+      <div class="act-card" style="flex:2.1">
+        <div class="hd" style="font-size:23px"><span style="flex:1">解：逐拍分析保持器与积分器</span></div>
+        <div class="bd">
+          <div ><div class="st">① 相邻两采样时刻之间，零阶保持器输出为常值：</div>
+            <div class="eq"><span class="tex">e_{h}(t)=e(nT),\quad nT\leq t<(n+1)T</span></div></div>
+          <div data-step="1"><div class="st">② 区间内积分器输出线性增长（斜率 <span class="tex">Ke(nT)</span>）：</div>
+            <div class="eq"><span class="tex">c(t)=Ke(nT)(t-nT)+c(nT),\quad nT\leq t<(n+1)T</span></div></div>
+          <div data-step="2"><div class="st">③ 令 <span class="tex">t=(n+1)T</span>，并代入 <span class="tex">e(nT)=r(nT)-c(nT)</span>：</div>
+            <div class="eq"><span class="tex">c[(n+1)T]=c(nT)+KT\,[r(nT)-c(nT)]</span></div></div>
+          <div data-step="3"><div class="st">④ 整理得离散系统的差分方程（与例 7-10 一致）：</div>
+            <div class="eq hl"><span class="tex">c[(n+1)T]+(KT-1)c(nT)=KTr(nT)</span></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="rgt">
+      <div class="act-card figc" style="flex:1">
+        <div class="hd" style="font-size:23px"><span style="flex:1">图 7-20　离散控制系统（重绘）</span></div>
+        <div class="bd2"><svg id="blk"></svg></div>
+      </div>
+      <div class="act-card figc" style="flex:1.3">
+        <div class="hd" style="font-size:23px"><span style="flex:1">零阶保持器的阶梯输出（T = 1 示意）</span></div>
+        <div class="bd2"><svg id="fig"></svg></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">结论</span><span>两例殊途同归——离散化后得到完全相同的差分方程。</span></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  /* 图 7-20 重绘：r(t) → ⊕(−) → 采样开关T → e*(t) → 零阶保持器 → e_h(t) → K/s → c(t) */
+  const B = BD.block("blk", [
+    { type: "line", pts: [[20, 150], [86, 150]], label: "r(t)", labelDy: -16 },
+    { type: "sum", x: 104, y: 150, r: 15, signs: { left: "+", bottom: "−" } },
+    { type: "line", pts: [[120, 150], [172, 150]], label: "e(t)", labelDy: -18 },
+    { type: "line", pts: [[232, 150], [288, 150]], label: "e^{*}(t)", labelDy: -16 },
+    { type: "box", x: 292, y: 106, w: 212, h: 88, label: "零阶保持器\n(1−e^{−Ts})/s" },
+    { type: "line", pts: [[504, 150], [560, 150]], label: "e_{h}(t)", labelDy: -18 },
+    { type: "box", x: 564, y: 106, w: 130, h: 88, label: "K/s" },
+    { type: "line", pts: [[694, 150], [786, 150]], label: "c(t)", labelDy: -16 },
+    { type: "dot", x: 752, y: 150 },
+    { type: "line", pts: [[752, 150], [752, 282], [104, 282], [104, 167]] }
+  ], { vw: 830, vh: 330, static: true });
+  /* 采样开关标准符号：线段开口 + 斜箭头（标 T） */
+  const mk = B.mk, tx = B.tx, g = B.g, INK = BD.INK;
+  const defs = B.svg.querySelector("defs");
+  const m = mk("marker", { id: "swar36", markerWidth: 10, markerHeight: 8, refX: 6, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: INK }, m);
+  mk("circle", { cx: 176, cy: 150, r: 5, fill: "#fff", stroke: INK, "stroke-width": 2.6 }, g);
+  mk("circle", { cx: 228, cy: 150, r: 5, fill: "#fff", stroke: INK, "stroke-width": 2.6 }, g);
+  mk("line", { x1: 176, y1: 150, x2: 221, y2: 122, stroke: INK, "stroke-width": 3,
+    "stroke-linecap": "round", "marker-end": "url(#swar36)" }, g);
+  tx(g, 202, 98, "T", { fs: 25, it: 1, b: 1, fill: INK });
+
+  /* 阶梯信号示意：e(t)=e^{−t/2}（示意连续误差），e_h(t) 逐拍保持 e(nT)，T=1 */
+  const e = t => Math.exp(-t / 2), T = 1, NN = 6;
+  const cont = []; for (let t = 0; t <= NN + .45; t += 0.02) cont.push([t, e(t)]);
+  const step = [];
+  for (let n = 0; n <= NN; n++) { step.push([n, e(n * T)], [n + 1, e(n * T)]); }
+  const F = DZ.plot("fig", {
+    xlim: [0, NN + .45], ylim: [0, 1.12], xlabel: "t", ylabel: "e",
+    curves: [
+      { pts: cont, color: "#8A97B5", width: 3, dash: "9 6" },
+      { pts: step, color: "#1D3FA0", width: 4.5 }
+    ],
+    marks: [{ type: "vline", x: T, label: "T", dx: 5, dy: 22 }]
+  }, { vw: 960, vh: 470, static: true });
+  F.tx(F.gMark, F.X(4.6), F.Y(.28), "e(t) 连续信号", { fs: 22, fill: "#5B6B8C", an: "start" });
+  F.tx(F.gMark, F.X(4.6), F.Y(.14), "e_{h}(t) 阶梯保持信号", { fs: 22, fill: "#1D3FA0", an: "start" });
+});
+</script>
+<script>/* qa-steps：?steps=N 自动前进 N 步 */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>㉛ 课堂互动：脉冲传递函数</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=700">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=700" defer></script>
+<style>
+  .qrow{display:flex;gap:24px;height:100%;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card .bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:18px;padding:20px 26px;min-height:0}
+  .stage-tip{display:inline-block;font-size:21px;color:#fff;background:var(--blue);border-radius:20px;padding:7px 24px;width:fit-content}
+  .hint{font-size:21.5px;color:var(--ink);line-height:1.62;display:flex;gap:11px;align-items:flex-start}
+  .hint .no{flex:none;width:32px;height:32px;margin-top:2px;border-radius:50%;background:var(--blue);color:#fff;font-weight:700;font-size:19px;display:grid;place-items:center}
+  .opts{display:flex;flex-direction:column;gap:16px}
+  .opt{background:var(--sky);border:2.5px solid var(--line);border-radius:12px;padding:13px 20px;
+    font-size:22px;color:var(--ink);font-weight:700;position:relative;line-height:1.5}
+  .opt .ab{color:var(--blue);margin-right:10px}
+  .opt .tx2{font-weight:400}
+  .seg.on .opt.right{border-color:#1E9E57;background:#F0FAF4}
+  .seg.on .opt.right::after{content:"✓";position:absolute;top:-13px;right:-9px;width:34px;height:34px;border-radius:50%;
+    background:#1E9E57;color:#fff;font-weight:800;font-size:21px;display:grid;place-items:center}
+  .ans{flex:none;font-size:22px;color:var(--navy);background:var(--sky);border-radius:12px;padding:12px 22px;line-height:1.6}
+  .ans b{color:var(--danger)}
+  .fx{flex:none;font-size:21px;color:var(--muted);background:#fff;border:2px dashed var(--line);
+    border-radius:12px;padding:12px 20px;line-height:1.62}
+  .fx b{color:var(--navy)}
+</style>
+</head>
+<body data-title="㉛ 课堂互动：脉冲传递函数" data-page="45 / 56">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="qrow">
+      <div class="act-card" style="flex:.95">
+        <div class="hd">速判回顾</div>
+        <div class="bd" style="justify-content:center;gap:32px">
+          <span class="stage-tip">先回顾，再作答</span>
+          <div class="hint"><span class="no">1</span><span><span class="tex">G(z)=C(z)/R(z)</span> 对应连续系统的传递函数，<b>直接反映离散系统的特征</b>。</span></div>
+          <div class="hint"><span class="no">2</span><span>串联无开关：<span class="tex">G_{1}G_{2}(z)</span>（先乘后变）；有开关：<span class="tex">G_{1}(z)G_{2}(z)</span>（各变后乘），<b>两者不等</b>。</span></div>
+          <div class="hint"><span class="no">3</span><span>含零阶保持器：<span class="tex">G(z)=(1-z^{-1})\mathscr{Z}[G_{0}(s)/s]</span>；<b>例 7-14 中极点未变</b>，零点与增益改变。</span></div>
+          <div class="hint"><span class="no">4</span><span>闭环：<span class="tex">\dfrac{C(z)}{R(z)}=\dfrac{G(z)}{1+GH(z)}</span>，分母 <span class="tex">1+GH(z)=0</span> 即<b>特征方程</b>。</span></div>
+        </div>
+      </div>
+      <div class="act-card" style="flex:1.22">
+        <div class="hd">多选题　1 分（可多选）</div>
+        <div class="bd">
+          <span class="stage-tip">请先作出选择</span>
+          <div class="st2" style="font-size:22px;color:var(--navy);font-weight:700">关于离散系统脉冲传递函数，下列说法正确的是：</div>
+          <div class="opts seg" id="q1">
+            <div class="opt" data-mark="1"><span class="ab">A</span><span class="tx2">脉冲传递函数直接反映了离散系统的特征</span></div>
+            <div class="opt" data-mark="1"><span class="ab">B</span><span class="tx2">两个环节串联时，之间有无采样开关，其脉冲传递函数是不同的</span></div>
+            <div class="opt" data-mark="1"><span class="ab">C</span><span class="tx2">例 7-14 中零阶保持器未改变脉冲传递函数的极点</span></div>
+            <div class="opt" data-mark="1"><span class="ab">D</span><span class="tx2">闭环脉冲传递函数的分母 <span class="tex">1+GH(z)=0</span> 称为采样系统的特征方程</span></div>
+          </div>
+          <div class="ans" data-step="2"><b>答案：A、B、C、D（全选）。</b></div>
+          <div class="fx" data-step="2"><b>解析：</b>A：<span class="tex">G(z)</span> 是离散系统的传递函数，直接反映其特征；B：<span class="tex">G_{1}(z)G_{2}(z)\neq G_{1}G_{2}(z)</span>（例 7-13）；C：例 7-14 中保持器未改变极点，零点与增益改变；D：与连续系统类似，分母 <span class="tex">1+GH(z)=0</span> 称特征方程。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 分步计数标记（隐藏）：1=勾选正确答案，2=答案汇总与解析 -->
+  <div data-step="1" style="display:none"></div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const S = ACT.step, _n = S.next.bind(S), _r = S.reset.bind(S);
+  function paint() {
+    const on = S.cur >= 1;
+    const q = document.getElementById("q1");
+    q.classList.toggle("on", on);
+    q.querySelectorAll(".opt").forEach(o => o.classList.toggle("right", on && o.dataset.mark === "1"));
+  }
+  S.next = function () { const d = _n(); paint(); return d; };
+  S.reset = function () { _r(); paint(); };
+  window.prev = function () { const n = Math.max(0, S.cur - 1); S.reset(); for (let i = 0; i < n; i++) S.next(); };
+});
+</script>
+<script>/* qa-steps：截图自验钩子，?steps=N 自动前进 N 步（播放时不生效） */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</body>
+</html>

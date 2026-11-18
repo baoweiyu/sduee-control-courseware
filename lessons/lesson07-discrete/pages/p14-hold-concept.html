@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>① 保持器：从离散回到连续</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=700">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=700" defer></script>
+<script src="../fig.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:.92;display:flex;flex-direction:column;gap:16px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:12px;padding:16px 24px;font-size:23px;line-height:1.6}
+  .st{font-size:22px;color:var(--ink);line-height:1.62}
+  .eq{background:var(--sky);border-radius:12px;padding:10px 16px;text-align:center;font-size:23px}
+  .figc{flex:1.35;display:flex;flex-direction:column;overflow:hidden;position:relative}
+  .figc .bd2{flex:1;display:flex;flex-direction:column;background:#fff;padding:4px 10px;min-height:0;gap:10px}
+  .figc .bd2 .fu{flex:1;min-height:0}
+  .figc .bd2 .fd{flex:1.12;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .segfloat{position:absolute;top:56px;right:14px;z-index:5;max-width:72%;background:#fff;
+    border:2px solid var(--blue);border-radius:10px;padding:5px 14px;font-size:18px;font-weight:700;
+    color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 2px 10px rgba(20,40,90,.18)}
+  .prog{position:absolute;top:60px;left:16px;z-index:5;font-size:17px;color:var(--muted);
+    background:rgba(255,255,255,.88);padding:2px 10px;border-radius:8px}
+  .ctl{display:flex;align-items:center;gap:10px;justify-content:center;padding:8px 0 10px}
+  .btn{background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:19px;font-weight:700;padding:8px 20px;cursor:pointer}
+  .btn.ghost{background:#fff;color:var(--blue);border:2px solid var(--blue)}
+  @keyframes bdPulse{0%,100%{opacity:1}50%{opacity:.2}}
+  .flash{animation:bdPulse .85s ease-in-out infinite}
+</style>
+</head>
+<body data-title="① 保持器：从离散回到连续" data-page="14 / 56">
+<div class="act-stage"><div class="act-slide">
+
+<div class="act-body has-note">
+  <div class="row">
+    <div class="lft">
+      <div class="act-card" style="flex:1.5">
+        <div class="hd"><span style="flex:1">信号保持与零阶保持器</span></div>
+        <div class="bd">
+<div data-step="1" style="display:none"></div> <!-- 首步驱动动画；基础内容常显 -->
+          <div ><div class="st">① <b>信号保持</b>：把<span class="kw-r">离散信号还原为连续信号</span>的过程；用于信号保持的装置称为<b>保持器</b> —— 与采样器的作用恰好相反。</div></div>
+          <div data-step="2"><div class="st">② <b>零阶保持器</b>：把前一采样时刻 <span class="tex">nT</span> 的采样值<span class="kw-r">不增不减地保持</span>到下一采样时刻 <span class="tex">(n+1)T</span> 的保持器。</div></div>
+          <div data-step="3"><div class="eq">示意数据：<span class="tex">e(t)=\sin(0.9t)+0.2</span>，采样周期 <span class="tex">T=1\,\mathrm{s}</span>（示意波形）</div></div>
+        </div>
+      </div>
+      <div class="act-card" style="flex:1">
+        <div class="hd"><span style="flex:1">看图读关系</span></div>
+        <div class="bd" style="font-size:21.5px">
+          <div class="st">上图：采样值序列 <span class="tex">e(nT)</span>；下图：阶梯波 <span class="tex">e_{h}(t)</span> 的每段高度 <span class="tex">=e(nT)</span>，宽度恰为一个周期 <span class="tex">T</span>。</div>
+          <div class="st">虚线为原连续信号 <span class="tex">e(t)</span> —— 阶梯波只是它的<b>近似恢复</b>。</div>
+        </div>
+      </div>
+    </div>
+    <div class="act-card figc">
+      <div class="hd"><span style="flex:1">采样值 → 零阶保持输出（逐段生长，示意）</span></div>
+      <span class="segfloat" id="segChip" style="display:none"></span>
+      <span class="prog" id="prog">0 / 3</span>
+      <div class="bd2">
+        <div class="fu"><svg id="figStem"></svg></div>
+        <div class="fd"><svg id="figZoh"></svg></div>
+      </div>
+      <div class="ctl">
+        <button class="btn" id="play">▶ 播放</button>
+        <button class="btn ghost" id="step">⧉ 分步</button>
+        <button class="btn ghost" onclick="ACT.step.reset()">↺ 重置</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">结论</span><span>零阶保持器把每个采样值<span class="kw-r">"定格"一个周期</span>，阶梯波近似还原连续信号。</span></div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  /* ---- 数据（教材口径现算，示意波形）---- */
+  const T = 1, N = 6;
+  const e = t => Math.sin(0.9 * t) + 0.2;
+  const seq = []; for (let n = 0; n < N; n++) seq.push(e(n * T));
+  const stair = [];
+  for (let n = 0; n < N; n++) { stair.push([n * T, seq[n]]); if (n < N - 1) stair.push([(n + 1) * T, seq[n]]); }
+  stair.push([N * T, seq[N - 1]]);
+  const orig = []; for (let t = 0; t <= 6.15; t += 0.04) orig.push([t, e(t)]);
+
+  const F1 = DZ.stem("figStem", { seq, xlabel: "n", ylabel: "e(nT)", color: "#1D3FA0" });
+  const F2 = DZ.plot("figZoh", {
+    xlim: [0, 6.2], ylim: [-1.15, 1.45], xlabel: "t/s", ylabel: "e_{h}(t)",
+    curves: [{ pts: stair, color: "#1D3FA0" }, { pts: orig, color: "#8A97B5", dash: "10 7", width: 3.2 }]
+  });
+
+  function chor(f) {
+    const u1 = Math.min(f * 3, 1), u2 = Math.max(0, Math.min((f - 1 / 3) * 3, 1)),
+          u3 = Math.max(0, Math.min((f - 2 / 3) * 3, 1));
+    F1.setAllF(u1);
+    F2.setF(0, u2); F2.setOp(0, 1);
+    F2.setF(1, u3); F2.setOp(1, u3 > 0 ? 1 : 1);
+  }
+  function paint(K) {
+    chor(K / 3);
+    if (K >= 1) {  /* ① 采样序列标注 */
+      const g = F1.mk("g", { "class": K === 1 ? "flash" : "" }, F1.gDyn);
+      F1.tx(g, F1.X(4.35), F1.Y(seq[4]) - 26, "采样值 e(nT)", { fs: 22, fill: "#1D3FA0", b: 1 });
+    }
+    if (K >= 2) {  /* ② 阶梯波标注：一段高度 = e(nT) */
+      const g = F2.mk("g", { "class": K === 2 ? "flash" : "" }, F2.gDyn);
+      const n = 3, x0 = F2.X(n * T), x1 = F2.X((n + 1) * T), y = F2.Y(seq[n]);
+      F2.mk("line", { x1: x0, y1: y, x2: x1, y2: y, stroke: "#D63A2F", "stroke-width": 5 }, g);
+      F2.tx(g, (x0 + x1) / 2, y - 20, "高度 = e(nT)", { fs: 22, fill: "#D63A2F", b: 1 });
+      F2.tx(g, F2.X(5.15), F2.Y(seq[4]) + 40, "e_{h}(t) 阶梯波", { fs: 22, fill: "#1D3FA0", b: 1 });
+    }
+    if (K >= 3) {  /* ③ 原信号虚线对比 */
+      const g = F2.mk("g", { "class": K === 3 ? "flash" : "" }, F2.gDyn);
+      F2.tx(g, F2.X(4.5), F2.Y(e(4.5)) + 44, "e(t) 原信号（虚线）", { fs: 22, fill: "#5B6B8C", b: 1 });
+    }
+  }
+  const FS = [0, 1 / 3, 2 / 3, 1];
+  BD.wire(3, paint, { figs: [F1, F2], FS, dur: 10000, playLabel: "▶ 播放", frame: f => chor(f) });
+
+  /* ---- ⧉分步（点一下推进一步）---- */
+  const STEPS = ["① 采样值序列 e(nT)", "② 阶梯波 e_h(t) 逐段生长", "③ 叠加原信号 e(t) 对比"];
+  const chip = document.getElementById("segChip"), total = 3, stepBtn = document.getElementById("step");
+  const wNext = ACT.step.next, wReset = ACT.step.reset;
+  let segRaf = null, segTok = 0;
+  function segEnable() { stepBtn.disabled = false; stepBtn.style.opacity = ""; stepBtn.style.cursor = ""; }
+  function segStopUI() {
+    segTok++;
+    if (segRaf) { cancelAnimationFrame(segRaf); segRaf = null; }
+    segEnable(); chip.style.display = "none";
+  }
+  ACT.step.next = function () { segStopUI(); return wNext(); };
+  ACT.step.reset = function () { segStopUI(); return wReset(); };
+  const playBtn = document.getElementById("play");
+  if (playBtn && playBtn.onclick) { const po = playBtn.onclick; playBtn.onclick = ev => { segStopUI(); po(ev); }; }
+  function segGo(instant) {
+    segStopUI();
+    if (ACT.step.cur >= total) wReset();
+    wNext();
+    const k = ACT.step.cur, f0 = FS[k - 1], f1 = FS[k];
+    chip.textContent = "分步 " + k + " / " + total + "　" + STEPS[k - 1]; chip.style.display = "";
+    if (instant || f1 <= f0 + 1e-9) { paint(k); return; }
+    paint(k); chor(f0);
+    stepBtn.disabled = true; stepBtn.style.opacity = ".55"; stepBtn.style.cursor = "default";
+    const t0 = performance.now(), D = 1700, tok = segTok;
+    const tick = now => {
+      if (tok !== segTok) return;
+      const u = Math.min(1, (now - t0) / D);
+      chor(f0 + (f1 - f0) * u);
+      if (u < 1) segRaf = requestAnimationFrame(tick); else { segRaf = null; segEnable(); paint(k); }
+    };
+    segRaf = requestAnimationFrame(tick);
+  }
+  stepBtn.onclick = () => segGo(false);
+  window.addEventListener("load", () => {
+    const n = +(new URLSearchParams(location.search).get("seg") || 0);
+    for (let i = 0; i < Math.min(n, total); i++) segGo(true);
+  });
+});
+</script>
+<script>/* qa-steps：截图自验钩子，?steps=N 自动前进 N 步（播放时不生效） */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

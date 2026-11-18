@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>⑫ 自激振荡的稳定性分析</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=800">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=800" defer></script>
+<script src="../fig.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 10px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .ctl{display:flex;align-items:center;gap:14px;justify-content:center;padding:8px 0 6px}
+  .btn{background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:21px;font-weight:700;padding:9px 24px;cursor:pointer;text-align:center}
+  .btn.ghost{background:#fff;color:var(--blue);border:2px solid var(--blue)}
+  .btn:disabled{opacity:.42;cursor:not-allowed}
+  #prog{font-size:21px;color:var(--navy);font-weight:700}
+  .segfloat{position:absolute;top:50px;left:64px;right:64px;z-index:5;background:#fff;
+    border:2px solid var(--blue);border-radius:10px;padding:5px 15px;font-size:21px;font-weight:700;
+    color:var(--navy);text-align:center;line-height:1.35;box-shadow:0 2px 10px rgba(20,40,90,.18)}
+  .judge{flex:none;display:flex;gap:10px;justify-content:center;padding:2px 14px 8px;min-height:14px;flex-wrap:wrap}
+  .jg,.jr,.jn{border-radius:10px;padding:6px 16px;font-size:21px;font-weight:700;line-height:1.4}
+  .jg{background:#E9F6EE;color:#0E7A36;border:2px solid #0E7A36}
+  .jr{background:#FCEBE9;color:#D63A2F;border:2px solid #D63A2F}
+  .jn{background:var(--sky);color:var(--navy);border:2px solid var(--blue)}
+  .figc .capnote{flex:none;font-size:21px;color:var(--navy);background:var(--sky);border-radius:12px;padding:9px 18px;margin:0 14px 12px;line-height:1.55}
+  .rgt{display:flex;flex-direction:column;gap:12px;min-height:0}
+  .case{flex:1;display:flex;flex-direction:column;justify-content:center;gap:7px;background:#fff;border-radius:14px;padding:10px 18px;border-left:8px solid var(--blue);box-shadow:0 1px 8px rgba(20,40,90,.10);min-height:0}
+  .case.g{border-left-color:#0E7A36}.case.r{border-left-color:#D63A2F}.case.o{border-left-color:var(--orange)}
+  .case .t{font-size:21.5px;font-weight:700;color:var(--navy);line-height:1.45}
+  .case .s{font-size:21px;color:var(--ink);line-height:1.55}
+  .case .s b{color:var(--navy)}
+  .vg{color:#0E7A36;font-weight:800}.vr{color:#D63A2F;font-weight:800}
+</style>
+</head>
+<body data-title="⑫ 自激振荡的稳定性分析" data-page="27 / 33">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="act-card figc" style="flex:1.3;position:relative">
+        <div class="hd"><span style="flex:1">图 8-9(c) 情形：两交点 a、b（程序精确绘制与求解）</span></div>
+        <span class="segfloat" id="segChip" style="display:none"></span>
+        <div class="bd2"><svg id="fig"></svg></div>
+        <div class="ctl">
+          <span id="prog">0 / 5</span>
+          <button class="btn" id="play">▶ 播放</button>
+          <button class="btn ghost" id="step">⧉ 分步</button>
+          <button class="btn ghost" id="rst">↺ 重置</button>
+        </div>
+        <div class="judge" id="judge"></div>
+        <div class="capnote">死区继电器 −1/N(X) 在负实轴上折返（双线 ±0.05 微离实轴仅为显示去/回程），a、b 几何上同在 (−2, j0) 而对应不同 X；工作点在交点 −2 右侧＝被包围，左侧＝不被包围。</div>
+      </div>
+      <div class="rgt" style="flex:1">
+<div data-step="1" style="display:none"></div> <!-- 首步驱动动画；基础内容常显 -->
+        <div class="case" >
+          <div class="t">① 线性部分 G(s)=30/[s(0.1s+1)(0.2s+1)]</div>
+          <div class="s">Im[G(jω)]=0 ⇒ ω=√50≈7.07，奈氏曲线交负实轴于 <b>−K/15=−2</b>。</div>
+        </div>
+        <div class="case" data-step="2">
+          <div class="t">② 非线性部分：死区继电器（M=1、a=1）</div>
+          <div class="s">−1/N(X)=−πX/(4√(1−1/X²))：X=1⁺→−∞，X=√2 取极值 <b>−π/2≈−1.571</b>，X→∞→−∞（折返）。</div>
+        </div>
+        <div class="case o" data-step="3">
+          <div class="t">③ 两交点（程序求解 −1/N(X)=−2）</div>
+          <div class="s"><b>b：X_b≈1.11</b>（去程）、<b>a：X_a≈2.29</b>（回程），频率 ω_a=ω_b=√50≈7.07 rad/s；扰动使工作点沿 −1/N(X) 移动。</div>
+        </div>
+        <div class="case g" data-step="4">
+          <div class="t">④ a 点扰动分析　→　<span class="vg">a 稳定，可形成稳定自振荡</span></div>
+          <div class="s">X 略增→c：<span class="vg">不被包围→收敛</span>，振幅衰减回 X_a；X 略减→d：<span class="vr">被包围→发散</span>，振幅增大回 X_a。</div>
+        </div>
+        <div class="case r" data-step="5">
+          <div class="t">⑤ b 点扰动分析　→　<span class="vr">b 不稳定，不能作为稳定自振持续观察</span></div>
+          <div class="s">最终状态：扰动振幅 <b>&lt;X_b</b> → 趋于平衡，无自振；<b>&gt;X_b</b> → <span class="vg">稳定自振：振幅 X_a≈2.29、ω=√50≈7.07 rad/s</span>。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">要点</span><span>自振稳定判据——X 增大落入稳定区则收敛回原幅值，落入不稳定区则继续发散。</span></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const TOTAL = 5;
+  const BLUE = "#1D3FA0", PUR = "#7B21C8", RED = "#D63A2F", GRN = "#0E7A36", MUT = "#5B6B8C";
+  const EP = 0.05, SQ2 = Math.SQRT2, K = 30;
+  /* G(jω)=K/[−0.3ω²+jω(1−0.02ω²)] */
+  const gPts = [];
+  for (let w = 4.6; w <= 400; w *= 1.012) {
+    const re = -0.3 * w * w, im = w * (1 - 0.02 * w * w), d = re * re + im * im;
+    gPts.push([K * re / d, -K * im / d]);
+  }
+  /* 死区继电器 −1/N(X)=−πX/(4√(1−1/X²))：程序验证 X=1⁺→−∞、X=√2 极值 −π/2、X→∞→−∞ */
+  const f2 = X => -Math.PI * X / (4 * Math.sqrt(1 - 1 / (X * X)));
+  const dzOut = [], dzBack = [];
+  for (let X = 1.02; X <= SQ2; X += 0.004) dzOut.push([f2(X), EP]);
+  for (let X = SQ2; X <= 12; X += 0.02) dzBack.push([f2(X), -EP]);
+  const XEXT = -Math.PI / 2;
+  /* 交点求解（bisection）：−1/N(X)=−2 → 去程 X_b、回程 X_a */
+  function bis(lo, hi, up) {
+    for (let i = 0; i < 200; i++) { const m = (lo + hi) / 2; if ((f2(m) < -2) === up) lo = m; else hi = m; }
+    return (lo + hi) / 2;
+  }
+  const XB = bis(1.0001, SQ2, true), XA = bis(SQ2, 60, false);
+  const XC = f2(XA + 0.55), XD = f2(XA - 0.55);   // a 点扰动后的工作点 c（左）、d（右）
+  const F = DZ.plot("fig", {
+    xlim: [-5.6, 1.2], ylim: [-2.15, 2.1], xlabel: "Re", ylabel: "Im",
+    curves: [{ pts: gPts, color: BLUE }, { pts: dzOut, color: PUR }, { pts: dzBack, color: PUR }]
+  }, { vw: 960, vh: 600, equal: true });
+  /* 刻度数字放大到 ≥21px（fig.js 默认 20，仅页面级覆盖） */
+  F.svg.querySelectorAll('text[font-size="20"]').forEach(t => t.setAttribute("font-size", 21));
+  /* 箭头 marker */
+  const defs = F.svg.querySelector("defs");
+  [["mP", PUR], ["mG", GRN], ["mR", RED], ["mM", MUT]].forEach(([id, c]) => {
+    const m = BD.mk("marker", { id: "p27" + id, markerWidth: 11, markerHeight: 9, refX: 7, refY: 3.2, orient: "auto" }, defs);
+    BD.mk("path", { d: "M0,0 L7.5,3.2 L0,6.4 Z", fill: c }, m);
+  });
+  function arr(g, x0, y0, x1, y1, id, dash) {
+    const l = F.mk("line", { x1: F.X(x0), y1: F.Y(y0), x2: F.X(x1), y2: F.Y(y1),
+      stroke: "none", "marker-end": "url(#p27" + id + ")" }, g);
+    if (dash) l.setAttribute("stroke-dasharray", dash);
+    return l;
+  }
+  function judge(k) {
+    const J = document.getElementById("judge");
+    if (k >= 5) J.innerHTML = '<span class="jr">b：X 略增 → 被包围 → 振幅增大 → 远离 b 趋向 a</span>' +
+      '<span class="jg">稳定自振：振幅 X_a=' + XA.toFixed(2) + '，ω=√50≈7.07 rad/s</span>';
+    else if (k >= 4) J.innerHTML = '<span class="jg">c 不被 G 包围 → 收敛 → 振幅衰减回 X_a → 回到 a</span>' +
+      '<span class="jr">d 被 G 包围 → 不稳定 → 振幅增大 → 回到 a</span>';
+    else J.innerHTML = "";
+  }
+  function deco(k, g) {
+    g = g || F.gDyn;
+    if (k >= 1) {
+      F.mk("circle", { cx: F.X(-2), cy: F.Y(0), r: 8, fill: BLUE, stroke: "#fff", "stroke-width": 2.5 }, g);
+      F.tx(g, F.X(-2) - 18, F.Y(0) - 56, "G 交负实轴 −2（ω=√50≈7.07）", { fs: 22, fill: BLUE, b: 1, an: "end" });
+      F.tx(g, F.X(-4.3), F.Y(-1.75), "G(jω)，K=30", { fs: 24, fill: BLUE, b: 1, it: 1 });
+    }
+    if (k >= 2) {
+      arr(g, -2.62, EP, -2.6, EP, "mP");                       // 去程向右
+      arr(g, -2.62, -EP, -2.64, -EP, "mP");                    // 回程向左
+      F.mk("circle", { cx: F.X(XEXT), cy: F.Y(0), r: 8, fill: "#fff", stroke: PUR, "stroke-width": 3 }, g);
+      F.tx(g, F.X(XEXT), F.Y(0) + 122, "极值 −π/2≈−1.571（X=√2）", { fs: 22, fill: PUR, b: 1 });
+      F.tx(g, F.X(-5.45), F.Y(EP) - 28, "X=1^{+}：−∞", { fs: 22, fill: PUR, b: 1, an: "start" });
+      F.tx(g, F.X(-5.45), F.Y(-EP) + 46, "X→∞：−∞", { fs: 22, fill: PUR, b: 1, an: "start" });
+      F.tx(g, F.X(-3.6), F.Y(1.3), "−1/N(X)", { fs: 23, fill: PUR, b: 1, it: 1 });
+    }
+    if (k >= 3) {
+      F.mk("circle", { cx: F.X(-2), cy: F.Y(EP), r: 12, fill: "none", stroke: RED, "stroke-width": 3.5 }, g);
+      F.mk("circle", { cx: F.X(-2), cy: F.Y(-EP), r: 12, fill: "none", stroke: RED, "stroke-width": 3.5 }, g);
+      F.tx(g, F.X(-2) + 18, F.Y(EP) - 34, "b：X_{b}=" + XB.toFixed(2), { fs: 22, fill: RED, b: 1, an: "start" });
+      F.tx(g, F.X(-2) + 18, F.Y(-EP) + 50, "a：X_{a}=" + XA.toFixed(2), { fs: 22, fill: RED, b: 1, an: "start" });
+    }
+    if (k >= 4) {
+      /* c（X 略增，左移）：不被包围→收敛回 a；d（X 略减，右移）：被包围→振幅增大回 a */
+      F.mk("circle", { cx: F.X(XC), cy: F.Y(-EP), r: 9, fill: GRN, stroke: "#fff", "stroke-width": 2.5 }, g);
+      F.mk("circle", { cx: F.X(XD), cy: F.Y(-EP), r: 9, fill: RED, stroke: "#fff", "stroke-width": 2.5 }, g);
+      arr(g, XC + 0.04, -EP - 0.15, -2.16, -EP - 0.15, "mG");
+      arr(g, XD - 0.04, -EP - 0.15, -1.88, -EP - 0.15, "mR");
+      F.tx(g, F.X(XC) - 6, F.Y(-EP) + 88, "c（X 略增）", { fs: 22, fill: GRN, b: 1, an: "end" });
+      F.tx(g, F.X(XD) + 6, F.Y(-EP) + 88, "d（X 略减）", { fs: 22, fill: RED, b: 1, an: "start" });
+    }
+    if (k >= 5) {
+      /* b：X 略增（右移）→ 被包围 → 振幅增大 → 趋向 a；X 略减 → 衰减 → 平衡 */
+      arr(g, -1.94, EP, -1.68, EP, "mR");
+      arr(g, -1.74, 0.16, -1.98, -0.14, "mG");
+      arr(g, -2.06, EP, -2.52, EP, "mM");
+      F.tx(g, F.X(-1.6), F.Y(-0.2), "趋向 a", { fs: 22, fill: GRN, b: 1, an: "start" });
+      F.tx(g, F.X(-2.62), F.Y(EP) + 36, "X↓→衰减→平衡", { fs: 22, fill: MUT, b: 1, an: "end" });
+    }
+  }
+  /* 连续进度：G 生长(0~0.2) → 去程(0.2~0.3) → 回程(0.3~0.4)，其后仅装饰 */
+  function seq(f) {
+    F.setF(0, Math.max(0, Math.min(1, f / 0.2)));
+    F.setF(1, Math.max(0, Math.min(1, (f - 0.2) / 0.1)));
+    F.setF(2, Math.max(0, Math.min(1, (f - 0.3) / 0.1)));
+  }
+  function paint(K, f) {
+    if (f != null) seq(f);
+    else {  // 第②步同时给出负倒曲线去程与回程，和右栏文字一致
+      F.setF(0, K >= 1 ? 1 : 0);
+      F.setF(1, K >= 2 ? 1 : 0); F.setF(2, K >= 2 ? 1 : 0);
+    }
+    deco(K); judge(K);
+  }
+  const chip = document.getElementById("segChip");
+  BD.wire(TOTAL, paint, {
+    figs: [F], dur: 14000,
+    frame: (f, K, info) => { if (info && (info.mode === "seg" || info.mode === "qa-seg")) return; paint(K, f); },
+    segPaint: () => {},
+    segments: [
+      { label: "① G(jω) 奈奎斯特曲线（K=30）：交负实轴于 −2（ω=√50）", parts: [{ F, b: [0], f0: 0, f1: 1 }], draw: (t, g) => deco(1, g) },
+      { label: "② −1/N(X) 折返曲线：X=1⁺→√2 去程向右，√2→∞ 回程向左", parts: [{ F, b: [1, 2], f0: 0, f1: 1 }], draw: (t, g) => deco(2, g) },
+      { label: "③ 程序求解交点：b（X_b=" + XB.toFixed(2) + "）、a（X_a=" + XA.toFixed(2) + "）", parts: [{ F, b: [0], f0: 1, f1: 1 }], draw: (t, g) => deco(3, g) },
+      { label: "④ 扰动 a：c 不被包围→收敛回 a；d 被包围→振幅增大回 a ⇒ a 稳定", parts: [{ F, b: [0], f0: 1, f1: 1 }], draw: (t, g) => deco(4, g) },
+      { label: "⑤ 扰动 b：X 略增即被包围 → 振幅增大远离 b ⇒ b 不稳定", parts: [{ F, b: [0], f0: 1, f1: 1 }], draw: (t, g) => deco(5, g) }
+    ],
+    segLabel: (label, si, n) => {
+      if (label == null) { chip.style.display = "none"; F.gDyn.innerHTML = ""; paint(TOTAL); return; }
+      chip.textContent = "分步 " + (si + 1) + " / " + n + "　" + label;
+      chip.style.display = "";
+      judge(si + 1);
+    }
+  });
+  document.getElementById("rst").onclick = () => ACT.step.reset();
+});
+</script>
+<script>/* qa-steps：截图自验钩子 */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

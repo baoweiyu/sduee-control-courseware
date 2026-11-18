@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>⑤ 继电器三特例的描述函数</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=800">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=800" defer></script>
+<style>
+  .row{display:flex;gap:20px;height:100%;min-height:0}
+  .col{flex:1;display:flex;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden;width:100%}
+  .act-card>.hd{font-size:23px}
+  .figbox{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
+  .figbox svg{width:100%;height:100%}
+  .fm{flex:none;background:var(--sky);border-radius:10px;margin:10px 14px 0;padding:12px 14px;
+    font-size:21.5px;color:var(--navy);line-height:1.55;text-align:center}
+  .fm b{color:var(--orange)}
+  .how{flex:none;font-size:21px;color:var(--muted);line-height:1.55;padding:8px 20px 6px;text-align:center}
+  .how b{color:var(--navy)}
+  .tag{flex:none;margin:10px 14px 18px;border-radius:12px;padding:11px 14px;font-size:22px;
+    font-weight:700;text-align:center;line-height:1.4}
+  .tag.re{background:var(--sky);color:var(--navy)}
+  .tag.cp{background:#FDF3EC;color:#B3541E;border:2px solid var(--orange)}
+</style>
+</head>
+<body data-title="⑤ 继电器三特例的描述函数" data-page="20 / 33">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="col"><div class="act-card">
+        <div class="hd"><span style="flex:1">m=1：只有死区</span></div>
+        <div class="figbox"><svg id="f-dz" viewBox="0 0 300 250" preserveAspectRatio="xMidYMid meet"></svg></div>
+        <div class="fm"><span class="tex">N(X)=\frac{4M}{\pi X}\sqrt{1-\left(\frac{a}{X}\right)^{2}}</span>（X≥a）</div>
+        <div class="how">通式令 <b>m=1</b>：虚部为零，两平方根合并。</div>
+        <div class="tag re">N(X) 为实函数</div>
+      </div></div>
+      <div class="col"><div class="act-card">
+        <div class="hd"><span style="flex:1">m=−1：只有滞环</span></div>
+        <div class="figbox"><svg id="f-hy" viewBox="0 0 300 250" preserveAspectRatio="xMidYMid meet"></svg></div>
+        <div class="fm"><span class="tex">N(X)=\frac{4M}{\pi X}\sqrt{1-\left(\frac{a}{X}\right)^{2}}-j\frac{4Ma}{\pi X^{2}}</span>（X≥a）</div>
+        <div class="how">通式令 <b>m=−1</b>：虚部 <span class="tex">\frac{2Ma}{\pi X^{2}}(-2)</span>，滞环引入<b>滞后相位</b>。</div>
+        <div class="tag cp">N(X) 为复函数</div>
+      </div></div>
+      <div class="col"><div class="act-card">
+        <div class="hd"><span style="flex:1">a=0：理想继电器</span></div>
+        <div class="figbox"><svg id="f-id" viewBox="0 0 300 250" preserveAspectRatio="xMidYMid meet"></svg></div>
+        <div class="fm"><span class="tex">N(X)=\frac{4M}{\pi X}</span></div>
+        <div class="how">上两式令 <b>a=0</b>：增益随幅值反比下降。</div>
+        <div class="tag re">N(X) 为实函数</div>
+      </div></div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">要点</span><span>a&gt;0 时：m=1 为实函数，m≠1 为复函数；a=0 的理想继电器为实函数。</span></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const MF = '"Cambria Math","STIX Two Math",Georgia,"Times New Roman","Microsoft YaHei",serif';
+  const INK = "#16324F", BLUE = "#1D3FA0", MUT = "#5B6B8C", NAVY = "#12266E";
+  /* 公共坐标架：数据域 x∈[-2.4,2.4]、y∈[-1.8,1.8] → viewBox 300×250 */
+  function frame(id) {
+    const svg = document.getElementById(id);
+    const mk = (t, a, p) => { const n = document.createElementNS(NS, t);
+      for (const k in a) n.setAttribute(k, a[k]); (p || svg).appendChild(n); return n; };
+    const L = 34, R = 288, T = 22, B = 222;
+    const X = x => L + (x + 2.4) / 4.8 * (R - L);
+    const Y = y => T + (1.8 - y) / 3.6 * (B - T);
+    const defs = mk("defs", {});
+    const m1 = mk("marker", { id: "ax" + id, markerWidth: 9, markerHeight: 8, refX: 6.5, refY: 3, orient: "auto" }, defs);
+    mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: MUT }, m1);
+    const m2 = mk("marker", { id: "cu" + id, markerWidth: 10, markerHeight: 8, refX: 6.5, refY: 3, orient: "auto" }, defs);
+    mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: BLUE }, m2);
+    mk("line", { x1: L - 6, y1: Y(0), x2: R + 6, y2: Y(0), stroke: MUT, "stroke-width": 2, "marker-end": `url(#ax${id})` });
+    mk("line", { x1: X(0), y1: B + 6, x2: X(0), y2: T - 6, stroke: MUT, "stroke-width": 2, "marker-end": `url(#ax${id})` });
+    const tx = (x, y, s, o) => { o = o || {};
+      const n = mk("text", { x, y, "font-size": o.fs || 18, "text-anchor": o.an || "middle",
+        fill: o.fill || NAVY, "font-style": "italic", "font-weight": o.b ? 700 : 400, "font-family": MF });
+      n.setAttribute("style", "paint-order:stroke;stroke:#FFF;stroke-width:4;stroke-linejoin:round");
+      n.textContent = s; return n; };
+    const poly = (pts, o) => { o = o || {};
+      mk("path", { d: "M" + pts.map(p => X(p[0]).toFixed(1) + "," + Y(p[1]).toFixed(1)).join("L"),
+        fill: "none", stroke: o.color || BLUE, "stroke-width": o.w || 4,
+        "stroke-dasharray": o.dash || "none", "marker-end": o.arrow ? `url(#cu${id})` : "none" }); };
+    tx(R + 2, Y(0) + 22, "x", { fs: 19 });
+    tx(X(0) - 10, T - 2, "y", { fs: 19, an: "end" });
+    tx(X(0) - 8, Y(0) + 17, "O", { an: "end", fill: MUT, fs: 16 });
+    return { mk, X, Y, tx, poly };
+  }
+  const A = 0.8, M = 1.1;
+  /* m=1：死区继电器——单值静态特性，不画单向滞环箭头 */
+  (() => { const f = frame("f-dz");
+    f.poly([[-A, 0], [A, 0]]);
+    f.poly([[A, M], [2.25, M]]); f.poly([[A, 0.02], [A, M]]);
+    f.poly([[-A, -M], [-2.25, -M]]); f.poly([[-A, -0.02], [-A, -M]]);
+    f.tx(f.X(A) + 2, f.Y(0) + 18, "a", { fs: 16 });
+    f.tx(f.X(-A) - 2, f.Y(0) + 18, "−a", { fs: 16 });
+    f.tx(f.X(1.9), f.Y(M) - 10, "M", { fs: 16 });
+    f.tx(f.X(-1.9), f.Y(-M) + 20, "−M", { fs: 16 });
+  })();
+  /* m=−1：纯滞环——上支 y=M（x>−a），下支 y=−M（x<a） */
+  (() => { const f = frame("f-hy");
+    f.poly([[-A, M], [2.25, M]]);
+    f.poly([[A, -M], [-2.25, -M]]);
+    f.poly([[A, -M], [A, M]], { arrow: true });
+    f.poly([[-A, M], [-A, -M]], { arrow: true });
+    f.tx(f.X(A) + 2, f.Y(0) + 19, "a", { fs: 18 });
+    f.tx(f.X(-A) - 2, f.Y(0) + 19, "−a", { fs: 18 });
+    f.tx(f.X(1.9), f.Y(M) - 10, "M", { fs: 18 });
+    f.tx(f.X(-1.9), f.Y(-M) + 21, "−M", { fs: 18 });
+  })();
+  /* a=0：理想继电器——单值静态特性，不画单向滞环箭头 */
+  (() => { const f = frame("f-id");
+    f.poly([[0, M], [2.25, M]]);
+    f.poly([[0, -M], [-2.25, -M]]);
+    f.poly([[0, -M], [0, M]]);
+    f.tx(f.X(1.9), f.Y(M) - 10, "M", { fs: 18 });
+    f.tx(f.X(-1.9), f.Y(-M) + 21, "−M", { fs: 18 });
+  })();
+});
+</script>
+</div></div>
+</body>
+</html>

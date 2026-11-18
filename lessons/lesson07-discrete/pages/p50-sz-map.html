@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>㉟ s 平面与 z 平面的映射</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=700">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=700" defer></script>
+<script src="../fig.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:.8;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:10px;padding:12px 22px}
+  .st{font-size:21px;color:var(--ink);line-height:1.58}
+  .eq{background:var(--sky);border-radius:12px;padding:11px 14px;text-align:center;font-size:22.5px;color:var(--navy)}
+  .eq .no{color:var(--muted);font-size:19px}
+  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .mp{display:flex;gap:11px;align-items:center;font-size:21px;color:var(--ink);line-height:1.5}
+  .mp .dot{flex:none;width:16px;height:16px;border-radius:4px}
+  .figc{flex:1.42;display:flex;flex-direction:column;overflow:hidden}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
+  .figc svg{width:100%;height:100%}
+</style>
+</head>
+<body data-title="㉟ s 平面与 z 平面的映射" data-page="50 / 56">
+<div class="act-stage"><div class="act-slide">
+<div class="act-body has-note">
+  <div class="row">
+    <div class="lft">
+      <div class="act-card" style="flex:1.12">
+        <div class="hd" style="font-size:23px"><span style="flex:1">映射关系：<span class="tex">z=e^{Ts}</span></span></div>
+        <div class="bd">
+          <div ><div class="st">令 <span class="tex">s=\sigma+j\omega</span>，代入定义：</div>
+            <div class="eq"><span class="tex">z=e^{Ts}=e^{(\sigma+j\omega)T}=e^{\sigma T}\cdot e^{j\omega T}</span></div></div>
+          <div data-step="1"><div class="st">于是模与幅角分别为：</div>
+            <div class="eq hl"><span class="tex">|z|=e^{\sigma T},\qquad \angle z=\omega T</span></div></div>
+        </div>
+      </div>
+      <div class="act-card" style="flex:1.28" data-step="2">
+        <div class="hd" style="font-size:23px"><span style="flex:1">三条对应（σ 的符号决定 |z|）</span></div>
+        <div class="bd">
+          <div class="mp"><span class="dot" style="background:#1D3FA0"></span><span><span class="tex">\sigma&lt;0</span>（左半 s 平面）⇒ <span class="tex">|z|&lt;1</span>（单位圆内）—— <b>稳定</b>；</span></div>
+          <div class="mp"><span class="dot" style="background:#16324F"></span><span><span class="tex">\sigma=0</span>（虚轴）⇒ <span class="tex">|z|=1</span>（单位圆周）—— <b>临界</b>；</span></div>
+          <div class="mp"><span class="dot" style="background:#D63A2F"></span><span><span class="tex">\sigma&gt;0</span>（右半 s 平面）⇒ <span class="tex">|z|&gt;1</span>（单位圆外）—— <b style="color:#D63A2F">不稳定</b>。</span></div>
+          <div class="st">等 σ 线 → 同心圆；等 ω 线 → 射线。主带 <span class="tex">-\pi/T&lt;\omega\leq\pi/T</span> 覆盖全 z 平面。</div>
+        </div>
+      </div>
+    </div>
+    <div class="act-card figc">
+      <div class="hd" style="font-size:23px"><span style="flex:1"><span class="tex">z=e^{Ts}</span>（T=1s）：等σ线→同心圆，等ω线→射线（程序现算）</span></div>
+      <div class="bd2"><svg id="fig"></svg></div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">结论</span><span>s 平面虚轴 → z 平面单位圆周；左半 s 平面 → 单位圆内。</span></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const svg = document.getElementById("fig");
+  const mk = BD.mk, tx = BD.tx;
+  const T = 1, PI = Math.PI;
+  svg.setAttribute("viewBox", "0 0 960 640");
+  const defs = mk("defs", {}, svg);
+  const ar = (id, c) => { const m = mk("marker", { id, markerWidth: 10, markerHeight: 8, refX: 7, refY: 3, orient: "auto" }, defs);
+    mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: c }, m); };
+  ar("mAx", "#5B6B8C"); ar("mMap", "#16324F");
+  const AX = "#5B6B8C", BLUE = "#1D3FA0", GREEN = "#0E7A36", RED = "#D63A2F", DARK = "#16324F";
+  const STABLE = "#EAF1FC", UNST = "#FDECEA";
+
+  /* ============ 左：s 平面 ============ */
+  const S = { cx: 242, cy: 322, sx: 92, sy: 80 };   // σ: ±2.4 → px；ω: ±π ≈ ±251px
+  const SX = sg => S.cx + sg * S.sx, SY = w => S.cy - w * S.sy;
+  /* 区域底色（先右半后左半，主带边界虚线） */
+  mk("rect", { x: SX(0), y: SY(3.4), width: SX(1.9) - SX(0), height: SY(-3.4) - SY(3.4), fill: UNST }, svg);
+  mk("rect", { x: SX(-2.35), y: SY(3.4), width: SX(0) - SX(-2.35), height: SY(-3.4) - SY(3.4), fill: STABLE }, svg);
+  /* 网格坐标轴 */
+  mk("line", { x1: SX(-2.5), y1: S.cy, x2: SX(2.0), y2: S.cy, stroke: AX, "stroke-width": 2.2, "marker-end": "url(#mAx)" }, svg);
+  mk("line", { x1: S.cx, y1: SY(-3.62), x2: S.cx, y2: SY(3.62), stroke: AX, "stroke-width": 2.2, "marker-end": "url(#mAx)" }, svg);
+  tx(svg, SX(2.0) - 4, S.cy + 30, "σ", { fs: 24, it: 1, b: 1, fill: AX });
+  tx(svg, S.cx + 16, SY(3.4) + 22, "jω", { fs: 24, it: 1, b: 1, fill: AX, an: "start" });
+  tx(svg, SX(-2.3), 40, "s 平面", { fs: 23, b: 1, fill: DARK, an: "start" });
+  /* 等 ω 线（绿）：ω = 0, ±π/4, ±π/2, ±3π/4, ±π */
+  [0, PI / 4, PI / 2, 3 * PI / 4, PI].forEach((w, i) => {
+    const lw = i === 0 ? 3 : 2.2;
+    const draw = (ww) => mk("line", { x1: SX(-2.35), y1: SY(ww), x2: SX(1.9), y2: SY(ww),
+      stroke: GREEN, "stroke-width": lw, opacity: ww === 0 ? .95 : .8 }, svg);
+    if (w === 0) draw(0); else { draw(w); draw(-w); }
+  });
+  /* 主带边界：ω = ±π/T 虚线强调 */
+  mk("line", { x1: SX(-2.35), y1: SY(PI), x2: SX(1.9), y2: SY(PI), stroke: "#8A97B5", "stroke-width": 2.4, "stroke-dasharray": "9 6" }, svg);
+  mk("line", { x1: SX(-2.35), y1: SY(-PI), x2: SX(1.9), y2: SY(-PI), stroke: "#8A97B5", "stroke-width": 2.4, "stroke-dasharray": "9 6" }, svg);
+  tx(svg, SX(1.66), SY(PI) + 24, "ω=π/T", { fs: 21, fill: "#5B6B8C", b: 1 });
+  tx(svg, SX(1.62), SY(-PI) - 12, "ω=−π/T", { fs: 21, fill: "#5B6B8C", b: 1 });
+  tx(svg, SX(-1.15), SY(PI / 2) - 14, "主带 −π/T<ω≤π/T", { fs: 21, fill: "#0E7A36", b: 1 });
+  /* 等 σ 线（蓝：σ<0；黑粗：σ=0 虚轴；红：σ>0），σ 标签沿实轴下方标注 */
+  [[-1.5, BLUE], [-1, BLUE], [-0.5, BLUE], [0.5, RED], [1, RED]].forEach(([sg, c]) => {
+    mk("line", { x1: SX(sg), y1: SY(-3.4), x2: SX(sg), y2: SY(3.4), stroke: c, "stroke-width": 2.4, opacity: .85 }, svg);
+    tx(svg, SX(sg), S.cy + 28, "σ=" + sg, { fs: 20, fill: c, b: 1 });
+  });
+  mk("line", { x1: S.cx, y1: SY(-3.4), x2: S.cx, y2: SY(3.4), stroke: DARK, "stroke-width": 4 }, svg);
+  /* 区域标注 */
+  tx(svg, SX(-1.2), 92, "稳定", { fs: 23, b: 1, fill: BLUE });
+  tx(svg, SX(0.95), 92, "不稳定", { fs: 23, b: 1, fill: RED });
+  tx(svg, S.cx - 10, SY(3.4) + 24, "虚轴：临界", { fs: 21, b: 1, fill: DARK, an: "end" });
+
+  /* ============ 中间映射箭头（顶部弧线，s → z） ============ */
+  mk("path", { d: "M320,84 C415,30 520,26 608,58", fill: "none", stroke: DARK, "stroke-width": 3, "marker-end": "url(#mMap)" }, svg);
+  tx(svg, 468, 26, "z=e^{Ts}", { fs: 22, b: 1, it: 1, fill: DARK });
+
+  /* ============ 右：z 平面 ============ */
+  const Z = { cx: 716, cy: 322, s: 90 };
+  const ZX = (r, th) => Z.cx + r * Math.cos(th) * Z.s, ZY = (r, th) => Z.cy - r * Math.sin(th) * Z.s;
+  /* 区域底色：圆外浅红（大圆裁剪感）+ 圆内浅蓝 */
+  mk("circle", { cx: Z.cx, cy: Z.cy, r: Math.exp(1) * Z.s, fill: UNST }, svg);
+  mk("circle", { cx: Z.cx, cy: Z.cy, r: Z.s, fill: STABLE }, svg);
+  /* 坐标轴 */
+  mk("line", { x1: Z.cx - 246, y1: Z.cy, x2: Z.cx + 240, y2: Z.cy, stroke: AX, "stroke-width": 2.2, "marker-end": "url(#mAx)" }, svg);
+  mk("line", { x1: Z.cx, y1: Z.cy + 280, x2: Z.cx, y2: Z.cy - 286, stroke: AX, "stroke-width": 2.2, "marker-end": "url(#mAx)" }, svg);
+  tx(svg, 928, 310, "Re", { fs: 22, it: 1, b: 1, fill: AX });
+  tx(svg, Z.cx - 16, Z.cy - 282, "Im", { fs: 22, it: 1, b: 1, fill: AX, an: "end" });
+  tx(svg, Z.cx + 118, 40, "z 平面", { fs: 23, b: 1, fill: DARK, an: "start" });
+  /* 等 ω 射线（绿）：θ = ωT */
+  [0, PI / 4, PI / 2, 3 * PI / 4].forEach(th => {
+    const rr = Math.exp(1);
+    const ray = (t) => mk("line", { x1: Z.cx, y1: Z.cy, x2: ZX(rr, t), y2: ZY(rr, t), stroke: GREEN, "stroke-width": 2.2, opacity: .8 }, svg);
+    if (th === 0) ray(0); else { ray(th); ray(-th); }
+  });
+  mk("line", { x1: Z.cx, y1: Z.cy, x2: ZX(Math.exp(1), PI), y2: ZY(Math.exp(1), PI), stroke: "#8A97B5", "stroke-width": 2.4, "stroke-dasharray": "9 6" }, svg);
+  tx(svg, ZX(1.72, PI), ZY(1.72, PI) - 12, "θ=π（ω=π/T）", { fs: 20, fill: "#5B6B8C", b: 1 });
+  /* 等 σ 同心圆：r = e^{σT} */
+  [[-1.5, BLUE], [-1, BLUE], [-0.5, BLUE], [0.5, RED], [1, RED]].forEach(([sg, c]) => {
+    mk("circle", { cx: Z.cx, cy: Z.cy, r: Math.exp(sg * T) * Z.s, fill: "none", stroke: c, "stroke-width": 2.4, opacity: .85 }, svg);
+  });
+  /* 单位圆（临界） */
+  mk("circle", { cx: Z.cx, cy: Z.cy, r: Z.s, fill: "none", stroke: DARK, "stroke-width": 4 }, svg);
+  tx(svg, ZX(1, PI / 4) + 10, ZY(1, PI / 4) - 12, "单位圆 |z|=1：临界", { fs: 21, b: 1, fill: DARK, an: "start" });
+  mk("circle", { cx: ZX(1, 0), cy: ZY(1, 0), r: 7, fill: DARK, stroke: "#fff", "stroke-width": 2 }, svg);
+  tx(svg, ZX(1, 0) + 14, ZY(1, 0) + 34, "z=1 ↔ s=0", { fs: 21, b: 1, fill: DARK, an: "start" });
+  /* 区域标注 */
+  tx(svg, Z.cx, Z.cy + 44, "稳定", { fs: 23, b: 1, fill: BLUE });
+  tx(svg, Z.cx, Z.cy + 74, "|z|<1", { fs: 20, b: 1, fill: BLUE });
+  tx(svg, ZX(2.2, PI / 2), ZY(2.2, PI / 2) + 4, "不稳定", { fs: 23, b: 1, fill: RED });
+  tx(svg, ZX(2.2, PI / 2), ZY(2.2, PI / 2) + 34, "|z|>1", { fs: 20, b: 1, fill: RED });
+  /* 图例（两行） */
+  tx(svg, 480, 604, "蓝线：等σ线（σ<0）→ 圆内同心圆 r=e^{σT}　　绿线：等ω线 → 射线 θ=ωT", { fs: 20, fill: "#41506B" });
+  tx(svg, 480, 632, "红线：等σ线（σ>0）→ 圆外同心圆　　黑粗线：虚轴 σ=0 → 单位圆周 |z|=1", { fs: 20, fill: "#41506B" });
+});
+</script>
+<script>/* qa-steps：?steps=N 自动前进 N 步 */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>㊱ 离散系统稳定的充要条件</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=700">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=700" defer></script>
+<script src="../fig.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:.94;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:10px;padding:12px 22px}
+  .st{font-size:21px;color:var(--ink);line-height:1.55}
+  .eq{background:var(--sky);border-radius:12px;padding:10px 14px;text-align:center;font-size:23px;color:var(--navy)}
+  .eq .no{color:var(--muted);font-size:19px}
+  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .cmp{display:flex;gap:12px;align-items:center;font-size:21px;color:var(--ink);line-height:1.5}
+  .cmp .tag{flex:none;width:66px;text-align:center;border-radius:9px;padding:4px 0;font-weight:700;font-size:20px;color:#fff}
+  .figc{flex:1.26;display:flex;flex-direction:column;overflow:hidden}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
+  .figc svg{width:100%;height:100%}
+</style>
+</head>
+<body data-title="㊱ 离散系统稳定的充要条件" data-page="51 / 56">
+<div class="act-stage"><div class="act-slide">
+<div class="act-body has-note">
+  <div class="row">
+    <div class="lft">
+      <div class="act-card" style="flex:1.18">
+        <div class="hd" style="font-size:23px"><span style="flex:1">稳定的充要条件：看闭环极点</span></div>
+        <div class="bd">
+          <div class="st">特征方程 <span class="tex">1+GH(z)=0</span> 的根 <span class="tex">\lambda_{1},\lambda_{2},\cdots,\lambda_{n}</span> 即<b>闭环极点</b>。</div>
+          <div ><div class="st">闭环离散系统稳定的<b>充分必要条件</b>：</div>
+            <div class="eq hl"><span class="tex">|\lambda_{i}|&lt;1\quad(i=1,2,\cdots,n)</span></div>
+            <div class="st">全部闭环极点位于 z 平面上的<b>单位圆内</b>。</div></div>
+        </div>
+      </div>
+      <div class="act-card" style="flex:1" data-step="1">
+        <div class="hd" style="font-size:23px"><span style="flex:1">与连续系统对照</span></div>
+        <div class="bd">
+          <div class="cmp"><span class="tag" style="background:var(--blue)">连续</span><span>稳定 ⇔ 极点均在<b>左半 s 平面</b>（<span class="tex">\operatorname{Re}\lambda_{i}&lt;0</span>）；</span></div>
+          <div class="cmp"><span class="tag" style="background:var(--navy)">离散</span><span>稳定 ⇔ 极点均在 <b>z 平面单位圆内</b>（<span class="tex">|\lambda_{i}|&lt;1</span>）。</span></div>
+          <div class="st">边界对应：虚轴 <span class="tex">\sigma=0</span> ↔ 单位圆周 <span class="tex">|z|=1</span>。</div>
+        </div>
+      </div>
+      <div class="act-card" style="flex:.82" data-step="2">
+        <div class="hd" style="font-size:23px"><span style="flex:1">主导极点</span></div>
+        <div class="bd">
+          <div class="st">稳定的离散系统中，<b>模长最大（最靠近单位圆周）</b>的闭环极点称为<b>主导极点</b>，可为实极点或共轭复极点——它决定暂态响应的主要形态。</div>
+        </div>
+      </div>
+    </div>
+    <div class="act-card figc">
+      <div class="hd" style="font-size:23px"><span style="flex:1">z 平面：圆内极点（蓝×）稳定，圆外极点（红×）不稳定</span></div>
+      <div class="bd2"><svg id="fig"></svg></div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">结论</span><span>判稳第一步永远是求闭环极点并看模长。</span></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  /* 示例极点（程序现算模长）：圆内一对共轭极点 + 圆外一对共轭极点 */
+  const PIN = [{ re: .55, im: .62 }, { re: .55, im: -.62 }];     // |λ|<1
+  const POUT = [{ re: .9, im: .85 }, { re: .9, im: -.85 }];      // |λ|>1
+  const mod = p => Math.hypot(p.re, p.im);
+  const F = DZ.zplane("fig", { xlim: [-1.85, 1.85], ylim: [-1.6, 1.6] }, { static: true, vw: 960, vh: 660 });
+  const cross = (p, c) => {
+    const x = F.X(p.re), y = F.Y(p.im), s = 11;
+    F.mk("line", { x1: x - s, y1: y - s, x2: x + s, y2: y + s, stroke: c, "stroke-width": 4.4 }, F.gMark);
+    F.mk("line", { x1: x - s, y1: y + s, x2: x + s, y2: y - s, stroke: c, "stroke-width": 4.4 }, F.gMark);
+  };
+  PIN.forEach(p => cross(p, "#1D3FA0"));
+  POUT.forEach(p => cross(p, "#D63A2F"));
+  /* 标注（模长程序现算） */
+  F.tx(F.gMark, F.X(PIN[0].re) + 16, F.Y(PIN[0].im) - 12, "λ_{1,2}", { fs: 22, fill: "#1D3FA0", b: 1, an: "start" });
+  F.tx(F.gMark, F.X(POUT[0].re) + 18, F.Y(POUT[0].im) + 6, "λ_{3,4}", { fs: 22, fill: "#D63A2F", b: 1, an: "start" });
+  F.tx(F.gMark, F.X(0), F.Y(0) + 40, "|λ|<1：稳定域", { fs: 22, fill: "#1D3FA0", b: 1 });
+  F.tx(F.gMark, F.X(-1.62), F.Y(1.44), "|λ_{1,2}|=" + mod(PIN[0]).toFixed(2) + "<1 → 稳定", { fs: 21, fill: "#1D3FA0", b: 1, an: "start" });
+  F.tx(F.gMark, F.X(-1.62), F.Y(-1.4), "|λ_{3,4}|=" + mod(POUT[0]).toFixed(2) + ">1 → 不稳定", { fs: 21, fill: "#D63A2F", b: 1, an: "start" });
+  F.tx(F.gMark, F.X(-Math.SQRT1_2) - 14, F.Y(Math.SQRT1_2) - 12, "单位圆 |z|=1", { fs: 21, fill: "#16324F", b: 1, an: "end" });
+});
+</script>
+<script>/* qa-steps：?steps=N 自动前进 N 步 */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

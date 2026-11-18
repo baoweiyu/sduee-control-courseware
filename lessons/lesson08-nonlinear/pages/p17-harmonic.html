@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>② 谐波分析</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=800">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=800" defer></script>
+<style>
+  .row{display:flex;gap:24px;height:100%;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card .bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:15px;padding:18px 26px;min-height:0}
+  .ds{display:flex;gap:14px;align-items:center;font-size:22px;color:var(--ink);line-height:1.6}
+  .ds .no{flex:none;width:36px;height:36px;border-radius:50%;background:var(--blue);color:#fff;
+    font-size:21px;font-weight:700;display:grid;place-items:center}
+  .ds b{color:var(--navy)}
+  .fm{flex:1;background:var(--sky);border-radius:10px;padding:10px 16px;font-size:21.5px;
+    color:var(--navy);line-height:1.6;min-width:0}
+  .pt{display:flex;gap:14px;align-items:flex-start;font-size:22.5px;color:var(--ink);line-height:1.6}
+  .pt .no{flex:none;width:36px;height:36px;border-radius:50%;background:var(--orange);color:#fff;
+    font-size:21px;font-weight:700;display:grid;place-items:center;margin-top:4px}
+  .pt b{color:var(--navy)}
+  .def{background:#FDF3EC;border-left:5px solid var(--orange);border-radius:12px;
+    padding:14px 20px;font-size:22.5px;color:var(--ink);line-height:1.6}
+  .def b{color:var(--navy)}
+</style>
+</head>
+<body data-title="② 谐波分析" data-page="17 / 33">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="act-card" style="flex:1.5">
+        <div class="hd"><span style="flex:1">谐波分析：由 y(t) 到 N(X)</span></div>
+        <div class="bd">
+          <div class="ds" ><span class="no">1</span>
+            <span>设输入 <span class="tex">x(t)=X\sin\omega t</span>，输出 <span class="tex">y(t)</span> 非正弦但与 <span class="tex">x</span> <b>同周期</b>。</span></div>
+          <div class="ds" data-step="1"><span class="no">2</span>
+            <div class="fm">傅里叶级数：<span class="tex">y(t)=A_{0}+\sum\limits_{n=1}^{\infty}\left(A_{n}\cos n\omega t+B_{n}\sin n\omega t\right)</span></div></div>
+          <div class="ds" data-step="2"><span class="no">3</span>
+            <span>直流分量 <span class="tex">A_{0}=\frac{1}{2\pi}\int_{0}^{2\pi}y(t)\,\mathrm{d}\omega t</span>；<b>奇对称</b>特性下 <span class="tex">A_{0}=0</span>。</span></div>
+          <div class="ds" data-step="3"><span class="no">4</span>
+            <div class="fm">基波 <span class="tex">y_{1}(t)=A_{1}\cos\omega t+B_{1}\sin\omega t=Y_{1}\sin(\omega t+\varphi_{1})</span>，<span class="tex">Y_{1}=\sqrt{A_{1}^{2}+B_{1}^{2}}</span>，<span class="tex">\varphi_{1}=\operatorname{atan2}(A_{1},B_{1})</span>（取正确象限）</div></div>
+          <div class="ds" data-step="4"><span class="no">5</span>
+            <div class="fm">系数 <span class="tex">A_{n}=\frac{1}{\pi}\!\int_{0}^{2\pi}\!y(t)\cos n\omega t\,\mathrm{d}\omega t</span>，<span class="tex">B_{n}=\frac{1}{\pi}\!\int_{0}^{2\pi}\!y(t)\sin n\omega t\,\mathrm{d}\omega t</span></div></div>
+          <div class="ds" data-step="5"><span class="no">6</span>
+            <div class="fm">描述函数 <span class="tex">N(X)=\frac{Y_{1}}{X}e^{j\varphi_{1}}=\frac{B_{1}+jA_{1}}{X}</span></div></div>
+        </div>
+      </div>
+      <div class="act-card" style="flex:1">
+        <div class="hd"><span style="flex:1">为什么只取基波？</span></div>
+        <div class="bd">
+          <div class="pt"><span class="no">1</span><span>输出 <span class="tex">y(t)</span> 中的高次谐波须经<b>线性部分</b> <span class="tex">G(j\omega)</span> 沿闭环传输。</span></div>
+          <div class="pt" data-step="7"><span class="no">2</span><span>实际系统的线性部分<b>低通滤波特性好</b>：<span class="tex">n</span> 越大，<span class="tex">|G(jn\omega)|</span> 越小，高次谐波被大幅衰减。</span></div>
+          <div class="def" data-step="8">故近似认为<b>只有基波分量沿闭环流通</b>——非线性环节对正弦输入的响应，可用基波代表（<span class="kw-r">谐波线性化</span>）。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">要点</span><span>求 N(X) 的核心是算两个积分 A₁、B₁。</span></div>
+<script>/* qa-steps：截图自验钩子 */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

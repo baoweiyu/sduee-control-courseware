@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>㉞ 闭环极点分布与暂态分量</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=700">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=700" defer></script>
+<script src="../fig.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:.9;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:10px;padding:12px 22px}
+  .st{font-size:21px;color:var(--ink);line-height:1.58}
+  .eq{background:var(--sky);border-radius:12px;padding:11px 14px;text-align:center;font-size:22.5px;color:var(--navy)}
+  .eq .no{color:var(--muted);font-size:20px}
+  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .figc{flex:1.32;display:flex;flex-direction:column;overflow:hidden}
+  .sel{display:flex;flex-direction:column;gap:9px;padding:12px 14px 5px;background:#fff}
+  .selrow{display:flex;gap:9px;align-items:stretch}
+  .selrow .gp{flex:none;font-size:19px;font-weight:700;color:var(--muted);display:grid;place-items:center;padding:0 4px}
+  .selbtn{flex:1;background:#F4F7FE;color:var(--navy);border:2px solid var(--line);border-radius:10px;
+    font-size:19.5px;font-weight:700;padding:8px 4px;cursor:pointer;white-space:nowrap}
+  .selbtn:hover{border-color:var(--blue)}
+  .selbtn.on{background:var(--blue);color:#fff;border-color:var(--blue)}
+  .figrow{flex:1;display:flex;gap:10px;padding:4px 12px;background:#fff;min-height:0}
+  .figrow .cell{min-height:0;display:grid;place-items:center}
+  .figrow .cell.z{flex:1.02}
+  .figrow .cell.c{flex:1.25}
+  .figrow svg{width:100%;height:100%}
+  .chip{margin:3px 14px 12px;background:var(--sky);border-radius:10px;padding:9px 16px;
+    font-size:21px;font-weight:700;color:var(--navy);text-align:center;line-height:1.45}
+  .chip b{color:#D63A2F}
+</style>
+</head>
+<body data-title="㉞ 闭环极点分布与暂态分量" data-page="49 / 56">
+<div class="act-stage"><div class="act-slide">
+<div class="act-body has-note">
+  <div class="row">
+    <div class="lft">
+      <div class="act-card" style="flex:1.42">
+        <div class="hd" style="font-size:23px"><span style="flex:1">部分分式：暂态分量由极点决定</span></div>
+        <div class="bd">
+          <div ><div class="st">闭环脉冲传递函数的一般形式：</div>
+            <div class="eq"><span class="tex">\frac{C(z)}{R(z)}=\frac{K_{1}\prod_{j}(z-z_{j})}{\prod_{i}(z-\lambda_{i})}</span></div></div>
+          <div data-step="1"><div class="st">单位阶跃下部分分式展开并取反变换：</div>
+            <div class="eq"><span class="tex">c(k)=A_{0}\cdot 1(k)+\sum_{i}A_{i}\lambda_{i}^{k}</span></div></div>
+          <div data-step="2"><div class="st">= 稳态分量 + 暂态分量，第 i 项暂态分量：</div>
+            <div class="eq hl"><span class="tex">c_{i}(k)=A_{i}\lambda_{i}^{k}</span>　<span class="no">形态完全由极点 <span class="tex">\lambda_{i}</span> 的位置决定</span></div></div>
+        </div>
+      </div>
+      <div class="act-card" style="flex:1.08" data-step="3">
+        <div class="hd" style="font-size:23px"><span style="flex:1">三种类型 · 六种形态（右侧逐档查看）</span></div>
+        <div class="bd">
+          <div class="st">① <b>正实极点</b>：<span class="tex">\lambda^{k}</span> 不变号 —— 单调；</div>
+          <div class="st">② <b>负实极点</b>：<span class="tex">(-|\lambda|)^{k}</span> 逐拍变号 —— 振荡角频率 <span class="tex">\pi/T</span>；</div>
+          <div class="st">③ <b>共轭复极点</b>：<span class="tex">|\lambda|^{k}\cos(k\theta+\varphi)</span> —— 振荡角频率 <span class="tex">\omega_{i}=\theta_{i}/T</span>；</div>
+          <div class="st"><span class="tex">|\lambda|&lt;1</span> 衰减，<span class="tex">|\lambda|&gt;1</span> <b style="color:#D63A2F">发散</b>。</div>
+        </div>
+      </div>
+    </div>
+    <div class="act-card figc">
+      <div class="hd" style="font-size:23px"><span style="flex:1">联动：极点位置（z 平面）→ 暂态分量 <span class="tex">c_{i}(k)</span></span></div>
+      <div class="sel">
+        <div class="selrow"><span class="gp">正实</span>
+          <button class="selbtn on" data-i="0">0&lt;λ&lt;1 单调衰减</button>
+          <button class="selbtn" data-i="1">λ&gt;1 单调发散</button></div>
+        <div class="selrow"><span class="gp">负实</span>
+          <button class="selbtn" data-i="2">−1&lt;λ&lt;0 交替衰减</button>
+          <button class="selbtn" data-i="3">λ&lt;−1 交替发散</button></div>
+        <div class="selrow"><span class="gp">共轭</span>
+          <button class="selbtn" data-i="4">|λ|&lt;1 衰减振荡</button>
+          <button class="selbtn" data-i="5">|λ|&gt;1 发散振荡</button></div>
+      </div>
+      <div class="figrow">
+        <div class="cell z"><svg id="figZ"></svg></div>
+        <div class="cell c"><svg id="figC"></svg></div>
+      </div>
+      <div class="chip" id="chip"></div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">结论</span><span>极点在圆内→暂态衰减；避免左半单位圆（尤其负实轴），最好在右半部靠近原点。</span></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  /* ---- 六态：极点与 c_i(k)=A_i λ_i^k 全部由 JS 现算 ---- */
+  const mk = (re, im) => ({ re, im });
+  const CASES = [
+    { poles: [mk(0.6, 0)], lab: "λ=0.6", K: 14,
+      f: k => Math.pow(0.6, k),
+      chip: "0<λ<1：单调衰减——右半单位圆内，动态最好的位置" },
+    { poles: [mk(1.25, 0)], lab: "λ=1.25", K: 8,
+      f: k => Math.pow(1.25, k),
+      chip: "λ>1：单调发散——<b>不稳定</b>" },
+    { poles: [mk(-0.6, 0)], lab: "λ=−0.6", K: 14,
+      f: k => Math.pow(-0.6, k),
+      chip: "−1<λ<0：正负交替衰减——振荡角频率 π/T，左半圆内动态差" },
+    { poles: [mk(-1.25, 0)], lab: "λ=−1.25", K: 8,
+      f: k => Math.pow(-1.25, k),
+      chip: "λ<−1：正负交替发散——<b>不稳定</b>" },
+    { poles: [mk(0.53, 0.53), mk(0.53, -0.53)], lab: "|λ|=0.75", K: 16,
+      f: k => Math.pow(0.75, k) * Math.cos(k * Math.PI / 4),
+      chip: "共轭复极点 |λ|<1：衰减振荡——包络 |λ|^k，ω_i=θ_i/T=π/(4T)" },
+    { poles: [mk(0.84, 0.84), mk(0.84, -0.84)], lab: "|λ|=1.19", K: 10,
+      f: k => Math.pow(1.19, k) * Math.cos(k * Math.PI / 4),
+      chip: "共轭复极点 |λ|>1：发散振荡——<b>不稳定</b>" }
+  ];
+  const chip = document.getElementById("chip");
+  function show(i) {
+    const cs = CASES[i];
+    document.querySelectorAll(".selbtn").forEach(b => b.classList.toggle("on", +b.dataset.i === i));
+    DZ.zplane("figZ", {
+      poles: cs.poles.map(p => ({ re: p.re, im: p.im, label: p === cs.poles[0] ? cs.lab : "" })),
+      shade: true, unit: true
+    }, { static: true, vw: 400, vh: 600 });
+    const pts = [];
+    for (let k = 0; k <= cs.K; k++) pts.push([k, cs.f(k)]);
+    DZ.stem("figC", { pts, xlabel: "k", ylabel: "c_{i}(k)", color: Math.hypot(cs.poles[0].re, cs.poles[0].im) > 1 ? "#C02A20" : "#1D3FA0" }, { static: true, vw: 440, vh: 600 });
+    chip.innerHTML = cs.chip;
+  }
+  document.querySelectorAll(".selbtn").forEach(b => b.addEventListener("click", () => show(+b.dataset.i)));
+  show(0);
+});
+</script>
+<script>/* qa-steps：?steps=N 自动前进 N 步 */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>㉜ 暂态响应：二阶系统例</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=700">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=700" defer></script>
+<script src="../fig.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:1.08;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:9px;padding:10px 22px}
+  .st{font-size:20px;color:var(--ink);line-height:1.5}
+  .eq{background:var(--sky);border-radius:12px;padding:8px 14px;text-align:center;font-size:21px;color:var(--navy)}
+  .eq .no{color:var(--muted);font-size:18px}
+  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .blkc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:2px 8px;min-height:0}
+  .blkc svg{width:100%;height:100%}
+  .figc{flex:1;display:flex;flex-direction:column;overflow:hidden;position:relative}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 10px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .prog{position:absolute;top:58px;left:16px;z-index:5;font-size:19px;color:var(--muted);
+    background:rgba(255,255,255,.88);padding:3px 12px;border-radius:8px}
+  .ctl{display:flex;align-items:center;gap:12px;justify-content:center;padding:10px 0 12px}
+  .btn{background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:20px;font-weight:700;padding:10px 24px;cursor:pointer}
+  .btn.ghost{background:#fff;color:var(--blue);border:2px solid var(--blue)}
+</style>
+</head>
+<body data-title="㉜ 暂态响应：二阶系统例" data-page="47 / 56">
+<div class="act-stage"><div class="act-slide">
+<div class="act-body has-note">
+  <div class="row">
+    <div class="lft">
+      <div class="act-card blkc" style="flex:.98">
+        <div class="hd" style="font-size:23px"><span style="flex:1">题设（图 7-26）：单位反馈采样系统，T=1s</span></div>
+        <div class="bd2"><svg id="blk"></svg></div>
+      </div>
+      <div class="act-card" style="flex:2.02">
+        <div class="hd" style="font-size:23px"><span style="flex:1">推导：G(z) → 闭环 → 长除 → c*(t)</span></div>
+        <div class="bd">
+<div data-step="1" style="display:none"></div> <!-- 首步驱动动画；基础内容常显 -->
+          <div ><div class="st">① 零阶保持器 + 广义对象（T=1s）：</div>
+            <div class="eq"><span class="tex">G(z)=Z\!\left[\frac{1-e^{-Ts}}{s^{2}(s+1)}\right]=\frac{0.368z+0.264}{(z-1)(z-0.368)}</span></div></div>
+          <div data-step="2"><div class="st">② 单位反馈闭环脉冲传递函数：</div>
+            <div class="eq"><span class="tex">\frac{C(z)}{R(z)}=\frac{G(z)}{1+G(z)}=\frac{0.368z+0.264}{z^{2}-z+0.632}</span></div></div>
+          <div data-step="3"><div class="st">③ 单位阶跃 <span class="tex">R(z)=\dfrac{z}{z-1}</span>，长除展开（程序递推验证）：</div>
+            <div class="eq"><span class="tex">C(z)=0.368z^{-1}+z^{-2}+1.4z^{-3}+1.4z^{-4}+1.147z^{-5}+0.895z^{-6}+0.802z^{-7}+\cdots</span></div></div>
+          <div data-step="4"><div class="st">④ 取 z 反变换，得采样时刻的输出序列：</div>
+            <div class="eq hl"><span class="tex">c^{*}(t)=0.368\delta(t-T)+\delta(t-2T)+1.4\delta(t-3T)+1.4\delta(t-4T)+\cdots</span></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="act-card figc">
+      <div class="hd" style="font-size:23px"><span style="flex:1">c*(t)：输出采样序列（递推现算）</span></div>
+      <span class="prog" id="prog">0 / 4</span>
+      <div class="bd2"><svg id="fig"></svg></div>
+      <div class="ctl">
+        <button class="btn" id="play">▶ 播放</button>
+        <button class="btn ghost" id="step">⧉ 分步</button>
+        <button class="btn ghost" onclick="ACT.step.reset()">↺ 重置</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">结论</span><span>与连续二阶系统一样可读出 <span class="tex">M_{p}</span>、<span class="tex">t_{s}</span>——只是曲线由各采样点连成。</span></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  /* ---- 题设方框图：R → ⊕(−) → T(采样开关) → Gh → 1/[s(s+1)] → C ---- */
+  const BLK = BD.block("blk", [
+    { type: "line", pts: [[16, 120], [66, 120]], label: "r(t)", labelDy: -14 },
+    { type: "sum", x: 84, y: 120, r: 14, signs: { left: "+", bottom: "−" } },
+    { type: "line", pts: [[98, 120], [132, 120]] },
+    { type: "box", x: 136, y: 92, w: 58, h: 56, label: "T", fs: 22 },
+    { type: "line", pts: [[194, 120], [224, 120]], label: "e^{*}(t)", labelDy: -14 },
+    { type: "box", x: 228, y: 88, w: 74, h: 64, label: "G_{h}(s)", fs: 22 },
+    { type: "line", pts: [[302, 120], [330, 120]] },
+    { type: "box", x: 334, y: 80, w: 128, h: 80, label: "1\ns(s+1)", fs: 24, name: "gp" },
+    { type: "line", pts: [[462, 120], [528, 120]], label: "c(t)", labelDy: -14 },
+    { type: "dot", x: 500, y: 120 },
+    { type: "line", pts: [[500, 120], [500, 216], [84, 216], [84, 136]], arrow: true }
+  ], { vw: 540, vh: 250, static: true });
+  /* Gp 的分数线（tx 不解析 LaTeX，手画横线） */
+  BLK.mk("line", { x1: 348, y1: 120, x2: 448, y2: 120, stroke: "#16324F", "stroke-width": 2.4 }, BLK.g);
+
+  /* ---- 数据：教材系数现算 c[0]=0, c[1]=0.368, c[2]=1,
+     c[k]=2c[k-1]−1.632c[k-2]+0.632c[k-3]（与 (7-61) 各系数一致） ---- */
+  const b1 = 0.368, b0 = 0.264, d2 = 0.632;
+  const N = 16, c = [0, b1, 2 * b1 + b0];
+  for (let k = 3; k <= N; k++) c.push(2 * c[k - 1] - (1 + d2) * c[k - 2] + d2 * c[k - 3]);
+  const pts = c.map((v, k) => [k, v]);
+  /* 读数：c_max 与 ts(±5%) 由程序现算 */
+  let kmax = 1; for (let k = 1; k <= N; k++) if (c[k] > c[kmax]) kmax = k;
+  let kts = N;
+  for (let k = 1; k <= N; k++) { let ok = true; for (let j = k; j <= N; j++) if (c[j] < 0.95 || c[j] > 1.05) { ok = false; break; } if (ok) { kts = k; break; } }
+  /* 教材口径格式化：与 (7-61) 一致（1.399→1.4，1.147/0.895/0.802 保留三位） */
+  const fmtV = v => {
+    const t3 = Math.round(v * 1000) / 1000, t2 = Math.round(v * 100) / 100;
+    return String(Math.abs(t3 - t2) <= 0.001 ? t2 : t3);
+  };
+
+  const F = DZ.stem("fig", {
+    pts, xlabel: "k", ylabel: "c(kT)", color: "#1D3FA0",
+    tips: true
+  }, {});
+
+  function paint(K) {
+    const g = F.mk("g", {}, F.gDyn);
+    if (K >= 3) {  /* ±5% 误差带 */
+      F.mk("line", { x1: F.X(-0.6), y1: F.Y(1.05), x2: F.X(16.6), y2: F.Y(1.05), stroke: "#0E7A36",
+        "stroke-width": 2, "stroke-dasharray": "7 5", opacity: .85 }, g);
+      F.mk("line", { x1: F.X(-0.6), y1: F.Y(0.95), x2: F.X(16.6), y2: F.Y(0.95), stroke: "#0E7A36",
+        "stroke-width": 2, "stroke-dasharray": "7 5", opacity: .85 }, g);
+      F.tx(g, F.X(15.2), F.Y(1.05) - 12, "±5% 带", { fs: 22, fill: "#0E7A36", b: 1 });
+    }
+    if (K >= 4) {  /* 读数：c_max 与 ts */
+      F.mk("circle", { cx: F.X(kmax), cy: F.Y(c[kmax]), r: 10, fill: "none", stroke: "#D63A2F", "stroke-width": 3 }, g);
+      F.tx(g, F.X(kmax) + 18, F.Y(c[kmax]) - 48, "c_{max}≈" + fmtV(c[kmax]) + " → M_{p}≈40%", { fs: 22, fill: "#D63A2F", b: 1, an: "start" });
+      F.mk("line", { x1: F.X(kts), y1: F.PLOT.y0, x2: F.X(kts), y2: F.PLOT.y1, stroke: "#C2410C",
+        "stroke-width": 2.4, "stroke-dasharray": "9 6", opacity: .9 }, g);
+      F.tx(g, F.X(kts) - 8, F.PLOT.y1 - 36, "t_{s}≈12T=12s", { fs: 22, fill: "#C2410C", b: 1, an: "end" });
+      [1, 2, 3, 4, 5, 6, 7].forEach(k => {
+        F.tx(g, F.X(k), F.Y(c[k]) - 18, fmtV(c[k]), { fs: 21, fill: "#16324F" });
+      });
+    }
+  }
+  const FS = [0, .28, .5, .75, 1];
+  BD.wire(4, paint, { figs: [F], FS, dur: 9000, playLabel: "▶ 播放" });
+});
+</script>
+<script>/* qa-steps：?steps=N 自动前进 N 步 */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>③ 零阶保持器的频率特性</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=700">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=700" defer></script>
+<script src="../fig.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:1.02;display:flex;flex-direction:column;gap:16px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:14px;padding:18px 26px;font-size:23px;line-height:1.6}
+  .st{font-size:22.5px;color:var(--ink);line-height:1.6}
+  .eq{background:var(--sky);border-radius:12px;padding:14px 16px;text-align:center;font-size:23.5px}
+  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .rd{display:flex;gap:12px;align-items:flex-start;font-size:22px;color:var(--ink);line-height:1.55}
+  .rd .no{flex:none;width:34px;height:34px;margin-top:2px;border-radius:50%;background:var(--blue);color:#fff;font-weight:700;font-size:20px;display:grid;place-items:center}
+  .figc{flex:1.25;display:flex;flex-direction:column;overflow:hidden;position:relative}
+  .figc .bd2{flex:1;display:flex;flex-direction:column;background:#fff;padding:4px 10px;min-height:0;gap:4px}
+  .figc .bd2 .fm{flex:1.08;min-height:0}
+  .figc .bd2 .fp{flex:1;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .segfloat{position:absolute;top:56px;right:14px;z-index:5;max-width:72%;background:#fff;
+    border:2px solid var(--blue);border-radius:10px;padding:5px 14px;font-size:18px;font-weight:700;
+    color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 2px 10px rgba(20,40,90,.18)}
+  .prog{position:absolute;top:60px;left:16px;z-index:5;font-size:17px;color:var(--muted);
+    background:rgba(255,255,255,.88);padding:2px 10px;border-radius:8px}
+  .ctl{display:flex;align-items:center;gap:10px;justify-content:center;padding:8px 0 10px}
+  .btn{background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:19px;font-weight:700;padding:8px 20px;cursor:pointer}
+  .btn.ghost{background:#fff;color:var(--blue);border:2px solid var(--blue)}
+  @keyframes bdPulse{0%,100%{opacity:1}50%{opacity:.2}}
+  .flash{animation:bdPulse .85s ease-in-out infinite}
+</style>
+</head>
+<body data-title="③ 零阶保持器的频率特性" data-page="16 / 56">
+<div class="act-stage"><div class="act-slide">
+
+<div class="act-body has-note">
+  <div class="row">
+    <div class="lft">
+      <div class="act-card" style="flex:1.45">
+        <div class="hd"><span style="flex:1">由传递函数 G<sub>h</sub>(s) 令 s = jω 推导</span></div>
+        <div class="bd">
+<div data-step="1" style="display:none"></div> <!-- 首步驱动动画；基础内容常显 -->
+          <div ><div class="eq"><span class="tex">G_{h}(j\omega)=T\,\dfrac{\sin(\omega T/2)}{\omega T/2}\,e^{-j\omega T/2}</span></div></div>
+          <div data-step="2"><div class="st">幅频特性——幅值按 <span class="tex">\left|\sin(\omega T/2)/(\omega T/2)\right|</span> 的规律波动衰减：</div>
+            <div class="eq hl"><span class="tex">\left|G_{h}(j\omega)\right|=T\left|\dfrac{\sin(\omega T/2)}{\omega T/2}\right|</span></div></div>
+          <div data-step="3"><div class="st">相频特性——主瓣内为线性滞后；过零点按连续展开相位逐瓣附加 −π：</div>
+            <div class="eq hl"><span class="tex">\angle G_{h}(j\omega)=-\dfrac{\omega T}{2},\quad 0&lt;\omega&lt;\omega_{s}</span></div></div>
+        </div>
+      </div>
+      <div class="act-card" style="flex:1.05" data-step="4">
+        <div class="hd"><span style="flex:1">读数：从图 7-11 读出三件事</span></div>
+        <div class="bd">
+          <div class="rd"><span class="no">1</span><span><span class="tex">\omega=\omega_{s}=2\pi/T</span> 处 <span class="tex">|G_{h}|=0</span> —— 主瓣在采样频率处归零；</span></div>
+          <div class="rd"><span class="no">2</span><span>主瓣内幅值随 <span class="tex">\omega</span> 增大而衰减 —— <b>近似低通</b>；</span></div>
+          <div class="rd"><span class="no">3</span><span><b>非理想低通</b>：旁瓣允许部分高频通过（泄漏），恢复的 <span class="tex">e_{h}(t)</span> 与 <span class="tex">e(t)</span> 有差别，<span class="tex">T</span> 越小差别越小。</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="act-card figc">
+      <div class="hd"><span style="flex:1">图 7-11　幅频 / 相频特性（T=1s，ω<sub>s</sub>=2π 精确计算）</span></div>
+      <span class="segfloat" id="segChip" style="display:none"></span>
+      <span class="prog" id="prog">0 / 4</span>
+      <div class="bd2">
+        <div class="fm"><svg id="figMag"></svg></div>
+        <div class="fp"><svg id="figPh"></svg></div>
+      </div>
+      <div class="ctl">
+        <button class="btn" id="play">▶ 播放</button>
+        <button class="btn ghost" id="step">⧉ 分步</button>
+        <button class="btn ghost" onclick="ACT.step.reset()">↺ 重置</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">结论</span><span>幅值随 <span class="tex">\omega</span> 增大而衰减 —— <span class="kw-r">明显低通特性，但非理想</span>（高频有泄漏）。</span></div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  /* ---- 数据：sinc 幅频与分段相频（T=1，ω_s=2π，程序精确现算）---- */
+  const T = 1, WS = 2 * Math.PI, WMAX = 3 * WS;
+  const mag = [];
+  for (let w = 0; w <= WMAX + 1e-9; w += 0.02) {
+    const x = w * T / 2;
+    mag.push([w, x < 1e-9 ? T : T * Math.abs(Math.sin(x) / x)]);
+  }
+  /* 相频（单位 π）：−ωT/2，ω/2 每跨过 kπ（sin 变号）附加 −π */
+  const segs = [];
+  for (let k = 0; k < 3; k++) segs.push([[k * WS, -(2 * k)], [(k + 1) * WS, -(2 * k + 1)]]);
+  const FM = DZ.plot("figMag", {
+    xlim: [0, WMAX + 0.4], ylim: [0, 1.24], ylabel: "|G_{h}(jω)|",
+    curves: [{ pts: mag, color: "#1D3FA0" }]
+  });
+  const FP = DZ.plot("figPh", {
+    xlim: [0, WMAX + 0.4], ylim: [-5.7, 0.5], xlabel: "ω", ylabel: "∠G_{h}(jω)/π",
+    curves: segs.map(s => ({ pts: s, color: "#0E7A36" }))
+  });
+
+  const cl = (v, a, b) => Math.max(a, Math.min(b, v));
+  function chor(f) {
+    const mU = cl((f - .02) / .33, 0, 1), pU = cl((f - .35) / .33, 0, 1);
+    FM.setAllF(mU); FP.setAllF(pU);
+  }
+  function paint(K) {
+    chor(FS[K]);
+    if (K >= 2) {  /* 幅频图标注 */
+      const g = FM.mk("g", { "class": K === 2 ? "flash" : "" }, FM.gDyn);
+      [1, 2, 3].forEach(i => {
+        FM.mk("line", { x1: FM.X(i * WS), y1: FM.PLOT.y0, x2: FM.X(i * WS), y2: FM.PLOT.y1,
+          stroke: "#8A97B5", "stroke-width": 2, "stroke-dasharray": "7 5", opacity: .8 }, g);
+        FM.tx(g, FM.X(i * WS), FM.PLOT.y0 + 18, (i > 1 ? i : "") + "ω_{s}", { fs: 22, fill: "#16324F", b: 1 });
+      });
+      FM.mk("circle", { cx: FM.X(0), cy: FM.Y(1), r: 9, fill: "#1D3FA0", stroke: "#fff", "stroke-width": 2.5 }, g);
+      FM.tx(g, FM.X(0) + 16, FM.Y(1) + 32, "主瓣峰 T", { fs: 23, fill: "#1D3FA0", b: 1, an: "start" });
+    }
+    if (K >= 3) {  /* 相频图：π 跳变虚垂线 */
+      const g = FP.mk("g", { "class": K === 3 ? "flash" : "" }, FP.gDyn);
+      [1, 2].forEach(i => {
+        FP.mk("line", { x1: FP.X(i * WS), y1: FP.Y(-(2 * i - 1)), x2: FP.X(i * WS), y2: FP.Y(-2 * i),
+          stroke: "#8A97B5", "stroke-width": 2.4, "stroke-dasharray": "7 5", opacity: .9 }, g);
+      });
+      FP.tx(g, FP.X(WS) + 14, FP.Y(-1.5), "−π 跳变", { fs: 22, fill: "#16324F", b: 1, an: "start" });
+      FP.tx(g, FP.X(WS * 0.5), FP.Y(-0.5) + 34, "斜率 −ωT/2", { fs: 22, fill: "#0E7A36", b: 1 });
+    }
+    if (K >= 4) {  /* 读数高亮：ωs 处归零 + 旁瓣泄漏 */
+      const g = FM.mk("g", { "class": "flash" }, FM.gDyn);
+      FM.mk("rect", { x: FM.X(0), y: FM.PLOT.y0, width: FM.X(WS) - FM.X(0), height: FM.PLOT.y1 - FM.PLOT.y0,
+        fill: "#1D3FA0", opacity: .07 }, g);
+      FM.mk("circle", { cx: FM.X(WS), cy: FM.Y(0), r: 9, fill: "#D63A2F", stroke: "#fff", "stroke-width": 2.5 }, g);
+      FM.tx(g, FM.X(WS) - 16, FM.Y(0.15), "ω_{s} 处 |G_{h}|=0", { fs: 23, fill: "#D63A2F", b: 1, an: "end" });
+      const ws1 = 8.9868, vs1 = T * Math.abs(Math.sin(ws1 / 2) / (ws1 / 2));  // 第一旁瓣峰
+      FM.mk("circle", { cx: FM.X(ws1), cy: FM.Y(vs1), r: 8, fill: "#F5821F", stroke: "#fff", "stroke-width": 2.5 }, g);
+      FM.tx(g, FM.X(ws1) + 12, FM.Y(vs1) - 20, "旁瓣 → 高频泄漏", { fs: 22, fill: "#C2410C", b: 1, an: "start" });
+      const g2 = FP.mk("g", {}, FP.gDyn);
+      FP.tx(g2, FP.X(WS), FP.PLOT.y0 + 20, "ω_{s}", { fs: 22, fill: "#16324F", b: 1 });
+      FP.tx(g2, FP.X(2 * WS), FP.PLOT.y0 + 20, "2ω_{s}", { fs: 22, fill: "#16324F", b: 1 });
+      FP.tx(g2, FP.X(3 * WS), FP.PLOT.y0 + 20, "3ω_{s}", { fs: 22, fill: "#16324F", b: 1 });
+    }
+  }
+  const FS = [0, .02, .35, .68, 1];
+  BD.wire(4, paint, { figs: [FM, FP], FS, dur: 12000, playLabel: "▶ 播放", frame: f => chor(f) });
+
+  /* ---- ⧉分步（点一下推进一步）---- */
+  const STEPS = ["① 频率特性表达式", "② 幅频：波动衰减的包络", "③ 相频：线性滞后 + π 跳变", "④ 读数：ωs 归零 / 旁瓣泄漏"];
+  const chip = document.getElementById("segChip"), total = 4, stepBtn = document.getElementById("step");
+  const wNext = ACT.step.next, wReset = ACT.step.reset;
+  let segRaf = null, segTok = 0;
+  function segEnable() { stepBtn.disabled = false; stepBtn.style.opacity = ""; stepBtn.style.cursor = ""; }
+  function segStopUI() {
+    segTok++;
+    if (segRaf) { cancelAnimationFrame(segRaf); segRaf = null; }
+    segEnable(); chip.style.display = "none";
+  }
+  ACT.step.next = function () { segStopUI(); return wNext(); };
+  ACT.step.reset = function () { segStopUI(); return wReset(); };
+  const playBtn = document.getElementById("play");
+  if (playBtn && playBtn.onclick) { const po = playBtn.onclick; playBtn.onclick = ev => { segStopUI(); po(ev); }; }
+  function segGo(instant) {
+    segStopUI();
+    if (ACT.step.cur >= total) wReset();
+    wNext();
+    const k = ACT.step.cur, f0 = FS[k - 1], f1 = FS[k];
+    chip.textContent = "分步 " + k + " / " + total + "　" + STEPS[k - 1]; chip.style.display = "";
+    if (instant || f1 <= f0 + 1e-9) { paint(k); return; }
+    paint(k); chor(f0);
+    stepBtn.disabled = true; stepBtn.style.opacity = ".55"; stepBtn.style.cursor = "default";
+    const t0 = performance.now(), D = 1700, tok = segTok;
+    const tick = now => {
+      if (tok !== segTok) return;
+      const u = Math.min(1, (now - t0) / D);
+      chor(f0 + (f1 - f0) * u);
+      if (u < 1) segRaf = requestAnimationFrame(tick); else { segRaf = null; segEnable(); paint(k); }
+    };
+    segRaf = requestAnimationFrame(tick);
+  }
+  stepBtn.onclick = () => segGo(false);
+  window.addEventListener("load", () => {
+    const n = +(new URLSearchParams(location.search).get("seg") || 0);
+    for (let i = 0; i < Math.min(n, total); i++) segGo(true);
+  });
+});
+</script>
+<script>/* qa-steps：截图自验钩子，?steps=N 自动前进 N 步（播放时不生效） */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

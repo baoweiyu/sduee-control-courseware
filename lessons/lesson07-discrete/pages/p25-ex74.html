@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>⑫ 例7-4 留数法：f(t)=t</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=700">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=700" defer></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:1.28;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .rgt{flex:.78;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:11px;padding:13px 24px}
+  .st{font-size:21.5px;color:var(--ink);line-height:1.6}
+  .eq{background:var(--sky);border-radius:12px;padding:10px 14px;text-align:center;font-size:22.5px;color:var(--navy)}
+  .eq .no{color:var(--muted);font-size:21px}
+  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+</style>
+</head>
+<body data-title="⑫ 例7-4 留数法：f(t)=t" data-page="25 / 56">
+<div class="act-stage"><div class="act-slide">
+<div class="act-body has-note">
+  <div class="row">
+    <div class="lft">
+      <div class="act-card" style="flex:.55">
+        <div class="hd" style="font-size:23px"><span style="flex:1">【例 7-4】题设</span></div>
+        <div class="bd"><div class="st">求 <span class="tex">f(t)=t</span> 的 z 变换（留数法），<span class="tex">F(s)=\dfrac{1}{s^{2}}\;(t\ge 0)</span>。</div></div>
+      </div>
+      <div class="act-card" style="flex:2.3">
+        <div class="hd" style="font-size:23px"><span style="flex:1">解：二重极点求留数</span></div>
+        <div class="bd">
+          <div ><div class="st">① <span class="tex">F(s)=\frac{1}{s^{2}}</span> 在 <span class="tex">s=0</span> 处有<span class="kw-r">二重极点</span>，用 q 阶极点留数公式（<span class="tex">q=2</span>，<span class="tex">(q-1)!=1</span>）：</div>
+            <div class="eq"><span class="tex">R=\lim_{s\to 0}\frac{d}{ds}\!\left[s^{2}\cdot\frac{1}{s^{2}}\cdot\frac{z}{z-e^{sT}}\right]=\left.\frac{d}{ds}\!\left[\frac{z}{z-e^{sT}}\right]\right|_{s=0}</span></div></div>
+          <div data-step="1"><div class="st">② 对 <span class="tex">s</span> 求导后代入 <span class="tex">s=0</span>：</div>
+            <div class="eq"><span class="tex">R=\left.\frac{zTe^{sT}}{\left(z-e^{sT}\right)^{2}}\right|_{s=0}</span></div>
+            <div class="eq hl"><span class="tex">Z[t]=F(z)=R=\frac{Tz}{(z-1)^{2}}</span></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="rgt">
+      <div class="act-card" data-step="2" style="flex:1.3">
+        <div class="hd" style="font-size:23px"><span style="flex:1">公式依据：q 阶极点留数</span></div>
+        <div class="bd">
+          <div class="eq"><span class="tex">R_{i}=\frac{1}{(q-1)!}\lim_{s\to p_{i}}\frac{d^{q-1}}{ds^{q-1}}\!\left[(s-p_{i})^{q}F(s)\frac{z}{z-e^{sT}}\right]</span></div>
+          <div class="st">本题：<span class="tex">p_{i}=0</span>，<span class="tex">q=2</span> → 求<span style="color:var(--navy);font-weight:700">一阶导数</span>即可，重极点<span class="kw-r">不必拆部分分式</span>。</div>
+        </div>
+      </div>
+      <div class="act-card" data-step="2" style="flex:1">
+        <div class="hd" style="font-size:23px"><span style="flex:1">与部分分式法对比</span></div>
+        <div class="bd">
+          <div class="st"><span class="tex">\frac{1}{s^{2}}</span> 无法拆成 <span class="tex">\frac{A_{i}}{s+p_{i}}</span> 形简单项，级数求和也不易。</div>
+          <div class="st">留数法对<span style="color:var(--navy);font-weight:700">重极点统一处理</span>，是本题最顺的路径。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">结论</span><span>留数法一步得出 <span class="tex">Z[t]=\dfrac{Tz}{(z-1)^{2}}</span>，重极点无需拆项。</span></div>
+<script>/* qa-steps：?steps=N 自动前进 N 步 */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

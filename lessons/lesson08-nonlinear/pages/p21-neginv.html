@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>⑥ 负倒描述函数曲线</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=800">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=800" defer></script>
+<script src="../fig.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .lft .bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:14px;padding:18px 22px;min-height:0}
+  .eq{background:var(--sky);border-radius:12px;padding:12px 16px;text-align:center;font-size:21px;position:relative}
+  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .st{font-size:21px;color:var(--ink);line-height:1.6}
+  .st b{color:var(--navy)}
+  .fx{display:flex;gap:10px;align-items:center;font-size:21px;color:var(--ink);line-height:1.5}
+  .fx .dot{flex:none;width:16px;height:16px;border-radius:50%}
+  .fx .fm{flex:1;background:var(--sky);border-radius:10px;padding:8px 12px;font-size:21px;color:var(--navy);min-width:0;text-align:center}
+  .figc{position:relative}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 10px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .ctl{display:flex;align-items:center;gap:12px;justify-content:center;padding:6px 0 8px}
+  .btn{background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:20px;font-weight:700;padding:9px 22px;cursor:pointer;text-align:center}
+  .btn.ghost{background:#fff;color:var(--blue);border:2px solid var(--blue)}
+  .btn:disabled{opacity:.42;cursor:not-allowed}
+  #prog{font-size:20px;color:var(--navy);font-weight:700}
+  .segfloat{position:absolute;top:52px;right:116px;z-index:5;max-width:70%;background:#fff;
+    border:2px solid var(--blue);border-radius:10px;padding:5px 14px;font-size:19px;font-weight:700;
+    color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 2px 10px rgba(20,40,90,.18)}
+  .figc .capnote{flex:none;font-size:21px;color:var(--navy);background:var(--sky);border-radius:12px;padding:10px 18px;margin:0 14px 12px;line-height:1.55}
+</style>
+</head>
+<body data-title="⑥ 负倒描述函数曲线" data-page="21 / 33">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="act-card lft" style="flex:1">
+        <div class="hd"><span style="flex:1">负倒描述函数 −1/N(X)</span></div>
+        <div class="bd">
+<div data-step="1" style="display:none"></div> <!-- 首步驱动动画；基础内容常显 -->
+          <div >
+            <div class="eq hl"><span class="tex">-\frac{1}{N(X)}</span>　——N(X) 的<b>负倒特性</b></div>
+            <div class="st" style="margin-top:12px">在复平面上，<b>−1/N(X)</b> 相当于线性系统 Nyquist 判据中的<b>临界点 (−1, j0)</b>；曲线上的<b>箭头表示 X 增大的方向</b>。</div>
+          </div>
+          <div data-step="2"><div class="fx"><span class="dot" style="background:#1D3FA0"></span>
+            <div class="fm">① 理想继电器：<span class="tex">-\frac{1}{N(X)}=-\frac{\pi X}{4M}</span></div></div></div>
+          <div data-step="3"><div class="fx"><span class="dot" style="background:#0E7A36"></span>
+            <div class="fm">② 死区继电器：<span class="tex">-\frac{1}{N(X)}=-\frac{\pi X}{4M\sqrt{1-(a/X)^{2}}}</span></div></div></div>
+          <div data-step="4">
+            <div class="fx"><span class="dot" style="background:#7B21C8"></span>
+            <div class="fm">③ 滞环继电器：<span class="tex">-\frac{1}{N(X)}=-\frac{\pi X}{4M}\sqrt{1-\left(\frac{a}{X}\right)^{2}}-j\frac{\pi a}{4M}</span></div></div>
+            <div class="st" style="margin-top:12px">③ 的虚部为常数 <b>−πa/(4M)</b>：因 <span class="tex">|N(X)|=\frac{4M}{\pi X}</span>，与 X 无关。</div>
+          </div>
+        </div>
+      </div>
+      <div class="act-card figc" style="flex:1.18">
+        <div class="hd"><span style="flex:1">负倒特性曲线（M=1、a=1，程序精确绘制）</span></div>
+        <span class="segfloat" id="segChip" style="display:none"></span>
+        <div class="bd2"><svg id="fig"></svg></div>
+        <div class="ctl">
+          <span id="prog">0 / 4</span>
+          <button class="btn" id="play">▶ 播放</button>
+          <button class="btn ghost" id="step">⧉ 分步</button>
+          <button class="btn ghost" id="rst">↺ 重置</button>
+        </div>
+        <div class="capnote">② 的折返曲线实际在负实轴上，图中双线微离实轴仅为显示去程与回程；X=√2a 处取极值 <b>−πa/(2M)≈−1.571</b>。</div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">要点</span><span>−1/N(X) 曲线 + G(jω) 曲线 = 描述函数法的两大作图对象。</span></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const TOTAL = 4, M = 1, A = 1, PI = Math.PI;
+  const C1 = "#1D3FA0", C2 = "#0E7A36", C3 = "#7B21C8", RED = "#D63A2F", MUT = "#5B6B8C";
+  /* ① 理想继电器：−πX/4M，负实轴上从原点向左的射线（X:0→∞） */
+  const ray = [];
+  for (let X = 0; X <= 5.6; X += 0.05) ray.push([-PI * X / (4 * M), 0]);
+  /* ② 死区继电器(m=1)：负实轴折返——X=a⁺ 时 −∞，X=√2a 极值 −πa/(2M)，X→∞ 重回 −∞（程序验证：X=50 时 −39.3）
+        去程微抬 +ε、回程微降 −ε（仅视觉分离，横坐标全部按公式现算） */
+  const EP = 0.045;
+  const dzOut = [], dzBack = [];
+  const f2 = X => -PI * X / (4 * M * Math.sqrt(1 - (A / X) * (A / X)));
+  for (let X = 1.02; X <= Math.SQRT2 * A; X += 0.004) dzOut.push([f2(X), EP]);
+  for (let X = Math.SQRT2 * A; X <= 12; X += 0.02) dzBack.push([f2(X), -EP]);
+  /* ③ 滞环继电器(m=−1)：−1/N = −(πX/4M)√(1−(a/X)²) − jπa/(4M)，第三象限平行于负实轴的直线 */
+  const hy = [];
+  const IM3 = -PI * A / (4 * M);                       // ≈ −0.7854（程序验证：与 −1/N 数值虚部一致）
+  for (let X = 1; X <= 7.2; X += 0.02)
+    hy.push([-PI * X / (4 * M) * Math.sqrt(1 - (A / X) * (A / X)), IM3]);
+  const XMAX = -PI * A / (2 * M);                      // 极值 ≈ −1.5708（程序验证：X=√2a）
+  const F = DZ.plot("fig", {
+    xlim: [-4.6, 0.85], ylim: [-1.75, 1.1], xlabel: "Re", ylabel: "Im",
+    curves: [
+      { pts: ray, color: C1 },
+      { pts: dzOut, color: C2 },
+      { pts: dzBack, color: C2 },
+      { pts: hy, color: C3 }
+    ]
+  }, { vw: 960, vh: 620, equal: true });
+  /* 方向箭头（marker 着色与曲线一致） */
+  ["ar1", "ar2", "ar3"].forEach((id, i) => {
+    const defs = F.svg.querySelector("defs");
+    const mk = BD.mk;
+    const m = mk("marker", { id: "nar" + id, markerWidth: 11, markerHeight: 9, refX: 7, refY: 3.2, orient: "auto" }, defs);
+    mk("path", { d: "M0,0 L7.5,3.2 L0,6.4 Z", fill: [C1, C2, C3][i] }, m);
+  });
+  function arrow(x, y, deg, id, g) {
+    const p = F.mk("line", { x1: F.X(x), y1: F.Y(y), x2: F.X(x) + 1, y2: F.Y(y),
+      stroke: "none", "marker-end": "url(#nar" + id + ")" }, g);
+    p.setAttribute("transform", `rotate(${deg} ${F.X(x)} ${F.Y(y)})`);
+  }
+  function deco(k, g) {
+    g = g || F.gDyn;
+    if (k >= 2) {                                     // ① 理想继电器
+      arrow(-2.55, 0, 180, "ar1", g);
+      F.tx(g, F.X(-2.9), F.Y(0) - 96, "① 理想继电器：负实轴上的射线 (X:0→∞)", { fs: 22, fill: C1, b: 1 });
+      F.tx(g, F.X(-2.55), F.Y(0) + 44, "X 增大", { fs: 22, fill: MUT });
+    }
+    if (k >= 3) {                                     // ② 死区继电器：极值点 + 双箭头
+      arrow(-2.75, EP, 0, "ar2", g);                  // 去程：X=a→√2a，向右
+      arrow(-0.98, -EP, 180, "ar2", g);               // 回程：X=√2a→∞，向左
+      F.mk("circle", { cx: F.X(XMAX), cy: F.Y(0), r: 9, fill: RED, stroke: "#fff", "stroke-width": 2.5 }, g);
+      F.tx(g, F.X(XMAX) + 12, F.Y(0) - 30, "② 极值：X=√2a，−πa/(2M)≈−1.571", { fs: 22, fill: RED, b: 1, an: "start" });
+      F.tx(g, F.X(-4.35), F.Y(EP) - 28, "X=a：−∞", { fs: 20, fill: C2, b: 1, an: "start" });
+      F.tx(g, F.X(-4.35), F.Y(-EP) + 48, "X→∞：−∞", { fs: 20, fill: C2, b: 1, an: "start" });
+    }
+    if (k >= 4) {                                     // ③ 滞环继电器
+      arrow(-2.3, IM3, 180, "ar3", g);
+      F.tx(g, F.X(-3.3), F.Y(IM3) + 44, "③ 滞环继电器：Im = −πa/(4M) ≈ −0.785", { fs: 22, fill: C3, b: 1 });
+      F.tx(g, F.X(0) + 14, F.Y(IM3) - 8, "−π/4", { fs: 22, fill: C3, b: 1, an: "start" });
+    }
+  }
+  /* 顺序生长：总体进度 f 映射为四条分支依次生长（①→②去程→②回程→③） */
+  const NB = 4;
+  function seq(f) { for (let i = 0; i < NB; i++) F.setF(i, Math.max(0, Math.min(1, NB * f - i))); }
+  function paint(K, f) {
+    if (f != null) seq(f);
+    else {  // 键控步骤与左栏定义顺序一致：②理想 → ③死区两支 → ④滞环
+      F.setF(0, K >= 2 ? 1 : 0);
+      F.setF(1, K >= 3 ? 1 : 0); F.setF(2, K >= 3 ? 1 : 0);
+      F.setF(3, K >= 4 ? 1 : 0);
+    }
+    deco(K);
+  }
+  const chip = document.getElementById("segChip");
+  BD.wire(TOTAL, paint, {
+    figs: [F], dur: 11000,
+    frame: (f, K, info) => { if (info && (info.mode === "seg" || info.mode === "qa-seg")) return; paint(K, f); },
+    segPaint: () => {},
+    segments: [
+      { label: "① 理想继电器：负实轴上从原点向左的射线", parts: [{ F, b: [0], f0: 0, f1: 1 }],
+        draw: (t, g) => deco(2, g) },
+      { label: "② 死区继电器：X=a→√2a，−∞ 右移至极值 −πa/(2M)", parts: [{ F, b: [1], f0: 0, f1: 1 }],
+        draw: (t, g) => deco(3, g) },
+      { label: "② 死区继电器：X=√2a→∞，折返向左重回 −∞", parts: [{ F, b: [2], f0: 0, f1: 1 }],
+        draw: (t, g) => deco(3, g) },
+      { label: "③ 滞环继电器：第三象限平行线，Im=−πa/(4M)", parts: [{ F, b: [3], f0: 0, f1: 1 }],
+        draw: (t, g) => deco(4, g) }
+    ],
+    segLabel: (label, si, n) => {
+      if (label == null) { chip.style.display = "none"; F.gDyn.innerHTML = ""; paint(TOTAL); return; }
+      chip.textContent = "分步 " + (si + 1) + " / " + n + "　" + label;
+      chip.style.display = "";
+    }
+  });
+  document.getElementById("rst").onclick = () => ACT.step.reset();
+});
+</script>
+<script>/* qa-steps：截图自验钩子 */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

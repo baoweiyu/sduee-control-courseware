@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>① 非线性系统客观存在</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=800">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=800" defer></script>
+<style>
+  .row{display:flex;gap:24px;height:100%;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card .bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:14px;padding:18px 28px;min-height:0}
+  .pt{display:flex;gap:14px;align-items:flex-start;font-size:23.5px;color:var(--ink);line-height:1.6}
+  .pt .no{flex:none;width:38px;height:38px;border-radius:50%;background:var(--blue);color:#fff;
+    font-size:22px;font-weight:700;display:grid;place-items:center;margin-top:4px}
+  .pt b{color:var(--navy)}
+  .tags{display:flex;flex-wrap:wrap;gap:12px;padding:4px 0 0 52px}
+  .tag{background:var(--sky);border:2px solid var(--line);border-radius:20px;padding:7px 20px;
+    font-size:21px;color:var(--navy);font-weight:700}
+  .def{background:var(--sky);border-radius:12px;padding:16px 22px;font-size:23.5px;color:var(--ink);line-height:1.65}
+  .def b{color:var(--navy)}
+  .def.hl{background:#FDF3EC;border-left:5px solid var(--orange)}
+</style>
+</head>
+<body data-title="① 非线性系统客观存在" data-page="4 / 33">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="act-card" style="flex:1.15">
+        <div class="hd"><span style="flex:1">非线性：客观存在的事实</span></div>
+        <div class="bd">
+          <div class="pt" ><span class="no">1</span><span>严格地说，<b>一切实际系统都是非线性的</b>——控制元件或多或少都带有非线性特性。</span></div>
+          <div class="pt" data-step="1"><span class="no">2</span><span>所谓<b>线性特性</b>，只是实际系统经<span class="kw-r">小范围线性化处理</span>后的近似结果。</span></div>
+          <div class="pt" data-step="2"><span class="no">3</span><span>系统中常含<b>不可避免的本质非线性因素</b>，例如：</span></div>
+          <div class="tags" data-step="2">
+            <span class="tag">不灵敏区（死区）</span><span class="tag">饱和</span><span class="tag">摩擦</span>
+            <span class="tag">磁滞</span><span class="tag">间隙</span>
+          </div>
+        </div>
+      </div>
+      <div class="act-card" style="flex:1">
+        <div class="hd"><span style="flex:1">两类系统的定义</span></div>
+        <div class="bd">
+          <div class="def hl"><b>非线性系统：</b>数学模型含<span class="kw-r">非线性关系</span>、整体上不满足叠加原理的系统；有些可在工作点附近局部线性化，本质非线性则不能靠单一线性模型替代。</div>
+          <div class="def" data-step="4"><b>线性系统：</b>可用<span class="tex">\text{线性微分方程}</span>描述，且满足<span class="tex">\text{叠加原理}</span>的系统。</div>
+          <div class="def" data-step="5">非线性因素较明显且<b>不能线性化</b>时，必须采用非线性系统理论分析，否则可能得出错误结论。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">要点</span><span>线性化是小范围近似；非线性才是普遍情况。</span></div>
+<script>/* qa-steps：截图自验钩子 */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

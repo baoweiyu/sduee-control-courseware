@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>② 特征一：稳定性问题复杂</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=800">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=800" defer></script>
+<style>
+  .row{display:flex;gap:24px;height:100%;min-height:0}
+  .lft{flex:1.18;display:flex;flex-direction:column;gap:18px;min-height:0}
+  .rgt{flex:1;display:flex;flex-direction:column;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card .bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:12px;padding:16px 26px;min-height:0}
+  .st{font-size:23px;color:var(--ink);line-height:1.6}
+  .st b{color:var(--navy)}
+  .cmp{display:flex;gap:12px;align-items:flex-start}
+  .cmp .k{flex:none;background:var(--sky);border:2px solid var(--line);border-radius:10px;
+    padding:6px 16px;font-size:21px;font-weight:700;color:var(--navy)}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:8px 14px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .figc .capnote{flex:none;font-size:21.5px;color:var(--navy);background:var(--sky);border-radius:12px;
+    padding:11px 18px;margin:0 14px 12px;line-height:1.55}
+</style>
+</head>
+<body data-title="② 特征一：稳定性问题复杂" data-page="5 / 33">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lft">
+        <div class="act-card" style="flex:1">
+          <div class="hd"><span style="flex:1">线性系统的稳定性</span></div>
+          <div class="bd">
+            <div class="st" >线性定常系统<b>平衡状态的稳定性</b>与初始条件、外加输入<b>无关</b>，只由系统<b>结构和参数</b>决定（即特征根的分布）。</div>
+            <div class="st" data-step="1">零输入且渐近稳定时，无论初始扰动多大，扰动消失后都回到平衡状态；若系统矩阵非奇异，则有<span class="kw-r">唯一平衡状态</span>。</div>
+          </div>
+        </div>
+        <div class="act-card" style="flex:1.25">
+          <div class="hd"><span style="flex:1">非线性系统的稳定性</span></div>
+          <div class="bd">
+            <div class="st"><b>初始条件、输入信号</b>改变，可能使运动收敛到不同平衡状态、自激振荡或发散——必须针对具体平衡状态和运动讨论稳定性。</div>
+            <div class="st" data-step="3">可能存在<span class="kw-r">多个平衡状态</span>，各平衡状态可能是稳定的、也可能是不稳定的（右图摆的例）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="rgt">
+        <div class="act-card figc">
+          <div class="hd"><span style="flex:1">图 8-1　摆的平衡状态</span></div>
+          <div class="bd2"><svg id="pend" viewBox="0 0 640 520" preserveAspectRatio="xMidYMid meet"></svg></div>
+          <div class="capnote">单摆在一个转动周期内有两个平衡位置：<span style="color:#D63A2F;font-weight:700">s₁ 倒立不稳定</span>（微扰即离去），<span style="color:var(--navy);font-weight:700">s₂ 下垂稳定</span>（小扰动不远离；有阻尼时回复）。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">要点</span><span>分析非线性系统稳定性时，必须指明平衡状态、初始条件与输入信号。</span></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("pend");
+  const mk = (t, a, p) => { const n = document.createElementNS(NS, t);
+    for (const k in a) n.setAttribute(k, a[k]); (p || svg).appendChild(n); return n; };
+  const MF = '"Cambria Math","STIX Two Math",Georgia,"Times New Roman","Microsoft YaHei",serif';
+  const INK = "#16324F", NAVY = "#12266E", RED = "#D63A2F", MUT = "#5B6B8C";
+  const P = { x: 320, y: 128 };                       // 支点
+  const label = (x, y, s, o) => { o = o || {};
+    const n = mk("text", { x, y, "font-size": o.fs || 24, "text-anchor": o.an || "middle",
+      fill: o.fill || NAVY, "font-weight": o.b ? 700 : 400, "font-family": MF });
+    n.setAttribute("style", "paint-order:stroke;stroke:#FFF;stroke-width:5;stroke-linejoin:round");
+    n.textContent = s; return n; };
+  const sub = (x, y, base, idx, o) => { o = o || {}; const fs = o.fs || 26;
+    label(x, y, base, o); label(x + fs * .58, y + 8, idx, { fs: fs * .64, fill: o.fill, b: o.b }); };
+  /* 支承（顶梁 + 斜纹） */
+  mk("rect", { x: 236, y: 92, width: 168, height: 14, rx: 4, fill: "#EEF3FD", stroke: INK, "stroke-width": 3 });
+  for (let i = 0; i < 8; i++)
+    mk("line", { x1: 244 + i * 21, y1: 92, x2: 232 + i * 21, y2: 72, stroke: MUT, "stroke-width": 2.5 });
+  mk("line", { x1: 226, y1: 72, x2: 414, y2: 72, stroke: MUT, "stroke-width": 2.5 });
+  /* 铅垂参考虚线 */
+  mk("line", { x1: P.x, y1: 18, x2: P.x, y2: 340, stroke: MUT, "stroke-width": 2, "stroke-dasharray": "8 7" });
+  /* 摆位绘制：rod + 摆球 */
+  function arm(deg, len, color, w) {                 // deg: 相对铅垂向上方向的角度（左负右正）
+    const r = deg * Math.PI / 180;
+    const ex = P.x + len * Math.sin(r), ey = P.y - len * Math.cos(r);
+    mk("line", { x1: P.x, y1: P.y, x2: ex, y2: ey, stroke: color, "stroke-width": w || 4.5 });
+    mk("circle", { cx: ex, cy: ey, r: 17, fill: "#fff", stroke: color, "stroke-width": 4.5 });
+    return { x: ex, y: ey };
+  }
+  /* 单摆平衡条件 sinθ=0：θ=0 为倒立不稳定平衡 s1，θ=π 为下垂稳定平衡 s2 */
+  const e1 = arm(0, 100, RED);
+  const e2 = (() => { const ex = P.x, ey = P.y + 165;
+    mk("line", { x1: P.x, y1: P.y, x2: ex, y2: ey, stroke: "#1D3FA0", "stroke-width": 4.5 });
+    mk("circle", { cx: ex, cy: ey, r: 17, fill: "#fff", stroke: "#1D3FA0", "stroke-width": 4.5 });
+    return { x: ex, y: ey }; })();
+  /* 倒立位置受微扰后偏离平衡（左右均可能） */
+  mk("path", { d: `M ${e1.x - 4} ${e1.y + 24} q -26 16 -34 46`, fill: "none", stroke: RED,
+    "stroke-width": 3.5, "stroke-dasharray": "7 6", "marker-end": "url(#ar)" });
+  mk("path", { d: `M ${e1.x + 4} ${e1.y + 24} q 26 16 34 46`, fill: "none", stroke: RED,
+    "stroke-width": 3.5, "stroke-dasharray": "7 6", "marker-end": "url(#ar)" });
+  const defs = mk("defs", {});
+  const mker = mk("marker", { id: "ar", markerWidth: 11, markerHeight: 9, refX: 7, refY: 3.5, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L8,3.5 L0,7 Z", fill: RED }, mker);
+  /* 下垂位置小扰动后的回复方向 */
+  mk("path", { d: `M ${P.x - 72} ${e2.y + 6} q 30 26 62 14`, fill: "none", stroke: "#1D3FA0",
+    "stroke-width": 3.5, "stroke-dasharray": "7 6", "marker-end": "url(#ab)" });
+  const mkb = mk("marker", { id: "ab", markerWidth: 11, markerHeight: 9, refX: 7, refY: 3.5, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L8,3.5 L0,7 Z", fill: "#1D3FA0" }, mkb);
+  /* 支点 */
+  mk("circle", { cx: P.x, cy: P.y, r: 7.5, fill: INK });
+  /* 标注 */
+  sub(e1.x - 44, e1.y + 2, "s", "1", { fill: RED, b: 1, fs: 28 });
+  sub(e2.x + 40, e2.y + 8, "s", "2", { fill: "#1D3FA0", b: 1, fs: 28 });
+  label(438, 58, "倒立：不稳定", { fill: RED, b: 1, fs: 25 });
+  label(404, e2.y + 46, "下垂：稳定", { fill: "#1D3FA0", b: 1, fs: 25 });
+  label(320, 408, "支点固定，摆球受重力作用", { fill: MUT, fs: 21 });
+});
+</script>
+<script>/* qa-steps：截图自验钩子 */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

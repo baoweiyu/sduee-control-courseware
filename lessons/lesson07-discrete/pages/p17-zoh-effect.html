@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>④ 零阶保持器的影响与近似实现</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=700">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=700" defer></script>
+<script src="../fig.js"></script>
+<style>
+  .row{display:flex;flex-direction:column;gap:18px;height:100%;min-height:0}
+  .line2{display:flex;gap:22px;flex:1;min-height:0}
+  .line2.b{flex:1.08}
+  .act-card{display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:14px;padding:18px 26px;font-size:22.5px;line-height:1.6}
+  .st{font-size:22.5px;color:var(--ink);line-height:1.6}
+  .eq{background:var(--sky);border-radius:12px;padding:14px 16px;text-align:center;font-size:23px}
+  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .ckrow{flex:1;display:flex;gap:12px;padding:10px 14px 12px;min-height:0}
+  .ck{flex:1;display:flex;flex-direction:column;min-width:0}
+  .ck .svgh{flex:1;display:grid;place-items:center;background:#fff;border:2px solid var(--line);border-radius:12px;min-height:0}
+  .ck svg{width:100%;height:100%}
+  .ck .cap{flex:none;text-align:center;font-size:20.5px;color:var(--navy);font-weight:700;padding:7px 4px 0;line-height:1.35}
+</style>
+</head>
+<body data-title="④ 零阶保持器的影响与近似实现" data-page="17 / 56">
+<div class="act-stage"><div class="act-slide">
+
+<div class="act-body has-note">
+  <div class="row">
+    <div class="line2">
+      <div class="act-card">
+        <div class="hd"><span style="flex:1">对系统的影响：相位滞后</span></div>
+        <div class="bd">
+          <div ><div class="st">① 相频是<b>线性滞后</b>：把阶梯信号 <span class="tex">e_{h}(t)</span> 各段<span class="kw-r">中点连接起来</span>，所得曲线近似于 <span class="tex">e(t-T/2)</span> —— 主瓣内相位滞后 <span class="tex">T/2</span>。</div></div>
+          <div data-step="1"><div class="st">② 滞后相移使系统的<span class="kw-r">相对稳定性降低</span>。</div></div>
+          <div data-step="2"><div class="st">③ 产生相位滞后是<b>各阶保持器的共性</b>；与其他各阶保持器相比，零阶保持器滞后<b>最小</b> → <b>相对稳定性最好</b>。</div></div>
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd"><span style="flex:1">中点连线 ≈ e(t−T/2)（示意，T=1s）</span></div>
+        <div class="bd2"><svg id="figMid"></svg></div>
+      </div>
+    </div>
+    <div class="line2 b">
+      <div class="act-card">
+        <div class="hd"><span style="flex:1">幂级数展开 → 近似传递函数</span></div>
+        <div class="bd">
+          <div class="st">展开 <span class="tex">G_{h}(s)=\dfrac{1}{s}\left(1-\dfrac{1}{e^{sT}}\right)=\dfrac{1}{s}\left[1-\dfrac{1}{1+sT+\frac{1}{2!}(sT)^{2}+\cdots}\right]</span>：</div>
+          <div data-step="3"><div class="eq hl"><b>取前两项</b>　<span class="tex">G_{h}(s)\approx\dfrac{T}{1+sT}</span></div></div>
+          <div data-step="4"><div class="eq hl"><b>取前三项</b>　<span class="tex">G_{h}(s)\approx T\,\dfrac{1+sT/2}{1+sT+(sT)^{2}/2}</span></div></div>
+        </div>
+      </div>
+      <div class="act-card">
+        <div class="hd"><span style="flex:1">近似实现电路（图 7-12 / 图 7-13 重绘）</span></div>
+        <div class="ckrow">
+          <div class="ck"><div class="svgh"><svg id="cktA" viewBox="0 0 460 320" preserveAspectRatio="xMidYMid meet"></svg></div>
+            <div class="cap">取前两项的实现：放大器 + RC 网络（图 7-12a）</div></div>
+          <div class="ck"><div class="svgh"><svg id="cktB" viewBox="0 0 460 320" preserveAspectRatio="xMidYMid meet"></svg></div>
+            <div class="cap">取前三项的实现：无源网络（图 7-13）</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">结论</span><span>项数过多网络复杂，实际很少采用；零阶保持器<span class="kw-r">结构简单 → 广泛应用</span>。</span></div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  /* ---- 左下小图：阶梯波 + 中点连线 e(t−T/2)（数据现算）---- */
+  const T = 1, e = t => Math.sin(0.9 * t) + 0.2, N = 10;
+  const seq = []; for (let n = 0; n < N; n++) seq.push(e(n * T));
+  const stair = [];
+  for (let n = 0; n < N; n++) { stair.push([n * T, seq[n]]); if (n < N - 1) stair.push([(n + 1) * T, seq[n]]); }
+  stair.push([N * T, seq[N - 1]]);
+  const mid = []; for (let t = 0.5; t <= 10.1; t += 0.04) mid.push([t, e(t - T / 2)]);
+  const marks = seq.map((v, n) => ({ type: "point", x: n * T + T / 2, y: v, color: "#D63A2F" }));
+  marks[6] = Object.assign({}, marks[6], { label: "中点连线 e(t-T/2)", dx: 16, dy: 30 });
+  DZ.plot("figMid", {
+    xlim: [0, 10.2], ylim: [-1.15, 1.45], xlabel: "t/s", ylabel: "e_{h}(t)",
+    curves: [{ pts: stair, color: "#1D3FA0" }, { pts: mid, color: "#F5821F", dash: "10 7", width: 3.4 }],
+    marks
+  }, { static: true });
+
+  /* ---- 电路重绘（规范：端子引线、节点圆点、极性标注）---- */
+  const NS = "http://www.w3.org/2000/svg";
+  const INK = "#16324F", BLUE = "#1D3FA0", NAVY = "#12266E";
+  const MF = '"Cambria Math","STIX Two Math",Georgia,"Times New Roman","Microsoft YaHei",serif';
+  function draw(svgId, kind) {
+    const svg = document.getElementById(svgId);
+    const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag);
+      for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+    const W = (x1, y1, x2, y2) => mk("line", { x1, y1, x2, y2, stroke: INK, "stroke-width": 3.5 });
+    const label = (x, y, s, o) => { o = o || {};
+      const n = mk("text", { x, y, "font-size": o.fs || 24, "text-anchor": o.an || "middle",
+        fill: o.fill || NAVY, "font-style": "italic", "font-family": MF });
+      n.textContent = s; return n; };
+    const sub = (x, y, base, idx, o) => { o = o || {};
+      label(x, y, base, o); label(x + (o.fs || 24) * .62, y + 6, idx, { fs: (o.fs || 24) * .68, an: o.an || "middle" }); };
+    const resH = (x, y, w, h) => mk("rect", { x, y, width: w, height: h, rx: 4, fill: "#fff", stroke: BLUE, "stroke-width": 3.2 });
+    const resV = resH;
+    const dot = (x, y) => mk("circle", { cx: x, cy: y, r: 5.5, fill: INK });
+    const term = (x, y) => mk("circle", { cx: x, cy: y, r: 7, fill: "#fff", stroke: INK, "stroke-width": 3 });
+    const cap = (x, yp) => { W(x - 24, yp, x + 24, yp); W(x - 24, yp + 12, x + 24, yp + 12); };
+    const YT = 110, YB = 250;
+    /* 端口与底轨 */
+    term(30, YT); term(30, YB); term(430, YT); term(430, YB);
+    W(30, YB, 430, YB);
+    label(58, YT - 14, "+", { fs: 24 }); label(58, YB + 28, "−", { fs: 24 });
+    label(402, YT - 14, "+", { fs: 24 }); label(402, YB + 28, "−", { fs: 24 });
+    if (kind === "a") {  /* 图 7-12(a)：放大器（增益 T）+ R + 输出端并联 C */
+      W(30, YT, 70, YT);
+      mk("rect", { x: 70, y: YT - 36, width: 130, height: 72, rx: 8, fill: "#F4F7FE", stroke: BLUE, "stroke-width": 3.2 });
+      label(135, YT - 4, "放大器", { fs: 22, it: 0 }); label(135, YT + 24, "增益为T", { fs: 19, it: 0 });
+      W(200, YT, 240, YT); resH(240, YT - 19, 86, 38); W(326, YT, 423, YT);
+      label(283, YT - 30, "R", { fs: 24 });
+      dot(380, YT); W(380, YT, 380, 168); cap(380, 168); W(380, 180, 380, YB); dot(380, YB);
+      label(414, 180, "C", { fs: 24 });
+    } else {          /* 图 7-13：R1 — 节点A — R2 — 节点B；节点A 下挂 R3+L；节点B 下挂 C */
+      W(30, YT, 78, YT); resH(78, YT - 19, 78, 38); W(156, YT, 205, YT); dot(205, YT);
+      resH(205, YT - 19, 78, 38); W(283, YT, 423, YT); dot(360, YT);
+      sub(117, YT - 30, "R", "1", { fs: 24 }); sub(244, YT - 30, "R", "2", { fs: 24 });
+      /* 节点 A：R3 + L 串联到底轨 */
+      W(205, YT, 205, 146); resV(186, 146, 38, 62); W(205, 208, 205, 214);
+      mk("path", { d: "M205,214 a11,6 0 0 1 0,12 a11,6 0 0 1 0,12 a11,6 0 0 1 0,12",
+        fill: "none", stroke: BLUE, "stroke-width": 3.2 });
+      dot(205, YB);
+      sub(178, 182, "R", "3", { fs: 23, an: "end" }); label(232, 240, "L", { fs: 24, an: "start" });
+      /* 节点 B：C 到底轨 */
+      W(360, YT, 360, 168); cap(360, 168); W(360, 180, 360, YB); dot(360, YB);
+      label(394, 180, "C", { fs: 24 });
+    }
+  }
+  draw("cktA", "a");
+  draw("cktB", "b");
+});
+</script>
+<script>/* qa-steps：截图自验钩子，?steps=N 自动前进 N 步（播放时不生效） */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

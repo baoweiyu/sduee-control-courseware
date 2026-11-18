@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>③ 饱和的描述函数</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=800">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=800" defer></script>
+<script src="../fig.js"></script>
+<style>
+  .row{display:flex;gap:24px;height:100%;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card .bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:14px;padding:18px 26px;min-height:0}
+  .ds{display:flex;gap:14px;align-items:center;font-size:22px;color:var(--ink);line-height:1.6}
+  .ds .no{flex:none;width:36px;height:36px;border-radius:50%;background:var(--blue);color:#fff;
+    font-size:21px;font-weight:700;display:grid;place-items:center}
+  .ds b{color:var(--navy)}
+  .fm{flex:1;background:var(--sky);border-radius:10px;padding:10px 16px;font-size:21.5px;
+    color:var(--navy);line-height:1.55;min-width:0}
+  .fm.hl{background:#FDF3EC;border:2px solid var(--orange)}
+  .lim{flex:1;display:flex;gap:12px}
+  .lim .it{flex:1;background:var(--sky);border-radius:10px;padding:10px 14px;font-size:21px;
+    color:var(--navy);line-height:1.55;text-align:center}
+  .figbox{flex:1;display:grid;place-items:center;background:#fff;padding:8px 10px;min-height:0}
+  .figbox svg{width:100%;height:100%}
+  #f-df text[font-size="20"]{font-size:22px}
+  .cap{flex:none;font-size:21px;color:var(--muted);line-height:1.55;padding:8px 22px 16px}
+  .cap b{color:var(--navy)}
+</style>
+</head>
+<body data-title="③ 饱和的描述函数" data-page="18 / 33">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="act-card" style="flex:1.42">
+        <div class="hd"><span style="flex:1">推导：由输出表达式到 N(X)</span></div>
+        <div class="bd">
+          <div class="ds" ><span class="no">1</span>
+            <div class="fm">输入 <span class="tex">x(t)=X\sin\omega t</span>，<span class="tex">X>a</span> 时输出为削顶正弦：<br>
+            <span class="tex">y(t)=\begin{cases}kX\sin\omega t,&0\le\omega t\le\varphi_{1}\\[2pt]ka,&\varphi_{1}<\omega t\le\pi/2\end{cases},\quad\varphi_{1}=\arcsin\frac{a}{X}</span></div></div>
+          <div class="ds" data-step="1"><span class="no">2</span>
+            <div class="fm">单值奇对称 ⇒ <span class="tex">A_{0}=0,\ A_{1}=0</span>；<br>
+            <span class="tex">B_{1}=\frac{4}{\pi}\left[\int_{0}^{\varphi_{1}}kX\sin^{2}\omega t\,\mathrm{d}\omega t+\int_{\varphi_{1}}^{\pi/2}ka\sin\omega t\,\mathrm{d}\omega t\right]</span></div></div>
+          <div class="ds" data-step="2"><span class="no">3</span>
+            <div class="fm">积分得 <span class="tex">B_{1}=\frac{2kX}{\pi}\left[\arcsin\frac{a}{X}+\frac{a}{X}\sqrt{1-\left(\frac{a}{X}\right)^{2}}\right]</span></div></div>
+          <div class="ds" data-step="3"><span class="no">4</span>
+            <div class="fm hl">描述函数：<span class="tex">N(X)=\frac{B_{1}}{X}=\frac{2k}{\pi}\left[\arcsin\frac{a}{X}+\frac{a}{X}\sqrt{1-\left(\frac{a}{X}\right)^{2}}\right]\ (X\ge a)</span></div></div>
+          <div class="ds" data-step="4"><span class="no">5</span>
+            <div class="lim">
+              <div class="it"><span class="tex">X=a</span> 时 <span class="tex">N=k</span>（未饱和增益）</div>
+              <div class="it"><span class="tex">X\to\infty</span> 时 <span class="tex">N\to 0</span>（深度饱和）</div>
+            </div></div>
+        </div>
+      </div>
+      <div class="act-card" style="flex:1">
+        <div class="hd"><span style="flex:1">N(X)/k 随 X/a 的变化</span></div>
+        <div class="figbox"><svg id="f-df"></svg></div>
+        <div class="cap">按上式<b>程序逐点计算</b>：从 <b>1</b>（X=a）单调下降到 <b>0</b>（X→∞）。</div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">要点</span><span>饱和使等效增益随输入幅值增大而下降。</span></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  /* (8-16)：N/k = (2/π)[arcsin(a/X) + (a/X)√(1−(a/X)²)]，u = X/a ≥ 1 */
+  const pts = [];
+  for (let i = 0; i <= 400; i++) {
+    const u = 1 + i / 400 * 7;                 // u∈[1,8]
+    const r = 1 / u;
+    pts.push([u, 2 / Math.PI * (Math.asin(r) + r * Math.sqrt(1 - r * r))]);
+  }
+  const F = DZ.plot("f-df", {
+    xlim: [0, 8.4], ylim: [0, 1.12], xlabel: "X/a", ylabel: "N(X)/k",
+    curves: [{ pts, color: "#1D3FA0" }],
+    marks: [
+      { type: "point", x: 1, y: 1, label: "X=a：N=k", dx: 16, dy: -10 }
+    ]
+  }, { vw: 960, vh: 860, static: true });
+  /* 右端极限标注（置于曲线左上方，避免出界） */
+  const y8 = 2 / Math.PI * (Math.asin(0.125) + 0.125 * Math.sqrt(1 - 0.125 ** 2));
+  F.tx(F.gMark, F.X(8) - 16, F.Y(y8) + 46, "X→∞：N→0", { fs: 22, fill: "#5B6B8C", b: 1, an: "end" });
+});
+</script>
+<script>/* qa-steps：截图自验钩子 */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

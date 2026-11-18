@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>㊶ 本章小结</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=700">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=700" defer></script>
+<style>
+  .wrap{width:100%;height:100%;display:flex;flex-direction:column;gap:15px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden;flex:1}
+  .act-card>.hd{padding:12px 24px}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:center;gap:10px;padding:10px 26px;font-size:23px;line-height:1.55}
+  .kv{background:var(--sky);border-radius:12px;padding:10px 20px;line-height:1.58}
+  .kv b{color:var(--navy)}
+</style>
+</head>
+<body data-title="㊶ 本章小结" data-page="56 / 56">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="wrap">
+      <div class="act-card">
+        <div class="hd">① 采样过程与采样定理（7.1–7.2）</div>
+        <div class="bd">
+          <div class="kv">采样 = <b>脉冲调制</b>（理想脉冲序列 × 连续信号）；香农定理：<span class="tex">\omega_{s}\geq2\,\omega_{max}</span> 才可由采样信号<b>完全恢复</b>原信号。</div>
+        </div>
+      </div>
+      <div class="act-card">
+        <div class="hd">② 信号复现与保持器（7.3）</div>
+        <div class="bd">
+          <div class="kv">零阶保持器 <span class="tex">G_{h}(s)=\dfrac{1-e^{-Ts}}{s}</span>：相角滞后约 <b>T/2</b>，结构简单、应用最广。</div>
+        </div>
+      </div>
+      <div class="act-card">
+        <div class="hd">③ z 变换理论（7.4）</div>
+        <div class="bd">
+          <div class="kv">定义 <span class="tex">z=e^{Ts}</span>；正/反变换各<b>三种方法</b>（级数求和 / 部分分式 / 留数，长除 / 部分分式 / 留数）；<b>七条基本性质</b>（线性、实位移、复位移、终值等）。</div>
+        </div>
+      </div>
+      <div class="act-card">
+        <div class="hd">④ 差分方程与脉冲传递函数（7.5–7.6）</div>
+        <div class="bd">
+          <div class="kv"><span class="tex">G(z)=C(z)/R(z)</span>（零初始条件）；环节间<b>有无采样开关结果不同</b>；闭环特征方程 <span class="tex">1+GH(z)=0</span>。</div>
+        </div>
+      </div>
+      <div class="act-card">
+        <div class="hd">⑤ 离散系统的时域分析（7.7）</div>
+        <div class="bd">
+          <div class="kv">稳定 ⇔ 闭环极点全部位于<b>单位圆内</b>（<span class="tex">|\lambda_{i}|&lt;1</span>）；<b>w 变换 + 劳斯判据</b>判稳（例7-15：<span class="tex">0&lt;K&lt;4.328</span>）；<b>K<sub>p</sub> / K<sub>v</sub> / K<sub>a</sub></b> 求稳态误差（例7-16：<span class="tex">K_{v}=1</span>）。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+</body>
+</html>

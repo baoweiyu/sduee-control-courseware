@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>⑩ 例7-2 级数求和法：指数函数</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=700">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=700" defer></script>
+<script src="../fig.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:1.15;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:12px;padding:14px 24px}
+  .st{font-size:22px;color:var(--ink);line-height:1.6}
+  .eq{background:var(--sky);border-radius:12px;padding:11px 16px;text-align:center;font-size:23px;color:var(--navy)}
+  .eq .no{color:var(--muted);font-size:21px}
+  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .figc{flex:1;display:flex;flex-direction:column;overflow:hidden}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
+  .figc svg{width:100%;height:100%}
+</style>
+</head>
+<body data-title="⑩ 例7-2 级数求和法：指数函数" data-page="23 / 56">
+<div class="act-stage"><div class="act-slide">
+<div class="act-body has-note">
+  <div class="row">
+    <div class="lft">
+      <div class="act-card" style="flex:.62">
+        <div class="hd" style="font-size:23px"><span style="flex:1">【例 7-2】题设</span></div>
+        <div class="bd"><div class="st">求 <span class="tex">f(t)=e^{-at}</span> 的 z 变换（级数求和法）。</div></div>
+      </div>
+      <div class="act-card" style="flex:2.1">
+        <div class="hd" style="font-size:23px"><span style="flex:1">解：定义展开 → 级数求和</span></div>
+        <div class="bd">
+          <div ><div class="st">① 采样时刻的函数值：</div>
+            <div class="eq"><span class="tex">f(nT)=e^{-anT},\quad n=0,1,2,\cdots</span></div></div>
+          <div data-step="1"><div class="st">② 代入 z 变换定义式逐项展开：</div>
+            <div class="eq"><span class="tex">F(z)=1+e^{-aT}z^{-1}+e^{-2aT}z^{-2}+\cdots+e^{-naT}z^{-n}+\cdots</span></div></div>
+          <div data-step="2"><div class="st">③ 等比级数（公比 <span class="tex">e^{-aT}z^{-1}</span>）求和：</div>
+            <div class="eq hl"><span class="tex">Z[e^{-at}]=F(z)=\frac{1}{1-e^{-aT}z^{-1}}=\frac{z}{z-e^{-aT}}</span>　<span class="no">收敛条件 <span class="tex">|e^{-aT}z^{-1}|&lt;1</span></span></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="act-card figc">
+      <div class="hd" style="font-size:22px"><span style="flex:1">e<sup>−at</sup> 与其采样序列（示意：T=1，aT=0.5）</span></div>
+      <div class="bd2"><svg id="fig"></svg></div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">结论</span><span><span class="tex">Z[e^{-at}]=\dfrac{z}{z-e^{-aT}}</span>；当 <span class="tex">a&gt;0,\ T&gt;0</span> 时，极点 <span class="tex">z=e^{-aT}</span> 在单位圆内。</span></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  /* 示意参数：T=1，aT=0.5 → a=0.5；连续曲线与采样值均按 f(t)=e^{-at} 现算 */
+  const T = 1, a = 0.5, X1 = 8.2;
+  const pts = []; for (let t = 0; t <= X1 + 1e-6; t += 0.04) pts.push([t, Math.exp(-a * t)]);
+  const F = DZ.plot("fig", {
+    xlim: [-0.5, 8.6], ylim: [-0.12, 1.12], xlabel: "t", ylabel: "f(t)",
+    curves: [{ pts, color: "#8AA6D8", width: 3, dash: "10 8" }]
+  }, { static: true });
+  /* 采样杆（同一公式在 t=nT 处取值） */
+  for (let n = 0; n <= 8; n++) {
+    const v = Math.exp(-a * n * T);
+    F.mk("line", { x1: F.X(n * T), y1: F.Y(0), x2: F.X(n * T), y2: F.Y(v), stroke: "#1D3FA0", "stroke-width": 3.6, "stroke-linecap": "round" }, F.gDyn);
+    F.mk("circle", { cx: F.X(n * T), cy: F.Y(v), r: 6.5, fill: "#1D3FA0", stroke: "#fff", "stroke-width": 2 }, F.gDyn);
+  }
+  F.tx(F.gDyn, F.X(6.1), F.Y(0.86), "f(t)=e^{-at}", { fs: 22, fill: "#8AA6D8", b: 1 });
+  F.tx(F.gDyn, F.X(6.1), F.Y(0.7), "f(nT)=e^{-anT}", { fs: 22, fill: "#1D3FA0", b: 1 });
+});
+</script>
+<script>/* qa-steps：?steps=N 自动前进 N 步 */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

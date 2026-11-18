@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>④ 特征三：自激振荡</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=800">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=800" defer></script>
+<script src="../fig.js"></script>
+<style>
+  .row{display:flex;gap:24px;height:100%;min-height:0}
+  .lft{flex:1;display:flex;flex-direction:column;min-height:0}
+  .rgt{flex:1.25;display:flex;flex-direction:column;gap:18px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card .bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:12px;padding:16px 26px;min-height:0}
+  .st{font-size:23px;color:var(--ink);line-height:1.62}
+  .st b{color:var(--navy)}
+  .ev{display:flex;gap:12px;align-items:flex-start}
+  .ev .k{flex:none;border-radius:10px;padding:6px 14px;font-size:21px;font-weight:700;color:#fff}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:6px 12px;min-height:0}
+  .figc svg{width:100%;height:100%}
+</style>
+</head>
+<body data-title="④ 特征三：自激振荡" data-page="7 / 33">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lft">
+        <div class="act-card" style="flex:1">
+          <div class="hd"><span style="flex:1">自激振荡（自振荡）的定义</span></div>
+          <div class="bd">
+            <div class="st" >非线性系统在<b>无外作用</b>时，内部可能自发引发频率和振幅一定的<span class="kw-r">稳定等幅振荡</span>，称为自持振荡或自激振荡，简称自振荡。</div>
+            <div class="st" data-step="1">理想线性系统在 <span class="tex">\zeta=0</span> 时也能维持等幅振荡，但其<b>振幅由初始条件决定</b>，参数稍有变化即衰减或发散，<b>不是稳定极限环</b>。</div>
+            <div class="st" data-step="2">非线性系统的自振荡可以<b>稳定存在</b>，其<span class="kw-r">振幅与频率由系统自身的结构参数决定</span>。</div>
+          </div>
+        </div>
+      </div>
+      <div class="rgt">
+        <div class="act-card figc" style="flex:1.35">
+          <div class="hd"><span style="flex:1">等幅振荡波形（无外作用、横轴以周期 T 计，示意）</span></div>
+          <div class="bd2"><svg id="osc"></svg></div>
+        </div>
+        <div class="act-card" style="flex:1">
+          <div class="hd"><span style="flex:1">工程评价</span></div>
+          <div class="bd">
+            <div class="ev"><span class="k" style="background:#D63A2F">一般有害</span><span class="st">精密系统不允许自振荡，正常工作时<b>应设法消除</b>。</span></div>
+            <div class="ev" data-step="4"><span class="k" style="background:#1E9E57">有时可利用</span><span class="st">时钟、振荡器等特意引入自振荡，可获得良好的静动态性能。</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">要点</span><span>稳定自激振荡对应孤立稳定极限环，是线性自治模型不能具有的现象。</span></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const A = 1, N = 600, pts = [];
+  for (let i = 0; i <= N; i++) {
+    const t = 3 * i / N;                       // 三个周期，振幅恒定
+    pts.push([t, A * Math.sin(2 * Math.PI * t)]);
+  }
+  const api = DZ.plot("osc", {
+    xlim: [0, 3], ylim: [-1.5, 1.5],
+    curves: [{ pts, color: "#1D3FA0", width: 4.5 }],
+    marks: [
+      { type: "hline", y: 1,  label: "+A", color: "#F5821F" },
+      { type: "hline", y: -1, label: "−A", color: "#F5821F" }
+    ]
+  }, { vh: 430, static: true });
+  api.tx(api.gMark, api.X(1.5), api.Y(-1.32), "无外作用 r(t)=0，振幅恒定、频率恒定", { fs: 23, b: 1, fill: "#12266E" });
+});
+</script>
+<script>/* qa-steps：截图自验钩子 */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>⑭ z 变换的基本性质（上）</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=700">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=700" defer></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:.92;display:flex;flex-direction:column;min-height:0}
+  .rgt{flex:1.35;display:flex;flex-direction:column;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden;flex:1}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:16px;padding:20px 26px}
+  .eq{background:var(--sky);border-radius:12px;padding:14px 18px;text-align:center;font-size:24px;color:var(--navy);line-height:1.6}
+  .eq .no{color:var(--muted);font-size:21px}
+  .st{font-size:22.5px;color:var(--ink);line-height:1.7}
+  .st b{color:var(--navy)}
+  .prf{display:flex;gap:14px;align-items:flex-start;background:var(--sky);border-radius:10px;
+    padding:12px 16px;font-size:21.5px;line-height:1.6;color:var(--ink)}
+  .prf .num{flex:none;width:32px;height:32px;border-radius:50%;background:var(--blue);color:#fff;
+    font-weight:700;font-size:20px;display:grid;place-items:center}
+  /* 左卡内容较少：加大字号行距撑满 */
+  .lft .bd{gap:22px;padding:24px 30px}
+  .lft .st{font-size:23.5px;line-height:1.8}
+  .lft .eq{font-size:25px;padding:18px 20px}
+</style>
+</head>
+<body data-title="⑭ z 变换的基本性质（上）" data-page="27 / 56">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lft">
+        <div class="act-card">
+          <div class="hd"><span style="flex:1">1. 线性定理</span></div>
+          <div class="bd">
+            <div class="st">设 <span class="tex">f(t)=\sum_{i=1}^{n}a_{i}f_{i}(t)=a_{1}f_{1}(t)+a_{2}f_{2}(t)+\cdots+a_{n}f_{n}(t)</span>，其中 <span class="tex">a_{i}</span> 为常数，则</div>
+            <div class="eq"><span class="tex">F(z)=\mathscr{Z}[f(t)]=\sum_{i=1}^{n}a_{i}F_{i}(z)</span></div>
+            <div class="st">线性定理说明：<b>各函数线性组合的 z 变换，等于各函数 z 变换的线性组合</b>。</div>
+          </div>
+        </div>
+      </div>
+      <div class="rgt">
+        <div class="act-card">
+          <div class="hd"><span style="flex:1">2. 延迟定理（滞后定理）</span></div>
+          <div class="bd">
+            <div class="st">设 <span class="tex">f(t)</span> 的 z 变换为 <span class="tex">F(z)</span>，且 <span class="tex">t&lt;0</span> 时 <span class="tex">f(t)=0</span>，则</div>
+            <div class="eq"><span class="tex">\mathscr{Z}[f(t-kT)]=z^{-k}F(z)</span></div>
+            <div class="prf" ><span class="num">1</span><span>由 z 变换定义 <span class="tex">\mathscr{Z}[f(t-kT)]=\sum_{n=0}^{\infty}f(nT-kT)z^{-n}=\sum_{n=0}^{\infty}f(nT-kT)z^{-(n-k)}\cdot z^{-k}</span></span></div>
+            <div class="prf" data-step="1"><span class="num">2</span><span>提出 <span class="tex">z^{-k}</span>：<span class="tex">\mathscr{Z}[f(t-kT)]=z^{-k}\sum_{n=0}^{\infty}f(nT-kT)z^{-(n-k)}</span></span></div>
+            <div class="prf" data-step="2"><span class="num">3</span><span>换元 <span class="tex">p=n-k</span>，由 <span class="tex">t&lt;0</span> 时 <span class="tex">f(t)=0</span>，求和起点不变：<span class="tex">\mathscr{Z}[f(t-kT)]=z^{-k}\sum_{p=0}^{\infty}f(pT)z^{-p}=z^{-k}F(z)</span></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">结论</span><span><span class="tex">z^{-k}</span> = 时域滞后 <span class="tex">k</span> 个采样周期的<span class="kw-r">滞后环节</span>。</span></div>
+<script>/* qa-steps：?steps=N 自动前进 N 步 */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

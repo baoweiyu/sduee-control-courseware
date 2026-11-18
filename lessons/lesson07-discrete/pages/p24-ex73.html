@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>⑪ 例7-3 部分分式法</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=700">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=700" defer></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:1.28;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .rgt{flex:.78;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:11px;padding:13px 24px}
+  .st{font-size:21.5px;color:var(--ink);line-height:1.6}
+  .eq{background:var(--sky);border-radius:12px;padding:10px 14px;text-align:center;font-size:22.5px;color:var(--navy)}
+  .eq .no{color:var(--muted);font-size:19px}
+  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+</style>
+</head>
+<body data-title="⑪ 例7-3 部分分式法" data-page="24 / 56">
+<div class="act-stage"><div class="act-slide">
+<div class="act-body has-note">
+  <div class="row">
+    <div class="lft">
+      <div class="act-card" style="flex:.55">
+        <div class="hd" style="font-size:23px"><span style="flex:1">【例 7-3】题设</span></div>
+        <div class="bd"><div class="st">求 <span class="tex">F(s)=\dfrac{1}{s(s+a)}</span> 的 z 变换（部分分式法）。</div></div>
+      </div>
+      <div class="act-card" style="flex:2.3">
+        <div class="hd" style="font-size:23px"><span style="flex:1">解：拆开 → 逐项查表 → 相加</span></div>
+        <div class="bd">
+          <div ><div class="st">① 展开成部分分式：</div>
+            <div class="eq"><span class="tex">F(s)=\frac{1}{s(s+a)}=\frac{1}{a}\left(\frac{1}{s}-\frac{1}{s+a}\right)</span></div></div>
+          <div data-step="1"><div class="st">② 对应的连续时间函数：</div>
+            <div class="eq"><span class="tex">f(t)=\frac{1}{a}\left(1-e^{-at}\right)</span></div></div>
+          <div data-step="2"><div class="st">③ 由【例 7-1】【例 7-2】逐项取 z 变换再相减：</div>
+            <div class="eq"><span class="tex">F(z)=\frac{1}{a}\left(\frac{z}{z-1}-\frac{z}{z-e^{-aT}}\right)</span></div>
+            <div class="eq hl"><span class="tex">F(z)=\frac{z\left(1-e^{-aT}\right)}{a\left[z^{2}-\left(1+e^{-aT}\right)z+e^{-aT}\right]}</span></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="rgt">
+      <div class="act-card" data-step="3" style="flex:1.15">
+        <div class="hd" style="font-size:23px"><span style="flex:1">方法要点</span></div>
+        <div class="bd">
+          <div class="st">已知 <span class="tex">F(s)</span> 时，<span class="kw-r">先拆成简单分式之和</span>，再逐项对照基本 z 变换表。</div>
+          <div class="st">无需重新求级数和——<span style="color:var(--navy);font-weight:700">复用已知变换对</span>是本法的核心。</div>
+        </div>
+      </div>
+      <div class="act-card" data-step="3" style="flex:1">
+        <div class="hd" style="font-size:23px"><span style="flex:1">本题用到的基本变换对</span></div>
+        <div class="bd">
+          <div class="eq"><span class="tex">\frac{1}{s}\;\leftrightarrow\;\frac{z}{z-1}</span></div>
+          <div class="eq"><span class="tex">\frac{1}{s+a}\;\leftrightarrow\;\frac{z}{z-e^{-aT}}</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">结论</span><span>部分分式法：拆开 <span class="tex">F(s)</span> → 逐项查表 → 相加，绕开级数求和。</span></div>
+<script>/* qa-steps：?steps=N 自动前进 N 步 */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

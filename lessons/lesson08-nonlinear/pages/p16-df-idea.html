@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>① 描述函数法的基本思想</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=800">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=800" defer></script>
+<script src="../fig.js"></script>
+<style>
+  .row{display:flex;gap:24px;height:100%;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card .bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:16px;padding:20px 26px;min-height:0}
+  .pt{display:flex;gap:14px;align-items:flex-start;font-size:23px;color:var(--ink);line-height:1.6}
+  .pt .no{flex:none;width:38px;height:38px;border-radius:50%;background:var(--blue);color:#fff;
+    font-size:22px;font-weight:700;display:grid;place-items:center;margin-top:4px}
+  .pt b{color:var(--navy)}
+  .figbox{flex:1;display:grid;place-items:center;background:#fff;padding:8px 10px;min-height:0}
+  .figbox svg{width:100%;height:100%}
+  .cap{flex:none;font-size:21px;color:var(--muted);line-height:1.6;padding:10px 22px 16px}
+  .cap b{color:var(--navy)}
+</style>
+</head>
+<body data-title="① 描述函数法的基本思想" data-page="16 / 33">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="act-card" style="flex:1.12">
+        <div class="hd"><span style="flex:1">基本思想</span></div>
+        <div class="bd">
+          <div class="pt" ><span class="no">1</span><span>当系统满足<b>一定假设条件</b>时，非线性环节在正弦信号作用下，输出中与输入同频率的<b>基波分量</b>占主导。</span></div>
+          <div class="pt" data-step="1"><span class="no">2</span><span>用输出中的<b>基波分量代替实际输出</b>，把非线性环节近似等效为一个线性环节。</span></div>
+          <div class="pt" data-step="2"><span class="no">3</span><span>其<b>近似等效频率特性</b>即为描述函数 <span class="tex">N(X)</span>——随输入幅值 <span class="tex">X</span> 变化的复增益。</span></div>
+          <div class="pt" data-step="3"><span class="no">4</span><span>非线性系统近似等效为线性系统，从而可用<b>线性系统的频率法</b>分析<span class="kw-r">稳定性与自振荡</span>。</span></div>
+        </div>
+      </div>
+      <div class="act-card" style="flex:1">
+        <div class="hd"><span style="flex:1">典型非线性系统结构（图 8-8）</span></div>
+        <div class="figbox"><svg id="f-blk"></svg></div>
+        <div class="cap"><b>信号：</b>r(t) 给定输入，e(t) 偏差，x(t) 非线性环节输出，c(t) 被控量；<b>单位反馈</b>（虚线）。</div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">要点</span><span>描述函数 = 非线性环节对正弦输入的「等效复增益」。</span></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  /* 图 8-8：r → ⊕(−) → 非线性 N → 线性 G(s) → c，单位反馈（虚线） */
+  const B = BD.block("f-blk", [
+    { type: "line", pts: [[26, 230], [100, 230]] },
+    { type: "sum", x: 118, y: 230, r: 18 },
+    { type: "line", pts: [[136, 230], [186, 230]] },
+    { type: "box", x: 186, y: 160, w: 180, h: 130, label: "非线性环节\nN", fs: 27 },
+    { type: "line", pts: [[366, 230], [414, 230]] },
+    { type: "box", x: 414, y: 160, w: 180, h: 130, label: "线性环节\nG(s)", fs: 27 },
+    { type: "line", pts: [[594, 230], [694, 230]] },
+    { type: "dot", x: 648, y: 230 }
+  ], { vw: 720, vh: 490, static: true });
+  /* 单位反馈通道（虚线） */
+  B.mk("path", { d: "M648,230 L648,420 L118,420 L118,248", fill: "none", stroke: "#5B6B8C",
+    "stroke-width": 3, "stroke-dasharray": "11 9", "stroke-linejoin": "round",
+    "marker-end": "url(#bxf-blk)" }, B.g);
+  B.tx(B.g, 44, 206, "r(t)", { fs: 25, it: 1, fill: "#16324F" });
+  B.tx(B.g, 96, 206, "+", { fs: 28, b: 1, fill: "#16324F" });
+  B.tx(B.g, 142, 292, "−", { fs: 28, b: 1, fill: "#16324F" });
+  B.tx(B.g, 160, 206, "e(t)", { fs: 25, it: 1, fill: "#16324F" });
+  B.tx(B.g, 390, 206, "x(t)", { fs: 25, it: 1, fill: "#16324F" });
+  B.tx(B.g, 674, 206, "c(t)", { fs: 25, it: 1, fill: "#16324F" });
+  B.tx(B.g, 383, 452, "单位反馈", { fs: 24, fill: "#5B6B8C", b: 1 });
+});
+</script>
+<script>/* qa-steps：截图自验钩子 */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

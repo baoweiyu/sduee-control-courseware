@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>继电器的三种特例</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=800">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=800" defer></script>
+<style>
+  .row{display:flex;gap:20px;height:100%;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.hd{font-size:23px;padding:13px 18px}
+  .fb{flex:1;display:flex;flex-direction:column;min-height:0}
+  .fb .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:6px 10px;min-height:0}
+  .fb svg{width:100%;height:100%}
+  .fb .capnote{flex:none;font-size:21.5px;color:var(--navy);background:var(--sky);border-radius:12px;
+    padding:10px 16px;margin:0 12px 12px;line-height:1.5}
+</style>
+</head>
+<body data-title="继电器的三种特例" data-page="14 / 33">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="act-card" style="flex:1">
+        <div class="hd"><span style="flex:1">m=1：具有死区的单值继电器</span></div>
+        <div class="fb" >
+          <div class="bd2"><svg id="f1"></svg></div>
+          <div class="capnote">吸合与释放同为 ±a（<span class="tex">m=1</span>，无滞环）——特性<b>单值</b>。</div>
+        </div>
+      </div>
+      <div class="act-card" style="flex:1">
+        <div class="hd"><span style="flex:1">m=−1：具有滞环的继电器</span></div>
+        <div class="fb">
+          <div class="bd2"><svg id="f2"></svg></div>
+          <div class="capnote" data-step="1">吸合值 a、释放值 −a（<span class="tex">m=-1</span>）——只有滞环、<b>非单值</b>。</div>
+        </div>
+      </div>
+      <div class="act-card" style="flex:1">
+        <div class="hd"><span style="flex:1">a=0：理想继电器</span></div>
+        <div class="fb">
+          <div class="bd2"><svg id="f3"></svg></div>
+          <div class="capnote" data-step="2"><span class="tex">i_{1}=i_{2}=0</span>（<span class="tex">a=0</span>）：过零即翻转，输出 ±M 两值。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">要点</span><span>三种特例覆盖工程常见继电器；描述函数在 8.3 推导。</span></div>
+<script src="../fig.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const M = 1, A = 1, Xe = 2.5;                     // 统一示意参数：输出 M=1、动作值 a=1
+  const RED = "#D63A2F", INK = "#16324F";
+  const CFG = { xlim: [-2.7, 2.7], ylim: [-2.2, 2.2], xlabel: "x_{1}", ylabel: "x_{2}" };
+  function arrow(F, id) {
+    const defs = F.svg.querySelector("defs");
+    const mk = F.mk("marker", { id, markerWidth: 9, markerHeight: 7, refX: 6, refY: 2.6, orient: "auto" }, defs);
+    F.mk("path", { d: "M0,0 L6,2.6 L0,5.2 Z", fill: INK }, mk);
+  }
+  const arr = (F, id, x1, y1, x2, y2) => F.mk("line", { x1: F.X(x1), y1: F.Y(y1), x2: F.X(x2), y2: F.Y(y2),
+    stroke: INK, "stroke-width": 2.6, "marker-end": "url(#" + id + ")" }, F.gDyn);
+  function axisLabels(F, xa, shift) {                // M / ±a 标注（xa: 是否标 ±a；shift: 避开竖线）
+    F.tx(F.gDyn, F.X(0) - 12, F.Y(M) + 6, "M", { fs: 22, fill: RED, b: 1, it: 1, an: "end" });
+    F.tx(F.gDyn, F.X(0) - 12, F.Y(-M) + 8, "−M", { fs: 22, fill: RED, b: 1, it: 1, an: "end" });
+    if (xa) {
+      F.tx(F.gDyn, F.X(A) + (shift || 0), F.Y(0) + 40, "a", { fs: 22, fill: RED, b: 1, it: 1, an: shift ? "start" : "middle" });
+      F.tx(F.gDyn, F.X(-A) - (shift || 0), F.Y(0) + 40, "−a", { fs: 22, fill: RED, b: 1, it: 1, an: shift ? "end" : "middle" });
+    }
+  }
+  /* (a) m=1 死区继电器：单值静态特性，不画单向滞环箭头 */
+  const pts1 = [[-Xe, -M], [-A, -M], [-A, 0], [A, 0], [A, M], [Xe, M]];
+  const F1 = DZ.plot("f1", Object.assign({ curves: [{ pts: pts1, color: "#1D3FA0" }] }, CFG), { vw: 480, vh: 660, static: true });
+  axisLabels(F1, true);
+  /* (b) m=−1 滞环继电器：升程 x₁=a 吸合、回程 x₁=−a 释放（回线） */
+  const F2 = DZ.plot("f2", Object.assign({ curves: [
+    { pts: [[-A, M], [Xe, M]], color: "#1D3FA0" },
+    { pts: [[-Xe, -M], [A, -M]], color: "#1D3FA0" },
+    { pts: [[A, -M], [A, M]], color: "#1D3FA0" },
+    { pts: [[-A, -M], [-A, M]], color: "#1D3FA0" }
+  ] }, CFG), { vw: 480, vh: 660, static: true });
+  arrow(F2, "a2"); axisLabels(F2, true, 16);
+  arr(F2, "a2", A, -(M - 0.08), A, M - 0.08); arr(F2, "a2", -A, M - 0.08, -A, -(M - 0.08));
+  arr(F2, "a2", -1.75, -M, -1.45, -M); arr(F2, "a2", 1.75, M, 1.45, M);
+  /* (c) a=0 理想继电器：单值静态特性，不画单向滞环箭头 */
+  const F3 = DZ.plot("f3", Object.assign({ curves: [
+    { pts: [[0, M], [Xe, M]], color: "#1D3FA0" },
+    { pts: [[-Xe, -M], [0, -M]], color: "#1D3FA0" },
+    { pts: [[0, -M], [0, M]], color: "#1D3FA0" }
+  ] }, CFG), { vw: 480, vh: 660, static: true });
+  axisLabels(F3, false);
+  F3.tx(F3.gDyn, F3.X(0) + 14, F3.Y(0.52), "过零翻转", { fs: 21, fill: INK, b: 1, an: "start" });
+});
+</script>
+<script>/* qa-steps：截图自验钩子 */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

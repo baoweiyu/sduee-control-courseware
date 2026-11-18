@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>㉔ 脉冲传递函数的定义</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=700">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=700" defer></script>
+<script src="../fig.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:1.18;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .rgt{flex:.95;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:9px;padding:11px 22px}
+  .st{font-size:21.5px;color:var(--ink);line-height:1.6}
+  .eq{background:var(--sky);border-radius:12px;padding:9px 14px;text-align:center;font-size:21.5px;color:var(--navy);line-height:1.5}
+  .eq .no{color:var(--muted);font-size:21px}
+  .figc .capnote{flex:none;font-size:21px;color:var(--navy);background:var(--sky);border-radius:12px;padding:9px 18px;margin:0 14px 12px;line-height:1.5}
+  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .figc{display:flex;flex-direction:column;overflow:hidden}
+  .figc .rows{flex:1;display:flex;flex-direction:column;background:#fff;padding:2px 8px;min-height:0}
+  .prow{flex:1;display:flex;align-items:stretch;min-height:0}
+  .prow .rlab{flex:none;width:64px;display:grid;place-items:center;font-size:22px;font-weight:700;color:var(--navy)}
+  .prow svg{flex:1;width:100%;height:100%;min-width:0}
+</style>
+</head>
+<body data-title="㉔ 脉冲传递函数的定义" data-page="38 / 56">
+<div class="act-stage"><div class="act-slide">
+<div class="act-body has-note">
+  <div class="row">
+    <div class="lft">
+      <div class="act-card" style="flex:1.06">
+        <div class="hd" style="font-size:23px"><span style="flex:1">定义（对应连续系统的传递函数）</span></div>
+        <div class="bd">
+          <div class="st">零初始条件下，系统输出信号的 z 变换与输入信号的 z 变换之比，称为<b>脉冲传递函数</b>（z 传递函数）：</div>
+          <div class="eq hl"><span class="tex">G(z)=\frac{C(z)}{R(z)}</span></div>
+          <div class="st">实际输出常为连续信号：在输出端<span class="kw-r">虚设同步采样开关</span>（图 7-21b）。</div>
+        </div>
+      </div>
+      <div class="act-card" style="flex:1.85">
+        <div class="hd" style="font-size:23px"><span style="flex:1">物理意义：脉冲序列激励下的响应</span></div>
+        <div class="bd">
+          <div ><div class="st">① 输入脉冲序列：</div>
+            <div class="eq"><span class="tex">r^{*}(t)=r(0)\delta(t)+r(T)\delta(t-T)+\cdots=\sum_{n=0}^{\infty}r(nT)\delta(t-nT)</span></div></div>
+          <div data-step="1"><div class="st">② 各时段输出（<span class="tex">g(t)</span> 为 <span class="tex">G(s)</span> 的单位脉冲响应）：</div>
+            <div class="eq"><span class="tex">0\leq t\lt T:\;c(t)=r(0)g(t);\;\cdots\;kT\leq t\lt (k+1)T:\;c(t)=\sum_{n=0}^{k}r(nT)g(t-nT)</span></div></div>
+          <div data-step="2"><div class="st">③ <span class="tex">t=kT</span> 时刻（<span class="tex">t<0</span> 时 <span class="tex">g(t)=0</span>，求和可延至 <span class="tex">\infty</span>）：</div>
+            <div class="eq"><span class="tex">c(kT)=\sum_{n=0}^{\infty}g[(k-n)T]\,r(nT)</span>　<span class="no">卷积和</span></div></div>
+          <div data-step="3"><div class="st">④ 由卷积定理得 <span class="tex">C(z)=G(z)R(z)</span>，故脉冲传递函数：</div>
+            <div class="eq hl"><span class="tex">G(z)=\mathscr{Z}[g(t)]=\sum_{n=0}^{\infty}g(nT)z^{-n}</span></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="rgt">
+      <div class="act-card figc" style="flex:1.55">
+        <div class="hd" style="font-size:22px"><span style="flex:1">图 7-21　离散系统（重绘）</span></div>
+        <div class="rows">
+          <div class="prow"><span class="rlab">(a)</span><svg id="ba"></svg></div>
+          <div class="prow"><span class="rlab">(b)</span><svg id="bb"></svg></div>
+        </div>
+        <div class="capnote">「输入开关 → G(s) → 输出开关」整体由 G(z) 描述；(b) 输出开关为虚设。</div>
+      </div>
+      <div class="act-card" style="flex:1">
+        <div class="hd" style="font-size:22px"><span style="flex:1">注意（两点）</span></div>
+        <div class="bd">
+          <div class="st">① <span class="tex">G(s)</span> 是线性系统<b>本身</b>的传递函数；<span class="tex">G(z)</span> 是「<span class="tex">G(s)</span> ＋ 采样开关」<span class="kw-r">组合体</span>的脉冲传递函数。</div>
+          <div class="st">② <span class="tex">G(z)=\mathscr{Z}[g(t)]=\mathscr{Z}[G(s)]</span>，但 <span class="tex">G(z)\neq G(s)\big|_{s=z}</span>。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">结论</span><span>脉冲传递函数对应连续系统的传递函数，直接反映离散系统特征。</span></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  /* 采样开关标准符号（可虚线化表示"虚设"） */
+  function drawSwitch(B, id, x0, x1, y, dashed) {
+    const mk = B.mk, tx = B.tx, g = B.g, INK = BD.INK;
+    const defs = B.svg.querySelector("defs");
+    const m = mk("marker", { id, markerWidth: 10, markerHeight: 8, refX: 6, refY: 3, orient: "auto" }, defs);
+    mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: INK }, m);
+    const da = dashed ? { "stroke-dasharray": "6 5" } : {};
+    mk("circle", Object.assign({ cx: x0, cy: y, r: 5, fill: "#fff", stroke: INK, "stroke-width": 2.6 }, da), g);
+    mk("circle", Object.assign({ cx: x1, cy: y, r: 5, fill: "#fff", stroke: INK, "stroke-width": 2.6 }, da), g);
+    mk("line", Object.assign({ x1: x0, y1: y, x2: x1 - 7, y2: y - 26, stroke: INK, "stroke-width": 3,
+      "stroke-linecap": "round", "marker-end": "url(#" + id + ")" }, da), g);
+    tx(g, (x0 + x1) / 2, y - 46, "T", { fs: 25, it: 1, b: 1, fill: INK });
+  }
+  /* 整体括号：输入开关 → 输出开关 = G(z) */
+  function bracket(B, x0, x1, y) {
+    const mk = B.mk, tx = B.tx, g = B.g, C = BD.REF.color.title;
+    mk("line", { x1: x0, y1: y, x2: x1, y2: y, stroke: C, "stroke-width": 3 }, g);
+    mk("line", { x1: x0, y1: y, x2: x0, y2: y + 12, stroke: C, "stroke-width": 3 }, g);
+    mk("line", { x1: x1, y1: y, x2: x1, y2: y + 12, stroke: C, "stroke-width": 3 }, g);
+    tx(g, (x0 + x1) / 2, y - 12, "G(z)", { fs: 26, b: 1, fill: C });
+  }
+  const OPT = { vw: 900, vh: 210, static: true };
+
+  /* (a) R(s) → 开关T → G(s) → C(s) → 开关T → C*(s) */
+  const A = BD.block("ba", [
+    { type: "line", pts: [[24, 130], [86, 130]], label: "R(s)", labelDy: -16 },
+    { type: "line", pts: [[150, 130], [214, 130]] },
+    { type: "box", x: 214, y: 90, w: 170, h: 80, label: "G(s)" },
+    { type: "line", pts: [[384, 130], [522, 130]], label: "C(s)", labelDx: -30, labelDy: -16 },
+    { type: "line", pts: [[586, 130], [716, 130]], label: "C^{*}(s)", labelDx: 24, labelDy: -16 }
+  ], OPT);
+  drawSwitch(A, "swA1", 90, 146, 130, false);
+  drawSwitch(A, "swA2", 526, 582, 130, false);
+  bracket(A, 90, 582, 50);
+
+  /* (b) 输出端虚设同步采样开关 */
+  const B2 = BD.block("bb", [
+    { type: "line", pts: [[24, 130], [86, 130]], label: "R(s)", labelDy: -16 },
+    { type: "line", pts: [[150, 130], [214, 130]], label: "R^{*}(s)", labelDy: -16 },
+    { type: "box", x: 214, y: 90, w: 170, h: 80, label: "G(s)" },
+    { type: "line", pts: [[384, 130], [522, 130]], label: "C(s)", labelDx: -30, labelDy: -16 },
+    { type: "line", pts: [[586, 130], [716, 130]], label: "C^{*}(s)", labelDx: 24, labelDy: -16 }
+  ], OPT);
+  drawSwitch(B2, "swB1", 90, 146, 130, false);
+  drawSwitch(B2, "swB2", 526, 582, 130, true);
+  bracket(B2, 90, 582, 50);
+  B2.tx(B2.g, 554, 186, "虚设同步采样开关", { fs: 22, fill: BD.AX, b: 1 });
+});
+</script>
+<script>/* qa-steps：?steps=N 自动前进 N 步 */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

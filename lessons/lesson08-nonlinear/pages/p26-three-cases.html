@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>⑪ 三种情形判稳</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=800">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=800" defer></script>
+<script src="../fig.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 10px;min-height:0;position:relative}
+  .figc svg{width:100%;height:100%}
+  .figc svg.hide{display:none}
+  .ctl{display:flex;align-items:center;gap:10px;justify-content:center;padding:8px 0 4px}
+  .cbtn{background:#fff;color:var(--blue);border:2px solid var(--blue);border-radius:10px;font-size:20px;font-weight:700;padding:8px 18px;cursor:pointer}
+  .cbtn.on{background:var(--blue);color:#fff}
+  .figc .capnote{flex:none;font-size:21px;color:var(--navy);background:var(--sky);border-radius:12px;padding:10px 18px;margin:0 14px 12px;line-height:1.55}
+  .rgt{display:flex;flex-direction:column;gap:14px;min-height:0}
+  .case{flex:1;display:flex;flex-direction:column;justify-content:center;gap:10px;background:#fff;border-radius:14px;padding:16px 20px;border-left:8px solid var(--blue);box-shadow:0 1px 8px rgba(20,40,90,.10);min-height:0}
+  .case.g{border-left-color:#0E7A36}.case.r{border-left-color:#D63A2F}.case.o{border-left-color:var(--orange)}
+  .case .t{font-size:22px;font-weight:700;color:var(--navy);line-height:1.45}
+  .case .t .verd{font-weight:800}
+  .case.g .verd{color:#0E7A36}.case.r .verd{color:#D63A2F}.case.o .verd{color:#C2410C}
+  .case .s{font-size:21px;color:var(--ink);line-height:1.6}
+  .case .s b{color:var(--navy)}
+</style>
+</head>
+<body data-title="⑪ 三种情形判稳" data-page="26 / 33">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="act-card figc" style="flex:1.28">
+        <div class="hd"><span style="flex:1">复平面上 G(jω) 与 −1/N(X) 的相对位置（程序精确绘制）</span></div>
+        <div class="ctl">
+          <button class="cbtn on" data-c="0">(a) 不相交·不包围</button>
+          <button class="cbtn" data-c="1">(b) 被包围</button>
+          <button class="cbtn" data-c="2">(c) 相交</button>
+        </div>
+        <div class="bd2">
+          <svg id="figA"></svg>
+          <svg id="figB" class="hide"></svg>
+          <svg id="figC" class="hide"></svg>
+        </div>
+        <div class="capnote" id="cap"></div>
+      </div>
+      <div class="rgt" style="flex:1">
+        <div class="case g" >
+          <div class="t">(a) −1/N(X) 不被 G(jω) 包围　→　<span class="verd">系统稳定</span></div>
+          <div class="s">图 (a)：死区继电器（M=1、a=1）折返曲线整体位于交点 <b>−1</b> 左侧，工作在包围区之外。</div>
+        </div>
+        <div class="case r" data-step="1">
+          <div class="t">(b) −1/N(X) 被 G(jω) 包围　→　<span class="verd">系统不稳定</span></div>
+          <div class="s">图 (b)：−1/N(X) 曲线落入 G(jω) 的包围区之内（有界曲线为<b>示意</b>）。</div>
+        </div>
+        <div class="case o" data-step="2">
+          <div class="t">(c) 两曲线相交　→　<span class="verd">给出周期解候选</span></div>
+          <div class="s">振幅与频率由交点的 X、ω 决定（K=30，程序求解）：<b>X_b≈1.11、X_a≈2.29，ω=√50≈7.07 rad/s</b>。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">要点</span><span>判稳须先确认线性部分无右半平面极点并考察完整频率范围；相交只给周期解候选，还须判自振稳定性。</span></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const BLUE = "#1D3FA0", PUR = "#7B21C8", RED = "#D63A2F", GRN = "#0E7A36", MUT = "#5B6B8C";
+  const EP = 0.05, SQ2 = Math.SQRT2;
+  /* G(jω)=K/[−0.3ω²+jω(1−0.02ω²)] */
+  const G = (K, w) => {
+    const re = -0.3 * w * w, im = w * (1 - 0.02 * w * w), d = re * re + im * im;
+    return [K * re / d, -K * im / d];
+  };
+  const gCurve = (K, w0) => { const p = []; for (let w = w0; w <= 400; w *= 1.012) p.push(G(K, w)); return p; };
+  /* 死区继电器 (8-19)：−1/N(X)=−πX/(4M√(1−(a/X)²))，M=1、a=1
+     程序验证：X=1⁺→−∞；X=√2 取极值 −π/2≈−1.5708；X→∞→−∞。双线 ±EP 微离实轴仅为显示去/回程 */
+  const f2 = X => -Math.PI * X / (4 * Math.sqrt(1 - 1 / (X * X)));
+  const dzOut = [], dzBack = [];
+  for (let X = 1.02; X <= SQ2; X += 0.004) dzOut.push([f2(X), EP]);
+  for (let X = SQ2; X <= 12; X += 0.02) dzBack.push([f2(X), -EP]);
+  const XEXT = -Math.PI / 2;  // ≈ −1.5708
+  /* 交点求解（K=30：−1/N(X)=−2）：bisection 两分支 */
+  function solveNeg(v, lo, hi) {
+    for (let i = 0; i < 200; i++) { const m = (lo + hi) / 2; (f2(m) < v ? (f2(lo) < v ? lo = m : hi = m) : (f2(lo) < v ? hi = m : lo = m)); }
+    return (lo + hi) / 2;
+  }
+  const XB = solveNeg(-2, 1.0001, SQ2), XA = solveNeg(-2, SQ2, 60);
+  /* 方向箭头 helper */
+  function mkArrow(F, id, color) {
+    const m = BD.mk("marker", { id, markerWidth: 11, markerHeight: 9, refX: 7, refY: 3.2, orient: "auto" }, F.svg.querySelector("defs"));
+    BD.mk("path", { d: "M0,0 L7.5,3.2 L0,6.4 Z", fill: color }, m);
+  }
+  function arrow(F, id, x, y, deg, g) {
+    const p = F.mk("line", { x1: F.X(x), y1: F.Y(y), x2: F.X(x) + 1, y2: F.Y(y), stroke: "none", "marker-end": "url(#" + id + ")" }, g);
+    p.setAttribute("transform", `rotate(${deg} ${F.X(x)} ${F.Y(y)})`);
+  }
+  function dzDeco(F, gid, g, extDy) {
+    mkArrow(F, "arO" + gid, PUR);
+    arrow(F, "arO" + gid, -2.6, EP, 0, g);          // 去程：X=1→√2 向右
+    arrow(F, "arO" + gid, -2.6, -EP, 180, g);       // 回程：X=√2→∞ 向左
+    F.mk("circle", { cx: F.X(XEXT), cy: F.Y(0), r: 8, fill: "#fff", stroke: PUR, "stroke-width": 3 }, g);
+    F.tx(g, F.X(XEXT), F.Y(0) + (extDy || 56), "极值 −π/2≈−1.571（X=√2）", { fs: 22, fill: PUR, b: 1 });
+    F.tx(g, F.X(-4.55), F.Y(EP) - 28, "X=1^{+}：−∞", { fs: 22, fill: PUR, b: 1, an: "start" });
+  }
+  /* ---------- (a) 稳定：G(K=15) + 死区继电器折返（整体在 −1 左侧） ---------- */
+  const FA = DZ.plot("figA", {
+    xlim: [-4.8, 1.2], ylim: [-1.9, 1.85], xlabel: "Re", ylabel: "Im",
+    curves: [{ pts: gCurve(15, 3.7), color: BLUE }, { pts: dzOut, color: PUR }, { pts: dzBack, color: PUR }]
+  }, { vw: 960, vh: 600, equal: true, static: true });
+  {
+    const g = FA.gDyn;
+    dzDeco(FA, "A", g);
+    FA.mk("circle", { cx: FA.X(-1), cy: FA.Y(0), r: 8, fill: BLUE, stroke: "#fff", "stroke-width": 2.5 }, g);
+    FA.tx(g, FA.X(-1), FA.Y(0) - 36, "G 交负实轴 −1（ω=√50）", { fs: 22, fill: BLUE, b: 1 });
+    FA.tx(g, FA.X(-2.9), FA.Y(-1.75), "G(jω)", { fs: 24, fill: BLUE, b: 1, it: 1 });
+    FA.tx(g, FA.X(-3.5), FA.Y(1.15), "−1/N(X)：包围区之外", { fs: 22, fill: GRN, b: 1 });
+  }
+  /* ---------- (b) 不稳定：G(K=15) + 有界示意曲线落入包围区 ---------- */
+  const ill = [];
+  for (let t = 0; t <= 2 * Math.PI + 0.01; t += 0.05) ill.push([-0.5 - 0.12 * Math.cos(t), 0.05 * Math.sin(t)]);
+  const FB = DZ.plot("figB", {
+    xlim: [-4.8, 1.2], ylim: [-1.9, 1.85], xlabel: "Re", ylabel: "Im",
+    curves: [{ pts: gCurve(15, 3.7), color: BLUE }, { pts: ill, color: PUR }]
+  }, { vw: 960, vh: 600, equal: true, static: true });
+  {
+    const g = FB.gDyn;
+    FB.mk("circle", { cx: FB.X(-1), cy: FB.Y(0), r: 8, fill: BLUE, stroke: "#fff", "stroke-width": 2.5 }, g);
+    FB.tx(g, FB.X(-1), FB.Y(0) - 34, "G 交负实轴 −1（ω=√50）", { fs: 20, fill: BLUE, b: 1 });
+    FB.tx(g, FB.X(-2.9), FB.Y(-1.75), "G(jω)", { fs: 24, fill: BLUE, b: 1, it: 1 });
+    FB.tx(g, FB.X(-0.5), FB.Y(0) + 54, "−1/N(X)（示意）", { fs: 22, fill: PUR, b: 1 });
+    FB.tx(g, FB.X(-0.75), FB.Y(1.15), "落入包围区", { fs: 22, fill: RED, b: 1 });
+  }
+  /* ---------- (c) 相交：G(K=30) + 死区继电器折返，两交点 a、b ---------- */
+  const FC = DZ.plot("figC", {
+    xlim: [-5.6, 1.2], ylim: [-2.15, 2.1], xlabel: "Re", ylabel: "Im",
+    curves: [{ pts: gCurve(30, 4.6), color: BLUE }, { pts: dzOut, color: PUR }, { pts: dzBack, color: PUR }]
+  }, { vw: 960, vh: 600, equal: true, static: true });
+  {
+    const g = FC.gDyn;
+    dzDeco(FC, "C", g, 118);
+    FC.tx(g, FC.X(-4.35), FC.Y(-1.6), "G(jω)，K=30", { fs: 24, fill: BLUE, b: 1, it: 1 });
+    /* 交点 b（去程，X_b）与 a（回程，X_a），几何上同在 (−2, j0)，±EP 仅为显示 */
+    FC.mk("circle", { cx: FC.X(-2), cy: FC.Y(EP), r: 11, fill: "none", stroke: RED, "stroke-width": 3.5 }, g);
+    FC.mk("circle", { cx: FC.X(-2), cy: FC.Y(-EP), r: 11, fill: "none", stroke: RED, "stroke-width": 3.5 }, g);
+    FC.tx(g, FC.X(-2) + 16, FC.Y(EP) - 34, "b：X_{b}=" + XB.toFixed(2), { fs: 22, fill: RED, b: 1, an: "start" });
+    FC.tx(g, FC.X(-2) + 16, FC.Y(-EP) + 58, "a：X_{a}=" + XA.toFixed(2) + "，ω=√50≈7.07", { fs: 22, fill: RED, b: 1, an: "start" });
+  }
+  /* ---------- 档位切换 ---------- */
+  const figs = [FA, FB, FC];
+  const caps = [
+    "(a) G(s)=15/[s(0.1s+1)(0.2s+1)]：折返曲线整体在交点 −1 左侧，<b>不被包围 → 稳定</b>（双线 ±0.05 微离实轴仅为显示去/回程）。",
+    "(b) 同一 G(jω)：−1/N(X) 曲线落入 G(jω) 包围区 → <b>不稳定</b>（此处 −1/N(X) 为有界示意曲线）。",
+    "(c) G 增益增至 K=30：交负实轴于 −2，与折返曲线相交于 b（X≈" + XB.toFixed(2) + "）、a（X≈" + XA.toFixed(2) + "）→ <b>周期解候选</b>，ω=√50≈7.07 rad/s。"
+  ];
+  const btns = Array.from(document.querySelectorAll(".cbtn"));
+  const cap = document.getElementById("cap");
+  function showCase(i) {
+    figs.forEach((F, j) => { F.svg.style.display = (j === i) ? "block" : "none"; });
+    btns.forEach((b, j) => b.classList.toggle("on", j === i));
+    cap.innerHTML = caps[i];
+  }
+  btns.forEach((b, j) => b.onclick = () => showCase(j));
+  showCase(0);
+  /* 分步揭示与档位联动 */
+  const S = ACT.step, _n = S.next.bind(S), _p = S.prev.bind(S), _r = S.reset.bind(S);
+  const syncCase = () => showCase(Math.max(0, Math.min(2, S.cur)));
+  S.next = function () { const d = _n(); syncCase(); return d; };
+  S.prev = function () { const d = _p(); syncCase(); return d; };
+  S.reset = function () { _r(); showCase(0); };
+  const qc = (new URLSearchParams(location.search)).get("case");
+  if (qc != null) showCase(Math.max(0, Math.min(2, +qc)));
+});
+</script>
+<script>/* qa-steps：截图自验钩子 */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

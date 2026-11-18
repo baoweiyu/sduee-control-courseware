@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>④ 继电器的描述函数</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=800">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=800" defer></script>
+<script src="../fig.js"></script>
+<style>
+  .row{display:flex;gap:24px;height:100%;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card .bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:14px;padding:18px 26px;min-height:0}
+  .ds{display:flex;gap:14px;align-items:center;font-size:22px;color:var(--ink);line-height:1.6}
+  .ds .no{flex:none;width:36px;height:36px;border-radius:50%;background:var(--blue);color:#fff;
+    font-size:21px;font-weight:700;display:grid;place-items:center}
+  .ds b{color:var(--navy)}
+  .fm{flex:1;background:var(--sky);border-radius:10px;padding:10px 16px;font-size:21.5px;
+    color:var(--navy);line-height:1.55;min-width:0}
+  .fm.hl{background:#FDF3EC;border:2px solid var(--orange)}
+  .figs{flex:1;display:flex;flex-direction:column;gap:6px;background:#fff;padding:8px 12px;min-height:0}
+  .figs .fi{flex:1;display:grid;place-items:center;min-height:0}
+  .figs svg{width:100%;height:100%}
+  .figs .ft{flex:none;font-size:21px;color:var(--navy);font-weight:700;text-align:center;padding:4px 0}
+</style>
+</head>
+<body data-title="④ 继电器的描述函数" data-page="19 / 33">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="act-card" style="flex:1.42">
+        <div class="hd"><span style="flex:1">推导：由输出表达式到 N(X)</span></div>
+        <div class="bd">
+          <div class="ds" ><span class="no">1</span>
+            <div class="fm">先取 <span class="tex">0\le m\le 1</span>，输出：<span class="tex">y(t)=\begin{cases}0,&0\le\omega t\le\varphi_{1}\\[2pt]M,&\varphi_{1}<\omega t\le\varphi_{2}\\[2pt]0,&\varphi_{2}<\omega t\le\pi\end{cases}</span>，
+            <span class="tex">\varphi_{1}=\arcsin\frac{a}{X}</span>，<span class="tex">\varphi_{2}=\pi-\arcsin\frac{ma}{X}</span></div></div>
+          <div class="ds" data-step="1"><span class="no">2</span>
+            <span><b>奇对称</b>、输出 <b>180° 镜对称</b> ⇒ <span class="tex">A_{0}=0</span>。<span class="tex">m&lt;0</span> 时 <span class="tex">\varphi_{2}&gt;\pi</span>，输出含跨周期保持段；按实际开关区间积分，仍得下列同一通式。</span></div>
+          <div class="ds" data-step="2"><span class="no">3</span>
+            <div class="fm"><span class="tex">A_{1}=\frac{2}{\pi}\!\int_{\varphi_{1}}^{\varphi_{2}}\!M\cos\omega t\,\mathrm{d}\omega t=\frac{2M}{\pi}(\sin\varphi_{2}-\sin\varphi_{1})=\frac{2Ma}{\pi X}(m-1)</span></div></div>
+          <div class="ds" data-step="3"><span class="no">4</span>
+            <div class="fm"><span class="tex">B_{1}=\frac{2}{\pi}\!\int_{\varphi_{1}}^{\varphi_{2}}\!M\sin\omega t\,\mathrm{d}\omega t=\frac{2M}{\pi}(\cos\varphi_{1}-\cos\varphi_{2})=\frac{2M}{\pi}\!\left[\sqrt{1\!-\!\left(\frac{a}{X}\right)^{2}}+\sqrt{1\!-\!\left(\frac{ma}{X}\right)^{2}}\right]</span></div></div>
+          <div class="ds" data-step="4"><span class="no">5</span>
+            <div class="fm hl">描述函数（<span class="tex">-1\le m\le 1,\ X\ge a</span>）：<br><span class="tex">N(X)=\frac{B_{1}+jA_{1}}{X}=\frac{2M}{\pi X}\!\left[\sqrt{1\!-\!\left(\frac{a}{X}\right)^{2}}+\sqrt{1\!-\!\left(\frac{ma}{X}\right)^{2}}\right]+j\frac{2Ma}{\pi X^{2}}(m-1)</span></div></div>
+        </div>
+      </div>
+      <div class="act-card" style="flex:1">
+        <div class="hd"><span style="flex:1">特性与输出波形（图 8-7）</span></div>
+        <div class="figs">
+          <div class="ft">继电器特性（死区 + 滞环）</div>
+          <div class="fi"><svg id="f-ch" viewBox="0 0 300 240" preserveAspectRatio="xMidYMid meet"></svg></div>
+          <div class="ft">正弦输入下的输出 y(ωt)</div>
+          <div class="fi"><svg id="f-wv" viewBox="0 0 300 250" preserveAspectRatio="xMidYMid meet"></svg></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">要点</span><span>N(X) 与返回系数 m 有关——m 决定虚部。</span></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const MF = '"Cambria Math","STIX Two Math",Georgia,"Times New Roman","Microsoft YaHei",serif';
+  const INK = "#16324F", BLUE = "#1D3FA0", MUT = "#5B6B8C", NAVY = "#12266E";
+  /* 参数（与 p09 继电器一致）：a=0.7，m=0.5 → ma=0.35，M=1.1 */
+  const A = 0.7, MA = 0.35, M = 1.1, X = 1.75;
+  const P1 = Math.asin(A / X), P2 = Math.PI - Math.asin(MA / X);
+  function frame(id, x0, x1, y0, y1, T, B) {
+    const svg = document.getElementById(id);
+    const mk = (t, a, p) => { const n = document.createElementNS(NS, t);
+      for (const k in a) n.setAttribute(k, a[k]); (p || svg).appendChild(n); return n; };
+    const L = 40, R = 290;
+    const Xf = x => L + (x - x0) / (x1 - x0) * (R - L);
+    const Yf = y => T + (y1 - y) / (y1 - y0) * (B - T);
+    const defs = mk("defs", {});
+    const m1 = mk("marker", { id: "ax" + id, markerWidth: 9, markerHeight: 8, refX: 6.5, refY: 3, orient: "auto" }, defs);
+    mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: MUT }, m1);
+    const m2 = mk("marker", { id: "cu" + id, markerWidth: 10, markerHeight: 8, refX: 6.5, refY: 3, orient: "auto" }, defs);
+    mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: BLUE }, m2);
+    mk("line", { x1: L - 6, y1: Yf(0), x2: R + 4, y2: Yf(0), stroke: MUT, "stroke-width": 2, "marker-end": `url(#ax${id})` });
+    mk("line", { x1: Xf(0), y1: B + 6, x2: Xf(0), y2: T - 8, stroke: MUT, "stroke-width": 2, "marker-end": `url(#ax${id})` });
+    const tx = (x, y, s, o) => { o = o || {};
+      const n = mk("text", { x, y, "font-size": o.fs || 16, "text-anchor": o.an || "middle",
+        fill: o.fill || NAVY, "font-style": "italic", "font-weight": o.b ? 700 : 400, "font-family": MF });
+      n.setAttribute("style", "paint-order:stroke;stroke:#FFF;stroke-width:4;stroke-linejoin:round");
+      n.textContent = s; return n; };
+    const poly = (pts, o) => { o = o || {};
+      mk("path", { d: "M" + pts.map(p => Xf(p[0]).toFixed(1) + "," + Yf(p[1]).toFixed(1)).join("L"),
+        fill: "none", stroke: o.color || BLUE, "stroke-width": o.w || 4,
+        "stroke-dasharray": o.dash || "none", "marker-end": o.arrow ? `url(#cu${id})` : "none" }); };
+    return { mk, Xf, Yf, tx, poly, L, R };
+  }
+  /* 上：继电器特性（死区 a + 滞环 ma，两值 ±M） */
+  (() => { const f = frame("f-ch", -2.4, 2.4, -1.8, 1.8, 20, 216);
+    f.poly([[MA, M], [2.25, M]]);
+    f.poly([[A, 0.02], [A, M]], { arrow: true });
+    f.poly([[MA, M], [MA, 0.02]], { arrow: true });
+    f.poly([[-A, 0], [A, 0]]);
+    f.poly([[-MA, -M], [-2.25, -M]]);
+    f.poly([[-A, -0.02], [-A, -M]], { arrow: true });
+    f.poly([[-MA, -M], [-MA, -0.02]], { arrow: true });
+    f.tx(284, f.Yf(0) + 22, "x", { fs: 19 });
+    f.tx(f.Xf(0) - 8, 15, "y", { fs: 19, an: "end" });
+    f.tx(f.Xf(0) - 8, f.Yf(0) + 17, "O", { an: "end", fill: MUT, fs: 16 });
+    f.tx(f.Xf(1.9), f.Yf(M) - 10, "M", { fs: 18 });
+    f.tx(f.Xf(-1.9), f.Yf(-M) + 21, "−M", { fs: 18 });
+    f.tx(f.Xf(A) + 2, f.Yf(0) + 19, "a", { fs: 18 });
+    f.tx(f.Xf(MA) - 8, f.Yf(0.55), "ma", { fs: 16, fill: MUT, an: "end" });
+  })();
+  /* 下：输出波形 y(ωt)（按 (8-17) 现算：φ₁=arcsin(a/X)，φ₂=π−arcsin(ma/X)） */
+  (() => { const f = frame("f-wv", 0, 2 * Math.PI, -2.3, 2.3, 22, 216);
+    const PI = Math.PI;
+    /* 输入正弦 x=Xsinωt（浅色虚线，真实幅值）与开关电平 a、ma */
+    const sp = [];
+    for (let i = 0; i <= 120; i++) { const t = i / 120 * 2 * PI; sp.push([t, X * Math.sin(t)]); }
+    f.poly(sp, { color: "#B9C6E4", w: 2, dash: "6 5" });
+    f.poly([[0, A], [2 * PI, A]], { color: "#C9D6F2", w: 1.6, dash: "4 5" });
+    f.poly([[0, MA], [2 * PI, MA]], { color: "#C9D6F2", w: 1.6, dash: "4 5" });
+    f.tx(f.Xf(0) - 8, f.Yf(A) + 5, "a", { an: "end", fill: MUT, fs: 16 });
+    f.tx(f.Xf(0) - 8, f.Yf(MA) + 5, "ma", { an: "end", fill: MUT, fs: 15 });
+    /* 输出脉冲串 */
+    f.poly([[0, 0], [P1, 0]]);
+    f.poly([[P1, 0], [P1, M]]); f.poly([[P1, M], [P2, M]]);
+    f.poly([[P2, M], [P2, 0]]); f.poly([[P2, 0], [PI + P1, 0]]);
+    f.poly([[PI + P1, 0], [PI + P1, -M]]); f.poly([[PI + P1, -M], [PI + P2, -M]]);
+    f.poly([[PI + P2, -M], [PI + P2, 0]]); f.poly([[PI + P2, 0], [2 * PI, 0]]);
+    /* 开关角虚线 */
+    f.poly([[P1, 0], [P1, M]], { color: "#8A97B5", w: 1.6, dash: "4 4" });
+    f.poly([[P2, 0], [P2, M]], { color: "#8A97B5", w: 1.6, dash: "4 4" });
+    f.tx(286, f.Yf(0) + 22, "ωt", { fs: 18 });
+    f.tx(f.Xf(0) - 8, 16, "y", { fs: 18, an: "end" });
+    f.tx(f.Xf(0) - 8, f.Yf(0) + 16, "O", { an: "end", fill: MUT, fs: 15 });
+    f.tx(f.Xf(P1), f.Yf(0) + 21, "φ₁", { fs: 17, fill: MUT });
+    f.tx(f.Xf(P2) - 8, f.Yf(0) + 21, "φ₂", { fs: 17, fill: MUT, an: "end" });
+    f.tx(f.Xf(PI) + 10, f.Yf(0) + 21, "π", { fs: 17, fill: MUT, an: "start" });
+    f.tx(f.Xf((P1 + P2) / 2), f.Yf(M) - 10, "M", { fs: 17 });
+    f.tx(f.Xf(PI + (P1 + P2) / 2), f.Yf(-M) + 21, "−M", { fs: 17 });
+  })();
+});
+</script>
+<script>/* qa-steps：截图自验钩子 */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

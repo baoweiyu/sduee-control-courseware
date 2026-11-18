@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>⑱ z 反变换：部分分式法 + 例7-7</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=700">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=700" defer></script>
+<style>
+  .row{display:flex;gap:20px;height:100%;min-height:0}
+  .lft{flex:.82;display:flex;flex-direction:column;min-height:0}
+  .lft .act-card{flex:1}
+  .rgt{flex:1.3;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:14px;padding:16px 24px}
+  .eq{background:var(--sky);border-radius:12px;padding:12px 16px;text-align:center;font-size:22.5px;color:var(--navy);line-height:1.6}
+  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .st{font-size:22px;color:var(--ink);line-height:1.62}
+  .st b{color:var(--navy)}
+  .prf{display:flex;gap:13px;align-items:flex-start;background:var(--sky);border-radius:10px;
+    padding:12px 16px;font-size:21.5px;line-height:1.55;color:var(--ink)}
+  .prf .num{flex:none;width:32px;height:32px;border-radius:50%;background:var(--blue);color:#fff;
+    font-weight:700;font-size:19px;display:grid;place-items:center}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 10px;min-height:0}
+  .figc svg{width:100%;height:100%}
+</style>
+</head>
+<body data-title="⑱ z 反变换：部分分式法 + 例7-7" data-page="31 / 56">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lft">
+        <div class="act-card">
+          <div class="hd"><span style="flex:1">方法 2：部分分式法（查表法）</span></div>
+          <div class="bd">
+            <div class="st">与部分分式法求拉氏反变换相似，但求 z 反变换时要把 <span class="tex">\dfrac{F(z)}{z}</span> 展开成部分分式——</div>
+            <div class="st">因为 F(z) 的分子通常都含有 <span class="tex">z</span>，除以 z 后才能与基本变换对 <span class="tex">\dfrac{z}{z-a}\leftrightarrow a^{n}</span> 对上号。</div>
+            <div class="eq hl">关键一步：先展 <span class="tex">\dfrac{F(z)}{z}</span>，<b>再逐项乘回 z、查表反变换</b>。</div>
+            <div class="st">部分分式法能得到 f(nT) 的<span class="kw-r">闭合表达式</span>。</div>
+          </div>
+        </div>
+      </div>
+      <div class="rgt">
+        <div class="act-card" style="flex:1.28">
+          <div class="hd"><span style="flex:1">例 7-7　<span class="tex">F(z)=\dfrac{0.5z}{(z-1)(z-0.5)}</span>，求 z 反变换</span></div>
+          <div class="bd">
+<div data-step="1" style="display:none"></div> <!-- 首步驱动动画；基础内容常显 -->
+            <div class="prf" ><span class="num">1</span><span>将 F(z)/z 展开成部分分式：<span class="tex">\dfrac{F(z)}{z}=\dfrac{0.5}{(z-1)(z-0.5)}=\dfrac{1}{z-1}-\dfrac{1}{z-0.5}</span></span></div>
+            <div class="prf" data-step="2"><span class="num">2</span><span>两边乘回 z：<span class="tex">F(z)=\dfrac{z}{z-1}-\dfrac{z}{z-0.5}</span></span></div>
+            <div class="prf" data-step="3"><span class="num">3</span><span>逐项查表（<span class="tex">\frac{z}{z-1}\leftrightarrow 1</span>，<span class="tex">\frac{z}{z-a}\leftrightarrow a^{n}</span>）：<span class="tex">f^{*}(t)=\Big[1-e^{-\frac{\ln 2}{T}t}\Big]\delta_{T}(t)=\sum_{n=0}^{\infty}\left(1-0.5^{n}\right)\delta(t-nT)</span></span></div>
+          </div>
+        </div>
+        <div class="act-card figc" style="flex:1">
+          <div class="hd" style="font-size:22px"><span style="flex:1">f(nT) = 1 − 0.5ⁿ（n = 0…10，程序现算）</span></div>
+          <div class="bd2"><svg id="fs"></svg></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">结论</span><span>查表法的关键一步：先提出 <span class="tex">F(z)/z</span> 再展开部分分式。</span></div>
+<script src="../fig.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  /* f(nT)=1-0.5^n，程序现算 */
+  const pts = [];
+  for (let n = 0; n <= 10; n++) pts.push([n, 1 - Math.pow(0.5, n)]);
+  const Fs = DZ.stem("fs", { pts, xlabel: "n", ylabel: "f(nT)", color: "#0E7A36" }, { vw: 960, vh: 330 });
+  /* ③ 反变换得到序列，stem 随第 3 步整幅呈现 */
+  BD.wire(3, () => {}, { figs: [Fs], FS: [0, 0, 0, 1] });
+});
+</script>
+<script>/* qa-steps：?steps=N 自动前进 N 步 */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

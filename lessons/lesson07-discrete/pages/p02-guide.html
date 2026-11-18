@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>本章导学</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=700">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=700" defer></script>
+<style>
+  .row{display:flex;gap:24px;height:100%;min-height:0}
+  .lft{flex:1;display:flex;flex-direction:column;gap:18px;min-height:0}
+  .rgt{flex:1.15;display:flex;flex-direction:column;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.hd{flex:none}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:22px;padding:26px 26px;font-size:23px;line-height:1.65;min-height:0;overflow:hidden}
+  .goal{display:flex;gap:16px;align-items:flex-start;background:var(--sky);border:2px solid var(--line);border-radius:14px;padding:24px 22px;font-size:23px;line-height:1.6;color:var(--ink)}
+  .goal .no{flex:none;width:48px;height:48px;border-radius:50%;background:var(--navy);color:#fff;font-size:26px;font-weight:700;display:grid;place-items:center}
+  .goal b{color:var(--navy)}
+  /* 知识地图 */
+  .map{display:flex;flex-direction:column;gap:14px;height:100%;justify-content:space-evenly}
+  .band{border:2px solid var(--line);border-radius:14px;overflow:hidden;background:#fff}
+  .band .bh{background:var(--navy);color:#fff;font-size:23px;font-weight:700;padding:10px 20px;letter-spacing:2px}
+  .band .bb{display:flex;align-items:stretch;gap:0;padding:12px 16px;background:var(--sky)}
+  .node{flex:1;background:#fff;border:2px solid var(--blue);border-radius:10px;padding:12px 8px;text-align:center;font-size:21.5px;font-weight:700;color:var(--navy);display:grid;place-items:center;line-height:1.35}
+  .arr{flex:none;align-self:center;color:var(--orange);font-size:30px;font-weight:700;padding:0 6px}
+  .mainline{background:#FDF3EC;border:2px solid var(--orange);border-radius:12px;padding:12px 20px;font-size:22px;color:var(--ink);line-height:1.5}
+  .mainline b{color:var(--orange)}
+</style>
+</head>
+<body data-title="本章导学" data-page="2 / 56">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lft">
+        <div class="act-card" style="flex:1">
+          <div class="hd"><span style="flex:1">学习目标</span></div>
+          <div class="bd">
+            <div class="goal"><span class="no">1</span><span><b>理解采样过程与采样定理</b>——会把采样看作脉冲调制，会用 <span class="tex">\omega_{s}\geq 2\omega_{max}</span> 判断采样频率是否足够。</span></div>
+            <div class="goal"><span class="no">2</span><span><b>掌握零阶保持器的特性</b>——知道 <span class="tex">G_{h}(s)=\dfrac{1-e^{-Ts}}{s}</span>、滞后 <span class="tex">T/2</span> 及其对稳定性的影响。</span></div>
+            <div class="goal"><span class="no">3</span><span><b>会用三种方法求 z 变换与 z 反变换</b>——级数求和、部分分式、留数，并熟用线性、延迟、初值、终值等性质。</span></div>
+            <div class="goal"><span class="no">4</span><span><b>会分析离散系统</b>——求脉冲传递函数、判 z 平面稳定性（劳斯判据）、算稳态误差系数。</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="rgt">
+        <div class="act-card">
+          <div class="hd"><span style="flex:1">本章知识地图</span></div>
+          <div class="bd" style="padding:16px 22px">
+            <div class="map">
+              <div class="band">
+                <div class="bh">第一层　信号离散化</div>
+                <div class="bb">
+                  <div class="node">采样过程<br>＝脉冲调制</div><div class="arr">→</div>
+                  <div class="node">采样定理<br><span class="tex">\omega_{s}\geq 2\omega_{max}</span></div><div class="arr">→</div>
+                  <div class="node">保持器<br>零阶 / 一阶</div>
+                </div>
+              </div>
+              <div class="band">
+                <div class="bh">第二层　数学工具</div>
+                <div class="bb">
+                  <div class="node">z 变换<br>定义·三方法</div><div class="arr">→</div>
+                  <div class="node">z 反变换<br>长除·分式·留数</div><div class="arr">→</div>
+                  <div class="node">差分方程<br>时域模型</div>
+                </div>
+              </div>
+              <div class="band">
+                <div class="bh">第三层　系统分析</div>
+                <div class="bb">
+                  <div class="node">脉冲传递函数<br>开环 / 闭环</div><div class="arr">→</div>
+                  <div class="node">稳定性<br>极点在单位圆内</div><div class="arr">→</div>
+                  <div class="node">稳态误差<br><span class="tex">K_{p},K_{v},K_{a}</span></div>
+                </div>
+              </div>
+              <div class="mainline"><b>主线：</b>连续理论 → 离散化（采样＋保持）→ z 域模型 → 判稳与稳态误差——换的是数学工具，不换的是反馈控制的本质。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">导学</span><span>本章回答一个问题：<b>连续系统的分析方法，如何搬到采样与 z 域中。</b></span></div>
+</div></div>
+</body>
+</html>

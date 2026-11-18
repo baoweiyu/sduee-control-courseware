@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>⑤ 理想脉冲序列的数学描述</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=700">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=700" defer></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:1.12;display:flex;flex-direction:column;min-height:0}
+  .rgt{flex:1;display:flex;flex-direction:column;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:16px;padding:22px 26px}
+  .st{font-size:23.5px;color:var(--ink);line-height:1.65}
+  .eq{background:var(--sky);border-radius:12px;padding:16px 18px;text-align:center;font-size:24px;line-height:1.55}
+  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:6px 12px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .figc .capnote{flex:none;font-size:20px;color:var(--navy);background:var(--sky);border-radius:12px;padding:9px 18px;margin:0 14px 12px;line-height:1.5}
+</style>
+</head>
+<body data-title="⑤ 理想脉冲序列的数学描述" data-page="8 / 56">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lft">
+        <div class="act-card" style="flex:1">
+          <div class="hd"><span style="flex:1">实际系统：t&lt;0 时 e(t)=0</span></div>
+          <div class="bd">
+            <div class="st" >控制系统中一般 <span class="tex">t&lt;0</span> 时 <span class="tex">e(t)=0</span>，故求和只需从 <span class="tex">n=0</span> 起：</div>
+            <div class="eq"><span class="tex">e^{*}(t)=e(t)\delta_{T}(t)=e(t)\sum_{n=0}^{\infty}\delta(t-nT)</span></div>
+            <div class="eq" data-step="2"><span class="tex">=\sum_{n=0}^{\infty}e(t)\delta(t-nT)</span></div>
+            <div class="eq hl" data-step="3"><span class="tex">e^{*}(t)=\sum_{n=0}^{\infty}e(nT)\delta(t-nT)</span></div>
+            <div class="st" data-step="3"><span class="tex">\delta(t-nT)</span>：发生在 <span class="tex">t=nT</span> 时刻的<span class="kw-r">理想单位脉冲</span>（面积 1、宽度 0）。</div>
+          </div>
+        </div>
+      </div>
+      <div class="rgt">
+        <div class="act-card figc" style="flex:1">
+          <div class="hd"><span style="flex:1">理想单位脉冲 <span class="tex">\delta(t-nT)</span> 示意</span></div>
+          <div class="bd2"><svg id="imp"></svg></div>
+          <div class="capnote">每个脉冲是 <span class="tex">t=nT</span> 处的单位强度箭头；序列 <span class="tex">\delta_{T}(t)</span> 即以 <span class="tex">T</span> 为周期的无限多个这种脉冲。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">结论</span><span>采样 = 以 <span class="tex">e(t)</span> 为被调制信号、<span class="tex">\delta_{T}(t)</span> 为载波的<span class="kw-r">脉冲调制</span>。</span></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("imp");
+  svg.setAttribute("viewBox", "0 0 960 460");
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag);
+    for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; };
+  const INK = "#16324F", BLUE = "#1D3FA0", AX = "#5B6B8C", ORG = "#C2410C";
+  const defs = mk("defs", {}, svg);
+  const m = mk("marker", { id: "impa", markerWidth: 12, markerHeight: 10, refX: 6, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L8,3.4 L0,6.8 Z", fill: BLUE }, m);
+  const ma = mk("marker", { id: "impax", markerWidth: 12, markerHeight: 10, refX: 6, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L8,3.4 L0,6.8 Z", fill: AX }, ma);
+  const X0 = 260, X1 = 890, YB = 360, H = 240;
+  mk("line", { x1: X0 - 30, y1: YB, x2: X1 + 24, y2: YB, stroke: AX, "stroke-width": 2.6, "marker-end": "url(#impa)" });
+  /* 纵轴（完整坐标轴）：原点 (X0-30, YB)，向上箭头 + 0 刻度 */
+  mk("line", { x1: X0 - 30, y1: YB, x2: X0 - 30, y2: 64, stroke: AX, "stroke-width": 2.6, "marker-end": "url(#impax)" });
+  const tx = (x, y, s, o) => { const t = mk("text", Object.assign({ x, y, "font-size": (o && o.fs) || 26,
+    "text-anchor": (o && o.an) || "middle", fill: (o && o.fill) || "#1B3B8B",
+    "font-weight": (o && o.b) ? 700 : 400, "font-style": (o && o.it) ? "italic" : "normal",
+    "font-family": '"Cambria Math","STIX Two Math",Georgia,"Times New Roman","Microsoft YaHei",serif' }, {}), svg);
+    t.textContent = s; return t; };
+  tx(X1 + 18, YB + 40, "t", { fs: 30, it: 1, b: 1, fill: AX });
+  const yLabel = tx(X0 - 42, 58, "δ", { fs: 27, it: 1, b: 1, fill: AX, an: "end" });
+  const ySub = mk("tspan", { dy: 7, "font-size": 18 }, yLabel); ySub.textContent = "T";
+  const yRest = mk("tspan", { dy: -7, "font-size": 27 }, yLabel); yRest.textContent = "(t)";
+  tx(X0 - 34, YB + 40, "0", { fs: 27, fill: AX });
+  /* 三根脉冲 δ(t)、δ(t−T)、δ(t−2T) + 省略号 */
+  const xs = [230, 450, 670], labs = ["δ(t)", "δ(t−T)", "δ(t−2T)"], ts = ["0", "T", "2T"];
+  xs.forEach((x, i) => {
+    mk("line", { x1: x, y1: YB, x2: x, y2: YB - H, stroke: BLUE, "stroke-width": 4, "marker-end": "url(#impa)" });
+    tx(x, YB - H - 26, labs[i], { fs: 28, fill: BLUE, b: 1 });
+    tx(x, YB + 40, ts[i], { fs: 27, it: 1, fill: AX });
+  });
+  tx(800, YB - 120, "⋯", { fs: 44, fill: AX });
+  /* 高度 1 标注 */
+  mk("line", { x1: X0 - 6, y1: YB - H, x2: xs[0] - 14, y2: YB - H, stroke: ORG, "stroke-width": 2, "stroke-dasharray": "7 5" });
+  tx(X0 - 30, YB - H + 8, "1", { fs: 27, fill: ORG, b: 1, an: "end" });
+  tx(480, YB + 80, "强度 1、宽度 0 的理想脉冲（箭头高度表示强度）", { fs: 26, fill: AX });
+});
+</script>
+<script>/* qa-steps：?steps=N 自动前进 N 步 */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

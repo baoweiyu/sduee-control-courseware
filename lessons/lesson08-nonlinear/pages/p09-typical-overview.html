@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>⑥ 典型非线性环节总览</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=800">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=800" defer></script>
+<style>
+  .row{display:flex;gap:18px;height:100%;min-height:0}
+  .col{flex:1;display:flex;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden;width:100%}
+  .act-card>.hd{font-size:24px}
+  .figbox{flex:1;display:grid;place-items:center;background:#fff;padding:6px 8px;min-height:0}
+  .figbox svg{width:100%;height:100%}
+  .one{flex:none;font-size:21px;color:var(--ink);line-height:1.55;padding:12px 16px 5px}
+  .one b{color:var(--navy)}
+  .ex{flex:none;font-size:20.5px;color:var(--muted);line-height:1.55;padding:5px 16px 16px}
+  .ex b{color:var(--navy)}
+</style>
+</head>
+<body data-title="⑥ 典型非线性环节总览" data-page="9 / 33">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="col"><div class="act-card">
+        <div class="hd"><span style="flex:1">死区（不灵敏区）</span></div>
+        <div class="figbox"><svg id="f-dz" viewBox="0 0 320 400" preserveAspectRatio="xMidYMid meet"></svg></div>
+        <div class="one"><span class="tex">|x_{1}|\le\Delta</span> 时输出为 0，超过阈值后<b>线性输出</b>。</div>
+        <div class="ex"><b>实例：</b>电动机静摩擦、触点预压力、电路阈值。</div>
+      </div></div>
+      <div class="col"><div class="act-card">
+        <div class="hd"><span style="flex:1">饱和</span></div>
+        <div class="figbox"><svg id="f-sat" viewBox="0 0 320 400" preserveAspectRatio="xMidYMid meet"></svg></div>
+        <div class="one"><span class="tex">|x_{1}|\le a</span> 时线性放大，超过后输出<b>封顶 ka</b>。</div>
+        <div class="ex"><b>实例：</b>晶体管大信号输入、电机变压器磁饱和。</div>
+      </div></div>
+      <div class="col"><div class="act-card">
+        <div class="hd"><span style="flex:1">间隙</span></div>
+        <div class="figbox"><svg id="f-gap" viewBox="0 0 320 400" preserveAspectRatio="xMidYMid meet"></svg></div>
+        <div class="one">输入反向时输出<b>保持不动</b>，越过间隙 <span class="tex">2b</span> 后才重新跟随。</div>
+        <div class="ex"><b>实例：</b>齿轮传动间隙（转向改变时从动轮滞后）。</div>
+      </div></div>
+      <div class="col"><div class="act-card">
+        <div class="hd"><span style="flex:1">继电器</span></div>
+        <div class="figbox"><svg id="f-rl" viewBox="0 0 320 400" preserveAspectRatio="xMidYMid meet"></svg></div>
+        <div class="one">触点式<b>两值输出</b> ±M，同时含死区与滞环（返回系数 <span class="tex">m</span>）。</div>
+        <div class="ex"><b>实例：</b>电磁继电器：动作电流大于返回电流。</div>
+      </div></div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">要点</span><span>死区、饱和、间隙、继电器——四大典型，本节逐一分析。</span></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const MF = '"Cambria Math","STIX Two Math",Georgia,"Times New Roman","Microsoft YaHei",serif';
+  const INK = "#16324F", BLUE = "#1D3FA0", MUT = "#5B6B8C", NAVY = "#12266E";
+  /* 公共坐标架：数据域 x∈[-2.4,2.4]、y∈[-1.8,1.8] 映射到 viewBox 320×400 */
+  function frame(id) {
+    const svg = document.getElementById(id);
+    const mk = (t, a, p) => { const n = document.createElementNS(NS, t);
+      for (const k in a) n.setAttribute(k, a[k]); (p || svg).appendChild(n); return n; };
+    const L = 34, R = 288, T = 22, B = 378;         // 绘图区像素边界
+    const X = x => L + (x + 2.4) / 4.8 * (R - L);
+    const Y = y => T + (1.8 - y) / 3.6 * (B - T);
+    const defs = mk("defs", {});
+    const m1 = mk("marker", { id: "ax" + id, markerWidth: 9, markerHeight: 8, refX: 6.5, refY: 3, orient: "auto" }, defs);
+    mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: MUT }, m1);
+    const m2 = mk("marker", { id: "cu" + id, markerWidth: 10, markerHeight: 8, refX: 6.5, refY: 3, orient: "auto" }, defs);
+    mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: BLUE }, m2);
+    mk("line", { x1: L - 6, y1: Y(0), x2: R + 6, y2: Y(0), stroke: MUT, "stroke-width": 2, "marker-end": `url(#ax${id})` });
+    mk("line", { x1: X(0), y1: B + 6, x2: X(0), y2: T - 6, stroke: MUT, "stroke-width": 2, "marker-end": `url(#ax${id})` });
+    const tx = (x, y, s, o) => { o = o || {};
+      const n = mk("text", { x, y, "font-size": o.fs || 17, "text-anchor": o.an || "middle",
+        fill: o.fill || NAVY, "font-style": "italic", "font-weight": o.b ? 700 : 400, "font-family": MF });
+      n.setAttribute("style", "paint-order:stroke;stroke:#FFF;stroke-width:4;stroke-linejoin:round");
+      n.textContent = s; return n; };
+    tx(R + 2, Y(0) + 21, "x", { fs: 19 }); tx(R + 15, Y(0) + 23, "1", { fs: 13 });
+    tx(X(0) - 10, T - 2, "x", { fs: 19, an: "end" }); tx(X(0) - 2, T + 0, "2", { fs: 13, an: "end" });
+    tx(X(0) - 8, Y(0) + 17, "O", { an: "end", fill: MUT, fs: 16 });
+    const poly = (pts, o) => { o = o || {};
+      mk("path", { d: "M" + pts.map(p => X(p[0]).toFixed(1) + "," + Y(p[1]).toFixed(1)).join("L"),
+        fill: "none", stroke: o.color || BLUE, "stroke-width": o.w || 4,
+        "stroke-dasharray": o.dash || "none", "marker-end": o.arrow ? `url(#cu${id})` : "none" }); };
+    return { mk, X, Y, tx, poly };
+  }
+  /* 死区：Δ=0.7，k=1 → x2=0 (|x1|≤Δ)，x2=k(x1∓Δ) */
+  (() => { const f = frame("f-dz"), D = 0.7;
+    f.poly([[-2.2, -1.5], [-D, 0], [D, 0], [2.2, 1.5]]);
+    f.tx(f.X(D), f.Y(0) + 18, "Δ", { fs: 17 }); f.tx(f.X(-D), f.Y(0) + 18, "−Δ", { fs: 17 });
+  })();
+  /* 饱和：a=0.9，k=1.5 → 线性段 x2=kx1，|x1|>a 时 x2=±ka=±1.35 */
+  (() => { const f = frame("f-sat"), a = 0.9, ka = 1.35;
+    f.poly([[-2.2, -ka], [-a, -ka], [a, ka], [2.2, ka]]);
+    f.tx(f.X(a) + 4, f.Y(0) + 18, "a", { fs: 17 });
+    f.tx(f.X(1.85), f.Y(ka) - 10, "ka", { fs: 17 });
+  })();
+  /* 间隙：b=0.55，k=1 → 回线：上支 x2=x1+b、下支 x2=x1−b，端部水平保持段 */
+  (() => { const f = frame("f-gap"), b = 0.55, ym = 1.5;
+    f.poly([[-0.95, -ym], [2.05, ym]], { arrow: true });           // 下支（输入增大方向）
+    f.poly([[0.95, ym], [-2.05, -ym]], { arrow: true });           // 上支（输入减小方向）
+    f.poly([[0.95, ym], [2.05, ym]]); f.poly([[-0.95, -ym], [-2.05, -ym]]);
+    f.tx(f.X(b) + 2, f.Y(0) + 18, "b", { fs: 17 });
+    f.tx(f.X(1.5), f.Y(ym) - 10, "2b", { fs: 17, fill: MUT });
+  })();
+  /* 继电器：a=0.7，m=0.5（ma=0.35），M=1.1 → 死区 + 滞环两值特性 */
+  (() => { const f = frame("f-rl"), a = 0.7, ma = 0.35, M = 1.1;
+    f.poly([[ma, M], [2.2, M]]);                                    // +M 平台
+    f.poly([[a, 0.02], [a, M]], { arrow: true });                   // 吸合（↑）
+    f.poly([[ma, M], [ma, 0.02]], { arrow: true });                 // 返回（↓）
+    f.poly([[-a, 0], [a, 0]]);                                      // 零输出段
+    f.poly([[-ma, -M], [-2.2, -M]]);                                // −M 平台
+    f.poly([[-a, -0.02], [-a, -M]], { arrow: true });
+    f.poly([[-ma, -M], [-ma, -0.02]], { arrow: true });
+    f.tx(f.X(1.9), f.Y(M) - 10, "M", { fs: 17 });
+    f.tx(f.X(-1.9), f.Y(-M) + 20, "−M", { fs: 17 });
+    f.tx(f.X(a) + 2, f.Y(0) + 18, "a", { fs: 17 });
+    f.tx(f.X(ma) - 8, f.Y(0.55), "ma", { fs: 16, fill: MUT, an: "end" });
+  })();
+});
+</script>
+</div></div>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>⑩ 稳定性分析原理</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=800">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=800" defer></script>
+<script src="../fig.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .lft .bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:14px;padding:18px 22px;min-height:0}
+  .eq{background:var(--sky);border-radius:12px;padding:12px 16px;text-align:center;font-size:21px;position:relative}
+  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .st{font-size:21px;color:var(--ink);line-height:1.6}
+  .st b{color:var(--navy)}
+  .chain{display:flex;gap:10px;align-items:flex-start}
+  .chain .idx{flex:none;width:32px;height:32px;border-radius:50%;background:var(--blue);color:#fff;font-size:20px;font-weight:700;display:grid;place-items:center;margin-top:4px}
+  .chain .cc{flex:1;min-width:0}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 10px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .figc .capnote{flex:none;font-size:21px;color:var(--navy);background:var(--sky);border-radius:12px;padding:10px 18px;margin:0 14px 12px;line-height:1.55}
+</style>
+</head>
+<body data-title="⑩ 稳定性分析原理" data-page="25 / 33">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="act-card lft" style="flex:1.08">
+        <div class="hd"><span style="flex:1">从奈氏判据到负倒特性：推导链</span></div>
+        <div class="bd">
+          <div class="chain" ><span class="idx">1</span><div class="cc">
+            <div class="st" style="margin-bottom:8px">把描述函数 <b>N(X)</b> 作为非线性环节的「<b>等效复增益</b>」，图 8-8 系统在<b>基波近似下</b>的闭环频率关系：</div>
+            <div class="eq"><span class="tex">\frac{C(j\omega)}{R(j\omega)}=\frac{N(X)\,G(j\omega)}{1+N(X)\,G(j\omega)}</span></div>
+          </div></div>
+          <div class="chain" data-step="1"><span class="idx">2</span><div class="cc">
+            <div class="st" style="margin-bottom:8px">闭环特征方程式：</div>
+            <div class="eq"><span class="tex">1+N(X)\,G(j\omega)=0</span></div>
+          </div></div>
+          <div class="chain" data-step="2"><span class="idx">3</span><div class="cc">
+            <div class="st" style="margin-bottom:8px">等价形式——与线性系统 <span class="tex">G(j\omega)=-1</span> 相对应：</div>
+            <div class="eq hl"><span class="tex">G(j\omega)=-\frac{1}{N(X)}</span></div>
+            <div class="st" style="margin-top:8px"><span class="tex">-\frac{1}{N(X)}</span> 称为<b>负倒特性</b>，相当于线性系统中<b>移动的临界点 (−1, j0)</b>（随 X 移动）。</div>
+          </div></div>
+          <div class="chain" data-step="3"><span class="idx">4</span><div class="cc">
+            <div class="st">若对某一特定的 <b>X₀、ω₀</b>，上面的特征方程（或其等价形式）成立，则得到一个<b>正弦周期解候选</b>——交点给出近似振幅 X₀ 与频率 ω₀；能否形成可观测的自激振荡，还须检查振幅扰动后的趋离方向。</div>
+          </div></div>
+        </div>
+      </div>
+      <div class="act-card figc" style="flex:1">
+        <div class="hd"><span style="flex:1">复平面上的两条曲线（程序精确绘制）</span></div>
+        <div class="bd2"><svg id="fig"></svg></div>
+        <div class="capnote">G(jω)：K=15，交负实轴于 <b>−1</b>（ω=√50）；−1/N(X)：饱和特性 k=2、a=1 的负实轴射线（X=1 时 −0.5，X 增大向左），交点红圈即 G(jω)=−1/N(X) 的解。</div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">要点</span><span>判稳核心——比较 G(jω) 与 −1/N(X) 两条曲线的相对位置。</span></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const BLUE = "#1D3FA0", PUR = "#7B21C8", RED = "#D63A2F", MUT = "#5B6B8C";
+  /* G(jω)=K/[jω(0.1jω+1)(0.2jω+1)]=K/[−0.3ω²+jω(1−0.02ω²)]，K=15 */
+  const K = 15;
+  const G = w => {
+    const re = -0.3 * w * w, im = w * (1 - 0.02 * w * w), d = re * re + im * im;
+    return [K * re / d, -K * im / d];
+  };
+  const gPts = [];
+  for (let w = 3.7; w <= 400; w *= 1.012) gPts.push(G(w));
+  /* 饱和特性 k=2、a=1：N(X)=(2k/π)[arcsin(1/X)+(1/X)√(1−1/X²)]，−1/N 为负实轴射线 X=1→−0.5 */
+  const NS = X => (4 / Math.PI) * (Math.asin(1 / X) + (1 / X) * Math.sqrt(1 - 1 / (X * X)));
+  const nPts = [];
+  for (let X = 1; X <= 30; X += 0.02) nPts.push([-1 / NS(X), 0]);
+  const F = DZ.plot("fig", {
+    xlim: [-4.8, 1.2], ylim: [-1.95, 1.95], xlabel: "Re", ylabel: "Im",
+    curves: [
+      { pts: gPts, color: BLUE },
+      { pts: nPts, color: PUR, width: 5 }
+    ]
+  }, { vw: 960, vh: 620, equal: true, static: true });
+  const g = F.gDyn;
+  /* 交点 (−1, j0)：程序断言 Im[G]=0 ⇒ ω=√50，Re=−K/15=−1 */
+  F.mk("circle", { cx: F.X(-1), cy: F.Y(0), r: 13, fill: "none", stroke: RED, "stroke-width": 4 }, g);
+  F.mk("circle", { cx: F.X(-1), cy: F.Y(0), r: 6, fill: RED, stroke: "#fff", "stroke-width": 2.5 }, g);
+  F.tx(g, F.X(-1), F.Y(0) - 46, "交点 (X_{0}, ω_{0})", { fs: 22, fill: RED, b: 1 });
+  /* 曲线名标注 */
+  F.tx(g, F.X(-2.55), F.Y(-1.55), "G(jω)", { fs: 24, fill: BLUE, b: 1, it: 1 });
+  F.tx(g, F.X(-3.6), F.Y(0) + 44, "−1/N(X)：移动的临界点", { fs: 22, fill: PUR, b: 1 });
+  /* −1/N 方向箭头（X 增大向左） */
+  const defs = F.svg.querySelector("defs");
+  const m = BD.mk("marker", { id: "arP25", markerWidth: 11, markerHeight: 9, refX: 7, refY: 3.2, orient: "auto" }, defs);
+  BD.mk("path", { d: "M0,0 L7.5,3.2 L0,6.4 Z", fill: PUR }, m);
+  const ar = F.mk("line", { x1: F.X(-2.3), y1: F.Y(0), x2: F.X(-2.3) + 1, y2: F.Y(0), stroke: "none", "marker-end": "url(#arP25)" }, g);
+  ar.setAttribute("transform", `rotate(180 ${F.X(-2.3)} ${F.Y(0)})`);
+  F.tx(g, F.X(-2.32), F.Y(0) - 32, "X 增大", { fs: 22, fill: MUT });
+  F.tx(g, F.X(-0.52), F.Y(0) + 48, "X=1：−0.5", { fs: 22, fill: PUR, b: 1 });
+});
+</script>
+<script>/* qa-steps：截图自验钩子 */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>⑬ 例7-5 留数法：f(t)=cosωt</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=700">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=700" defer></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:1.28;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .rgt{flex:.78;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:11px;padding:13px 24px}
+  .st{font-size:21.5px;color:var(--ink);line-height:1.6}
+  .eq{background:var(--sky);border-radius:12px;padding:10px 14px;text-align:center;font-size:22.5px;color:var(--navy)}
+  .eq .no{color:var(--muted);font-size:21px}
+  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+</style>
+</head>
+<body data-title="⑬ 例7-5 留数法：f(t)=cosωt" data-page="26 / 56">
+<div class="act-stage"><div class="act-slide">
+<div class="act-body has-note">
+  <div class="row">
+    <div class="lft">
+      <div class="act-card" style="flex:.62">
+        <div class="hd" style="font-size:23px"><span style="flex:1">【例 7-5】题设</span></div>
+        <div class="bd"><div class="st">求 <span class="tex">f(t)=\cos\omega t</span> 的 z 变换（留数法），<span class="tex">F(s)=\dfrac{s}{s^{2}+\omega^{2}}=\dfrac{s}{(s+j\omega)(s-j\omega)}</span>。</div></div>
+      </div>
+      <div class="act-card" style="flex:2.2">
+        <div class="hd" style="font-size:23px"><span style="flex:1">解：共轭极点各求留数再相加</span></div>
+        <div class="bd">
+          <div ><div class="st">① <span class="tex">F(s)</span> 有两个一阶极点 <span class="tex">s=\mp j\omega</span>，由一阶极点留数公式：</div>
+            <div class="eq"><span class="tex">R_{1}=\left[\frac{s}{s-j\omega}\cdot\frac{z}{z-e^{sT}}\right]_{s=-j\omega}=\frac{1}{2}\cdot\frac{z}{z-e^{-j\omega T}},\quad R_{2}=\frac{1}{2}\cdot\frac{z}{z-e^{j\omega T}}</span></div></div>
+          <div data-step="1"><div class="st">② 相加并通分（欧拉公式化简，见右卡）：</div>
+            <div class="eq"><span class="tex">F(z)=R_{1}+R_{2}=\frac{1}{2}\!\left[\frac{z}{z-e^{-j\omega T}}+\frac{z}{z-e^{j\omega T}}\right]</span></div>
+            <div class="eq hl"><span class="tex">F(z)=\frac{z^{2}-z\cos\omega T}{z^{2}-2z\cos\omega T+1}</span></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="rgt">
+      <div class="act-card" data-step="2" style="flex:1.25">
+        <div class="hd" style="font-size:23px"><span style="flex:1">化简要点：欧拉公式</span></div>
+        <div class="bd">
+          <div class="eq"><span class="tex">e^{j\omega T}+e^{-j\omega T}=2\cos\omega T</span></div>
+          <div class="eq"><span class="tex">e^{j\omega T}\cdot e^{-j\omega T}=1</span></div>
+          <div class="st">分母：<span class="tex">(z-e^{j\omega T})(z-e^{-j\omega T})=z^{2}-2z\cos\omega T+1</span></div>
+        </div>
+      </div>
+      <div class="act-card" data-step="2" style="flex:1">
+        <div class="hd" style="font-size:23px"><span style="flex:1">方法回顾</span></div>
+        <div class="bd">
+          <div class="st">共轭复极点 <span class="tex">s=\mp j\omega</span> 各按<span style="color:var(--navy);font-weight:700">一阶极点</span>求留数，结果中的虚指数必成对消去。</div>
+          <div class="st">最终 <span class="tex">F(z)</span> 只含实系数——<span class="kw-r">虚数不出现在答案里</span>。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">结论</span><span><span class="tex">Z[\cos\omega t]=\dfrac{z^{2}-z\cos\omega T}{z^{2}-2z\cos\omega T+1}</span>，极点在单位圆上。</span></div>
+<script>/* qa-steps：?steps=N 自动前进 N 步 */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

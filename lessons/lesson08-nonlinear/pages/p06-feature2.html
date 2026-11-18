@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>③ 特征二：频率畸变</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=800">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=800" defer></script>
+<script src="../fig.js"></script>
+<style>
+  .row{display:flex;gap:24px;height:100%;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card .bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:12px;padding:16px 26px;min-height:0}
+  .st{font-size:23px;color:var(--ink);line-height:1.62}
+  .st b{color:var(--navy)}
+  .eq{background:var(--sky);border-radius:12px;padding:10px 16px;text-align:center;font-size:23.5px}
+  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:6px 12px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .figc .capnote{flex:none;font-size:21.5px;color:var(--navy);background:var(--sky);border-radius:12px;
+    padding:10px 18px;margin:0 14px 12px;line-height:1.55}
+</style>
+</head>
+<body data-title="③ 特征二：频率畸变" data-page="6 / 33">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="act-card" style="flex:0.92">
+        <div class="hd"><span style="flex:1">线性系统：频率保持不变</span></div>
+        <div class="bd">
+          <div class="st" >输入为正弦信号时，输出的稳态分量是<b>同频率</b>的正弦量——只有幅值与相位改变：</div>
+          <div class="eq"><span class="tex">x(t)=X\sin\omega t\;\Rightarrow\;y(t)=X\,|G(j\omega)|\sin(\omega t+\angle G(j\omega))</span></div>
+          <div class="st" data-step="2">幅值 <span class="tex">|G(j\omega)|</span>、相位 <span class="tex">\angle G(j\omega)</span> 都是频率 <span class="tex">\omega</span> 的函数，但<b>不会产生新频率</b>——传递函数、频率特性等概念皆由此而来。</div>
+        </div>
+      </div>
+      <div class="act-card figc" style="flex:1.3">
+        <div class="hd"><span style="flex:1">非线性系统：输出波形畸变（产生新频率）</span></div>
+        <div class="bd2"><svg id="wave"></svg></div>
+        <div class="capnote" data-step="3">例：正弦输入经 <span class="tex">y(t)=x^{2}(t)</span> —— <span class="tex">y(t)=\dfrac{X^{2}}{2}-\dfrac{X^{2}}{2}\cos 2\omega t</span>，输出含<span class="kw-r">直流分量</span>与<span class="kw-r">2ω 分量</span>，已非正弦（图中 X=1、横轴以周期 T 为单位，示意）。</div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">要点</span><span>叠加原理对非线性系统不成立——多种频率输入会相互作用、互相调制。</span></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const Xa = 1, N = 480;                       // 幅值 X=1（示意）
+  const inp = [], out = [];
+  for (let i = 0; i <= N; i++) {
+    const t = 2 * i / N;                       // t 以周期 T 为单位，画两个周期
+    const ph = 2 * Math.PI * t;                // ωt
+    inp.push([t, Xa * Math.sin(ph)]);
+    out.push([t, Xa * Xa / 2 - Xa * Xa / 2 * Math.cos(2 * ph)]);
+  }
+  const api = DZ.plot("wave", {
+    xlim: [0, 2], ylim: [-1.25, 1.25],
+    curves: [
+      { pts: inp, color: "#1D3FA0", width: 4.5 },
+      { pts: out, color: "#0E7A36", width: 4.5 }
+    ],
+    marks: [{ type: "hline", y: 0.5, label: "X^{2}/2", color: "#F5821F" }]
+  }, { vh: 560, static: true });
+  /* 曲线名标注（halo 防压线由 tx 内置） */
+  api.tx(api.gMark, api.X(0.28), api.Y(1.0) - 26, "输入 x(t)：正弦 ω", { fs: 23, b: 1, fill: "#1D3FA0", an: "start" });
+  api.tx(api.gMark, api.X(1.06), api.Y(0.98) - 26, "输出 y(t)：直流 + 2ω", { fs: 23, b: 1, fill: "#0E7A36", an: "start" });
+});
+</script>
+<script>/* qa-steps：截图自验钩子 */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

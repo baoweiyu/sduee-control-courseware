@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>⑧ 描述函数法的使用条件</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=800">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=800" defer></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .col{flex:1;display:flex;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden;width:100%}
+  .act-card>.hd{font-size:23px}
+  .act-card>.hd .no{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;
+    background:var(--blue);color:#fff;font-size:20px;font-weight:700;margin-right:10px;vertical-align:2px}
+  .bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:16px;padding:20px 24px;min-height:0}
+  .figbox{flex:none;height:210px;display:grid;place-items:center;background:#fff;padding:4px 10px}
+  .figbox svg{width:100%;height:100%}
+  .pt{font-size:22px;color:var(--ink);line-height:1.65}
+  .pt b{color:var(--navy)}
+  .kw{background:var(--sky);border-radius:10px;padding:13px 16px;font-size:23px;color:var(--navy);
+    line-height:1.5;text-align:center;font-weight:700}
+  .kw .tex{font-weight:400}
+  .why{font-size:21px;color:var(--muted);line-height:1.6}
+  .why b{color:var(--navy)}
+</style>
+</head>
+<body data-title="⑧ 描述函数法的使用条件" data-page="23 / 33">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="col"><div class="act-card" >
+        <div class="hd"><span style="flex:1"><span class="no">1</span>典型结构：串联</span></div>
+        <div class="bd">
+          <div class="pt">非线性系统可化为由<b>线性部分 G(s)</b> 与<b>非线性部分 N(X)</b> 相<b>串联</b>的典型结构（图 8-8）。</div>
+          <div class="figbox"><svg id="f-blk" viewBox="0 0 420 170" preserveAspectRatio="xMidYMid meet"></svg></div>
+          <div class="why">只有一个非线性环节（或可归并为一个），与线性部分构成<b>单回路</b>。</div>
+        </div>
+      </div></div>
+      <div class="col"><div class="act-card" data-step="1">
+        <div class="hd"><span style="flex:1"><span class="no">2</span>特性：奇对称</span></div>
+        <div class="bd">
+          <div class="pt">非线性环节的输入输出特性具有<b>奇对称</b>性质：</div>
+          <div class="kw">f(−x) = −f(x)　⇒　<span class="tex">A_{0}=0</span></div>
+          <div class="why">保证正弦输入下输出<b>不含直流分量</b>，输出以基波与各次谐波为主。</div>
+        </div>
+      </div></div>
+      <div class="col"><div class="act-card" data-step="2">
+        <div class="hd"><span style="flex:1"><span class="no">3</span>线性部分：低通滤波</span></div>
+        <div class="bd">
+          <div class="pt">线性部分具有较好的<b>低通滤波</b>效应：</div>
+          <div class="kw">|G(jω)| 随 ω 增大迅速衰减</div>
+          <div class="why">高次谐波被衰减到<b>微不足道</b>，近似只有<b>基波分量</b>沿闭环流通——谐波线性化成立。</div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">要点</span><span>这是本章近似分析的典型前提；条件越充分，结果通常越可信，但仍需校核。</span></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  /* 图 8-8 典型结构：r → ⊕(−) → N(X) → G(s) → c，单位反馈 */
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("f-blk");
+  const mk = (t, a, p) => { const n = document.createElementNS(NS, t);
+    for (const k in a) n.setAttribute(k, a[k]); (p || svg).appendChild(n); return n; };
+  const INK = "#16324F", MUT = "#5B6B8C", NAVY = "#12266E";
+  const MF = '"Cambria Math","STIX Two Math",Georgia,"Times New Roman","Microsoft YaHei",serif';
+  const defs = mk("defs", {});
+  const m = mk("marker", { id: "ba", markerWidth: 10, markerHeight: 8, refX: 6.5, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: MUT }, m);
+  const line = (x1, y1, x2, y2, ar) => mk("line", { x1, y1, x2, y2, stroke: MUT, "stroke-width": 2.2,
+    "marker-end": ar ? "url(#ba)" : "none" });
+  const txt = (x, y, s, o) => { o = o || {};
+    const n = mk("text", { x, y, "font-size": o.fs || 20, "text-anchor": o.an || "middle",
+      fill: o.fill || NAVY, "font-style": o.it ? "italic" : "normal", "font-weight": o.b ? 700 : 400, "font-family": MF });
+    n.textContent = s; return n; };
+  const Y0 = 66;
+  line(26, Y0, 66, Y0, true);
+  mk("circle", { cx: 82, cy: Y0, r: 15, fill: "#fff", stroke: INK, "stroke-width": 2.2 });
+  line(75.4, Y0 - 6.6, 88.6, Y0 + 6.6); line(75.4, Y0 + 6.6, 88.6, Y0 - 6.6);
+  line(82, Y0 + 58, 82, Y0 + 15, true);
+  txt(70, Y0 + 5, "−", { fs: 20, b: 1, fill: "#D63A2F", it: 0 });
+  txt(20, Y0 - 12, "r", { it: 1, b: 1 });
+  line(97, Y0, 128, Y0, true);
+  txt(112, Y0 - 12, "e", { it: 1, b: 1 });
+  mk("rect", { x: 128, y: Y0 - 26, width: 104, height: 52, rx: 8, fill: "#EAF1FC", stroke: INK, "stroke-width": 2.2 });
+  txt(180, Y0 + 7, "N(X)", { fs: 21, b: 1 });
+  line(232, Y0, 262, Y0, true);
+  txt(247, Y0 - 12, "x", { it: 1, b: 1 });
+  mk("rect", { x: 262, y: Y0 - 26, width: 104, height: 52, rx: 8, fill: "#EAF1FC", stroke: INK, "stroke-width": 2.2 });
+  txt(314, Y0 + 7, "G(s)", { fs: 21, b: 1 });
+  line(366, Y0, 402, Y0, true);
+  txt(396, Y0 - 12, "c", { it: 1, b: 1 });
+  line(390, Y0, 390, Y0 + 58); line(390, Y0 + 58, 82, Y0 + 58);
+  txt(236, Y0 + 80, "单位反馈", { fs: 19, fill: MUT });
+});
+</script>
+<script>/* qa-steps：截图自验钩子 */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

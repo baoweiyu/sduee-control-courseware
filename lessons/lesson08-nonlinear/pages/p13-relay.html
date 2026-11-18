@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>继电器的一般特性</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=800">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=800" defer></script>
+<style>
+  .row{display:flex;gap:20px;height:100%;min-height:0}
+  .side{flex:.92;display:flex;flex-direction:column;min-height:0}
+  .mid{flex:1.16;display:flex;flex-direction:column;min-height:0}
+  .side>.act-card,.mid>.act-card{flex:1}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:16px;padding:20px 24px;font-size:24px;line-height:1.6}
+  .eq{background:var(--sky);border-radius:12px;padding:14px 16px;text-align:center;font-size:24px;position:relative}
+  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .st{font-size:23px;color:var(--ink);line-height:1.68}
+  .pt{display:flex;gap:12px;align-items:flex-start;font-size:22.5px;color:var(--ink);line-height:1.62}
+  .pt .no{flex:none;width:34px;height:34px;border-radius:50%;background:var(--blue);color:#fff;
+    font-size:20px;font-weight:700;display:grid;place-items:center;margin-top:3px}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:6px 12px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .figc .capnote{flex:none;font-size:21.5px;color:var(--navy);background:var(--sky);border-radius:12px;padding:10px 16px;margin:0 14px 12px;line-height:1.5}
+  .ctl{display:flex;align-items:center;gap:12px;justify-content:center;padding:6px 0 8px}
+  .btn{background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:19px;font-weight:700;padding:8px 20px;cursor:pointer;text-align:center}
+  .btn.ghost{background:#fff;color:var(--blue);border:2px solid var(--blue)}
+  .btn:disabled{opacity:.42;cursor:not-allowed}
+  .segfloat{position:absolute;top:52px;right:12px;z-index:5;max-width:86%;background:#fff;
+    border:2px solid var(--blue);border-radius:10px;padding:4px 13px;font-size:17.5px;font-weight:700;
+    color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 2px 10px rgba(20,40,90,.18)}
+</style>
+</head>
+<body data-title="继电器的一般特性" data-page="13 / 33">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="side">
+        <div class="act-card">
+          <div class="hd"><span style="flex:1">动作电流与返回电流</span></div>
+          <div class="bd">
+<div data-step="1" style="display:none"></div> <!-- 首步驱动动画；基础内容常显 -->
+            <div class="st" >实际继电器的<b>动作电流 <span class="tex">i_{1}</span></b> 往往大于<b>返回电流 <span class="tex">i_{2}</span></b>，故继电器特性中不仅含有<span class="kw-r">死区特性</span>，而且含有<span class="kw-r">滞环特性</span>。</div>
+            <div data-step="2"><div class="eq hl">返回系数 <span class="tex">m=\dfrac{i_{2}}{i_{1}}</span></div></div>
+            <div class="st" data-step="3">返回系数 = 返回电流与动作电流之比，本章取 <span class="tex">-1\le m\le 1</span>。图示一般情形 <span class="tex">0&lt;m&lt;1</span>：吸合阈值 <span class="tex">a</span> 对应 <span class="tex">i_{1}</span>，释放阈值 <span class="tex">ma</span> 对应 <span class="tex">i_{2}</span>，输出幅值 <span class="tex">M</span>。</div>
+          </div>
+        </div>
+      </div>
+      <div class="mid">
+        <div class="act-card figc">
+          <div class="hd"><span style="flex:1">继电器特性曲线（M=1、a=1、m=0.5 示意）</span></div>
+          <span class="segfloat" id="segChip" style="display:none"></span>
+          <div class="bd2"><svg id="fig"></svg></div>
+          <div class="ctl">
+            <span id="prog">0 / 6</span>
+            <button class="btn" id="play">▶ 播放</button>
+            <button class="btn ghost" id="step">⧉ 分步</button>
+            <button class="btn ghost" id="rst">↺ 重置</button>
+          </div>
+          <div class="capnote">吸合阈值 a、释放阈值 ma：动作电流大于返回电流 → 同时含死区与滞环。</div>
+        </div>
+      </div>
+      <div class="side">
+        <div class="act-card">
+          <div class="hd"><span style="flex:1">三种特例（下页对照）</span></div>
+          <div class="bd">
+            <div data-step="4" style="display:none"></div> <!-- 保持动画步序；首条说明常显 -->
+            <div class="pt"><span class="no">1</span><span><span class="tex">m=1</span>：无滞环——<b>具有死区的单值继电器</b>特性；</span></div>
+            <div class="pt" data-step="5"><span class="no">2</span><span><span class="tex">m=-1</span>：正向返回电流等于反向动作电流——<b>具有滞环的继电器</b>特性；</span></div>
+            <div class="pt" data-step="6"><span class="no">3</span><span><span class="tex">i_{1}=i_{2}=0</span>（<span class="tex">a=0</span>）：零值切换——<b>理想继电器</b>特性。</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">要点</span><span>返回系数 <span class="tex">m=i_{2}/i_{1}</span> 决定继电器特性的形状。</span></div>
+<script src="../fig.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const TOTAL = 6, M = 1, A = 1, m = 0.5, Xe = 2.6;   // 示意参数：输出 M=1、吸合阈值 a=1、返回系数 m=0.5
+  /* 一般继电器特性（图 8-4）现算：吸合 a（0→M）、释放 ma（M→0），反向对称 —— 蛇形折线 */
+  const pts = [[0, 0]];
+  const leg = (f, x0, x1, n) => { for (let i = 1; i <= n; i++) { const x = x0 + (x1 - x0) * i / n; pts.push([x, f(x)]); } };
+  leg(() => 0, 0, A, 10);          // 死区段
+  pts.push([A, M]);                // 吸合跳变 0→M
+  leg(() => M, A, Xe, 20);         // 正平台
+  leg(() => M, Xe, m * A, 25);     // 返回（保持 M）
+  pts.push([m * A, 0]);            // 释放跳变 M→0
+  leg(() => 0, m * A, -A, 15);     // 轴上回行
+  pts.push([-A, -M]);              // 反向吸合 0→−M
+  leg(() => -M, -A, -Xe, 20);      // 负平台
+  leg(() => -M, -Xe, -m * A, 25);  // 返回（保持 −M）
+  pts.push([-m * A, 0]);           // 释放回零
+  const F = DZ.plot("fig", {
+    xlim: [-2.9, 2.9], ylim: [-1.9, 1.9], xlabel: "x_{1}", ylabel: "x_{2}",
+    curves: [{ pts, color: "#1D3FA0" }]
+  }, { vw: 960, vh: 780 });
+  /* 刻度数字放大到 ≥21px（viewBox 960 基准；fig.js 公共默认 20，页面级上调） */
+  F.svg.querySelectorAll("text").forEach(t => { const f = parseFloat(t.getAttribute("font-size") || "0"); if (f && f < 21) t.setAttribute("font-size", "21"); });
+  /* 各段累计长度分数 */
+  const F1 = 57 / 119, F2 = 94 / 119;  // DZ.setF 按采样点序号推进：分别为释放点、负平台终点
+  const FS = [0, F1, F2, 1, 1, 1, 1];
+  const RED = "#D63A2F", INK = "#16324F", MUT = "#5B6B8C";
+  const defs = F.svg.querySelector("defs");
+  const mk = F.mk("marker", { id: "rar", markerWidth: 9, markerHeight: 7, refX: 6, refY: 2.6, orient: "auto" }, defs);
+  F.mk("path", { d: "M0,0 L6,2.6 L0,5.2 Z", fill: INK }, mk);
+  const arr = (g, x, y1, y2) => F.mk("line", { x1: F.X(x), y1: F.Y(y1), x2: F.X(x), y2: F.Y(y2),
+    stroke: INK, "stroke-width": 2.6, "marker-end": "url(#rar)" }, g);
+  function deco(kk, g) {
+    g = g || F.gDyn;
+    if (kk >= 1) {                                  // 正半周标注
+      arr(g, A, 0.06, M - 0.06); arr(g, m * A, M - 0.06, 0.06);
+      F.tx(g, F.X(0) - 16, F.Y(M) + 7, "M", { fs: 24, fill: RED, b: 1, it: 1, an: "end" });
+      F.tx(g, F.X(A), F.Y(0) + 44, "a", { fs: 24, fill: RED, b: 1, it: 1 });
+      F.tx(g, F.X(m * A), F.Y(0) + 44, "ma", { fs: 24, fill: RED, b: 1, it: 1 });
+      F.tx(g, F.X(A) + 14, F.Y(0.78), "吸合", { fs: 22, fill: INK, b: 1, an: "start" });
+      F.tx(g, F.X(m * A) + 14, F.Y(0.24), "释放", { fs: 22, fill: INK, b: 1, an: "start" });
+    }
+    if (kk >= 2) {                                  // 反向吸合
+      arr(g, -A, -0.06, -(M - 0.06));
+      F.tx(g, F.X(0) - 16, F.Y(-M) + 7, "−M", { fs: 24, fill: RED, b: 1, it: 1, an: "end" });
+      F.tx(g, F.X(-A), F.Y(0) + 44, "−a", { fs: 24, fill: RED, b: 1, it: 1 });
+    }
+    if (kk >= 3) {                                  // 释放回零
+      arr(g, -m * A, -(M - 0.06), -0.06);
+      F.tx(g, F.X(-m * A), F.Y(0) + 82, "−ma", { fs: 24, fill: RED, b: 1, it: 1 });
+    }
+  }
+  function paint(K) { F.gDyn.innerHTML = ""; deco(K); }
+  const chip = document.getElementById("segChip");
+  BD.wire(TOTAL, paint, {
+    figs: [F], FS, dur: 10000,
+    segments: [
+      { label: "① 正向：x₁=a 吸合（0→M），回落至 ma 释放", parts: [{ F, b: [0], f0: 0, f1: F1 }], draw: (t, g) => deco(1, g) },
+      { label: "② 反向：x₁=−a 吸合（0→−M），负平台", parts: [{ F, b: [0], f0: F1, f1: F2 }], draw: (t, g) => deco(2, g) },
+      { label: "③ 返回：x₁=−ma 释放回零，滞环闭合", parts: [{ F, b: [0], f0: F2, f1: 1 }], draw: (t, g) => deco(3, g) }
+    ],
+    segLabel: (label, si, n) => {
+      if (label == null) { chip.style.display = "none"; F.gDyn.innerHTML = ""; paint(TOTAL); return; }
+      chip.textContent = "分步 " + (si + 1) + " / 3　" + label;
+      chip.style.display = "";
+    }
+  });
+  document.getElementById("rst").onclick = () => ACT.step.reset();
+});
+</script>
+<script>/* qa-steps：截图自验钩子 */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

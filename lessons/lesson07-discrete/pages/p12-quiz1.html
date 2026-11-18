@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>⑨ 课堂互动：采样与频谱</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=700">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=700" defer></script>
+<style>
+  .qrow{display:flex;gap:24px;height:100%;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card .bd{flex:1;display:flex;flex-direction:column;justify-content:center;gap:14px;padding:16px 24px;min-height:0}
+  .stage-tip{display:inline-block;font-size:21px;color:#fff;background:var(--blue);border-radius:20px;padding:7px 24px;width:fit-content}
+  .kv{display:flex;gap:14px;align-items:flex-start;background:var(--sky);border-radius:14px;padding:18px 22px;
+    font-size:23px;color:var(--ink);line-height:1.6}
+  .kv .num{flex:none;width:36px;height:36px;border-radius:50%;background:var(--blue);color:#fff;
+    font-weight:700;font-size:21px;display:grid;place-items:center}
+  .kv b{color:var(--navy)}
+  .qz .qt{font-size:25px;color:var(--navy);font-weight:700;line-height:1.45}
+  .opts{display:flex;flex-direction:column;gap:11px}
+  .opt{background:var(--sky);border:2.5px solid var(--line);border-radius:12px;padding:11px 18px;
+    font-size:21.5px;color:var(--ink);font-weight:700;position:relative;line-height:1.5;cursor:pointer;user-select:none}
+  .opt .ab{color:var(--blue);margin-right:10px}
+  .opt.sel{border-color:var(--blue);background:#fff}
+  .opt.right{border-color:#1E9E57;background:#F0FAF4}
+  .opt.right::after{content:"✓";position:absolute;top:-14px;right:-10px;width:34px;height:34px;border-radius:50%;
+    background:#1E9E57;color:#fff;font-weight:800;font-size:21px;display:grid;place-items:center}
+  .opt.wrong{border-color:#D63A2F;background:#FDF1EF}
+  .opt.wrong::after{content:"✗";position:absolute;top:-14px;right:-10px;width:34px;height:34px;border-radius:50%;
+    background:#D63A2F;color:#fff;font-weight:800;font-size:21px;display:grid;place-items:center}
+  .subrow{display:flex;align-items:center;gap:16px}
+  .subbtn{font-family:var(--font);font-size:20px;font-weight:700;color:#fff;background:var(--blue);
+    border:none;border-radius:12px;padding:9px 30px;cursor:pointer}
+  .subbtn:disabled{opacity:.42;cursor:not-allowed}
+  .subhint{font-size:18.5px;color:var(--muted)}
+  .ans{flex:none;font-size:21.5px;color:var(--navy);background:var(--sky);border-radius:12px;padding:10px 20px;line-height:1.55}
+  .ans b{color:var(--danger)}
+  .fx{flex:none;font-size:19px;color:var(--muted);background:#fff;border:2px dashed var(--line);
+    border-radius:12px;padding:8px 18px;line-height:1.55}
+  .fx b{color:var(--navy)}
+</style>
+</head>
+<body data-title="⑨ 课堂互动：采样与频谱" data-page="12 / 56">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="qrow">
+      <div class="act-card" style="flex:.86">
+        <div class="hd">速判 · 本节三要素</div>
+        <div class="bd" style="justify-content:space-evenly;gap:18px">
+          <div class="kv"><span class="num">1</span><span><b>采样开关（采样器）</b>：产生脉冲序列的元件，每隔 <span class="tex">T</span> 闭合一次，<span class="tex">\tau\to 0</span> 理想化。</span></div>
+          <div class="kv"><span class="num">2</span><span><b>脉冲调制</b>：<span class="tex">e^{*}(t)=\sum e(nT)\delta(t-nT)</span>，脉冲强度 = 采样时刻函数值。</span></div>
+          <div class="kv"><span class="num">3</span><span><b>频谱周期复制</b>：主频谱 <span class="tex">n=0</span>，幅值 <span class="tex">1/T</span>；恢复条件 <span class="tex">\omega_{s}\geq 2\omega_{max}</span>。</span></div>
+          <div style="font-size:21px;color:var(--muted)">先凭记忆作答，再看右侧解析。</div>
+        </div>
+      </div>
+      <div class="act-card qz" style="flex:1.2">
+        <div class="hd">多选题　1 分</div>
+        <div class="bd">
+          <div class="qt">关于离散控制系统，下列说法<span style="color:var(--danger)">正确的</span>是？（多选）</div>
+          <span class="stage-tip">请先勾选，再提交</span>
+          <div class="opts">
+            <div class="opt" data-mark="1"><span class="ab">A</span>采样开关或采样器可以看作是产生脉冲序列的元件</div>
+            <div class="opt" data-mark="1"><span class="ab">B</span>在采样信号的频谱中，<span class="tex">n=0</span> 时的频谱称为主频谱</div>
+            <div class="opt" data-mark="0"><span class="ab">C</span><span class="tex">e^{*}(t)</span> 主频谱的幅值为连续信号 <span class="tex">e(t)</span> 频谱的 <span class="tex">T</span> 倍</div>
+            <div class="opt" data-mark="1"><span class="ab">D</span>采样定理确定了最低采样频率与最高信号频率之间的关系</div>
+          </div>
+          <div class="subrow">
+            <button class="subbtn" id="sub">提交</button>
+            <span class="subhint" id="hint">也可按空格键逐步揭示答案</span>
+          </div>
+          <div class="ans" data-step="2"><b>答案：A、B、D。</b></div>
+          <div class="fx" data-step="3">
+            <b>解析：</b>A 对：采样开关 = 脉冲序列发生器；B 对：<span class="tex">n=0</span> 的部分 <span class="tex">\frac{1}{T}E(j\omega)</span> 称主频谱；
+            <span style="color:var(--danger);font-weight:700">C 错：主频谱幅值是原来的 1/T，不是 T 倍</span>；
+            D 对：<span class="tex">\omega_{s}\geq 2\omega_{max}</span> 正是最低采样频率与最高信号频率的关系。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 分步：1=提交判定，2=答案条，3=解析条 -->
+  <div data-step="1" style="display:none"></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const S = ACT.step, _n = S.next.bind(S), _r = S.reset.bind(S);
+  const sub = document.getElementById("sub"), hint = document.getElementById("hint");
+  let judged = false;
+  document.querySelectorAll(".opt").forEach(o => {
+    o.addEventListener("click", () => { if (!judged) o.classList.toggle("sel"); });
+  });
+  function judge() {
+    judged = true; sub.disabled = true; hint.textContent = "已提交：绿✓为正确项，红✗为误选项";
+    document.querySelectorAll(".opt").forEach(o => {
+      const right = o.dataset.mark === "1", picked = o.classList.contains("sel");
+      o.classList.remove("sel");
+      o.classList.toggle("right", right);
+      o.classList.toggle("wrong", !right && picked);
+    });
+  }
+  sub.addEventListener("click", () => { if (!judged) { judge(); if (S.cur < 1) _n(); S.report(); } });
+  function paint() { if (S.cur >= 1 && !judged) judge(); }
+  S.next = function () { const d = _n(); paint(); return d; };
+  S.reset = function () {
+    _r(); judged = false; sub.disabled = false; hint.textContent = "也可按空格键逐步揭示答案";
+    document.querySelectorAll(".opt").forEach(o => o.classList.remove("sel", "right", "wrong"));
+  };
+  window.prev = function () { const n = Math.max(0, S.cur - 1); S.reset(); for (let i = 0; i < n; i++) S.next(); };
+});
+</script>
+<script>/* qa-steps：?steps=N 自动前进 N 步 */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

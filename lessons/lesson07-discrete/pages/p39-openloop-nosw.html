@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>㉕ 开环：环节之间无采样开关</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=700">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=700" defer></script>
+<script src="../fig.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:1.12;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .rgt{flex:1;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:10px;padding:12px 24px}
+  .st{font-size:21.5px;color:var(--ink);line-height:1.6}
+  .eq{background:var(--sky);border-radius:12px;padding:9px 14px;text-align:center;font-size:22px;color:var(--navy);line-height:1.5}
+  .eq .no{color:var(--muted);font-size:21px}
+  .figc .capnote{flex:none;font-size:21px;color:var(--navy);background:var(--sky);border-radius:12px;padding:9px 18px;margin:0 14px 12px;line-height:1.5}
+  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .figc{display:flex;flex-direction:column;overflow:hidden}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 10px;min-height:0}
+  .figc svg{width:100%;height:100%}
+</style>
+</head>
+<body data-title="㉕ 开环：环节之间无采样开关" data-page="39 / 56">
+<div class="act-stage"><div class="act-slide">
+<div class="act-body has-note">
+  <div class="row">
+    <div class="lft">
+      <div class="act-card" style="flex:.95">
+        <div class="hd" style="font-size:23px"><span style="flex:1">串联环节之间无采样开关（图 7-22a）</span></div>
+        <div class="bd">
+          <div class="st">两环节 <span class="tex">G_{1}(s)</span>、<span class="tex">G_{2}(s)</span> 之间<b>没有</b>采样开关，中间信号 <span class="tex">x(t)</span> 是<span class="kw-r">连续信号</span>，只有输入端一个采样开关。</div>
+          <div class="st">对脉冲序列 <span class="tex">r^{*}(t)</span> 而言，<span class="tex">G_{1}(s)</span> 与 <span class="tex">G_{2}(s)</span> 是一个<b>不可分割的连续整体</b>。</div>
+        </div>
+      </div>
+      <div class="act-card" style="flex:1.5">
+        <div class="hd" style="font-size:23px"><span style="flex:1">推导：先合并连续部分，再取 z 变换</span></div>
+        <div class="bd">
+          <div ><div class="st">① 先把两个连续环节合并为一个连续传递函数：</div>
+            <div class="eq"><span class="tex">G(s)=G_{1}(s)\,G_{2}(s)</span>　<span class="no">连续域内相乘</span></div></div>
+          <div data-step="1"><div class="st">② 对整体取 z 变换，得开环脉冲传递函数：</div>
+            <div class="eq hl"><span class="tex">G(z)=\frac{C(z)}{R(z)}=\mathscr{Z}\!\left[G_{1}(s)G_{2}(s)\right]=G_{1}G_{2}(z)</span></div></div>
+          <div data-step="2"><div class="st">③ <span class="tex">G_{1}G_{2}(z)</span> 是<b>一个整体记号</b>：表示对<b>乘积</b> <span class="tex">G_{1}(s)G_{2}(s)</span> 取 z 变换（先乘后变）。</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="rgt">
+      <div class="act-card figc" style="flex:1.35">
+        <div class="hd" style="font-size:22px"><span style="flex:1">图 7-22(a)　环节之间无采样开关（重绘）</span></div>
+        <div class="bd2"><svg id="fig"></svg></div>
+        <div class="capnote">环节之间无开关：x(t) 是连续信号，G₁(s)G₂(s) 先乘为一个整体再取 z 变换。</div>
+      </div>
+      <div class="act-card" style="flex:1">
+        <div class="hd" style="font-size:22px"><span style="flex:1">推广到 n 个环节</span></div>
+        <div class="bd">
+          <div class="st"><span class="tex">n</span> 个环节相串联、之间均无采样开关时，总的脉冲传递函数等于<b>各环节传递函数乘积的 z 变换</b>：</div>
+          <div class="eq"><span class="tex">G(z)=\mathscr{Z}\!\left[G_{1}(s)G_{2}(s)\cdots G_{n}(s)\right]=G_{1}G_{2}\cdots G_{n}(z)</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">结论</span><span>无开关 = 连续环节先合成一个连续传递函数，再离散化。</span></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  /* 采样开关标准符号（dashed=true 表示虚设） */
+  function drawSwitch(B, id, x0, x1, y, dashed) {
+    const mk = B.mk, tx = B.tx, g = B.g, INK = BD.INK;
+    const defs = B.svg.querySelector("defs");
+    const m = mk("marker", { id, markerWidth: 10, markerHeight: 8, refX: 6, refY: 3, orient: "auto" }, defs);
+    mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: INK }, m);
+    const da = dashed ? { "stroke-dasharray": "6 5" } : {};
+    mk("circle", Object.assign({ cx: x0, cy: y, r: 5, fill: "#fff", stroke: INK, "stroke-width": 2.6 }, da), g);
+    mk("circle", Object.assign({ cx: x1, cy: y, r: 5, fill: "#fff", stroke: INK, "stroke-width": 2.6 }, da), g);
+    mk("line", Object.assign({ x1: x0, y1: y, x2: x1 - 7, y2: y - 26, stroke: INK, "stroke-width": 3,
+      "stroke-linecap": "round", "marker-end": "url(#" + id + ")" }, da), g);
+    tx(g, (x0 + x1) / 2, y - 46, "T", { fs: 25, it: 1, b: 1, fill: INK });
+  }
+  /* 图 7-22(a)：R(s) → T → G₁(s) → x(t) → G₂(s) → C(s) →（虚设开关）→ C*(s) */
+  const B = BD.block("fig", [
+    { type: "line", pts: [[26, 130], [88, 130]], label: "R(s)", labelDy: -16 },
+    { type: "line", pts: [[152, 130], [208, 130]], label: "R^{*}(s)", labelDx: 22, labelDy: 34 },
+    { type: "box", x: 208, y: 90, w: 150, h: 80, label: "G_{1}(s)" },
+    { type: "line", pts: [[358, 130], [440, 130]], label: "x(t)", labelDy: -16 },
+    { type: "box", x: 440, y: 90, w: 150, h: 80, label: "G_{2}(s)" },
+    { type: "line", pts: [[590, 130], [664, 130]], label: "C(s)", labelDx: -8, labelDy: -16 },
+    { type: "line", pts: [[728, 130], [834, 130]], label: "C^{*}(s)", labelDx: 30, labelDy: -16 }
+  ], { vw: 900, vh: 220, static: true });
+  drawSwitch(B, "sw1", 94, 146, 130, false);
+  drawSwitch(B, "sw2", 668, 722, 130, true);
+  B.tx(B.g, 695, 186, "虚设同步开关", { fs: 22, fill: BD.AX, b: 1 });
+  B.tx(B.g, 399, 190, "连续信号（环节间无开关）", { fs: 22, fill: BD.REF.color.title, b: 1 });
+});
+</script>
+<script>/* qa-steps：?steps=N 自动前进 N 步 */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

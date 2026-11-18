@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>⑦ 采样信号的频谱与混叠</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=700">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=700" defer></script>
+<style>
+  .row{display:flex;gap:20px;height:100%;min-height:0}
+  .figc{display:flex;flex-direction:column;overflow:hidden;position:relative}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:2px 8px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .lft{flex:.9}
+  .rgt{flex:1.35;display:flex;flex-direction:column;gap:12px;min-height:0}
+  .figc2{flex:1;display:flex;flex-direction:column;overflow:hidden;position:relative}
+  .figc2 .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:2px 8px;min-height:0}
+  .figc2 svg{width:100%;height:100%}
+  .chips{display:flex;gap:10px;justify-content:center;padding:0 0 10px}
+  .achip{display:flex;align-items:center;gap:8px;background:var(--sky);border:2.5px solid transparent;border-radius:10px;
+    padding:9px 18px;font-size:21px;font-weight:700;color:var(--navy);cursor:pointer}
+  .achip.on{border-color:var(--blue);background:#fff;box-shadow:0 0 0 2px rgba(29,63,160,.25)}
+  .verdict{font-size:22px;color:var(--navy);background:var(--sky);border-radius:12px;
+    padding:12px 22px;line-height:1.6;margin:0 14px 12px}
+  .verdict.bad{background:#FDF1EF;color:var(--danger);font-weight:700}
+</style>
+</head>
+<body data-title="⑦ 采样信号的频谱与混叠" data-page="10 / 56">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="act-card figc lft">
+        <div class="hd" style="font-size:23px"><span style="flex:1">连续信号频谱 <span class="tex">|E(j\omega)|</span>（单峰三角形谱，示意）</span></div>
+        <div class="bd2"><svg id="fE"></svg></div>
+        <div class="verdict">最高频率 <span class="tex">\omega_{max}</span>；<span class="tex">|\omega|&gt;\omega_{max}</span> 时 <span class="tex">|E|=0</span>（有限带宽）。</div>
+      </div>
+      <div class="rgt">
+        <div class="act-card figc2">
+          <div class="hd" style="font-size:23px"><span style="flex:1">采样信号复频谱 <span class="tex">E^{*}(j\omega)=\frac{1}{T}\sum_{n}E(j(\omega-n\omega_{s}))</span>（按 n=−2..2 现算）</span></div>
+          <div class="bd2"><svg id="fS"></svg></div>
+          <div class="chips" id="chips"></div>
+          <div class="verdict" id="verdict"></div>
+          <div class="verdict">本页取零相位三角谱，各分量同相，幅值可直接相加；一般复频谱须先求矢量和再取模。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">结论</span><span><span class="tex">\omega_{s}&lt;2\omega_{max}</span> 时复制频谱<span class="kw-r">重叠混叠</span>，原信号无法再完全恢复。</span></div>
+<script src="../fig.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const WMAX = 1;                       // 横轴单位：ω/ω_max，故 ω_max=1
+  const E = w => Math.max(0, 1 - Math.abs(w) / WMAX);   // 三角形谱（示意）
+  /* ---------- 左：连续频谱（偶对称三角形） ---------- */
+  const pE = [];
+  for (let i = 0; i <= 240; i++) { const w = -2.2 + i / 240 * 4.4; pE.push([w, E(w)]); }
+  DZ.plot("fE", {
+    xlim: [-2.2, 2.2], ylim: [0, 1.25], ylabel: "|E(jω)|",
+    curves: [{ pts: pE, color: "#1D3FA0" }],
+    marks: [
+      { type: "point", x: 0, y: 1, label: "1", dx: 12, dy: -6, color: "#1D3FA0" },
+      { type: "vline", x: 1, label: "ω_{max}", dx: 10, dy: 46 },
+      { type: "vline", x: -1, label: "−ω_{max}", dx: -10, dy: 46 }
+    ]
+  }, { vw: 700, vh: 650, static: true });
+  {  // 横轴名（右端内收，避免裁切）
+    const fE = document.getElementById("fE");
+    BD.tx(fE, 685, 596, "ω/ω_{max}", { fs: 24, it: 1, b: 1, fill: "#5B6B8C", an: "end" });
+  }
+  /* 规范：viewBox 基准下刻度/标注字号 ≥21px（fig.js 默认 tick=20，本页统一上调） */
+  function bumpFs(svg) {
+    svg.querySelectorAll("text").forEach(t => {
+      const fs = parseFloat(t.getAttribute("font-size") || "0");
+      if (fs && fs < 21) t.setAttribute("font-size", "21");
+    });
+  }
+  bumpFs(document.getElementById("fE"));
+  /* ---------- 右：采样频谱（三档联动，程序现算） ---------- */
+  const MODES = [
+    { ws: 4,   tag: "ω<sub>s</sub>=4ω<sub>max</sub>",   name: "分离",
+      txt: "ωₛ > 2ωₘₐₓ：各周期频谱互不重叠 —— 主频谱完整，可完全恢复 e(t)。" },
+    { ws: 2,   tag: "ω<sub>s</sub>=2ω<sub>max</sub>",   name: "临界",
+      txt: "ωₛ = 2ωₘₐₓ：相邻频谱恰好相接（临界）—— 香农定理的边界。" },
+    { ws: 1.4, tag: "ω<sub>s</sub>=1.4ω<sub>max</sub>", name: "混叠",
+      txt: "ωₛ < 2ωₘₐₓ：复制频谱互相重叠 —— 混叠！无法完全恢复。", bad: true }
+  ];
+  let sel = 0, F = null;
+  const chipsEl = document.getElementById("chips");
+  MODES.forEach((m, i) => {
+    const c = document.createElement("button");
+    c.className = "achip" + (i === sel ? " on" : "");
+    c.innerHTML = `<span>${m.tag}</span><span style="color:${m.bad ? "var(--danger)" : "var(--blue)"}">${m.name}</span>`;
+    c.onclick = () => select(i);
+    chipsEl.appendChild(c);
+  });
+  function build(m) {
+    const ws = m.ws, T = 2 * Math.PI / ws, inv = 1 / T;
+    const XL = 9.2;
+    const curves = [];
+    for (let n = -2; n <= 2; n++) {          // 各周期分量（淡色）
+      const pts = [];
+      for (let i = 0; i <= 720; i++) { const w = -XL + i / 720 * 2 * XL; pts.push([w, inv * E(w - n * ws)]); }
+      curves.push({ pts, color: "#C9D6F2", width: 2.6 });
+    }
+    const tot = [];
+    for (let i = 0; i <= 720; i++) {          // 叠加总频谱 |E*(jω)|
+      const w = -XL + i / 720 * 2 * XL;
+      let s = 0; for (let n = -2; n <= 2; n++) s += inv * E(w - n * ws);
+      tot.push([w, s]);
+    }
+    curves.push({ pts: tot, color: "#1D3FA0" });
+    const marks = [
+      { type: "vline", x: ws, label: "ω_{s}", dy: 20 },
+      { type: "vline", x: -ws, label: "−ω_{s}", dy: 20 },
+      { type: "vline", x: 2 * ws, label: "2ω_{s}", dy: 46 },
+      { type: "vline", x: -2 * ws, label: "−2ω_{s}", dy: 46 },
+      { type: "point", x: 0, y: inv, label: "主频谱 n=0：幅值 1/T≈" + inv.toFixed(2), dx: 16, dy: -22, color: "#0E7A36" }
+    ];
+    if (m.bad) {   // 重叠区标红
+      marks.push({ type: "band", x0: ws - WMAX, x1: WMAX, color: "#D63A2F", op: .16 });
+      marks.push({ type: "band", x0: -WMAX, x1: -(ws - WMAX), color: "#D63A2F", op: .16 });
+    }
+    F = DZ.plot("fS", {
+      xlim: [-XL, XL], ylim: [0, 1.05], ylabel: "|E^{*}(jω)|",
+      curves, marks
+    }, { vw: 960, vh: 470, static: true });
+    F.tx(F.svg, 945, F.PLOT.y1 - 10, "ω/ω_{max}", { fs: 24, it: 1, b: 1, fill: "#5B6B8C", an: "end" });
+    if (m.bad) {   // 混叠文字标注（红）
+      const y = F.Y(0.62);
+      F.tx(F.gMark, F.X((ws - WMAX + WMAX) / 2), y, "混叠", { fs: 24, fill: "#D63A2F", b: 1 });
+      F.tx(F.gMark, F.X(-(ws - WMAX + WMAX) / 2), y, "混叠", { fs: 24, fill: "#D63A2F", b: 1 });
+    }
+    bumpFs(F.svg);
+  }
+  function select(i) {
+    sel = i;
+    chipsEl.querySelectorAll(".achip").forEach((c, j) => c.classList.toggle("on", j === i));
+    const m = MODES[i], v = document.getElementById("verdict");
+    v.textContent = m.txt; v.classList.toggle("bad", !!m.bad);
+    build(m);
+  }
+  select(0);
+});
+</script>
+</div></div>
+</body>
+</html>

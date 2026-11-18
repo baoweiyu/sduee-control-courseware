@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>③ 采样形式</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=700">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=700" defer></script>
+<style>
+  .list4{display:flex;flex-direction:column;gap:16px;height:100%;min-height:0}
+  .act-card{display:flex;flex-direction:row;align-items:stretch;min-height:0;overflow:hidden}
+  .act-card.star{border:3px solid var(--orange);box-shadow:0 0 0 3px rgba(245,130,31,.18)}
+  .ltxt{flex:1.05;display:flex;flex-direction:column;justify-content:center;gap:10px;padding:14px 24px;border-right:2px dashed var(--line)}
+  .tt{font-size:25px;font-weight:700;color:var(--navy);display:flex;align-items:center;gap:12px}
+  .ds{font-size:22px;color:var(--ink);line-height:1.55}
+  .mini{flex:.95;display:grid;place-items:center;background:var(--sky);min-height:0;padding:8px 14px}
+  .mini svg{width:100%;height:100%}
+  .tagline{font-size:20px;color:var(--muted);text-align:center}
+</style>
+</head>
+<body data-title="③ 采样形式" data-page="6 / 56">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="list4">
+      <div class="act-card star">
+        <div class="ltxt">
+          <div class="tt">等周期采样<span class="tagchip" style="background:var(--orange);color:#fff">本章默认</span></div>
+          <div class="ds">采样间隔 <span class="tex">T</span> 恒定，采样开关每隔 <span class="tex">T</span> 闭合一次。</div>
+          <div class="tagline">间隔相等：<span class="tex">T</span></div>
+        </div>
+        <div class="mini"><svg id="m1" viewBox="0 0 460 120" preserveAspectRatio="xMidYMid meet"></svg></div>
+      </div>
+      <div class="act-card">
+        <div class="ltxt">
+          <div class="tt">多阶采样</div>
+          <div class="ds">采样间隔不等，但按固定模式<span class="kw-r">周期性重复</span>。</div>
+          <div class="tagline">间隔不等、模式重复</div>
+        </div>
+        <div class="mini"><svg id="m2" viewBox="0 0 460 120" preserveAspectRatio="xMidYMid meet"></svg></div>
+      </div>
+      <div class="act-card">
+        <div class="ltxt">
+          <div class="tt">多速采样</div>
+          <div class="ds">两个以上<span class="kw-r">不同采样周期</span>的开关，对信号同时进行采样。</div>
+          <div class="tagline">开关 A 周期 <span class="tex">T_{1}</span>，开关 B 周期 <span class="tex">T_{2}</span></div>
+        </div>
+        <div class="mini"><svg id="m3" viewBox="0 0 460 140" preserveAspectRatio="xMidYMid meet"></svg></div>
+      </div>
+      <div class="act-card">
+        <div class="ltxt">
+          <div class="tt">随机采样</div>
+          <div class="ds">采样随机进行，<span class="kw-r">没有固定规律</span>。</div>
+          <div class="tagline">采样时刻无规律</div>
+        </div>
+        <div class="mini"><svg id="m4" viewBox="0 0 460 120" preserveAspectRatio="xMidYMid meet"></svg></div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">约定</span><span>除特别说明外，本章讨论的采样均为<span class="kw-r">等周期采样</span>。</span></div>
+<script src="../fig.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const INK = "#16324F", BLUE = "#1D3FA0", AX = "#5B6B8C", ORG = "#C2410C";
+  function draw(id, rows) {
+    const svg = document.getElementById(id);
+    const mk = (tag, attrs) => { const n = document.createElementNS(NS, tag);
+      for (const k in attrs) n.setAttribute(k, attrs[k]); svg.appendChild(n); return n; };
+    const defs = mk("defs", {});
+    const m = mk("marker", { id: "ax" + id, markerWidth: 10, markerHeight: 8, refX: 7, refY: 3, orient: "auto" }, defs);
+    mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: AX }, m);
+    const n = rows.length, X0 = 34, X1 = 428, YB = n === 2 ? 116 : 96;
+    rows.forEach((r, ri) => {
+      const y = YB - ri * 52;
+      mk("line", { x1: X0 - 8, y1: y, x2: X1 + 10, y2: y, stroke: AX, "stroke-width": 2.4, "marker-end": `url(#ax${id})` });
+      if (ri === n - 1) BD.tx(svg, X1 + 6, y + 28, "t", { fs: 22, it: 1, b: 1, fill: AX });
+      if (r.tag) BD.tx(svg, X0 - 14, y + 8, r.tag, { fs: 22, fill: AX, an: "end", b: 1 });
+      r.pts.forEach(x => {
+        const px = X0 + x * (X1 - X0);
+        mk("line", { x1: px, y1: y, x2: px, y2: y - 30, stroke: r.color || BLUE, "stroke-width": 3.6, "stroke-linecap": "round" });
+        mk("circle", { cx: px, cy: y - 30, r: 5.2, fill: r.color || BLUE });
+      });
+    });
+  }
+  const eq = []; for (let k = 0; k <= 6; k++) eq.push(k / 6);
+  draw("m1", [{ pts: eq }]);
+  draw("m2", [{ pts: [0, .13, .34, .47, .68, .81, 1] }]);
+  draw("m3", [{ pts: [0, 1 / 6, 2 / 6, 3 / 6, 4 / 6, 5 / 6, 1], tag: "A" },
+              { pts: [0, .29, .58, .87], tag: "B", color: ORG }]);
+  draw("m4", [{ pts: [0, .09, .24, .31, .52, .66, .72, .93] }]);
+});
+</script>
+</div></div>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>⑦ z 变换的定义</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=700">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=700" defer></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:1.22;display:flex;flex-direction:column;gap:16px;min-height:0}
+  .rgt{flex:.92;display:flex;flex-direction:column;gap:16px;min-height:0}
+  .stepb{flex:1;display:flex;align-items:center;gap:18px;background:#fff;border:2px solid var(--line);
+    border-left:6px solid var(--blue);border-radius:14px;padding:14px 22px;min-height:0;overflow:hidden}
+  .stepb .num{flex:none;width:46px;height:46px;border-radius:50%;background:var(--blue);
+    color:#fff;font-weight:700;font-size:24px;display:grid;place-items:center}
+  .stepb .cc{flex:1;min-width:0}
+  .stepb .tt{font-size:23px;font-weight:700;color:var(--navy);line-height:1.4;margin-bottom:6px}
+  .stepb .fml{background:var(--sky);border-radius:10px;padding:10px 14px;font-size:22.5px;line-height:1.55;
+    color:var(--navy);text-align:center}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:12px;padding:14px 22px}
+  .st{font-size:22.5px;color:var(--ink);line-height:1.6}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 10px;min-height:0}
+  .figc svg{width:100%;height:100%}
+</style>
+</head>
+<body data-title="⑦ z 变换的定义" data-page="20 / 56">
+<div class="act-stage"><div class="act-slide">
+<div class="act-body has-note">
+  <div class="row">
+    <div class="lft">
+      <div class="stepb" >
+        <span class="num">1</span>
+        <div class="cc">
+          <div class="tt">出发点：连续信号的拉氏变换</div>
+          <div class="fml"><span class="tex">F(s)=L[f(t)]=\int_{0}^{\infty}f(t)e^{-st}dt</span></div>
+        </div>
+      </div>
+      <div class="stepb">
+        <span class="num">2</span>
+        <div class="cc">
+          <div class="tt">采样后的离散信号及其拉氏变换</div>
+          <div class="fml"><span class="tex">f^{*}(t)=\sum_{n=0}^{\infty}f(nT)\delta(t-nT)</span>　→　<span class="tex">F^{*}(s)=\sum_{n=0}^{\infty}f(nT)e^{-nTs}</span></div>
+        </div>
+      </div>
+      <div class="stepb" data-step="2">
+        <span class="num">3</span>
+        <div class="cc">
+          <div class="tt"><span class="tex">s</span> 含在指数 <span class="tex">e^{-nTs}</span> 中，不便计算 → 引入新复变量</div>
+          <div class="fml"><span class="tex">z=e^{Ts}</span>　（s 平面 ↔ z 平面的映射，见右下图）</div>
+        </div>
+      </div>
+      <div class="stepb" data-step="3">
+        <span class="num">4</span>
+        <div class="cc">
+          <div class="tt">代入上式：级数收敛则称为 <span class="tex">f^{*}(t)</span> 的 <span style="color:var(--danger)">z 变换</span></div>
+          <div class="fml"><span class="tex">F(z)=\sum_{n=0}^{\infty}f(nT)z^{-n}</span>　→　<span class="tex">Z[f^{*}(t)]=F(z)=\sum_{n=0}^{\infty}f(nT)z^{-n}</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="rgt">
+      <div class="act-card" style="flex:1.05">
+        <div class="hd" style="font-size:23px"><span style="flex:1">重要说明</span></div>
+        <div class="bd">
+          <div class="st">z 变换<span class="kw-r">只适用于离散信号</span>，只刻画连续信号在<span style="color:var(--navy);font-weight:700">采样时刻</span>的特性，不反映采样时刻之间的变化。</div>
+          <div class="st">因此连续信号 <span class="tex">f(t)</span> 与其采样信号 <span class="tex">f^{*}(t)</span> 有<span class="kw-r">相同的 z 变换</span>：</div>
+          <div class="fml" style="background:var(--sky);border-radius:10px;padding:10px 12px;text-align:center;font-size:22px;color:var(--navy)"><span class="tex">Z[f(t)]=Z[f^{*}(t)]=F(z)=\sum_{n=0}^{\infty}f(nT)z^{-n}</span></div>
+        </div>
+      </div>
+      <div class="act-card figc" style="flex:1.35">
+        <div class="hd" style="font-size:22px"><span style="flex:1">映射 z = e<sup>Ts</sup>：主横带左半部 → 单位圆内；虚轴段 → 单位圆</span></div>
+        <div class="bd2"><svg id="mapfig" viewBox="0 0 960 560" preserveAspectRatio="xMidYMid meet"></svg></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">结论</span><span>令 <span class="tex">z=e^{Ts}</span>，含指数的 <span class="tex">F^{*}(s)</span> 化为幂级数 <span class="tex">F(z)=\sum f(nT)z^{-n}</span>，即 z 变换。</span></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("mapfig");
+  const mk = (t, a, p) => { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); (p || svg).appendChild(e); return e; };
+  const txt = (x, y, s, o) => { o = o || {}; const el = mk("text", { x, y, "font-size": o.fs || 22, fill: o.fill || "#16324F",
+    "text-anchor": o.an || "middle", "font-weight": o.b ? 700 : 400, "font-style": o.it ? "italic" : "normal",
+    "font-family": o.fam || "'STIX Two Text','Times New Roman',serif" }); el.textContent = s; return el; };
+  const C = { ax: "#41506B", grid: "#C9D3E4", band: "#DCE9FA", disk: "#E4EEFB", red: "#D63A2F", navy: "#16324F", blue: "#1D3FA0" };
+  /* ---- 左：s 平面 ---- */
+  const L = { x0: 70, x1: 400, y0: 40, y1: 520, cx: 235, cy: 280 };
+  mk("rect", { x: L.x0, y: L.cy - 110, width: L.cx - L.x0, height: 220, fill: C.band, opacity: .8 });
+  mk("line", { x1: L.x0, y1: L.cy, x2: L.x1 + 18, y2: L.cy, stroke: C.ax, "stroke-width": 2.4, "marker-end": "url(#mAr)" });
+  mk("line", { x1: L.cx, y1: L.y1, x2: L.cx, y2: L.y0 - 14, stroke: C.ax, "stroke-width": 2.4, "marker-end": "url(#mAr)" });
+  /* 横带边界 */
+  mk("line", { x1: L.x0, y1: L.cy - 110, x2: L.x1, y2: L.cy - 110, stroke: C.blue, "stroke-width": 2, "stroke-dasharray": "9 6" });
+  mk("line", { x1: L.x0, y1: L.cy + 110, x2: L.x1, y2: L.cy + 110, stroke: C.blue, "stroke-width": 2, "stroke-dasharray": "9 6" });
+  txt(L.x0 + 58, L.cy - 122, "ω=π/T", { fs: 22, fill: C.navy, b: 1, it: 1 });
+  txt(L.x0 + 62, L.cy + 140, "ω=−π/T", { fs: 22, fill: C.navy, b: 1, it: 1 });
+  /* jω 轴（带内一段强调） */
+  mk("line", { x1: L.cx, y1: L.cy + 110, x2: L.cx, y2: L.cy - 110, stroke: C.red, "stroke-width": 5 });
+  txt(L.cx - 16, L.cy - 132, "jω", { fs: 22, fill: C.red, b: 1, it: 1, an: "end" });
+  txt(L.x1 + 14, L.cy + 34, "σ", { fs: 22, fill: C.ax, b: 1, it: 1 });
+  txt((L.x0 + L.x1) / 2, L.y1 + 34, "s 平面", { fs: 22, fill: C.navy, b: 1, fam: "'Noto Sans SC',sans-serif" });
+  txt(L.x0 + 70, L.y0 + 26, "主横带 −π/T<ω≤π/T", { fs: 21, fill: "#41506B", an: "start", fam: "'Noto Sans SC',sans-serif" });
+  /* ---- 中：映射箭头 ---- */
+  mk("line", { x1: 440, y1: 280, x2: 512, y2: 280, stroke: C.red, "stroke-width": 4, "marker-end": "url(#mArR)" });
+  const zt = mk("text", { x: 476, y: 236, "font-size": 24, fill: C.red, "font-weight": 700, "font-style": "italic", "text-anchor": "middle" });
+  zt.textContent = "z=e";
+  const ts = mk("tspan", { "font-size": 17, dy: -7 }, zt); ts.textContent = "Ts";
+  /* ---- 右：z 平面 ---- */
+  const R = { cx: 710, cy: 280, r: 150 };
+  mk("circle", { cx: R.cx, cy: R.cy, r: R.r, fill: C.disk, stroke: C.blue, "stroke-width": 3 });
+  mk("line", { x1: R.cx - R.r - 40, y1: R.cy, x2: R.cx + R.r + 46, y2: R.cy, stroke: C.ax, "stroke-width": 2.2, "marker-end": "url(#mAr)" });
+  mk("line", { x1: R.cx, y1: R.cy + R.r + 40, x2: R.cx, y2: R.cy - R.r - 46, stroke: C.ax, "stroke-width": 2.2, "marker-end": "url(#mAr)" });
+  txt(R.cx + R.r + 44, R.cy + 32, "Re", { fs: 22, fill: C.ax, b: 1, it: 1 });
+  txt(R.cx + 18, R.cy - R.r - 30, "Im", { fs: 22, fill: C.ax, b: 1, it: 1 });
+  /* 单位圆上 s=jω 对应点 */
+  mk("circle", { cx: R.cx + R.r, cy: R.cy, r: 9, fill: C.red, stroke: "#fff", "stroke-width": 2 });
+  txt(R.cx + R.r - 10, R.cy - 18, "z=1", { fs: 22, fill: C.red, b: 1, an: "end" });
+  mk("circle", { cx: R.cx - R.r, cy: R.cy, r: 8, fill: C.red, stroke: "#fff", "stroke-width": 2 });
+  txt(R.cx - R.r + 4, R.cy + 32, "z=−1", { fs: 22, fill: C.red, b: 1, an: "end" });
+  txt(R.cx, R.cy + 62, "单位圆 |z|=1", { fs: 22, fill: C.navy, b: 1 });
+  txt(R.cx, R.cy + 90, "↔ s 平面 jω 轴", { fs: 21, fill: "#41506B" });
+  txt(R.cx, R.cy + R.r + 58, "z 平面", { fs: 23, fill: C.navy, b: 1, fam: "'Noto Sans SC',sans-serif" });
+  txt(R.cx, R.cy + R.r + 88, "s=0↔z=1，ω=±π/T↔z=−1", { fs: 20, fill: "#41506B" });
+  /* 箭头 marker（前置定义） */
+  const defs = mk("defs", {});
+  const m1 = mk("marker", { id: "mAr", markerWidth: 10, markerHeight: 8, refX: 7, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: C.ax }, m1);
+  const m2 = mk("marker", { id: "mArR", markerWidth: 12, markerHeight: 9, refX: 8, refY: 3.4, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L8,3.4 L0,6.8 Z", fill: C.red }, m2);
+});
+</script>
+<script>/* qa-steps：?steps=N 自动前进 N 步 */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

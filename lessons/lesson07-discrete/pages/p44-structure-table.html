@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>㉚ 常见采样系统结构一览</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=700">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=700" defer></script>
+<script src="../fig.js"></script>
+<style>
+  .col{display:flex;flex-direction:column;gap:14px;height:100%;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:8px;padding:10px 20px}
+  .st{font-size:21px;color:var(--ink);line-height:1.55}
+  .tbl{flex:1;display:flex;flex-direction:column;min-height:0}
+  .tr{flex:1;display:flex;gap:14px;align-items:center;min-height:0;border-top:2px solid var(--line);padding:4px 2px}
+  .tr.hd0{flex:.52;border-top:none;font-size:22px;font-weight:700;color:var(--navy)}
+  .c1{flex:1.5;min-width:0;display:grid;place-items:center;background:#fff;border-radius:10px;align-self:stretch}
+  .c1 svg{width:100%;height:100%}
+  .c2{flex:.95;font-size:21px;color:var(--ink);line-height:1.55}
+  .c3{flex:1.05;font-size:21px;color:var(--navy);text-align:center;background:var(--sky);border-radius:10px;padding:6px 8px;line-height:1.5}
+</style>
+</head>
+<body data-title="㉚ 常见采样系统结构一览" data-page="44 / 56">
+<div class="act-stage"><div class="act-slide">
+<div class="act-body has-note">
+  <div class="col">
+    <div class="act-card" style="flex:3.2">
+      <div class="hd" style="font-size:23px"><span style="flex:1">表 7-1　典型采样系统及其 C(z)（复刻重绘）</span></div>
+      <div class="tbl">
+        <div class="tr hd0"><div class="c1">系统框图</div><div class="c2">说明</div><div class="c3">C(z)</div></div>
+        <div class="tr">
+          <div class="c1"><svg id="r1"></svg></div>
+          <div class="c2">① 误差通道采样（即图 7-24 结构），反馈连续。</div>
+          <div class="c3"><span class="tex">C(z)=\frac{G(z)\,R(z)}{1+GH(z)}</span></div>
+        </div>
+        <div class="tr">
+          <div class="c1"><svg id="r2"></svg></div>
+          <div class="c2">② 误差与输出端均设同步采样开关。</div>
+          <div class="c3"><span class="tex">C(z)=\frac{G(z)\,R(z)}{1+G(z)\,H(z)}</span></div>
+        </div>
+        <div class="tr">
+          <div class="c1"><svg id="r3"></svg></div>
+          <div class="c2">③ 仅反馈通道采样、输入未采样：得不到 C(z)/R(z)，只能写 C(z)。</div>
+          <div class="c3"><span class="tex">C(z)=\frac{RG(z)}{1+GH(z)}</span></div>
+        </div>
+        <div class="tr">
+          <div class="c1"><svg id="r4"></svg></div>
+          <div class="c2">④ 误差处与 G₁、G₂ 之间均有同步开关。</div>
+          <div class="c3"><span class="tex">C(z)=\frac{G_{1}(z)\,G_{2}(z)\,R(z)}{1+G_{1}(z)\,HG_{2}(z)}</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="act-card fill" style="flex:.95">
+      <div class="hd" style="font-size:22px"><span style="flex:1">注意（两点）</span></div>
+      <div class="bd" style="gap:10px">
+        <div class="st">① 采样开关位置不同 → <span class="tex">C(z)</span> 的分子、分母（特征式）都可能不同，<span class="kw-r">不能套同一个公式</span>；</div>
+        <div class="st">② 输入端无采样开关时（如③），<span class="tex">R(z)</span> 不能独立分出，闭环<b>脉冲传递函数不存在</b>，只能求输出的 z 变换 <span class="tex">C(z)</span>。</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">结论</span><span>先标出所有采样开关的位置，再列方程求 C(z)。</span></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  function miniSwitch(B, id, x0, x1, y) {
+    const mk = B.mk, tx = B.tx, g = B.g, INK = BD.INK;
+    const defs = B.svg.querySelector("defs");
+    const m = mk("marker", { id, markerWidth: 9, markerHeight: 7, refX: 6, refY: 3, orient: "auto" }, defs);
+    mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: INK }, m);
+    mk("circle", { cx: x0, cy: y, r: 4.5, fill: "#fff", stroke: INK, "stroke-width": 2.4 }, g);
+    mk("circle", { cx: x1, cy: y, r: 4.5, fill: "#fff", stroke: INK, "stroke-width": 2.4 }, g);
+    mk("line", { x1: x0, y1: y, x2: x1 - 6, y2: y - 21, stroke: INK, "stroke-width": 2.8,
+      "stroke-linecap": "round", "marker-end": "url(#" + id + ")" }, g);
+    tx(g, (x0 + x1) / 2, y - 36, "T", { fs: 20, it: 1, b: 1, fill: INK });
+  }
+  const OPT = { vw: 400, vh: 172, static: true };
+  /* ① 误差采样 */
+  const B1 = BD.block("r1", [
+    { type: "line", pts: [[12, 72], [68, 72]], arrow: false, label: "R(s)", labelDy: -14, fs: 20 },
+    { type: "sum", x: 80, y: 72, r: 13 },
+    { type: "line", pts: [[93, 72], [110, 72]] },
+    { type: "line", pts: [[142, 72], [166, 72]] },
+    { type: "box", x: 166, y: 44, w: 118, h: 56, label: "G(s)", fs: 21 },
+    { type: "line", pts: [[284, 72], [384, 72]], label: "C(s)", labelDx: 14, labelDy: -14 },
+    { type: "dot", x: 330, y: 72 },
+    { type: "line", pts: [[330, 72], [330, 134], [248, 134]], arrow: false },
+    { type: "box", x: 130, y: 116, w: 118, h: 40, label: "H(s)", fs: 21 },
+    { type: "line", pts: [[130, 134], [80, 134], [80, 87]], arrow: true }
+  ], OPT);
+  miniSwitch(B1, "s1", 112, 140, 72);
+  B1.tx(B1.g, 60, 82, "+", { fs: 22, b: 1, an: "end", fill: BD.INK });
+  B1.tx(B1.g, 70, 112, "−", { fs: 22, b: 1, an: "end", fill: BD.INK });
+  /* ② 误差与输出均采样 */
+  const B2 = BD.block("r2", [
+    { type: "line", pts: [[12, 72], [68, 72]], arrow: false, label: "R(s)", labelDy: -14 },
+    { type: "sum", x: 80, y: 72, r: 13 },
+    { type: "line", pts: [[93, 72], [110, 72]] },
+    { type: "line", pts: [[142, 72], [166, 72]] },
+    { type: "box", x: 166, y: 44, w: 112, h: 56, label: "G(s)", fs: 21 },
+    { type: "line", pts: [[278, 72], [300, 72]] },
+    { type: "line", pts: [[332, 72], [384, 72]], label: "C(s)", labelDx: 16, labelDy: -14 },
+    { type: "dot", x: 352, y: 72 },
+    { type: "line", pts: [[352, 72], [352, 134], [248, 134]], arrow: false },
+    { type: "box", x: 130, y: 116, w: 118, h: 40, label: "H(s)", fs: 21 },
+    { type: "line", pts: [[130, 134], [80, 134], [80, 87]], arrow: true }
+  ], OPT);
+  miniSwitch(B2, "s2a", 112, 140, 72);
+  miniSwitch(B2, "s2b", 302, 330, 72);
+  B2.tx(B2.g, 60, 82, "+", { fs: 22, b: 1, an: "end", fill: BD.INK });
+  B2.tx(B2.g, 70, 112, "−", { fs: 22, b: 1, an: "end", fill: BD.INK });
+  /* ③ 仅反馈通道采样 */
+  const B3 = BD.block("r3", [
+    { type: "line", pts: [[12, 72], [68, 72]], arrow: false, label: "R(s)", labelDy: -14 },
+    { type: "sum", x: 80, y: 72, r: 13 },
+    { type: "line", pts: [[93, 72], [160, 72]] },
+    { type: "box", x: 160, y: 44, w: 118, h: 56, label: "G(s)", fs: 21 },
+    { type: "line", pts: [[278, 72], [384, 72]], label: "C(s)", labelDx: 14, labelDy: -14 },
+    { type: "dot", x: 330, y: 72 },
+    { type: "line", pts: [[330, 72], [330, 134], [318, 134]], arrow: false },
+    { type: "line", pts: [[286, 134], [248, 134]], arrow: false },
+    { type: "box", x: 130, y: 116, w: 118, h: 40, label: "H(s)", fs: 21 },
+    { type: "line", pts: [[130, 134], [80, 134], [80, 87]], arrow: true }
+  ], OPT);
+  miniSwitch(B3, "s3", 288, 316, 134);
+  B3.tx(B3.g, 60, 82, "+", { fs: 22, b: 1, an: "end", fill: BD.INK });
+  B3.tx(B3.g, 70, 112, "−", { fs: 22, b: 1, an: "end", fill: BD.INK });
+  /* ④ 误差处 + G₁/G₂ 之间均有开关 */
+  const B4 = BD.block("r4", [
+    { type: "line", pts: [[8, 72], [54, 72]], arrow: false, label: "R(s)", labelDy: -14 },
+    { type: "sum", x: 66, y: 72, r: 13 },
+    { type: "line", pts: [[79, 72], [94, 72]] },
+    { type: "line", pts: [[124, 72], [142, 72]] },
+    { type: "box", x: 142, y: 44, w: 82, h: 56, label: "G_{1}(s)", fs: 20 },
+    { type: "line", pts: [[224, 72], [240, 72]] },
+    { type: "line", pts: [[270, 72], [286, 72]] },
+    { type: "box", x: 286, y: 44, w: 82, h: 56, label: "G_{2}(s)", fs: 20 },
+    { type: "line", pts: [[368, 72], [396, 72]], label: "C(s)", labelDx: 8, labelDy: -14 },
+    { type: "dot", x: 384, y: 72 },
+    { type: "line", pts: [[384, 72], [384, 134], [232, 134]], arrow: false },
+    { type: "box", x: 114, y: 116, w: 118, h: 40, label: "H(s)", fs: 21 },
+    { type: "line", pts: [[114, 134], [66, 134], [66, 87]], arrow: true }
+  ], OPT);
+  miniSwitch(B4, "s4a", 96, 122, 72);
+  miniSwitch(B4, "s4b", 242, 268, 72);
+  B4.tx(B4.g, 46, 82, "+", { fs: 22, b: 1, an: "end", fill: BD.INK });
+  B4.tx(B4.g, 56, 112, "−", { fs: 22, b: 1, an: "end", fill: BD.INK });
+});
+</script>
+</div></div>
+</body>
+</html>

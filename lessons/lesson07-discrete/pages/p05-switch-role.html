@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>② 采样开关的作用</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=700">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=700" defer></script>
+<style>
+  .row{display:flex;gap:20px;height:100%;min-height:0}
+  .figc{flex:1.58;display:flex;flex-direction:column;overflow:hidden;position:relative}
+  .figc .rows{flex:1;display:flex;flex-direction:column;background:#fff;padding:2px 8px;min-height:0}
+  .prow{flex:1;display:flex;align-items:stretch;min-height:0;border-bottom:1.5px dashed var(--line)}
+  .prow:last-child{border-bottom:none}
+  .prow .rlab{flex:none;width:86px;display:grid;place-items:center;font-size:23px;font-weight:700;color:var(--navy)}
+  .prow svg{flex:1;width:100%;height:100%;min-width:0}
+  .segfloat{position:absolute;top:52px;right:12px;z-index:5;max-width:80%;background:#fff;
+    border:2px solid var(--blue);border-radius:10px;padding:6px 15px;font-size:20px;font-weight:700;
+    color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 2px 10px rgba(20,40,90,.18)}
+  .ctl{display:flex;align-items:center;gap:10px;justify-content:center;padding:6px 0 8px}
+  .btn{background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:19px;font-weight:700;padding:8px 20px;cursor:pointer;min-width:112px;text-align:center}
+  .btn.ghost{background:#fff;color:var(--blue);border:2px solid var(--blue)}
+  .btn:disabled{opacity:.42;cursor:not-allowed}
+  .rgt{flex:.8;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:8px;padding:10px 16px}
+  .stp2{display:flex;gap:10px;align-items:flex-start;background:var(--sky);border-radius:9px;
+    padding:7px 12px;font-size:19.5px;line-height:1.4;color:var(--ink);border-left:5px solid transparent}
+  .stp2 .num{flex:none;width:26px;height:26px;border-radius:50%;background:var(--blue);color:#fff;
+    font-weight:700;font-size:16px;display:grid;place-items:center}
+  .stp2.on{background:#FDF3EC;border-left-color:var(--danger);box-shadow:0 0 0 2px rgba(214,58,47,.22)}
+  .stp2.on .num{background:var(--danger)}
+  .conc{font-size:22px;color:var(--ink);line-height:1.62}
+</style>
+</head>
+<body data-title="② 采样开关的作用" data-page="5 / 56">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="row">
+      <div class="act-card figc">
+        <div class="hd"><span style="flex:1">采样开关的工作过程（<span class="tex">T=2\,\mathrm{s}</span>，<span class="tex">e(t)=1-e^{-t/2}</span> 示意波形）</span></div>
+        <span class="segfloat" id="segChip" style="display:none"></span>
+        <span id="prog">0 / 4</span>
+        <div class="rows">
+          <div class="prow"><span class="rlab"><span class="tex">e(t)</span></span><svg id="fe"></svg></div>
+          <div class="prow"><span class="rlab">开关</span><svg id="sw"></svg></div>
+          <div class="prow"><span class="rlab"><span class="tex">e^{*}(t)</span></span><svg id="fs"></svg></div>
+        </div>
+        <div class="ctl">
+          <button class="btn" id="play">▶ 播放</button>
+          <button class="btn ghost" id="step">⧉ 分步</button>
+          <button class="btn ghost" id="rst">↺ 重置</button>
+        </div>
+      </div>
+      <div class="rgt">
+        <div class="act-card" style="flex:1.15">
+          <div class="hd" style="font-size:23px"><span style="flex:1">演示步骤</span></div>
+          <div class="bd">
+            <div class="stp2" id="st1"><span class="num">1</span><span>误差曲线 e(t) 出现（慢变化）</span></div>
+            <div class="stp2" id="st2"><span class="num">2</span><span>开关闭合：脉冲通过，电机转动调阀</span></div>
+            <div class="stp2" id="st3"><span class="num">3</span><span>开关断开：电机停，阀门固定，炉温自由变化</span></div>
+            <div class="stp2" id="st4"><span class="num">4</span><span>到下一周期再闭合……周而复始</span></div>
+          </div>
+        </div>
+        <div class="act-card" style="flex:1">
+          <div class="hd" style="font-size:23px"><span style="flex:1">结论</span></div>
+          <div class="bd">
+            <div class="conc"><span class="kw-r">采样</span>：在采样开关作用下，把连续信号变成<span class="kw-r">脉冲序列</span>。</div>
+            <div class="conc">采样开关<span style="color:var(--navy);font-weight:700">周期性闭合（周期 T）— 断开</span>，电机时转时停，超调因而受控。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<div data-step="1" style="display:none"></div><div data-step="2" style="display:none"></div>
+<div data-step="3" style="display:none"></div><div data-step="4" style="display:none"></div>
+<script src="../fig.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const TOTAL = 4, T = 2, N = 10;
+  const eOf = t => 1 - Math.exp(-t / 2);
+  /* ---------- 上：e(t) 连续曲线 ---------- */
+  const ePts = [];
+  for (let i = 0; i <= 300; i++) { const t = i / 300 * 20.8 - 0.8; ePts.push([t, eOf(Math.max(0, t))]); }
+  const Fe = DZ.plot("fe", {
+    xlim: [-0.8, 20.8], ylim: [0, 1.15], xlabel: "t/s", ylabel: "e(t)",
+    curves: [{ pts: ePts, color: "#1D3FA0" }]
+  }, { vw: 960, vh: 240 });
+  /* ---------- 下：e*(t) 脉冲序列（脉冲高度 = e(nT)，程序现算） ---------- */
+  const sPts = [];
+  for (let n = 0; n <= N; n++) sPts.push([n * T, eOf(n * T)]);
+  const Fs = DZ.stem("fs", { pts: sPts, xlabel: "t/s", ylabel: "e^{*}(t)", color: "#0E7A36" }, { vw: 960, vh: 240 });
+  /* stem 横轴由采样时刻 t=nT 现算为 [-0.8, 20.8]，与 e(t) 图天然对齐 */
+  /* ---------- 中：采样开关符号（自绘，状态由步骤决定） ---------- */
+  const NS = "http://www.w3.org/2000/svg";
+  const sw = document.getElementById("sw");
+  sw.setAttribute("viewBox", "0 0 960 190");
+  const mk = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag);
+    for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || sw).appendChild(n); return n; };
+  const INK = "#16324F", GREEN = "#1E9E57", RED = "#D63A2F", MUT = "#5B6B8C";
+  const defs = mk("defs", {}, sw);
+  const m1 = mk("marker", { id: "swa", markerWidth: 10, markerHeight: 8, refX: 6, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: INK }, m1);
+  const gSw = mk("g", {}, sw);
+  const Y0 = 88, C1 = 400, C2 = 520;
+  const txt = (x, y, s, o) => BD.tx(gSw, x, y, s, Object.assign({ fs: 23 }, o || {}));
+  function drawSwitch(st) {   // 0 待闭合 1 闭合 2 断开 3 周而复始
+    gSw.innerHTML = "";
+    mk("line", { x1: 30, y1: Y0, x2: C1 - 4, y2: Y0, stroke: INK, "stroke-width": 3 }, gSw);
+    txt(40, Y0 - 18, "e(t)", { it: 1, an: "start" });
+    mk("line", { x1: C2 + 4, y1: Y0, x2: 930, y2: Y0, stroke: INK, "stroke-width": 3,
+      "marker-end": "url(#swa)" }, gSw);
+    txt(880, Y0 - 18, "e^{*}(t)", { it: 1 });
+    mk("circle", { cx: C1, cy: Y0, r: 6, fill: "#fff", stroke: INK, "stroke-width": 2.8 }, gSw);
+    mk("circle", { cx: C2, cy: Y0, r: 6, fill: "#fff", stroke: INK, "stroke-width": 2.8 }, gSw);
+    const closed = (st === 1 || st === 3);
+    if (closed) mk("line", { x1: C1, y1: Y0, x2: C2 - 6, y2: Y0, stroke: INK, "stroke-width": 3.4,
+      "stroke-linecap": "round", "marker-end": "url(#swa)" }, gSw);
+    else mk("line", { x1: C1, y1: Y0, x2: C2 - 12, y2: Y0 - 30, stroke: INK, "stroke-width": 3.4,
+      "stroke-linecap": "round", "marker-end": "url(#swa)" }, gSw);
+    txt((C1 + C2) / 2, 34, "T", { it: 1, b: 1 });
+    txt((C1 + C2) / 2, Y0 + 42, "采样开关", { fs: 22, fill: MUT, b: 1 });
+    if (st === 2) {   // 断开：通道画红色 ×
+      const cx = (C1 + C2) / 2, r = 17;
+      mk("line", { x1: cx - r, y1: Y0 - r, x2: cx + r, y2: Y0 + r, stroke: RED, "stroke-width": 5, "stroke-linecap": "round" }, gSw);
+      mk("line", { x1: cx - r, y1: Y0 + r, x2: cx + r, y2: Y0 - r, stroke: RED, "stroke-width": 5, "stroke-linecap": "round" }, gSw);
+      txt(660, 42, "断开：电机停，阀门固定", { fill: RED, b: 1, an: "start" });
+    } else if (st === 1) {
+      txt(660, 42, "闭合：脉冲通过，电机调阀", { fill: GREEN, b: 1, an: "start" });
+    } else if (st === 3) {
+      txt(660, 42, "周期 T，周而复始", { fill: GREEN, b: 1, an: "start" });
+    } else {
+      txt(700, 42, "等待第一次闭合…", { fill: MUT, an: "start" });
+    }
+  }
+  /* ---------- 步进编排 ---------- */
+  const chips = K => { for (let i = 1; i <= TOTAL; i++)
+    document.getElementById("st" + i).classList.toggle("on", i === K); };
+  const swStateOf = K => K <= 1 ? 0 : K === 2 ? 1 : K === 3 ? 2 : 3;
+  /* 连贯播放时按连续进度 f 同步开关状态（与各段区间一致），避免播放中开关状态滞后一段 */
+  const swStateOfF = f => f < 0.25 ? 0 : f < 0.5 ? 1 : f < 0.75 ? 2 : 3;
+  function paint(K, f) {
+    const fp = typeof f === "number" ? f : K / TOTAL;
+    Fe.setF(0, Math.min(1, fp * 4));                       // ① e(t) 生长
+    const stemF = Math.max(0, Math.min(1, (fp - 0.25) / 0.75)); // ②③④ 脉冲逐次生长
+    Fs.setF(0, stemF > 0 ? 1 : 0);
+    Fs.setF(1, stemF);
+    if (swOverride == null) drawSwitch(typeof f === "number" ? swStateOfF(f) : swStateOf(K));
+    chips(K);
+  }
+  let swOverride = null;
+  const chip = document.getElementById("segChip");
+  BD.wire(TOTAL, paint, {
+    figs: [Fe, Fs], dur: 12000,
+    segments: [
+      { label: "① 误差曲线 e(t) 出现（慢变化）", parts: [{ F: Fe, b: [0] }] },
+      { label: "② 开关闭合：脉冲通过，电机转动调阀", parts: [{ F: Fs, b: [1], f0: 0, f1: .34 }] },
+      { label: "③ 开关断开：电机停，阀门固定", parts: [{ F: Fs, b: [1], f0: .34, f1: .67 }] },
+      { label: "④ 周期 T：周而复始", parts: [{ F: Fs, b: [1], f0: .67, f1: 1 }] }
+    ],
+    segLabel: (label, si) => {
+      if (label == null) { swOverride = null; drawSwitch(swStateOf(TOTAL)); chip.style.display = "none"; return; }
+      swOverride = si; drawSwitch(si === 0 ? 0 : si);
+      chips(si + 1);
+      chip.textContent = "分步 " + (si + 1) + " / " + TOTAL + "　" + label;
+      chip.style.display = "";
+    }
+  });
+  document.getElementById("rst").onclick = () => ACT.step.reset();
+});
+</script>
+</div></div>
+</body>
+</html>

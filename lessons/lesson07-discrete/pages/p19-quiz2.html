@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>⑥ 课堂互动：保持器</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=700">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=700" defer></script>
+<style>
+  .qrow{display:flex;gap:24px;height:100%;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card .bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:14px;padding:16px 26px;min-height:0}
+  .stage-tip{display:inline-block;font-size:23px;color:#fff;background:var(--blue);border-radius:22px;padding:9px 28px;width:fit-content}
+  .hint{font-size:22.5px;color:var(--ink);line-height:1.75;display:flex;gap:14px;align-items:flex-start}
+  .hint .no{flex:none;width:38px;height:38px;margin-top:3px;border-radius:50%;background:var(--blue);color:#fff;font-weight:700;font-size:22px;display:grid;place-items:center}
+  /* 选择填空 */
+  .fill{font-size:24.5px;color:var(--ink);line-height:1.9}
+  .fill .hd2{font-weight:700;color:var(--navy)}
+  .bl{display:inline-block;min-width:130px;padding:0 8px;text-align:center;vertical-align:bottom;
+    border-bottom:3px solid var(--blue);line-height:1.35}
+  .bl .aw{display:block;font-weight:700;color:var(--danger);opacity:0;transition:opacity .25s}
+  .seg.reveal .bl .aw{opacity:1}
+  .opts2{display:flex;gap:14px;margin-top:8px}
+  .opt2{flex:1;background:var(--sky);border:2.5px solid var(--line);border-radius:12px;padding:9px 16px;
+    font-size:21.5px;color:var(--ink);font-weight:700;position:relative;line-height:1.4}
+  .opt2 .ab{color:var(--blue);margin-right:8px}
+  .seg.on .opt2.right{border-color:#1E9E57;background:#F0FAF4}
+  .seg.on .opt2.right::after{content:"✓";position:absolute;top:-13px;right:-9px;width:32px;height:32px;border-radius:50%;
+    background:#1E9E57;color:#fff;font-weight:800;font-size:20px;display:grid;place-items:center}
+  .ans{flex:none;font-size:21.5px;color:var(--navy);background:var(--sky);border-radius:12px;padding:10px 20px;line-height:1.55}
+  .ans b{color:var(--danger)}
+  .fx{flex:none;font-size:21px;color:var(--muted);background:#fff;border:2px dashed var(--line);
+    border-radius:12px;padding:10px 18px;line-height:1.6}
+  .fx b{color:var(--navy)}
+</style>
+</head>
+<body data-title="⑥ 课堂互动：保持器" data-page="19 / 56">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body">
+    <div class="qrow">
+      <div class="act-card" style="flex:.92">
+        <div class="hd">速判回顾</div>
+        <div class="bd" style="justify-content:space-evenly;gap:30px;padding:26px 30px">
+          <span class="stage-tip">先回顾，再作答</span>
+          <div class="hint"><span class="no">1</span><span>保持器把离散信号还原为连续信号；<b>零阶保持器</b>把每个采样值保持一个周期 <span class="tex">T</span>。</span></div>
+          <div class="hint"><span class="no">2</span><span>零阶保持器在主瓣内的相频 <span class="tex">\angle G_{h}=-\omega T/2</span>：线性滞后，等效滞后 <span class="tex">T/2</span>。</span></div>
+          <div class="hint"><span class="no">3</span><span>一阶保持器用<b>两个采样值线性外推</b>，更贴近原信号的变化趋势。</span></div>
+        </div>
+      </div>
+      <div class="act-card" style="flex:1.25">
+        <div class="hd">选择填空　3 分（每空 1 分）</div>
+        <div class="bd">
+          <span class="stage-tip">请先作出选择</span>
+          <div class="fill seg" id="q1">
+            <span class="hd2">①</span> 各阶保持器所具有的共性，是产生相位 <span class="bl"><span class="aw">滞后</span></span>。
+            <div class="opts2">
+              <div class="opt2" data-mark="1"><span class="ab">A</span>滞后</div>
+              <div class="opt2" data-mark="0"><span class="ab">B</span>超前</div>
+            </div>
+          </div>
+          <div class="fill seg" id="q2">
+            <span class="hd2">②</span> 与其他各阶保持器相比，<span class="bl"><span class="aw">零阶保持器</span></span> 的相对稳定性最好。
+            <div class="opts2">
+              <div class="opt2" data-mark="1"><span class="ab">A</span>零阶保持器</div>
+              <div class="opt2" data-mark="0"><span class="ab">B</span>一阶保持器</div>
+            </div>
+          </div>
+          <div class="fill seg" id="q3">
+            <span class="hd2">③</span> 零阶保持器与一阶保持器相比，<span class="bl"><span class="aw">一阶保持器</span></span> 给出更精确的信号恢复。
+            <div class="opts2">
+              <div class="opt2" data-mark="1"><span class="ab">A</span>一阶保持器</div>
+              <div class="opt2" data-mark="0"><span class="ab">B</span>零阶保持器</div>
+            </div>
+          </div>
+          <div data-step="6">
+            <div class="ans"><b>答案：① 滞后　② 零阶保持器　③ 一阶保持器。</b></div>
+            <div class="fx" style="margin-top:10px"><b>解析：</b>产生相位滞后是各阶保持器的共性，其中零阶保持器滞后最小（<span class="tex">T/2</span>），相对稳定性最好；一阶保持器用两个采样值外推，恢复更精确，但相位滞后更大。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 分步：1/3/5=逐题判定，2/4/6=逐题答案；第6步同时显示答案汇总与解析 -->
+  <div data-step="1" style="display:none"></div>
+  <div data-step="2" style="display:none"></div>
+  <div data-step="3" style="display:none"></div>
+  <div data-step="4" style="display:none"></div>
+  <div data-step="5" style="display:none"></div>
+</div></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const S = ACT.step, _n = S.next.bind(S), _r = S.reset.bind(S);
+  function paint() {
+    const c = S.cur;
+    for (let i = 1; i <= 3; i++) {
+      const q = document.getElementById("q" + i);
+      const on = c >= 2 * i - 1, reveal = c >= 2 * i;
+      q.classList.toggle("on", on);
+      q.classList.toggle("reveal", reveal);
+      q.querySelectorAll(".opt2").forEach(o => o.classList.toggle("right", on && o.dataset.mark === "1"));
+    }
+  }
+  S.next = function () { const d = _n(); paint(); return d; };
+  S.reset = function () { _r(); paint(); };
+  window.prev = function () { const n = Math.max(0, S.cur - 1); S.reset(); for (let i = 0; i < n; i++) S.next(); };
+});
+</script>
+<script>/* qa-steps：截图自验钩子，?steps=N 自动前进 N 步（播放时不生效） */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</body>
+</html>

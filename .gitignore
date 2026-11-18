@@ -64,6 +64,7 @@ lessons/*.bak*/
 # ===== 后续交接文件夹 =====
 交接in-2026-09-19pm/
 交接out-2026-09-14eve/
+交接-in-kimi-20261118/
 
 # ===== Python 缓存与日志 =====
 __pycache__/
@@ -72,6 +73,8 @@ qa/measure_*.json
 
 # ===== V2.36 审查截图产物 =====
 qa/review-shots/
+qa/ch7-ch8-integrated-images/
+lessons/**/img/封面配图提示词.md
 
 # ===== 其他独立工具（不属于课件，不入库）=====
 sfr-analyzer/

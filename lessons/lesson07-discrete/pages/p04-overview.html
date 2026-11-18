@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>① 从连续到离散</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=700">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=700" defer></script>
+<style>
+  .row{display:flex;flex-direction:column;gap:20px;height:100%;min-height:0}
+  .top{display:flex;gap:22px;flex:1;min-height:0}
+  .bot{display:flex;gap:22px;flex:1.32;min-height:0}
+  .txt{flex:.92;display:flex;flex-direction:column;min-height:0}
+  .figw{flex:1.35;display:flex;flex-direction:column;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:10px;padding:14px 24px;font-size:22.5px;line-height:1.6}
+  .st{font-size:22.5px;color:var(--ink);line-height:1.62}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:6px 12px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .figc .capnote{flex:none;font-size:20px;color:var(--navy);background:var(--sky);border-radius:12px;padding:9px 18px;margin:0 14px 12px;line-height:1.5}
+</style>
+</head>
+<body data-title="① 从连续到离散" data-page="4 / 56">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="top">
+        <div class="act-card"  style="flex:1">
+          <div class="hd"><span style="flex:1">连续信号（模拟信号）</span></div>
+          <div class="bd">
+            <div class="st">在<span class="kw-r">时间上连续、幅值上也连续</span>的信号称为连续信号，又称<span class="kw-r">模拟信号</span>。</div>
+            <div class="st">前几章讨论的连续系统中，所有信号都是时间 <span class="tex">t</span> 的连续函数。</div>
+          </div>
+        </div>
+        <div class="act-card" data-step="1" style="flex:1">
+          <div class="hd"><span style="flex:1">离散控制信号</span></div>
+          <div class="bd">
+            <div class="st">离散控制系统中，<span class="kw-r">有一处或多处</span>的信号不是连续信号，而是离散的<span class="kw-r">脉冲序列或数码</span>。</div>
+            <div class="st">脉冲技术、数字元件、特别是<span style="color:var(--navy);font-weight:700">数字计算机</span>的迅速发展，推动离散控制得到广泛应用。</div>
+          </div>
+        </div>
+      </div>
+      <div class="bot">
+        <div class="act-card txt" data-step="2">
+          <div class="hd"><span style="flex:1">炉温控制：连续调节的困境</span></div>
+          <div class="bd">
+            <div class="st">炉子时间常数大、炉温上升慢：炉温升到给定值时，阀门<span class="kw-r">早已超过规定开度</span> → 超温、电机反转 → 反方向超调 → <span class="kw-r">炉温震荡</span>。</div>
+            <div class="st">对策：在误差信号与电动机之间加一个<span style="color:var(--navy);font-weight:700">采样开关</span>，让它周期性地闭合和断开。</div>
+          </div>
+        </div>
+        <div class="act-card figc figw" data-step="3">
+          <div class="hd"><span style="flex:1">图 7-2　炉温采样控制系统的原理方框图</span></div>
+          <div class="bd2"><svg id="blk"></svg></div>
+          <div class="capnote">采样开关只在闭合瞬间让误差信号通过：电机转动调阀；断开时电机即停、阀门位置固定，炉温自由变化，等待下一次闭合。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">结论</span><span>执行电机时转时停 → 超调受控，即使较大的开环放大系数系统仍稳定。</span></div>
+<script src="../fig.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const B = BD.block("blk", [
+    { type: "line", pts: [[26, 150], [92, 150]], label: "给定炉温", labelDx: -6, labelDy: -30 },
+    { type: "sum", x: 110, y: 150, r: 16, signs: { left: "+", bottom: "−" } },
+    { type: "line", pts: [[127, 150], [188, 150]], label: "e(t)", labelDy: -30 },
+    { type: "line", pts: [[252, 150], [306, 150]], label: "e^{*}(t)", labelDy: -14 },
+    { type: "box", x: 310, y: 110, w: 182, h: 80, label: "放大器与\n执行电机" },
+    { type: "line", pts: [[492, 150], [526, 150]] },
+    { type: "box", x: 530, y: 110, w: 150, h: 80, label: "燃料\n供应阀" },
+    { type: "line", pts: [[680, 150], [714, 150]] },
+    { type: "box", x: 718, y: 110, w: 124, h: 80, label: "炉子" },
+    { type: "line", pts: [[842, 150], [934, 150]], label: "炉温", labelDx: 44, labelDy: -16 },
+    { type: "dot", x: 884, y: 150 },
+    { type: "line", pts: [[884, 150], [884, 300], [110, 300], [110, 168]] }
+  ], { vw: 960, vh: 380, static: true });
+  /* 采样开关标准符号：线段开口 + 斜箭头（标 T） */
+  const mk = B.mk, tx = B.tx, g = B.g, INK = BD.INK;
+  const defs = B.svg.querySelector("defs");
+  const m = mk("marker", { id: "swar", markerWidth: 10, markerHeight: 8, refX: 6, refY: 3, orient: "auto" }, defs);
+  mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: INK }, m);
+  mk("circle", { cx: 192, cy: 150, r: 5, fill: "#fff", stroke: INK, "stroke-width": 2.6 }, g);
+  mk("circle", { cx: 250, cy: 150, r: 5, fill: "#fff", stroke: INK, "stroke-width": 2.6 }, g);
+  mk("line", { x1: 192, y1: 150, x2: 243, y2: 122, stroke: INK, "stroke-width": 3,
+    "stroke-linecap": "round", "marker-end": "url(#swar)" }, g);
+  tx(g, 221, 98, "T", { fs: 25, it: 1, b: 1, fill: INK });
+  tx(g, 221, 194, "采样开关", { fs: 23, fill: BD.AX, b: 1 });
+});
+</script>
+<script>/* qa-steps：截图自验钩子，?steps=N 自动前进 N 步 */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

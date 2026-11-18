@@ -28,5 +28,15 @@
     "lesson_id": "lesson06-correction",
     "path": "lesson06-correction/lesson.json",
     "title": "第六章 控制系统的校正"
+  },
+  {
+    "lesson_id": "lesson07-discrete",
+    "path": "lesson07-discrete/lesson.json",
+    "title": "第七章 离散控制系统"
+  },
+  {
+    "lesson_id": "lesson08-nonlinear",
+    "path": "lesson08-nonlinear/lesson.json",
+    "title": "第八章 非线性系统分析"
   }
 ]

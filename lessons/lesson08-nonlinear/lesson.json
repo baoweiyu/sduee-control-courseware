@@ -1,0 +1,270 @@
+{
+  "lesson_id": "lesson08-nonlinear",
+  "title": "第八章 非线性系统分析",
+  "pages": [
+    {
+      "id": "l8-p01",
+      "file": "pages/p01-cover.html",
+      "title": "第八章 非线性系统分析",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l8-p02",
+      "file": "pages/p02-guide.html",
+      "title": "本章导学",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l8-p03",
+      "file": "pages/p03-sec81-cover.html",
+      "title": "8.1 非线性系统的概述",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l8-p04",
+      "file": "pages/p04-nl-exists.html",
+      "title": "非线性系统客观存在",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l8-p05",
+      "file": "pages/p05-feature1.html",
+      "title": "特征一：稳定性问题复杂",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l8-p06",
+      "file": "pages/p06-feature2.html",
+      "title": "特征二：频率畸变",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l8-p07",
+      "file": "pages/p07-feature3.html",
+      "title": "特征三：自激振荡",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l8-p08",
+      "file": "pages/p08-quiz1.html",
+      "title": "课堂互动：非线性系统特征",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l8-p09",
+      "file": "pages/p09-typical-overview.html",
+      "title": "典型非线性环节总览",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l8-p10",
+      "file": "pages/p10-deadzone.html",
+      "title": "死区（不灵敏区）非线性",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l8-p11",
+      "file": "pages/p11-saturation.html",
+      "title": "饱和非线性",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l8-p12",
+      "file": "pages/p12-gap.html",
+      "title": "间隙非线性",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l8-p13",
+      "file": "pages/p13-relay.html",
+      "title": "继电器的一般特性",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l8-p14",
+      "file": "pages/p14-relay-cases.html",
+      "title": "继电器的三种特例",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l8-p15",
+      "file": "pages/p15-sec83-cover.html",
+      "title": "8.3 描述函数法",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l8-p16",
+      "file": "pages/p16-df-idea.html",
+      "title": "描述函数法的基本思想",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l8-p17",
+      "file": "pages/p17-harmonic.html",
+      "title": "谐波分析",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l8-p18",
+      "file": "pages/p18-df-saturation.html",
+      "title": "饱和的描述函数",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l8-p19",
+      "file": "pages/p19-df-relay.html",
+      "title": "继电器的描述函数",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l8-p20",
+      "file": "pages/p20-df-relay-cases.html",
+      "title": "继电器三特例的描述函数",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l8-p21",
+      "file": "pages/p21-neginv.html",
+      "title": "负倒描述函数曲线",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l8-p22",
+      "file": "pages/p22-df-table.html",
+      "title": "表 8-1 常见非线性特性描述函数",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l8-p23",
+      "file": "pages/p23-df-conditions.html",
+      "title": "描述函数法的使用条件",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l8-p24",
+      "file": "pages/p24-quiz2.html",
+      "title": "课堂互动：使用条件",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l8-p25",
+      "file": "pages/p25-stability.html",
+      "title": "稳定性分析原理",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l8-p26",
+      "file": "pages/p26-three-cases.html",
+      "title": "三种情形判稳",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l8-p27",
+      "file": "pages/p27-limit-cycle.html",
+      "title": "自激振荡的稳定性分析",
+      "complexity": "L3",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l8-p28",
+      "file": "pages/p28-ex81-setup.html",
+      "title": "例8-1 题设与作图",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l8-p29",
+      "file": "pages/p29-ex81-calc.html",
+      "title": "例8-1 自振参数计算",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l8-p30",
+      "file": "pages/p30-ex81-boundary.html",
+      "title": "例8-1 稳定性边界",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l8-p31",
+      "file": "pages/p31-summary.html",
+      "title": "本章小结",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l8-p32",
+      "file": "pages/p32-quiz3.html",
+      "title": "随堂测",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l8-p33",
+      "file": "pages/p33-homework.html",
+      "title": "课后作业与下章预告",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    }
+  ]
+}

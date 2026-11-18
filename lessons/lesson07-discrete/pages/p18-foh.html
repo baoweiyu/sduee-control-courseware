@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>⑤ 一阶保持器</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=700">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=700" defer></script>
+<script src="../fig.js"></script>
+<style>
+  .col{display:flex;flex-direction:column;gap:16px;height:100%;min-height:0}
+  .row{flex:1;display:flex;gap:22px;min-height:0}
+  .lft{flex:1;display:flex;flex-direction:column;gap:16px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:10px;padding:14px 24px;font-size:22px;line-height:1.55}
+  .st{font-size:22px;color:var(--ink);line-height:1.6}
+  .eq{background:var(--sky);border-radius:12px;padding:10px 14px;text-align:center;font-size:22px}
+  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .figc{flex:1.28;display:flex;flex-direction:column;overflow:hidden;position:relative}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .segfloat{position:absolute;top:56px;right:14px;z-index:5;max-width:72%;background:#fff;
+    border:2px solid var(--blue);border-radius:10px;padding:6px 14px;font-size:20px;font-weight:700;
+    color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 2px 10px rgba(20,40,90,.18)}
+  .prog{position:absolute;top:60px;left:16px;z-index:5;font-size:19px;color:var(--muted);
+    background:rgba(255,255,255,.88);padding:2px 10px;border-radius:8px}
+  .ctl{display:flex;align-items:center;gap:10px;justify-content:center;padding:8px 0 10px}
+  .btn{background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:19px;font-weight:700;padding:8px 20px;cursor:pointer}
+  .btn.ghost{background:#fff;color:var(--blue);border:2px solid var(--blue)}
+  .cmp{flex:none;display:flex;gap:22px}
+  .cmp .cell{flex:1;display:flex;gap:14px;align-items:center;background:#fff;border:2px solid var(--line);border-radius:14px;padding:12px 20px}
+  .cmp .tag{flex:none;background:var(--blue);color:#fff;font-size:21px;font-weight:700;border-radius:10px;padding:10px 16px;line-height:1.3;text-align:center}
+  .cmp .cell.b .tag{background:#C2410C}
+  .cmp .tx2{font-size:21.5px;color:var(--ink);line-height:1.55}
+  @keyframes bdPulse{0%,100%{opacity:1}50%{opacity:.2}}
+  .flash{animation:bdPulse .85s ease-in-out infinite}
+</style>
+</head>
+<body data-title="⑤ 一阶保持器" data-page="18 / 56">
+<div class="act-stage"><div class="act-slide">
+
+<div class="act-body has-note">
+  <div class="col">
+    <div class="row">
+      <div class="lft">
+        <div class="act-card" style="flex:1.15">
+          <div class="hd"><span style="flex:1">定义：两个采样值线性外推</span></div>
+          <div class="bd">
+<div data-step="1" style="display:none"></div> <!-- 首步驱动动画；基础内容常显 -->
+            <div ><div class="st">根据 <span class="tex">y(nT)</span> 与 <span class="tex">y[(n-1)T]</span>，按<span class="kw-r">线性规律外推</span>的保持器为一阶保持器（<span class="tex">0\le\Delta t&lt;T</span>）：</div>
+              <div class="eq hl"><span class="tex">y(nT+\Delta t)=y(nT)+\dfrac{y(nT)-y[(n-1)T]}{T}\,\Delta t</span></div></div>
+            <div class="st">每段输出的<b>斜率</b>由相邻两个采样值之差决定 —— 比零阶保持器更贴近原信号的变化趋势。</div>
+          </div>
+        </div>
+        <div class="act-card" style="flex:1.45">
+          <div class="hd"><span style="flex:1">传递函数与频率特性</span></div>
+          <div class="bd">
+            <div data-step="2"><div class="st">由单位脉冲响应各分量的拉氏变换整理得：</div>
+              <div class="eq"><span class="tex">G_{h}(s)=T(1+Ts)\left(\dfrac{1-e^{-Ts}}{Ts}\right)^{2}</span></div></div>
+            <div data-step="3"><div class="st">令 <span class="tex">s=j\omega</span>：</div>
+              <div class="eq" style="font-size:21.5px;padding:10px 8px"><span class="tex">G_{h}(j\omega)=T\sqrt{1+T^{2}\omega^{2}}\left(\dfrac{\sin(\omega T/2)}{\omega T/2}\right)^{2}\angle(\arctan\omega T-\omega T)</span></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="act-card figc">
+        <div class="hd"><span style="flex:1">一阶保持输出折线 vs 原信号（示意，T=1s）</span></div>
+        <span class="segfloat" id="segChip" style="display:none"></span>
+        <span class="prog" id="prog">0 / 3</span>
+        <div class="bd2"><svg id="fig"></svg></div>
+        <div class="ctl">
+          <button class="btn" id="play">▶ 播放</button>
+          <button class="btn ghost" id="step">⧉ 分步</button>
+          <button class="btn ghost" onclick="ACT.step.reset()">↺ 重置</button>
+        </div>
+      </div>
+    </div>
+    <div class="cmp">
+      <div class="cell"><span class="tag">零阶<br>保持器</span><span class="tx2">结构<b>简单</b>；相位滞后 <span class="tex">T/2</span>，各阶中<b>最小</b> → <b>相对稳定性最好</b>，应用最广。</span></div>
+      <div class="cell b"><span class="tag">一阶<br>保持器</span><span class="tx2">信号恢复<span class="kw-r">更精确</span>；但相位滞后<b>更大</b>、结构<b>更复杂</b>、对稳定性<b>更不利</b>。</span></div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">对比</span><span>一阶保持器恢复更精确，但滞后更大、结构更复杂、对稳定性更不利。</span></div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  /* ---- 数据：一阶保持折线（每段斜率由两相邻采样值决定）+ 原信号（现算）---- */
+  const T = 1, e = t => Math.sin(0.9 * t) + 0.2, NSEG = 5;
+  const y = []; for (let n = -1; n <= NSEG; n++) y.push(e(n * T));   // y[i] = y((i-1)T)
+  const segs = [];                                                   // 每段一条独立折线，段间不回连（避免尖刺）
+  for (let n = 0; n < NSEG; n++) {
+    const y0 = y[n + 1], y1 = y[n];                                  // y(nT), y((n−1)T)
+    segs.push([[n * T, y0], [(n + 1) * T, y0 + (y0 - y1)]]);
+  }
+  const orig = []; for (let t = 0; t <= NSEG + 0.6; t += 0.04) orig.push([t, e(t)]);
+  let ymin = 1e9, ymax = -1e9;
+  segs.forEach(s => s.forEach(p => { ymin = Math.min(ymin, p[1]); ymax = Math.max(ymax, p[1]); }));
+  const F = DZ.plot("fig", {
+    xlim: [0, NSEG + 0.7], ylim: [Math.floor(ymin * 10) / 10 - .2, Math.ceil(ymax * 10) / 10 + .2],
+    xlabel: "t/s", ylabel: "y",
+    curves: [...segs.map(s => ({ pts: s, color: "#1D3FA0", width: 3.6 })), { pts: orig, color: "#8A97B5", dash: "10 7", width: 3.2 }]
+  });
+  function chor(f) {
+    const u1 = Math.min(f * 3, 1), u2 = Math.max(0, Math.min((f - 1 / 3) * 3, 1));
+    for (let i = 0; i < NSEG; i++) F.setF(i, Math.max(0, Math.min(u1 * NSEG - i, 1)));
+    F.setF(NSEG, u2);
+  }
+  function paint(K) {
+    chor(K / 3);
+    if (K >= 1) {  /* ① 外推斜率标注：以 n=3 段为例 */
+      const g = F.mk("g", { "class": K === 1 ? "flash" : "" }, F.gDyn);
+      const n = 3, y0 = y[n + 1], y1 = y[n], yend = y0 + (y0 - y1);
+      [[n - 1, y1], [n, y0]].forEach(p =>
+        F.mk("circle", { cx: F.X(p[0] * T), cy: F.Y(p[1]), r: 8, fill: "#0E7A36", stroke: "#fff", "stroke-width": 2.5 }, g));
+      F.mk("line", { x1: F.X((n - 1) * T), y1: F.Y(y1), x2: F.X(n * T), y2: F.Y(y0),
+        stroke: "#0E7A36", "stroke-width": 2.6, "stroke-dasharray": "7 5" }, g);
+      F.mk("circle", { cx: F.X((n + 1) * T), cy: F.Y(yend), r: 8, fill: "#D63A2F", stroke: "#fff", "stroke-width": 2.5 }, g);
+      F.tx(g, F.X((n - 0.5) * T), F.Y(Math.max(y1, y0)) - 24, "两相邻采样值", { fs: 22, fill: "#0E7A36", b: 1 });
+      F.tx(g, F.X((n + 1) * T) + 12, F.Y(yend) - 22, "外推终点", { fs: 22, fill: "#D63A2F", b: 1, an: "start" });
+      F.tx(g, F.X(0.25), F.Y(-1.22), "一阶保持输出（逐段折线）", { fs: 23, fill: "#1D3FA0", b: 1, an: "start" });
+    }
+    if (K >= 2) {  /* ② 原信号虚线 */
+      const g = F.mk("g", { "class": K === 2 ? "flash" : "" }, F.gDyn);
+      F.tx(g, F.X(2.75), F.Y(-1.12), "e(t) 原信号（虚线）", { fs: 23, fill: "#5B6B8C", b: 1, an: "start" });
+    }
+    if (K >= 3) {  /* ③ 与原信号的差别 */
+      const g = F.mk("g", { "class": "flash" }, F.gDyn);
+      const t = 4.5, n = 4, y0 = y[n + 1], y1 = y[n], yh = y0 + (y0 - y1) * (t - n);
+      F.mk("line", { x1: F.X(t), y1: F.Y(yh), x2: F.X(t), y2: F.Y(e(t)),
+        stroke: "#D63A2F", "stroke-width": 3.2, "stroke-dasharray": "6 5" }, g);
+      F.tx(g, F.X(t) - 14, (F.Y(yh) + F.Y(e(t))) / 2, "仍有差别", { fs: 22, fill: "#D63A2F", b: 1, an: "end" });
+    }
+  }
+  const FS = [0, 1 / 3, 2 / 3, 1];
+  BD.wire(3, paint, { figs: [F], FS, dur: 10000, playLabel: "▶ 播放", frame: f => chor(f) });
+
+  /* ---- ⧉分步（点一下推进一步）---- */
+  const STEPS = ["① 外推折线生长", "② 叠加原信号 e(t)", "③ 与原信号仍有差别"];
+  const chip = document.getElementById("segChip"), total = 3, stepBtn = document.getElementById("step");
+  const wNext = ACT.step.next, wReset = ACT.step.reset;
+  let segRaf = null, segTok = 0;
+  function segEnable() { stepBtn.disabled = false; stepBtn.style.opacity = ""; stepBtn.style.cursor = ""; }
+  function segStopUI() {
+    segTok++;
+    if (segRaf) { cancelAnimationFrame(segRaf); segRaf = null; }
+    segEnable(); chip.style.display = "none";
+  }
+  ACT.step.next = function () { segStopUI(); return wNext(); };
+  ACT.step.reset = function () { segStopUI(); return wReset(); };
+  const playBtn = document.getElementById("play");
+  if (playBtn && playBtn.onclick) { const po = playBtn.onclick; playBtn.onclick = ev => { segStopUI(); po(ev); }; }
+  function segGo(instant) {
+    segStopUI();
+    if (ACT.step.cur >= total) wReset();
+    wNext();
+    const k = ACT.step.cur, f0 = FS[k - 1], f1 = FS[k];
+    chip.textContent = "分步 " + k + " / " + total + "　" + STEPS[k - 1]; chip.style.display = "";
+    if (instant || f1 <= f0 + 1e-9) { paint(k); return; }
+    paint(k); chor(f0);
+    stepBtn.disabled = true; stepBtn.style.opacity = ".55"; stepBtn.style.cursor = "default";
+    const t0 = performance.now(), D = 1700, tok = segTok;
+    const tick = now => {
+      if (tok !== segTok) return;
+      const u = Math.min(1, (now - t0) / D);
+      chor(f0 + (f1 - f0) * u);
+      if (u < 1) segRaf = requestAnimationFrame(tick); else { segRaf = null; segEnable(); paint(k); }
+    };
+    segRaf = requestAnimationFrame(tick);
+  }
+  stepBtn.onclick = () => segGo(false);
+  window.addEventListener("load", () => {
+    const n = +(new URLSearchParams(location.search).get("seg") || 0);
+    for (let i = 0; i < Math.min(n, total); i++) segGo(true);
+  });
+});
+</script>
+<script>/* qa-steps：截图自验钩子，?steps=N 自动前进 N 步（播放时不生效） */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

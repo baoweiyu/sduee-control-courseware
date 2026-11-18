@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>㊳ 例7-15 劳斯判据求 K 范围</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=700">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=700" defer></script>
+<script src="../fig.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:1.06;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .rgt{flex:.94;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:11px;padding:12px 22px}
+  .st{font-size:21px;color:var(--ink);line-height:1.58}
+  .eq{background:var(--sky);border-radius:12px;padding:11px 14px;text-align:center;font-size:22px;color:var(--navy)}
+  .eq .no{color:var(--muted);font-size:19px}
+  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .blkc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:2px 8px;min-height:0}
+  .blkc svg{width:100%;height:100%}
+  .kw-r{color:#D63A2F;font-weight:700}
+</style>
+</head>
+<body data-title="㊳ 例7-15 劳斯判据求 K 范围" data-page="53 / 56">
+<div class="act-stage"><div class="act-slide">
+<div class="act-body has-note">
+  <div class="row">
+    <div class="lft">
+      <div class="act-card blkc" style="flex:.92">
+        <div class="hd" style="font-size:22px"><span style="flex:1">题设（图 7-31）：G(s)=K/[s(0.1s+1)]，T=0.1s，求稳定 K 范围</span></div>
+        <div class="bd2"><svg id="blk"></svg></div>
+      </div>
+      <div class="act-card" style="flex:2.08">
+        <div class="hd" style="font-size:22px"><span style="flex:1">推导：G(z) → 特征方程 → w 变换</span></div>
+        <div class="bd">
+          <div ><div class="st">① 开环脉冲传递函数（部分分式 + 查表，T=0.1s）：</div>
+            <div class="eq"><span class="tex">G(z)=Z\!\left[K\!\left(\frac{1}{s}-\frac{1}{s+10}\right)\right]=K\!\left(\frac{z}{z-1}-\frac{z}{z-e^{-10T}}\right)=\frac{0.632\,Kz}{z^{2}-1.368z+0.368}</span></div></div>
+          <div><div class="st">② 单位反馈特征方程 <span class="tex">1+G(z)=0</span>，整理得：</div>
+            <div class="eq"><span class="tex">z^{2}+(0.632K-1.368)z+0.368=0</span></div></div>
+          <div><div class="st">③ 令 <span class="tex">z=\dfrac{1+w}{1-w}</span> 代入（w 变换），化简得：</div>
+            <div class="eq hl"><span class="tex">(2.736-0.632K)\,w^{2}+1.264\,w+0.632K=0</span></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="rgt">
+      <div class="act-card" style="flex:1.14">
+        <div class="hd" style="font-size:22px"><span style="flex:1">④ 劳斯表　⑤ 第一列全正</span></div>
+        <div class="bd">
+          <div>
+            <div class="eq"><span class="tex">\begin{array}{c|cc} w^{2} & 2.736-0.632K & 0.632K \\ w^{1} & 1.264 & \\ w^{0} & 0.632K & \end{array}</span></div></div>
+          <div data-step="4"><div class="st">⑤ 第一列各项均大于零：<span class="tex">0.632K&gt;0</span> 且 <span class="tex">2.736-0.632K&gt;0</span>，故</div>
+            <div class="eq hl"><span class="tex">0&lt;K&lt;4.328</span></div></div>
+        </div>
+      </div>
+      <div class="act-card" style="flex:1" data-step="5">
+        <div class="hd" style="font-size:22px"><span style="flex:1">注意：采样开关使稳定性变差</span></div>
+        <div class="bd">
+          <div class="st">① 对应的<b>二阶连续系统</b>：不论 K 取多大，总是稳定的；</div>
+          <div class="st">② 加采样开关后：<span class="kw-r">K&gt;4.328 系统即不稳定</span>——采样开关的引入使稳定性变坏；</div>
+          <div class="st">③ 提高采样频率（丢失信息少，更接近连续系统）可改善稳定性，但过高的采样频率会增加计算机的负担。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">结论</span><span>采样系统有稳定的 K 上限——离散化的代价。</span></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  /* ---- 题设方框图（图 7-31）：r → ⊕(−) → T → G(s) → c，单位反馈 ---- */
+  const BLK = BD.block("blk", [
+    { type: "line", pts: [[16, 120], [66, 120]], label: "r(t)", labelDy: -14 },
+    { type: "sum", x: 84, y: 120, r: 14, signs: { left: "+", bottom: "−" } },
+    { type: "line", pts: [[98, 120], [128, 120]], label: "e(t)", labelDy: -14 },
+    { type: "box", x: 132, y: 92, w: 56, h: 56, label: "T", fs: 22 },
+    { type: "line", pts: [[188, 120], [218, 120]], label: "e^{*}(t)", labelDy: -14 },
+    { type: "box", x: 222, y: 80, w: 160, h: 80, label: "K\ns(0.1s+1)", fs: 24, name: "gp" },
+    { type: "line", pts: [[382, 120], [528, 120]], label: "c(t)", labelDy: -14 },
+    { type: "dot", x: 500, y: 120 },
+    { type: "line", pts: [[500, 120], [500, 216], [84, 216], [84, 136]], arrow: true }
+  ], { vw: 540, vh: 250, static: true });
+  /* G(s) 的分数线（tx 不解析 LaTeX，手画横线） */
+  BLK.mk("line", { x1: 238, y1: 120, x2: 366, y2: 120, stroke: "#16324F", "stroke-width": 2.4 }, BLK.g);
+  BLK.tx(BLK.g, 302, 196, "G(s)", { fs: 22, it: 1, b: 1, fill: "#16324F" });
+});
+</script>
+<script>/* qa-steps：?steps=N 自动前进 N 步 */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

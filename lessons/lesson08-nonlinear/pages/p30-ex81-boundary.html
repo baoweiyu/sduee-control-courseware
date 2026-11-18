@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>例8-1 稳定性边界</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=800">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=800" defer></script>
+<script src="../fig.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .lft .bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:12px;padding:14px 22px;min-height:0}
+  .stp{display:flex;gap:12px;align-items:flex-start}
+  .stp .no{flex:none;width:36px;height:36px;border-radius:50%;background:var(--blue);color:#fff;
+    font-size:21px;font-weight:700;display:grid;place-items:center;margin-top:6px}
+  .stp .bx{flex:1;min-width:0}
+  .eq{background:var(--sky);border-radius:11px;padding:9px 15px;text-align:center;font-size:21px;line-height:1.5}
+  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .sub{font-size:21px;color:var(--ink);line-height:1.5;margin-top:6px;text-align:center}
+  .sub b{color:var(--navy)}
+  .fin{background:#EAF7EE;border:2px solid #0E7A36;border-radius:12px;padding:10px 18px;font-size:21px;
+    color:var(--navy);line-height:1.55;text-align:center;font-weight:700}
+  .eng{background:var(--sky);border:2px solid var(--blue);border-radius:12px;padding:10px 18px;font-size:21px;
+    color:var(--ink);line-height:1.55}
+  .eng b{color:var(--navy)}
+  .colR{flex:1.05;display:flex;flex-direction:column;gap:16px;min-height:0}
+  .figc{flex:1;position:relative}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:2px 10px;min-height:0}
+  .figc svg{width:100%;height:100%}
+</style>
+</head>
+<body data-title="例8-1 稳定性边界" data-page="30 / 33">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="act-card lft" style="flex:1">
+        <div class="hd"><span style="flex:1">K 取何值时系统稳定？</span></div>
+        <div class="bd">
+          <div class="stp" ><span class="no">1</span><div class="bx">
+            <div class="eq"><span class="tex">-\frac{1}{N(1)}=-\frac{1}{k}=-0.5,\quad X\uparrow\ \Rightarrow\ -\frac{1}{N(X)}\to -\infty</span></div>
+            <div class="sub">−1/N(X) 射线起点（X=1）为 <b>−1/k = −0.5</b>，随 X 增大沿负实轴左移。</div>
+          </div></div>
+          <div class="stp" data-step="1"><span class="no">2</span><div class="bx">
+            <div class="eq hl"><span class="tex">\text{相交}\iff -\frac{K}{15}\le -0.5\iff K\ge 7.5</span></div>
+            <div class="sub">G(jω) 与负实轴交于 <b>−K/15</b>（ω=√50 处）；交点落入射线 ⇔ 两曲线相交。</div>
+          </div></div>
+          <div class="stp" data-step="2"><span class="no">3</span><div class="bx">
+            <div class="eq"><span class="tex">K=7.5:\ b_{1}\left(-\frac{1}{2},\ j0\right)</span>（射线端点、临界等幅）；<span class="tex">K<7.5</span>：不相交</div>
+            <div class="sub">K=7.5 时小信号等效线性系统临界，<b>不是稳定自激振荡</b>；K&gt;7.5 时交点经扰动分析对应稳定自振。</div>
+          </div></div>
+          <div class="stp" data-step="3"><span class="no">4</span><div class="bx">
+            <div class="fin">K&lt;7.5 平衡状态渐近稳定，不产生自振荡</div>
+          </div></div>
+          <div class="stp" data-step="4"><span class="no">5</span><div class="bx">
+            <div class="eng"><b>工程注记：</b>若运行中出现自振，可<b>减小 K</b> 或<b>串联校正</b>，使 G(jω) 不再与 −1/N(X) 相交。</div>
+          </div></div>
+        </div>
+      </div>
+      <div class="colR">
+        <div class="act-card figc">
+          <div class="hd"><span style="flex:1">(a) K=7.5：交于射线端点 b₁(−1/2, j0)（临界）</span></div>
+          <div class="bd2"><svg id="figA"></svg></div>
+        </div>
+        <div class="act-card figc">
+          <div class="hd"><span style="flex:1">(b) K=15：相交于 (−1, j0)（自振）</span></div>
+          <div class="bd2"><svg id="figB"></svg></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">要点</span><span>非线性系统的稳定是有条件的——K 超过临界值即出现自振。</span></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const PI = Math.PI, C1 = "#1D3FA0", C2 = "#0E7A36", RED = "#D63A2F", MUT = "#5B6B8C";
+  const NofX = X => (4 / PI) * (Math.asin(1 / X) + (1 / X) * Math.sqrt(1 - 1 / (X * X)));
+  const ray = [];
+  for (let X = 1; X <= 30; X += 0.02) ray.push([-1 / NofX(X), 0]);
+  function gpts(K) {
+    const p = [];
+    for (let i = 0; i <= 700; i++) {
+      const w = 0.05 * Math.pow(80 / 0.05, i / 700);
+      const dr = -0.3 * w * w, di = w * (1 - 0.02 * w * w), m2 = dr * dr + di * di;
+      p.push([K * dr / m2, -K * di / m2]);
+    }
+    return p;
+  }
+  function decorate(F, defs) {
+    [["narA", C1], ["narB", C2]].forEach(([id, c]) => {
+      const m = F.mk("marker", { id: id + F.svg.id, markerWidth: 11, markerHeight: 9, refX: 7, refY: 3.2, orient: "auto" }, defs);
+      F.mk("path", { d: "M0,0 L7.5,3.2 L0,6.4 Z", fill: c }, m);
+    });
+  }
+  function arrow(F, x, y, deg, id) {
+    const p = F.mk("line", { x1: F.X(x), y1: F.Y(y), x2: F.X(x) + 1, y2: F.Y(y),
+      stroke: "none", "marker-end": "url(#" + id + F.svg.id + ")" }, F.gDyn);
+    p.setAttribute("transform", `rotate(${deg} ${F.X(x)} ${F.Y(y)})`);
+  }
+  /* 曲线上某点沿 ω 增大方向的切线箭头 */
+  function tArrow(F, pts, w0, id) {
+    let i = 0;
+    while (i < pts.length - 2 && 0.05 * Math.pow(80 / 0.05, i / 700) < w0) i++;
+    const a = pts[i], b = pts[Math.min(i + 10, pts.length - 1)];
+    const deg = -Math.atan2(b[1] - a[1], b[0] - a[0]) * 180 / PI;
+    arrow(F, a[0], a[1], deg, id);
+  }
+  /* (a) K=7.5：G(jω) 过 −0.5，恰与射线起点 b1 相交（临界，不是曲线相切） */
+  const GA = gpts(7.5);
+  const FA = DZ.plot("figA", {
+    xlim: [-1.75, 0.35], ylim: [-1.05, 0.72], xlabel: "Re", ylabel: "Im",
+    curves: [ { pts: ray, color: C1, width: 5.5 }, { pts: GA, color: C2, width: 4.5 } ]
+  }, { vw: 960, vh: 430, equal: true, static: true });
+  FA.svg.querySelectorAll('text[font-size="20"]').forEach(t => t.setAttribute("font-size", 21));
+  decorate(FA, FA.svg.querySelector("defs"));
+  FA.mk("circle", { cx: FA.X(-0.5), cy: FA.Y(0), r: 10, fill: RED, stroke: "#fff", "stroke-width": 3 }, FA.gDyn);
+  arrow(FA, -1.35, 0, 180, "narA");
+  tArrow(FA, GA, 5.0, "narB");
+  FA.tx(FA.gDyn, FA.X(-0.56), FA.Y(0) - 28, "b_{1}(−1/2, j0)：临界", { fs: 22, fill: RED, b: 1, an: "end" });
+  FA.tx(FA.gDyn, FA.X(-1.7), FA.Y(0) + 40, "−1/N(X)", { fs: 22, fill: C1, b: 1, an: "start" });
+  FA.tx(FA.gDyn, FA.X(-1.66), FA.Y(-0.62), "G(jω)，K=7.5", { fs: 22, fill: C2, b: 1, an: "start" });
+  /* (b) K=15：G(jω) 过 −1，与射线相交（自振） */
+  const GB = gpts(15);
+  const FB = DZ.plot("figB", {
+    xlim: [-2.7, 0.4], ylim: [-1.35, 0.85], xlabel: "Re", ylabel: "Im",
+    curves: [ { pts: ray, color: C1, width: 5.5 }, { pts: GB, color: C2, width: 4.5 } ]
+  }, { vw: 960, vh: 430, equal: true, static: true });
+  FB.svg.querySelectorAll('text[font-size="20"]').forEach(t => t.setAttribute("font-size", 21));
+  decorate(FB, FB.svg.querySelector("defs"));
+  FB.mk("circle", { cx: FB.X(-0.5), cy: FB.Y(0), r: 7, fill: C1, stroke: "#fff", "stroke-width": 2.5 }, FB.gDyn);
+  FB.mk("circle", { cx: FB.X(-1), cy: FB.Y(0), r: 10, fill: RED, stroke: "#fff", "stroke-width": 3 }, FB.gDyn);
+  arrow(FB, -2.15, 0, 180, "narA");
+  tArrow(FB, GB, 5.0, "narB");
+  FB.tx(FB.gDyn, FB.X(-1) - 16, FB.Y(0) - 28, "交点 (−1, j0)：自振", { fs: 22, fill: RED, b: 1, an: "end" });
+  FB.tx(FB.gDyn, FB.X(-0.44), FB.Y(0) + 40, "−0.5", { fs: 22, fill: C1, b: 1 });
+  FB.tx(FB.gDyn, FB.X(-2.62), FB.Y(0) + 40, "−1/N(X)", { fs: 22, fill: C1, b: 1, an: "start" });
+  FB.tx(FB.gDyn, FB.X(-2.6), FB.Y(-0.8), "G(jω)，K=15", { fs: 22, fill: C2, b: 1, an: "start" });
+});
+</script>
+<script>/* qa-steps：截图自验钩子 */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

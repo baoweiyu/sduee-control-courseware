@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>㉑ 例7-10 微分方程离散化</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=700">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=700" defer></script>
+<script src="../fig.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:1.12;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .rgt{flex:1;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:14px;padding:16px 24px}
+  .st{font-size:21.5px;color:var(--ink);line-height:1.65}
+  .eq{background:var(--sky);border-radius:12px;padding:12px 16px;text-align:center;font-size:22px;color:var(--navy);line-height:1.6}
+  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .figc{display:flex;flex-direction:column;overflow:hidden}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
+  .figc svg{width:100%;height:100%}
+</style>
+</head>
+<body data-title="㉑ 例7-10 微分方程离散化" data-page="35 / 56">
+<div class="act-stage"><div class="act-slide">
+<div class="act-body has-note">
+  <div class="row">
+    <div class="lft">
+      <div class="act-card" style="flex:.85">
+        <div class="hd" style="font-size:23px"><span style="flex:1">【例 7-10】题设（图 7-19 一阶系统）</span></div>
+        <div class="bd">
+          <div class="st">由图可知其微分方程为 <span class="tex">\dot{c}(t)=Ke(t)=Kr(t)-Kc(t)</span>，即</div>
+          <div class="eq"><span class="tex">\dot{c}(t)+Kc(t)=Kr(t)</span></div>
+        </div>
+      </div>
+      <div class="act-card" style="flex:1.6">
+        <div class="hd" style="font-size:23px"><span style="flex:1">解：微分 → 一阶前向差分近似</span></div>
+        <div class="bd">
+          <div ><div class="st">① 数字仿真需把微分方程化为差分方程：<span class="tex">\dot{c}(t)</span> 在 <span class="tex">t=nT</span> 处的值用一阶前向差分近似（T 为采样周期）：</div>
+            <div class="eq"><span class="tex">\dot{c}(t)\Big|_{t=nT}=\lim_{T\rightarrow 0}\frac{c[(n+1)T]-c(nT)}{T}\approx\frac{c[(n+1)T]-c(nT)}{T}</span></div></div>
+          <div data-step="1"><div class="st">② 将上式代入题设微分方程，得差分方程：</div>
+            <div class="eq hl"><span class="tex">c[(n+1)T]+(KT-1)c(nT)=KTr(nT)</span></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="rgt">
+      <div class="act-card figc" style="flex:1">
+        <div class="hd" style="font-size:23px"><span style="flex:1">图 7-19　一阶系统（重绘）</span></div>
+        <div class="bd2"><svg id="blk"></svg></div>
+      </div>
+      <div class="act-card figc" style="flex:1.28">
+        <div class="hd" style="font-size:23px"><span style="flex:1">近似的几何意义：割线斜率 ≈ 切线斜率</span></div>
+        <div class="bd2"><svg id="fig"></svg></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">结论</span><span>采样周期 T 越小，差分方程对微分方程的逼近越准确。</span></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  /* 图 7-19 重绘：r(t) → ⊕(−) → K → ċ(t) → 1/s → c(t)，单位负反馈 */
+  BD.block("blk", [
+    { type: "line", pts: [[18, 150], [76, 150]], label: "r(t)", labelDy: -16 },
+    { type: "sum", x: 94, y: 150, r: 15, signs: { left: "+", bottom: "−" } },
+    { type: "line", pts: [[110, 150], [160, 150]], label: "e(t)", labelDy: -16 },
+    { type: "box", x: 164, y: 110, w: 100, h: 80, label: "K" },
+    { type: "line", pts: [[264, 150], [316, 150]], label: "ċ(t)", labelDy: -16 },
+    { type: "box", x: 320, y: 110, w: 100, h: 80, label: "1/s" },
+    { type: "line", pts: [[420, 150], [500, 150]], label: "c(t)", labelDy: -16 },
+    { type: "dot", x: 470, y: 150 },
+    { type: "line", pts: [[470, 150], [470, 262], [94, 262], [94, 167]], arrow: true }
+  ], { vw: 560, vh: 310, static: true });
+
+  /* 一阶前向差分的几何意义：c(t)=1−e^{−t}（示意），割线 ≈ 切线 */
+  const c = t => 1 - Math.exp(-t), dc = t => Math.exp(-t);
+  const T = 1, t0 = 1, t1 = t0 + T;
+  const cv = []; for (let t = 0; t <= 3.3; t += 0.02) cv.push([t, c(t)]);
+  const m0 = dc(t0), ms = (c(t1) - c(t0)) / T;
+  const tang = [[t0 - .62, c(t0) - m0 * .62], [t0 + 1.05, c(t0) + m0 * 1.05]];
+  const sec  = [[t0 - .18, c(t0) - ms * .18], [t1 + .5, c(t1) + ms * .5]];
+  const F = DZ.plot("fig", {
+    xlim: [0, 3.3], ylim: [0, 1.12], xlabel: "t", ylabel: "c(t)",
+    curves: [
+      { pts: cv, color: "#1D3FA0", width: 4.5 },
+      { pts: tang, color: "#8A97B5", width: 3, dash: "9 6" },
+      { pts: sec, color: "#F5821F", width: 4 }
+    ],
+    marks: [
+      { type: "vline", x: t0, label: "nT", dx: 6, dy: 22 },
+      { type: "vline", x: t1, label: "(n+1)T", dx: 6, dy: 22 },
+      { type: "point", x: t0, y: c(t0), color: "#D63A2F" },
+      { type: "point", x: t1, y: c(t1), color: "#D63A2F" }
+    ]
+  }, { vw: 960, vh: 470, static: true });
+  /* 图例（图内标注） */
+  F.tx(F.gMark, F.X(2.22), F.Y(.55), "切线斜率 ċ(nT)", { fs: 22, fill: "#5B6B8C", an: "start" });
+  F.tx(F.gMark, F.X(2.22), F.Y(.41), "割线斜率（前向差分）", { fs: 22, fill: "#C2410C", an: "start" });
+  F.tx(F.gMark, F.X(.12), F.Y(1.04), "c(t)=1−e^{−t}（示意）", { fs: 22, fill: "#1D3FA0", an: "start" });
+});
+</script>
+<script>/* qa-steps：?steps=N 自动前进 N 步 */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

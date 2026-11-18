@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>㊲ w 变换与劳斯判据</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=700">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=700" defer></script>
+<script src="../fig.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:.98;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:9px;padding:11px 22px}
+  .st{font-size:21px;color:var(--ink);line-height:1.58}
+  .eq{background:var(--sky);border-radius:12px;padding:9px 14px;text-align:center;font-size:22px;color:var(--navy)}
+  .eq .no{color:var(--muted);font-size:18.5px}
+  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .mp{display:flex;gap:11px;align-items:center;font-size:21px;color:var(--ink);line-height:1.5}
+  .mp .dot{flex:none;width:16px;height:16px;border-radius:4px}
+  .figc{flex:1.22;display:flex;flex-direction:column;overflow:hidden}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:4px 8px;min-height:0}
+  .figc svg{width:100%;height:100%}
+</style>
+</head>
+<body data-title="㊲ w 变换与劳斯判据" data-page="52 / 56">
+<div class="act-stage"><div class="act-slide">
+<div class="act-body has-note">
+  <div class="row">
+    <div class="lft">
+      <div class="act-card" style="flex:1.02">
+        <div class="hd" style="font-size:23px"><span style="flex:1">w 变换（双线性变换）</span></div>
+        <div class="bd">
+          <div class="st">离散系统稳定边界是<b>单位圆周</b>而非虚轴，不能直接用劳斯判据。引入变换：</div>
+          <div >
+            <div class="eq"><span class="tex">z=\dfrac{1+w}{1-w}</span>　　<span class="tex">w=\dfrac{z-1}{z+1}</span></div>
+            <div class="st">（另一种约定为 <span class="tex">w'=-w=\dfrac{z+1}{z-1}</span>，此时圆内对应右半 <span class="tex">w'</span> 平面；本页统一采用前一种，不混用。）</div></div>
+        </div>
+      </div>
+      <div class="act-card" style="flex:1.5">
+        <div class="hd" style="font-size:23px"><span style="flex:1">单位圆周 → w 平面虚轴</span></div>
+        <div class="bd">
+          <div><div class="st">令 <span class="tex">z=x+jy,\ w=u+jv</span>，代入上面的 w 变换式得：</div>
+            <div class="eq"><span class="tex">w=u+jv=\frac{x^{2}+y^{2}-1}{(x+1)^{2}+y^{2}}+j\,\frac{2y}{(x+1)^{2}+y^{2}}</span></div></div>
+          <div data-step="2">
+            <div class="mp"><span class="dot" style="background:#16324F"></span><span><span class="tex">x^{2}+y^{2}=1</span>（单位圆周）⇒ <span class="tex">u=0</span> —— <b>虚轴</b>；</span></div>
+            <div class="mp"><span class="dot" style="background:#1D3FA0"></span><span><span class="tex">x^{2}+y^{2}&lt;1</span>（单位圆内）⇒ <span class="tex">u&lt;0</span> —— <b>左半 w 平面</b>；</span></div>
+            <div class="mp"><span class="dot" style="background:#D63A2F"></span><span><span class="tex">x^{2}+y^{2}&gt;1</span>（单位圆外）⇒ <span class="tex">u&gt;0</span> —— <b style="color:#D63A2F">右半 w 平面</b>。</span></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="act-card figc">
+      <div class="hd" style="font-size:23px"><span style="flex:1">图 7-30：z 平面单位圆 ↔ w 平面虚轴（区域一一对应）</span></div>
+      <div class="bd2"><svg id="fig"></svg></div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">结论</span><span>判稳步骤——z→w 代入特征方程 → 劳斯表 → 第一列全正。</span></div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const svg = document.getElementById("fig");
+  const mk = BD.mk, tx = BD.tx;
+  svg.setAttribute("viewBox", "0 0 960 640");
+  const defs = mk("defs", {}, svg);
+  const ar = (id, c) => { const m = mk("marker", { id, markerWidth: 10, markerHeight: 8, refX: 7, refY: 3, orient: "auto" }, defs);
+    mk("path", { d: "M0,0 L7,3 L0,6 Z", fill: c }, m); };
+  ar("mAx", "#5B6B8C"); ar("mMap", "#16324F");
+  const AX = "#5B6B8C", BLUE = "#1D3FA0", RED = "#D63A2F", DARK = "#16324F";
+  const STABLE = "#EAF1FC", UNST = "#FDECEA";
+
+  /* ============ 左：z 平面 ============ */
+  const Z = { cx: 252, cy: 336, s: 118 };
+  const ZX = (r, th) => Z.cx + r * Math.cos(th) * Z.s, ZY = (r, th) => Z.cy - r * Math.sin(th) * Z.s;
+  /* 圆外浅红 + 圆内浅蓝 */
+  mk("circle", { cx: Z.cx, cy: Z.cy, r: 1.52 * Z.s, fill: UNST }, svg);
+  mk("circle", { cx: Z.cx, cy: Z.cy, r: Z.s, fill: STABLE }, svg);
+  /* 坐标轴 */
+  mk("line", { x1: Z.cx - 208, y1: Z.cy, x2: Z.cx + 212, y2: Z.cy, stroke: AX, "stroke-width": 2.2, "marker-end": "url(#mAx)" }, svg);
+  mk("line", { x1: Z.cx, y1: Z.cy + 246, x2: Z.cx, y2: Z.cy - 254, stroke: AX, "stroke-width": 2.2, "marker-end": "url(#mAx)" }, svg);
+  tx(svg, Z.cx + 206, Z.cy + 30, "Re", { fs: 22, it: 1, b: 1, fill: AX });
+  tx(svg, Z.cx + 24, Z.cy - 246, "Im", { fs: 22, it: 1, b: 1, fill: AX });
+  tx(svg, Z.cx, 40, "z 平面", { fs: 23, b: 1, fill: DARK });
+  /* 单位圆（临界） */
+  mk("circle", { cx: Z.cx, cy: Z.cy, r: Z.s, fill: "none", stroke: DARK, "stroke-width": 4 }, svg);
+  tx(svg, ZX(1, Math.PI / 4) + 10, ZY(1, Math.PI / 4) - 14, "单位圆周 |z|=1", { fs: 21, b: 1, fill: DARK, an: "start" });
+  /* 对应点：z=1 ↔ w=0；z=j ↔ w=j（程序现算） */
+  const wOf = (x, y) => { const d = (x + 1) * (x + 1) + y * y; return [(x * x + y * y - 1) / d, 2 * y / d]; };
+  mk("circle", { cx: ZX(1, 0), cy: ZY(1, 0), r: 7.5, fill: DARK, stroke: "#fff", "stroke-width": 2.4 }, svg);
+  tx(svg, ZX(1, 0) + 14, ZY(1, 0) + 32, "z=1", { fs: 21, b: 1, fill: DARK, an: "start" });
+  mk("circle", { cx: ZX(1, Math.PI / 2), cy: ZY(1, Math.PI / 2), r: 7.5, fill: DARK, stroke: "#fff", "stroke-width": 2.4 }, svg);
+  tx(svg, ZX(1, Math.PI / 2) - 16, ZY(1, Math.PI / 2) - 14, "z=j", { fs: 21, b: 1, fill: DARK, an: "end" });
+  /* 区域标注 */
+  tx(svg, Z.cx, Z.cy + 40, "稳定", { fs: 23, b: 1, fill: BLUE });
+  tx(svg, Z.cx, Z.cy + 70, "x²+y²<1", { fs: 20, b: 1, fill: BLUE });
+  tx(svg, ZX(1.32, Math.PI * .78), ZY(1.32, Math.PI * .78) - 6, "不稳定", { fs: 23, b: 1, fill: RED });
+  tx(svg, ZX(1.32, Math.PI * .78), ZY(1.32, Math.PI * .78) + 24, "x²+y²>1", { fs: 20, b: 1, fill: RED });
+
+  /* ============ 中间映射箭头（z → w） ============ */
+  mk("path", { d: "M398,96 C470,54 560,54 640,92", fill: "none", stroke: DARK, "stroke-width": 3, "marker-end": "url(#mMap)" }, svg);
+  tx(svg, 520, 56, "w=(z−1)/(z+1)", { fs: 22, b: 1, it: 1, fill: DARK });
+  mk("path", { d: "M640,560 C560,598 470,598 398,556", fill: "none", stroke: "#8A97B5", "stroke-width": 2.6, "stroke-dasharray": "9 6", "marker-end": "url(#mMap)" }, svg);
+  tx(svg, 520, 602, "z=(1+w)/(1−w)", { fs: 21, b: 1, it: 1, fill: "#5B6B8C" });
+
+  /* ============ 右：w 平面 ============ */
+  const W = { cx: 720, cy: 336, sx: 118, sy: 118 };
+  const WX = u => W.cx + u * W.sx, WY = v => W.cy - v * W.sy;
+  /* 区域底色：右半浅红 + 左半浅蓝 */
+  mk("rect", { x: WX(0), y: WY(2.05), width: WX(1.75) - WX(0), height: WY(-2.05) - WY(2.05), fill: UNST }, svg);
+  mk("rect", { x: WX(-1.75), y: WY(2.05), width: WX(0) - WX(-1.75), height: WY(-2.05) - WY(2.05), fill: STABLE }, svg);
+  /* 坐标轴 */
+  mk("line", { x1: WX(-1.8), y1: W.cy, x2: WX(1.86), y2: W.cy, stroke: AX, "stroke-width": 2.2, "marker-end": "url(#mAx)" }, svg);
+  mk("line", { x1: W.cx, y1: WY(-2.1), x2: W.cx, y2: WY(2.16), stroke: AX, "stroke-width": 2.2, "marker-end": "url(#mAx)" }, svg);
+  tx(svg, WX(1.8), W.cy + 30, "u", { fs: 22, it: 1, b: 1, fill: AX });
+  tx(svg, W.cx + 22, WY(2.0) + 20, "jv", { fs: 22, it: 1, b: 1, fill: AX, an: "start" });
+  tx(svg, W.cx, 40, "w 平面", { fs: 23, b: 1, fill: DARK });
+  /* 虚轴（临界）加粗 */
+  mk("line", { x1: W.cx, y1: WY(-2.05), x2: W.cx, y2: WY(2.05), stroke: DARK, "stroke-width": 4 }, svg);
+  tx(svg, W.cx - 12, WY(2.05) + 22, "虚轴 u=0", { fs: 20, b: 1, fill: DARK, an: "end" });
+  /* 对应点：w=0 ↔ z=1；w=j ↔ z=j */
+  mk("circle", { cx: WX(0), cy: WY(0), r: 7.5, fill: DARK, stroke: "#fff", "stroke-width": 2.4 }, svg);
+  tx(svg, WX(0) + 14, WY(0) + 32, "w=0", { fs: 21, b: 1, fill: DARK, an: "start" });
+  const wj = wOf(0, 1);
+  mk("circle", { cx: WX(wj[0]), cy: WY(wj[1]), r: 7.5, fill: DARK, stroke: "#fff", "stroke-width": 2.4 }, svg);
+  tx(svg, WX(wj[0]) + 16, WY(wj[1]) + 6, "w=j", { fs: 21, b: 1, fill: DARK, an: "start" });
+  /* 区域标注 */
+  tx(svg, WX(-0.92), W.cy + 40, "稳定", { fs: 23, b: 1, fill: BLUE });
+  tx(svg, WX(-0.92), W.cy + 70, "u<0", { fs: 20, b: 1, fill: BLUE });
+  tx(svg, WX(0.94), W.cy + 40, "不稳定", { fs: 23, b: 1, fill: RED });
+  tx(svg, WX(0.94), W.cy + 70, "u>0", { fs: 20, b: 1, fill: RED });
+  /* 底部说明 */
+  tx(svg, 480, 632, "w 变换把 z 平面单位圆内/外 ⇄ w 平面左/右半平面——离散特征方程可用劳斯判据", { fs: 20, fill: "#41506B" });
+});
+</script>
+<script>/* qa-steps：?steps=N 自动前进 N 步 */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

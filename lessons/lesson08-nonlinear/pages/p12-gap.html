@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>间隙非线性</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=800">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=800" defer></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:1.06;display:flex;flex-direction:column;gap:16px;min-height:0}
+  .rgt{flex:1;display:flex;flex-direction:column;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:14px;padding:18px 24px;font-size:23px;line-height:1.6}
+  .eq{background:var(--sky);border-radius:12px;padding:14px 16px;text-align:center;font-size:23px;position:relative}
+  .eq.hl{background:#FDF3EC;border-left:5px solid var(--orange);border-top-left-radius:0;border-bottom-left-radius:0}
+  .st{font-size:21.5px;color:var(--ink);line-height:1.6}
+  .lft .act-card:first-child>.bd{gap:9px;padding:12px 22px}
+  .lft .act-card:first-child .st{font-size:21px;line-height:1.5}
+  .lft .act-card:first-child .eq{padding:10px 14px;font-size:22px}
+  .roomy>.bd{padding:20px 26px}
+  .roomy .pt{font-size:23px;line-height:1.72}
+  .pt{display:flex;gap:12px;align-items:flex-start;font-size:22px;color:var(--ink);line-height:1.58}
+  .pt .no{flex:none;width:34px;height:34px;border-radius:50%;background:var(--blue);color:#fff;
+    font-size:20px;font-weight:700;display:grid;place-items:center;margin-top:3px}
+  .figc .bd2{flex:1;display:grid;place-items:center;background:#fff;padding:6px 12px;min-height:0}
+  .figc svg{width:100%;height:100%}
+  .figc .capnote{flex:none;font-size:21.5px;color:var(--navy);background:var(--sky);border-radius:12px;padding:10px 16px;margin:0 14px 12px;line-height:1.5}
+  .ctl{display:flex;align-items:center;gap:12px;justify-content:center;padding:6px 0 8px}
+  .btn{background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:19px;font-weight:700;padding:8px 20px;cursor:pointer;text-align:center}
+  .btn.ghost{background:#fff;color:var(--blue);border:2px solid var(--blue)}
+  .btn:disabled{opacity:.42;cursor:not-allowed}
+  .segfloat{position:absolute;top:52px;right:12px;z-index:5;max-width:86%;background:#fff;
+    border:2px solid var(--blue);border-radius:10px;padding:4px 13px;font-size:17.5px;font-weight:700;
+    color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 2px 10px rgba(20,40,90,.18)}
+</style>
+</head>
+<body data-title="间隙非线性" data-page="12 / 33">
+<div class="act-stage"><div class="act-slide">
+  <div class="act-body has-note">
+    <div class="row">
+      <div class="lft">
+        <div class="act-card" style="flex:1.3">
+          <div class="hd"><span style="flex:1">齿轮传动中的间隙（图 8-3）</span></div>
+          <div class="bd">
+<div data-step="1" style="display:none"></div> <!-- 首步驱动动画；基础内容常显 -->
+            <div class="st" >传动机构中由于加工精度及运动部件动作需要，<b>总会存在间隙</b>——齿轮传动系统为保证转动灵活不卡死，齿轮间必须有少量间隙。</div>
+            <div class="st" data-step="2">主动轮<span class="kw-r">转向改变</span>时，从动轮开始<b>保持原有位置</b>，直到主动轮转过间隙 <span class="tex">2b</span>、在相反方向与从动轮<b>重新啮合</b>后，从动轮才开始转动。</div>
+            <div data-step="3"><div class="eq hl"><span class="tex">\dot{x}_{2}=\begin{cases}k\dot{x}_{1}, & x_{2}=k(x_{1}-b),\ \dot{x}_{1}>0\ \text{或}\ x_{2}=k(x_{1}+b),\ \dot{x}_{1}<0\\[6pt]0, & \left|\dfrac{x_{2}}{k}-x_{1}\right|&lt;b\quad\text{（换向穿越间隙）}\end{cases}</span></div></div>
+            <div class="st" data-step="4">式中：<b>b 为单边间隙（换向总行程 2b）</b>；<b>k 为啮合随动斜率</b>。两式共同描述“啮合随动—换向保持—重新啮合”。</div>
+          </div>
+        </div>
+        <div class="act-card roomy" style="flex:.72">
+          <div class="hd"><span style="flex:1">对系统的影响</span></div>
+          <div class="bd">
+            <div data-step="5" style="display:none"></div> <!-- 保持动画步序；首条说明常显 -->
+            <div class="pt"><span class="no">!</span><span>间隙通常是<b>不利因素</b>：可能使<span class="kw-r">静差扩大</span>，更常使<span class="kw-r">动态性能变差、振荡加剧、稳定裕度下降</span>——应尽量减小。</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="rgt">
+        <div class="act-card figc">
+          <div class="hd"><span style="flex:1">间隙特性曲线（k=1、b=0.5 示意）</span></div>
+          <span class="segfloat" id="segChip" style="display:none"></span>
+          <div class="bd2"><svg id="fig"></svg></div>
+          <div class="ctl">
+            <span id="prog">0 / 5</span>
+            <button class="btn" id="play">▶ 播放</button>
+            <button class="btn ghost" id="step">⧉ 分步</button>
+            <button class="btn ghost" id="rst">↺ 重置</button>
+          </div>
+          <div class="capnote">转向改变时输出先保持（ẋ₂=0），越过间隙 2b 后重新啮合随动——形成滞环回线。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="act-note"><span class="lead">要点</span><span>间隙常使静差扩大、动态性能变差、振荡加剧、稳定裕度下降——应尽量减小。</span></div>
+<script src="../fig.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const TOTAL = 5, k = 1, b = 0.5, Xm = 2.5;       // 示意参数：斜率 k=1、间隙宽度 b=0.5
+  /* 滞环回线按上式现算：啮合段 x₂=k(x₁∓b)，间隙内 ẋ₂=0（保持），反向越过 2b 后重新啮合 */
+  const pts = [];
+  const leg = (f, a0, a1, n) => { for (let i = 1; i <= n; i++) { const x = a0 + (a1 - a0) * i / n; pts.push([x, f(x)]); } };
+  pts.push([b, 0]);
+  leg(x => k * (x - b), b, Xm, 60);                // ① 正啮合段
+  leg(() => k * (Xm - b), Xm, Xm - 2 * b, 20);     // ② 上保持段（越过间隙 2b）
+  leg(x => k * (x + b), Xm - 2 * b, -Xm, 90);      // ③ 负啮合段
+  leg(() => -k * (Xm - b), -Xm, -Xm + 2 * b, 20);  // ④ 下保持段
+  leg(x => k * (x - b), -Xm + 2 * b, Xm, 90);      // ⑤ 回到正啮合段，回线闭合
+  const F = DZ.plot("fig", {
+    xlim: [-2.9, 2.9], ylim: [-2.6, 2.6], xlabel: "x_{1}", ylabel: "x_{2}",
+    curves: [{ pts, color: "#1D3FA0" }]
+  }, { vw: 960, vh: 640 });
+  /* 刻度数字放大到 ≥21px（viewBox 960 基准；fig.js 公共默认 20，页面级上调） */
+  F.svg.querySelectorAll("text").forEach(t => { const f = parseFloat(t.getAttribute("font-size") || "0"); if (f && f < 21) t.setAttribute("font-size", "21"); });
+  /* DZ.setF 按采样点序号推进：共 281 点、末下标 280；五段边界下标 60/80/170/190/280 */
+  const F1 = 60 / 280, F2 = 80 / 280, F3 = 170 / 280, F4 = 190 / 280;
+  const FS = [0, F1, F2, F3, F4, 1];
+  const RED = "#D63A2F", INK = "#16324F", MUT = "#5B6B8C";
+  /* 走向箭头 marker */
+  const defs = F.svg.querySelector("defs");
+  const mk = F.mk("marker", { id: "gar", markerWidth: 9, markerHeight: 7, refX: 6, refY: 2.6, orient: "auto" }, defs);
+  F.mk("path", { d: "M0,0 L6,2.6 L0,5.2 Z", fill: INK }, mk);
+  const arr = (g, x1, y1, x2, y2) => F.mk("line", { x1: F.X(x1), y1: F.Y(y1), x2: F.X(x2), y2: F.Y(y2),
+    stroke: INK, "stroke-width": 2.6, "marker-end": "url(#gar)" }, g);
+  function deco(kk, g) {
+    g = g || F.gDyn;
+    if (kk >= 1) {                                   // x 轴截距 ±b
+      F.tx(g, F.X(b), F.Y(0) + 44, "b", { fs: 24, fill: RED, b: 1, it: 1 });
+      F.tx(g, F.X(-b), F.Y(0) + 44, "−b", { fs: 24, fill: RED, b: 1, it: 1 });
+    }
+    if (kk >= 2) {                                   // 上保持段宽 2b
+      F.tx(g, F.X(Xm - b), F.Y(k * (Xm - b)) - 18, "2b", { fs: 22, fill: RED, b: 1, it: 1 });
+      F.tx(g, F.X(Xm - b), F.Y(k * (Xm - b)) + 36, "保持", { fs: 22, fill: MUT });
+    }
+    if (kk >= 4) {                                   // 走向箭头 + 回线标注
+      arr(g, 0.9, 0.4, 1.25, 0.75);
+      arr(g, 2.15, k * (Xm - b), 1.8, k * (Xm - b));
+      arr(g, 0.2, 0.7, -0.15, 0.35);
+      arr(g, -2.15, -k * (Xm - b), -1.8, -k * (Xm - b));
+      arr(g, 0.35, -0.15, 0.7, 0.2);
+      F.tx(g, F.X(1.35), F.Y(1.38), "滞环回线", { fs: 22, fill: MUT, b: 1 });
+      F.tx(g, F.X(1.92), F.Y(0.78), "斜率 k", { fs: 22, fill: INK, b: 1, an: "start" });
+    }
+  }
+  function paint(K) { F.gDyn.innerHTML = ""; deco(K); }
+  const chip = document.getElementById("segChip");
+  BD.wire(TOTAL, paint, {
+    figs: [F], FS, dur: 11000,
+    segments: [
+      { label: "① 正啮合段：x₂=k(x₁−b) 随动", parts: [{ F, b: [0], f0: 0, f1: F1 }], draw: (t, g) => deco(1, g) },
+      { label: "② 转向改变：保持原位，越过间隙 2b", parts: [{ F, b: [0], f0: F1, f1: F2 }], draw: (t, g) => deco(2, g) },
+      { label: "③ 反向啮合：x₂=k(x₁+b) 随动", parts: [{ F, b: [0], f0: F2, f1: F3 }], draw: (t, g) => deco(2, g) },
+      { label: "④ 再次反向：下保持段", parts: [{ F, b: [0], f0: F3, f1: F4 }], draw: (t, g) => deco(2, g) },
+      { label: "⑤ 回到正啮合段：滞环回线闭合", parts: [{ F, b: [0], f0: F4, f1: 1 }], draw: (t, g) => deco(4, g) }
+    ],
+    segLabel: (label, si, n) => {
+      if (label == null) { chip.style.display = "none"; F.gDyn.innerHTML = ""; paint(TOTAL); return; }
+      chip.textContent = "分步 " + (si + 1) + " / 5　" + label;
+      chip.style.display = "";
+    }
+  });
+  document.getElementById("rst").onclick = () => ACT.step.reset();
+});
+</script>
+<script>/* qa-steps：截图自验钩子 */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>

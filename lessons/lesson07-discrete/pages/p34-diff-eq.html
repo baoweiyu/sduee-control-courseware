@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>⑳ 线性差分方程</title>
+<link rel="stylesheet" href="../../../theme/theme.css?v=700">
+<script src="../../../theme/mathjax/mathjax-render.js"></script>
+<script src="../../../theme/mathjax/tex-chtml.js"></script>
+<script src="../../../theme/mathjax/mjx/input/tex/extensions/color.js"></script>
+<script src="../../../theme/act-base.js?v=700" defer></script>
+<script src="../fig.js"></script>
+<style>
+  .row{display:flex;gap:22px;height:100%;min-height:0}
+  .lft{flex:1;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .rgt{flex:1.08;display:flex;flex-direction:column;gap:14px;min-height:0}
+  .act-card{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+  .act-card>.bd{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:14px;padding:16px 24px}
+  .st{font-size:22.5px;color:var(--ink);line-height:1.65}
+  .eq{background:var(--sky);border-radius:12px;padding:13px 16px;text-align:center;font-size:23px;color:var(--navy);line-height:1.65}
+  .eq .cond{color:var(--muted);font-size:21px}
+  .dsub{display:flex;align-items:baseline;gap:14px}
+  .dsub .tag{flex:none;width:150px;text-align:right;font-size:21.5px;font-weight:700;color:var(--navy)}
+  .dsub .eq{flex:1}
+</style>
+</head>
+<body data-title="⑳ 线性差分方程" data-page="34 / 56">
+<div class="act-stage"><div class="act-slide">
+<div class="act-body has-note">
+  <div class="row">
+    <div class="lft">
+      <div class="act-card" style="flex:.78">
+        <div class="hd" style="font-size:23px"><span style="flex:1">什么是差分方程</span></div>
+        <div class="bd">
+          <div class="st">连续系统用<span style="color:var(--navy);font-weight:700">微分方程</span>描述；离散信号不能直接按连续时间求导，只能用<span class="kw-r">离散自变量</span>的函数在各采样时刻的取值来刻画系统行为，由此建立的方程称为<span class="kw-r">差分方程</span>。</div>
+        </div>
+      </div>
+      <div class="act-card" style="flex:1.35">
+        <div class="hd" style="font-size:23px"><span style="flex:1">k 阶线性差分方程的一般形式</span></div>
+        <div class="bd">
+          <div class="st">描述 k 阶线性离散系统的方程称为 k 阶线性差分方程：</div>
+          <div class="eq"><span class="tex">c[(n+k)T]+a_{k-1}c[(n+k-1)T]+\cdots+a_{1}c[(n+1)T]+a_{0}c(nT)</span></div>
+          <div class="eq"><span class="tex">=b_{m}r[(n+m)T]+\cdots+b_{1}r[(n+1)T]+b_{0}r(nT)</span>　<span class="cond"><span class="tex">(m\leq k)</span></span></div>
+          <div class="st">式中 <span class="tex">r(nT)</span> —— 输入序列；<span class="tex">c(nT)</span> —— 输出序列。</div>
+        </div>
+      </div>
+    </div>
+    <div class="rgt">
+      <div class="act-card" style="flex:1">
+        <div class="hd" style="font-size:23px"><span style="flex:1">前向差分与后向差分（采样函数 <span class="tex">y(nT)</span>）</span></div>
+        <div class="bd">
+          <div  style="display:flex;flex-direction:column;gap:16px">
+            <div class="dsub"><span class="tag">一阶前向差分</span>
+              <div class="eq"><span class="tex">\Delta y(nT)=y[(n+1)T]-y(nT)</span></div></div>
+            <div class="dsub"><span class="tag">二阶前向差分</span>
+              <div class="eq"><span class="tex">\Delta^{2}y(nT)=\Delta[\Delta y(nT)]=y[(n+2)T]-2y[(n+1)T]+y(nT)</span></div></div>
+          </div>
+          <div data-step="1" style="display:flex;flex-direction:column;gap:16px">
+            <div class="dsub"><span class="tag">一阶后向差分</span>
+              <div class="eq"><span class="tex">\nabla y(nT)=y(nT)-y[(n-1)T]</span></div></div>
+            <div class="dsub"><span class="tag">二阶后向差分</span>
+              <div class="eq"><span class="tex">\nabla^{2}y(nT)=\nabla[\nabla y(nT)]=y(nT)-2y[(n-1)T]+y[(n-2)T]</span></div></div>
+            <div class="st" style="text-align:center;color:var(--muted)">高阶前向、后向差分以此类推。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="act-note"><span class="lead">结论</span><span>差分方程是描述离散系统的基本形式，对应连续系统的微分方程。</span></div>
+<script>/* qa-steps：?steps=N 自动前进 N 步 */window.addEventListener("load",()=>setTimeout(()=>{const n=+(new URLSearchParams(location.search)).get("steps")||0;if(n){document.querySelectorAll("[data-step]").forEach(e=>e.style.transition="none");for(let i=0;i<n;i++)ACT.step.next();}},350));</script>
+</div></div>
+</body>
+</html>
