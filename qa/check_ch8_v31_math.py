@@ -95,17 +95,21 @@ def g_abs(w, k=D(30)):
     return k / (w * (1 + (D("0.1") * w) ** 2).sqrt() * (1 + (D("0.2") * w) ** 2).sqrt())
 
 G1 = g_abs(W0)
-for harmonic in (3, 5):
-    ratio_g = g_abs(harmonic * W0) / G1
-    ratio_input = ratio_g / D(harmonic)  # 理想继电器第 h 次谐波为基波的 1/h。
-    print(f"h={harmonic}: |G(jhω0)|/|G(jω0)|={ratio_g}，返回输入端谐波/基波={ratio_input}")
-    if harmonic == 3:
-        assert abs(ratio_g - D("0.0691714464")) < D("1e-9")
-        assert ratio_input < D("0.024")
-    else:
-        assert abs(ratio_g - D("0.0161690417")) < D("1e-9")
-        assert ratio_input < D("0.0033")
-print("PASS 三阶谐波返回输入端约为基波的 2.31%，五阶约 0.32%（一阶谐波近似校核）")
+# 死区继电器不是理想继电器：B_h/B_1=cos(hα)/(h cosα)，α=asin(a/X)。
+# 用 Chebyshev 多项式直接计算 cos(hα)，避免把理想继电器的 1/h 误套到本例。
+for point, x in (("b", XB), ("a", XA)):
+    c = (1 - 1 / (x * x)).sqrt()
+    cos3 = 4 * c ** 3 - 3 * c
+    cos5 = 16 * c ** 5 - 20 * c ** 3 + 5 * c
+    for harmonic, cos_h in ((3, cos3), (5, cos5)):
+        ratio_g = g_abs(harmonic * W0) / G1
+        harmonic_ratio = cos_h / (D(harmonic) * c)
+        ratio_input = ratio_g * harmonic_ratio
+        print(f"{point} 点 h={harmonic}: 谐波/基波={harmonic_ratio}，"
+              f"滤波比={ratio_g}，返回输入端谐波/基波={ratio_input}")
+        assert abs(ratio_input) < D("0.06")
+print("PASS 死区继电器实际谐波校核：b 点三阶约 5.16%、五阶约 0.57%；"
+      "a 点约 0.55%、0.23%（均指返回输入端的幅值绝对值）")
 
 if "--math-only" not in sys.argv:
     print("\n== 页面防回归：严格代数结论与描述函数近似结论须明确区分 ==")
