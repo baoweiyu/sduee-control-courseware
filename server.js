@@ -27,6 +27,12 @@ const MIME = {
 http.createServer((req, res) => {
   let p = decodeURIComponent(req.url.split("?")[0]);
   if (p === "/") p = "/player/index.html";
+  if (p === "/classroom" || p === "/classroom/player") {
+    const query = req.url.indexOf("?");
+    res.writeHead(302, { Location: p + "/" + (query < 0 ? "" : req.url.slice(query)) });
+    return res.end();
+  }
+  if (p === "/classroom/" || p === "/classroom/player/") p += "index.html";
   if (p === "/sfr-analyzer/") p = "/sfr-analyzer/index.html";
   const file = path.normalize(path.join(ROOT, p));
   if (!file.startsWith(ROOT)) { res.writeHead(403); return res.end("forbidden"); }

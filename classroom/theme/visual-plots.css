@@ -1,0 +1,154 @@
+/* Graph paper and controls for the live workbench. */
+.response-plot .plot-paper{fill:#fbfcfe}
+.response-plot .plot-paper-minor{fill:none;stroke:#edf1f7;stroke-width:1}
+.response-plot .plot-grid path{stroke:#dfe7f2}
+.response-plot :is(.plot-grid text,.response-labels text){fill:#344960;font-size:11.5px;font-variant-numeric:tabular-nums}
+.response-plot .axis{stroke:#172744;stroke-width:1.45}
+.response-plot .plot-arrow{fill:#172744}
+.response-plot .plot-cursor{fill:none;stroke:#263958;stroke-width:1.25;stroke-dasharray:3 3}
+.response-plot .plot-handle{fill:#fff;stroke:#263958;stroke-width:1.7}
+.response-plot.compact-plot :is(.plot-grid text,.response-labels text){font-size:10px}
+.response-plot.compact-plot .response-labels text{paint-order:stroke;stroke:#fbfcfe;stroke-width:2px}
+.response-plot .curve-tag{pointer-events:none}
+.curve-tag path{fill:none;stroke:currentColor;stroke-width:1.4}
+.curve-tag rect{fill:#fbfdfff5;stroke:currentColor;stroke-width:1.35}
+.curve-tag text{fill:currentColor;font-weight:760}
+.chart.side-legend{display:grid;grid-template-columns:minmax(0,1fr) 110px;column-gap:8px}
+.chart.side-legend .legend{flex-direction:column;align-items:flex-start;justify-content:center;gap:10px}
+.legend .dashed{height:2px;background:repeating-linear-gradient(90deg,var(--trace) 0 4px,transparent 4px 7px)}
+.side-legend .legend i{width:20px}
+
+.model-art.photo-backdrop{
+  background:#f1f5f8 var(--rig-photo) center/contain no-repeat;
+  padding:0;
+}
+
+.lesson-lab input[type=range]{
+  --slider-fill:#08796a;
+  --slider-rest:#ced9df;
+  --slider-track:6px;
+  --slider-handle:17px;
+  appearance:none;
+  -webkit-appearance:none;
+  background:none;
+}
+.lesson-lab input[type=range]::-webkit-slider-runnable-track{
+  height:var(--slider-track);
+  border-radius:999px;
+  background:linear-gradient(90deg,var(--slider-fill) var(--range-progress,0%),var(--slider-rest) var(--range-progress,0%));
+}
+.lesson-lab input[type=range]::-moz-range-track{
+  height:var(--slider-track);
+  border-radius:999px;
+  background:linear-gradient(90deg,var(--slider-fill) var(--range-progress,0%),var(--slider-rest) var(--range-progress,0%));
+}
+.lesson-lab input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  width:var(--slider-handle);
+  height:var(--slider-handle);
+  margin-top:calc((var(--slider-track) - var(--slider-handle))/2);
+  border:1.5px solid var(--slider-fill);
+  border-radius:50%;
+  background:#fcfdff;
+  box-shadow:0 1px 3px #10253d4d;
+}
+.lesson-lab input[type=range]::-moz-range-thumb{
+  box-sizing:border-box;
+  width:var(--slider-handle);
+  height:var(--slider-handle);
+  border:1.5px solid var(--slider-fill);
+  border-radius:50%;
+  background:#fcfdff;
+  box-shadow:0 1px 3px #10253d4d;
+}
+.water input[data-key=outlet]{--slider-fill:#e96c08;--slider-rest:#d5d8dd}
+:is(.water,.motor,.performance) .settings [data-row] input[type=range]{--slider-track:8px;--slider-handle:22px}
+:is(.water,.motor,.performance) .settings output{font-weight:760;font-variant-numeric:tabular-nums}
+.water .analysis-panel>.settings,.motor .rig-panel>.settings{
+  background:#f6f8fc;
+  border-color:#c6d4e4;
+}
+.water .analysis-panel>.settings .range-row{
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:4px 12px;
+  padding:2px 4px;
+}
+.water .analysis-panel>.settings .range-row input{grid-column:1/-1;grid-row:2}
+.water .analysis-panel>.settings .range-row output{grid-column:2;grid-row:1}
+:is(.water,.motor,.performance) .chart-panel,.performance .rig-panel{
+  border-color:#c4d1e2;
+  background:#f8fafd;
+}
+.motor :is(.chart-panel,.rig-panel)>h2::after{
+  content:"";
+  display:block;
+  width:44px;height:3px;
+  margin:5px 0 0;
+  border-radius:99px;
+  background:var(--blue);
+}
+.performance .lab-tabs{
+  position:relative;
+  gap:12px;
+  padding:4px;
+  border-color:#bfcedf;
+  border-radius:10px;
+  background:#f7f9fc;
+}
+.performance .lab-tabs button{
+  position:relative;
+  border:0;
+  border-radius:7px;
+  background:transparent;
+  color:#111e39;
+  font-weight:760;
+}
+.performance .lab-tabs button+button::before{
+  position:absolute;top:15%;bottom:15%;left:-7px;width:1px;
+  background:#c6d2e2;
+  content:"";
+}
+.performance .lab-tabs button:hover{background:#ecf3f7}
+.performance .lab-tabs button[aria-pressed=true]{background:#e2f1ee;color:#087360}
+.performance .rig-panel>.settings{
+  padding:0 0 7px;
+  border:0;
+  border-bottom:1px solid #c6d2e2;
+  border-radius:0;
+  background:none;
+}
+.performance .rig-panel>.settings .range-row{
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:4px 10px;
+}
+.performance .rig-panel>.settings .range-row input{grid-column:1/-1;grid-row:2}
+.performance .rig-panel>.settings .range-row output{grid-column:2;grid-row:1}
+.performance .rig-panel .selected-result{
+  color:#0d5b4b;
+  background:#e2f1ee;
+  border:0;
+}
+.performance .rig-panel .selected-result strong{color:inherit}
+@media(min-width:840px) and (min-height:580px){
+  :is(.water,.motor,.performance) .chart-panel{padding:clamp(10px,1.05vw,17px)}
+  .water .analysis-panel>.settings{padding:14px 11px}
+  .water .analysis-panel>.settings .range-row{font-size:clamp(16px,1.4vw,22px)}
+  .water .readouts .meter>div{padding:8px 5px}
+  .motor .rig-panel>.settings{padding:7px 11px}
+  .motor .rig-panel>.settings .range-row{font-size:clamp(14px,1.15vw,20px);gap:8px 12px}
+  .motor .rig-panel>.settings .range-row+.range-row{border-top:1px solid #dfe7f2}
+  .performance .lab-tabs button{min-height:47px}
+  .performance .rig-panel>.settings .range-row{font-size:clamp(17px,1.5vw,25px)}
+  .performance .rig-panel .selected-result{padding:12px}
+}
+@media (max-width:650px), (max-height:490px){
+  :is(.water,.motor,.performance) .settings [data-row] input[type=range]{--slider-track:6px;--slider-handle:16px}
+  .water .analysis-panel>.settings .range-row{padding:0 2px;gap:0 4px}
+  .performance .rig-panel>.settings{padding-bottom:3px}
+  .performance .rig-panel>.settings .range-row{gap:0 4px}
+  .performance .lab-tabs{gap:9px;padding:2px}
+  .performance .lab-tabs button+button::before{left:-5px}
+}
+@media(forced-colors:active){
+  .lesson-lab input[type=range]{appearance:auto;-webkit-appearance:auto}
+}

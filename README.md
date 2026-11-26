@@ -35,6 +35,8 @@
 
 **Web 部署**：下载 `act-courseware-web-deploy` zip，保持目录结构上传至任意静态托管。必须通过 HTTP(S) 访问，详见包内 `DEPLOY-部署说明.md`。
 
+**课堂投影优化版**：从仓库根目录运行 `node server.js` 后，打开 [课堂版入口](http://127.0.0.1:7100/classroom/)。八章沿用原章页顺序，课件提供收起式页目、分步演示和由教师控制的答案揭示。也可单独发布 [classroom 目录](./classroom/DEPLOY-部署说明.md)。
+
 **播放器操作**：
 
 - 方向键 / PgUp / PgDn / 空格 = 上一步或下一步，步尽后自动翻页，兼容常见翻页笔；

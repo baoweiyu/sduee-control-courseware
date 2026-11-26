@@ -1,0 +1,287 @@
+{
+  "lesson_id": "lesson01-intro",
+  "title": "第一章 自动控制概述",
+  "source": "bwy-ori-oldPPT/chapt1.pdf",
+  "pages": [
+    {
+      "id": "l1-p01",
+      "file": "pages/p01-cover.html",
+      "title": "课程封面",
+      "complexity": "L0",
+      "status": "Review",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l1-p02",
+      "file": "pages/p02-teachers.html",
+      "title": "教学团队与联系方式",
+      "complexity": "L0",
+      "status": "Review",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l1-p03",
+      "file": "pages/p03-teaching.html",
+      "title": "教学环节（线下52+线上16学时）",
+      "complexity": "L0",
+      "status": "Review",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l1-p04",
+      "file": "pages/p04-grading.html",
+      "title": "考核评价方式与标准",
+      "complexity": "L0",
+      "status": "Review",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l1-p05",
+      "file": "pages/p05-mooc.html",
+      "title": "线上慕课登录方法",
+      "complexity": "L0",
+      "status": "Review",
+      "legacy_action": "POLISH"
+    },
+    {
+      "id": "l1-p06",
+      "file": "pages/p06-textbook.html",
+      "title": "课程教材",
+      "complexity": "L0",
+      "status": "Review",
+      "legacy_action": "POLISH"
+    },
+    {
+      "id": "l1-p07",
+      "file": "pages/p07-contents.html",
+      "title": "本章主要内容",
+      "complexity": "L0",
+      "status": "Review",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l1-p08",
+      "file": "pages/p08-curriculum.html",
+      "title": "专业培养计划模块图",
+      "complexity": "L0",
+      "status": "Review",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l1-p09",
+      "file": "pages/p09-disciplines.html",
+      "title": "与相关学科的关系",
+      "complexity": "L0",
+      "status": "Review",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l1-p10",
+      "file": "pages/p10-calendar.html",
+      "title": "课程内容安排（教学日历）",
+      "complexity": "L0",
+      "status": "Review",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l1-p11",
+      "file": "pages/p11-concept.html",
+      "title": "第一节 · 自动控制的概念",
+      "complexity": "L0",
+      "status": "Review",
+      "legacy_action": "POLISH"
+    },
+    {
+      "id": "l1-p12",
+      "file": "pages/p12-examples-space.html",
+      "title": "应用实例 · 无人机与天问一号",
+      "complexity": "L1",
+      "status": "Review",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l1-p13",
+      "file": "pages/p13-example-driving.html",
+      "title": "应用实例 · 智能驾驶感知系统",
+      "complexity": "L1",
+      "status": "Review",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l1-p14",
+      "file": "pages/p14-quiz-blank.html",
+      "title": "课堂互动 · 随堂填空",
+      "complexity": "L2",
+      "status": "Review",
+      "legacy_action": "POLISH"
+    },
+    {
+      "id": "l1-p15",
+      "file": "pages/p15-incubator.html",
+      "title": "举例 · 恒温箱温度控制",
+      "complexity": "L1",
+      "status": "Review",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l1-p16",
+      "file": "pages/p16-level.html",
+      "title": "举例 · 液位机械调节",
+      "complexity": "L1",
+      "status": "Review",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l1-p17",
+      "file": "pages/p17-modes.html",
+      "title": "二、自动控制的基本方式",
+      "complexity": "L0",
+      "status": "Review",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l1-p18",
+      "file": "pages/p18-openloop.html",
+      "title": "1、开环控制",
+      "complexity": "L0",
+      "status": "Review",
+      "legacy_action": "POLISH"
+    },
+    {
+      "id": "l1-p19",
+      "file": "pages/p19-openloop-motor.html",
+      "title": "直流电动机转速开环控制系统",
+      "complexity": "L0",
+      "status": "Review",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l1-p20",
+      "file": "pages/p20-closedloop.html",
+      "title": "2、闭环控制",
+      "complexity": "L0",
+      "status": "Review",
+      "legacy_action": "POLISH"
+    },
+    {
+      "id": "l1-p21",
+      "file": "pages/p21-closedloop-motor.html",
+      "title": "直流电动机转速闭环控制系统",
+      "complexity": "L0",
+      "status": "Review",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l1-p22",
+      "file": "pages/p22-cruise.html",
+      "title": "身边实例 · 汽车定速巡航",
+      "complexity": "L1",
+      "status": "Review",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l1-p23",
+      "file": "pages/p23-compound.html",
+      "title": "3、复合控制（定义与优缺点）",
+      "complexity": "L0",
+      "status": "Review",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l1-p24",
+      "file": "pages/p24-compound-diag.html",
+      "title": "复合控制 · 按扰动补偿的框图",
+      "complexity": "L1",
+      "status": "Review",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l1-p25",
+      "file": "pages/p25-quiz-multi.html",
+      "title": "课堂互动 · 随堂多选",
+      "complexity": "L2",
+      "status": "Review",
+      "legacy_action": "POLISH"
+    },
+    {
+      "id": "l1-p26",
+      "file": "pages/p26-modes-compare.html",
+      "title": "开环 · 闭环 · 复合——三种方式比较",
+      "complexity": "L1",
+      "status": "Review",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l1-p27",
+      "file": "pages/p27-history-origins.html",
+      "title": "三、发展史 ① 思想萌芽",
+      "complexity": "L1",
+      "status": "Review",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l1-p28",
+      "file": "pages/p28-history-classical.html",
+      "title": "三、发展史 ② 经典控制理论",
+      "complexity": "L1",
+      "status": "Review",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l1-p29",
+      "file": "pages/p29-history-modern.html",
+      "title": "三、发展史 ③ 现代与智能控制",
+      "complexity": "L1",
+      "status": "Review",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l1-p30",
+      "file": "pages/p30-components.html",
+      "title": "自动控制系统的组成",
+      "complexity": "L0",
+      "status": "Review",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l1-p31",
+      "file": "pages/p31-terms.html",
+      "title": "控制系统中的常用术语",
+      "complexity": "L0",
+      "status": "Review",
+      "legacy_action": "POLISH"
+    },
+    {
+      "id": "l1-p32",
+      "file": "pages/p32-classification.html",
+      "title": "自动控制系统的分类",
+      "complexity": "L0",
+      "status": "Review",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l1-p33",
+      "file": "pages/p33-requirements.html",
+      "title": "对控制系统的基本要求（稳快准）",
+      "complexity": "L0",
+      "status": "Review",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l1-p34",
+      "file": "pages/p34-design.html",
+      "title": "自动控制系统的设计原则与步骤",
+      "complexity": "L0",
+      "status": "Review",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l1-p36",
+      "file": "pages/p36-summary.html",
+      "title": "本章小结",
+      "complexity": "L0",
+      "status": "Review",
+      "legacy_action": "POLISH"
+    }
+  ]
+}

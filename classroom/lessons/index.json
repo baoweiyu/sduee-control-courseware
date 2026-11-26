@@ -1,0 +1,42 @@
+[
+  {
+    "lesson_id": "lesson01-intro",
+    "path": "lesson01-intro/lesson.json",
+    "title": "第一章 绪论"
+  },
+  {
+    "lesson_id": "lesson02-math-model",
+    "path": "lesson02-math-model/lesson.json",
+    "title": "第二章 控制系统的数学模型"
+  },
+  {
+    "lesson_id": "lesson03-timedomain",
+    "path": "lesson03-timedomain/lesson.json",
+    "title": "第三章 时域分析法"
+  },
+  {
+    "lesson_id": "lesson04-freq",
+    "path": "lesson04-freq/lesson.json",
+    "title": "第四章 频率响应法"
+  },
+  {
+    "lesson_id": "lesson05-root-locus",
+    "path": "lesson05-root-locus/lesson.json",
+    "title": "第五章 根轨迹法"
+  },
+  {
+    "lesson_id": "lesson06-correction",
+    "path": "lesson06-correction/lesson.json",
+    "title": "第六章 控制系统的校正"
+  },
+  {
+    "lesson_id": "lesson07-discrete",
+    "path": "lesson07-discrete/lesson.json",
+    "title": "第七章 离散控制系统"
+  },
+  {
+    "lesson_id": "lesson08-nonlinear",
+    "path": "lesson08-nonlinear/lesson.json",
+    "title": "第八章 非线性系统分析"
+  }
+]
