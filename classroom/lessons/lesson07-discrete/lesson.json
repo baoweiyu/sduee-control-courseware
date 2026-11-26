@@ -1,0 +1,454 @@
+{
+  "lesson_id": "lesson07-discrete",
+  "title": "第七章 离散控制系统",
+  "pages": [
+    {
+      "id": "l7-p01",
+      "file": "pages/p01-cover.html",
+      "title": "第七章 离散控制系统",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p02",
+      "file": "pages/p02-guide.html",
+      "title": "本章导学",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p03",
+      "file": "pages/p03-sec71-cover.html",
+      "title": "7.1–7.2 采样过程及采样定理",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p04",
+      "file": "pages/p04-overview.html",
+      "title": "从连续到离散",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p05",
+      "file": "pages/p05-switch-role.html",
+      "title": "采样开关的作用",
+      "complexity": "L3",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p06",
+      "file": "pages/p06-sample-forms.html",
+      "title": "采样形式",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p07",
+      "file": "pages/p07-pulse-mod.html",
+      "title": "采样过程就是脉冲调制",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p08",
+      "file": "pages/p08-ideal-pulse.html",
+      "title": "理想脉冲序列的数学描述",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p09",
+      "file": "pages/p09-star-laplace.html",
+      "title": "采样信号的拉氏变换与频谱",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p10",
+      "file": "pages/p10-spectrum.html",
+      "title": "采样信号的频谱与混叠",
+      "complexity": "L3",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p11",
+      "file": "pages/p11-shannon.html",
+      "title": "香农采样定理",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p12",
+      "file": "pages/p12-quiz1.html",
+      "title": "课堂互动：采样与频谱",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p13",
+      "file": "pages/p13-sec73-cover.html",
+      "title": "7.3–7.4 保持器与 z 变换理论",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p14",
+      "file": "pages/p14-hold-concept.html",
+      "title": "保持器：从离散回到连续",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p15",
+      "file": "pages/p15-zoh-tf.html",
+      "title": "零阶保持器的脉冲响应与传递函数",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p16",
+      "file": "pages/p16-zoh-freq.html",
+      "title": "零阶保持器的频率特性",
+      "complexity": "L3",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p17",
+      "file": "pages/p17-zoh-effect.html",
+      "title": "零阶保持器的影响与近似实现",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p18",
+      "file": "pages/p18-foh.html",
+      "title": "一阶保持器",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p19",
+      "file": "pages/p19-quiz2.html",
+      "title": "课堂互动：保持器",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p20",
+      "file": "pages/p20-z-def.html",
+      "title": "z 变换的定义",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p21",
+      "file": "pages/p21-z-methods.html",
+      "title": "求 z 变换的三种方法",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p22",
+      "file": "pages/p22-ex71.html",
+      "title": "例7-1 级数求和法：单位阶跃",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p23",
+      "file": "pages/p23-ex72.html",
+      "title": "例7-2 级数求和法：指数函数",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p24",
+      "file": "pages/p24-ex73.html",
+      "title": "例7-3 部分分式法",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p25",
+      "file": "pages/p25-ex74.html",
+      "title": "例7-4 留数法：f(t)=t",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p26",
+      "file": "pages/p26-ex75.html",
+      "title": "例7-5 留数法：f(t)=cosωt",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p27",
+      "file": "pages/p27-z-props1.html",
+      "title": "z 变换的基本性质（上）",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p28",
+      "file": "pages/p28-z-delay.html",
+      "title": "z^{−k}：滞后环节图示",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p29",
+      "file": "pages/p29-z-props2.html",
+      "title": "z 变换的基本性质（下）",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p30",
+      "file": "pages/p30-longdiv.html",
+      "title": "z 反变换：长除法 + 例7-6",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p31",
+      "file": "pages/p31-partial.html",
+      "title": "z 反变换：部分分式法 + 例7-7",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p32",
+      "file": "pages/p32-residue.html",
+      "title": "z 反变换：留数法 + 例7-8、7-9",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p33",
+      "file": "pages/p33-sec75-cover.html",
+      "title": "7.5–7.6 差分方程与脉冲传递函数",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p34",
+      "file": "pages/p34-diff-eq.html",
+      "title": "线性差分方程",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p35",
+      "file": "pages/p35-ex710.html",
+      "title": "例7-10 微分方程离散化",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p36",
+      "file": "pages/p36-ex711.html",
+      "title": "例7-11 离散系统差分方程",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p37",
+      "file": "pages/p37-ex712.html",
+      "title": "例7-12 z 变换解差分方程",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p38",
+      "file": "pages/p38-pulse-tf.html",
+      "title": "脉冲传递函数的定义",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p39",
+      "file": "pages/p39-openloop-nosw.html",
+      "title": "开环：环节之间无采样开关",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p40",
+      "file": "pages/p40-openloop-sw.html",
+      "title": "开环：环节之间有采样开关 + 例7-13",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p41",
+      "file": "pages/p41-ex714.html",
+      "title": "例7-14 含零阶保持器的开环",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p42",
+      "file": "pages/p42-closedloop.html",
+      "title": "闭环脉冲传递函数",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p43",
+      "file": "pages/p43-digital-ctrl.html",
+      "title": "数字控制器与单位反馈",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p44",
+      "file": "pages/p44-structure-table.html",
+      "title": "常见采样系统结构一览",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p45",
+      "file": "pages/p45-quiz3.html",
+      "title": "课堂互动：脉冲传递函数",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p46",
+      "file": "pages/p46-sec77-cover.html",
+      "title": "7.7 离散系统的时域分析",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p47",
+      "file": "pages/p47-transient.html",
+      "title": "暂态响应：二阶系统例",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p48",
+      "file": "pages/p48-z-cond.html",
+      "title": "z 变换研究暂态的条件",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p49",
+      "file": "pages/p49-poles-map.html",
+      "title": "闭环极点分布与暂态分量",
+      "complexity": "L3",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p50",
+      "file": "pages/p50-sz-map.html",
+      "title": "s 平面与 z 平面的映射",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p51",
+      "file": "pages/p51-stability.html",
+      "title": "离散系统稳定的充要条件",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p52",
+      "file": "pages/p52-w-transform.html",
+      "title": "w 变换与劳斯判据",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p53",
+      "file": "pages/p53-ex715.html",
+      "title": "例7-15 劳斯判据求 K 范围",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p54",
+      "file": "pages/p54-error-coeff.html",
+      "title": "稳态误差与静态误差系数",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p55",
+      "file": "pages/p55-ex716.html",
+      "title": "例7-16 静态误差系数",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    },
+    {
+      "id": "l7-p56",
+      "file": "pages/p56-summary.html",
+      "title": "本章小结",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "NEW"
+    }
+  ]
+}

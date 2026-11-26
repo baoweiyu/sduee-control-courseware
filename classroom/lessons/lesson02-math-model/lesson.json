@@ -1,0 +1,415 @@
+{
+  "lesson_id": "lesson02-math-model",
+  "title": "第二章 控制系统的数学模型",
+  "source": "bwy-ori-oldPPT/chapt2.pdf",
+  "pages": [
+    {
+      "id": "l2-p01",
+      "file": "pages/p01-cover.html",
+      "title": "第二章封面",
+      "complexity": "L0",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l2-p02",
+      "file": "pages/p02-model-intro.html",
+      "title": "数学模型概念与建模方法",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l2-p03",
+      "file": "pages/p03-contents.html",
+      "title": "本章内容导览",
+      "complexity": "L0",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l2-p04",
+      "file": "pages/p04-ode-build.html",
+      "title": "微分方程的建立（4步骤+一般形式）",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l2-p05",
+      "file": "pages/p05-ex-rlc.html",
+      "title": "例2-1 RLC串联电路",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l2-p06",
+      "file": "pages/p06-ex-spring.html",
+      "title": "例2-2 弹簧-质量-阻尼器",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l2-p07",
+      "file": "pages/p07-ex-motor.html",
+      "title": "例2-3 他励直流电动机",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l2-p08",
+      "file": "pages/p08-quiz-common.html",
+      "title": "课堂互动：三例共同点（多选）",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l2-p09",
+      "file": "pages/p09-laplace-table.html",
+      "title": "拉氏变换定义与常用变换表",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l2-p10",
+      "file": "pages/p10-laplace-theorems.html",
+      "title": "拉氏变换基本定理",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l2-p11",
+      "file": "pages/p11-laplace-inverse.html",
+      "title": "拉氏反变换（部分分式法）",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l2-p12",
+      "file": "pages/p12-ode-solve.html",
+      "title": "拉氏变换法求解微分方程",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l2-p13",
+      "file": "pages/p13-ode-example.html",
+      "title": "求解示例与MATLAB",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l2-p14",
+      "file": "pages/p14-quiz-solution.html",
+      "title": "课堂互动：稳态解与暂态解（单选）",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l2-p15",
+      "file": "pages/p15-linearization.html",
+      "title": "非线性特性的线性化（切线法）",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l2-p16",
+      "file": "pages/p16-tf-definition.html",
+      "title": "传递函数的定义",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l2-p17",
+      "file": "pages/p17-tf-derive.html",
+      "title": "由微分方程求传递函数",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l2-p18",
+      "file": "pages/p18-tf-properties.html",
+      "title": "传递函数的性质",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l2-p19",
+      "file": "pages/p19-tf-forms.html",
+      "title": "传递函数的两种表示与一般形式",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l2-p20",
+      "file": "pages/p20-quiz-tf.html",
+      "title": "课堂互动：物理性质与传递函数（判断）",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l2-p21",
+      "file": "pages/p21-typical-1.html",
+      "title": "典型环节：比例与惯性",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l2-p22",
+      "file": "pages/p22-typical-2.html",
+      "title": "典型环节：积分与振荡",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l2-p23",
+      "file": "pages/p23-typical-3.html",
+      "title": "典型环节：微分与延迟",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l2-p24",
+      "file": "pages/p24-quiz-tf2.html",
+      "title": "课堂互动：传递函数概念（单选+判断）",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l2-p25",
+      "file": "pages/p25-ex-rlc-tf.html",
+      "title": "例2-6 RLC传递函数（复阻抗法）",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l2-p26",
+      "file": "pages/p26-ex-opamp.html",
+      "title": "例2-7 理想运算放大器",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l2-p27",
+      "file": "pages/p27-ex-speed-system.html",
+      "title": "例2-8 速度控制系统",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l2-p28",
+      "file": "pages/p28-ex-speed-tf.html",
+      "title": "例2-8 各环节传递函数与综合",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l2-p29",
+      "file": "pages/p29-bd-elements.html",
+      "title": "方框图的组成（4要素）",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l2-p30",
+      "file": "pages/p30-bd-draw.html",
+      "title": "方框图的绘制（例2-9）",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l2-p31",
+      "file": "pages/p31-bd-equiv-principle.html",
+      "title": "等效变换的两类与两原则",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l2-p32",
+      "file": "pages/p32-bd-basic-anim.html",
+      "title": "★交互：串联/并联/反馈合并",
+      "complexity": "L3",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l2-p33",
+      "file": "pages/p33-bd-move-rules.html",
+      "title": "相加点与分支点的等效移动规则",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l2-p34",
+      "file": "pages/p34-bd-branch-move.html",
+      "title": "★交互：分支点等效移动",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l2-p35",
+      "file": "pages/p35-bd-sum-move.html",
+      "title": "相加点移动辨析（投票+错例+向同类移动）",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l2-p36",
+      "file": "pages/p36-action-decompose.html",
+      "title": "作用分解（处理交叉反馈）",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l2-p37",
+      "file": "pages/p37-bd-reduce-ex210.html",
+      "title": "★交互：例2-10 环节合并化简",
+      "complexity": "L3",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l2-p38",
+      "file": "pages/p38-ex-rc-ladder.html",
+      "title": "例2-11 两级RC网络方框图变换",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l2-p39",
+      "file": "pages/p39-closedloop-tf.html",
+      "title": "典型闭环系统的传递函数",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l2-p40",
+      "file": "pages/p40-sfg-concept.html",
+      "title": "信号流图基本概念",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l2-p41",
+      "file": "pages/p41-sfg-terms.html",
+      "title": "信号流图常用术语",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l2-p42",
+      "file": "pages/p42-sfg-mapping.html",
+      "title": "方框图与信号流图对照",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l2-p43",
+      "file": "pages/p43-sfg-example.html",
+      "title": "术语对号入座（X0…X6）",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l2-p44",
+      "file": "pages/p44-sfg-rules.html",
+      "title": "信号流图绘制与等效变换规则（表2-2）",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l2-p45",
+      "file": "pages/p45-sfg-convert.html",
+      "title": "★交互：方框图⇄信号流图（例2-13）",
+      "complexity": "L3",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l2-p46",
+      "file": "pages/p46-mason-formula.html",
+      "title": "梅逊公式及各项含义",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l2-p47",
+      "file": "pages/p47-mason-lab.html",
+      "title": "★★旗舰交互：梅逊公式分步（例2-14）",
+      "complexity": "L3",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l2-p48",
+      "file": "pages/p48-mason-rc.html",
+      "title": "★交互：梅逊公式R-C例练习",
+      "complexity": "L3",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l2-p49",
+      "file": "pages/p49-keypoints.html",
+      "title": "本章学习要点",
+      "complexity": "L0",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l2-p50",
+      "file": "pages/p50-exercise.html",
+      "title": "课后练习（X4/X1）",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l2-p51",
+      "file": "pages/p51-quiz-furnace.html",
+      "title": "课堂互动：加热炉控制方式（单选）",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    }
+  ]
+}

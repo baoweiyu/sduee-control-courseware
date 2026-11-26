@@ -1,0 +1,687 @@
+{
+  "lesson_id": "lesson03-timedomain",
+  "title": "第三章 时域分析法",
+  "source": "bwy-ori-oldPPT/chapt3-1.pdf, chapt3-2.pdf, chapt3-3.pdf, chapt3-4.pdf",
+  "pages": [
+    {
+      "id": "l3-p01",
+      "file": "pages/p01-cover.html",
+      "title": "第三章封面",
+      "complexity": "L0",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p02",
+      "file": "pages/p02-intro.html",
+      "title": "时域分析法引言",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "POLISH"
+    },
+    {
+      "id": "l3-p03",
+      "file": "pages/p03-signals-why.html",
+      "title": "典型输入信号的引入",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "POLISH"
+    },
+    {
+      "id": "l3-p04",
+      "file": "pages/p04-signal-step.html",
+      "title": "阶跃函数",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p05",
+      "file": "pages/p05-signal-ramp.html",
+      "title": "斜坡函数",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p06",
+      "file": "pages/p06-signal-parab.html",
+      "title": "抛物线函数",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p07",
+      "file": "pages/p07-signal-impulse.html",
+      "title": "脉冲函数",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p08",
+      "file": "pages/p08-signal-sine.html",
+      "title": "正弦函数",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p08b",
+      "file": "pages/p09-signal-relation.html",
+      "title": "各典型输入函数间的关系",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "INTERACTIVE"
+    },
+    {
+      "id": "l3-p09",
+      "file": "pages/p09-signal-choice.html",
+      "title": "典型输入信号的选择原则",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "POLISH"
+    },
+    {
+      "id": "l3-p10",
+      "file": "pages/p10-metrics-def.html",
+      "title": "阶跃响应的时域性能指标（定义）",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p11",
+      "file": "pages/p11-metrics-figure.html",
+      "title": "阶跃响应性能指标图解（分步标注）",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "INTERACTIVE"
+    },
+    {
+      "id": "l3-p12",
+      "file": "pages/p12-metrics-noover.html",
+      "title": "无超调响应的 tr 与 ts",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p13",
+      "file": "pages/p13-ess-meaning.html",
+      "title": "稳态误差与指标意义",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p14",
+      "file": "pages/p14-first-order.html",
+      "title": "一阶系统的数学模型",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p15",
+      "file": "pages/p15-fo-step.html",
+      "title": "一阶系统的单位阶跃响应",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "INTERACTIVE"
+    },
+    {
+      "id": "l3-p16",
+      "file": "pages/p16-fo-lab.html",
+      "title": "互动实验：时间常数 T 与响应速度",
+      "complexity": "L3",
+      "status": "Draft",
+      "legacy_action": "INTERACTIVE"
+    },
+    {
+      "id": "l3-p17",
+      "file": "pages/p17-fo-ramp.html",
+      "title": "一阶系统的单位斜坡响应",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p18",
+      "file": "pages/p18-fo-impulse.html",
+      "title": "一阶系统的单位脉冲响应",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p19",
+      "file": "pages/p19-fo-summary.html",
+      "title": "一阶系统三种响应的关系",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "INTERACTIVE"
+    },
+    {
+      "id": "l3-p20",
+      "file": "pages/p20-quiz-fo.html",
+      "title": "课堂互动 · 一阶系统指标（填空）",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "INTERACTIVE"
+    },
+    {
+      "id": "l3-p21",
+      "file": "pages/p21-summary.html",
+      "title": "第一、二节小结",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p22a",
+      "file": "pages/p22a-part2-cover.html",
+      "title": "第二部分封面 · 二阶系统与高阶系统分析",
+      "complexity": "L0",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p22",
+      "file": "pages/p22-so-typical.html",
+      "title": "典型二阶系统与物理原型",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p23",
+      "file": "pages/p23-so-poles.html",
+      "title": "二阶系统的闭环极点",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p24",
+      "file": "pages/p24-so-polemap.html",
+      "title": "四种阻尼的闭环极点分布",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "INTERACTIVE"
+    },
+    {
+      "id": "l3-p25",
+      "file": "pages/p25-resp-zero.html",
+      "title": "零阻尼（ζ=0）的阶跃响应",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p26",
+      "file": "pages/p26-resp-over.html",
+      "title": "过阻尼（ζ>1）的阶跃响应",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p27",
+      "file": "pages/p27-resp-crit.html",
+      "title": "临界阻尼（ζ=1）的阶跃响应",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p28",
+      "file": "pages/p28-resp-under.html",
+      "title": "欠阻尼（0<ζ<1）的阶跃响应与包络线",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "INTERACTIVE"
+    },
+    {
+      "id": "l3-p29",
+      "file": "pages/p29-so-compare.html",
+      "title": "四种阻尼的响应对比",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "INTERACTIVE"
+    },
+    {
+      "id": "l3-p30",
+      "file": "pages/p30-quiz-beta.html",
+      "title": "课堂互动 · 阻尼角 β 在哪里",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "INTERACTIVE"
+    },
+    {
+      "id": "l3-p31",
+      "file": "pages/p31-metrics-tr.html",
+      "title": "上升时间 tr 的推导",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "INTERACTIVE"
+    },
+    {
+      "id": "l3-p32",
+      "file": "pages/p32-metrics-tp.html",
+      "title": "峰值时间 tp 与超调量 σ%",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "INTERACTIVE"
+    },
+    {
+      "id": "l3-p33",
+      "file": "pages/p33-metrics-ts.html",
+      "title": "调节时间 ts 与延迟时间 td",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "INTERACTIVE"
+    },
+    {
+      "id": "l3-p34",
+      "file": "pages/p34-so-lab.html",
+      "title": "互动实验：ζ、ωn 与性能指标联动",
+      "complexity": "L3",
+      "status": "Draft",
+      "legacy_action": "INTERACTIVE"
+    },
+    {
+      "id": "l3-p35",
+      "file": "pages/p35-zeta-sigma.html",
+      "title": "ζ 与 σ% 的关系曲线",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "INTERACTIVE"
+    },
+    {
+      "id": "l3-p36",
+      "file": "pages/p36-ex31.html",
+      "title": "例 3-1 · 二阶系统指标计算",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "INTERACTIVE"
+    },
+    {
+      "id": "l3-p37",
+      "file": "pages/p37-ex32.html",
+      "title": "例 3-2 · 随动系统分析与设计",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "INTERACTIVE"
+    },
+    {
+      "id": "l3-p38",
+      "file": "pages/p38-velocity-fb.html",
+      "title": "速度反馈改善二阶系统性能",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "INTERACTIVE"
+    },
+    {
+      "id": "l3-p39",
+      "file": "pages/p39-ex33.html",
+      "title": "例 3-3 · 速度反馈参数设计",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "INTERACTIVE"
+    },
+    {
+      "id": "l3-p40",
+      "file": "pages/p40-so-impulse.html",
+      "title": "二阶系统的单位脉冲响应",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p41",
+      "file": "pages/p41-so-ramp.html",
+      "title": "二阶系统的单位斜坡响应",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p42",
+      "file": "pages/p42-so-zero.html",
+      "title": "附加零点对二阶响应的影响",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p43",
+      "file": "pages/p43-ho-third.html",
+      "title": "三阶系统（附加极点）的响应",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p44",
+      "file": "pages/p44-ho-general.html",
+      "title": "高阶系统响应的一般结构",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p45",
+      "file": "pages/p45-ho-dominant.html",
+      "title": "主导极点与偶极子",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p46",
+      "file": "pages/p46-quiz-ho.html",
+      "title": "课堂互动 · 主导极点判型",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "INTERACTIVE"
+    },
+    {
+      "id": "l3-p47",
+      "file": "pages/p47-so-summary.html",
+      "title": "第三、四节小结",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p48a",
+      "file": "pages/p48a-part3-cover.html",
+      "title": "第三部分封面 · 稳定性分析",
+      "complexity": "L0",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p48",
+      "file": "pages/p48-stability-concept.html",
+      "title": "稳定性的基本概念",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p49",
+      "file": "pages/p49-stability-math.html",
+      "title": "稳定性的数学描述",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p50",
+      "file": "pages/p50-root-response.html",
+      "title": "根的位置与响应形态（表 3-2）",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p51",
+      "file": "pages/p51-stability-condition.html",
+      "title": "稳定的充分必要条件",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p52",
+      "file": "pages/p52-routh-motivation.html",
+      "title": "代数稳定判据的引入",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p53",
+      "file": "pages/p53-routh-table.html",
+      "title": "劳斯表的构造 · 逐步演示",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p54",
+      "file": "pages/p54-routh-coeffs.html",
+      "title": "劳斯表系数的计算",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "INTERACTIVE"
+    },
+    {
+      "id": "l3-p55",
+      "file": "pages/p55-routh-criterion.html",
+      "title": "劳斯判据",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p56",
+      "file": "pages/p56-ex35.html",
+      "title": "例 3-5 · 劳斯判据的应用",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "INTERACTIVE"
+    },
+    {
+      "id": "l3-p57",
+      "file": "pages/p57-quiz-routh.html",
+      "title": "课堂互动 · 系数为零意味着什么",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "INTERACTIVE"
+    },
+    {
+      "id": "l3-p58",
+      "file": "pages/p58-routh-special1.html",
+      "title": "特殊情况① · 例 3-7",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "INTERACTIVE"
+    },
+    {
+      "id": "l3-p59",
+      "file": "pages/p59-routh-special2.html",
+      "title": "特殊情况② · 例 3-8",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "INTERACTIVE"
+    },
+    {
+      "id": "l3-p60",
+      "file": "pages/p60-hurwitz.html",
+      "title": "赫尔维茨判据 · 例 3-9",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p61",
+      "file": "pages/p61-routh-app.html",
+      "title": "稳定判据的应用 · 例 3-11",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p62",
+      "file": "pages/p62-stability-margin.html",
+      "title": "稳定裕度检验 · 例 3-12",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p63",
+      "file": "pages/p63-routh-summary.html",
+      "title": "第五节小结（判稳流程）",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p64a",
+      "file": "pages/p64a-part4-cover.html",
+      "title": "第四部分封面 · 稳态误差分析",
+      "complexity": "L0",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p64",
+      "file": "pages/p64-ess-intro.html",
+      "title": "第六节 稳态误差分析及误差系数",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p65",
+      "file": "pages/p65-ess-definition.html",
+      "title": "稳态误差的定义",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p66",
+      "file": "pages/p66-error-tf.html",
+      "title": "误差传递函数",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p67",
+      "file": "pages/p67-disturbance-tf.html",
+      "title": "扰动误差传递函数",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p68",
+      "file": "pages/p68-quiz-disturbance.html",
+      "title": "课堂互动 · 扰动稳态误差",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "INTERACTIVE"
+    },
+    {
+      "id": "l3-p69",
+      "file": "pages/p69-system-type.html",
+      "title": "系统类型",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p70",
+      "file": "pages/p70-step-kp.html",
+      "title": "阶跃输入 · 静态位置误差系数",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p71",
+      "file": "pages/p71-ramp-kv.html",
+      "title": "斜坡输入 · 静态速度误差系数",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p72",
+      "file": "pages/p72-parab-ka.html",
+      "title": "抛物线输入 · 静态加速度误差系数",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p73",
+      "file": "pages/p73-ess-table.html",
+      "title": "静态误差系数总表",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p74",
+      "file": "pages/p74-ex313.html",
+      "title": "例 3-13 · 两种型别系统的稳态误差对比",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "INTERACTIVE"
+    },
+    {
+      "id": "l3-p75",
+      "file": "pages/p75-quiz-kv.html",
+      "title": "课堂互动 · Kv 与系统型别",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "INTERACTIVE"
+    },
+    {
+      "id": "l3-p76",
+      "file": "pages/p76-disturbance-ess.html",
+      "title": "扰动输入引起的稳态误差",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p77",
+      "file": "pages/p77-dynamic-coeff.html",
+      "title": "动态误差系数法",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p78",
+      "file": "pages/p78-ex314.html",
+      "title": "例 3-14 · 动态误差系数的计算",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "INTERACTIVE"
+    },
+    {
+      "id": "l3-p79",
+      "file": "pages/p79-reduce-ess.html",
+      "title": "减小稳态误差的措施",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p80",
+      "file": "pages/p80-ch3-summary.html",
+      "title": "第三章小结",
+      "complexity": "L1",
+      "status": "Draft",
+      "legacy_action": "REDESIGN"
+    },
+    {
+      "id": "l3-p81",
+      "file": "pages/p81-ch3-exercise.html",
+      "title": "章末思考 · 主导极点的可行区域",
+      "complexity": "L2",
+      "status": "Draft",
+      "legacy_action": "INTERACTIVE"
+    }
+  ]
+}
